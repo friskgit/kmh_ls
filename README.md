@@ -56,34 +56,21 @@ In Klangkupolen the channel order from the mixer is channel 1-29 for the regular
 
 -   (1) AllRad mixed order (4/3)
 
-    Mixed order ambisonics decoder, sounds good and even. Bassy with the binaural convolution for lilla salen (49 speakers)
-    Sounds good
+    Mixed order ambisonics decoder
 
 -   (2) Decoding with the pseudoinverse
 
-    Pinv decoders in 1st and 3rd. Crisp but less presence. 
-    Error in the normalisation, valume way to loud.
-    5th unusable
-    7th unusable
-    3rd is good
+    Pinv decoders in 1st and 3rd.
 
 -   (4) Same as (2) but with a blend coefficient for inversion variants (energy limited/mode matching 50%)
 
-    Up to 3rd. Sounds very good.
-    7th does not work
-    6th works fine
-    5th order also too loud
-    3rd is good
+    Up to 3rd.
 
 -   (5) Spherical slepian decoders
 
-    SSF decoders in 1st, 3rd and 5th order (up to 6th). Not much difference?
-    5th not work
-    7th does not work
-    3rd is fine
-    1st muffled
+    SSF decoders in 1st, 3rd and 5th order (up to 6th).
 
 -   (6) All-round decoders
 
-    AllRAD decoders in 1st, 3rd, 5th and 7th order. Nice presence, slightly muffled
+    AllRAD decoders in 1st, 3rd, 5th and 7th order.
 
