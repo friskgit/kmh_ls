@@ -1,0 +1,9 @@
+<h3 id="channel-mapping-plugin"><code>Channel mapping plugin for Klangkupolen 45.4</code></h3>
+<p>Channel mapping plugin that takes 45+3 inputs and outputs 29 channels linearly, then adds the extra thre channels and appends the last 16 channels for a total of 48 channels. This utility is due to the way outputs are mapped in the standard configuration of the Nexus mixer.</p>
+<p>Insert this plugin after the decoder to get channels to map correctly to the Nexus, i.e.:</p>
+<ul>
+<li>Channel 1-29 of the decoder maps to Nexus 1-29 (Layer A)</li>
+<li>Channel 30-45 of the decoder maps to Nexus 33-48 (Layer B)</li>
+</ul>
+<img width="600px" src="KMHLS_ch_map.png"></png>
+<hr />
