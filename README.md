@@ -1,10 +1,10 @@
 
-
 # Ambisonics in KMH studios and Lilla salen
+
 
 ## About the compiled decoders
 
-All decoders use ACN channel order (see [Component order](#org73764d8)) and SN3D normalization (see [Normalisation](#orgcc22c51)) and are dual-band, max-rE/rV. If not said othrwise. 
+All decoders use ACN channel order (see [Component order](#orgf3d55cf)) and SN3D normalization (see [Normalisation](#org024c4b3)) and are dual-band, max-rE/rV.
 
 
 ### A guide to the file names
@@ -21,11 +21,15 @@ For efficiency file names use the following format
 
     Mixed order ambisonics decoder.
 
--   (2) Decoding with the pseudoinverse
+-   (2) Decoding with the pseudo-inverse, even-energy
 
-    Pinv decoders in 1st, 3rd order.
+    Pinv decoders in 1st, 3rd order with even-energy for inversion variants.
 
--   (4) Same as (2) but with a blend coefficient for inversion variants (energy limited/mode matching 50%)
+-   (3) Decoding with the pseudo-inverse, mode-matching
+
+    Pinv decoders in 1st, 3rd order, mode-matching for inversion variants
+
+-   (4) Same as (2) and (4) but with a blend coefficient for inversion variants (energy limited/mode matching 50%)
 
     1st and 3rd and 6th order.
 
@@ -52,25 +56,82 @@ For efficiency file names use the following format
 In Klangkupolen the channel order from the mixer is channel 1-29 for the regular dome. The lower ring starts at channel 33-48 and the subs are at 49-52. This is the reason that in the decoder the names for the sixteen floor speakers start at 33.
 
 
-### Comments
+<a id="orgf3d55cf"></a>
 
--   (1) AllRad mixed order (4/3)
+### Component order
 
-    Mixed order ambisonics decoder
+The component order for the input to the decoder follows the ACN (Ambisonics Channel Number) standard according to the table below (for third order):
 
--   (2) Decoding with the pseudoinverse
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
-    Pinv decoders in 1st and 3rd.
 
--   (4) Same as (2) but with a blend coefficient for inversion variants (energy limited/mode matching 50%)
+<colgroup>
+<col  class="org-left" />
 
-    Up to 3rd.
+<col  class="org-right" />
 
--   (5) Spherical slepian decoders
+<col  class="org-right" />
 
-    SSF decoders in 1st, 3rd and 5th order (up to 6th).
+<col  class="org-right" />
 
--   (6) All-round decoders
+<col  class="org-right" />
 
-    AllRAD decoders in 1st, 3rd, 5th and 7th order.
+<col  class="org-right" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-right">&#xa0;</td>
+<td class="org-right">&#xa0;</td>
+<td class="org-right">0</td>
+<td class="org-right">&#xa0;</td>
+<td class="org-right">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-right">&#xa0;</td>
+<td class="org-right">1</td>
+<td class="org-right">2</td>
+<td class="org-right">3</td>
+<td class="org-right">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-right">4</td>
+<td class="org-right">5</td>
+<td class="org-right">6</td>
+<td class="org-right">7</td>
+<td class="org-right">8</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+
+<tr>
+<td class="org-left">9</td>
+<td class="org-right">10</td>
+<td class="org-right">11</td>
+<td class="org-right">12</td>
+<td class="org-right">13</td>
+<td class="org-right">13</td>
+<td class="org-left">15</td>
+</tr>
+</tbody>
+</table>
+
+Or: W Y Z X V T R S U Q O M K L N P 
+
+
+<a id="org024c4b3"></a>
+
+### Normalisation
+
+The decoder is using SN3D normalisation. With SN3D normalisation no component will exceed the peak value of the 0th order component.
 
