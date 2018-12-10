@@ -1,7 +1,7 @@
 
 ### decoder information 
-decoder file = ../decoders/KMHLS_Dome_3h3p_pinv_match_rV_max_rE_2_band.dsp
-description = KMHLS_Dome_3h3p_pinv_match_rV_max_rE_2_band
+decoder file = ../decoders/KMHLS_Dome_3h3p_pinv_even_energy_rV_max_rE_2_band.dsp
+description = KMHLS_Dome_3h3p_pinv_even_energy_rV_max_rE_2_band
 speaker array name = KMHLS_Dome
 horizontal order   = 3
 vertical order     = 3
