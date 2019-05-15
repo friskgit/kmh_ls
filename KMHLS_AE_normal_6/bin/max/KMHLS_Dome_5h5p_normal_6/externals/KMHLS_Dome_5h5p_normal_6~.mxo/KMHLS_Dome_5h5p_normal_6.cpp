@@ -1776,10 +1776,10 @@ class mydsp : public dsp {
 	double fRec51[2];
 	double fConst26;
 	double fConst27;
-	double fConst28;
 	double fRec70[3];
 	double fRec71[3];
 	double fRec72[3];
+	double fConst28;
 	double fRec69[2];
 	double fRec67[2];
 	double fConst29;
@@ -1808,60 +1808,58 @@ class mydsp : public dsp {
 	double fRec87[2];
 	double fRec86[2];
 	double fRec84[2];
-	double fRec110[2];
-	double fRec108[2];
 	double fRec107[2];
 	double fRec105[2];
 	double fRec104[2];
 	double fRec102[2];
 	double fRec101[2];
 	double fRec99[2];
-	double fRec119[2];
-	double fRec117[2];
+	double fRec110[2];
+	double fRec108[2];
 	double fRec116[2];
 	double fRec114[2];
 	double fRec113[2];
 	double fRec111[2];
-	double fRec122[2];
-	double fRec120[2];
 	double fRec128[2];
 	double fRec126[2];
 	double fRec125[2];
 	double fRec123[2];
+	double fRec122[2];
+	double fRec120[2];
+	double fRec119[2];
+	double fRec117[2];
 	double fVec1[1024];
-	double fRec143[2];
-	double fRec141[2];
-	double fRec140[2];
-	double fRec138[2];
-	double fRec137[2];
-	double fRec135[2];
 	double fRec134[2];
 	double fRec132[2];
 	double fRec131[2];
 	double fRec129[2];
-	double fRec155[2];
-	double fRec153[2];
+	double fRec137[2];
+	double fRec135[2];
 	double fRec152[2];
 	double fRec150[2];
 	double fRec149[2];
 	double fRec147[2];
 	double fRec146[2];
 	double fRec144[2];
-	double fRec164[2];
-	double fRec162[2];
+	double fRec143[2];
+	double fRec141[2];
+	double fRec140[2];
+	double fRec138[2];
 	double fRec161[2];
 	double fRec159[2];
 	double fRec158[2];
 	double fRec156[2];
-	double fRec167[2];
-	double fRec165[2];
+	double fRec155[2];
+	double fRec153[2];
 	double fRec173[2];
 	double fRec171[2];
 	double fRec170[2];
 	double fRec168[2];
+	double fRec167[2];
+	double fRec165[2];
+	double fRec164[2];
+	double fRec162[2];
 	double fVec2[1024];
-	double fRec188[2];
-	double fRec186[2];
 	double fRec185[2];
 	double fRec183[2];
 	double fRec182[2];
@@ -1870,26 +1868,28 @@ class mydsp : public dsp {
 	double fRec177[2];
 	double fRec176[2];
 	double fRec174[2];
-	double fRec200[2];
-	double fRec198[2];
-	double fRec197[2];
-	double fRec195[2];
 	double fRec194[2];
 	double fRec192[2];
 	double fRec191[2];
 	double fRec189[2];
+	double fRec188[2];
+	double fRec186[2];
+	double fRec200[2];
+	double fRec198[2];
+	double fRec197[2];
+	double fRec195[2];
+	double fRec215[2];
+	double fRec213[2];
+	double fRec212[2];
+	double fRec210[2];
 	double fRec209[2];
 	double fRec207[2];
 	double fRec206[2];
 	double fRec204[2];
 	double fRec203[2];
 	double fRec201[2];
-	double fRec212[2];
-	double fRec210[2];
 	double fRec218[2];
 	double fRec216[2];
-	double fRec215[2];
-	double fRec213[2];
 	double fVec3[1024];
 	double fRec233[2];
 	double fRec231[2];
@@ -1922,39 +1922,37 @@ class mydsp : public dsp {
 	double fRec260[2];
 	double fRec258[2];
 	double fVec4[1024];
-	double fRec278[2];
-	double fRec276[2];
-	double fRec275[2];
-	double fRec273[2];
 	double fRec272[2];
 	double fRec270[2];
 	double fRec269[2];
 	double fRec267[2];
 	double fRec266[2];
 	double fRec264[2];
+	double fRec278[2];
+	double fRec276[2];
+	double fRec275[2];
+	double fRec273[2];
+	double fRec281[2];
+	double fRec279[2];
+	double fRec296[2];
+	double fRec294[2];
+	double fRec293[2];
+	double fRec291[2];
 	double fRec290[2];
 	double fRec288[2];
 	double fRec287[2];
 	double fRec285[2];
 	double fRec284[2];
 	double fRec282[2];
-	double fRec281[2];
-	double fRec279[2];
-	double fRec299[2];
-	double fRec297[2];
-	double fRec296[2];
-	double fRec294[2];
-	double fRec293[2];
-	double fRec291[2];
-	double fRec302[2];
-	double fRec300[2];
 	double fRec308[2];
 	double fRec306[2];
 	double fRec305[2];
 	double fRec303[2];
+	double fRec302[2];
+	double fRec300[2];
+	double fRec299[2];
+	double fRec297[2];
 	double fVec5[1024];
-	double fRec323[2];
-	double fRec321[2];
 	double fRec320[2];
 	double fRec318[2];
 	double fRec317[2];
@@ -1963,58 +1961,62 @@ class mydsp : public dsp {
 	double fRec312[2];
 	double fRec311[2];
 	double fRec309[2];
-	double fRec335[2];
-	double fRec333[2];
-	double fRec332[2];
-	double fRec330[2];
 	double fRec329[2];
 	double fRec327[2];
 	double fRec326[2];
 	double fRec324[2];
-	double fRec344[2];
-	double fRec342[2];
-	double fRec341[2];
-	double fRec339[2];
+	double fRec323[2];
+	double fRec321[2];
+	double fRec332[2];
+	double fRec330[2];
 	double fRec338[2];
 	double fRec336[2];
-	double fRec347[2];
-	double fRec345[2];
+	double fRec335[2];
+	double fRec333[2];
 	double fRec353[2];
 	double fRec351[2];
 	double fRec350[2];
 	double fRec348[2];
+	double fRec347[2];
+	double fRec345[2];
+	double fRec344[2];
+	double fRec342[2];
+	double fRec341[2];
+	double fRec339[2];
 	double fVec6[1024];
+	double fRec368[2];
+	double fRec366[2];
+	double fRec365[2];
+	double fRec363[2];
+	double fRec362[2];
+	double fRec360[2];
 	double fRec359[2];
 	double fRec357[2];
 	double fRec356[2];
 	double fRec354[2];
-	double fRec362[2];
-	double fRec360[2];
 	double fRec377[2];
 	double fRec375[2];
 	double fRec374[2];
 	double fRec372[2];
 	double fRec371[2];
 	double fRec369[2];
-	double fRec368[2];
-	double fRec366[2];
-	double fRec365[2];
-	double fRec363[2];
+	double fRec389[2];
+	double fRec387[2];
 	double fRec386[2];
 	double fRec384[2];
 	double fRec383[2];
 	double fRec381[2];
 	double fRec380[2];
 	double fRec378[2];
+	double fRec392[2];
+	double fRec390[2];
 	double fRec398[2];
 	double fRec396[2];
 	double fRec395[2];
 	double fRec393[2];
-	double fRec392[2];
-	double fRec390[2];
-	double fRec389[2];
-	double fRec387[2];
 	double fVec7[1024];
+	double fRec401[2];
+	double fRec399[2];
 	double fRec413[2];
 	double fRec411[2];
 	double fRec410[2];
@@ -2023,8 +2025,8 @@ class mydsp : public dsp {
 	double fRec405[2];
 	double fRec404[2];
 	double fRec402[2];
-	double fRec401[2];
-	double fRec399[2];
+	double fRec428[2];
+	double fRec426[2];
 	double fRec425[2];
 	double fRec423[2];
 	double fRec422[2];
@@ -2037,14 +2039,12 @@ class mydsp : public dsp {
 	double fRec432[2];
 	double fRec431[2];
 	double fRec429[2];
-	double fRec428[2];
-	double fRec426[2];
-	double fRec437[2];
-	double fRec435[2];
 	double fRec443[2];
 	double fRec441[2];
 	double fRec440[2];
 	double fRec438[2];
+	double fRec437[2];
+	double fRec435[2];
 	double fVec8[1024];
 	double fRec458[2];
 	double fRec456[2];
@@ -2077,30 +2077,30 @@ class mydsp : public dsp {
 	double fRec485[2];
 	double fRec483[2];
 	double fVec9[1024];
-	double fRec503[2];
-	double fRec501[2];
-	double fRec500[2];
-	double fRec498[2];
 	double fRec497[2];
 	double fRec495[2];
 	double fRec494[2];
 	double fRec492[2];
 	double fRec491[2];
 	double fRec489[2];
-	double fRec515[2];
-	double fRec513[2];
-	double fRec512[2];
-	double fRec510[2];
 	double fRec509[2];
 	double fRec507[2];
 	double fRec506[2];
 	double fRec504[2];
+	double fRec503[2];
+	double fRec501[2];
+	double fRec500[2];
+	double fRec498[2];
 	double fRec524[2];
 	double fRec522[2];
 	double fRec521[2];
 	double fRec519[2];
 	double fRec518[2];
 	double fRec516[2];
+	double fRec515[2];
+	double fRec513[2];
+	double fRec512[2];
+	double fRec510[2];
 	double fRec527[2];
 	double fRec525[2];
 	double fRec533[2];
@@ -2157,18 +2157,18 @@ class mydsp : public dsp {
 	double fRec597[2];
 	double fRec596[2];
 	double fRec594[2];
-	double fRec614[2];
-	double fRec612[2];
 	double fRec611[2];
 	double fRec609[2];
 	double fRec608[2];
 	double fRec606[2];
-	double fRec617[2];
-	double fRec615[2];
+	double fRec614[2];
+	double fRec612[2];
 	double fRec623[2];
 	double fRec621[2];
 	double fRec620[2];
 	double fRec618[2];
+	double fRec617[2];
+	double fRec615[2];
 	double fVec12[1024];
 	double fRec638[2];
 	double fRec636[2];
@@ -2201,36 +2201,36 @@ class mydsp : public dsp {
 	double fRec665[2];
 	double fRec663[2];
 	double fVec13[1024];
-	double fRec671[2];
-	double fRec669[2];
-	double fRec686[2];
-	double fRec684[2];
-	double fRec683[2];
-	double fRec681[2];
 	double fRec680[2];
 	double fRec678[2];
 	double fRec677[2];
 	double fRec675[2];
 	double fRec674[2];
 	double fRec672[2];
-	double fRec698[2];
-	double fRec696[2];
+	double fRec671[2];
+	double fRec669[2];
+	double fRec689[2];
+	double fRec687[2];
+	double fRec686[2];
+	double fRec684[2];
+	double fRec683[2];
+	double fRec681[2];
 	double fRec695[2];
 	double fRec693[2];
 	double fRec692[2];
 	double fRec690[2];
-	double fRec689[2];
-	double fRec687[2];
-	double fRec704[2];
-	double fRec702[2];
-	double fRec701[2];
-	double fRec699[2];
-	double fRec713[2];
-	double fRec711[2];
 	double fRec710[2];
 	double fRec708[2];
 	double fRec707[2];
 	double fRec705[2];
+	double fRec704[2];
+	double fRec702[2];
+	double fRec701[2];
+	double fRec699[2];
+	double fRec698[2];
+	double fRec696[2];
+	double fRec713[2];
+	double fRec711[2];
 	double fVec14[1024];
 	double fRec728[2];
 	double fRec726[2];
@@ -2268,52 +2268,46 @@ class mydsp : public dsp {
 	double fConst36;
 	double fConst37;
 	double fConst38;
-	double fConst39;
-	double fConst40;
-	double fConst41;
-	double fConst42;
-	double fRec773[2];
-	double fRec771[2];
-	double fRec770[2];
-	double fRec768[2];
 	double fRec767[2];
 	double fRec765[2];
 	double fRec764[2];
 	double fRec762[2];
+	double fConst39;
 	double fRec761[2];
 	double fRec759[2];
+	double fConst40;
+	double fConst41;
+	double fConst42;
+	double fRec770[2];
+	double fRec768[2];
 	double fConst43;
 	double fConst44;
 	double fConst45;
 	double fConst46;
+	double fRec776[2];
+	double fRec774[2];
+	double fRec773[2];
+	double fRec771[2];
 	double fConst47;
 	double fConst48;
 	double fConst49;
+	double fConst50;
+	double fConst51;
+	double fConst52;
+	double fConst53;
+	double fRec788[2];
+	double fRec786[2];
 	double fRec785[2];
 	double fRec783[2];
 	double fRec782[2];
 	double fRec780[2];
 	double fRec779[2];
 	double fRec777[2];
-	double fRec776[2];
-	double fRec774[2];
-	double fConst50;
-	double fConst51;
-	double fConst52;
-	double fConst53;
 	double fConst54;
 	double fConst55;
-	double fRec794[2];
-	double fRec792[2];
-	double fRec791[2];
-	double fRec789[2];
-	double fRec788[2];
-	double fRec786[2];
 	double fConst56;
 	double fConst57;
 	double fConst58;
-	double fRec797[2];
-	double fRec795[2];
 	double fConst59;
 	double fConst60;
 	double fConst61;
@@ -2322,10 +2316,14 @@ class mydsp : public dsp {
 	double fRec801[2];
 	double fRec800[2];
 	double fRec798[2];
+	double fRec797[2];
+	double fRec795[2];
+	double fRec794[2];
+	double fRec792[2];
+	double fRec791[2];
+	double fRec789[2];
 	double fVec16[2];
 	int iConst63;
-	double fRec818[2];
-	double fRec816[2];
 	double fRec815[2];
 	double fRec813[2];
 	double fRec812[2];
@@ -2334,29 +2332,29 @@ class mydsp : public dsp {
 	double fRec807[2];
 	double fRec806[2];
 	double fRec804[2];
-	double fRec830[2];
-	double fRec828[2];
-	double fRec827[2];
-	double fRec825[2];
 	double fRec824[2];
 	double fRec822[2];
 	double fRec821[2];
 	double fRec819[2];
+	double fRec818[2];
+	double fRec816[2];
+	double fRec830[2];
+	double fRec828[2];
+	double fRec827[2];
+	double fRec825[2];
+	double fRec845[2];
+	double fRec843[2];
+	double fRec842[2];
+	double fRec840[2];
 	double fRec839[2];
 	double fRec837[2];
 	double fRec836[2];
 	double fRec834[2];
 	double fRec833[2];
 	double fRec831[2];
-	double fRec842[2];
-	double fRec840[2];
 	double fRec848[2];
 	double fRec846[2];
-	double fRec845[2];
-	double fRec843[2];
 	double fVec17[2];
-	double fRec863[2];
-	double fRec861[2];
 	double fRec860[2];
 	double fRec858[2];
 	double fRec857[2];
@@ -2365,26 +2363,28 @@ class mydsp : public dsp {
 	double fRec852[2];
 	double fRec851[2];
 	double fRec849[2];
-	double fRec875[2];
-	double fRec873[2];
-	double fRec872[2];
-	double fRec870[2];
-	double fRec869[2];
-	double fRec867[2];
 	double fRec866[2];
 	double fRec864[2];
+	double fRec863[2];
+	double fRec861[2];
+	double fRec869[2];
+	double fRec867[2];
 	double fRec884[2];
 	double fRec882[2];
 	double fRec881[2];
 	double fRec879[2];
 	double fRec878[2];
 	double fRec876[2];
-	double fRec887[2];
-	double fRec885[2];
+	double fRec875[2];
+	double fRec873[2];
+	double fRec872[2];
+	double fRec870[2];
 	double fRec893[2];
 	double fRec891[2];
 	double fRec890[2];
 	double fRec888[2];
+	double fRec887[2];
+	double fRec885[2];
 	double fVec18[2];
 	double fRec905[2];
 	double fRec903[2];
@@ -2394,59 +2394,59 @@ class mydsp : public dsp {
 	double fRec897[2];
 	double fRec896[2];
 	double fRec894[2];
+	double fRec920[2];
+	double fRec918[2];
+	double fRec917[2];
+	double fRec915[2];
 	double fRec914[2];
 	double fRec912[2];
 	double fRec911[2];
 	double fRec909[2];
 	double fRec908[2];
 	double fRec906[2];
-	double fRec920[2];
-	double fRec918[2];
-	double fRec917[2];
-	double fRec915[2];
-	double fRec935[2];
-	double fRec933[2];
-	double fRec932[2];
-	double fRec930[2];
+	double fRec923[2];
+	double fRec921[2];
 	double fRec929[2];
 	double fRec927[2];
 	double fRec926[2];
 	double fRec924[2];
-	double fRec923[2];
-	double fRec921[2];
 	double fRec938[2];
 	double fRec936[2];
+	double fRec935[2];
+	double fRec933[2];
+	double fRec932[2];
+	double fRec930[2];
 	double fVec19[2];
-	double fRec953[2];
-	double fRec951[2];
-	double fRec950[2];
-	double fRec948[2];
-	double fRec947[2];
-	double fRec945[2];
 	double fRec944[2];
 	double fRec942[2];
 	double fRec941[2];
 	double fRec939[2];
+	double fRec947[2];
+	double fRec945[2];
+	double fRec956[2];
+	double fRec954[2];
+	double fRec953[2];
+	double fRec951[2];
+	double fRec950[2];
+	double fRec948[2];
+	double fRec968[2];
+	double fRec966[2];
 	double fRec965[2];
 	double fRec963[2];
 	double fRec962[2];
 	double fRec960[2];
 	double fRec959[2];
 	double fRec957[2];
-	double fRec956[2];
-	double fRec954[2];
-	double fRec974[2];
-	double fRec972[2];
-	double fRec971[2];
-	double fRec969[2];
-	double fRec968[2];
-	double fRec966[2];
-	double fRec977[2];
-	double fRec975[2];
 	double fRec983[2];
 	double fRec981[2];
 	double fRec980[2];
 	double fRec978[2];
+	double fRec977[2];
+	double fRec975[2];
+	double fRec974[2];
+	double fRec972[2];
+	double fRec971[2];
+	double fRec969[2];
 	double fVec20[2];
 	double fRec998[2];
 	double fRec996[2];
@@ -2510,8 +2510,6 @@ class mydsp : public dsp {
 	double fRec1070[2];
 	double fRec1068[2];
 	double fVec22[2];
-	double fRec1088[2];
-	double fRec1086[2];
 	double fRec1085[2];
 	double fRec1083[2];
 	double fRec1082[2];
@@ -2520,26 +2518,28 @@ class mydsp : public dsp {
 	double fRec1077[2];
 	double fRec1076[2];
 	double fRec1074[2];
-	double fRec1100[2];
-	double fRec1098[2];
-	double fRec1097[2];
-	double fRec1095[2];
 	double fRec1094[2];
 	double fRec1092[2];
 	double fRec1091[2];
 	double fRec1089[2];
+	double fRec1088[2];
+	double fRec1086[2];
+	double fRec1100[2];
+	double fRec1098[2];
+	double fRec1097[2];
+	double fRec1095[2];
+	double fRec1115[2];
+	double fRec1113[2];
+	double fRec1112[2];
+	double fRec1110[2];
 	double fRec1109[2];
 	double fRec1107[2];
 	double fRec1106[2];
 	double fRec1104[2];
 	double fRec1103[2];
 	double fRec1101[2];
-	double fRec1112[2];
-	double fRec1110[2];
 	double fRec1118[2];
 	double fRec1116[2];
-	double fRec1115[2];
-	double fRec1113[2];
 	double fVec23[2];
 	double fConst64;
 	double fConst65;
@@ -2548,10 +2548,6 @@ class mydsp : public dsp {
 	double fConst68;
 	double fConst69;
 	double fConst70;
-	double fConst71;
-	double fConst72;
-	double fRec1133[2];
-	double fRec1131[2];
 	double fRec1130[2];
 	double fRec1128[2];
 	double fRec1127[2];
@@ -2560,48 +2556,56 @@ class mydsp : public dsp {
 	double fRec1122[2];
 	double fRec1121[2];
 	double fRec1119[2];
+	double fConst71;
+	double fConst72;
 	double fConst73;
 	double fConst74;
 	double fConst75;
 	double fConst76;
-	double fConst77;
-	double fConst78;
-	double fConst79;
-	double fRec1145[2];
-	double fRec1143[2];
-	double fRec1142[2];
-	double fRec1140[2];
 	double fRec1139[2];
 	double fRec1137[2];
 	double fRec1136[2];
 	double fRec1134[2];
+	double fRec1133[2];
+	double fRec1131[2];
+	double fConst77;
+	double fConst78;
+	double fConst79;
 	double fConst80;
+	double fRec1145[2];
+	double fRec1143[2];
+	double fRec1142[2];
+	double fRec1140[2];
 	double fConst81;
 	double fConst82;
 	double fConst83;
 	double fConst84;
 	double fConst85;
+	double fConst86;
+	double fConst87;
+	double fConst88;
+	double fConst89;
+	double fRec1160[2];
+	double fRec1158[2];
+	double fRec1157[2];
+	double fRec1155[2];
 	double fRec1154[2];
 	double fRec1152[2];
 	double fRec1151[2];
 	double fRec1149[2];
 	double fRec1148[2];
 	double fRec1146[2];
-	double fConst86;
-	double fConst87;
-	double fConst88;
-	double fRec1157[2];
-	double fRec1155[2];
-	double fConst89;
 	double fConst90;
 	double fConst91;
 	double fConst92;
 	double fRec1163[2];
 	double fRec1161[2];
-	double fRec1160[2];
-	double fRec1158[2];
 	double fVec24[512];
 	int iConst93;
+	double fRec1166[2];
+	double fRec1164[2];
+	double fRec1181[2];
+	double fRec1179[2];
 	double fRec1178[2];
 	double fRec1176[2];
 	double fRec1175[2];
@@ -2610,28 +2614,24 @@ class mydsp : public dsp {
 	double fRec1170[2];
 	double fRec1169[2];
 	double fRec1167[2];
-	double fRec1166[2];
-	double fRec1164[2];
+	double fRec1193[2];
+	double fRec1191[2];
 	double fRec1190[2];
 	double fRec1188[2];
 	double fRec1187[2];
 	double fRec1185[2];
 	double fRec1184[2];
 	double fRec1182[2];
-	double fRec1181[2];
-	double fRec1179[2];
 	double fRec1199[2];
 	double fRec1197[2];
 	double fRec1196[2];
 	double fRec1194[2];
-	double fRec1193[2];
-	double fRec1191[2];
-	double fRec1202[2];
-	double fRec1200[2];
 	double fRec1208[2];
 	double fRec1206[2];
 	double fRec1205[2];
 	double fRec1203[2];
+	double fRec1202[2];
+	double fRec1200[2];
 	double fVec25[512];
 	double fRec1223[2];
 	double fRec1221[2];
@@ -2700,52 +2700,46 @@ class mydsp : public dsp {
 	double fConst96;
 	double fConst97;
 	double fConst98;
-	double fConst99;
-	double fConst100;
-	double fConst101;
-	double fConst102;
-	double fRec1313[2];
-	double fRec1311[2];
-	double fRec1310[2];
-	double fRec1308[2];
 	double fRec1307[2];
 	double fRec1305[2];
 	double fRec1304[2];
 	double fRec1302[2];
+	double fConst99;
 	double fRec1301[2];
 	double fRec1299[2];
+	double fConst100;
+	double fConst101;
+	double fConst102;
 	double fConst103;
 	double fConst104;
-	double fConst105;
-	double fConst106;
-	double fConst107;
-	double fConst108;
-	double fConst109;
-	double fRec1325[2];
-	double fRec1323[2];
-	double fRec1322[2];
-	double fRec1320[2];
 	double fRec1319[2];
 	double fRec1317[2];
 	double fRec1316[2];
 	double fRec1314[2];
+	double fConst105;
+	double fConst106;
+	double fRec1313[2];
+	double fRec1311[2];
+	double fRec1310[2];
+	double fRec1308[2];
+	double fConst107;
+	double fConst108;
+	double fConst109;
+	double fRec1322[2];
+	double fRec1320[2];
 	double fConst110;
 	double fConst111;
 	double fConst112;
 	double fConst113;
-	double fConst114;
-	double fConst115;
-	double fRec1334[2];
-	double fRec1332[2];
-	double fRec1331[2];
-	double fRec1329[2];
 	double fRec1328[2];
 	double fRec1326[2];
+	double fRec1325[2];
+	double fRec1323[2];
+	double fConst114;
+	double fConst115;
 	double fConst116;
 	double fConst117;
 	double fConst118;
-	double fRec1337[2];
-	double fRec1335[2];
 	double fConst119;
 	double fConst120;
 	double fConst121;
@@ -2754,6 +2748,12 @@ class mydsp : public dsp {
 	double fRec1341[2];
 	double fRec1340[2];
 	double fRec1338[2];
+	double fRec1337[2];
+	double fRec1335[2];
+	double fRec1334[2];
+	double fRec1332[2];
+	double fRec1331[2];
+	double fRec1329[2];
 	
  public:
 	
@@ -3092,102 +3092,102 @@ class mydsp : public dsp {
 		fConst24 = (0.0 - (36337.405150168022 / (fConst5 * fConst22)));
 		fConst25 = (0.0 - (((36337.405150168022 / fConst2) + 275.8478509196745) / (fConst2 * fConst22)));
 		fConst26 = ((37.501597758147724 / fConst2) + 1.0);
-		fConst27 = (0.0 - (75.003195516295449 / (fConst2 * fConst26)));
-		fConst28 = (1.0 / fConst26);
+		fConst27 = (1.0 / fConst26);
+		fConst28 = (0.0 - (75.003195516295449 / (fConst2 * fConst26)));
 		fConst29 = ((((4219.1095032417315 / fConst2) + 112.50479327444317) / fConst2) + 1.0);
 		fConst30 = (1.0 / fConst29);
-		fConst31 = (0.0 - (16876.438012966926 / (fConst5 * fConst29)));
-		fConst32 = (0.0 - (((16876.438012966926 / fConst2) + 225.00958654888635) / (fConst2 * fConst29)));
+		fConst31 = (0.0 - (((16876.438012966926 / fConst2) + 225.00958654888635) / (fConst2 * fConst29)));
+		fConst32 = (0.0 - (16876.438012966926 / (fConst5 * fConst29)));
 		iConst33 = int(((0.002913628773109936 * double(iConst0)) + 0.5));
-		fConst34 = ((112.25237766978 / fConst2) + 1.0);
-		fConst35 = (0.0 - (224.50475533956001 / (fConst2 * fConst34)));
-		fConst36 = ((((13523.256620516057 / fConst2) + 206.35703153074112) / fConst2) + 1.0);
-		fConst37 = (0.0 - (54093.026482064226 / (fConst5 * fConst36)));
-		fConst38 = (0.0 - (((54093.026482064226 / fConst2) + 412.71406306148225) / (fConst2 * fConst36)));
-		fConst39 = ((((17203.21222637999 / fConst2) + 143.11429844418876) / fConst2) + 1.0);
-		fConst40 = (1.0 / ((fConst34 * fConst36) * fConst39));
-		fConst41 = (0.0 - (68812.848905519961 / (fConst5 * fConst39)));
-		fConst42 = (0.0 - (((68812.848905519961 / fConst2) + 286.22859688837752) / (fConst2 * fConst39)));
-		fConst43 = ((((8660.3261051454228 / fConst2) + 178.29987968721923) / fConst2) + 1.0);
-		fConst44 = (0.0 - (34641.304420581691 / (fConst5 * fConst43)));
-		fConst45 = (0.0 - (((34641.304420581691 / fConst2) + 356.59975937443846) / (fConst2 * fConst43)));
-		fConst46 = ((((10884.756417041221 / fConst2) + 129.51592540925418) / fConst2) + 1.0);
-		fConst47 = (1.0 / (fConst43 * fConst46));
-		fConst48 = (0.0 - (43539.025668164883 / (fConst5 * fConst46)));
-		fConst49 = (0.0 - (((43539.025668164883 / fConst2) + 259.03185081850836) / (fConst2 * fConst46)));
-		fConst50 = ((71.480535451746846 / fConst2) + 1.0);
-		fConst51 = (0.0 - (142.96107090349369 / (fConst2 * fConst50)));
-		fConst52 = ((((6120.3492872630823 / fConst2) + 113.20894760613724) / fConst2) + 1.0);
-		fConst53 = (1.0 / (fConst50 * fConst52));
-		fConst54 = (0.0 - (24481.397149052329 / (fConst5 * fConst52)));
-		fConst55 = (0.0 - (((24481.397149052329 / fConst2) + 226.41789521227449) / (fConst2 * fConst52)));
-		fConst56 = ((30.781580509647348 / fConst2) + 1.0);
-		fConst57 = (1.0 / fConst56);
-		fConst58 = (0.0 - (61.563161019294697 / (fConst2 * fConst56)));
-		fConst59 = ((((2842.5170960157047 / fConst2) + 92.344741528942052) / fConst2) + 1.0);
-		fConst60 = (1.0 / fConst59);
-		fConst61 = (0.0 - (11370.068384062819 / (fConst5 * fConst59)));
-		fConst62 = (0.0 - (((11370.068384062819 / fConst2) + 184.6894830578841) / (fConst2 * fConst59)));
+		fConst34 = ((((6120.3492872630823 / fConst2) + 113.20894760613724) / fConst2) + 1.0);
+		fConst35 = (0.0 - (((24481.397149052329 / fConst2) + 226.41789521227449) / (fConst2 * fConst34)));
+		fConst36 = (0.0 - (24481.397149052329 / (fConst5 * fConst34)));
+		fConst37 = ((71.480535451746846 / fConst2) + 1.0);
+		fConst38 = (1.0 / (fConst37 * fConst34));
+		fConst39 = (0.0 - (142.96107090349369 / (fConst2 * fConst37)));
+		fConst40 = ((30.781580509647348 / fConst2) + 1.0);
+		fConst41 = (1.0 / fConst40);
+		fConst42 = (0.0 - (61.563161019294697 / (fConst2 * fConst40)));
+		fConst43 = ((((2842.5170960157047 / fConst2) + 92.344741528942052) / fConst2) + 1.0);
+		fConst44 = (1.0 / fConst43);
+		fConst45 = (0.0 - (11370.068384062819 / (fConst5 * fConst43)));
+		fConst46 = (0.0 - (((11370.068384062819 / fConst2) + 184.6894830578841) / (fConst2 * fConst43)));
+		fConst47 = ((((8660.3261051454228 / fConst2) + 178.29987968721923) / fConst2) + 1.0);
+		fConst48 = (0.0 - (34641.304420581691 / (fConst5 * fConst47)));
+		fConst49 = (0.0 - (((34641.304420581691 / fConst2) + 356.59975937443846) / (fConst2 * fConst47)));
+		fConst50 = ((((10884.756417041221 / fConst2) + 129.51592540925418) / fConst2) + 1.0);
+		fConst51 = (1.0 / (fConst47 * fConst50));
+		fConst52 = (0.0 - (43539.025668164883 / (fConst5 * fConst50)));
+		fConst53 = (0.0 - (((43539.025668164883 / fConst2) + 259.03185081850836) / (fConst2 * fConst50)));
+		fConst54 = ((112.25237766978 / fConst2) + 1.0);
+		fConst55 = (0.0 - (224.50475533956001 / (fConst2 * fConst54)));
+		fConst56 = ((((13523.256620516057 / fConst2) + 206.35703153074112) / fConst2) + 1.0);
+		fConst57 = (0.0 - (54093.026482064226 / (fConst5 * fConst56)));
+		fConst58 = (0.0 - (((54093.026482064226 / fConst2) + 412.71406306148225) / (fConst2 * fConst56)));
+		fConst59 = ((((17203.21222637999 / fConst2) + 143.11429844418876) / fConst2) + 1.0);
+		fConst60 = (1.0 / ((fConst59 * fConst54) * fConst56));
+		fConst61 = (0.0 - (68812.848905519961 / (fConst59 * fConst5)));
+		fConst62 = (0.0 - (((68812.848905519961 / fConst2) + 286.22859688837752) / (fConst59 * fConst2)));
 		iConst63 = int(((2.9136287731083211e-06 * double(iConst0)) + 0.5));
-		fConst64 = ((123.06922428889351 / fConst2) + 1.0);
-		fConst65 = (0.0 - (246.13844857778702 / (fConst2 * fConst64)));
-		fConst66 = ((((16255.080264839977 / fConst2) + 226.24197655533564) / fConst2) + 1.0);
-		fConst67 = (0.0 - (65020.321059359907 / (fConst5 * fConst66)));
-		fConst68 = (0.0 - (((65020.321059359907 / fConst2) + 452.48395311067128) / (fConst2 * fConst66)));
-		fConst69 = ((((20678.421137748988 / fConst2) + 156.90505679967598) / fConst2) + 1.0);
-		fConst70 = (1.0 / ((fConst64 * fConst66) * fConst69));
-		fConst71 = (0.0 - (82713.684550995953 / (fConst5 * fConst69)));
-		fConst72 = (0.0 - (((82713.684550995953 / fConst2) + 313.81011359935195) / (fConst2 * fConst69)));
-		fConst73 = ((((10409.79254547754 / fConst2) + 195.48118569444392) / fConst2) + 1.0);
-		fConst74 = (0.0 - (41639.170181910158 / (fConst5 * fConst73)));
-		fConst75 = (0.0 - (((41639.170181910158 / fConst2) + 390.96237138888785) / (fConst2 * fConst73)));
-		fConst76 = ((((13083.578474271766 / fConst2) + 141.99631940149303) / fConst2) + 1.0);
-		fConst77 = (1.0 / (fConst73 * fConst76));
-		fConst78 = (0.0 - (52334.313897087064 / (fConst5 * fConst76)));
-		fConst79 = (0.0 - (((52334.313897087064 / fConst2) + 283.99263880298605) / (fConst2 * fConst76)));
-		fConst80 = ((78.36853198495352 / fConst2) + 1.0);
-		fConst81 = (0.0 - (156.73706396990704 / (fConst2 * fConst80)));
-		fConst82 = ((((7356.7167809554639 / fConst2) + 124.11797107260868) / fConst2) + 1.0);
-		fConst83 = (1.0 / (fConst80 * fConst82));
-		fConst84 = (0.0 - (29426.867123821856 / (fConst5 * fConst82)));
-		fConst85 = (0.0 - (((29426.867123821856 / fConst2) + 248.23594214521736) / (fConst2 * fConst82)));
-		fConst86 = ((33.7477505095937 / fConst2) + 1.0);
-		fConst87 = (1.0 / fConst86);
-		fConst88 = (0.0 - (67.495501019187401 / (fConst2 * fConst86)));
-		fConst89 = ((((3416.7319933733456 / fConst2) + 101.2432515287811) / fConst2) + 1.0);
-		fConst90 = (1.0 / fConst89);
-		fConst91 = (0.0 - (13666.927973493383 / (fConst5 * fConst89)));
-		fConst92 = (0.0 - (((13666.927973493383 / fConst2) + 202.4865030575622) / (fConst2 * fConst89)));
+		fConst64 = ((((10409.79254547754 / fConst2) + 195.48118569444392) / fConst2) + 1.0);
+		fConst65 = (0.0 - (41639.170181910158 / (fConst5 * fConst64)));
+		fConst66 = (0.0 - (((41639.170181910158 / fConst2) + 390.96237138888785) / (fConst2 * fConst64)));
+		fConst67 = ((((13083.578474271766 / fConst2) + 141.99631940149303) / fConst2) + 1.0);
+		fConst68 = (1.0 / (fConst64 * fConst67));
+		fConst69 = (0.0 - (52334.313897087064 / (fConst5 * fConst67)));
+		fConst70 = (0.0 - (((52334.313897087064 / fConst2) + 283.99263880298605) / (fConst2 * fConst67)));
+		fConst71 = ((78.36853198495352 / fConst2) + 1.0);
+		fConst72 = (0.0 - (156.73706396990704 / (fConst2 * fConst71)));
+		fConst73 = ((((7356.7167809554639 / fConst2) + 124.11797107260868) / fConst2) + 1.0);
+		fConst74 = (1.0 / (fConst71 * fConst73));
+		fConst75 = (0.0 - (29426.867123821856 / (fConst5 * fConst73)));
+		fConst76 = (0.0 - (((29426.867123821856 / fConst2) + 248.23594214521736) / (fConst2 * fConst73)));
+		fConst77 = ((((3416.7319933733456 / fConst2) + 101.2432515287811) / fConst2) + 1.0);
+		fConst78 = (1.0 / fConst77);
+		fConst79 = (0.0 - (13666.927973493383 / (fConst5 * fConst77)));
+		fConst80 = (0.0 - (((13666.927973493383 / fConst2) + 202.4865030575622) / (fConst2 * fConst77)));
+		fConst81 = ((123.06922428889351 / fConst2) + 1.0);
+		fConst82 = (0.0 - (246.13844857778702 / (fConst2 * fConst81)));
+		fConst83 = ((((16255.080264839977 / fConst2) + 226.24197655533564) / fConst2) + 1.0);
+		fConst84 = (0.0 - (65020.321059359907 / (fConst5 * fConst83)));
+		fConst85 = (0.0 - (((65020.321059359907 / fConst2) + 452.48395311067128) / (fConst2 * fConst83)));
+		fConst86 = ((((20678.421137748988 / fConst2) + 156.90505679967598) / fConst2) + 1.0);
+		fConst87 = (1.0 / ((fConst81 * fConst83) * fConst86));
+		fConst88 = (0.0 - (82713.684550995953 / (fConst5 * fConst86)));
+		fConst89 = (0.0 - (((82713.684550995953 / fConst2) + 313.81011359935195) / (fConst2 * fConst86)));
+		fConst90 = ((33.7477505095937 / fConst2) + 1.0);
+		fConst91 = (1.0 / fConst90);
+		fConst92 = (0.0 - (67.495501019187401 / (fConst2 * fConst90)));
 		iConst93 = int(((0.0014305917275969774 * double(iConst0)) + 0.5));
-		fConst94 = ((112.2322463251477 / fConst2) + 1.0);
-		fConst95 = (0.0 - (224.4644926502954 / (fConst2 * fConst94)));
-		fConst96 = ((((13518.406533001747 / fConst2) + 206.32002345478514) / fConst2) + 1.0);
-		fConst97 = (0.0 - (54073.62613200699 / (fConst5 * fConst96)));
-		fConst98 = (0.0 - (((54073.62613200699 / fConst2) + 412.64004690957029) / (fConst2 * fConst96)));
-		fConst99 = ((((17197.042330535627 / fConst2) + 143.0886323217992) / fConst2) + 1.0);
-		fConst100 = (1.0 / ((fConst94 * fConst96) * fConst99));
-		fConst101 = (0.0 - (68788.169322142508 / (fConst5 * fConst99)));
-		fConst102 = (0.0 - (((68788.169322142508 / fConst2) + 286.17726464359839) / (fConst2 * fConst99)));
-		fConst103 = ((((8657.2200974217594 / fConst2) + 178.26790338167996) / fConst2) + 1.0);
-		fConst104 = (0.0 - (34628.880389687038 / (fConst5 * fConst103)));
-		fConst105 = (0.0 - (((34628.880389687038 / fConst2) + 356.53580676335991) / (fConst2 * fConst103)));
-		fConst106 = ((((10880.852622069639 / fConst2) + 129.49269801947491) / fConst2) + 1.0);
-		fConst107 = (1.0 / (fConst103 * fConst106));
-		fConst108 = (0.0 - (43523.410488278554 / (fConst5 * fConst106)));
-		fConst109 = (0.0 - (((43523.410488278554 / fConst2) + 258.98539603894983) / (fConst2 * fConst106)));
-		fConst110 = ((71.467716130467849 / fConst2) + 1.0);
-		fConst111 = (0.0 - (142.9354322609357 / (fConst2 * fConst110)));
-		fConst112 = ((((6118.1542368773398 / fConst2) + 113.18864471022512) / fConst2) + 1.0);
-		fConst113 = (1.0 / (fConst110 * fConst112));
-		fConst114 = (0.0 - (24472.616947509359 / (fConst5 * fConst112)));
-		fConst115 = (0.0 - (((24472.616947509359 / fConst2) + 226.37728942045024) / (fConst2 * fConst112)));
-		fConst116 = ((30.776060140115494 / fConst2) + 1.0);
-		fConst117 = (1.0 / fConst116);
-		fConst118 = (0.0 - (61.552120280230987 / (fConst2 * fConst116)));
-		fConst119 = ((((2841.4976332440169 / fConst2) + 92.328180420346484) / fConst2) + 1.0);
-		fConst120 = (1.0 / fConst119);
-		fConst121 = (0.0 - (11365.990532976068 / (fConst5 * fConst119)));
-		fConst122 = (0.0 - (((11365.990532976068 / fConst2) + 184.65636084069297) / (fConst2 * fConst119)));
+		fConst94 = ((71.467716130467849 / fConst2) + 1.0);
+		fConst95 = ((((6118.1542368773398 / fConst2) + 113.18864471022512) / fConst2) + 1.0);
+		fConst96 = (1.0 / (fConst94 * fConst95));
+		fConst97 = (0.0 - (24472.616947509359 / (fConst95 * fConst5)));
+		fConst98 = (0.0 - (((24472.616947509359 / fConst2) + 226.37728942045024) / (fConst95 * fConst2)));
+		fConst99 = (0.0 - (142.9354322609357 / (fConst94 * fConst2)));
+		fConst100 = ((((8657.2200974217594 / fConst2) + 178.26790338167996) / fConst2) + 1.0);
+		fConst101 = ((((10880.852622069639 / fConst2) + 129.49269801947491) / fConst2) + 1.0);
+		fConst102 = (1.0 / (fConst100 * fConst101));
+		fConst103 = (0.0 - (((43523.410488278554 / fConst2) + 258.98539603894983) / (fConst2 * fConst101)));
+		fConst104 = (0.0 - (43523.410488278554 / (fConst5 * fConst101)));
+		fConst105 = (0.0 - (((34628.880389687038 / fConst2) + 356.53580676335991) / (fConst2 * fConst100)));
+		fConst106 = (0.0 - (34628.880389687038 / (fConst5 * fConst100)));
+		fConst107 = ((30.776060140115494 / fConst2) + 1.0);
+		fConst108 = (1.0 / fConst107);
+		fConst109 = (0.0 - (61.552120280230987 / (fConst2 * fConst107)));
+		fConst110 = ((((2841.4976332440169 / fConst2) + 92.328180420346484) / fConst2) + 1.0);
+		fConst111 = (1.0 / fConst110);
+		fConst112 = (0.0 - (11365.990532976068 / (fConst110 * fConst5)));
+		fConst113 = (0.0 - (((11365.990532976068 / fConst2) + 184.65636084069297) / (fConst110 * fConst2)));
+		fConst114 = ((112.2322463251477 / fConst2) + 1.0);
+		fConst115 = (0.0 - (224.4644926502954 / (fConst2 * fConst114)));
+		fConst116 = ((((13518.406533001747 / fConst2) + 206.32002345478514) / fConst2) + 1.0);
+		fConst117 = (0.0 - (54073.62613200699 / (fConst5 * fConst116)));
+		fConst118 = (0.0 - (((54073.62613200699 / fConst2) + 412.64004690957029) / (fConst2 * fConst116)));
+		fConst119 = ((((17197.042330535627 / fConst2) + 143.0886323217992) / fConst2) + 1.0);
+		fConst120 = (1.0 / ((fConst114 * fConst116) * fConst119));
+		fConst121 = (0.0 - (68788.169322142508 / (fConst5 * fConst119)));
+		fConst122 = (0.0 - (((68788.169322142508 / fConst2) + 286.17726464359839) / (fConst2 * fConst119)));
 		
 	}
 	
@@ -3522,83 +3522,83 @@ class mydsp : public dsp {
 			
 		}
 		for (int l80 = 0; (l80 < 2); l80 = (l80 + 1)) {
-			fRec110[l80] = 0.0;
+			fRec107[l80] = 0.0;
 			
 		}
 		for (int l81 = 0; (l81 < 2); l81 = (l81 + 1)) {
-			fRec108[l81] = 0.0;
+			fRec105[l81] = 0.0;
 			
 		}
 		for (int l82 = 0; (l82 < 2); l82 = (l82 + 1)) {
-			fRec107[l82] = 0.0;
+			fRec104[l82] = 0.0;
 			
 		}
 		for (int l83 = 0; (l83 < 2); l83 = (l83 + 1)) {
-			fRec105[l83] = 0.0;
+			fRec102[l83] = 0.0;
 			
 		}
 		for (int l84 = 0; (l84 < 2); l84 = (l84 + 1)) {
-			fRec104[l84] = 0.0;
+			fRec101[l84] = 0.0;
 			
 		}
 		for (int l85 = 0; (l85 < 2); l85 = (l85 + 1)) {
-			fRec102[l85] = 0.0;
+			fRec99[l85] = 0.0;
 			
 		}
 		for (int l86 = 0; (l86 < 2); l86 = (l86 + 1)) {
-			fRec101[l86] = 0.0;
+			fRec110[l86] = 0.0;
 			
 		}
 		for (int l87 = 0; (l87 < 2); l87 = (l87 + 1)) {
-			fRec99[l87] = 0.0;
+			fRec108[l87] = 0.0;
 			
 		}
 		for (int l88 = 0; (l88 < 2); l88 = (l88 + 1)) {
-			fRec119[l88] = 0.0;
+			fRec116[l88] = 0.0;
 			
 		}
 		for (int l89 = 0; (l89 < 2); l89 = (l89 + 1)) {
-			fRec117[l89] = 0.0;
+			fRec114[l89] = 0.0;
 			
 		}
 		for (int l90 = 0; (l90 < 2); l90 = (l90 + 1)) {
-			fRec116[l90] = 0.0;
+			fRec113[l90] = 0.0;
 			
 		}
 		for (int l91 = 0; (l91 < 2); l91 = (l91 + 1)) {
-			fRec114[l91] = 0.0;
+			fRec111[l91] = 0.0;
 			
 		}
 		for (int l92 = 0; (l92 < 2); l92 = (l92 + 1)) {
-			fRec113[l92] = 0.0;
+			fRec128[l92] = 0.0;
 			
 		}
 		for (int l93 = 0; (l93 < 2); l93 = (l93 + 1)) {
-			fRec111[l93] = 0.0;
+			fRec126[l93] = 0.0;
 			
 		}
 		for (int l94 = 0; (l94 < 2); l94 = (l94 + 1)) {
-			fRec122[l94] = 0.0;
+			fRec125[l94] = 0.0;
 			
 		}
 		for (int l95 = 0; (l95 < 2); l95 = (l95 + 1)) {
-			fRec120[l95] = 0.0;
+			fRec123[l95] = 0.0;
 			
 		}
 		for (int l96 = 0; (l96 < 2); l96 = (l96 + 1)) {
-			fRec128[l96] = 0.0;
+			fRec122[l96] = 0.0;
 			
 		}
 		for (int l97 = 0; (l97 < 2); l97 = (l97 + 1)) {
-			fRec126[l97] = 0.0;
+			fRec120[l97] = 0.0;
 			
 		}
 		for (int l98 = 0; (l98 < 2); l98 = (l98 + 1)) {
-			fRec125[l98] = 0.0;
+			fRec119[l98] = 0.0;
 			
 		}
 		for (int l99 = 0; (l99 < 2); l99 = (l99 + 1)) {
-			fRec123[l99] = 0.0;
+			fRec117[l99] = 0.0;
 			
 		}
 		for (int l100 = 0; (l100 < 1024); l100 = (l100 + 1)) {
@@ -3606,19 +3606,19 @@ class mydsp : public dsp {
 			
 		}
 		for (int l101 = 0; (l101 < 2); l101 = (l101 + 1)) {
-			fRec143[l101] = 0.0;
+			fRec134[l101] = 0.0;
 			
 		}
 		for (int l102 = 0; (l102 < 2); l102 = (l102 + 1)) {
-			fRec141[l102] = 0.0;
+			fRec132[l102] = 0.0;
 			
 		}
 		for (int l103 = 0; (l103 < 2); l103 = (l103 + 1)) {
-			fRec140[l103] = 0.0;
+			fRec131[l103] = 0.0;
 			
 		}
 		for (int l104 = 0; (l104 < 2); l104 = (l104 + 1)) {
-			fRec138[l104] = 0.0;
+			fRec129[l104] = 0.0;
 			
 		}
 		for (int l105 = 0; (l105 < 2); l105 = (l105 + 1)) {
@@ -3630,99 +3630,99 @@ class mydsp : public dsp {
 			
 		}
 		for (int l107 = 0; (l107 < 2); l107 = (l107 + 1)) {
-			fRec134[l107] = 0.0;
+			fRec152[l107] = 0.0;
 			
 		}
 		for (int l108 = 0; (l108 < 2); l108 = (l108 + 1)) {
-			fRec132[l108] = 0.0;
+			fRec150[l108] = 0.0;
 			
 		}
 		for (int l109 = 0; (l109 < 2); l109 = (l109 + 1)) {
-			fRec131[l109] = 0.0;
+			fRec149[l109] = 0.0;
 			
 		}
 		for (int l110 = 0; (l110 < 2); l110 = (l110 + 1)) {
-			fRec129[l110] = 0.0;
+			fRec147[l110] = 0.0;
 			
 		}
 		for (int l111 = 0; (l111 < 2); l111 = (l111 + 1)) {
-			fRec155[l111] = 0.0;
+			fRec146[l111] = 0.0;
 			
 		}
 		for (int l112 = 0; (l112 < 2); l112 = (l112 + 1)) {
-			fRec153[l112] = 0.0;
+			fRec144[l112] = 0.0;
 			
 		}
 		for (int l113 = 0; (l113 < 2); l113 = (l113 + 1)) {
-			fRec152[l113] = 0.0;
+			fRec143[l113] = 0.0;
 			
 		}
 		for (int l114 = 0; (l114 < 2); l114 = (l114 + 1)) {
-			fRec150[l114] = 0.0;
+			fRec141[l114] = 0.0;
 			
 		}
 		for (int l115 = 0; (l115 < 2); l115 = (l115 + 1)) {
-			fRec149[l115] = 0.0;
+			fRec140[l115] = 0.0;
 			
 		}
 		for (int l116 = 0; (l116 < 2); l116 = (l116 + 1)) {
-			fRec147[l116] = 0.0;
+			fRec138[l116] = 0.0;
 			
 		}
 		for (int l117 = 0; (l117 < 2); l117 = (l117 + 1)) {
-			fRec146[l117] = 0.0;
+			fRec161[l117] = 0.0;
 			
 		}
 		for (int l118 = 0; (l118 < 2); l118 = (l118 + 1)) {
-			fRec144[l118] = 0.0;
+			fRec159[l118] = 0.0;
 			
 		}
 		for (int l119 = 0; (l119 < 2); l119 = (l119 + 1)) {
-			fRec164[l119] = 0.0;
+			fRec158[l119] = 0.0;
 			
 		}
 		for (int l120 = 0; (l120 < 2); l120 = (l120 + 1)) {
-			fRec162[l120] = 0.0;
+			fRec156[l120] = 0.0;
 			
 		}
 		for (int l121 = 0; (l121 < 2); l121 = (l121 + 1)) {
-			fRec161[l121] = 0.0;
+			fRec155[l121] = 0.0;
 			
 		}
 		for (int l122 = 0; (l122 < 2); l122 = (l122 + 1)) {
-			fRec159[l122] = 0.0;
+			fRec153[l122] = 0.0;
 			
 		}
 		for (int l123 = 0; (l123 < 2); l123 = (l123 + 1)) {
-			fRec158[l123] = 0.0;
+			fRec173[l123] = 0.0;
 			
 		}
 		for (int l124 = 0; (l124 < 2); l124 = (l124 + 1)) {
-			fRec156[l124] = 0.0;
+			fRec171[l124] = 0.0;
 			
 		}
 		for (int l125 = 0; (l125 < 2); l125 = (l125 + 1)) {
-			fRec167[l125] = 0.0;
+			fRec170[l125] = 0.0;
 			
 		}
 		for (int l126 = 0; (l126 < 2); l126 = (l126 + 1)) {
-			fRec165[l126] = 0.0;
+			fRec168[l126] = 0.0;
 			
 		}
 		for (int l127 = 0; (l127 < 2); l127 = (l127 + 1)) {
-			fRec173[l127] = 0.0;
+			fRec167[l127] = 0.0;
 			
 		}
 		for (int l128 = 0; (l128 < 2); l128 = (l128 + 1)) {
-			fRec171[l128] = 0.0;
+			fRec165[l128] = 0.0;
 			
 		}
 		for (int l129 = 0; (l129 < 2); l129 = (l129 + 1)) {
-			fRec170[l129] = 0.0;
+			fRec164[l129] = 0.0;
 			
 		}
 		for (int l130 = 0; (l130 < 2); l130 = (l130 + 1)) {
-			fRec168[l130] = 0.0;
+			fRec162[l130] = 0.0;
 			
 		}
 		for (int l131 = 0; (l131 < 1024); l131 = (l131 + 1)) {
@@ -3730,123 +3730,123 @@ class mydsp : public dsp {
 			
 		}
 		for (int l132 = 0; (l132 < 2); l132 = (l132 + 1)) {
-			fRec188[l132] = 0.0;
+			fRec185[l132] = 0.0;
 			
 		}
 		for (int l133 = 0; (l133 < 2); l133 = (l133 + 1)) {
-			fRec186[l133] = 0.0;
+			fRec183[l133] = 0.0;
 			
 		}
 		for (int l134 = 0; (l134 < 2); l134 = (l134 + 1)) {
-			fRec185[l134] = 0.0;
+			fRec182[l134] = 0.0;
 			
 		}
 		for (int l135 = 0; (l135 < 2); l135 = (l135 + 1)) {
-			fRec183[l135] = 0.0;
+			fRec180[l135] = 0.0;
 			
 		}
 		for (int l136 = 0; (l136 < 2); l136 = (l136 + 1)) {
-			fRec182[l136] = 0.0;
+			fRec179[l136] = 0.0;
 			
 		}
 		for (int l137 = 0; (l137 < 2); l137 = (l137 + 1)) {
-			fRec180[l137] = 0.0;
+			fRec177[l137] = 0.0;
 			
 		}
 		for (int l138 = 0; (l138 < 2); l138 = (l138 + 1)) {
-			fRec179[l138] = 0.0;
+			fRec176[l138] = 0.0;
 			
 		}
 		for (int l139 = 0; (l139 < 2); l139 = (l139 + 1)) {
-			fRec177[l139] = 0.0;
+			fRec174[l139] = 0.0;
 			
 		}
 		for (int l140 = 0; (l140 < 2); l140 = (l140 + 1)) {
-			fRec176[l140] = 0.0;
+			fRec194[l140] = 0.0;
 			
 		}
 		for (int l141 = 0; (l141 < 2); l141 = (l141 + 1)) {
-			fRec174[l141] = 0.0;
+			fRec192[l141] = 0.0;
 			
 		}
 		for (int l142 = 0; (l142 < 2); l142 = (l142 + 1)) {
-			fRec200[l142] = 0.0;
+			fRec191[l142] = 0.0;
 			
 		}
 		for (int l143 = 0; (l143 < 2); l143 = (l143 + 1)) {
-			fRec198[l143] = 0.0;
+			fRec189[l143] = 0.0;
 			
 		}
 		for (int l144 = 0; (l144 < 2); l144 = (l144 + 1)) {
-			fRec197[l144] = 0.0;
+			fRec188[l144] = 0.0;
 			
 		}
 		for (int l145 = 0; (l145 < 2); l145 = (l145 + 1)) {
-			fRec195[l145] = 0.0;
+			fRec186[l145] = 0.0;
 			
 		}
 		for (int l146 = 0; (l146 < 2); l146 = (l146 + 1)) {
-			fRec194[l146] = 0.0;
+			fRec200[l146] = 0.0;
 			
 		}
 		for (int l147 = 0; (l147 < 2); l147 = (l147 + 1)) {
-			fRec192[l147] = 0.0;
+			fRec198[l147] = 0.0;
 			
 		}
 		for (int l148 = 0; (l148 < 2); l148 = (l148 + 1)) {
-			fRec191[l148] = 0.0;
+			fRec197[l148] = 0.0;
 			
 		}
 		for (int l149 = 0; (l149 < 2); l149 = (l149 + 1)) {
-			fRec189[l149] = 0.0;
+			fRec195[l149] = 0.0;
 			
 		}
 		for (int l150 = 0; (l150 < 2); l150 = (l150 + 1)) {
-			fRec209[l150] = 0.0;
+			fRec215[l150] = 0.0;
 			
 		}
 		for (int l151 = 0; (l151 < 2); l151 = (l151 + 1)) {
-			fRec207[l151] = 0.0;
+			fRec213[l151] = 0.0;
 			
 		}
 		for (int l152 = 0; (l152 < 2); l152 = (l152 + 1)) {
-			fRec206[l152] = 0.0;
+			fRec212[l152] = 0.0;
 			
 		}
 		for (int l153 = 0; (l153 < 2); l153 = (l153 + 1)) {
-			fRec204[l153] = 0.0;
+			fRec210[l153] = 0.0;
 			
 		}
 		for (int l154 = 0; (l154 < 2); l154 = (l154 + 1)) {
-			fRec203[l154] = 0.0;
+			fRec209[l154] = 0.0;
 			
 		}
 		for (int l155 = 0; (l155 < 2); l155 = (l155 + 1)) {
-			fRec201[l155] = 0.0;
+			fRec207[l155] = 0.0;
 			
 		}
 		for (int l156 = 0; (l156 < 2); l156 = (l156 + 1)) {
-			fRec212[l156] = 0.0;
+			fRec206[l156] = 0.0;
 			
 		}
 		for (int l157 = 0; (l157 < 2); l157 = (l157 + 1)) {
-			fRec210[l157] = 0.0;
+			fRec204[l157] = 0.0;
 			
 		}
 		for (int l158 = 0; (l158 < 2); l158 = (l158 + 1)) {
-			fRec218[l158] = 0.0;
+			fRec203[l158] = 0.0;
 			
 		}
 		for (int l159 = 0; (l159 < 2); l159 = (l159 + 1)) {
-			fRec216[l159] = 0.0;
+			fRec201[l159] = 0.0;
 			
 		}
 		for (int l160 = 0; (l160 < 2); l160 = (l160 + 1)) {
-			fRec215[l160] = 0.0;
+			fRec218[l160] = 0.0;
 			
 		}
 		for (int l161 = 0; (l161 < 2); l161 = (l161 + 1)) {
-			fRec213[l161] = 0.0;
+			fRec216[l161] = 0.0;
 			
 		}
 		for (int l162 = 0; (l162 < 1024); l162 = (l162 + 1)) {
@@ -3978,123 +3978,123 @@ class mydsp : public dsp {
 			
 		}
 		for (int l194 = 0; (l194 < 2); l194 = (l194 + 1)) {
-			fRec278[l194] = 0.0;
+			fRec272[l194] = 0.0;
 			
 		}
 		for (int l195 = 0; (l195 < 2); l195 = (l195 + 1)) {
-			fRec276[l195] = 0.0;
+			fRec270[l195] = 0.0;
 			
 		}
 		for (int l196 = 0; (l196 < 2); l196 = (l196 + 1)) {
-			fRec275[l196] = 0.0;
+			fRec269[l196] = 0.0;
 			
 		}
 		for (int l197 = 0; (l197 < 2); l197 = (l197 + 1)) {
-			fRec273[l197] = 0.0;
+			fRec267[l197] = 0.0;
 			
 		}
 		for (int l198 = 0; (l198 < 2); l198 = (l198 + 1)) {
-			fRec272[l198] = 0.0;
+			fRec266[l198] = 0.0;
 			
 		}
 		for (int l199 = 0; (l199 < 2); l199 = (l199 + 1)) {
-			fRec270[l199] = 0.0;
+			fRec264[l199] = 0.0;
 			
 		}
 		for (int l200 = 0; (l200 < 2); l200 = (l200 + 1)) {
-			fRec269[l200] = 0.0;
+			fRec278[l200] = 0.0;
 			
 		}
 		for (int l201 = 0; (l201 < 2); l201 = (l201 + 1)) {
-			fRec267[l201] = 0.0;
+			fRec276[l201] = 0.0;
 			
 		}
 		for (int l202 = 0; (l202 < 2); l202 = (l202 + 1)) {
-			fRec266[l202] = 0.0;
+			fRec275[l202] = 0.0;
 			
 		}
 		for (int l203 = 0; (l203 < 2); l203 = (l203 + 1)) {
-			fRec264[l203] = 0.0;
+			fRec273[l203] = 0.0;
 			
 		}
 		for (int l204 = 0; (l204 < 2); l204 = (l204 + 1)) {
-			fRec290[l204] = 0.0;
+			fRec281[l204] = 0.0;
 			
 		}
 		for (int l205 = 0; (l205 < 2); l205 = (l205 + 1)) {
-			fRec288[l205] = 0.0;
+			fRec279[l205] = 0.0;
 			
 		}
 		for (int l206 = 0; (l206 < 2); l206 = (l206 + 1)) {
-			fRec287[l206] = 0.0;
+			fRec296[l206] = 0.0;
 			
 		}
 		for (int l207 = 0; (l207 < 2); l207 = (l207 + 1)) {
-			fRec285[l207] = 0.0;
+			fRec294[l207] = 0.0;
 			
 		}
 		for (int l208 = 0; (l208 < 2); l208 = (l208 + 1)) {
-			fRec284[l208] = 0.0;
+			fRec293[l208] = 0.0;
 			
 		}
 		for (int l209 = 0; (l209 < 2); l209 = (l209 + 1)) {
-			fRec282[l209] = 0.0;
+			fRec291[l209] = 0.0;
 			
 		}
 		for (int l210 = 0; (l210 < 2); l210 = (l210 + 1)) {
-			fRec281[l210] = 0.0;
+			fRec290[l210] = 0.0;
 			
 		}
 		for (int l211 = 0; (l211 < 2); l211 = (l211 + 1)) {
-			fRec279[l211] = 0.0;
+			fRec288[l211] = 0.0;
 			
 		}
 		for (int l212 = 0; (l212 < 2); l212 = (l212 + 1)) {
-			fRec299[l212] = 0.0;
+			fRec287[l212] = 0.0;
 			
 		}
 		for (int l213 = 0; (l213 < 2); l213 = (l213 + 1)) {
-			fRec297[l213] = 0.0;
+			fRec285[l213] = 0.0;
 			
 		}
 		for (int l214 = 0; (l214 < 2); l214 = (l214 + 1)) {
-			fRec296[l214] = 0.0;
+			fRec284[l214] = 0.0;
 			
 		}
 		for (int l215 = 0; (l215 < 2); l215 = (l215 + 1)) {
-			fRec294[l215] = 0.0;
+			fRec282[l215] = 0.0;
 			
 		}
 		for (int l216 = 0; (l216 < 2); l216 = (l216 + 1)) {
-			fRec293[l216] = 0.0;
+			fRec308[l216] = 0.0;
 			
 		}
 		for (int l217 = 0; (l217 < 2); l217 = (l217 + 1)) {
-			fRec291[l217] = 0.0;
+			fRec306[l217] = 0.0;
 			
 		}
 		for (int l218 = 0; (l218 < 2); l218 = (l218 + 1)) {
-			fRec302[l218] = 0.0;
+			fRec305[l218] = 0.0;
 			
 		}
 		for (int l219 = 0; (l219 < 2); l219 = (l219 + 1)) {
-			fRec300[l219] = 0.0;
+			fRec303[l219] = 0.0;
 			
 		}
 		for (int l220 = 0; (l220 < 2); l220 = (l220 + 1)) {
-			fRec308[l220] = 0.0;
+			fRec302[l220] = 0.0;
 			
 		}
 		for (int l221 = 0; (l221 < 2); l221 = (l221 + 1)) {
-			fRec306[l221] = 0.0;
+			fRec300[l221] = 0.0;
 			
 		}
 		for (int l222 = 0; (l222 < 2); l222 = (l222 + 1)) {
-			fRec305[l222] = 0.0;
+			fRec299[l222] = 0.0;
 			
 		}
 		for (int l223 = 0; (l223 < 2); l223 = (l223 + 1)) {
-			fRec303[l223] = 0.0;
+			fRec297[l223] = 0.0;
 			
 		}
 		for (int l224 = 0; (l224 < 1024); l224 = (l224 + 1)) {
@@ -4102,99 +4102,99 @@ class mydsp : public dsp {
 			
 		}
 		for (int l225 = 0; (l225 < 2); l225 = (l225 + 1)) {
-			fRec323[l225] = 0.0;
+			fRec320[l225] = 0.0;
 			
 		}
 		for (int l226 = 0; (l226 < 2); l226 = (l226 + 1)) {
-			fRec321[l226] = 0.0;
+			fRec318[l226] = 0.0;
 			
 		}
 		for (int l227 = 0; (l227 < 2); l227 = (l227 + 1)) {
-			fRec320[l227] = 0.0;
+			fRec317[l227] = 0.0;
 			
 		}
 		for (int l228 = 0; (l228 < 2); l228 = (l228 + 1)) {
-			fRec318[l228] = 0.0;
+			fRec315[l228] = 0.0;
 			
 		}
 		for (int l229 = 0; (l229 < 2); l229 = (l229 + 1)) {
-			fRec317[l229] = 0.0;
+			fRec314[l229] = 0.0;
 			
 		}
 		for (int l230 = 0; (l230 < 2); l230 = (l230 + 1)) {
-			fRec315[l230] = 0.0;
+			fRec312[l230] = 0.0;
 			
 		}
 		for (int l231 = 0; (l231 < 2); l231 = (l231 + 1)) {
-			fRec314[l231] = 0.0;
+			fRec311[l231] = 0.0;
 			
 		}
 		for (int l232 = 0; (l232 < 2); l232 = (l232 + 1)) {
-			fRec312[l232] = 0.0;
+			fRec309[l232] = 0.0;
 			
 		}
 		for (int l233 = 0; (l233 < 2); l233 = (l233 + 1)) {
-			fRec311[l233] = 0.0;
+			fRec329[l233] = 0.0;
 			
 		}
 		for (int l234 = 0; (l234 < 2); l234 = (l234 + 1)) {
-			fRec309[l234] = 0.0;
+			fRec327[l234] = 0.0;
 			
 		}
 		for (int l235 = 0; (l235 < 2); l235 = (l235 + 1)) {
-			fRec335[l235] = 0.0;
+			fRec326[l235] = 0.0;
 			
 		}
 		for (int l236 = 0; (l236 < 2); l236 = (l236 + 1)) {
-			fRec333[l236] = 0.0;
+			fRec324[l236] = 0.0;
 			
 		}
 		for (int l237 = 0; (l237 < 2); l237 = (l237 + 1)) {
-			fRec332[l237] = 0.0;
+			fRec323[l237] = 0.0;
 			
 		}
 		for (int l238 = 0; (l238 < 2); l238 = (l238 + 1)) {
-			fRec330[l238] = 0.0;
+			fRec321[l238] = 0.0;
 			
 		}
 		for (int l239 = 0; (l239 < 2); l239 = (l239 + 1)) {
-			fRec329[l239] = 0.0;
+			fRec332[l239] = 0.0;
 			
 		}
 		for (int l240 = 0; (l240 < 2); l240 = (l240 + 1)) {
-			fRec327[l240] = 0.0;
+			fRec330[l240] = 0.0;
 			
 		}
 		for (int l241 = 0; (l241 < 2); l241 = (l241 + 1)) {
-			fRec326[l241] = 0.0;
+			fRec338[l241] = 0.0;
 			
 		}
 		for (int l242 = 0; (l242 < 2); l242 = (l242 + 1)) {
-			fRec324[l242] = 0.0;
+			fRec336[l242] = 0.0;
 			
 		}
 		for (int l243 = 0; (l243 < 2); l243 = (l243 + 1)) {
-			fRec344[l243] = 0.0;
+			fRec335[l243] = 0.0;
 			
 		}
 		for (int l244 = 0; (l244 < 2); l244 = (l244 + 1)) {
-			fRec342[l244] = 0.0;
+			fRec333[l244] = 0.0;
 			
 		}
 		for (int l245 = 0; (l245 < 2); l245 = (l245 + 1)) {
-			fRec341[l245] = 0.0;
+			fRec353[l245] = 0.0;
 			
 		}
 		for (int l246 = 0; (l246 < 2); l246 = (l246 + 1)) {
-			fRec339[l246] = 0.0;
+			fRec351[l246] = 0.0;
 			
 		}
 		for (int l247 = 0; (l247 < 2); l247 = (l247 + 1)) {
-			fRec338[l247] = 0.0;
+			fRec350[l247] = 0.0;
 			
 		}
 		for (int l248 = 0; (l248 < 2); l248 = (l248 + 1)) {
-			fRec336[l248] = 0.0;
+			fRec348[l248] = 0.0;
 			
 		}
 		for (int l249 = 0; (l249 < 2); l249 = (l249 + 1)) {
@@ -4206,19 +4206,19 @@ class mydsp : public dsp {
 			
 		}
 		for (int l251 = 0; (l251 < 2); l251 = (l251 + 1)) {
-			fRec353[l251] = 0.0;
+			fRec344[l251] = 0.0;
 			
 		}
 		for (int l252 = 0; (l252 < 2); l252 = (l252 + 1)) {
-			fRec351[l252] = 0.0;
+			fRec342[l252] = 0.0;
 			
 		}
 		for (int l253 = 0; (l253 < 2); l253 = (l253 + 1)) {
-			fRec350[l253] = 0.0;
+			fRec341[l253] = 0.0;
 			
 		}
 		for (int l254 = 0; (l254 < 2); l254 = (l254 + 1)) {
-			fRec348[l254] = 0.0;
+			fRec339[l254] = 0.0;
 			
 		}
 		for (int l255 = 0; (l255 < 1024); l255 = (l255 + 1)) {
@@ -4226,19 +4226,19 @@ class mydsp : public dsp {
 			
 		}
 		for (int l256 = 0; (l256 < 2); l256 = (l256 + 1)) {
-			fRec359[l256] = 0.0;
+			fRec368[l256] = 0.0;
 			
 		}
 		for (int l257 = 0; (l257 < 2); l257 = (l257 + 1)) {
-			fRec357[l257] = 0.0;
+			fRec366[l257] = 0.0;
 			
 		}
 		for (int l258 = 0; (l258 < 2); l258 = (l258 + 1)) {
-			fRec356[l258] = 0.0;
+			fRec365[l258] = 0.0;
 			
 		}
 		for (int l259 = 0; (l259 < 2); l259 = (l259 + 1)) {
-			fRec354[l259] = 0.0;
+			fRec363[l259] = 0.0;
 			
 		}
 		for (int l260 = 0; (l260 < 2); l260 = (l260 + 1)) {
@@ -4250,99 +4250,99 @@ class mydsp : public dsp {
 			
 		}
 		for (int l262 = 0; (l262 < 2); l262 = (l262 + 1)) {
-			fRec377[l262] = 0.0;
+			fRec359[l262] = 0.0;
 			
 		}
 		for (int l263 = 0; (l263 < 2); l263 = (l263 + 1)) {
-			fRec375[l263] = 0.0;
+			fRec357[l263] = 0.0;
 			
 		}
 		for (int l264 = 0; (l264 < 2); l264 = (l264 + 1)) {
-			fRec374[l264] = 0.0;
+			fRec356[l264] = 0.0;
 			
 		}
 		for (int l265 = 0; (l265 < 2); l265 = (l265 + 1)) {
-			fRec372[l265] = 0.0;
+			fRec354[l265] = 0.0;
 			
 		}
 		for (int l266 = 0; (l266 < 2); l266 = (l266 + 1)) {
-			fRec371[l266] = 0.0;
+			fRec377[l266] = 0.0;
 			
 		}
 		for (int l267 = 0; (l267 < 2); l267 = (l267 + 1)) {
-			fRec369[l267] = 0.0;
+			fRec375[l267] = 0.0;
 			
 		}
 		for (int l268 = 0; (l268 < 2); l268 = (l268 + 1)) {
-			fRec368[l268] = 0.0;
+			fRec374[l268] = 0.0;
 			
 		}
 		for (int l269 = 0; (l269 < 2); l269 = (l269 + 1)) {
-			fRec366[l269] = 0.0;
+			fRec372[l269] = 0.0;
 			
 		}
 		for (int l270 = 0; (l270 < 2); l270 = (l270 + 1)) {
-			fRec365[l270] = 0.0;
+			fRec371[l270] = 0.0;
 			
 		}
 		for (int l271 = 0; (l271 < 2); l271 = (l271 + 1)) {
-			fRec363[l271] = 0.0;
+			fRec369[l271] = 0.0;
 			
 		}
 		for (int l272 = 0; (l272 < 2); l272 = (l272 + 1)) {
-			fRec386[l272] = 0.0;
+			fRec389[l272] = 0.0;
 			
 		}
 		for (int l273 = 0; (l273 < 2); l273 = (l273 + 1)) {
-			fRec384[l273] = 0.0;
+			fRec387[l273] = 0.0;
 			
 		}
 		for (int l274 = 0; (l274 < 2); l274 = (l274 + 1)) {
-			fRec383[l274] = 0.0;
+			fRec386[l274] = 0.0;
 			
 		}
 		for (int l275 = 0; (l275 < 2); l275 = (l275 + 1)) {
-			fRec381[l275] = 0.0;
+			fRec384[l275] = 0.0;
 			
 		}
 		for (int l276 = 0; (l276 < 2); l276 = (l276 + 1)) {
-			fRec380[l276] = 0.0;
+			fRec383[l276] = 0.0;
 			
 		}
 		for (int l277 = 0; (l277 < 2); l277 = (l277 + 1)) {
-			fRec378[l277] = 0.0;
+			fRec381[l277] = 0.0;
 			
 		}
 		for (int l278 = 0; (l278 < 2); l278 = (l278 + 1)) {
-			fRec398[l278] = 0.0;
+			fRec380[l278] = 0.0;
 			
 		}
 		for (int l279 = 0; (l279 < 2); l279 = (l279 + 1)) {
-			fRec396[l279] = 0.0;
+			fRec378[l279] = 0.0;
 			
 		}
 		for (int l280 = 0; (l280 < 2); l280 = (l280 + 1)) {
-			fRec395[l280] = 0.0;
+			fRec392[l280] = 0.0;
 			
 		}
 		for (int l281 = 0; (l281 < 2); l281 = (l281 + 1)) {
-			fRec393[l281] = 0.0;
+			fRec390[l281] = 0.0;
 			
 		}
 		for (int l282 = 0; (l282 < 2); l282 = (l282 + 1)) {
-			fRec392[l282] = 0.0;
+			fRec398[l282] = 0.0;
 			
 		}
 		for (int l283 = 0; (l283 < 2); l283 = (l283 + 1)) {
-			fRec390[l283] = 0.0;
+			fRec396[l283] = 0.0;
 			
 		}
 		for (int l284 = 0; (l284 < 2); l284 = (l284 + 1)) {
-			fRec389[l284] = 0.0;
+			fRec395[l284] = 0.0;
 			
 		}
 		for (int l285 = 0; (l285 < 2); l285 = (l285 + 1)) {
-			fRec387[l285] = 0.0;
+			fRec393[l285] = 0.0;
 			
 		}
 		for (int l286 = 0; (l286 < 1024); l286 = (l286 + 1)) {
@@ -4350,123 +4350,123 @@ class mydsp : public dsp {
 			
 		}
 		for (int l287 = 0; (l287 < 2); l287 = (l287 + 1)) {
-			fRec413[l287] = 0.0;
+			fRec401[l287] = 0.0;
 			
 		}
 		for (int l288 = 0; (l288 < 2); l288 = (l288 + 1)) {
-			fRec411[l288] = 0.0;
+			fRec399[l288] = 0.0;
 			
 		}
 		for (int l289 = 0; (l289 < 2); l289 = (l289 + 1)) {
-			fRec410[l289] = 0.0;
+			fRec413[l289] = 0.0;
 			
 		}
 		for (int l290 = 0; (l290 < 2); l290 = (l290 + 1)) {
-			fRec408[l290] = 0.0;
+			fRec411[l290] = 0.0;
 			
 		}
 		for (int l291 = 0; (l291 < 2); l291 = (l291 + 1)) {
-			fRec407[l291] = 0.0;
+			fRec410[l291] = 0.0;
 			
 		}
 		for (int l292 = 0; (l292 < 2); l292 = (l292 + 1)) {
-			fRec405[l292] = 0.0;
+			fRec408[l292] = 0.0;
 			
 		}
 		for (int l293 = 0; (l293 < 2); l293 = (l293 + 1)) {
-			fRec404[l293] = 0.0;
+			fRec407[l293] = 0.0;
 			
 		}
 		for (int l294 = 0; (l294 < 2); l294 = (l294 + 1)) {
-			fRec402[l294] = 0.0;
+			fRec405[l294] = 0.0;
 			
 		}
 		for (int l295 = 0; (l295 < 2); l295 = (l295 + 1)) {
-			fRec401[l295] = 0.0;
+			fRec404[l295] = 0.0;
 			
 		}
 		for (int l296 = 0; (l296 < 2); l296 = (l296 + 1)) {
-			fRec399[l296] = 0.0;
+			fRec402[l296] = 0.0;
 			
 		}
 		for (int l297 = 0; (l297 < 2); l297 = (l297 + 1)) {
-			fRec425[l297] = 0.0;
+			fRec428[l297] = 0.0;
 			
 		}
 		for (int l298 = 0; (l298 < 2); l298 = (l298 + 1)) {
-			fRec423[l298] = 0.0;
+			fRec426[l298] = 0.0;
 			
 		}
 		for (int l299 = 0; (l299 < 2); l299 = (l299 + 1)) {
-			fRec422[l299] = 0.0;
+			fRec425[l299] = 0.0;
 			
 		}
 		for (int l300 = 0; (l300 < 2); l300 = (l300 + 1)) {
-			fRec420[l300] = 0.0;
+			fRec423[l300] = 0.0;
 			
 		}
 		for (int l301 = 0; (l301 < 2); l301 = (l301 + 1)) {
-			fRec419[l301] = 0.0;
+			fRec422[l301] = 0.0;
 			
 		}
 		for (int l302 = 0; (l302 < 2); l302 = (l302 + 1)) {
-			fRec417[l302] = 0.0;
+			fRec420[l302] = 0.0;
 			
 		}
 		for (int l303 = 0; (l303 < 2); l303 = (l303 + 1)) {
-			fRec416[l303] = 0.0;
+			fRec419[l303] = 0.0;
 			
 		}
 		for (int l304 = 0; (l304 < 2); l304 = (l304 + 1)) {
-			fRec414[l304] = 0.0;
+			fRec417[l304] = 0.0;
 			
 		}
 		for (int l305 = 0; (l305 < 2); l305 = (l305 + 1)) {
-			fRec434[l305] = 0.0;
+			fRec416[l305] = 0.0;
 			
 		}
 		for (int l306 = 0; (l306 < 2); l306 = (l306 + 1)) {
-			fRec432[l306] = 0.0;
+			fRec414[l306] = 0.0;
 			
 		}
 		for (int l307 = 0; (l307 < 2); l307 = (l307 + 1)) {
-			fRec431[l307] = 0.0;
+			fRec434[l307] = 0.0;
 			
 		}
 		for (int l308 = 0; (l308 < 2); l308 = (l308 + 1)) {
-			fRec429[l308] = 0.0;
+			fRec432[l308] = 0.0;
 			
 		}
 		for (int l309 = 0; (l309 < 2); l309 = (l309 + 1)) {
-			fRec428[l309] = 0.0;
+			fRec431[l309] = 0.0;
 			
 		}
 		for (int l310 = 0; (l310 < 2); l310 = (l310 + 1)) {
-			fRec426[l310] = 0.0;
+			fRec429[l310] = 0.0;
 			
 		}
 		for (int l311 = 0; (l311 < 2); l311 = (l311 + 1)) {
-			fRec437[l311] = 0.0;
+			fRec443[l311] = 0.0;
 			
 		}
 		for (int l312 = 0; (l312 < 2); l312 = (l312 + 1)) {
-			fRec435[l312] = 0.0;
+			fRec441[l312] = 0.0;
 			
 		}
 		for (int l313 = 0; (l313 < 2); l313 = (l313 + 1)) {
-			fRec443[l313] = 0.0;
+			fRec440[l313] = 0.0;
 			
 		}
 		for (int l314 = 0; (l314 < 2); l314 = (l314 + 1)) {
-			fRec441[l314] = 0.0;
+			fRec438[l314] = 0.0;
 			
 		}
 		for (int l315 = 0; (l315 < 2); l315 = (l315 + 1)) {
-			fRec440[l315] = 0.0;
+			fRec437[l315] = 0.0;
 			
 		}
 		for (int l316 = 0; (l316 < 2); l316 = (l316 + 1)) {
-			fRec438[l316] = 0.0;
+			fRec435[l316] = 0.0;
 			
 		}
 		for (int l317 = 0; (l317 < 1024); l317 = (l317 + 1)) {
@@ -4598,99 +4598,99 @@ class mydsp : public dsp {
 			
 		}
 		for (int l349 = 0; (l349 < 2); l349 = (l349 + 1)) {
-			fRec503[l349] = 0.0;
+			fRec497[l349] = 0.0;
 			
 		}
 		for (int l350 = 0; (l350 < 2); l350 = (l350 + 1)) {
-			fRec501[l350] = 0.0;
+			fRec495[l350] = 0.0;
 			
 		}
 		for (int l351 = 0; (l351 < 2); l351 = (l351 + 1)) {
-			fRec500[l351] = 0.0;
+			fRec494[l351] = 0.0;
 			
 		}
 		for (int l352 = 0; (l352 < 2); l352 = (l352 + 1)) {
-			fRec498[l352] = 0.0;
+			fRec492[l352] = 0.0;
 			
 		}
 		for (int l353 = 0; (l353 < 2); l353 = (l353 + 1)) {
-			fRec497[l353] = 0.0;
+			fRec491[l353] = 0.0;
 			
 		}
 		for (int l354 = 0; (l354 < 2); l354 = (l354 + 1)) {
-			fRec495[l354] = 0.0;
+			fRec489[l354] = 0.0;
 			
 		}
 		for (int l355 = 0; (l355 < 2); l355 = (l355 + 1)) {
-			fRec494[l355] = 0.0;
+			fRec509[l355] = 0.0;
 			
 		}
 		for (int l356 = 0; (l356 < 2); l356 = (l356 + 1)) {
-			fRec492[l356] = 0.0;
+			fRec507[l356] = 0.0;
 			
 		}
 		for (int l357 = 0; (l357 < 2); l357 = (l357 + 1)) {
-			fRec491[l357] = 0.0;
+			fRec506[l357] = 0.0;
 			
 		}
 		for (int l358 = 0; (l358 < 2); l358 = (l358 + 1)) {
-			fRec489[l358] = 0.0;
+			fRec504[l358] = 0.0;
 			
 		}
 		for (int l359 = 0; (l359 < 2); l359 = (l359 + 1)) {
-			fRec515[l359] = 0.0;
+			fRec503[l359] = 0.0;
 			
 		}
 		for (int l360 = 0; (l360 < 2); l360 = (l360 + 1)) {
-			fRec513[l360] = 0.0;
+			fRec501[l360] = 0.0;
 			
 		}
 		for (int l361 = 0; (l361 < 2); l361 = (l361 + 1)) {
-			fRec512[l361] = 0.0;
+			fRec500[l361] = 0.0;
 			
 		}
 		for (int l362 = 0; (l362 < 2); l362 = (l362 + 1)) {
-			fRec510[l362] = 0.0;
+			fRec498[l362] = 0.0;
 			
 		}
 		for (int l363 = 0; (l363 < 2); l363 = (l363 + 1)) {
-			fRec509[l363] = 0.0;
+			fRec524[l363] = 0.0;
 			
 		}
 		for (int l364 = 0; (l364 < 2); l364 = (l364 + 1)) {
-			fRec507[l364] = 0.0;
+			fRec522[l364] = 0.0;
 			
 		}
 		for (int l365 = 0; (l365 < 2); l365 = (l365 + 1)) {
-			fRec506[l365] = 0.0;
+			fRec521[l365] = 0.0;
 			
 		}
 		for (int l366 = 0; (l366 < 2); l366 = (l366 + 1)) {
-			fRec504[l366] = 0.0;
+			fRec519[l366] = 0.0;
 			
 		}
 		for (int l367 = 0; (l367 < 2); l367 = (l367 + 1)) {
-			fRec524[l367] = 0.0;
+			fRec518[l367] = 0.0;
 			
 		}
 		for (int l368 = 0; (l368 < 2); l368 = (l368 + 1)) {
-			fRec522[l368] = 0.0;
+			fRec516[l368] = 0.0;
 			
 		}
 		for (int l369 = 0; (l369 < 2); l369 = (l369 + 1)) {
-			fRec521[l369] = 0.0;
+			fRec515[l369] = 0.0;
 			
 		}
 		for (int l370 = 0; (l370 < 2); l370 = (l370 + 1)) {
-			fRec519[l370] = 0.0;
+			fRec513[l370] = 0.0;
 			
 		}
 		for (int l371 = 0; (l371 < 2); l371 = (l371 + 1)) {
-			fRec518[l371] = 0.0;
+			fRec512[l371] = 0.0;
 			
 		}
 		for (int l372 = 0; (l372 < 2); l372 = (l372 + 1)) {
-			fRec516[l372] = 0.0;
+			fRec510[l372] = 0.0;
 			
 		}
 		for (int l373 = 0; (l373 < 2); l373 = (l373 + 1)) {
@@ -4918,51 +4918,51 @@ class mydsp : public dsp {
 			
 		}
 		for (int l429 = 0; (l429 < 2); l429 = (l429 + 1)) {
-			fRec614[l429] = 0.0;
+			fRec611[l429] = 0.0;
 			
 		}
 		for (int l430 = 0; (l430 < 2); l430 = (l430 + 1)) {
-			fRec612[l430] = 0.0;
+			fRec609[l430] = 0.0;
 			
 		}
 		for (int l431 = 0; (l431 < 2); l431 = (l431 + 1)) {
-			fRec611[l431] = 0.0;
+			fRec608[l431] = 0.0;
 			
 		}
 		for (int l432 = 0; (l432 < 2); l432 = (l432 + 1)) {
-			fRec609[l432] = 0.0;
+			fRec606[l432] = 0.0;
 			
 		}
 		for (int l433 = 0; (l433 < 2); l433 = (l433 + 1)) {
-			fRec608[l433] = 0.0;
+			fRec614[l433] = 0.0;
 			
 		}
 		for (int l434 = 0; (l434 < 2); l434 = (l434 + 1)) {
-			fRec606[l434] = 0.0;
+			fRec612[l434] = 0.0;
 			
 		}
 		for (int l435 = 0; (l435 < 2); l435 = (l435 + 1)) {
-			fRec617[l435] = 0.0;
+			fRec623[l435] = 0.0;
 			
 		}
 		for (int l436 = 0; (l436 < 2); l436 = (l436 + 1)) {
-			fRec615[l436] = 0.0;
+			fRec621[l436] = 0.0;
 			
 		}
 		for (int l437 = 0; (l437 < 2); l437 = (l437 + 1)) {
-			fRec623[l437] = 0.0;
+			fRec620[l437] = 0.0;
 			
 		}
 		for (int l438 = 0; (l438 < 2); l438 = (l438 + 1)) {
-			fRec621[l438] = 0.0;
+			fRec618[l438] = 0.0;
 			
 		}
 		for (int l439 = 0; (l439 < 2); l439 = (l439 + 1)) {
-			fRec620[l439] = 0.0;
+			fRec617[l439] = 0.0;
 			
 		}
 		for (int l440 = 0; (l440 < 2); l440 = (l440 + 1)) {
-			fRec618[l440] = 0.0;
+			fRec615[l440] = 0.0;
 			
 		}
 		for (int l441 = 0; (l441 < 1024); l441 = (l441 + 1)) {
@@ -5094,59 +5094,59 @@ class mydsp : public dsp {
 			
 		}
 		for (int l473 = 0; (l473 < 2); l473 = (l473 + 1)) {
-			fRec671[l473] = 0.0;
+			fRec680[l473] = 0.0;
 			
 		}
 		for (int l474 = 0; (l474 < 2); l474 = (l474 + 1)) {
-			fRec669[l474] = 0.0;
+			fRec678[l474] = 0.0;
 			
 		}
 		for (int l475 = 0; (l475 < 2); l475 = (l475 + 1)) {
-			fRec686[l475] = 0.0;
+			fRec677[l475] = 0.0;
 			
 		}
 		for (int l476 = 0; (l476 < 2); l476 = (l476 + 1)) {
-			fRec684[l476] = 0.0;
+			fRec675[l476] = 0.0;
 			
 		}
 		for (int l477 = 0; (l477 < 2); l477 = (l477 + 1)) {
-			fRec683[l477] = 0.0;
+			fRec674[l477] = 0.0;
 			
 		}
 		for (int l478 = 0; (l478 < 2); l478 = (l478 + 1)) {
-			fRec681[l478] = 0.0;
+			fRec672[l478] = 0.0;
 			
 		}
 		for (int l479 = 0; (l479 < 2); l479 = (l479 + 1)) {
-			fRec680[l479] = 0.0;
+			fRec671[l479] = 0.0;
 			
 		}
 		for (int l480 = 0; (l480 < 2); l480 = (l480 + 1)) {
-			fRec678[l480] = 0.0;
+			fRec669[l480] = 0.0;
 			
 		}
 		for (int l481 = 0; (l481 < 2); l481 = (l481 + 1)) {
-			fRec677[l481] = 0.0;
+			fRec689[l481] = 0.0;
 			
 		}
 		for (int l482 = 0; (l482 < 2); l482 = (l482 + 1)) {
-			fRec675[l482] = 0.0;
+			fRec687[l482] = 0.0;
 			
 		}
 		for (int l483 = 0; (l483 < 2); l483 = (l483 + 1)) {
-			fRec674[l483] = 0.0;
+			fRec686[l483] = 0.0;
 			
 		}
 		for (int l484 = 0; (l484 < 2); l484 = (l484 + 1)) {
-			fRec672[l484] = 0.0;
+			fRec684[l484] = 0.0;
 			
 		}
 		for (int l485 = 0; (l485 < 2); l485 = (l485 + 1)) {
-			fRec698[l485] = 0.0;
+			fRec683[l485] = 0.0;
 			
 		}
 		for (int l486 = 0; (l486 < 2); l486 = (l486 + 1)) {
-			fRec696[l486] = 0.0;
+			fRec681[l486] = 0.0;
 			
 		}
 		for (int l487 = 0; (l487 < 2); l487 = (l487 + 1)) {
@@ -5166,51 +5166,51 @@ class mydsp : public dsp {
 			
 		}
 		for (int l491 = 0; (l491 < 2); l491 = (l491 + 1)) {
-			fRec689[l491] = 0.0;
+			fRec710[l491] = 0.0;
 			
 		}
 		for (int l492 = 0; (l492 < 2); l492 = (l492 + 1)) {
-			fRec687[l492] = 0.0;
+			fRec708[l492] = 0.0;
 			
 		}
 		for (int l493 = 0; (l493 < 2); l493 = (l493 + 1)) {
-			fRec704[l493] = 0.0;
+			fRec707[l493] = 0.0;
 			
 		}
 		for (int l494 = 0; (l494 < 2); l494 = (l494 + 1)) {
-			fRec702[l494] = 0.0;
+			fRec705[l494] = 0.0;
 			
 		}
 		for (int l495 = 0; (l495 < 2); l495 = (l495 + 1)) {
-			fRec701[l495] = 0.0;
+			fRec704[l495] = 0.0;
 			
 		}
 		for (int l496 = 0; (l496 < 2); l496 = (l496 + 1)) {
-			fRec699[l496] = 0.0;
+			fRec702[l496] = 0.0;
 			
 		}
 		for (int l497 = 0; (l497 < 2); l497 = (l497 + 1)) {
-			fRec713[l497] = 0.0;
+			fRec701[l497] = 0.0;
 			
 		}
 		for (int l498 = 0; (l498 < 2); l498 = (l498 + 1)) {
-			fRec711[l498] = 0.0;
+			fRec699[l498] = 0.0;
 			
 		}
 		for (int l499 = 0; (l499 < 2); l499 = (l499 + 1)) {
-			fRec710[l499] = 0.0;
+			fRec698[l499] = 0.0;
 			
 		}
 		for (int l500 = 0; (l500 < 2); l500 = (l500 + 1)) {
-			fRec708[l500] = 0.0;
+			fRec696[l500] = 0.0;
 			
 		}
 		for (int l501 = 0; (l501 < 2); l501 = (l501 + 1)) {
-			fRec707[l501] = 0.0;
+			fRec713[l501] = 0.0;
 			
 		}
 		for (int l502 = 0; (l502 < 2); l502 = (l502 + 1)) {
-			fRec705[l502] = 0.0;
+			fRec711[l502] = 0.0;
 			
 		}
 		for (int l503 = 0; (l503 < 1024); l503 = (l503 + 1)) {
@@ -5342,99 +5342,99 @@ class mydsp : public dsp {
 			
 		}
 		for (int l535 = 0; (l535 < 2); l535 = (l535 + 1)) {
-			fRec773[l535] = 0.0;
+			fRec767[l535] = 0.0;
 			
 		}
 		for (int l536 = 0; (l536 < 2); l536 = (l536 + 1)) {
-			fRec771[l536] = 0.0;
+			fRec765[l536] = 0.0;
 			
 		}
 		for (int l537 = 0; (l537 < 2); l537 = (l537 + 1)) {
-			fRec770[l537] = 0.0;
+			fRec764[l537] = 0.0;
 			
 		}
 		for (int l538 = 0; (l538 < 2); l538 = (l538 + 1)) {
-			fRec768[l538] = 0.0;
+			fRec762[l538] = 0.0;
 			
 		}
 		for (int l539 = 0; (l539 < 2); l539 = (l539 + 1)) {
-			fRec767[l539] = 0.0;
+			fRec761[l539] = 0.0;
 			
 		}
 		for (int l540 = 0; (l540 < 2); l540 = (l540 + 1)) {
-			fRec765[l540] = 0.0;
+			fRec759[l540] = 0.0;
 			
 		}
 		for (int l541 = 0; (l541 < 2); l541 = (l541 + 1)) {
-			fRec764[l541] = 0.0;
+			fRec770[l541] = 0.0;
 			
 		}
 		for (int l542 = 0; (l542 < 2); l542 = (l542 + 1)) {
-			fRec762[l542] = 0.0;
+			fRec768[l542] = 0.0;
 			
 		}
 		for (int l543 = 0; (l543 < 2); l543 = (l543 + 1)) {
-			fRec761[l543] = 0.0;
+			fRec776[l543] = 0.0;
 			
 		}
 		for (int l544 = 0; (l544 < 2); l544 = (l544 + 1)) {
-			fRec759[l544] = 0.0;
+			fRec774[l544] = 0.0;
 			
 		}
 		for (int l545 = 0; (l545 < 2); l545 = (l545 + 1)) {
-			fRec785[l545] = 0.0;
+			fRec773[l545] = 0.0;
 			
 		}
 		for (int l546 = 0; (l546 < 2); l546 = (l546 + 1)) {
-			fRec783[l546] = 0.0;
+			fRec771[l546] = 0.0;
 			
 		}
 		for (int l547 = 0; (l547 < 2); l547 = (l547 + 1)) {
-			fRec782[l547] = 0.0;
+			fRec788[l547] = 0.0;
 			
 		}
 		for (int l548 = 0; (l548 < 2); l548 = (l548 + 1)) {
-			fRec780[l548] = 0.0;
+			fRec786[l548] = 0.0;
 			
 		}
 		for (int l549 = 0; (l549 < 2); l549 = (l549 + 1)) {
-			fRec779[l549] = 0.0;
+			fRec785[l549] = 0.0;
 			
 		}
 		for (int l550 = 0; (l550 < 2); l550 = (l550 + 1)) {
-			fRec777[l550] = 0.0;
+			fRec783[l550] = 0.0;
 			
 		}
 		for (int l551 = 0; (l551 < 2); l551 = (l551 + 1)) {
-			fRec776[l551] = 0.0;
+			fRec782[l551] = 0.0;
 			
 		}
 		for (int l552 = 0; (l552 < 2); l552 = (l552 + 1)) {
-			fRec774[l552] = 0.0;
+			fRec780[l552] = 0.0;
 			
 		}
 		for (int l553 = 0; (l553 < 2); l553 = (l553 + 1)) {
-			fRec794[l553] = 0.0;
+			fRec779[l553] = 0.0;
 			
 		}
 		for (int l554 = 0; (l554 < 2); l554 = (l554 + 1)) {
-			fRec792[l554] = 0.0;
+			fRec777[l554] = 0.0;
 			
 		}
 		for (int l555 = 0; (l555 < 2); l555 = (l555 + 1)) {
-			fRec791[l555] = 0.0;
+			fRec803[l555] = 0.0;
 			
 		}
 		for (int l556 = 0; (l556 < 2); l556 = (l556 + 1)) {
-			fRec789[l556] = 0.0;
+			fRec801[l556] = 0.0;
 			
 		}
 		for (int l557 = 0; (l557 < 2); l557 = (l557 + 1)) {
-			fRec788[l557] = 0.0;
+			fRec800[l557] = 0.0;
 			
 		}
 		for (int l558 = 0; (l558 < 2); l558 = (l558 + 1)) {
-			fRec786[l558] = 0.0;
+			fRec798[l558] = 0.0;
 			
 		}
 		for (int l559 = 0; (l559 < 2); l559 = (l559 + 1)) {
@@ -5446,19 +5446,19 @@ class mydsp : public dsp {
 			
 		}
 		for (int l561 = 0; (l561 < 2); l561 = (l561 + 1)) {
-			fRec803[l561] = 0.0;
+			fRec794[l561] = 0.0;
 			
 		}
 		for (int l562 = 0; (l562 < 2); l562 = (l562 + 1)) {
-			fRec801[l562] = 0.0;
+			fRec792[l562] = 0.0;
 			
 		}
 		for (int l563 = 0; (l563 < 2); l563 = (l563 + 1)) {
-			fRec800[l563] = 0.0;
+			fRec791[l563] = 0.0;
 			
 		}
 		for (int l564 = 0; (l564 < 2); l564 = (l564 + 1)) {
-			fRec798[l564] = 0.0;
+			fRec789[l564] = 0.0;
 			
 		}
 		for (int l565 = 0; (l565 < 2); l565 = (l565 + 1)) {
@@ -5466,123 +5466,123 @@ class mydsp : public dsp {
 			
 		}
 		for (int l566 = 0; (l566 < 2); l566 = (l566 + 1)) {
-			fRec818[l566] = 0.0;
+			fRec815[l566] = 0.0;
 			
 		}
 		for (int l567 = 0; (l567 < 2); l567 = (l567 + 1)) {
-			fRec816[l567] = 0.0;
+			fRec813[l567] = 0.0;
 			
 		}
 		for (int l568 = 0; (l568 < 2); l568 = (l568 + 1)) {
-			fRec815[l568] = 0.0;
+			fRec812[l568] = 0.0;
 			
 		}
 		for (int l569 = 0; (l569 < 2); l569 = (l569 + 1)) {
-			fRec813[l569] = 0.0;
+			fRec810[l569] = 0.0;
 			
 		}
 		for (int l570 = 0; (l570 < 2); l570 = (l570 + 1)) {
-			fRec812[l570] = 0.0;
+			fRec809[l570] = 0.0;
 			
 		}
 		for (int l571 = 0; (l571 < 2); l571 = (l571 + 1)) {
-			fRec810[l571] = 0.0;
+			fRec807[l571] = 0.0;
 			
 		}
 		for (int l572 = 0; (l572 < 2); l572 = (l572 + 1)) {
-			fRec809[l572] = 0.0;
+			fRec806[l572] = 0.0;
 			
 		}
 		for (int l573 = 0; (l573 < 2); l573 = (l573 + 1)) {
-			fRec807[l573] = 0.0;
+			fRec804[l573] = 0.0;
 			
 		}
 		for (int l574 = 0; (l574 < 2); l574 = (l574 + 1)) {
-			fRec806[l574] = 0.0;
+			fRec824[l574] = 0.0;
 			
 		}
 		for (int l575 = 0; (l575 < 2); l575 = (l575 + 1)) {
-			fRec804[l575] = 0.0;
+			fRec822[l575] = 0.0;
 			
 		}
 		for (int l576 = 0; (l576 < 2); l576 = (l576 + 1)) {
-			fRec830[l576] = 0.0;
+			fRec821[l576] = 0.0;
 			
 		}
 		for (int l577 = 0; (l577 < 2); l577 = (l577 + 1)) {
-			fRec828[l577] = 0.0;
+			fRec819[l577] = 0.0;
 			
 		}
 		for (int l578 = 0; (l578 < 2); l578 = (l578 + 1)) {
-			fRec827[l578] = 0.0;
+			fRec818[l578] = 0.0;
 			
 		}
 		for (int l579 = 0; (l579 < 2); l579 = (l579 + 1)) {
-			fRec825[l579] = 0.0;
+			fRec816[l579] = 0.0;
 			
 		}
 		for (int l580 = 0; (l580 < 2); l580 = (l580 + 1)) {
-			fRec824[l580] = 0.0;
+			fRec830[l580] = 0.0;
 			
 		}
 		for (int l581 = 0; (l581 < 2); l581 = (l581 + 1)) {
-			fRec822[l581] = 0.0;
+			fRec828[l581] = 0.0;
 			
 		}
 		for (int l582 = 0; (l582 < 2); l582 = (l582 + 1)) {
-			fRec821[l582] = 0.0;
+			fRec827[l582] = 0.0;
 			
 		}
 		for (int l583 = 0; (l583 < 2); l583 = (l583 + 1)) {
-			fRec819[l583] = 0.0;
+			fRec825[l583] = 0.0;
 			
 		}
 		for (int l584 = 0; (l584 < 2); l584 = (l584 + 1)) {
-			fRec839[l584] = 0.0;
+			fRec845[l584] = 0.0;
 			
 		}
 		for (int l585 = 0; (l585 < 2); l585 = (l585 + 1)) {
-			fRec837[l585] = 0.0;
+			fRec843[l585] = 0.0;
 			
 		}
 		for (int l586 = 0; (l586 < 2); l586 = (l586 + 1)) {
-			fRec836[l586] = 0.0;
+			fRec842[l586] = 0.0;
 			
 		}
 		for (int l587 = 0; (l587 < 2); l587 = (l587 + 1)) {
-			fRec834[l587] = 0.0;
+			fRec840[l587] = 0.0;
 			
 		}
 		for (int l588 = 0; (l588 < 2); l588 = (l588 + 1)) {
-			fRec833[l588] = 0.0;
+			fRec839[l588] = 0.0;
 			
 		}
 		for (int l589 = 0; (l589 < 2); l589 = (l589 + 1)) {
-			fRec831[l589] = 0.0;
+			fRec837[l589] = 0.0;
 			
 		}
 		for (int l590 = 0; (l590 < 2); l590 = (l590 + 1)) {
-			fRec842[l590] = 0.0;
+			fRec836[l590] = 0.0;
 			
 		}
 		for (int l591 = 0; (l591 < 2); l591 = (l591 + 1)) {
-			fRec840[l591] = 0.0;
+			fRec834[l591] = 0.0;
 			
 		}
 		for (int l592 = 0; (l592 < 2); l592 = (l592 + 1)) {
-			fRec848[l592] = 0.0;
+			fRec833[l592] = 0.0;
 			
 		}
 		for (int l593 = 0; (l593 < 2); l593 = (l593 + 1)) {
-			fRec846[l593] = 0.0;
+			fRec831[l593] = 0.0;
 			
 		}
 		for (int l594 = 0; (l594 < 2); l594 = (l594 + 1)) {
-			fRec845[l594] = 0.0;
+			fRec848[l594] = 0.0;
 			
 		}
 		for (int l595 = 0; (l595 < 2); l595 = (l595 + 1)) {
-			fRec843[l595] = 0.0;
+			fRec846[l595] = 0.0;
 			
 		}
 		for (int l596 = 0; (l596 < 2); l596 = (l596 + 1)) {
@@ -5590,123 +5590,123 @@ class mydsp : public dsp {
 			
 		}
 		for (int l597 = 0; (l597 < 2); l597 = (l597 + 1)) {
-			fRec863[l597] = 0.0;
+			fRec860[l597] = 0.0;
 			
 		}
 		for (int l598 = 0; (l598 < 2); l598 = (l598 + 1)) {
-			fRec861[l598] = 0.0;
+			fRec858[l598] = 0.0;
 			
 		}
 		for (int l599 = 0; (l599 < 2); l599 = (l599 + 1)) {
-			fRec860[l599] = 0.0;
+			fRec857[l599] = 0.0;
 			
 		}
 		for (int l600 = 0; (l600 < 2); l600 = (l600 + 1)) {
-			fRec858[l600] = 0.0;
+			fRec855[l600] = 0.0;
 			
 		}
 		for (int l601 = 0; (l601 < 2); l601 = (l601 + 1)) {
-			fRec857[l601] = 0.0;
+			fRec854[l601] = 0.0;
 			
 		}
 		for (int l602 = 0; (l602 < 2); l602 = (l602 + 1)) {
-			fRec855[l602] = 0.0;
+			fRec852[l602] = 0.0;
 			
 		}
 		for (int l603 = 0; (l603 < 2); l603 = (l603 + 1)) {
-			fRec854[l603] = 0.0;
+			fRec851[l603] = 0.0;
 			
 		}
 		for (int l604 = 0; (l604 < 2); l604 = (l604 + 1)) {
-			fRec852[l604] = 0.0;
+			fRec849[l604] = 0.0;
 			
 		}
 		for (int l605 = 0; (l605 < 2); l605 = (l605 + 1)) {
-			fRec851[l605] = 0.0;
+			fRec866[l605] = 0.0;
 			
 		}
 		for (int l606 = 0; (l606 < 2); l606 = (l606 + 1)) {
-			fRec849[l606] = 0.0;
+			fRec864[l606] = 0.0;
 			
 		}
 		for (int l607 = 0; (l607 < 2); l607 = (l607 + 1)) {
-			fRec875[l607] = 0.0;
+			fRec863[l607] = 0.0;
 			
 		}
 		for (int l608 = 0; (l608 < 2); l608 = (l608 + 1)) {
-			fRec873[l608] = 0.0;
+			fRec861[l608] = 0.0;
 			
 		}
 		for (int l609 = 0; (l609 < 2); l609 = (l609 + 1)) {
-			fRec872[l609] = 0.0;
+			fRec869[l609] = 0.0;
 			
 		}
 		for (int l610 = 0; (l610 < 2); l610 = (l610 + 1)) {
-			fRec870[l610] = 0.0;
+			fRec867[l610] = 0.0;
 			
 		}
 		for (int l611 = 0; (l611 < 2); l611 = (l611 + 1)) {
-			fRec869[l611] = 0.0;
+			fRec884[l611] = 0.0;
 			
 		}
 		for (int l612 = 0; (l612 < 2); l612 = (l612 + 1)) {
-			fRec867[l612] = 0.0;
+			fRec882[l612] = 0.0;
 			
 		}
 		for (int l613 = 0; (l613 < 2); l613 = (l613 + 1)) {
-			fRec866[l613] = 0.0;
+			fRec881[l613] = 0.0;
 			
 		}
 		for (int l614 = 0; (l614 < 2); l614 = (l614 + 1)) {
-			fRec864[l614] = 0.0;
+			fRec879[l614] = 0.0;
 			
 		}
 		for (int l615 = 0; (l615 < 2); l615 = (l615 + 1)) {
-			fRec884[l615] = 0.0;
+			fRec878[l615] = 0.0;
 			
 		}
 		for (int l616 = 0; (l616 < 2); l616 = (l616 + 1)) {
-			fRec882[l616] = 0.0;
+			fRec876[l616] = 0.0;
 			
 		}
 		for (int l617 = 0; (l617 < 2); l617 = (l617 + 1)) {
-			fRec881[l617] = 0.0;
+			fRec875[l617] = 0.0;
 			
 		}
 		for (int l618 = 0; (l618 < 2); l618 = (l618 + 1)) {
-			fRec879[l618] = 0.0;
+			fRec873[l618] = 0.0;
 			
 		}
 		for (int l619 = 0; (l619 < 2); l619 = (l619 + 1)) {
-			fRec878[l619] = 0.0;
+			fRec872[l619] = 0.0;
 			
 		}
 		for (int l620 = 0; (l620 < 2); l620 = (l620 + 1)) {
-			fRec876[l620] = 0.0;
+			fRec870[l620] = 0.0;
 			
 		}
 		for (int l621 = 0; (l621 < 2); l621 = (l621 + 1)) {
-			fRec887[l621] = 0.0;
+			fRec893[l621] = 0.0;
 			
 		}
 		for (int l622 = 0; (l622 < 2); l622 = (l622 + 1)) {
-			fRec885[l622] = 0.0;
+			fRec891[l622] = 0.0;
 			
 		}
 		for (int l623 = 0; (l623 < 2); l623 = (l623 + 1)) {
-			fRec893[l623] = 0.0;
+			fRec890[l623] = 0.0;
 			
 		}
 		for (int l624 = 0; (l624 < 2); l624 = (l624 + 1)) {
-			fRec891[l624] = 0.0;
+			fRec888[l624] = 0.0;
 			
 		}
 		for (int l625 = 0; (l625 < 2); l625 = (l625 + 1)) {
-			fRec890[l625] = 0.0;
+			fRec887[l625] = 0.0;
 			
 		}
 		for (int l626 = 0; (l626 < 2); l626 = (l626 + 1)) {
-			fRec888[l626] = 0.0;
+			fRec885[l626] = 0.0;
 			
 		}
 		for (int l627 = 0; (l627 < 2); l627 = (l627 + 1)) {
@@ -5746,91 +5746,91 @@ class mydsp : public dsp {
 			
 		}
 		for (int l636 = 0; (l636 < 2); l636 = (l636 + 1)) {
-			fRec914[l636] = 0.0;
+			fRec920[l636] = 0.0;
 			
 		}
 		for (int l637 = 0; (l637 < 2); l637 = (l637 + 1)) {
-			fRec912[l637] = 0.0;
+			fRec918[l637] = 0.0;
 			
 		}
 		for (int l638 = 0; (l638 < 2); l638 = (l638 + 1)) {
-			fRec911[l638] = 0.0;
+			fRec917[l638] = 0.0;
 			
 		}
 		for (int l639 = 0; (l639 < 2); l639 = (l639 + 1)) {
-			fRec909[l639] = 0.0;
+			fRec915[l639] = 0.0;
 			
 		}
 		for (int l640 = 0; (l640 < 2); l640 = (l640 + 1)) {
-			fRec908[l640] = 0.0;
+			fRec914[l640] = 0.0;
 			
 		}
 		for (int l641 = 0; (l641 < 2); l641 = (l641 + 1)) {
-			fRec906[l641] = 0.0;
+			fRec912[l641] = 0.0;
 			
 		}
 		for (int l642 = 0; (l642 < 2); l642 = (l642 + 1)) {
-			fRec920[l642] = 0.0;
+			fRec911[l642] = 0.0;
 			
 		}
 		for (int l643 = 0; (l643 < 2); l643 = (l643 + 1)) {
-			fRec918[l643] = 0.0;
+			fRec909[l643] = 0.0;
 			
 		}
 		for (int l644 = 0; (l644 < 2); l644 = (l644 + 1)) {
-			fRec917[l644] = 0.0;
+			fRec908[l644] = 0.0;
 			
 		}
 		for (int l645 = 0; (l645 < 2); l645 = (l645 + 1)) {
-			fRec915[l645] = 0.0;
+			fRec906[l645] = 0.0;
 			
 		}
 		for (int l646 = 0; (l646 < 2); l646 = (l646 + 1)) {
-			fRec935[l646] = 0.0;
+			fRec923[l646] = 0.0;
 			
 		}
 		for (int l647 = 0; (l647 < 2); l647 = (l647 + 1)) {
-			fRec933[l647] = 0.0;
+			fRec921[l647] = 0.0;
 			
 		}
 		for (int l648 = 0; (l648 < 2); l648 = (l648 + 1)) {
-			fRec932[l648] = 0.0;
+			fRec929[l648] = 0.0;
 			
 		}
 		for (int l649 = 0; (l649 < 2); l649 = (l649 + 1)) {
-			fRec930[l649] = 0.0;
+			fRec927[l649] = 0.0;
 			
 		}
 		for (int l650 = 0; (l650 < 2); l650 = (l650 + 1)) {
-			fRec929[l650] = 0.0;
+			fRec926[l650] = 0.0;
 			
 		}
 		for (int l651 = 0; (l651 < 2); l651 = (l651 + 1)) {
-			fRec927[l651] = 0.0;
+			fRec924[l651] = 0.0;
 			
 		}
 		for (int l652 = 0; (l652 < 2); l652 = (l652 + 1)) {
-			fRec926[l652] = 0.0;
+			fRec938[l652] = 0.0;
 			
 		}
 		for (int l653 = 0; (l653 < 2); l653 = (l653 + 1)) {
-			fRec924[l653] = 0.0;
+			fRec936[l653] = 0.0;
 			
 		}
 		for (int l654 = 0; (l654 < 2); l654 = (l654 + 1)) {
-			fRec923[l654] = 0.0;
+			fRec935[l654] = 0.0;
 			
 		}
 		for (int l655 = 0; (l655 < 2); l655 = (l655 + 1)) {
-			fRec921[l655] = 0.0;
+			fRec933[l655] = 0.0;
 			
 		}
 		for (int l656 = 0; (l656 < 2); l656 = (l656 + 1)) {
-			fRec938[l656] = 0.0;
+			fRec932[l656] = 0.0;
 			
 		}
 		for (int l657 = 0; (l657 < 2); l657 = (l657 + 1)) {
-			fRec936[l657] = 0.0;
+			fRec930[l657] = 0.0;
 			
 		}
 		for (int l658 = 0; (l658 < 2); l658 = (l658 + 1)) {
@@ -5838,19 +5838,19 @@ class mydsp : public dsp {
 			
 		}
 		for (int l659 = 0; (l659 < 2); l659 = (l659 + 1)) {
-			fRec953[l659] = 0.0;
+			fRec944[l659] = 0.0;
 			
 		}
 		for (int l660 = 0; (l660 < 2); l660 = (l660 + 1)) {
-			fRec951[l660] = 0.0;
+			fRec942[l660] = 0.0;
 			
 		}
 		for (int l661 = 0; (l661 < 2); l661 = (l661 + 1)) {
-			fRec950[l661] = 0.0;
+			fRec941[l661] = 0.0;
 			
 		}
 		for (int l662 = 0; (l662 < 2); l662 = (l662 + 1)) {
-			fRec948[l662] = 0.0;
+			fRec939[l662] = 0.0;
 			
 		}
 		for (int l663 = 0; (l663 < 2); l663 = (l663 + 1)) {
@@ -5862,75 +5862,75 @@ class mydsp : public dsp {
 			
 		}
 		for (int l665 = 0; (l665 < 2); l665 = (l665 + 1)) {
-			fRec944[l665] = 0.0;
+			fRec956[l665] = 0.0;
 			
 		}
 		for (int l666 = 0; (l666 < 2); l666 = (l666 + 1)) {
-			fRec942[l666] = 0.0;
+			fRec954[l666] = 0.0;
 			
 		}
 		for (int l667 = 0; (l667 < 2); l667 = (l667 + 1)) {
-			fRec941[l667] = 0.0;
+			fRec953[l667] = 0.0;
 			
 		}
 		for (int l668 = 0; (l668 < 2); l668 = (l668 + 1)) {
-			fRec939[l668] = 0.0;
+			fRec951[l668] = 0.0;
 			
 		}
 		for (int l669 = 0; (l669 < 2); l669 = (l669 + 1)) {
-			fRec965[l669] = 0.0;
+			fRec950[l669] = 0.0;
 			
 		}
 		for (int l670 = 0; (l670 < 2); l670 = (l670 + 1)) {
-			fRec963[l670] = 0.0;
+			fRec948[l670] = 0.0;
 			
 		}
 		for (int l671 = 0; (l671 < 2); l671 = (l671 + 1)) {
-			fRec962[l671] = 0.0;
+			fRec968[l671] = 0.0;
 			
 		}
 		for (int l672 = 0; (l672 < 2); l672 = (l672 + 1)) {
-			fRec960[l672] = 0.0;
+			fRec966[l672] = 0.0;
 			
 		}
 		for (int l673 = 0; (l673 < 2); l673 = (l673 + 1)) {
-			fRec959[l673] = 0.0;
+			fRec965[l673] = 0.0;
 			
 		}
 		for (int l674 = 0; (l674 < 2); l674 = (l674 + 1)) {
-			fRec957[l674] = 0.0;
+			fRec963[l674] = 0.0;
 			
 		}
 		for (int l675 = 0; (l675 < 2); l675 = (l675 + 1)) {
-			fRec956[l675] = 0.0;
+			fRec962[l675] = 0.0;
 			
 		}
 		for (int l676 = 0; (l676 < 2); l676 = (l676 + 1)) {
-			fRec954[l676] = 0.0;
+			fRec960[l676] = 0.0;
 			
 		}
 		for (int l677 = 0; (l677 < 2); l677 = (l677 + 1)) {
-			fRec974[l677] = 0.0;
+			fRec959[l677] = 0.0;
 			
 		}
 		for (int l678 = 0; (l678 < 2); l678 = (l678 + 1)) {
-			fRec972[l678] = 0.0;
+			fRec957[l678] = 0.0;
 			
 		}
 		for (int l679 = 0; (l679 < 2); l679 = (l679 + 1)) {
-			fRec971[l679] = 0.0;
+			fRec983[l679] = 0.0;
 			
 		}
 		for (int l680 = 0; (l680 < 2); l680 = (l680 + 1)) {
-			fRec969[l680] = 0.0;
+			fRec981[l680] = 0.0;
 			
 		}
 		for (int l681 = 0; (l681 < 2); l681 = (l681 + 1)) {
-			fRec968[l681] = 0.0;
+			fRec980[l681] = 0.0;
 			
 		}
 		for (int l682 = 0; (l682 < 2); l682 = (l682 + 1)) {
-			fRec966[l682] = 0.0;
+			fRec978[l682] = 0.0;
 			
 		}
 		for (int l683 = 0; (l683 < 2); l683 = (l683 + 1)) {
@@ -5942,19 +5942,19 @@ class mydsp : public dsp {
 			
 		}
 		for (int l685 = 0; (l685 < 2); l685 = (l685 + 1)) {
-			fRec983[l685] = 0.0;
+			fRec974[l685] = 0.0;
 			
 		}
 		for (int l686 = 0; (l686 < 2); l686 = (l686 + 1)) {
-			fRec981[l686] = 0.0;
+			fRec972[l686] = 0.0;
 			
 		}
 		for (int l687 = 0; (l687 < 2); l687 = (l687 + 1)) {
-			fRec980[l687] = 0.0;
+			fRec971[l687] = 0.0;
 			
 		}
 		for (int l688 = 0; (l688 < 2); l688 = (l688 + 1)) {
-			fRec978[l688] = 0.0;
+			fRec969[l688] = 0.0;
 			
 		}
 		for (int l689 = 0; (l689 < 2); l689 = (l689 + 1)) {
@@ -6210,123 +6210,123 @@ class mydsp : public dsp {
 			
 		}
 		for (int l752 = 0; (l752 < 2); l752 = (l752 + 1)) {
-			fRec1088[l752] = 0.0;
+			fRec1085[l752] = 0.0;
 			
 		}
 		for (int l753 = 0; (l753 < 2); l753 = (l753 + 1)) {
-			fRec1086[l753] = 0.0;
+			fRec1083[l753] = 0.0;
 			
 		}
 		for (int l754 = 0; (l754 < 2); l754 = (l754 + 1)) {
-			fRec1085[l754] = 0.0;
+			fRec1082[l754] = 0.0;
 			
 		}
 		for (int l755 = 0; (l755 < 2); l755 = (l755 + 1)) {
-			fRec1083[l755] = 0.0;
+			fRec1080[l755] = 0.0;
 			
 		}
 		for (int l756 = 0; (l756 < 2); l756 = (l756 + 1)) {
-			fRec1082[l756] = 0.0;
+			fRec1079[l756] = 0.0;
 			
 		}
 		for (int l757 = 0; (l757 < 2); l757 = (l757 + 1)) {
-			fRec1080[l757] = 0.0;
+			fRec1077[l757] = 0.0;
 			
 		}
 		for (int l758 = 0; (l758 < 2); l758 = (l758 + 1)) {
-			fRec1079[l758] = 0.0;
+			fRec1076[l758] = 0.0;
 			
 		}
 		for (int l759 = 0; (l759 < 2); l759 = (l759 + 1)) {
-			fRec1077[l759] = 0.0;
+			fRec1074[l759] = 0.0;
 			
 		}
 		for (int l760 = 0; (l760 < 2); l760 = (l760 + 1)) {
-			fRec1076[l760] = 0.0;
+			fRec1094[l760] = 0.0;
 			
 		}
 		for (int l761 = 0; (l761 < 2); l761 = (l761 + 1)) {
-			fRec1074[l761] = 0.0;
+			fRec1092[l761] = 0.0;
 			
 		}
 		for (int l762 = 0; (l762 < 2); l762 = (l762 + 1)) {
-			fRec1100[l762] = 0.0;
+			fRec1091[l762] = 0.0;
 			
 		}
 		for (int l763 = 0; (l763 < 2); l763 = (l763 + 1)) {
-			fRec1098[l763] = 0.0;
+			fRec1089[l763] = 0.0;
 			
 		}
 		for (int l764 = 0; (l764 < 2); l764 = (l764 + 1)) {
-			fRec1097[l764] = 0.0;
+			fRec1088[l764] = 0.0;
 			
 		}
 		for (int l765 = 0; (l765 < 2); l765 = (l765 + 1)) {
-			fRec1095[l765] = 0.0;
+			fRec1086[l765] = 0.0;
 			
 		}
 		for (int l766 = 0; (l766 < 2); l766 = (l766 + 1)) {
-			fRec1094[l766] = 0.0;
+			fRec1100[l766] = 0.0;
 			
 		}
 		for (int l767 = 0; (l767 < 2); l767 = (l767 + 1)) {
-			fRec1092[l767] = 0.0;
+			fRec1098[l767] = 0.0;
 			
 		}
 		for (int l768 = 0; (l768 < 2); l768 = (l768 + 1)) {
-			fRec1091[l768] = 0.0;
+			fRec1097[l768] = 0.0;
 			
 		}
 		for (int l769 = 0; (l769 < 2); l769 = (l769 + 1)) {
-			fRec1089[l769] = 0.0;
+			fRec1095[l769] = 0.0;
 			
 		}
 		for (int l770 = 0; (l770 < 2); l770 = (l770 + 1)) {
-			fRec1109[l770] = 0.0;
+			fRec1115[l770] = 0.0;
 			
 		}
 		for (int l771 = 0; (l771 < 2); l771 = (l771 + 1)) {
-			fRec1107[l771] = 0.0;
+			fRec1113[l771] = 0.0;
 			
 		}
 		for (int l772 = 0; (l772 < 2); l772 = (l772 + 1)) {
-			fRec1106[l772] = 0.0;
+			fRec1112[l772] = 0.0;
 			
 		}
 		for (int l773 = 0; (l773 < 2); l773 = (l773 + 1)) {
-			fRec1104[l773] = 0.0;
+			fRec1110[l773] = 0.0;
 			
 		}
 		for (int l774 = 0; (l774 < 2); l774 = (l774 + 1)) {
-			fRec1103[l774] = 0.0;
+			fRec1109[l774] = 0.0;
 			
 		}
 		for (int l775 = 0; (l775 < 2); l775 = (l775 + 1)) {
-			fRec1101[l775] = 0.0;
+			fRec1107[l775] = 0.0;
 			
 		}
 		for (int l776 = 0; (l776 < 2); l776 = (l776 + 1)) {
-			fRec1112[l776] = 0.0;
+			fRec1106[l776] = 0.0;
 			
 		}
 		for (int l777 = 0; (l777 < 2); l777 = (l777 + 1)) {
-			fRec1110[l777] = 0.0;
+			fRec1104[l777] = 0.0;
 			
 		}
 		for (int l778 = 0; (l778 < 2); l778 = (l778 + 1)) {
-			fRec1118[l778] = 0.0;
+			fRec1103[l778] = 0.0;
 			
 		}
 		for (int l779 = 0; (l779 < 2); l779 = (l779 + 1)) {
-			fRec1116[l779] = 0.0;
+			fRec1101[l779] = 0.0;
 			
 		}
 		for (int l780 = 0; (l780 < 2); l780 = (l780 + 1)) {
-			fRec1115[l780] = 0.0;
+			fRec1118[l780] = 0.0;
 			
 		}
 		for (int l781 = 0; (l781 < 2); l781 = (l781 + 1)) {
-			fRec1113[l781] = 0.0;
+			fRec1116[l781] = 0.0;
 			
 		}
 		for (int l782 = 0; (l782 < 2); l782 = (l782 + 1)) {
@@ -6334,123 +6334,123 @@ class mydsp : public dsp {
 			
 		}
 		for (int l783 = 0; (l783 < 2); l783 = (l783 + 1)) {
-			fRec1133[l783] = 0.0;
+			fRec1130[l783] = 0.0;
 			
 		}
 		for (int l784 = 0; (l784 < 2); l784 = (l784 + 1)) {
-			fRec1131[l784] = 0.0;
+			fRec1128[l784] = 0.0;
 			
 		}
 		for (int l785 = 0; (l785 < 2); l785 = (l785 + 1)) {
-			fRec1130[l785] = 0.0;
+			fRec1127[l785] = 0.0;
 			
 		}
 		for (int l786 = 0; (l786 < 2); l786 = (l786 + 1)) {
-			fRec1128[l786] = 0.0;
+			fRec1125[l786] = 0.0;
 			
 		}
 		for (int l787 = 0; (l787 < 2); l787 = (l787 + 1)) {
-			fRec1127[l787] = 0.0;
+			fRec1124[l787] = 0.0;
 			
 		}
 		for (int l788 = 0; (l788 < 2); l788 = (l788 + 1)) {
-			fRec1125[l788] = 0.0;
+			fRec1122[l788] = 0.0;
 			
 		}
 		for (int l789 = 0; (l789 < 2); l789 = (l789 + 1)) {
-			fRec1124[l789] = 0.0;
+			fRec1121[l789] = 0.0;
 			
 		}
 		for (int l790 = 0; (l790 < 2); l790 = (l790 + 1)) {
-			fRec1122[l790] = 0.0;
+			fRec1119[l790] = 0.0;
 			
 		}
 		for (int l791 = 0; (l791 < 2); l791 = (l791 + 1)) {
-			fRec1121[l791] = 0.0;
+			fRec1139[l791] = 0.0;
 			
 		}
 		for (int l792 = 0; (l792 < 2); l792 = (l792 + 1)) {
-			fRec1119[l792] = 0.0;
+			fRec1137[l792] = 0.0;
 			
 		}
 		for (int l793 = 0; (l793 < 2); l793 = (l793 + 1)) {
-			fRec1145[l793] = 0.0;
+			fRec1136[l793] = 0.0;
 			
 		}
 		for (int l794 = 0; (l794 < 2); l794 = (l794 + 1)) {
-			fRec1143[l794] = 0.0;
+			fRec1134[l794] = 0.0;
 			
 		}
 		for (int l795 = 0; (l795 < 2); l795 = (l795 + 1)) {
-			fRec1142[l795] = 0.0;
+			fRec1133[l795] = 0.0;
 			
 		}
 		for (int l796 = 0; (l796 < 2); l796 = (l796 + 1)) {
-			fRec1140[l796] = 0.0;
+			fRec1131[l796] = 0.0;
 			
 		}
 		for (int l797 = 0; (l797 < 2); l797 = (l797 + 1)) {
-			fRec1139[l797] = 0.0;
+			fRec1145[l797] = 0.0;
 			
 		}
 		for (int l798 = 0; (l798 < 2); l798 = (l798 + 1)) {
-			fRec1137[l798] = 0.0;
+			fRec1143[l798] = 0.0;
 			
 		}
 		for (int l799 = 0; (l799 < 2); l799 = (l799 + 1)) {
-			fRec1136[l799] = 0.0;
+			fRec1142[l799] = 0.0;
 			
 		}
 		for (int l800 = 0; (l800 < 2); l800 = (l800 + 1)) {
-			fRec1134[l800] = 0.0;
+			fRec1140[l800] = 0.0;
 			
 		}
 		for (int l801 = 0; (l801 < 2); l801 = (l801 + 1)) {
-			fRec1154[l801] = 0.0;
+			fRec1160[l801] = 0.0;
 			
 		}
 		for (int l802 = 0; (l802 < 2); l802 = (l802 + 1)) {
-			fRec1152[l802] = 0.0;
+			fRec1158[l802] = 0.0;
 			
 		}
 		for (int l803 = 0; (l803 < 2); l803 = (l803 + 1)) {
-			fRec1151[l803] = 0.0;
+			fRec1157[l803] = 0.0;
 			
 		}
 		for (int l804 = 0; (l804 < 2); l804 = (l804 + 1)) {
-			fRec1149[l804] = 0.0;
+			fRec1155[l804] = 0.0;
 			
 		}
 		for (int l805 = 0; (l805 < 2); l805 = (l805 + 1)) {
-			fRec1148[l805] = 0.0;
+			fRec1154[l805] = 0.0;
 			
 		}
 		for (int l806 = 0; (l806 < 2); l806 = (l806 + 1)) {
-			fRec1146[l806] = 0.0;
+			fRec1152[l806] = 0.0;
 			
 		}
 		for (int l807 = 0; (l807 < 2); l807 = (l807 + 1)) {
-			fRec1157[l807] = 0.0;
+			fRec1151[l807] = 0.0;
 			
 		}
 		for (int l808 = 0; (l808 < 2); l808 = (l808 + 1)) {
-			fRec1155[l808] = 0.0;
+			fRec1149[l808] = 0.0;
 			
 		}
 		for (int l809 = 0; (l809 < 2); l809 = (l809 + 1)) {
-			fRec1163[l809] = 0.0;
+			fRec1148[l809] = 0.0;
 			
 		}
 		for (int l810 = 0; (l810 < 2); l810 = (l810 + 1)) {
-			fRec1161[l810] = 0.0;
+			fRec1146[l810] = 0.0;
 			
 		}
 		for (int l811 = 0; (l811 < 2); l811 = (l811 + 1)) {
-			fRec1160[l811] = 0.0;
+			fRec1163[l811] = 0.0;
 			
 		}
 		for (int l812 = 0; (l812 < 2); l812 = (l812 + 1)) {
-			fRec1158[l812] = 0.0;
+			fRec1161[l812] = 0.0;
 			
 		}
 		for (int l813 = 0; (l813 < 512); l813 = (l813 + 1)) {
@@ -6458,123 +6458,123 @@ class mydsp : public dsp {
 			
 		}
 		for (int l814 = 0; (l814 < 2); l814 = (l814 + 1)) {
-			fRec1178[l814] = 0.0;
+			fRec1166[l814] = 0.0;
 			
 		}
 		for (int l815 = 0; (l815 < 2); l815 = (l815 + 1)) {
-			fRec1176[l815] = 0.0;
+			fRec1164[l815] = 0.0;
 			
 		}
 		for (int l816 = 0; (l816 < 2); l816 = (l816 + 1)) {
-			fRec1175[l816] = 0.0;
+			fRec1181[l816] = 0.0;
 			
 		}
 		for (int l817 = 0; (l817 < 2); l817 = (l817 + 1)) {
-			fRec1173[l817] = 0.0;
+			fRec1179[l817] = 0.0;
 			
 		}
 		for (int l818 = 0; (l818 < 2); l818 = (l818 + 1)) {
-			fRec1172[l818] = 0.0;
+			fRec1178[l818] = 0.0;
 			
 		}
 		for (int l819 = 0; (l819 < 2); l819 = (l819 + 1)) {
-			fRec1170[l819] = 0.0;
+			fRec1176[l819] = 0.0;
 			
 		}
 		for (int l820 = 0; (l820 < 2); l820 = (l820 + 1)) {
-			fRec1169[l820] = 0.0;
+			fRec1175[l820] = 0.0;
 			
 		}
 		for (int l821 = 0; (l821 < 2); l821 = (l821 + 1)) {
-			fRec1167[l821] = 0.0;
+			fRec1173[l821] = 0.0;
 			
 		}
 		for (int l822 = 0; (l822 < 2); l822 = (l822 + 1)) {
-			fRec1166[l822] = 0.0;
+			fRec1172[l822] = 0.0;
 			
 		}
 		for (int l823 = 0; (l823 < 2); l823 = (l823 + 1)) {
-			fRec1164[l823] = 0.0;
+			fRec1170[l823] = 0.0;
 			
 		}
 		for (int l824 = 0; (l824 < 2); l824 = (l824 + 1)) {
-			fRec1190[l824] = 0.0;
+			fRec1169[l824] = 0.0;
 			
 		}
 		for (int l825 = 0; (l825 < 2); l825 = (l825 + 1)) {
-			fRec1188[l825] = 0.0;
+			fRec1167[l825] = 0.0;
 			
 		}
 		for (int l826 = 0; (l826 < 2); l826 = (l826 + 1)) {
-			fRec1187[l826] = 0.0;
+			fRec1193[l826] = 0.0;
 			
 		}
 		for (int l827 = 0; (l827 < 2); l827 = (l827 + 1)) {
-			fRec1185[l827] = 0.0;
+			fRec1191[l827] = 0.0;
 			
 		}
 		for (int l828 = 0; (l828 < 2); l828 = (l828 + 1)) {
-			fRec1184[l828] = 0.0;
+			fRec1190[l828] = 0.0;
 			
 		}
 		for (int l829 = 0; (l829 < 2); l829 = (l829 + 1)) {
-			fRec1182[l829] = 0.0;
+			fRec1188[l829] = 0.0;
 			
 		}
 		for (int l830 = 0; (l830 < 2); l830 = (l830 + 1)) {
-			fRec1181[l830] = 0.0;
+			fRec1187[l830] = 0.0;
 			
 		}
 		for (int l831 = 0; (l831 < 2); l831 = (l831 + 1)) {
-			fRec1179[l831] = 0.0;
+			fRec1185[l831] = 0.0;
 			
 		}
 		for (int l832 = 0; (l832 < 2); l832 = (l832 + 1)) {
-			fRec1199[l832] = 0.0;
+			fRec1184[l832] = 0.0;
 			
 		}
 		for (int l833 = 0; (l833 < 2); l833 = (l833 + 1)) {
-			fRec1197[l833] = 0.0;
+			fRec1182[l833] = 0.0;
 			
 		}
 		for (int l834 = 0; (l834 < 2); l834 = (l834 + 1)) {
-			fRec1196[l834] = 0.0;
+			fRec1199[l834] = 0.0;
 			
 		}
 		for (int l835 = 0; (l835 < 2); l835 = (l835 + 1)) {
-			fRec1194[l835] = 0.0;
+			fRec1197[l835] = 0.0;
 			
 		}
 		for (int l836 = 0; (l836 < 2); l836 = (l836 + 1)) {
-			fRec1193[l836] = 0.0;
+			fRec1196[l836] = 0.0;
 			
 		}
 		for (int l837 = 0; (l837 < 2); l837 = (l837 + 1)) {
-			fRec1191[l837] = 0.0;
+			fRec1194[l837] = 0.0;
 			
 		}
 		for (int l838 = 0; (l838 < 2); l838 = (l838 + 1)) {
-			fRec1202[l838] = 0.0;
+			fRec1208[l838] = 0.0;
 			
 		}
 		for (int l839 = 0; (l839 < 2); l839 = (l839 + 1)) {
-			fRec1200[l839] = 0.0;
+			fRec1206[l839] = 0.0;
 			
 		}
 		for (int l840 = 0; (l840 < 2); l840 = (l840 + 1)) {
-			fRec1208[l840] = 0.0;
+			fRec1205[l840] = 0.0;
 			
 		}
 		for (int l841 = 0; (l841 < 2); l841 = (l841 + 1)) {
-			fRec1206[l841] = 0.0;
+			fRec1203[l841] = 0.0;
 			
 		}
 		for (int l842 = 0; (l842 < 2); l842 = (l842 + 1)) {
-			fRec1205[l842] = 0.0;
+			fRec1202[l842] = 0.0;
 			
 		}
 		for (int l843 = 0; (l843 < 2); l843 = (l843 + 1)) {
-			fRec1203[l843] = 0.0;
+			fRec1200[l843] = 0.0;
 			
 		}
 		for (int l844 = 0; (l844 < 512); l844 = (l844 + 1)) {
@@ -6830,99 +6830,99 @@ class mydsp : public dsp {
 			
 		}
 		for (int l907 = 0; (l907 < 2); l907 = (l907 + 1)) {
-			fRec1313[l907] = 0.0;
+			fRec1307[l907] = 0.0;
 			
 		}
 		for (int l908 = 0; (l908 < 2); l908 = (l908 + 1)) {
-			fRec1311[l908] = 0.0;
+			fRec1305[l908] = 0.0;
 			
 		}
 		for (int l909 = 0; (l909 < 2); l909 = (l909 + 1)) {
-			fRec1310[l909] = 0.0;
+			fRec1304[l909] = 0.0;
 			
 		}
 		for (int l910 = 0; (l910 < 2); l910 = (l910 + 1)) {
-			fRec1308[l910] = 0.0;
+			fRec1302[l910] = 0.0;
 			
 		}
 		for (int l911 = 0; (l911 < 2); l911 = (l911 + 1)) {
-			fRec1307[l911] = 0.0;
+			fRec1301[l911] = 0.0;
 			
 		}
 		for (int l912 = 0; (l912 < 2); l912 = (l912 + 1)) {
-			fRec1305[l912] = 0.0;
+			fRec1299[l912] = 0.0;
 			
 		}
 		for (int l913 = 0; (l913 < 2); l913 = (l913 + 1)) {
-			fRec1304[l913] = 0.0;
+			fRec1319[l913] = 0.0;
 			
 		}
 		for (int l914 = 0; (l914 < 2); l914 = (l914 + 1)) {
-			fRec1302[l914] = 0.0;
+			fRec1317[l914] = 0.0;
 			
 		}
 		for (int l915 = 0; (l915 < 2); l915 = (l915 + 1)) {
-			fRec1301[l915] = 0.0;
+			fRec1316[l915] = 0.0;
 			
 		}
 		for (int l916 = 0; (l916 < 2); l916 = (l916 + 1)) {
-			fRec1299[l916] = 0.0;
+			fRec1314[l916] = 0.0;
 			
 		}
 		for (int l917 = 0; (l917 < 2); l917 = (l917 + 1)) {
-			fRec1325[l917] = 0.0;
+			fRec1313[l917] = 0.0;
 			
 		}
 		for (int l918 = 0; (l918 < 2); l918 = (l918 + 1)) {
-			fRec1323[l918] = 0.0;
+			fRec1311[l918] = 0.0;
 			
 		}
 		for (int l919 = 0; (l919 < 2); l919 = (l919 + 1)) {
-			fRec1322[l919] = 0.0;
+			fRec1310[l919] = 0.0;
 			
 		}
 		for (int l920 = 0; (l920 < 2); l920 = (l920 + 1)) {
-			fRec1320[l920] = 0.0;
+			fRec1308[l920] = 0.0;
 			
 		}
 		for (int l921 = 0; (l921 < 2); l921 = (l921 + 1)) {
-			fRec1319[l921] = 0.0;
+			fRec1322[l921] = 0.0;
 			
 		}
 		for (int l922 = 0; (l922 < 2); l922 = (l922 + 1)) {
-			fRec1317[l922] = 0.0;
+			fRec1320[l922] = 0.0;
 			
 		}
 		for (int l923 = 0; (l923 < 2); l923 = (l923 + 1)) {
-			fRec1316[l923] = 0.0;
+			fRec1328[l923] = 0.0;
 			
 		}
 		for (int l924 = 0; (l924 < 2); l924 = (l924 + 1)) {
-			fRec1314[l924] = 0.0;
+			fRec1326[l924] = 0.0;
 			
 		}
 		for (int l925 = 0; (l925 < 2); l925 = (l925 + 1)) {
-			fRec1334[l925] = 0.0;
+			fRec1325[l925] = 0.0;
 			
 		}
 		for (int l926 = 0; (l926 < 2); l926 = (l926 + 1)) {
-			fRec1332[l926] = 0.0;
+			fRec1323[l926] = 0.0;
 			
 		}
 		for (int l927 = 0; (l927 < 2); l927 = (l927 + 1)) {
-			fRec1331[l927] = 0.0;
+			fRec1343[l927] = 0.0;
 			
 		}
 		for (int l928 = 0; (l928 < 2); l928 = (l928 + 1)) {
-			fRec1329[l928] = 0.0;
+			fRec1341[l928] = 0.0;
 			
 		}
 		for (int l929 = 0; (l929 < 2); l929 = (l929 + 1)) {
-			fRec1328[l929] = 0.0;
+			fRec1340[l929] = 0.0;
 			
 		}
 		for (int l930 = 0; (l930 < 2); l930 = (l930 + 1)) {
-			fRec1326[l930] = 0.0;
+			fRec1338[l930] = 0.0;
 			
 		}
 		for (int l931 = 0; (l931 < 2); l931 = (l931 + 1)) {
@@ -6934,19 +6934,19 @@ class mydsp : public dsp {
 			
 		}
 		for (int l933 = 0; (l933 < 2); l933 = (l933 + 1)) {
-			fRec1343[l933] = 0.0;
+			fRec1334[l933] = 0.0;
 			
 		}
 		for (int l934 = 0; (l934 < 2); l934 = (l934 + 1)) {
-			fRec1341[l934] = 0.0;
+			fRec1332[l934] = 0.0;
 			
 		}
 		for (int l935 = 0; (l935 < 2); l935 = (l935 + 1)) {
-			fRec1340[l935] = 0.0;
+			fRec1331[l935] = 0.0;
 			
 		}
 		for (int l936 = 0; (l936 < 2); l936 = (l936 + 1)) {
-			fRec1338[l936] = 0.0;
+			fRec1329[l936] = 0.0;
 			
 		}
 		
@@ -7068,8 +7068,8 @@ class mydsp : public dsp {
 			double fTemp8 = (fConst4 * fRec4[1]);
 			double fTemp9 = (fConst7 * fRec7[1]);
 			double fTemp10 = (fConst8 * fRec10[1]);
-			fRec19[0] = (double(input25[i]) - (((fTemp2 * fRec19[2]) + (2.0 * (fTemp3 * fRec19[1]))) / fTemp4));
-			double fTemp11 = (((fTemp1 * (fRec19[2] + (fRec19[0] + (2.0 * fRec19[1])))) / fTemp5) + (0.20571231109999999 * (fRec3[0] * (0.0 - ((fTemp6 * fRec19[1]) + ((fRec19[0] + fRec19[2]) / fTemp4))))));
+			fRec19[0] = (double(input25[i]) - (((fRec19[2] * fTemp2) + (2.0 * (fRec19[1] * fTemp3))) / fTemp4));
+			double fTemp11 = ((((fRec19[2] + (fRec19[0] + (2.0 * fRec19[1]))) * fTemp1) / fTemp5) + (0.20571231109999999 * (fRec3[0] * (0.0 - ((fRec19[1] * fTemp6) + ((fRec19[0] + fRec19[2]) / fTemp4))))));
 			fRec20[0] = (double(input29[i]) - (((fTemp2 * fRec20[2]) + (2.0 * (fTemp3 * fRec20[1]))) / fTemp4));
 			double fTemp12 = (((fTemp1 * (fRec20[2] + (fRec20[0] + (2.0 * fRec20[1])))) / fTemp5) + (0.20571231109999999 * (fRec3[0] * (0.0 - ((fTemp6 * fRec20[1]) + ((fRec20[0] + fRec20[2]) / fTemp4))))));
 			fRec21[0] = (double(input30[i]) - (((fTemp2 * fRec21[2]) + (2.0 * (fTemp3 * fRec21[1]))) / fTemp4));
@@ -7078,8 +7078,8 @@ class mydsp : public dsp {
 			double fTemp14 = (((fTemp1 * (fRec22[2] + (fRec22[0] + (2.0 * fRec22[1])))) / fTemp5) + (0.20571231109999999 * (fRec3[0] * (0.0 - ((fTemp6 * fRec22[1]) + ((fRec22[0] + fRec22[2]) / fTemp4))))));
 			fRec23[0] = (double(input34[i]) - (((fTemp2 * fRec23[2]) + (2.0 * (fTemp3 * fRec23[1]))) / fTemp4));
 			double fTemp15 = (((fTemp1 * (fRec23[2] + (fRec23[0] + (2.0 * fRec23[1])))) / fTemp5) + (0.20571231109999999 * (fRec3[0] * (0.0 - ((fTemp6 * fRec23[1]) + ((fRec23[0] + fRec23[2]) / fTemp4))))));
-			fRec24[0] = (double(input26[i]) - (((fTemp2 * fRec24[2]) + (2.0 * (fTemp3 * fRec24[1]))) / fTemp4));
-			double fTemp16 = (((fTemp1 * (fRec24[2] + (fRec24[0] + (2.0 * fRec24[1])))) / fTemp5) + (0.20571231109999999 * (fRec3[0] * (0.0 - ((fTemp6 * fRec24[1]) + ((fRec24[0] + fRec24[2]) / fTemp4))))));
+			fRec24[0] = (double(input26[i]) - (((fRec24[2] * fTemp2) + (2.0 * (fRec24[1] * fTemp3))) / fTemp4));
+			double fTemp16 = (((fTemp1 * (fRec24[2] + (fRec24[0] + (2.0 * fRec24[1])))) / fTemp5) + (0.20571231109999999 * (fRec3[0] * (0.0 - ((fRec24[1] * fTemp6) + ((fRec24[0] + fRec24[2]) / fTemp4))))));
 			fRec25[0] = (double(input27[i]) - (((fTemp2 * fRec25[2]) + (2.0 * (fTemp3 * fRec25[1]))) / fTemp4));
 			double fTemp17 = (((fTemp1 * (fRec25[2] + (fRec25[0] + (2.0 * fRec25[1])))) / fTemp5) + (0.20571231109999999 * (fRec3[0] * (0.0 - ((fTemp6 * fRec25[1]) + ((fRec25[0] + fRec25[2]) / fTemp4))))));
 			fRec26[0] = (double(input28[i]) - (((fTemp2 * fRec26[2]) + (2.0 * (fTemp3 * fRec26[1]))) / fTemp4));
@@ -7110,25 +7110,25 @@ class mydsp : public dsp {
 			double fRec5 = (fRec8 + fTemp8);
 			double fTemp25 = (fConst14 * fRec30[1]);
 			double fTemp26 = (fConst15 * fRec33[1]);
-			fRec42[0] = (double(input16[i]) - (((fTemp2 * fRec42[2]) + (2.0 * (fTemp3 * fRec42[1]))) / fTemp4));
-			double fTemp27 = (((fTemp1 * (fRec42[2] + (fRec42[0] + (2.0 * fRec42[1])))) / fTemp5) + (0.42200500930000001 * (fRec3[0] * (0.0 - ((fTemp6 * fRec42[1]) + ((fRec42[0] + fRec42[2]) / fTemp4))))));
-			fRec43[0] = (double(input19[i]) - (((fTemp2 * fRec43[2]) + (2.0 * (fTemp3 * fRec43[1]))) / fTemp4));
-			double fTemp28 = (((fTemp1 * (fRec43[2] + (fRec43[0] + (2.0 * fRec43[1])))) / fTemp5) + (0.42200500930000001 * (fRec3[0] * (0.0 - ((fTemp6 * fRec43[1]) + ((fRec43[0] + fRec43[2]) / fTemp4))))));
-			fRec44[0] = (double(input20[i]) - (((fTemp2 * fRec44[2]) + (2.0 * (fTemp3 * fRec44[1]))) / fTemp4));
-			double fTemp29 = (((fTemp1 * (fRec44[2] + (fRec44[0] + (2.0 * fRec44[1])))) / fTemp5) + (0.42200500930000001 * (fRec3[0] * (0.0 - ((fTemp6 * fRec44[1]) + ((fRec44[0] + fRec44[2]) / fTemp4))))));
-			fRec45[0] = (double(input21[i]) - (((fTemp2 * fRec45[2]) + (2.0 * (fTemp3 * fRec45[1]))) / fTemp4));
-			double fTemp30 = (((fTemp1 * (fRec45[2] + (fRec45[0] + (2.0 * fRec45[1])))) / fTemp5) + (0.42200500930000001 * (fRec3[0] * (0.0 - ((fTemp6 * fRec45[1]) + ((fRec45[0] + fRec45[2]) / fTemp4))))));
-			fRec46[0] = (double(input23[i]) - (((fTemp2 * fRec46[2]) + (2.0 * (fTemp3 * fRec46[1]))) / fTemp4));
-			double fTemp31 = (((fTemp1 * (fRec46[2] + (fRec46[0] + (2.0 * fRec46[1])))) / fTemp5) + (0.42200500930000001 * (fRec3[0] * (0.0 - ((fTemp6 * fRec46[1]) + ((fRec46[0] + fRec46[2]) / fTemp4))))));
-			fRec47[0] = (double(input17[i]) - (((fTemp2 * fRec47[2]) + (2.0 * (fTemp3 * fRec47[1]))) / fTemp4));
-			double fTemp32 = (((fTemp1 * (fRec47[2] + (fRec47[0] + (2.0 * fRec47[1])))) / fTemp5) + (0.42200500930000001 * (fRec3[0] * (0.0 - ((fTemp6 * fRec47[1]) + ((fRec47[0] + fRec47[2]) / fTemp4))))));
-			fRec48[0] = (double(input18[i]) - (((fTemp2 * fRec48[2]) + (2.0 * (fTemp3 * fRec48[1]))) / fTemp4));
-			double fTemp33 = (((fTemp1 * (fRec48[2] + (fRec48[0] + (2.0 * fRec48[1])))) / fTemp5) + (0.42200500930000001 * (fRec3[0] * (0.0 - ((fTemp6 * fRec48[1]) + ((fRec48[0] + fRec48[2]) / fTemp4))))));
-			fRec49[0] = (double(input22[i]) - (((fTemp2 * fRec49[2]) + (2.0 * (fTemp3 * fRec49[1]))) / fTemp4));
-			double fTemp34 = (((fTemp1 * (fRec49[2] + (fRec49[0] + (2.0 * fRec49[1])))) / fTemp5) + (0.42200500930000001 * (fRec3[0] * (0.0 - ((fTemp6 * fRec49[1]) + ((fRec49[0] + fRec49[2]) / fTemp4))))));
-			fRec50[0] = (double(input24[i]) - (((fTemp2 * fRec50[2]) + (2.0 * (fTemp3 * fRec50[1]))) / fTemp4));
-			double fTemp35 = (((fTemp1 * (fRec50[2] + (fRec50[0] + (2.0 * fRec50[1])))) / fTemp5) + (0.42200500930000001 * (fRec3[0] * (0.0 - ((fTemp6 * fRec50[1]) + ((fRec50[0] + fRec50[2]) / fTemp4))))));
-			double fTemp36 = (fConst17 * ((((((0.1376464248 * fTemp27) + (0.0014099147 * fTemp28)) + (0.027293582 * fTemp29)) + (0.0012123736999999999 * fTemp30)) + (0.0013474269 * fTemp31)) - ((((0.055329556199999998 * fTemp32) + (0.029305725899999999 * fTemp33)) + (0.017369112400000001 * fTemp34)) + (0.074356897300000002 * fTemp35))));
+			fRec42[0] = (double(input21[i]) - (((fRec42[2] * fTemp2) + (2.0 * (fRec42[1] * fTemp3))) / fTemp4));
+			double fTemp27 = ((((fRec42[2] + (fRec42[0] + (2.0 * fRec42[1]))) * fTemp1) / fTemp5) + (0.42200500930000001 * (fRec3[0] * (0.0 - ((fRec42[1] * fTemp6) + ((fRec42[0] + fRec42[2]) / fTemp4))))));
+			fRec43[0] = (double(input19[i]) - (((fRec43[2] * fTemp2) + (2.0 * (fRec43[1] * fTemp3))) / fTemp4));
+			double fTemp28 = ((((fRec43[2] + ((2.0 * fRec43[1]) + fRec43[0])) * fTemp1) / fTemp5) + (0.42200500930000001 * ((0.0 - ((fRec43[1] * fTemp6) + ((fRec43[2] + fRec43[0]) / fTemp4))) * fRec3[0])));
+			fRec44[0] = (double(input16[i]) - (((fRec44[2] * fTemp2) + (2.0 * (fRec44[1] * fTemp3))) / fTemp4));
+			double fTemp29 = (((fTemp1 * (fRec44[2] + (fRec44[0] + (2.0 * fRec44[1])))) / fTemp5) + (0.42200500930000001 * ((0.0 - ((fRec44[1] * fTemp6) + ((fRec44[0] + fRec44[2]) / fTemp4))) * fRec3[0])));
+			fRec45[0] = (double(input23[i]) - (((fRec45[2] * fTemp2) + (2.0 * (fRec45[1] * fTemp3))) / fTemp4));
+			double fTemp30 = ((0.42200500930000001 * ((0.0 - ((fRec45[1] * fTemp6) + ((fRec45[0] + fRec45[2]) / fTemp4))) * fRec3[0])) + (((fRec45[2] + (fRec45[0] + (2.0 * fRec45[1]))) * fTemp1) / fTemp5));
+			fRec46[0] = (double(input20[i]) - (((fRec46[2] * fTemp2) + (2.0 * (fRec46[1] * fTemp3))) / fTemp4));
+			double fTemp31 = ((0.42200500930000001 * (fRec3[0] * (0.0 - ((fRec46[1] * fTemp6) + ((fRec46[0] + fRec46[2]) / fTemp4))))) + (((fRec46[2] + (fRec46[0] + (2.0 * fRec46[1]))) * fTemp1) / fTemp5));
+			fRec47[0] = (double(input17[i]) - (((fRec47[2] * fTemp2) + (2.0 * (fRec47[1] * fTemp3))) / fTemp4));
+			double fTemp32 = ((((fRec47[2] + ((2.0 * fRec47[1]) + fRec47[0])) * fTemp1) / fTemp5) + (0.42200500930000001 * ((0.0 - ((fRec47[1] * fTemp6) + ((fRec47[2] + fRec47[0]) / fTemp4))) * fRec3[0])));
+			fRec48[0] = (double(input18[i]) - (((fRec48[2] * fTemp2) + (2.0 * (fRec48[1] * fTemp3))) / fTemp4));
+			double fTemp33 = ((((fRec48[2] + ((2.0 * fRec48[1]) + fRec48[0])) * fTemp1) / fTemp5) + (0.42200500930000001 * ((0.0 - ((fRec48[1] * fTemp6) + ((fRec48[2] + fRec48[0]) / fTemp4))) * fRec3[0])));
+			fRec49[0] = (double(input22[i]) - (((fRec49[2] * fTemp2) + (2.0 * (fRec49[1] * fTemp3))) / fTemp4));
+			double fTemp34 = ((((fRec49[2] + (fRec49[0] + (2.0 * fRec49[1]))) * fTemp1) / fTemp5) + (0.42200500930000001 * (fRec3[0] * (0.0 - ((fRec49[1] * fTemp6) + ((fRec49[0] + fRec49[2]) / fTemp4))))));
+			fRec50[0] = (double(input24[i]) - (((fRec50[2] * fTemp2) + (2.0 * (fRec50[1] * fTemp3))) / fTemp4));
+			double fTemp35 = ((((fRec50[2] + (fRec50[0] + (2.0 * fRec50[1]))) * fTemp1) / fTemp5) + (0.42200500930000001 * (fRec3[0] * (0.0 - ((fRec50[1] * fTemp6) + ((fRec50[0] + fRec50[2]) / fTemp4))))));
+			double fTemp36 = (fConst17 * (((0.0012123736999999999 * fTemp27) + ((0.0014099147 * fTemp28) + ((0.1376464248 * fTemp29) + ((0.0013474269 * fTemp30) + (0.027293582 * fTemp31))))) - ((((0.055329556199999998 * fTemp32) + (0.029305725899999999 * fTemp33)) + (0.017369112400000001 * fTemp34)) + (0.074356897300000002 * fTemp35))));
 			double fTemp37 = (fConst18 * fRec36[1]);
 			double fTemp38 = (fConst19 * fRec39[1]);
 			fRec41[0] = (fTemp36 + (fTemp37 + (fRec41[1] + fTemp38)));
@@ -7145,19 +7145,19 @@ class mydsp : public dsp {
 			double fRec31 = fRec34;
 			double fTemp39 = (fConst21 * fRec51[1]);
 			fRec60[0] = (double(input9[i]) - (((fRec60[2] * fTemp2) + (2.0 * (fRec60[1] * fTemp3))) / fTemp4));
-			double fTemp40 = ((((fRec60[2] + (fRec60[0] + (2.0 * fRec60[1]))) * fTemp1) / fTemp5) + (0.62824992459999995 * (fRec3[0] * (0.0 - ((fRec60[1] * fTemp6) + ((fRec60[0] + fRec60[2]) / fTemp4))))));
+			double fTemp40 = ((((fRec60[2] + (fRec60[0] + (2.0 * fRec60[1]))) * fTemp1) / fTemp5) + (0.62824992459999995 * ((0.0 - ((fRec60[1] * fTemp6) + ((fRec60[0] + fRec60[2]) / fTemp4))) * fRec3[0])));
 			fRec61[0] = (double(input12[i]) - (((fRec61[2] * fTemp2) + (2.0 * (fRec61[1] * fTemp3))) / fTemp4));
-			double fTemp41 = ((((fRec61[2] + (fRec61[0] + (2.0 * fRec61[1]))) * fTemp1) / fTemp5) + (0.62824992459999995 * (fRec3[0] * (0.0 - ((fRec61[1] * fTemp6) + ((fRec61[0] + fRec61[2]) / fTemp4))))));
-			fRec62[0] = (double(input15[i]) - (((fTemp2 * fRec62[2]) + (2.0 * (fTemp3 * fRec62[1]))) / fTemp4));
-			double fTemp42 = (((fTemp1 * (fRec62[2] + (fRec62[0] + (2.0 * fRec62[1])))) / fTemp5) + (0.62824992459999995 * (fRec3[0] * (0.0 - ((fTemp6 * fRec62[1]) + ((fRec62[0] + fRec62[2]) / fTemp4))))));
+			double fTemp41 = ((((fRec61[2] + ((2.0 * fRec61[1]) + fRec61[0])) * fTemp1) / fTemp5) + (0.62824992459999995 * (fRec3[0] * (0.0 - ((fRec61[1] * fTemp6) + ((fRec61[2] + fRec61[0]) / fTemp4))))));
+			fRec62[0] = (double(input15[i]) - (((fRec62[2] * fTemp2) + (2.0 * (fRec62[1] * fTemp3))) / fTemp4));
+			double fTemp42 = ((((fRec62[2] + (fRec62[0] + (2.0 * fRec62[1]))) * fTemp1) / fTemp5) + (0.62824992459999995 * (fRec3[0] * (0.0 - ((fRec62[1] * fTemp6) + ((fRec62[0] + fRec62[2]) / fTemp4))))));
 			fRec63[0] = (double(input10[i]) - (((fRec63[2] * fTemp2) + (2.0 * (fRec63[1] * fTemp3))) / fTemp4));
-			double fTemp43 = ((((fRec63[2] + (fRec63[0] + (2.0 * fRec63[1]))) * fTemp1) / fTemp5) + (0.62824992459999995 * (fRec3[0] * (0.0 - ((fRec63[1] * fTemp6) + ((fRec63[0] + fRec63[2]) / fTemp4))))));
+			double fTemp43 = ((((fRec63[2] + ((2.0 * fRec63[1]) + fRec63[0])) * fTemp1) / fTemp5) + (0.62824992459999995 * ((0.0 - ((fRec63[1] * fTemp6) + ((fRec63[2] + fRec63[0]) / fTemp4))) * fRec3[0])));
 			fRec64[0] = (double(input11[i]) - (((fRec64[2] * fTemp2) + (2.0 * (fRec64[1] * fTemp3))) / fTemp4));
-			double fTemp44 = ((((fRec64[2] + (fRec64[0] + (2.0 * fRec64[1]))) * fTemp1) / fTemp5) + (0.62824992459999995 * (fRec3[0] * (0.0 - ((fRec64[1] * fTemp6) + ((fRec64[0] + fRec64[2]) / fTemp4))))));
+			double fTemp44 = ((((fRec64[2] + ((2.0 * fRec64[1]) + fRec64[0])) * fTemp1) / fTemp5) + (0.62824992459999995 * ((0.0 - ((fRec64[1] * fTemp6) + ((fRec64[2] + fRec64[0]) / fTemp4))) * fRec3[0])));
 			fRec65[0] = (double(input13[i]) - (((fRec65[2] * fTemp2) + (2.0 * (fRec65[1] * fTemp3))) / fTemp4));
 			double fTemp45 = ((((fRec65[2] + (fRec65[0] + (2.0 * fRec65[1]))) * fTemp1) / fTemp5) + (0.62824992459999995 * (fRec3[0] * (0.0 - ((fRec65[1] * fTemp6) + ((fRec65[0] + fRec65[2]) / fTemp4))))));
 			fRec66[0] = (double(input14[i]) - (((fRec66[2] * fTemp2) + (2.0 * (fRec66[1] * fTemp3))) / fTemp4));
-			double fTemp46 = (((fTemp1 * (fRec66[2] + (fRec66[0] + (2.0 * fRec66[1])))) / fTemp5) + (0.62824992459999995 * (fRec3[0] * (0.0 - ((fRec66[1] * fTemp6) + ((fRec66[0] + fRec66[2]) / fTemp4))))));
+			double fTemp46 = ((((fRec66[2] + (fRec66[0] + (2.0 * fRec66[1]))) * fTemp1) / fTemp5) + (0.62824992459999995 * (fRec3[0] * (0.0 - ((fRec66[1] * fTemp6) + ((fRec66[0] + fRec66[2]) / fTemp4))))));
 			double fTemp47 = (fConst23 * ((((0.1509013957 * fTemp40) + (0.017599064599999999 * fTemp41)) + (0.0031030061000000002 * fTemp42)) - ((((0.048377653299999997 * fTemp43) + (0.024264610999999998 * fTemp44)) + (0.042728553900000001 * fTemp45)) + (0.027189593000000001 * fTemp46))));
 			double fTemp48 = (fConst24 * fRec54[1]);
 			double fTemp49 = (fConst25 * fRec57[1]);
@@ -7170,1912 +7170,1909 @@ class mydsp : public dsp {
 			fRec53[0] = (fTemp39 + (fRec55 + fRec53[1]));
 			fRec51[0] = fRec53[0];
 			double fRec52 = (fRec55 + fTemp39);
-			fRec70[0] = (double(input1[i]) - (((fRec70[2] * fTemp2) + (2.0 * (fRec70[1] * fTemp3))) / fTemp4));
-			double fTemp50 = ((((fRec70[2] + ((2.0 * fRec70[1]) + fRec70[0])) * fTemp1) / fTemp5) + (0.93246951420000002 * ((0.0 - ((fRec70[1] * fTemp6) + ((fRec70[2] + fRec70[0]) / fTemp4))) * fRec3[0])));
-			fRec71[0] = (double(input3[i]) - (((fRec71[2] * fTemp2) + (2.0 * (fRec71[1] * fTemp3))) / fTemp4));
-			double fTemp51 = ((((fRec71[2] + (fRec71[0] + (2.0 * fRec71[1]))) * fTemp1) / fTemp5) + (0.93246951420000002 * (fRec3[0] * (0.0 - ((fRec71[1] * fTemp6) + ((fRec71[2] + fRec71[0]) / fTemp4))))));
-			fRec72[0] = (double(input2[i]) - (((fRec72[2] * fTemp2) + (2.0 * (fRec72[1] * fTemp3))) / fTemp4));
-			double fTemp52 = ((((fRec72[2] + ((2.0 * fRec72[1]) + fRec72[0])) * fTemp1) / fTemp5) + (0.93246951420000002 * ((0.0 - ((fRec72[1] * fTemp6) + ((fRec72[2] + fRec72[0]) / fTemp4))) * fRec3[0])));
-			double fTemp53 = ((fConst27 * fRec67[1]) + (fConst28 * (((0.0519228334 * fTemp50) + (0.091305722199999995 * fTemp51)) - (0.0250128604 * fTemp52))));
-			fRec69[0] = (fTemp53 + fRec69[1]);
+			fRec70[0] = (double(input1[i]) - (((fTemp2 * fRec70[2]) + (2.0 * (fTemp3 * fRec70[1]))) / fTemp4));
+			double fTemp50 = (((fTemp1 * (fRec70[2] + (fRec70[0] + (2.0 * fRec70[1])))) / fTemp5) + (0.93246951420000002 * (fRec3[0] * (0.0 - ((fTemp6 * fRec70[1]) + ((fRec70[0] + fRec70[2]) / fTemp4))))));
+			fRec71[0] = (double(input3[i]) - (((fTemp2 * fRec71[2]) + (2.0 * (fTemp3 * fRec71[1]))) / fTemp4));
+			double fTemp51 = (((fTemp1 * (fRec71[2] + (fRec71[0] + (2.0 * fRec71[1])))) / fTemp5) + (0.93246951420000002 * (fRec3[0] * (0.0 - ((fTemp6 * fRec71[1]) + ((fRec71[0] + fRec71[2]) / fTemp4))))));
+			fRec72[0] = (double(input2[i]) - (((fTemp2 * fRec72[2]) + (2.0 * (fTemp3 * fRec72[1]))) / fTemp4));
+			double fTemp52 = (((fTemp1 * (fRec72[2] + (fRec72[0] + (2.0 * fRec72[1])))) / fTemp5) + (0.93246951420000002 * (fRec3[0] * (0.0 - ((fTemp6 * fRec72[1]) + ((fRec72[0] + fRec72[2]) / fTemp4))))));
+			double fTemp53 = (fConst27 * (((0.0519228334 * fTemp50) + (0.091305722199999995 * fTemp51)) - (0.0250128604 * fTemp52)));
+			double fTemp54 = (fConst28 * fRec67[1]);
+			fRec69[0] = (fTemp53 + (fRec69[1] + fTemp54));
 			fRec67[0] = fRec69[0];
-			double fRec68 = fTemp53;
-			fRec79[0] = (double(input4[i]) - (((fRec79[2] * fTemp2) + (2.0 * (fRec79[1] * fTemp3))) / fTemp4));
-			double fTemp54 = ((((fRec79[2] + (fRec79[0] + (2.0 * fRec79[1]))) * fTemp1) / fTemp5) + (0.80424909239999998 * (fRec3[0] * (0.0 - ((fRec79[1] * fTemp6) + ((fRec79[0] + fRec79[2]) / fTemp4))))));
-			fRec80[0] = (double(input8[i]) - (((fRec80[2] * fTemp2) + (2.0 * (fRec80[1] * fTemp3))) / fTemp4));
-			double fTemp55 = ((((fRec80[2] + (fRec80[0] + (2.0 * fRec80[1]))) * fTemp1) / fTemp5) + (0.80424909239999998 * (fRec3[0] * (0.0 - ((fRec80[1] * fTemp6) + ((fRec80[0] + fRec80[2]) / fTemp4))))));
-			fRec81[0] = (double(input5[i]) - (((fRec81[2] * fTemp2) + (2.0 * (fRec81[1] * fTemp3))) / fTemp4));
-			double fTemp56 = ((((fRec81[2] + (fRec81[0] + (2.0 * fRec81[1]))) * fTemp1) / fTemp5) + (0.80424909239999998 * (fRec3[0] * (0.0 - ((fRec81[1] * fTemp6) + ((fRec81[0] + fRec81[2]) / fTemp4))))));
-			fRec82[0] = (double(input6[i]) - (((fRec82[2] * fTemp2) + (2.0 * (fRec82[1] * fTemp3))) / fTemp4));
-			double fTemp57 = ((((fRec82[2] + (fRec82[0] + (2.0 * fRec82[1]))) * fTemp1) / fTemp5) + (0.80424909239999998 * (fRec3[0] * (0.0 - ((fRec82[1] * fTemp6) + ((fRec82[0] + fRec82[2]) / fTemp4))))));
-			fRec83[0] = (double(input7[i]) - (((fRec83[2] * fTemp2) + (2.0 * (fRec83[1] * fTemp3))) / fTemp4));
-			double fTemp58 = ((((fRec83[2] + (fRec83[0] + (2.0 * fRec83[1]))) * fTemp1) / fTemp5) + (0.80424909239999998 * (fRec3[0] * (0.0 - ((fRec83[1] * fTemp6) + ((fRec83[0] + fRec83[2]) / fTemp4))))));
-			double fTemp59 = (fConst30 * (((0.11562328049999999 * fTemp54) + (0.068831033900000005 * fTemp55)) - (((0.025030843699999999 * fTemp56) + (0.048101867700000002 * fTemp57)) + (0.0429812631 * fTemp58))));
-			double fTemp60 = (fConst31 * fRec73[1]);
-			double fTemp61 = (fConst32 * fRec76[1]);
-			fRec78[0] = (fTemp59 + (fTemp60 + (fRec78[1] + fTemp61)));
+			double fRec68 = (fTemp54 + fTemp53);
+			fRec79[0] = (double(input8[i]) - (((fRec79[2] * fTemp2) + (2.0 * (fRec79[1] * fTemp3))) / fTemp4));
+			double fTemp55 = ((0.80424909239999998 * (fRec3[0] * (0.0 - ((fRec79[1] * fTemp6) + ((fRec79[0] + fRec79[2]) / fTemp4))))) + (((fRec79[2] + (fRec79[0] + (2.0 * fRec79[1]))) * fTemp1) / fTemp5));
+			fRec80[0] = (double(input4[i]) - (((fTemp2 * fRec80[2]) + (2.0 * (fTemp3 * fRec80[1]))) / fTemp4));
+			double fTemp56 = (((fTemp1 * (fRec80[2] + (fRec80[0] + (2.0 * fRec80[1])))) / fTemp5) + (0.80424909239999998 * (fRec3[0] * (0.0 - ((fTemp6 * fRec80[1]) + ((fRec80[0] + fRec80[2]) / fTemp4))))));
+			fRec81[0] = (double(input7[i]) - (((fRec81[2] * fTemp2) + (2.0 * (fRec81[1] * fTemp3))) / fTemp4));
+			double fTemp57 = ((((fRec81[2] + (fRec81[0] + (2.0 * fRec81[1]))) * fTemp1) / fTemp5) + (0.80424909239999998 * (fRec3[0] * (0.0 - ((fRec81[1] * fTemp6) + ((fRec81[0] + fRec81[2]) / fTemp4))))));
+			fRec82[0] = (double(input6[i]) - (((fTemp2 * fRec82[2]) + (2.0 * (fTemp3 * fRec82[1]))) / fTemp4));
+			double fTemp58 = ((0.80424909239999998 * (fRec3[0] * (0.0 - ((fTemp6 * fRec82[1]) + ((fRec82[0] + fRec82[2]) / fTemp4))))) + ((fTemp1 * (fRec82[2] + (fRec82[0] + (2.0 * fRec82[1])))) / fTemp5));
+			fRec83[0] = (double(input5[i]) - (((fTemp2 * fRec83[2]) + (2.0 * (fTemp3 * fRec83[1]))) / fTemp4));
+			double fTemp59 = (((fTemp1 * (fRec83[2] + (fRec83[0] + (2.0 * fRec83[1])))) / fTemp5) + (0.80424909239999998 * (fRec3[0] * (0.0 - ((fTemp6 * fRec83[1]) + ((fRec83[0] + fRec83[2]) / fTemp4))))));
+			double fTemp60 = (fConst30 * (((0.068831033900000005 * fTemp55) + (0.11562328049999999 * fTemp56)) - (((0.0429812631 * fTemp57) + (0.048101867700000002 * fTemp58)) + (0.025030843699999999 * fTemp59))));
+			double fTemp61 = (fConst31 * fRec76[1]);
+			double fTemp62 = (fConst32 * fRec73[1]);
+			fRec78[0] = (((fTemp60 + fRec78[1]) + fTemp61) + fTemp62);
 			fRec76[0] = fRec78[0];
-			double fRec77 = ((fTemp61 + fTemp60) + fTemp59);
+			double fRec77 = ((fTemp60 + fTemp61) + fTemp62);
 			fRec75[0] = (fRec76[0] + fRec75[1]);
 			fRec73[0] = fRec75[0];
 			double fRec74 = fRec77;
 			fVec0[(IOTA & 1023)] = ((0.039486611599999999 * fTemp7) + (fRec5 + (fRec31 + (fRec52 + (fRec68 + fRec74)))));
 			output0[i] = FAUSTFLOAT((0.82065997130559543 * (fRec0[0] * fVec0[((IOTA - iConst33) & 1023)])));
-			double fTemp62 = (fConst4 * fRec84[1]);
-			double fTemp63 = (fConst7 * fRec87[1]);
-			double fTemp64 = (fConst8 * fRec90[1]);
-			double fTemp65 = (fConst10 * ((((0.033927521199999998 * fTemp14) + ((0.0097629259999999999 * fTemp13) + ((0.0993824024 * fTemp11) + (0.0043116921000000002 * fTemp12)))) + (0.1112840511 * fTemp21)) - ((0.045314966999999998 * fTemp15) + ((0.018431789000000001 * fTemp20) + ((((0.021420200600000001 * fTemp16) + (0.0079382519999999998 * fTemp17)) + (0.0069090525000000003 * fTemp18)) + (0.015210990400000001 * fTemp19))))));
-			double fTemp66 = (fConst11 * fRec93[1]);
-			double fTemp67 = (fConst12 * fRec96[1]);
-			fRec98[0] = (fTemp65 + (fTemp66 + (fRec98[1] + fTemp67)));
+			double fTemp63 = (fConst4 * fRec84[1]);
+			double fTemp64 = (fConst7 * fRec87[1]);
+			double fTemp65 = (fConst8 * fRec90[1]);
+			double fTemp66 = (fConst10 * ((((0.033927521199999998 * fTemp14) + ((0.0097629259999999999 * fTemp13) + ((0.0993824024 * fTemp11) + (0.0043116921000000002 * fTemp12)))) + (0.1112840511 * fTemp21)) - ((0.045314966999999998 * fTemp15) + ((0.018431789000000001 * fTemp20) + ((((0.021420200600000001 * fTemp16) + (0.0079382519999999998 * fTemp17)) + (0.0069090525000000003 * fTemp18)) + (0.015210990400000001 * fTemp19))))));
+			double fTemp67 = (fConst11 * fRec93[1]);
+			double fTemp68 = (fConst12 * fRec96[1]);
+			fRec98[0] = (fTemp66 + (fTemp67 + (fRec98[1] + fTemp68)));
 			fRec96[0] = fRec98[0];
-			double fRec97 = ((fTemp67 + fTemp66) + fTemp65);
+			double fRec97 = ((fTemp68 + fTemp67) + fTemp66);
 			fRec95[0] = (fRec96[0] + fRec95[1]);
 			fRec93[0] = fRec95[0];
 			double fRec94 = fRec97;
-			fRec92[0] = (fTemp63 + (fTemp64 + (fRec94 + fRec92[1])));
+			fRec92[0] = (fTemp64 + (fTemp65 + (fRec94 + fRec92[1])));
 			fRec90[0] = fRec92[0];
-			double fRec91 = (fTemp63 + (fRec94 + fTemp64));
+			double fRec91 = (fTemp64 + (fRec94 + fTemp65));
 			fRec89[0] = (fRec90[0] + fRec89[1]);
 			fRec87[0] = fRec89[0];
 			double fRec88 = fRec91;
-			fRec86[0] = (fTemp62 + (fRec88 + fRec86[1]));
+			fRec86[0] = (fTemp63 + (fRec88 + fRec86[1]));
 			fRec84[0] = fRec86[0];
-			double fRec85 = (fRec88 + fTemp62);
-			double fTemp68 = (fConst14 * fRec99[1]);
-			double fTemp69 = (fConst15 * fRec102[1]);
-			double fTemp70 = (fConst17 * ((((0.001525645 * fTemp30) + ((0.083121047899999995 * fTemp27) + (0.025631570999999999 * fTemp29))) + (0.12605663950000001 * fTemp35)) - ((0.049936505300000003 * fTemp31) + ((((0.0180622218 * fTemp32) + (0.0091999070999999998 * fTemp33)) + (0.00095451819999999997 * fTemp28)) + (0.030983422100000001 * fTemp34)))));
-			double fTemp71 = (fConst18 * fRec105[1]);
-			double fTemp72 = (fConst19 * fRec108[1]);
-			fRec110[0] = (fTemp70 + (fTemp71 + (fRec110[1] + fTemp72)));
-			fRec108[0] = fRec110[0];
-			double fRec109 = ((fTemp72 + fTemp71) + fTemp70);
-			fRec107[0] = (fRec108[0] + fRec107[1]);
+			double fRec85 = (fRec88 + fTemp63);
+			double fTemp69 = (fConst23 * (((0.1307991432 * fTemp42) + ((0.061102555500000003 * fTemp40) + (0.0164224673 * fTemp41))) - ((((0.012514683299999999 * fTemp43) + (0.0068264971000000004 * fTemp44)) + (0.046029363900000002 * fTemp45)) + (0.051041985099999999 * fTemp46))));
+			double fTemp70 = (fConst25 * fRec105[1]);
+			double fTemp71 = (fConst24 * fRec102[1]);
+			fRec107[0] = (((fTemp69 + fRec107[1]) + fTemp70) + fTemp71);
 			fRec105[0] = fRec107[0];
-			double fRec106 = fRec109;
-			fRec104[0] = (fTemp68 + (fTemp69 + (fRec106 + fRec104[1])));
+			double fRec106 = ((fTemp69 + fTemp70) + fTemp71);
+			fRec104[0] = (fRec105[0] + fRec104[1]);
 			fRec102[0] = fRec104[0];
-			double fRec103 = (fTemp68 + (fRec106 + fTemp69));
-			fRec101[0] = (fRec102[0] + fRec101[1]);
+			double fRec103 = fRec106;
+			double fTemp72 = (fConst21 * fRec99[1]);
+			fRec101[0] = ((fRec103 + fRec101[1]) + fTemp72);
 			fRec99[0] = fRec101[0];
-			double fRec100 = fRec103;
-			double fTemp73 = (fConst21 * fRec111[1]);
-			double fTemp74 = (fConst23 * ((((0.061102555500000003 * fTemp40) + (0.0164224673 * fTemp41)) + (0.1307991432 * fTemp42)) - ((((0.012514683299999999 * fTemp43) + (0.0068264971000000004 * fTemp44)) + (0.046029363900000002 * fTemp45)) + (0.051041985099999999 * fTemp46))));
-			double fTemp75 = (fConst24 * fRec114[1]);
-			double fTemp76 = (fConst25 * fRec117[1]);
-			fRec119[0] = (fTemp74 + (fTemp75 + (fRec119[1] + fTemp76)));
-			fRec117[0] = fRec119[0];
-			double fRec118 = ((fTemp76 + fTemp75) + fTemp74);
-			fRec116[0] = (fRec117[0] + fRec116[1]);
+			double fRec100 = (fRec103 + fTemp72);
+			double fTemp73 = (fConst27 * (((0.0144140317 * fTemp50) + (0.098432117499999999 * fTemp51)) - (0.023507075700000001 * fTemp52)));
+			double fTemp74 = (fConst28 * fRec108[1]);
+			fRec110[0] = (fTemp73 + (fRec110[1] + fTemp74));
+			fRec108[0] = fRec110[0];
+			double fRec109 = (fTemp74 + fTemp73);
+			double fTemp75 = (fConst30 * (((0.036718164800000001 * fTemp56) + (0.1225290872 * fTemp55)) - ((0.0057987613999999996 * fTemp59) + ((0.045539167899999997 * fTemp58) + (0.046448097600000002 * fTemp57)))));
+			double fTemp76 = (fConst32 * fRec111[1]);
+			double fTemp77 = (fConst31 * fRec114[1]);
+			fRec116[0] = (fTemp75 + (fTemp76 + (fRec116[1] + fTemp77)));
 			fRec114[0] = fRec116[0];
-			double fRec115 = fRec118;
-			fRec113[0] = (fTemp73 + (fRec115 + fRec113[1]));
+			double fRec115 = ((fTemp77 + fTemp76) + fTemp75);
+			fRec113[0] = (fRec114[0] + fRec113[1]);
 			fRec111[0] = fRec113[0];
-			double fRec112 = (fRec115 + fTemp73);
-			double fTemp77 = (fConst28 * (((0.0144140317 * fTemp50) + (0.098432117499999999 * fTemp51)) - (0.023507075700000001 * fTemp52)));
-			double fTemp78 = (fConst27 * fRec120[1]);
-			fRec122[0] = (fTemp77 + (fRec122[1] + fTemp78));
-			fRec120[0] = fRec122[0];
-			double fRec121 = (fTemp78 + fTemp77);
-			double fTemp79 = (fConst30 * (((0.036718164800000001 * fTemp54) + (0.1225290872 * fTemp55)) - (((0.0057987613999999996 * fTemp56) + (0.045539167899999997 * fTemp57)) + (0.046448097600000002 * fTemp58))));
-			double fTemp80 = (fConst31 * fRec123[1]);
-			double fTemp81 = (fConst32 * fRec126[1]);
-			fRec128[0] = (fTemp79 + (fTemp80 + (fRec128[1] + fTemp81)));
+			double fRec112 = fRec115;
+			double fTemp78 = (fConst17 * ((((0.001525645 * fTemp27) + ((0.083121047899999995 * fTemp29) + (0.025631570999999999 * fTemp31))) + (0.12605663950000001 * fTemp35)) - ((0.030983422100000001 * fTemp34) + ((0.00095451819999999997 * fTemp28) + ((0.0091999070999999998 * fTemp33) + ((0.0180622218 * fTemp32) + (0.049936505300000003 * fTemp30)))))));
+			double fTemp79 = (fConst18 * fRec123[1]);
+			double fTemp80 = (fConst19 * fRec126[1]);
+			fRec128[0] = (fTemp78 + (fTemp79 + (fRec128[1] + fTemp80)));
 			fRec126[0] = fRec128[0];
-			double fRec127 = ((fTemp81 + fTemp80) + fTemp79);
-			fRec125[0] = (fRec126[0] + fRec125[1]);
+			double fRec127 = ((fTemp80 + fTemp79) + fTemp78);
+			fRec125[0] = (fRec125[1] + fRec126[0]);
 			fRec123[0] = fRec125[0];
 			double fRec124 = fRec127;
-			fVec1[(IOTA & 1023)] = ((0.037347541200000001 * fTemp7) + (fRec85 + (fRec100 + (fRec112 + (fRec121 + fRec124)))));
+			double fTemp81 = (fConst14 * fRec117[1]);
+			double fTemp82 = (fConst15 * fRec120[1]);
+			fRec122[0] = (fRec124 + (fTemp81 + (fRec122[1] + fTemp82)));
+			fRec120[0] = fRec122[0];
+			double fRec121 = ((fTemp82 + fTemp81) + fRec124);
+			fRec119[0] = (fRec119[1] + fRec120[0]);
+			fRec117[0] = fRec119[0];
+			double fRec118 = fRec121;
+			fVec1[(IOTA & 1023)] = ((0.037347541200000001 * fTemp7) + (fRec85 + ((fRec100 + (fRec109 + fRec112)) + fRec118)));
 			output1[i] = FAUSTFLOAT((0.82065997130559543 * (fRec0[0] * fVec1[((IOTA - iConst33) & 1023)])));
-			double fTemp82 = (fConst4 * fRec129[1]);
-			double fTemp83 = (fConst7 * fRec132[1]);
-			double fTemp84 = (fConst8 * fRec135[1]);
-			double fTemp85 = (fConst10 * ((((0.0199189343 * fTemp14) + ((((0.033332296599999998 * fTemp16) + (0.012568389500000001 * fTemp17)) + (0.0136801062 * fTemp18)) + (0.025637434099999998 * fTemp13))) + (0.059665767199999997 * fTemp21)) - ((0.0046475177999999997 * fTemp15) + ((0.0084762655999999995 * fTemp20) + (((0.15160789899999999 * fTemp11) + (0.0075302305999999999 * fTemp12)) + (0.037770466000000003 * fTemp19))))));
-			double fTemp86 = (fConst11 * fRec138[1]);
-			double fTemp87 = (fConst12 * fRec141[1]);
-			fRec143[0] = (fTemp85 + (fTemp86 + (fRec143[1] + fTemp87)));
-			fRec141[0] = fRec143[0];
-			double fRec142 = ((fTemp87 + fTemp86) + fTemp85);
-			fRec140[0] = (fRec141[0] + fRec140[1]);
-			fRec138[0] = fRec140[0];
-			double fRec139 = fRec142;
-			fRec137[0] = (fTemp83 + (fTemp84 + (fRec139 + fRec137[1])));
-			fRec135[0] = fRec137[0];
-			double fRec136 = (fTemp83 + (fRec139 + fTemp84));
-			fRec134[0] = (fRec135[0] + fRec134[1]);
+			double fTemp83 = (fConst30 * (((0.0105931689 * fTemp59) + (0.1346317631 * fTemp55)) - ((0.069048685400000004 * fTemp56) + ((0.055113220300000001 * fTemp58) + (0.031872700499999997 * fTemp57)))));
+			double fTemp84 = (fConst32 * fRec129[1]);
+			double fTemp85 = (fConst31 * fRec132[1]);
+			fRec134[0] = (fTemp83 + (fTemp84 + (fRec134[1] + fTemp85)));
 			fRec132[0] = fRec134[0];
-			double fRec133 = fRec136;
-			fRec131[0] = (fTemp82 + (fRec133 + fRec131[1]));
+			double fRec133 = ((fTemp85 + fTemp84) + fTemp83);
+			fRec131[0] = (fRec132[0] + fRec131[1]);
 			fRec129[0] = fRec131[0];
-			double fRec130 = (fRec133 + fTemp82);
-			double fTemp88 = (fConst14 * fRec144[1]);
-			double fTemp89 = (fConst15 * fRec147[1]);
-			double fTemp90 = (fConst17 * ((((((0.0301405888 * fTemp32) + (0.0164527431 * fTemp33)) + (0.0024298416000000001 * fTemp28)) + (0.022871106200000001 * fTemp29)) + (0.098799471900000005 * fTemp35)) - ((0.016851580500000001 * fTemp31) + ((0.028349254399999999 * fTemp34) + ((0.13911981200000001 * fTemp27) + (0.0230049292 * fTemp30))))));
-			double fTemp91 = (fConst18 * fRec150[1]);
-			double fTemp92 = (fConst19 * fRec153[1]);
-			fRec155[0] = (fTemp90 + (fTemp91 + (fRec155[1] + fTemp92)));
-			fRec153[0] = fRec155[0];
-			double fRec154 = ((fTemp92 + fTemp91) + fTemp90);
-			fRec152[0] = (fRec153[0] + fRec152[1]);
+			double fRec130 = fRec133;
+			double fTemp86 = (fConst27 * ((0.1156078598 * fTemp51) - ((0.027880441299999999 * fTemp50) + (0.018629593999999999 * fTemp52))));
+			double fTemp87 = (fConst28 * fRec135[1]);
+			fRec137[0] = (fTemp86 + (fRec137[1] + fTemp87));
+			fRec135[0] = fRec137[0];
+			double fRec136 = (fTemp87 + fTemp86);
+			double fTemp88 = (fConst4 * fRec138[1]);
+			double fTemp89 = (fConst7 * fRec141[1]);
+			double fTemp90 = (fConst8 * fRec144[1]);
+			double fTemp91 = (fConst10 * ((((0.0199189343 * fTemp14) + ((((0.033332296599999998 * fTemp16) + (0.012568389500000001 * fTemp17)) + (0.0136801062 * fTemp18)) + (0.025637434099999998 * fTemp13))) + (0.059665767199999997 * fTemp21)) - ((0.0046475177999999997 * fTemp15) + ((0.0084762655999999995 * fTemp20) + (((0.15160789899999999 * fTemp11) + (0.0075302305999999999 * fTemp12)) + (0.037770466000000003 * fTemp19))))));
+			double fTemp92 = (fConst11 * fRec147[1]);
+			double fTemp93 = (fConst12 * fRec150[1]);
+			fRec152[0] = (fTemp91 + (fTemp92 + (fRec152[1] + fTemp93)));
 			fRec150[0] = fRec152[0];
-			double fRec151 = fRec154;
-			fRec149[0] = (fTemp88 + (fTemp89 + (fRec151 + fRec149[1])));
+			double fRec151 = ((fTemp93 + fTemp92) + fTemp91);
+			fRec149[0] = (fRec150[0] + fRec149[1]);
 			fRec147[0] = fRec149[0];
-			double fRec148 = (fTemp88 + (fRec151 + fTemp89));
-			fRec146[0] = (fRec147[0] + fRec146[1]);
+			double fRec148 = fRec151;
+			fRec146[0] = (fTemp89 + (fTemp90 + (fRec148 + fRec146[1])));
 			fRec144[0] = fRec146[0];
-			double fRec145 = fRec148;
-			double fTemp93 = (fConst21 * fRec156[1]);
-			double fTemp94 = (fConst23 * (((((0.022031477899999999 * fTemp43) + (0.012939878700000001 * fTemp44)) + (0.0015555148000000001 * fTemp41)) + (0.1267827846 * fTemp42)) - (((0.1095552786 * fTemp40) + (0.052195738300000002 * fTemp45)) + (0.0272433116 * fTemp46))));
-			double fTemp95 = (fConst24 * fRec159[1]);
-			double fTemp96 = (fConst25 * fRec162[1]);
-			fRec164[0] = (fTemp94 + (fTemp95 + (fRec164[1] + fTemp96)));
-			fRec162[0] = fRec164[0];
-			double fRec163 = ((fTemp96 + fTemp95) + fTemp94);
-			fRec161[0] = (fRec162[0] + fRec161[1]);
+			double fRec145 = (fTemp89 + (fRec148 + fTemp90));
+			fRec143[0] = (fRec144[0] + fRec143[1]);
+			fRec141[0] = fRec143[0];
+			double fRec142 = fRec145;
+			fRec140[0] = (fTemp88 + (fRec142 + fRec140[1]));
+			fRec138[0] = fRec140[0];
+			double fRec139 = (fRec142 + fTemp88);
+			double fTemp94 = (fConst21 * fRec153[1]);
+			double fTemp95 = (fConst23 * (((((0.022031477899999999 * fTemp43) + (0.012939878700000001 * fTemp44)) + (0.0015555148000000001 * fTemp41)) + (0.1267827846 * fTemp42)) - (((0.1095552786 * fTemp40) + (0.052195738300000002 * fTemp45)) + (0.0272433116 * fTemp46))));
+			double fTemp96 = (fConst24 * fRec156[1]);
+			double fTemp97 = (fConst25 * fRec159[1]);
+			fRec161[0] = (fTemp95 + (fTemp96 + (fRec161[1] + fTemp97)));
 			fRec159[0] = fRec161[0];
-			double fRec160 = fRec163;
-			fRec158[0] = (fTemp93 + (fRec160 + fRec158[1]));
+			double fRec160 = ((fTemp97 + fTemp96) + fTemp95);
+			fRec158[0] = (fRec159[0] + fRec158[1]);
 			fRec156[0] = fRec158[0];
-			double fRec157 = (fRec160 + fTemp93);
-			double fTemp97 = (fConst28 * ((0.1156078598 * fTemp51) - ((0.027880441299999999 * fTemp50) + (0.018629593999999999 * fTemp52))));
-			double fTemp98 = (fConst27 * fRec165[1]);
-			fRec167[0] = (fTemp97 + (fRec167[1] + fTemp98));
-			fRec165[0] = fRec167[0];
-			double fRec166 = (fTemp98 + fTemp97);
-			double fTemp99 = (fConst30 * (((0.0105931689 * fTemp56) + (0.1346317631 * fTemp55)) - (((0.069048685400000004 * fTemp54) + (0.055113220300000001 * fTemp57)) + (0.031872700499999997 * fTemp58))));
-			double fTemp100 = (fConst31 * fRec168[1]);
-			double fTemp101 = (fConst32 * fRec171[1]);
-			fRec173[0] = (fTemp99 + (fTemp100 + (fRec173[1] + fTemp101)));
+			double fRec157 = fRec160;
+			fRec155[0] = (fTemp94 + (fRec157 + fRec155[1]));
+			fRec153[0] = fRec155[0];
+			double fRec154 = (fRec157 + fTemp94);
+			double fTemp98 = (fConst14 * fRec162[1]);
+			double fTemp99 = (fConst15 * fRec165[1]);
+			double fTemp100 = (fConst17 * ((((0.0024298416000000001 * fTemp28) + ((0.0164527431 * fTemp33) + ((0.0301405888 * fTemp32) + (0.022871106200000001 * fTemp31)))) + (0.098799471900000005 * fTemp35)) - ((0.028349254399999999 * fTemp34) + ((0.0230049292 * fTemp27) + ((0.13911981200000001 * fTemp29) + (0.016851580500000001 * fTemp30))))));
+			double fTemp101 = (fConst18 * fRec168[1]);
+			double fTemp102 = (fConst19 * fRec171[1]);
+			fRec173[0] = (fTemp100 + (fTemp101 + (fRec173[1] + fTemp102)));
 			fRec171[0] = fRec173[0];
-			double fRec172 = ((fTemp101 + fTemp100) + fTemp99);
+			double fRec172 = ((fTemp102 + fTemp101) + fTemp100);
 			fRec170[0] = (fRec171[0] + fRec170[1]);
 			fRec168[0] = fRec170[0];
 			double fRec169 = fRec172;
-			fVec2[(IOTA & 1023)] = ((0.044675587599999997 * fTemp7) + (fRec130 + (fRec145 + (fRec157 + (fRec166 + fRec169)))));
+			fRec167[0] = (fTemp98 + (fTemp99 + (fRec169 + fRec167[1])));
+			fRec165[0] = fRec167[0];
+			double fRec166 = (fTemp98 + (fRec169 + fTemp99));
+			fRec164[0] = (fRec165[0] + fRec164[1]);
+			fRec162[0] = fRec164[0];
+			double fRec163 = fRec166;
+			fVec2[(IOTA & 1023)] = ((0.044675587599999997 * fTemp7) + (fRec130 + (fRec136 + (fRec139 + (fRec154 + fRec163)))));
 			output2[i] = FAUSTFLOAT((0.82065997130559543 * (fRec0[0] * fVec2[((IOTA - iConst33) & 1023)])));
-			double fTemp102 = (fConst4 * fRec174[1]);
-			double fTemp103 = (fConst7 * fRec177[1]);
-			double fTemp104 = (fConst8 * fRec180[1]);
-			double fTemp105 = (fConst10 * (((0.0422459923 * fTemp15) + (((0.028807307800000001 * fTemp14) + ((((0.027713410899999999 * fTemp16) + (0.019614962600000001 * fTemp17)) + (0.015626804800000001 * fTemp18)) + (0.0098167545999999998 * fTemp13))) + (0.0063695708999999996 * fTemp20))) - ((((0.0014936775000000001 * fTemp11) + (0.021095328699999999 * fTemp12)) + (0.0060834825999999996 * fTemp19)) + (0.15165601479999999 * fTemp21))));
-			double fTemp106 = (fConst11 * fRec183[1]);
-			double fTemp107 = (fConst12 * fRec186[1]);
-			fRec188[0] = (fTemp105 + (fTemp106 + (fRec188[1] + fTemp107)));
-			fRec186[0] = fRec188[0];
-			double fRec187 = ((fTemp107 + fTemp106) + fTemp105);
-			fRec185[0] = (fRec186[0] + fRec185[1]);
+			double fTemp103 = (fConst14 * fRec174[1]);
+			double fTemp104 = (fConst15 * fRec177[1]);
+			double fTemp105 = (fConst17 * (((0.0013093376 * fTemp27) + ((0.031700784699999998 * fTemp33) + ((0.0514680894 * fTemp32) + ((0.026607929200000002 * fTemp31) + (0.018286464799999999 * fTemp30))))) - ((((0.092047027899999995 * fTemp29) + (0.0015010524 * fTemp28)) + (0.0105139706 * fTemp34)) + (0.1241890605 * fTemp35))));
+			double fTemp106 = (fConst18 * fRec180[1]);
+			double fTemp107 = (fConst19 * fRec183[1]);
+			fRec185[0] = (fTemp105 + (fTemp106 + (fRec185[1] + fTemp107)));
 			fRec183[0] = fRec185[0];
-			double fRec184 = fRec187;
-			fRec182[0] = (fTemp103 + (fTemp104 + (fRec184 + fRec182[1])));
+			double fRec184 = ((fTemp107 + fTemp106) + fTemp105);
+			fRec182[0] = (fRec183[0] + fRec182[1]);
 			fRec180[0] = fRec182[0];
-			double fRec181 = (fTemp103 + (fRec184 + fTemp104));
-			fRec179[0] = (fRec180[0] + fRec179[1]);
+			double fRec181 = fRec184;
+			fRec179[0] = (fTemp103 + (fTemp104 + (fRec181 + fRec179[1])));
 			fRec177[0] = fRec179[0];
-			double fRec178 = fRec181;
-			fRec176[0] = (fTemp102 + (fRec178 + fRec176[1]));
+			double fRec178 = (fTemp103 + (fRec181 + fTemp104));
+			fRec176[0] = (fRec177[0] + fRec176[1]);
 			fRec174[0] = fRec176[0];
-			double fRec175 = (fRec178 + fTemp102);
-			double fTemp108 = (fConst14 * fRec189[1]);
-			double fTemp109 = (fConst15 * fRec192[1]);
-			double fTemp110 = (fConst17 * ((((0.0013093376 * fTemp30) + (((0.0514680894 * fTemp32) + (0.031700784699999998 * fTemp33)) + (0.026607929200000002 * fTemp29))) + (0.018286464799999999 * fTemp31)) - ((((0.092047027899999995 * fTemp27) + (0.0015010524 * fTemp28)) + (0.0105139706 * fTemp34)) + (0.1241890605 * fTemp35))));
-			double fTemp111 = (fConst18 * fRec195[1]);
-			double fTemp112 = (fConst19 * fRec198[1]);
-			fRec200[0] = (fTemp110 + (fTemp111 + (fRec200[1] + fTemp112)));
-			fRec198[0] = fRec200[0];
-			double fRec199 = ((fTemp112 + fTemp111) + fTemp110);
-			fRec197[0] = (fRec198[0] + fRec197[1]);
-			fRec195[0] = fRec197[0];
-			double fRec196 = fRec199;
-			fRec194[0] = (fTemp108 + (fTemp109 + (fRec196 + fRec194[1])));
+			double fRec175 = fRec178;
+			double fTemp108 = (fConst21 * fRec186[1]);
+			double fTemp109 = (fConst23 * ((((0.052194571500000002 * fTemp43) + (0.028151060700000001 * fTemp44)) + (0.017443871 * fTemp41)) - ((0.044784871499999997 * fTemp42) + (((0.1416670478 * fTemp40) + (0.039066768799999999 * fTemp45)) + (0.016165409499999998 * fTemp46)))));
+			double fTemp110 = (fConst24 * fRec189[1]);
+			double fTemp111 = (fConst25 * fRec192[1]);
+			fRec194[0] = (fTemp109 + (fTemp110 + (fRec194[1] + fTemp111)));
 			fRec192[0] = fRec194[0];
-			double fRec193 = (fTemp108 + (fRec196 + fTemp109));
+			double fRec193 = ((fTemp111 + fTemp110) + fTemp109);
 			fRec191[0] = (fRec192[0] + fRec191[1]);
 			fRec189[0] = fRec191[0];
 			double fRec190 = fRec193;
-			double fTemp113 = (fConst21 * fRec201[1]);
-			double fTemp114 = (fConst23 * ((((0.052194571500000002 * fTemp43) + (0.028151060700000001 * fTemp44)) + (0.017443871 * fTemp41)) - ((0.044784871499999997 * fTemp42) + (((0.1416670478 * fTemp40) + (0.039066768799999999 * fTemp45)) + (0.016165409499999998 * fTemp46)))));
-			double fTemp115 = (fConst24 * fRec204[1]);
-			double fTemp116 = (fConst25 * fRec207[1]);
-			fRec209[0] = (fTemp114 + (fTemp115 + (fRec209[1] + fTemp116)));
+			fRec188[0] = (fTemp108 + (fRec190 + fRec188[1]));
+			fRec186[0] = fRec188[0];
+			double fRec187 = (fRec190 + fTemp108);
+			double fTemp112 = (fConst30 * (((0.028936670300000002 * fTemp59) + (0.0415360226 * fTemp55)) - ((0.12542443810000001 * fTemp56) + ((0.047173413499999997 * fTemp58) + (0.039396397800000003 * fTemp57)))));
+			double fTemp113 = (fConst32 * fRec195[1]);
+			double fTemp114 = (fConst31 * fRec198[1]);
+			fRec200[0] = (fTemp112 + (fTemp113 + (fRec200[1] + fTemp114)));
+			fRec198[0] = fRec200[0];
+			double fRec199 = ((fTemp114 + fTemp113) + fTemp112);
+			fRec197[0] = (fRec198[0] + fRec197[1]);
+			fRec195[0] = fRec197[0];
+			double fRec196 = fRec199;
+			double fTemp115 = (fConst4 * fRec201[1]);
+			double fTemp116 = (fConst7 * fRec204[1]);
+			double fTemp117 = (fConst8 * fRec207[1]);
+			double fTemp118 = (fConst10 * (((0.0422459923 * fTemp15) + (((0.028807307800000001 * fTemp14) + ((((0.027713410899999999 * fTemp16) + (0.019614962600000001 * fTemp17)) + (0.015626804800000001 * fTemp18)) + (0.0098167545999999998 * fTemp13))) + (0.0063695708999999996 * fTemp20))) - ((((0.0014936775000000001 * fTemp11) + (0.021095328699999999 * fTemp12)) + (0.0060834825999999996 * fTemp19)) + (0.15165601479999999 * fTemp21))));
+			double fTemp119 = (fConst11 * fRec210[1]);
+			double fTemp120 = (fConst12 * fRec213[1]);
+			fRec215[0] = (fTemp118 + (fTemp119 + (fRec215[1] + fTemp120)));
+			fRec213[0] = fRec215[0];
+			double fRec214 = ((fTemp120 + fTemp119) + fTemp118);
+			fRec212[0] = (fRec213[0] + fRec212[1]);
+			fRec210[0] = fRec212[0];
+			double fRec211 = fRec214;
+			fRec209[0] = (fTemp116 + (fTemp117 + (fRec211 + fRec209[1])));
 			fRec207[0] = fRec209[0];
-			double fRec208 = ((fTemp116 + fTemp115) + fTemp114);
+			double fRec208 = (fTemp116 + (fRec211 + fTemp117));
 			fRec206[0] = (fRec207[0] + fRec206[1]);
 			fRec204[0] = fRec206[0];
 			double fRec205 = fRec208;
-			fRec203[0] = (fTemp113 + (fRec205 + fRec203[1]));
+			fRec203[0] = (fTemp115 + (fRec205 + fRec203[1]));
 			fRec201[0] = fRec203[0];
-			double fRec202 = (fRec205 + fTemp113);
-			double fTemp117 = (fConst28 * ((0.083485984799999996 * fTemp51) - ((0.060291803099999999 * fTemp50) + (0.024531132800000001 * fTemp52))));
-			double fTemp118 = (fConst27 * fRec210[1]);
-			fRec212[0] = (fTemp117 + (fRec212[1] + fTemp118));
-			fRec210[0] = fRec212[0];
-			double fRec211 = (fTemp118 + fTemp117);
-			double fTemp119 = (fConst30 * (((0.028936670300000002 * fTemp56) + (0.0415360226 * fTemp55)) - (((0.12542443810000001 * fTemp54) + (0.047173413499999997 * fTemp57)) + (0.039396397800000003 * fTemp58))));
-			double fTemp120 = (fConst31 * fRec213[1]);
-			double fTemp121 = (fConst32 * fRec216[1]);
-			fRec218[0] = (fTemp119 + (fTemp120 + (fRec218[1] + fTemp121)));
+			double fRec202 = (fRec205 + fTemp115);
+			double fTemp121 = (fConst27 * ((0.083485984799999996 * fTemp51) - ((0.060291803099999999 * fTemp50) + (0.024531132800000001 * fTemp52))));
+			double fTemp122 = (fConst28 * fRec216[1]);
+			fRec218[0] = (fTemp121 + (fRec218[1] + fTemp122));
 			fRec216[0] = fRec218[0];
-			double fRec217 = ((fTemp121 + fTemp120) + fTemp119);
-			fRec215[0] = (fRec216[0] + fRec215[1]);
-			fRec213[0] = fRec215[0];
-			double fRec214 = fRec217;
-			fVec3[(IOTA & 1023)] = ((0.0386870822 * fTemp7) + (fRec175 + (fRec190 + (fRec202 + (fRec211 + fRec214)))));
+			double fRec217 = (fTemp122 + fTemp121);
+			fVec3[(IOTA & 1023)] = ((0.0386870822 * fTemp7) + (fRec175 + (fRec187 + (fRec196 + (fRec202 + fRec217)))));
 			output3[i] = FAUSTFLOAT((0.82065997130559543 * (fRec0[0] * fVec3[((IOTA - iConst33) & 1023)])));
-			double fTemp122 = (fConst4 * fRec219[1]);
-			double fTemp123 = (fConst7 * fRec222[1]);
-			double fTemp124 = (fConst8 * fRec225[1]);
-			double fTemp125 = (fConst10 * (((0.040702448000000002 * fTemp21) + ((0.0135820174 * fTemp15) + ((0.015215922099999999 * fTemp20) + ((0.010055277 * fTemp19) + ((0.0114140886 * fTemp14) + ((((0.1507408791 * fTemp11) + (0.00048115640000000003 * fTemp17)) + (0.029779691399999999 * fTemp18)) + (0.019424687199999999 * fTemp13))))))) - ((0.029185772200000001 * fTemp16) + (0.019935821199999999 * fTemp12))));
-			double fTemp126 = (fConst11 * fRec228[1]);
-			double fTemp127 = (fConst12 * fRec231[1]);
-			fRec233[0] = (fTemp125 + (fTemp126 + (fRec233[1] + fTemp127)));
+			double fTemp123 = (fConst10 * (((0.040702448000000002 * fTemp21) + ((0.0135820174 * fTemp15) + ((0.015215922099999999 * fTemp20) + ((0.010055277 * fTemp19) + ((0.0114140886 * fTemp14) + ((((0.1507408791 * fTemp11) + (0.00048115640000000003 * fTemp17)) + (0.029779691399999999 * fTemp18)) + (0.019424687199999999 * fTemp13))))))) - ((0.029185772200000001 * fTemp16) + (0.019935821199999999 * fTemp12))));
+			double fTemp124 = (fConst12 * fRec231[1]);
+			double fTemp125 = (fConst11 * fRec228[1]);
+			fRec233[0] = (((fTemp123 + fRec233[1]) + fTemp124) + fTemp125);
 			fRec231[0] = fRec233[0];
-			double fRec232 = ((fTemp127 + fTemp126) + fTemp125);
+			double fRec232 = ((fTemp123 + fTemp124) + fTemp125);
 			fRec230[0] = (fRec231[0] + fRec230[1]);
 			fRec228[0] = fRec230[0];
 			double fRec229 = fRec232;
-			fRec227[0] = (fTemp123 + (fTemp124 + (fRec229 + fRec227[1])));
+			double fTemp126 = (fConst8 * fRec225[1]);
+			double fTemp127 = (fConst7 * fRec222[1]);
+			fRec227[0] = (((fRec229 + fRec227[1]) + fTemp126) + fTemp127);
 			fRec225[0] = fRec227[0];
-			double fRec226 = (fTemp123 + (fRec229 + fTemp124));
+			double fRec226 = ((fRec229 + fTemp126) + fTemp127);
 			fRec224[0] = (fRec225[0] + fRec224[1]);
 			fRec222[0] = fRec224[0];
 			double fRec223 = fRec226;
-			fRec221[0] = (fTemp122 + (fRec223 + fRec221[1]));
+			double fTemp128 = (fConst4 * fRec219[1]);
+			fRec221[0] = ((fRec223 + fRec221[1]) + fTemp128);
 			fRec219[0] = fRec221[0];
-			double fRec220 = (fRec223 + fTemp122);
-			double fTemp128 = (fConst14 * fRec234[1]);
-			double fTemp129 = (fConst15 * fRec237[1]);
-			double fTemp130 = (fConst17 * (((0.034589434500000002 * fTemp31) + (((((0.1168234495 * fTemp27) + (0.027344870600000001 * fTemp33)) + (0.0116523965 * fTemp28)) + (0.0218557591 * fTemp29)) + (0.0129320293 * fTemp34))) - (((0.0012980890999999999 * fTemp32) + (0.0095501453999999996 * fTemp30)) + (0.105209924 * fTemp35))));
-			double fTemp131 = (fConst18 * fRec240[1]);
-			double fTemp132 = (fConst19 * fRec243[1]);
-			fRec245[0] = (fTemp130 + (fTemp131 + (fRec245[1] + fTemp132)));
+			double fRec220 = (fRec223 + fTemp128);
+			double fTemp129 = (fConst14 * fRec234[1]);
+			double fTemp130 = (fConst15 * fRec237[1]);
+			double fTemp131 = (fConst17 * (((0.0129320293 * fTemp34) + ((0.0116523965 * fTemp28) + ((0.027344870600000001 * fTemp33) + ((0.1168234495 * fTemp29) + ((0.0218557591 * fTemp31) + (0.034589434500000002 * fTemp30)))))) - (((0.0012980890999999999 * fTemp32) + (0.0095501453999999996 * fTemp27)) + (0.105209924 * fTemp35))));
+			double fTemp132 = (fConst18 * fRec240[1]);
+			double fTemp133 = (fConst19 * fRec243[1]);
+			fRec245[0] = (fTemp131 + (fTemp132 + (fRec245[1] + fTemp133)));
 			fRec243[0] = fRec245[0];
-			double fRec244 = ((fTemp132 + fTemp131) + fTemp130);
+			double fRec244 = ((fTemp133 + fTemp132) + fTemp131);
 			fRec242[0] = (fRec243[0] + fRec242[1]);
 			fRec240[0] = fRec242[0];
 			double fRec241 = fRec244;
-			fRec239[0] = (fTemp128 + (fTemp129 + (fRec241 + fRec239[1])));
+			fRec239[0] = (fTemp129 + (fTemp130 + (fRec241 + fRec239[1])));
 			fRec237[0] = fRec239[0];
-			double fRec238 = (fTemp128 + (fRec241 + fTemp129));
+			double fRec238 = (fTemp129 + (fRec241 + fTemp130));
 			fRec236[0] = (fRec237[0] + fRec236[1]);
 			fRec234[0] = fRec236[0];
 			double fRec235 = fRec238;
-			double fTemp133 = (fConst21 * fRec246[1]);
-			double fTemp134 = (fConst23 * (((((0.030819063300000001 * fTemp43) + (0.039677604300000002 * fTemp44)) + (0.0050476471000000002 * fTemp41)) + (0.017963184300000001 * fTemp46)) - (((0.0235969597 * fTemp40) + (0.0256761691 * fTemp45)) + (0.1479492198 * fTemp42))));
-			double fTemp135 = (fConst24 * fRec249[1]);
-			double fTemp136 = (fConst25 * fRec252[1]);
-			fRec254[0] = (fTemp134 + (fTemp135 + (fRec254[1] + fTemp136)));
+			double fTemp134 = (fConst21 * fRec246[1]);
+			double fTemp135 = (fConst23 * (((((0.030819063300000001 * fTemp43) + (0.039677604300000002 * fTemp44)) + (0.0050476471000000002 * fTemp41)) + (0.017963184300000001 * fTemp46)) - (((0.0235969597 * fTemp40) + (0.0256761691 * fTemp45)) + (0.1479492198 * fTemp42))));
+			double fTemp136 = (fConst24 * fRec249[1]);
+			double fTemp137 = (fConst25 * fRec252[1]);
+			fRec254[0] = (fTemp135 + (fTemp136 + (fRec254[1] + fTemp137)));
 			fRec252[0] = fRec254[0];
-			double fRec253 = ((fTemp136 + fTemp135) + fTemp134);
+			double fRec253 = ((fTemp137 + fTemp136) + fTemp135);
 			fRec251[0] = (fRec252[0] + fRec251[1]);
 			fRec249[0] = fRec251[0];
 			double fRec250 = fRec253;
-			fRec248[0] = (fTemp133 + (fRec250 + fRec248[1]));
+			fRec248[0] = (fTemp134 + (fRec250 + fRec248[1]));
 			fRec246[0] = fRec248[0];
-			double fRec247 = (fRec250 + fTemp133);
-			double fTemp137 = (fConst28 * ((0.056038754199999999 * fTemp51) - ((0.0861693548 * fTemp50) + (0.018113735299999999 * fTemp52))));
-			double fTemp138 = (fConst27 * fRec255[1]);
-			fRec257[0] = (fTemp137 + (fRec257[1] + fTemp138));
+			double fRec247 = (fRec250 + fTemp134);
+			double fTemp138 = (fConst27 * ((0.056038754199999999 * fTemp51) - ((0.0861693548 * fTemp50) + (0.018113735299999999 * fTemp52))));
+			double fTemp139 = (fConst28 * fRec255[1]);
+			fRec257[0] = ((fTemp138 + fRec257[1]) + fTemp139);
 			fRec255[0] = fRec257[0];
-			double fRec256 = (fTemp138 + fTemp137);
-			double fTemp139 = (fConst30 * ((0.029012070500000001 * fTemp56) - ((((0.12105266670000001 * fTemp54) + (0.047438930300000001 * fTemp57)) + (0.017077355900000001 * fTemp58)) + (0.053725982700000001 * fTemp55))));
-			double fTemp140 = (fConst31 * fRec258[1]);
-			double fTemp141 = (fConst32 * fRec261[1]);
-			fRec263[0] = (fTemp139 + (fTemp140 + (fRec263[1] + fTemp141)));
+			double fRec256 = (fTemp138 + fTemp139);
+			double fTemp140 = (fConst30 * ((0.029012070500000001 * fTemp59) - ((0.12105266670000001 * fTemp56) + ((0.017077355900000001 * fTemp57) + ((0.047438930300000001 * fTemp58) + (0.053725982700000001 * fTemp55))))));
+			double fTemp141 = (fConst32 * fRec258[1]);
+			double fTemp142 = (fConst31 * fRec261[1]);
+			fRec263[0] = (fTemp140 + (fTemp141 + (fRec263[1] + fTemp142)));
 			fRec261[0] = fRec263[0];
-			double fRec262 = ((fTemp141 + fTemp140) + fTemp139);
+			double fRec262 = ((fTemp142 + fTemp141) + fTemp140);
 			fRec260[0] = (fRec261[0] + fRec260[1]);
 			fRec258[0] = fRec260[0];
 			double fRec259 = fRec262;
-			fVec4[(IOTA & 1023)] = ((0.038480182100000003 * fTemp7) + (fRec220 + (fRec235 + (fRec247 + (fRec256 + fRec259)))));
+			fVec4[(IOTA & 1023)] = ((fRec220 + (fRec235 + (fRec247 + (fRec256 + fRec259)))) + (0.038480182100000003 * fTemp7));
 			output4[i] = FAUSTFLOAT((0.82065997130559543 * (fRec0[0] * fVec4[((IOTA - iConst33) & 1023)])));
-			double fTemp142 = (fConst4 * fRec264[1]);
-			double fTemp143 = (fConst7 * fRec267[1]);
-			double fTemp144 = (fConst8 * fRec270[1]);
-			double fTemp145 = (fConst10 * ((((0.011171174000000001 * fTemp20) + ((0.0149023161 * fTemp19) + ((0.0065698190999999998 * fTemp14) + ((0.0079271316999999994 * fTemp18) + (0.0098907222999999999 * fTemp13))))) + (0.12755165800000001 * fTemp21)) - (((((0.080993279799999998 * fTemp11) + (0.032885837500000001 * fTemp16)) + (0.017255626900000001 * fTemp17)) + (0.034785510399999997 * fTemp12)) + (0.038274468800000003 * fTemp15))));
-			double fTemp146 = (fConst11 * fRec273[1]);
-			double fTemp147 = (fConst12 * fRec276[1]);
-			fRec278[0] = (fTemp145 + (fTemp146 + (fRec278[1] + fTemp147)));
-			fRec276[0] = fRec278[0];
-			double fRec277 = ((fTemp147 + fTemp146) + fTemp145);
-			fRec275[0] = (fRec276[0] + fRec275[1]);
-			fRec273[0] = fRec275[0];
-			double fRec274 = fRec277;
-			fRec272[0] = (fTemp143 + (fTemp144 + (fRec274 + fRec272[1])));
+			double fTemp143 = (fConst21 * fRec264[1]);
+			double fTemp144 = (fConst23 * ((((((0.12184012869999999 * fTemp40) + (0.019390164000000001 * fTemp43)) + (0.046860719799999999 * fTemp44)) + (0.017100411400000001 * fTemp41)) + (0.0504461997 * fTemp46)) - ((0.0094964516000000006 * fTemp45) + (0.083315496599999997 * fTemp42))));
+			double fTemp145 = (fConst24 * fRec267[1]);
+			double fTemp146 = (fConst25 * fRec270[1]);
+			fRec272[0] = (fTemp144 + (fTemp145 + (fRec272[1] + fTemp146)));
 			fRec270[0] = fRec272[0];
-			double fRec271 = (fTemp143 + (fRec274 + fTemp144));
+			double fRec271 = ((fTemp146 + fTemp145) + fTemp144);
 			fRec269[0] = (fRec270[0] + fRec269[1]);
 			fRec267[0] = fRec269[0];
 			double fRec268 = fRec271;
-			fRec266[0] = (fTemp142 + (fRec268 + fRec266[1]));
+			fRec266[0] = (fTemp143 + (fRec268 + fRec266[1]));
 			fRec264[0] = fRec266[0];
-			double fRec265 = (fRec268 + fTemp142);
-			double fTemp148 = (fConst14 * fRec279[1]);
-			double fTemp149 = (fConst15 * fRec282[1]);
-			double fTemp150 = (fConst17 * (((0.1069511546 * fTemp35) + ((0.027966809200000001 * fTemp31) + ((((0.11045931790000001 * fTemp27) + (0.0127946326 * fTemp33)) + (0.0264195269 * fTemp29)) + (0.030635730399999998 * fTemp34)))) - (((0.046428765499999997 * fTemp32) + (0.0017785507999999999 * fTemp28)) + (0.0004386867 * fTemp30))));
-			double fTemp151 = (fConst18 * fRec285[1]);
-			double fTemp152 = (fConst19 * fRec288[1]);
-			fRec290[0] = (fTemp150 + (fTemp151 + (fRec290[1] + fTemp152)));
+			double fRec265 = (fRec268 + fTemp143);
+			double fTemp147 = (fConst30 * ((0.047463243000000002 * fTemp59) - ((0.0509714852 * fTemp56) + ((0.0089290974000000006 * fTemp57) + ((0.046807208199999999 * fTemp58) + (0.1208345966 * fTemp55))))));
+			double fTemp148 = (fConst32 * fRec273[1]);
+			double fTemp149 = (fConst31 * fRec276[1]);
+			fRec278[0] = (fTemp147 + (fTemp148 + (fRec278[1] + fTemp149)));
+			fRec276[0] = fRec278[0];
+			double fRec277 = ((fTemp149 + fTemp148) + fTemp147);
+			fRec275[0] = (fRec276[0] + fRec275[1]);
+			fRec273[0] = fRec275[0];
+			double fRec274 = fRec277;
+			double fTemp150 = (fConst27 * ((0.020230615800000001 * fTemp51) - ((0.10014234869999999 * fTemp50) + (0.024249416699999998 * fTemp52))));
+			double fTemp151 = (fConst28 * fRec279[1]);
+			fRec281[0] = (fTemp150 + (fRec281[1] + fTemp151));
+			fRec279[0] = fRec281[0];
+			double fRec280 = (fTemp151 + fTemp150);
+			double fTemp152 = (fConst4 * fRec282[1]);
+			double fTemp153 = (fConst7 * fRec285[1]);
+			double fTemp154 = (fConst8 * fRec288[1]);
+			double fTemp155 = (fConst10 * ((((0.011171174000000001 * fTemp20) + ((0.0149023161 * fTemp19) + ((0.0065698190999999998 * fTemp14) + ((0.0079271316999999994 * fTemp18) + (0.0098907222999999999 * fTemp13))))) + (0.12755165800000001 * fTemp21)) - (((((0.080993279799999998 * fTemp11) + (0.032885837500000001 * fTemp16)) + (0.017255626900000001 * fTemp17)) + (0.034785510399999997 * fTemp12)) + (0.038274468800000003 * fTemp15))));
+			double fTemp156 = (fConst11 * fRec291[1]);
+			double fTemp157 = (fConst12 * fRec294[1]);
+			fRec296[0] = (fTemp155 + (fTemp156 + (fRec296[1] + fTemp157)));
+			fRec294[0] = fRec296[0];
+			double fRec295 = ((fTemp157 + fTemp156) + fTemp155);
+			fRec293[0] = (fRec294[0] + fRec293[1]);
+			fRec291[0] = fRec293[0];
+			double fRec292 = fRec295;
+			fRec290[0] = (fTemp153 + (fTemp154 + (fRec292 + fRec290[1])));
 			fRec288[0] = fRec290[0];
-			double fRec289 = ((fTemp152 + fTemp151) + fTemp150);
+			double fRec289 = (fTemp153 + (fRec292 + fTemp154));
 			fRec287[0] = (fRec288[0] + fRec287[1]);
 			fRec285[0] = fRec287[0];
 			double fRec286 = fRec289;
-			fRec284[0] = (fTemp148 + (fTemp149 + (fRec286 + fRec284[1])));
+			fRec284[0] = (fTemp152 + (fRec286 + fRec284[1]));
 			fRec282[0] = fRec284[0];
-			double fRec283 = (fTemp148 + (fRec286 + fTemp149));
-			fRec281[0] = (fRec282[0] + fRec281[1]);
-			fRec279[0] = fRec281[0];
-			double fRec280 = fRec283;
-			double fTemp153 = (fConst21 * fRec291[1]);
-			double fTemp154 = (fConst23 * ((((((0.12184012869999999 * fTemp40) + (0.019390164000000001 * fTemp43)) + (0.046860719799999999 * fTemp44)) + (0.017100411400000001 * fTemp41)) + (0.0504461997 * fTemp46)) - ((0.0094964516000000006 * fTemp45) + (0.083315496599999997 * fTemp42))));
-			double fTemp155 = (fConst24 * fRec294[1]);
-			double fTemp156 = (fConst25 * fRec297[1]);
-			fRec299[0] = (fTemp154 + (fTemp155 + (fRec299[1] + fTemp156)));
-			fRec297[0] = fRec299[0];
-			double fRec298 = ((fTemp156 + fTemp155) + fTemp154);
-			fRec296[0] = (fRec297[0] + fRec296[1]);
-			fRec294[0] = fRec296[0];
-			double fRec295 = fRec298;
-			fRec293[0] = (fTemp153 + (fRec295 + fRec293[1]));
-			fRec291[0] = fRec293[0];
-			double fRec292 = (fRec295 + fTemp153);
-			double fTemp157 = (fConst28 * ((0.020230615800000001 * fTemp51) - ((0.10014234869999999 * fTemp50) + (0.024249416699999998 * fTemp52))));
-			double fTemp158 = (fConst27 * fRec300[1]);
-			fRec302[0] = (fTemp157 + (fRec302[1] + fTemp158));
-			fRec300[0] = fRec302[0];
-			double fRec301 = (fTemp158 + fTemp157);
-			double fTemp159 = (fConst30 * ((0.047463243000000002 * fTemp56) - ((((0.0509714852 * fTemp54) + (0.046807208199999999 * fTemp57)) + (0.0089290974000000006 * fTemp58)) + (0.1208345966 * fTemp55))));
-			double fTemp160 = (fConst31 * fRec303[1]);
-			double fTemp161 = (fConst32 * fRec306[1]);
-			fRec308[0] = (fTemp159 + (fTemp160 + (fRec308[1] + fTemp161)));
+			double fRec283 = (fRec286 + fTemp152);
+			double fTemp158 = (fConst14 * fRec297[1]);
+			double fTemp159 = (fConst15 * fRec300[1]);
+			double fTemp160 = (fConst17 * (((0.1069511546 * fTemp35) + ((0.030635730399999998 * fTemp34) + ((0.0127946326 * fTemp33) + ((0.11045931790000001 * fTemp29) + ((0.0264195269 * fTemp31) + (0.027966809200000001 * fTemp30)))))) - (((0.046428765499999997 * fTemp32) + (0.0017785507999999999 * fTemp28)) + (0.0004386867 * fTemp27))));
+			double fTemp161 = (fConst18 * fRec303[1]);
+			double fTemp162 = (fConst19 * fRec306[1]);
+			fRec308[0] = (fTemp160 + (fTemp161 + (fRec308[1] + fTemp162)));
 			fRec306[0] = fRec308[0];
-			double fRec307 = ((fTemp161 + fTemp160) + fTemp159);
+			double fRec307 = ((fTemp162 + fTemp161) + fTemp160);
 			fRec305[0] = (fRec306[0] + fRec305[1]);
 			fRec303[0] = fRec305[0];
 			double fRec304 = fRec307;
-			fVec5[(IOTA & 1023)] = ((0.038373513900000003 * fTemp7) + (fRec265 + (fRec280 + (fRec292 + (fRec301 + fRec304)))));
+			fRec302[0] = (fTemp158 + (fTemp159 + (fRec304 + fRec302[1])));
+			fRec300[0] = fRec302[0];
+			double fRec301 = (fTemp158 + (fRec304 + fTemp159));
+			fRec299[0] = (fRec300[0] + fRec299[1]);
+			fRec297[0] = fRec299[0];
+			double fRec298 = fRec301;
+			fVec5[(IOTA & 1023)] = ((0.038373513900000003 * fTemp7) + (fRec265 + (fRec274 + (fRec280 + (fRec283 + fRec298)))));
 			output5[i] = FAUSTFLOAT((0.82065997130559543 * (fRec0[0] * fVec5[((IOTA - iConst33) & 1023)])));
-			double fTemp162 = (fConst4 * fRec309[1]);
-			double fTemp163 = (fConst7 * fRec312[1]);
-			double fTemp164 = (fConst8 * fRec315[1]);
-			double fTemp165 = (fConst10 * ((((0.029168811699999998 * fTemp16) + (0.0234451538 * fTemp13)) + (0.035955005800000002 * fTemp19)) - ((0.12561431679999999 * fTemp21) + ((0.0169814231 * fTemp15) + ((((((0.1045293979 * fTemp11) + (0.0123158177 * fTemp17)) + (0.0091087893999999992 * fTemp18)) + (0.023392072999999999 * fTemp12)) + (0.0058802137999999999 * fTemp14)) + (0.010060641800000001 * fTemp20))))));
-			double fTemp166 = (fConst11 * fRec318[1]);
-			double fTemp167 = (fConst12 * fRec321[1]);
-			fRec323[0] = (fTemp165 + (fTemp166 + (fRec323[1] + fTemp167)));
-			fRec321[0] = fRec323[0];
-			double fRec322 = ((fTemp167 + fTemp166) + fTemp165);
-			fRec320[0] = (fRec321[0] + fRec320[1]);
+			double fTemp163 = (fConst14 * fRec309[1]);
+			double fTemp164 = (fConst15 * fRec312[1]);
+			double fTemp165 = (fConst17 * ((((0.031054801699999999 * fTemp34) + ((0.0011954494 * fTemp27) + ((0.0192021567 * fTemp28) + (0.0239902964 * fTemp31)))) + (0.1305373846 * fTemp35)) - ((0.0123221145 * fTemp33) + ((0.026635189300000001 * fTemp32) + ((0.1094144502 * fTemp29) + (0.0250209006 * fTemp30))))));
+			double fTemp166 = (fConst18 * fRec315[1]);
+			double fTemp167 = (fConst19 * fRec318[1]);
+			fRec320[0] = (fTemp165 + (fTemp166 + (fRec320[1] + fTemp167)));
 			fRec318[0] = fRec320[0];
-			double fRec319 = fRec322;
-			fRec317[0] = (fTemp163 + (fTemp164 + (fRec319 + fRec317[1])));
+			double fRec319 = ((fTemp167 + fTemp166) + fTemp165);
+			fRec317[0] = (fRec318[0] + fRec317[1]);
 			fRec315[0] = fRec317[0];
-			double fRec316 = (fTemp163 + (fRec319 + fTemp164));
-			fRec314[0] = (fRec315[0] + fRec314[1]);
+			double fRec316 = fRec319;
+			fRec314[0] = (fTemp163 + (fTemp164 + (fRec316 + fRec314[1])));
 			fRec312[0] = fRec314[0];
-			double fRec313 = fRec316;
-			fRec311[0] = (fTemp162 + (fRec313 + fRec311[1]));
+			double fRec313 = (fTemp163 + (fRec316 + fTemp164));
+			fRec311[0] = (fRec312[0] + fRec311[1]);
 			fRec309[0] = fRec311[0];
-			double fRec310 = (fRec313 + fTemp162);
-			double fTemp168 = (fConst14 * fRec324[1]);
-			double fTemp169 = (fConst15 * fRec327[1]);
-			double fTemp170 = (fConst17 * ((((0.031054801699999999 * fTemp34) + ((0.0011954494 * fTemp30) + ((0.0192021567 * fTemp28) + (0.0239902964 * fTemp29)))) + (0.1305373846 * fTemp35)) - ((((0.1094144502 * fTemp27) + (0.026635189300000001 * fTemp32)) + (0.0123221145 * fTemp33)) + (0.0250209006 * fTemp31))));
-			double fTemp171 = (fConst18 * fRec330[1]);
-			double fTemp172 = (fConst19 * fRec333[1]);
-			fRec335[0] = (fTemp170 + (fTemp171 + (fRec335[1] + fTemp172)));
-			fRec333[0] = fRec335[0];
-			double fRec334 = ((fTemp172 + fTemp171) + fTemp170);
-			fRec332[0] = (fRec333[0] + fRec332[1]);
-			fRec330[0] = fRec332[0];
-			double fRec331 = fRec334;
-			fRec329[0] = (fTemp168 + (fTemp169 + (fRec331 + fRec329[1])));
+			double fRec310 = fRec313;
+			double fTemp168 = (fConst21 * fRec321[1]);
+			double fTemp169 = (fConst23 * (((0.082880557699999996 * fTemp42) + ((0.033838185999999999 * fTemp46) + ((((0.14442842610000001 * fTemp40) + (0.052791545799999999 * fTemp44)) + (0.0042994838 * fTemp41)) + (0.0094045086 * fTemp45)))) - (0.017559348299999999 * fTemp43)));
+			double fTemp170 = (fConst24 * fRec324[1]);
+			double fTemp171 = (fConst25 * fRec327[1]);
+			fRec329[0] = (fTemp169 + (fTemp170 + (fRec329[1] + fTemp171)));
 			fRec327[0] = fRec329[0];
-			double fRec328 = (fTemp168 + (fRec331 + fTemp169));
+			double fRec328 = ((fTemp171 + fTemp170) + fTemp169);
 			fRec326[0] = (fRec327[0] + fRec326[1]);
 			fRec324[0] = fRec326[0];
 			double fRec325 = fRec328;
-			double fTemp173 = (fConst21 * fRec336[1]);
-			double fTemp174 = (fConst23 * (((0.082880557699999996 * fTemp42) + ((0.033838185999999999 * fTemp46) + ((((0.14442842610000001 * fTemp40) + (0.052791545799999999 * fTemp44)) + (0.0042994838 * fTemp41)) + (0.0094045086 * fTemp45)))) - (0.017559348299999999 * fTemp43)));
-			double fTemp175 = (fConst24 * fRec339[1]);
-			double fTemp176 = (fConst25 * fRec342[1]);
-			fRec344[0] = (fTemp174 + (fTemp175 + (fRec344[1] + fTemp176)));
-			fRec342[0] = fRec344[0];
-			double fRec343 = ((fTemp176 + fTemp175) + fTemp174);
-			fRec341[0] = (fRec342[0] + fRec341[1]);
-			fRec339[0] = fRec341[0];
-			double fRec340 = fRec343;
-			fRec338[0] = (fTemp173 + (fRec340 + fRec338[1]));
+			fRec323[0] = (fTemp168 + (fRec325 + fRec323[1]));
+			fRec321[0] = fRec323[0];
+			double fRec322 = (fRec325 + fTemp168);
+			double fTemp172 = (fConst27 * (0.0 - (((0.1157432811 * fTemp50) + (0.019877845500000001 * fTemp52)) + (0.0202146242 * fTemp51))));
+			double fTemp173 = (fConst28 * fRec330[1]);
+			fRec332[0] = (fTemp172 + (fRec332[1] + fTemp173));
+			fRec330[0] = fRec332[0];
+			double fRec331 = (fTemp173 + fTemp172);
+			double fTemp174 = (fConst30 * (((0.0355767445 * fTemp59) + ((0.050852656400000001 * fTemp56) + (0.0082006522000000002 * fTemp57))) - ((0.054427415600000001 * fTemp58) + (0.14093518390000001 * fTemp55))));
+			double fTemp175 = (fConst32 * fRec333[1]);
+			double fTemp176 = (fConst31 * fRec336[1]);
+			fRec338[0] = (fTemp174 + (fTemp175 + (fRec338[1] + fTemp176)));
 			fRec336[0] = fRec338[0];
-			double fRec337 = (fRec340 + fTemp173);
-			double fTemp177 = (fConst28 * (0.0 - (((0.1157432811 * fTemp50) + (0.019877845500000001 * fTemp52)) + (0.0202146242 * fTemp51))));
-			double fTemp178 = (fConst27 * fRec345[1]);
-			fRec347[0] = (fTemp177 + (fRec347[1] + fTemp178));
-			fRec345[0] = fRec347[0];
-			double fRec346 = (fTemp178 + fTemp177);
-			double fTemp179 = (fConst30 * ((((0.050852656400000001 * fTemp54) + (0.0355767445 * fTemp56)) + (0.0082006522000000002 * fTemp58)) - ((0.054427415600000001 * fTemp57) + (0.14093518390000001 * fTemp55))));
-			double fTemp180 = (fConst31 * fRec348[1]);
-			double fTemp181 = (fConst32 * fRec351[1]);
-			fRec353[0] = (fTemp179 + (fTemp180 + (fRec353[1] + fTemp181)));
+			double fRec337 = ((fTemp176 + fTemp175) + fTemp174);
+			fRec335[0] = (fRec336[0] + fRec335[1]);
+			fRec333[0] = fRec335[0];
+			double fRec334 = fRec337;
+			double fTemp177 = (fConst4 * fRec339[1]);
+			double fTemp178 = (fConst7 * fRec342[1]);
+			double fTemp179 = (fConst8 * fRec345[1]);
+			double fTemp180 = (fConst10 * ((((0.029168811699999998 * fTemp16) + (0.0234451538 * fTemp13)) + (0.035955005800000002 * fTemp19)) - ((0.12561431679999999 * fTemp21) + ((0.0169814231 * fTemp15) + ((((((0.1045293979 * fTemp11) + (0.0123158177 * fTemp17)) + (0.0091087893999999992 * fTemp18)) + (0.023392072999999999 * fTemp12)) + (0.0058802137999999999 * fTemp14)) + (0.010060641800000001 * fTemp20))))));
+			double fTemp181 = (fConst11 * fRec348[1]);
+			double fTemp182 = (fConst12 * fRec351[1]);
+			fRec353[0] = (fTemp180 + (fTemp181 + (fRec353[1] + fTemp182)));
 			fRec351[0] = fRec353[0];
-			double fRec352 = ((fTemp181 + fTemp180) + fTemp179);
+			double fRec352 = ((fTemp182 + fTemp181) + fTemp180);
 			fRec350[0] = (fRec351[0] + fRec350[1]);
 			fRec348[0] = fRec350[0];
 			double fRec349 = fRec352;
-			fVec6[(IOTA & 1023)] = ((0.044118517000000003 * fTemp7) + (fRec310 + (fRec325 + (fRec337 + (fRec346 + fRec349)))));
+			fRec347[0] = (fTemp178 + (fTemp179 + (fRec349 + fRec347[1])));
+			fRec345[0] = fRec347[0];
+			double fRec346 = (fTemp178 + (fRec349 + fTemp179));
+			fRec344[0] = (fRec345[0] + fRec344[1]);
+			fRec342[0] = fRec344[0];
+			double fRec343 = fRec346;
+			fRec341[0] = (fTemp177 + (fRec343 + fRec341[1]));
+			fRec339[0] = fRec341[0];
+			double fRec340 = (fRec343 + fTemp177);
+			fVec6[(IOTA & 1023)] = ((0.044118517000000003 * fTemp7) + ((fRec310 + (fRec322 + (fRec331 + fRec334))) + fRec340));
 			output6[i] = FAUSTFLOAT((0.82065997130559543 * (fRec0[0] * fVec6[((IOTA - iConst33) & 1023)])));
-			double fTemp182 = (fConst30 * ((((0.13586002450000001 * fTemp54) + (0.043857336500000003 * fTemp56)) + (0.031218894399999999 * fTemp58)) - ((0.052343153699999999 * fTemp57) + (0.0509730906 * fTemp55))));
-			double fTemp183 = (fConst31 * fRec354[1]);
-			double fTemp184 = (fConst32 * fRec357[1]);
-			fRec359[0] = (fTemp182 + (fTemp183 + (fRec359[1] + fTemp184)));
-			fRec357[0] = fRec359[0];
-			double fRec358 = ((fTemp184 + fTemp183) + fTemp182);
-			fRec356[0] = (fRec357[0] + fRec356[1]);
-			fRec354[0] = fRec356[0];
-			double fRec355 = fRec358;
-			double fTemp185 = (fConst28 * (0.0 - (((0.093781532599999995 * fTemp50) + (0.027175271300000001 * fTemp52)) + (0.0650333201 * fTemp51))));
-			double fTemp186 = (fConst27 * fRec360[1]);
-			fRec362[0] = (fTemp185 + (fRec362[1] + fTemp186));
+			double fTemp183 = (fConst4 * fRec354[1]);
+			double fTemp184 = (fConst7 * fRec357[1]);
+			double fTemp185 = (fConst8 * fRec360[1]);
+			double fTemp186 = (fConst10 * (((((((0.15431312480000001 * fTemp11) + (0.031350573800000003 * fTemp16)) + (0.0058997770000000001 * fTemp17)) + (0.0111479975 * fTemp13)) + (0.0081523979000000003 * fTemp19)) + (0.042362610799999999 * fTemp15)) - (((((0.017243516 * fTemp18) + (0.032101099399999999 * fTemp12)) + (0.022813529700000001 * fTemp14)) + (0.021298658000000002 * fTemp20)) + (0.019423686799999999 * fTemp21))));
+			double fTemp187 = (fConst11 * fRec363[1]);
+			double fTemp188 = (fConst12 * fRec366[1]);
+			fRec368[0] = (fTemp186 + (fTemp187 + (fRec368[1] + fTemp188)));
+			fRec366[0] = fRec368[0];
+			double fRec367 = ((fTemp188 + fTemp187) + fTemp186);
+			fRec365[0] = (fRec366[0] + fRec365[1]);
+			fRec363[0] = fRec365[0];
+			double fRec364 = fRec367;
+			fRec362[0] = (fTemp184 + (fTemp185 + (fRec364 + fRec362[1])));
 			fRec360[0] = fRec362[0];
-			double fRec361 = (fTemp186 + fTemp185);
-			double fTemp187 = (fConst4 * fRec363[1]);
-			double fTemp188 = (fConst7 * fRec366[1]);
-			double fTemp189 = (fConst8 * fRec369[1]);
-			double fTemp190 = (fConst10 * (((((((0.15431312480000001 * fTemp11) + (0.031350573800000003 * fTemp16)) + (0.0058997770000000001 * fTemp17)) + (0.0111479975 * fTemp13)) + (0.0081523979000000003 * fTemp19)) + (0.042362610799999999 * fTemp15)) - (((((0.017243516 * fTemp18) + (0.032101099399999999 * fTemp12)) + (0.022813529700000001 * fTemp14)) + (0.021298658000000002 * fTemp20)) + (0.019423686799999999 * fTemp21))));
-			double fTemp191 = (fConst11 * fRec372[1]);
-			double fTemp192 = (fConst12 * fRec375[1]);
+			double fRec361 = (fTemp184 + (fRec364 + fTemp185));
+			fRec359[0] = (fRec360[0] + fRec359[1]);
+			fRec357[0] = fRec359[0];
+			double fRec358 = fRec361;
+			fRec356[0] = (fTemp183 + (fRec358 + fRec356[1]));
+			fRec354[0] = fRec356[0];
+			double fRec355 = (fRec358 + fTemp183);
+			double fTemp189 = (fConst21 * fRec369[1]);
+			double fTemp190 = (fConst23 * (((0.15588323439999999 * fTemp42) + ((0.019238960699999998 * fTemp46) + (((0.043789402700000001 * fTemp44) + (0.018948800299999999 * fTemp41)) + (0.030336761600000001 * fTemp45)))) - ((0.039012974999999998 * fTemp40) + (0.056323312600000001 * fTemp43))));
+			double fTemp191 = (fConst24 * fRec372[1]);
+			double fTemp192 = (fConst25 * fRec375[1]);
 			fRec377[0] = (fTemp190 + (fTemp191 + (fRec377[1] + fTemp192)));
 			fRec375[0] = fRec377[0];
 			double fRec376 = ((fTemp192 + fTemp191) + fTemp190);
 			fRec374[0] = (fRec375[0] + fRec374[1]);
 			fRec372[0] = fRec374[0];
 			double fRec373 = fRec376;
-			fRec371[0] = (fTemp188 + (fTemp189 + (fRec373 + fRec371[1])));
+			fRec371[0] = (fTemp189 + (fRec373 + fRec371[1]));
 			fRec369[0] = fRec371[0];
-			double fRec370 = (fTemp188 + (fRec373 + fTemp189));
-			fRec368[0] = (fRec369[0] + fRec368[1]);
-			fRec366[0] = fRec368[0];
-			double fRec367 = fRec370;
-			fRec365[0] = (fTemp187 + (fRec367 + fRec365[1]));
-			fRec363[0] = fRec365[0];
-			double fRec364 = (fRec367 + fTemp187);
-			double fTemp193 = (fConst21 * fRec378[1]);
-			double fTemp194 = (fConst23 * (((0.15588323439999999 * fTemp42) + ((0.019238960699999998 * fTemp46) + (((0.043789402700000001 * fTemp44) + (0.018948800299999999 * fTemp41)) + (0.030336761600000001 * fTemp45)))) - ((0.039012974999999998 * fTemp40) + (0.056323312600000001 * fTemp43))));
-			double fTemp195 = (fConst24 * fRec381[1]);
-			double fTemp196 = (fConst25 * fRec384[1]);
-			fRec386[0] = (fTemp194 + (fTemp195 + (fRec386[1] + fTemp196)));
+			double fRec370 = (fRec373 + fTemp189);
+			double fTemp193 = (fConst14 * fRec378[1]);
+			double fTemp194 = (fConst15 * fRec381[1]);
+			double fTemp195 = (fConst17 * ((((0.0172150306 * fTemp32) + (0.029587684 * fTemp31)) + (0.0127131246 * fTemp34)) - ((0.1225071799 * fTemp35) + ((0.0015493512000000001 * fTemp27) + ((0.00080251349999999999 * fTemp28) + ((0.034270592799999999 * fTemp33) + ((0.10823658730000001 * fTemp29) + (0.055861069399999998 * fTemp30))))))));
+			double fTemp196 = (fConst18 * fRec384[1]);
+			double fTemp197 = (fConst19 * fRec387[1]);
+			fRec389[0] = (fTemp195 + (fTemp196 + (fRec389[1] + fTemp197)));
+			fRec387[0] = fRec389[0];
+			double fRec388 = ((fTemp197 + fTemp196) + fTemp195);
+			fRec386[0] = (fRec387[0] + fRec386[1]);
 			fRec384[0] = fRec386[0];
-			double fRec385 = ((fTemp196 + fTemp195) + fTemp194);
-			fRec383[0] = (fRec384[0] + fRec383[1]);
+			double fRec385 = fRec388;
+			fRec383[0] = (fTemp193 + (fTemp194 + (fRec385 + fRec383[1])));
 			fRec381[0] = fRec383[0];
-			double fRec382 = fRec385;
-			fRec380[0] = (fTemp193 + (fRec382 + fRec380[1]));
+			double fRec382 = (fTemp193 + (fRec385 + fTemp194));
+			fRec380[0] = (fRec381[0] + fRec380[1]);
 			fRec378[0] = fRec380[0];
-			double fRec379 = (fRec382 + fTemp193);
-			double fTemp197 = (fConst14 * fRec387[1]);
-			double fTemp198 = (fConst15 * fRec390[1]);
-			double fTemp199 = (fConst17 * ((((0.0172150306 * fTemp32) + (0.029587684 * fTemp29)) + (0.0127131246 * fTemp34)) - ((0.1225071799 * fTemp35) + (((((0.10823658730000001 * fTemp27) + (0.034270592799999999 * fTemp33)) + (0.00080251349999999999 * fTemp28)) + (0.0015493512000000001 * fTemp30)) + (0.055861069399999998 * fTemp31)))));
-			double fTemp200 = (fConst18 * fRec393[1]);
-			double fTemp201 = (fConst19 * fRec396[1]);
-			fRec398[0] = (fTemp199 + (fTemp200 + (fRec398[1] + fTemp201)));
+			double fRec379 = fRec382;
+			double fTemp198 = (fConst27 * (0.0 - (((0.027175271300000001 * fTemp52) + (0.093781532599999995 * fTemp50)) + (0.0650333201 * fTemp51))));
+			double fTemp199 = (fConst28 * fRec390[1]);
+			fRec392[0] = ((fTemp198 + fRec392[1]) + fTemp199);
+			fRec390[0] = fRec392[0];
+			double fRec391 = (fTemp198 + fTemp199);
+			double fTemp200 = (fConst30 * (((0.043857336500000003 * fTemp59) + ((0.13586002450000001 * fTemp56) + (0.031218894399999999 * fTemp57))) - ((0.052343153699999999 * fTemp58) + (0.0509730906 * fTemp55))));
+			double fTemp201 = (fConst32 * fRec393[1]);
+			double fTemp202 = (fConst31 * fRec396[1]);
+			fRec398[0] = (fTemp200 + (fTemp201 + (fRec398[1] + fTemp202)));
 			fRec396[0] = fRec398[0];
-			double fRec397 = ((fTemp201 + fTemp200) + fTemp199);
-			fRec395[0] = (fRec396[0] + fRec395[1]);
+			double fRec397 = ((fTemp202 + fTemp201) + fTemp200);
+			fRec395[0] = (fRec395[1] + fRec396[0]);
 			fRec393[0] = fRec395[0];
 			double fRec394 = fRec397;
-			fRec392[0] = (fTemp197 + (fTemp198 + (fRec394 + fRec392[1])));
-			fRec390[0] = fRec392[0];
-			double fRec391 = (fTemp197 + (fRec394 + fTemp198));
-			fRec389[0] = (fRec390[0] + fRec389[1]);
-			fRec387[0] = fRec389[0];
-			double fRec388 = fRec391;
-			fVec7[(IOTA & 1023)] = ((0.043013200600000003 * fTemp7) + (fRec355 + (fRec361 + (fRec364 + (fRec379 + fRec388)))));
+			fVec7[(IOTA & 1023)] = ((((fRec355 + (fRec370 + fRec379)) + fRec391) + fRec394) + (0.043013200600000003 * fTemp7));
 			output7[i] = FAUSTFLOAT((0.82065997130559543 * (fRec0[0] * fVec7[((IOTA - iConst33) & 1023)])));
-			double fTemp202 = (fConst4 * fRec399[1]);
-			double fTemp203 = (fConst7 * fRec402[1]);
-			double fTemp204 = (fConst8 * fRec405[1]);
-			double fTemp205 = (fConst10 * (((0.15511100620000001 * fTemp21) + ((0.0114876809 * fTemp15) + (((0.017807463900000001 * fTemp17) + (0.0232957105 * fTemp13)) + (0.00082419320000000004 * fTemp20)))) - ((0.0112528878 * fTemp19) + (((((0.052810613200000002 * fTemp11) + (0.037426377599999998 * fTemp16)) + (0.035013641200000001 * fTemp18)) + (0.0132818615 * fTemp12)) + (0.0250254187 * fTemp14)))));
-			double fTemp206 = (fConst11 * fRec408[1]);
-			double fTemp207 = (fConst12 * fRec411[1]);
-			fRec413[0] = (fTemp205 + (fTemp206 + (fRec413[1] + fTemp207)));
+			double fTemp203 = (fConst27 * (0.0 - (((0.067107245400000001 * fTemp50) + (0.022493231999999998 * fTemp52)) + (0.1055430831 * fTemp51))));
+			double fTemp204 = (fConst28 * fRec399[1]);
+			fRec401[0] = (fTemp203 + (fRec401[1] + fTemp204));
+			fRec399[0] = fRec401[0];
+			double fRec400 = (fTemp204 + fTemp203);
+			double fTemp205 = (fConst17 * (((0.0130414538 * fTemp27) + ((0.0115370422 * fTemp28) + ((0.042122555999999998 * fTemp32) + ((0.13535413509999999 * fTemp29) + ((0.026597103600000001 * fTemp31) + (0.0057470530000000002 * fTemp30)))))) - (((0.032101543400000002 * fTemp33) + (0.016344634199999999 * fTemp34)) + (0.1108176084 * fTemp35))));
+			double fTemp206 = (fConst19 * fRec411[1]);
+			double fTemp207 = (fConst18 * fRec408[1]);
+			fRec413[0] = (((fTemp205 + fRec413[1]) + fTemp206) + fTemp207);
 			fRec411[0] = fRec413[0];
-			double fRec412 = ((fTemp207 + fTemp206) + fTemp205);
+			double fRec412 = ((fTemp205 + fTemp206) + fTemp207);
 			fRec410[0] = (fRec411[0] + fRec410[1]);
 			fRec408[0] = fRec410[0];
 			double fRec409 = fRec412;
-			fRec407[0] = (fTemp203 + (fTemp204 + (fRec409 + fRec407[1])));
+			double fTemp208 = (fConst15 * fRec405[1]);
+			double fTemp209 = (fConst14 * fRec402[1]);
+			fRec407[0] = (((fRec409 + fRec407[1]) + fTemp208) + fTemp209);
 			fRec405[0] = fRec407[0];
-			double fRec406 = (fTemp203 + (fRec409 + fTemp204));
+			double fRec406 = ((fRec409 + fTemp208) + fTemp209);
 			fRec404[0] = (fRec405[0] + fRec404[1]);
 			fRec402[0] = fRec404[0];
 			double fRec403 = fRec406;
-			fRec401[0] = (fTemp202 + (fRec403 + fRec401[1]));
-			fRec399[0] = fRec401[0];
-			double fRec400 = (fRec403 + fTemp202);
-			double fTemp208 = (fConst14 * fRec414[1]);
-			double fTemp209 = (fConst15 * fRec417[1]);
-			double fTemp210 = (fConst17 * ((((0.0130414538 * fTemp30) + ((((0.13535413509999999 * fTemp27) + (0.042122555999999998 * fTemp32)) + (0.0115370422 * fTemp28)) + (0.026597103600000001 * fTemp29))) + (0.0057470530000000002 * fTemp31)) - (((0.032101543400000002 * fTemp33) + (0.016344634199999999 * fTemp34)) + (0.1108176084 * fTemp35))));
-			double fTemp211 = (fConst18 * fRec420[1]);
-			double fTemp212 = (fConst19 * fRec423[1]);
-			fRec425[0] = (fTemp210 + (fTemp211 + (fRec425[1] + fTemp212)));
+			double fTemp210 = (fConst4 * fRec414[1]);
+			double fTemp211 = (fConst7 * fRec417[1]);
+			double fTemp212 = (fConst8 * fRec420[1]);
+			double fTemp213 = (fConst10 * (((0.15511100620000001 * fTemp21) + ((0.0114876809 * fTemp15) + (((0.017807463900000001 * fTemp17) + (0.0232957105 * fTemp13)) + (0.00082419320000000004 * fTemp20)))) - ((0.0112528878 * fTemp19) + (((((0.052810613200000002 * fTemp11) + (0.037426377599999998 * fTemp16)) + (0.035013641200000001 * fTemp18)) + (0.0132818615 * fTemp12)) + (0.0250254187 * fTemp14)))));
+			double fTemp214 = (fConst11 * fRec423[1]);
+			double fTemp215 = (fConst12 * fRec426[1]);
+			fRec428[0] = (fTemp213 + (fTemp214 + (fRec428[1] + fTemp215)));
+			fRec426[0] = fRec428[0];
+			double fRec427 = ((fTemp215 + fTemp214) + fTemp213);
+			fRec425[0] = (fRec426[0] + fRec425[1]);
 			fRec423[0] = fRec425[0];
-			double fRec424 = ((fTemp212 + fTemp211) + fTemp210);
-			fRec422[0] = (fRec423[0] + fRec422[1]);
+			double fRec424 = fRec427;
+			fRec422[0] = (fTemp211 + (fTemp212 + (fRec424 + fRec422[1])));
 			fRec420[0] = fRec422[0];
-			double fRec421 = fRec424;
-			fRec419[0] = (fTemp208 + (fTemp209 + (fRec421 + fRec419[1])));
+			double fRec421 = (fTemp211 + (fRec424 + fTemp212));
+			fRec419[0] = (fRec420[0] + fRec419[1]);
 			fRec417[0] = fRec419[0];
-			double fRec418 = (fTemp208 + (fRec421 + fTemp209));
-			fRec416[0] = (fRec417[0] + fRec416[1]);
+			double fRec418 = fRec421;
+			fRec416[0] = (fTemp210 + (fRec418 + fRec416[1]));
 			fRec414[0] = fRec416[0];
-			double fRec415 = fRec418;
-			double fTemp213 = (fConst21 * fRec426[1]);
-			double fTemp214 = (fConst23 * (((((0.030602520000000001 * fTemp44) + (0.0069865526000000002 * fTemp41)) + (0.048410404999999997 * fTemp45)) + (0.0217216826 * fTemp42)) - (((0.17263160999999999 * fTemp40) + (0.0367705173 * fTemp43)) + (0.024484749199999999 * fTemp46))));
-			double fTemp215 = (fConst24 * fRec429[1]);
-			double fTemp216 = (fConst25 * fRec432[1]);
-			fRec434[0] = (fTemp214 + (fTemp215 + (fRec434[1] + fTemp216)));
+			double fRec415 = (fRec418 + fTemp210);
+			double fTemp216 = (fConst30 * (((0.020290013999999999 * fTemp59) + ((0.143392194 * fTemp56) + ((0.036669744900000002 * fTemp57) + (0.067279233100000002 * fTemp55)))) - (0.057986305799999999 * fTemp58)));
+			double fTemp217 = (fConst32 * fRec429[1]);
+			double fTemp218 = (fConst31 * fRec432[1]);
+			fRec434[0] = (fTemp216 + (fTemp217 + (fRec434[1] + fTemp218)));
 			fRec432[0] = fRec434[0];
-			double fRec433 = ((fTemp216 + fTemp215) + fTemp214);
+			double fRec433 = ((fTemp218 + fTemp217) + fTemp216);
 			fRec431[0] = (fRec432[0] + fRec431[1]);
 			fRec429[0] = fRec431[0];
 			double fRec430 = fRec433;
-			fRec428[0] = (fTemp213 + (fRec430 + fRec428[1]));
-			fRec426[0] = fRec428[0];
-			double fRec427 = (fRec430 + fTemp213);
-			double fTemp217 = (fConst28 * (0.0 - (((0.067107245400000001 * fTemp50) + (0.022493231999999998 * fTemp52)) + (0.1055430831 * fTemp51))));
-			double fTemp218 = (fConst27 * fRec435[1]);
-			fRec437[0] = (fTemp217 + (fRec437[1] + fTemp218));
-			fRec435[0] = fRec437[0];
-			double fRec436 = (fTemp218 + fTemp217);
-			double fTemp219 = (fConst30 * (((((0.143392194 * fTemp54) + (0.020290013999999999 * fTemp56)) + (0.036669744900000002 * fTemp58)) + (0.067279233100000002 * fTemp55)) - (0.057986305799999999 * fTemp57)));
-			double fTemp220 = (fConst31 * fRec438[1]);
-			double fTemp221 = (fConst32 * fRec441[1]);
-			fRec443[0] = (fTemp219 + (fTemp220 + (fRec443[1] + fTemp221)));
+			double fTemp219 = (fConst21 * fRec435[1]);
+			double fTemp220 = (fConst23 * (((((0.030602520000000001 * fTemp44) + (0.0069865526000000002 * fTemp41)) + (0.048410404999999997 * fTemp45)) + (0.0217216826 * fTemp42)) - (((0.17263160999999999 * fTemp40) + (0.0367705173 * fTemp43)) + (0.024484749199999999 * fTemp46))));
+			double fTemp221 = (fConst24 * fRec438[1]);
+			double fTemp222 = (fConst25 * fRec441[1]);
+			fRec443[0] = (fTemp220 + (fTemp221 + (fRec443[1] + fTemp222)));
 			fRec441[0] = fRec443[0];
-			double fRec442 = ((fTemp221 + fTemp220) + fTemp219);
+			double fRec442 = ((fTemp222 + fTemp221) + fTemp220);
 			fRec440[0] = (fRec441[0] + fRec440[1]);
 			fRec438[0] = fRec440[0];
 			double fRec439 = fRec442;
-			fVec8[(IOTA & 1023)] = ((fRec400 + (fRec415 + (fRec427 + (fRec436 + fRec439)))) + (0.047086569199999997 * fTemp7));
+			fRec437[0] = (fTemp219 + (fRec439 + fRec437[1]));
+			fRec435[0] = fRec437[0];
+			double fRec436 = (fRec439 + fTemp219);
+			fVec8[(IOTA & 1023)] = ((0.047086569199999997 * fTemp7) + (fRec400 + (fRec403 + (fRec415 + (fRec430 + fRec436)))));
 			output8[i] = FAUSTFLOAT((0.82065997130559543 * (fRec0[0] * fVec8[((IOTA - iConst33) & 1023)])));
-			double fTemp222 = (fConst4 * fRec444[1]);
-			double fTemp223 = (fConst7 * fRec447[1]);
-			double fTemp224 = (fConst8 * fRec450[1]);
-			double fTemp225 = (fConst10 * ((((0.0084801031000000006 * fTemp17) + (0.022881643399999999 * fTemp13)) + (0.013018259900000001 * fTemp20)) - ((0.12965995359999999 * fTemp21) + (((0.035918897499999998 * fTemp19) + (((((0.095386441799999999 * fTemp11) + (0.026826913300000001 * fTemp16)) + (0.0047263514999999999 * fTemp18)) + (0.0049032375999999997 * fTemp12)) + (0.022118527999999998 * fTemp14))) + (0.020463746200000001 * fTemp15)))));
-			double fTemp226 = (fConst11 * fRec453[1]);
-			double fTemp227 = (fConst12 * fRec456[1]);
-			fRec458[0] = (fTemp225 + (fTemp226 + (fRec458[1] + fTemp227)));
+			double fTemp223 = (fConst4 * fRec444[1]);
+			double fTemp224 = (fConst7 * fRec447[1]);
+			double fTemp225 = (fConst8 * fRec450[1]);
+			double fTemp226 = (fConst10 * ((((0.0084801031000000006 * fTemp17) + (0.022881643399999999 * fTemp13)) + (0.013018259900000001 * fTemp20)) - ((0.12965995359999999 * fTemp21) + (((0.035918897499999998 * fTemp19) + (((((0.095386441799999999 * fTemp11) + (0.026826913300000001 * fTemp16)) + (0.0047263514999999999 * fTemp18)) + (0.0049032375999999997 * fTemp12)) + (0.022118527999999998 * fTemp14))) + (0.020463746200000001 * fTemp15)))));
+			double fTemp227 = (fConst11 * fRec453[1]);
+			double fTemp228 = (fConst12 * fRec456[1]);
+			fRec458[0] = (fTemp226 + (fTemp227 + (fRec458[1] + fTemp228)));
 			fRec456[0] = fRec458[0];
-			double fRec457 = ((fTemp227 + fTemp226) + fTemp225);
+			double fRec457 = ((fTemp228 + fTemp227) + fTemp226);
 			fRec455[0] = (fRec456[0] + fRec455[1]);
 			fRec453[0] = fRec455[0];
 			double fRec454 = fRec457;
-			fRec452[0] = (fTemp223 + (fTemp224 + (fRec454 + fRec452[1])));
+			fRec452[0] = (fTemp224 + (fTemp225 + (fRec454 + fRec452[1])));
 			fRec450[0] = fRec452[0];
-			double fRec451 = (fTemp223 + (fRec454 + fTemp224));
+			double fRec451 = (fTemp224 + (fRec454 + fTemp225));
 			fRec449[0] = (fRec450[0] + fRec449[1]);
 			fRec447[0] = fRec449[0];
 			double fRec448 = fRec451;
-			fRec446[0] = (fTemp222 + (fRec448 + fRec446[1]));
+			fRec446[0] = (fTemp223 + (fRec448 + fRec446[1]));
 			fRec444[0] = fRec446[0];
-			double fRec445 = (fRec448 + fTemp222);
-			double fTemp228 = (fConst14 * fRec459[1]);
-			double fTemp229 = (fConst15 * fRec462[1]);
-			double fTemp230 = (fConst17 * (((0.14537095159999999 * fTemp35) + (((0.019136438499999998 * fTemp30) + (((0.080117320699999994 * fTemp27) + (0.021787292699999999 * fTemp32)) + (0.022810786600000001 * fTemp29))) + (0.027891624600000001 * fTemp31))) - (((0.0091456670999999993 * fTemp33) + (0.0001359884 * fTemp28)) + (0.030823519399999999 * fTemp34))));
-			double fTemp231 = (fConst18 * fRec465[1]);
-			double fTemp232 = (fConst19 * fRec468[1]);
-			fRec470[0] = (fTemp230 + (fTemp231 + (fRec470[1] + fTemp232)));
+			double fRec445 = (fRec448 + fTemp223);
+			double fTemp229 = (fConst14 * fRec459[1]);
+			double fTemp230 = (fConst15 * fRec462[1]);
+			double fTemp231 = (fConst17 * (((0.14537095159999999 * fTemp35) + ((0.019136438499999998 * fTemp27) + ((0.021787292699999999 * fTemp32) + ((0.080117320699999994 * fTemp29) + ((0.022810786600000001 * fTemp31) + (0.027891624600000001 * fTemp30)))))) - (((0.0091456670999999993 * fTemp33) + (0.0001359884 * fTemp28)) + (0.030823519399999999 * fTemp34))));
+			double fTemp232 = (fConst18 * fRec465[1]);
+			double fTemp233 = (fConst19 * fRec468[1]);
+			fRec470[0] = (fTemp231 + (fTemp232 + (fRec470[1] + fTemp233)));
 			fRec468[0] = fRec470[0];
-			double fRec469 = ((fTemp232 + fTemp231) + fTemp230);
+			double fRec469 = ((fTemp233 + fTemp232) + fTemp231);
 			fRec467[0] = (fRec468[0] + fRec467[1]);
 			fRec465[0] = fRec467[0];
 			double fRec466 = fRec469;
-			fRec464[0] = (fTemp228 + (fTemp229 + (fRec466 + fRec464[1])));
+			fRec464[0] = (fTemp229 + (fTemp230 + (fRec466 + fRec464[1])));
 			fRec462[0] = fRec464[0];
-			double fRec463 = (fTemp228 + (fRec466 + fTemp229));
+			double fRec463 = (fTemp229 + (fRec466 + fTemp230));
 			fRec461[0] = (fRec462[0] + fRec461[1]);
 			fRec459[0] = fRec461[0];
 			double fRec460 = fRec463;
-			double fTemp233 = (fConst21 * fRec471[1]);
-			double fTemp234 = (fConst23 * ((((0.0066033454999999998 * fTemp44) + (0.0036201546000000002 * fTemp41)) + (0.051068044899999998 * fTemp45)) - ((0.149838998 * fTemp42) + (((0.059068788599999998 * fTemp40) + (0.0146100555 * fTemp43)) + (0.033138250700000003 * fTemp46)))));
-			double fTemp235 = (fConst24 * fRec474[1]);
-			double fTemp236 = (fConst25 * fRec477[1]);
-			fRec479[0] = (fTemp234 + (fTemp235 + (fRec479[1] + fTemp236)));
+			double fTemp234 = (fConst21 * fRec471[1]);
+			double fTemp235 = (fConst23 * ((((0.0066033454999999998 * fTemp44) + (0.0036201546000000002 * fTemp41)) + (0.051068044899999998 * fTemp45)) - ((0.149838998 * fTemp42) + (((0.059068788599999998 * fTemp40) + (0.0146100555 * fTemp43)) + (0.033138250700000003 * fTemp46)))));
+			double fTemp236 = (fConst24 * fRec474[1]);
+			double fTemp237 = (fConst25 * fRec477[1]);
+			fRec479[0] = (fTemp235 + (fTemp236 + (fRec479[1] + fTemp237)));
 			fRec477[0] = fRec479[0];
-			double fRec478 = ((fTemp236 + fTemp235) + fTemp234);
+			double fRec478 = ((fTemp237 + fTemp236) + fTemp235);
 			fRec476[0] = (fRec477[0] + fRec476[1]);
 			fRec474[0] = fRec476[0];
 			double fRec475 = fRec478;
-			fRec473[0] = (fTemp233 + (fRec475 + fRec473[1]));
+			fRec473[0] = (fTemp234 + (fRec475 + fRec473[1]));
 			fRec471[0] = fRec473[0];
-			double fRec472 = (fRec475 + fTemp233);
-			double fTemp237 = (fConst28 * (0.0 - (((0.0139901699 * fTemp50) + (0.0187740081 * fTemp52)) + (0.1118847164 * fTemp51))));
-			double fTemp238 = (fConst27 * fRec480[1]);
-			fRec482[0] = (fTemp237 + (fRec482[1] + fTemp238));
+			double fRec472 = (fRec475 + fTemp234);
+			double fTemp238 = (fConst27 * (0.0 - (((0.0139901699 * fTemp50) + (0.0187740081 * fTemp52)) + (0.1118847164 * fTemp51))));
+			double fTemp239 = (fConst28 * fRec480[1]);
+			fRec482[0] = (fTemp238 + (fRec482[1] + fTemp239));
 			fRec480[0] = fRec482[0];
-			double fRec481 = (fTemp238 + fTemp237);
-			double fTemp239 = (fConst30 * (((((0.035572504300000002 * fTemp54) + (0.0065747543 * fTemp56)) + (0.033802809400000002 * fTemp58)) + (0.13974363040000001 * fTemp55)) - (0.052231796900000002 * fTemp57)));
-			double fTemp240 = (fConst31 * fRec483[1]);
-			double fTemp241 = (fConst32 * fRec486[1]);
-			fRec488[0] = (fTemp239 + (fTemp240 + (fRec488[1] + fTemp241)));
+			double fRec481 = (fTemp239 + fTemp238);
+			double fTemp240 = (fConst30 * (((0.0065747543 * fTemp59) + ((0.035572504300000002 * fTemp56) + ((0.033802809400000002 * fTemp57) + (0.13974363040000001 * fTemp55)))) - (0.052231796900000002 * fTemp58)));
+			double fTemp241 = (fConst32 * fRec483[1]);
+			double fTemp242 = (fConst31 * fRec486[1]);
+			fRec488[0] = (fTemp240 + (fTemp241 + (fRec488[1] + fTemp242)));
 			fRec486[0] = fRec488[0];
-			double fRec487 = ((fTemp241 + fTemp240) + fTemp239);
+			double fRec487 = ((fTemp242 + fTemp241) + fTemp240);
 			fRec485[0] = (fRec486[0] + fRec485[1]);
 			fRec483[0] = fRec485[0];
 			double fRec484 = fRec487;
 			fVec9[(IOTA & 1023)] = ((0.042293780500000003 * fTemp7) + (fRec445 + (fRec460 + (fRec472 + (fRec481 + fRec484)))));
 			output9[i] = FAUSTFLOAT((0.82065997130559543 * (fRec0[0] * fVec9[((IOTA - iConst33) & 1023)])));
-			double fTemp242 = (fConst4 * fRec489[1]);
-			double fTemp243 = (fConst7 * fRec492[1]);
-			double fTemp244 = (fConst8 * fRec495[1]);
-			double fTemp245 = (fConst10 * ((((0.0094715310999999996 * fTemp13) + ((((0.13686883480000001 * fTemp11) + (0.036196392799999998 * fTemp16)) + (0.0089257316000000003 * fTemp18)) + (0.0073127701999999998 * fTemp12))) + (0.015364609499999999 * fTemp20)) - ((0.056651884399999998 * fTemp21) + (((0.013570645399999999 * fTemp19) + ((0.012411964100000001 * fTemp17) + (0.032839936100000001 * fTemp14))) + (0.033400346300000001 * fTemp15)))));
-			double fTemp246 = (fConst11 * fRec498[1]);
-			double fTemp247 = (fConst12 * fRec501[1]);
-			fRec503[0] = (fTemp245 + (fTemp246 + (fRec503[1] + fTemp247)));
-			fRec501[0] = fRec503[0];
-			double fRec502 = ((fTemp247 + fTemp246) + fTemp245);
-			fRec500[0] = (fRec501[0] + fRec500[1]);
-			fRec498[0] = fRec500[0];
-			double fRec499 = fRec502;
-			fRec497[0] = (fTemp243 + (fTemp244 + (fRec499 + fRec497[1])));
+			double fTemp243 = (fConst21 * fRec489[1]);
+			double fTemp244 = (fConst23 * (((((0.091916881000000006 * fTemp40) + (0.0214102085 * fTemp43)) + (0.016141917499999998 * fTemp41)) + (0.044214239099999997 * fTemp45)) - ((0.108020109 * fTemp42) + ((0.010632809700000001 * fTemp44) + (0.0469183803 * fTemp46)))));
+			double fTemp245 = (fConst24 * fRec492[1]);
+			double fTemp246 = (fConst25 * fRec495[1]);
+			fRec497[0] = (fTemp244 + (fTemp245 + (fRec497[1] + fTemp246)));
 			fRec495[0] = fRec497[0];
-			double fRec496 = (fTemp243 + (fRec499 + fTemp244));
+			double fRec496 = ((fTemp246 + fTemp245) + fTemp244);
 			fRec494[0] = (fRec495[0] + fRec494[1]);
 			fRec492[0] = fRec494[0];
 			double fRec493 = fRec496;
-			fRec491[0] = (fTemp242 + (fRec493 + fRec491[1]));
+			fRec491[0] = (fTemp243 + (fRec493 + fRec491[1]));
 			fRec489[0] = fRec491[0];
-			double fRec490 = (fRec493 + fTemp242);
-			double fTemp248 = (fConst14 * fRec504[1]);
-			double fTemp249 = (fConst15 * fRec507[1]);
-			double fTemp250 = (fConst17 * (((0.087738857000000003 * fTemp35) + (((0.01426851 * fTemp33) + (0.025091668099999999 * fTemp29)) + (0.0421037935 * fTemp31))) - ((0.0282797181 * fTemp34) + ((((0.12043640279999999 * fTemp27) + (0.030795635299999999 * fTemp32)) + (0.00058311020000000003 * fTemp28)) + (0.0015971383 * fTemp30)))));
-			double fTemp251 = (fConst18 * fRec510[1]);
-			double fTemp252 = (fConst19 * fRec513[1]);
-			fRec515[0] = (fTemp250 + (fTemp251 + (fRec515[1] + fTemp252)));
-			fRec513[0] = fRec515[0];
-			double fRec514 = ((fTemp252 + fTemp251) + fTemp250);
-			fRec512[0] = (fRec513[0] + fRec512[1]);
-			fRec510[0] = fRec512[0];
-			double fRec511 = fRec514;
-			fRec509[0] = (fTemp248 + (fTemp249 + (fRec511 + fRec509[1])));
+			double fRec490 = (fRec493 + fTemp243);
+			double fTemp247 = (fConst17 * (((0.087738857000000003 * fTemp35) + ((0.01426851 * fTemp33) + ((0.025091668099999999 * fTemp31) + (0.0421037935 * fTemp30)))) - ((0.0282797181 * fTemp34) + ((((0.12043640279999999 * fTemp29) + (0.030795635299999999 * fTemp32)) + (0.00058311020000000003 * fTemp28)) + (0.0015971383 * fTemp27)))));
+			double fTemp248 = (fConst19 * fRec507[1]);
+			double fTemp249 = (fConst18 * fRec504[1]);
+			fRec509[0] = (((fTemp247 + fRec509[1]) + fTemp248) + fTemp249);
 			fRec507[0] = fRec509[0];
-			double fRec508 = (fTemp248 + (fRec511 + fTemp249));
+			double fRec508 = ((fTemp247 + fTemp248) + fTemp249);
 			fRec506[0] = (fRec507[0] + fRec506[1]);
 			fRec504[0] = fRec506[0];
 			double fRec505 = fRec508;
-			double fTemp253 = (fConst21 * fRec516[1]);
-			double fTemp254 = (fConst23 * (((((0.091916881000000006 * fTemp40) + (0.0214102085 * fTemp43)) + (0.016141917499999998 * fTemp41)) + (0.044214239099999997 * fTemp45)) - ((0.108020109 * fTemp42) + ((0.010632809700000001 * fTemp44) + (0.0469183803 * fTemp46)))));
-			double fTemp255 = (fConst24 * fRec519[1]);
-			double fTemp256 = (fConst25 * fRec522[1]);
-			fRec524[0] = (fTemp254 + (fTemp255 + (fRec524[1] + fTemp256)));
+			double fTemp250 = (fConst15 * fRec501[1]);
+			double fTemp251 = (fConst14 * fRec498[1]);
+			fRec503[0] = (((fRec505 + fRec503[1]) + fTemp250) + fTemp251);
+			fRec501[0] = fRec503[0];
+			double fRec502 = ((fRec505 + fTemp250) + fTemp251);
+			fRec500[0] = (fRec501[0] + fRec500[1]);
+			fRec498[0] = fRec500[0];
+			double fRec499 = fRec502;
+			double fTemp252 = (fConst10 * (((0.015364609499999999 * fTemp20) + ((0.0094715310999999996 * fTemp13) + ((((0.13686883480000001 * fTemp11) + (0.036196392799999998 * fTemp16)) + (0.0089257316000000003 * fTemp18)) + (0.0073127701999999998 * fTemp12)))) - ((0.056651884399999998 * fTemp21) + (((0.013570645399999999 * fTemp19) + ((0.032839936100000001 * fTemp14) + (0.012411964100000001 * fTemp17))) + (0.033400346300000001 * fTemp15)))));
+			double fTemp253 = (fConst12 * fRec522[1]);
+			double fTemp254 = (fConst11 * fRec519[1]);
+			fRec524[0] = (((fTemp252 + fRec524[1]) + fTemp253) + fTemp254);
 			fRec522[0] = fRec524[0];
-			double fRec523 = ((fTemp256 + fTemp255) + fTemp254);
+			double fRec523 = ((fTemp252 + fTemp253) + fTemp254);
 			fRec521[0] = (fRec522[0] + fRec521[1]);
 			fRec519[0] = fRec521[0];
 			double fRec520 = fRec523;
-			fRec518[0] = (fTemp253 + (fRec520 + fRec518[1]));
+			double fTemp255 = (fConst8 * fRec516[1]);
+			double fTemp256 = (fConst7 * fRec513[1]);
+			fRec518[0] = ((fRec520 + (fRec518[1] + fTemp255)) + fTemp256);
 			fRec516[0] = fRec518[0];
-			double fRec517 = (fRec520 + fTemp253);
-			double fTemp257 = (fConst28 * ((0.022604914399999999 * fTemp50) - ((0.0230256566 * fTemp52) + (0.094607951100000004 * fTemp51))));
-			double fTemp258 = (fConst27 * fRec525[1]);
-			fRec527[0] = (fTemp257 + (fRec527[1] + fTemp258));
+			double fRec517 = ((fTemp255 + fRec520) + fTemp256);
+			fRec515[0] = (fRec515[1] + fRec516[0]);
+			fRec513[0] = fRec515[0];
+			double fRec514 = fRec517;
+			double fTemp257 = (fConst4 * fRec510[1]);
+			fRec512[0] = (fRec514 + (fRec512[1] + fTemp257));
+			fRec510[0] = fRec512[0];
+			double fRec511 = (fTemp257 + fRec514);
+			double fTemp258 = (fConst27 * ((0.022604914399999999 * fTemp50) - ((0.0230256566 * fTemp52) + (0.094607951100000004 * fTemp51))));
+			double fTemp259 = (fConst28 * fRec525[1]);
+			fRec527[0] = (fTemp258 + (fRec527[1] + fTemp259));
 			fRec525[0] = fRec527[0];
-			double fRec526 = (fTemp258 + fTemp257);
-			double fTemp259 = (fConst30 * (((0.044813985399999999 * fTemp58) + (0.1117277515 * fTemp55)) - (((0.056689465500000001 * fTemp54) + (0.0098900816999999992 * fTemp56)) + (0.0444895337 * fTemp57))));
-			double fTemp260 = (fConst31 * fRec528[1]);
-			double fTemp261 = (fConst32 * fRec531[1]);
-			fRec533[0] = (fTemp259 + (fTemp260 + (fRec533[1] + fTemp261)));
+			double fRec526 = (fTemp259 + fTemp258);
+			double fTemp260 = (fConst30 * (((0.044813985399999999 * fTemp57) + (0.1117277515 * fTemp55)) - ((0.0098900816999999992 * fTemp59) + ((0.056689465500000001 * fTemp56) + (0.0444895337 * fTemp58)))));
+			double fTemp261 = (fConst32 * fRec528[1]);
+			double fTemp262 = (fConst31 * fRec531[1]);
+			fRec533[0] = (fTemp260 + (fTemp261 + (fRec533[1] + fTemp262)));
 			fRec531[0] = fRec533[0];
-			double fRec532 = ((fTemp261 + fTemp260) + fTemp259);
+			double fRec532 = ((fTemp262 + fTemp261) + fTemp260);
 			fRec530[0] = (fRec531[0] + fRec530[1]);
 			fRec528[0] = fRec530[0];
 			double fRec529 = fRec532;
-			fVec10[(IOTA & 1023)] = ((0.036496616699999998 * fTemp7) + (fRec490 + (fRec505 + (fRec517 + (fRec526 + fRec529)))));
+			fVec10[(IOTA & 1023)] = (((((fRec490 + fRec499) + fRec511) + fRec526) + fRec529) + (0.036496616699999998 * fTemp7));
 			output10[i] = FAUSTFLOAT((0.82065997130559543 * (fRec0[0] * fVec10[((IOTA - iConst33) & 1023)])));
-			double fTemp262 = (fConst4 * fRec534[1]);
-			double fTemp263 = (fConst7 * fRec537[1]);
-			double fTemp264 = (fConst8 * fRec540[1]);
-			double fTemp265 = (fConst10 * (((0.16100671820000001 * fTemp21) + (((0.0188835563 * fTemp13) + ((((0.0045617260000000003 * fTemp11) + (0.027934566300000001 * fTemp16)) + (0.0297684387 * fTemp18)) + (0.0157645296 * fTemp12))) + (0.024358896500000001 * fTemp15))) - ((0.0039366213999999997 * fTemp20) + ((0.0075060188 * fTemp19) + ((0.016998194599999999 * fTemp17) + (0.0234694129 * fTemp14))))));
-			double fTemp266 = (fConst11 * fRec543[1]);
-			double fTemp267 = (fConst12 * fRec546[1]);
-			fRec548[0] = (fTemp265 + (fTemp266 + (fRec548[1] + fTemp267)));
+			double fTemp263 = (fConst4 * fRec534[1]);
+			double fTemp264 = (fConst7 * fRec537[1]);
+			double fTemp265 = (fConst8 * fRec540[1]);
+			double fTemp266 = (fConst10 * (((0.16100671820000001 * fTemp21) + (((0.0188835563 * fTemp13) + ((((0.0045617260000000003 * fTemp11) + (0.027934566300000001 * fTemp16)) + (0.0297684387 * fTemp18)) + (0.0157645296 * fTemp12))) + (0.024358896500000001 * fTemp15))) - ((0.0039366213999999997 * fTemp20) + ((0.0075060188 * fTemp19) + ((0.016998194599999999 * fTemp17) + (0.0234694129 * fTemp14))))));
+			double fTemp267 = (fConst11 * fRec543[1]);
+			double fTemp268 = (fConst12 * fRec546[1]);
+			fRec548[0] = (fTemp266 + (fTemp267 + (fRec548[1] + fTemp268)));
 			fRec546[0] = fRec548[0];
-			double fRec547 = ((fTemp267 + fTemp266) + fTemp265);
+			double fRec547 = ((fTemp268 + fTemp267) + fTemp266);
 			fRec545[0] = (fRec546[0] + fRec545[1]);
 			fRec543[0] = fRec545[0];
 			double fRec544 = fRec547;
-			fRec542[0] = (fTemp263 + (fTemp264 + (fRec544 + fRec542[1])));
+			fRec542[0] = (fTemp264 + (fTemp265 + (fRec544 + fRec542[1])));
 			fRec540[0] = fRec542[0];
-			double fRec541 = (fTemp263 + (fRec544 + fTemp264));
+			double fRec541 = (fTemp264 + (fRec544 + fTemp265));
 			fRec539[0] = (fRec540[0] + fRec539[1]);
 			fRec537[0] = fRec539[0];
 			double fRec538 = fRec541;
-			fRec536[0] = (fTemp262 + (fRec538 + fRec536[1]));
+			fRec536[0] = (fTemp263 + (fRec538 + fRec536[1]));
 			fRec534[0] = fRec536[0];
-			double fRec535 = (fRec538 + fTemp262);
-			double fTemp268 = (fConst14 * fRec549[1]);
-			double fTemp269 = (fConst15 * fRec552[1]);
-			double fTemp270 = (fConst17 * (((0.0091371217000000005 * fTemp30) + ((0.031718664700000003 * fTemp33) + (0.0251757775 * fTemp29))) - ((0.13222540839999999 * fTemp35) + ((0.0070475887999999999 * fTemp31) + ((((0.1001662079 * fTemp27) + (0.040741431000000002 * fTemp32)) + (0.0081995816999999999 * fTemp28)) + (0.0110633187 * fTemp34))))));
-			double fTemp271 = (fConst18 * fRec555[1]);
-			double fTemp272 = (fConst19 * fRec558[1]);
-			fRec560[0] = (fTemp270 + (fTemp271 + (fRec560[1] + fTemp272)));
+			double fRec535 = (fRec538 + fTemp263);
+			double fTemp269 = (fConst14 * fRec549[1]);
+			double fTemp270 = (fConst15 * fRec552[1]);
+			double fTemp271 = (fConst17 * (((0.0091371217000000005 * fTemp27) + ((0.031718664700000003 * fTemp33) + (0.0251757775 * fTemp31))) - ((0.13222540839999999 * fTemp35) + ((0.0110633187 * fTemp34) + ((0.0081995816999999999 * fTemp28) + ((0.040741431000000002 * fTemp32) + ((0.1001662079 * fTemp29) + (0.0070475887999999999 * fTemp30))))))));
+			double fTemp272 = (fConst18 * fRec555[1]);
+			double fTemp273 = (fConst19 * fRec558[1]);
+			fRec560[0] = (fTemp271 + (fTemp272 + (fRec560[1] + fTemp273)));
 			fRec558[0] = fRec560[0];
-			double fRec559 = ((fTemp272 + fTemp271) + fTemp270);
+			double fRec559 = ((fTemp273 + fTemp272) + fTemp271);
 			fRec557[0] = (fRec558[0] + fRec557[1]);
 			fRec555[0] = fRec557[0];
 			double fRec556 = fRec559;
-			fRec554[0] = (fTemp268 + (fTemp269 + (fRec556 + fRec554[1])));
+			fRec554[0] = (fTemp269 + (fTemp270 + (fRec556 + fRec554[1])));
 			fRec552[0] = fRec554[0];
-			double fRec553 = (fTemp268 + (fRec556 + fTemp269));
+			double fRec553 = (fTemp269 + (fRec556 + fTemp270));
 			fRec551[0] = (fRec552[0] + fRec551[1]);
 			fRec549[0] = fRec551[0];
 			double fRec550 = fRec553;
-			double fTemp273 = (fConst21 * fRec561[1]);
-			double fTemp274 = (fConst23 * ((((((0.15345727319999999 * fTemp40) + (0.039850505899999999 * fTemp43)) + (0.0086045681999999991 * fTemp41)) + (0.042071925199999999 * fTemp45)) + (0.047569668799999999 * fTemp42)) - ((0.030255153100000001 * fTemp44) + (0.016565007 * fTemp46))));
-			double fTemp275 = (fConst24 * fRec564[1]);
-			double fTemp276 = (fConst25 * fRec567[1]);
-			fRec569[0] = (fTemp274 + (fTemp275 + (fRec569[1] + fTemp276)));
+			double fTemp274 = (fConst21 * fRec561[1]);
+			double fTemp275 = (fConst23 * ((((((0.15345727319999999 * fTemp40) + (0.039850505899999999 * fTemp43)) + (0.0086045681999999991 * fTemp41)) + (0.042071925199999999 * fTemp45)) + (0.047569668799999999 * fTemp42)) - ((0.030255153100000001 * fTemp44) + (0.016565007 * fTemp46))));
+			double fTemp276 = (fConst24 * fRec564[1]);
+			double fTemp277 = (fConst25 * fRec567[1]);
+			fRec569[0] = (fTemp275 + (fTemp276 + (fRec569[1] + fTemp277)));
 			fRec567[0] = fRec569[0];
-			double fRec568 = ((fTemp276 + fTemp275) + fTemp274);
+			double fRec568 = ((fTemp277 + fTemp276) + fTemp275);
 			fRec566[0] = (fRec567[0] + fRec566[1]);
 			fRec564[0] = fRec566[0];
 			double fRec565 = fRec568;
-			fRec563[0] = (fTemp273 + (fRec565 + fRec563[1]));
+			fRec563[0] = (fTemp274 + (fRec565 + fRec563[1]));
 			fRec561[0] = fRec563[0];
-			double fRec562 = (fRec565 + fTemp273);
-			double fTemp277 = (fConst28 * ((0.065558011599999994 * fTemp50) - ((0.021438986600000001 * fTemp52) + (0.091018033600000006 * fTemp51))));
-			double fTemp278 = (fConst27 * fRec570[1]);
-			fRec572[0] = (fTemp277 + (fRec572[1] + fTemp278));
+			double fRec562 = (fRec565 + fTemp274);
+			double fTemp278 = (fConst27 * ((0.065558011599999994 * fTemp50) - ((0.021438986600000001 * fTemp52) + (0.091018033600000006 * fTemp51))));
+			double fTemp279 = (fConst28 * fRec570[1]);
+			fRec572[0] = (fTemp278 + (fRec572[1] + fTemp279));
 			fRec570[0] = fRec572[0];
-			double fRec571 = (fTemp278 + fTemp277);
-			double fTemp279 = (fConst30 * (((0.033551486899999997 * fTemp58) + (0.045523567799999998 * fTemp55)) - (((0.13618199319999999 * fTemp54) + (0.022724650200000002 * fTemp56)) + (0.051775444300000001 * fTemp57))));
-			double fTemp280 = (fConst31 * fRec573[1]);
-			double fTemp281 = (fConst32 * fRec576[1]);
-			fRec578[0] = (fTemp279 + (fTemp280 + (fRec578[1] + fTemp281)));
+			double fRec571 = (fTemp279 + fTemp278);
+			double fTemp280 = (fConst30 * (((0.045523567799999998 * fTemp55) + (0.033551486899999997 * fTemp57)) - ((0.022724650200000002 * fTemp59) + ((0.13618199319999999 * fTemp56) + (0.051775444300000001 * fTemp58)))));
+			double fTemp281 = (fConst32 * fRec573[1]);
+			double fTemp282 = (fConst31 * fRec576[1]);
+			fRec578[0] = (fTemp280 + (fTemp281 + (fRec578[1] + fTemp282)));
 			fRec576[0] = fRec578[0];
-			double fRec577 = ((fTemp281 + fTemp280) + fTemp279);
+			double fRec577 = ((fTemp282 + fTemp281) + fTemp280);
 			fRec575[0] = (fRec576[0] + fRec575[1]);
 			fRec573[0] = fRec575[0];
 			double fRec574 = fRec577;
 			fVec11[(IOTA & 1023)] = ((0.042104407699999999 * fTemp7) + (fRec535 + (fRec550 + (fRec562 + (fRec571 + fRec574)))));
 			output11[i] = FAUSTFLOAT((0.82065997130559543 * (fRec0[0] * fVec11[((IOTA - iConst33) & 1023)])));
-			double fTemp282 = (fConst4 * fRec579[1]);
-			double fTemp283 = (fConst7 * fRec582[1]);
-			double fTemp284 = (fConst8 * fRec585[1]);
-			double fTemp285 = (fConst10 * (((((0.010245812199999999 * fTemp13) + ((0.0157389244 * fTemp18) + (0.0309485631 * fTemp12))) + (0.007350189 * fTemp19)) + (0.0339026443 * fTemp15)) - ((((((0.14720765099999999 * fTemp11) + (0.0382762309 * fTemp16)) + (0.0031925398000000002 * fTemp17)) + (0.020032963000000001 * fTemp14)) + (0.020883256999999999 * fTemp20)) + (0.0432458327 * fTemp21))));
-			double fTemp286 = (fConst11 * fRec588[1]);
-			double fTemp287 = (fConst12 * fRec591[1]);
-			fRec593[0] = (fTemp285 + (fTemp286 + (fRec593[1] + fTemp287)));
+			double fTemp283 = (fConst4 * fRec579[1]);
+			double fTemp284 = (fConst7 * fRec582[1]);
+			double fTemp285 = (fConst8 * fRec585[1]);
+			double fTemp286 = (fConst10 * (((((0.010245812199999999 * fTemp13) + ((0.0157389244 * fTemp18) + (0.0309485631 * fTemp12))) + (0.007350189 * fTemp19)) + (0.0339026443 * fTemp15)) - ((((((0.14720765099999999 * fTemp11) + (0.0382762309 * fTemp16)) + (0.0031925398000000002 * fTemp17)) + (0.020032963000000001 * fTemp14)) + (0.020883256999999999 * fTemp20)) + (0.0432458327 * fTemp21))));
+			double fTemp287 = (fConst11 * fRec588[1]);
+			double fTemp288 = (fConst12 * fRec591[1]);
+			fRec593[0] = (fTemp286 + (fTemp287 + (fRec593[1] + fTemp288)));
 			fRec591[0] = fRec593[0];
-			double fRec592 = ((fTemp287 + fTemp286) + fTemp285);
+			double fRec592 = ((fTemp288 + fTemp287) + fTemp286);
 			fRec590[0] = (fRec591[0] + fRec590[1]);
 			fRec588[0] = fRec590[0];
 			double fRec589 = fRec592;
-			fRec587[0] = (fTemp283 + (fTemp284 + (fRec589 + fRec587[1])));
+			fRec587[0] = (fTemp284 + (fTemp285 + (fRec589 + fRec587[1])));
 			fRec585[0] = fRec587[0];
-			double fRec586 = (fTemp283 + (fRec589 + fTemp284));
+			double fRec586 = (fTemp284 + (fRec589 + fTemp285));
 			fRec584[0] = (fRec585[0] + fRec584[1]);
 			fRec582[0] = fRec584[0];
 			double fRec583 = fRec586;
-			fRec581[0] = (fTemp282 + (fRec583 + fRec581[1]));
+			fRec581[0] = (fTemp283 + (fRec583 + fRec581[1]));
 			fRec579[0] = fRec581[0];
-			double fRec580 = (fRec583 + fTemp282);
-			double fTemp288 = (fConst14 * fRec594[1]);
-			double fTemp289 = (fConst15 * fRec597[1]);
-			double fTemp290 = (fConst17 * ((((((0.118952302 * fTemp27) + (0.031355792200000003 * fTemp33)) + (0.0015876949 * fTemp28)) + (0.027483474099999999 * fTemp29)) + (0.014179727499999999 * fTemp34)) - ((0.10347497460000001 * fTemp35) + (((0.0084027890000000008 * fTemp32) + (0.0011304606 * fTemp30)) + (0.055197059499999999 * fTemp31)))));
-			double fTemp291 = (fConst18 * fRec600[1]);
-			double fTemp292 = (fConst19 * fRec603[1]);
-			fRec605[0] = (fTemp290 + (fTemp291 + (fRec605[1] + fTemp292)));
+			double fRec580 = (fRec583 + fTemp283);
+			double fTemp289 = (fConst14 * fRec594[1]);
+			double fTemp290 = (fConst15 * fRec597[1]);
+			double fTemp291 = (fConst17 * ((((0.0015876949 * fTemp28) + ((0.031355792200000003 * fTemp33) + ((0.118952302 * fTemp29) + (0.027483474099999999 * fTemp31)))) + (0.014179727499999999 * fTemp34)) - ((0.10347497460000001 * fTemp35) + ((0.0011304606 * fTemp27) + ((0.0084027890000000008 * fTemp32) + (0.055197059499999999 * fTemp30))))));
+			double fTemp292 = (fConst18 * fRec600[1]);
+			double fTemp293 = (fConst19 * fRec603[1]);
+			fRec605[0] = (fTemp291 + (fTemp292 + (fRec605[1] + fTemp293)));
 			fRec603[0] = fRec605[0];
-			double fRec604 = ((fTemp292 + fTemp291) + fTemp290);
+			double fRec604 = ((fTemp293 + fTemp292) + fTemp291);
 			fRec602[0] = (fRec603[0] + fRec602[1]);
 			fRec600[0] = fRec602[0];
 			double fRec601 = fRec604;
-			fRec599[0] = (fTemp288 + (fTemp289 + (fRec601 + fRec599[1])));
+			fRec599[0] = (fTemp289 + (fTemp290 + (fRec601 + fRec599[1])));
 			fRec597[0] = fRec599[0];
-			double fRec598 = (fTemp288 + (fRec601 + fTemp289));
+			double fRec598 = (fTemp289 + (fRec601 + fTemp290));
 			fRec596[0] = (fRec597[0] + fRec596[1]);
 			fRec594[0] = fRec596[0];
 			double fRec595 = fRec598;
-			double fTemp293 = (fConst21 * fRec606[1]);
-			double fTemp294 = (fConst23 * (((0.15083916529999999 * fTemp42) + ((0.023068706000000001 * fTemp46) + ((((0.022075648999999999 * fTemp40) + (0.051247200700000002 * fTemp43)) + (0.018022852400000001 * fTemp41)) + (0.0269553046 * fTemp45)))) - (0.041812899700000003 * fTemp44)));
-			double fTemp295 = (fConst24 * fRec609[1]);
-			double fTemp296 = (fConst25 * fRec612[1]);
-			fRec614[0] = (fTemp294 + (fTemp295 + (fRec614[1] + fTemp296)));
-			fRec612[0] = fRec614[0];
-			double fRec613 = ((fTemp296 + fTemp295) + fTemp294);
-			fRec611[0] = (fRec612[0] + fRec611[1]);
+			double fTemp294 = (fConst30 * ((0.027381388499999999 * fTemp57) - ((0.042364577700000003 * fTemp59) + ((0.1239419023 * fTemp56) + ((0.048777356199999997 * fTemp58) + (0.056279228100000002 * fTemp55))))));
+			double fTemp295 = (fConst32 * fRec606[1]);
+			double fTemp296 = (fConst31 * fRec609[1]);
+			fRec611[0] = (fTemp294 + (fTemp295 + (fRec611[1] + fTemp296)));
 			fRec609[0] = fRec611[0];
-			double fRec610 = fRec613;
-			fRec608[0] = (fTemp293 + (fRec610 + fRec608[1]));
+			double fRec610 = ((fTemp296 + fTemp295) + fTemp294);
+			fRec608[0] = (fRec609[0] + fRec608[1]);
 			fRec606[0] = fRec608[0];
-			double fRec607 = (fRec610 + fTemp293);
-			double fTemp297 = (fConst28 * ((0.089397061200000003 * fTemp50) - ((0.025335723000000001 * fTemp52) + (0.0576062746 * fTemp51))));
-			double fTemp298 = (fConst27 * fRec615[1]);
-			fRec617[0] = (fTemp297 + (fRec617[1] + fTemp298));
-			fRec615[0] = fRec617[0];
-			double fRec616 = (fTemp298 + fTemp297);
-			double fTemp299 = (fConst30 * ((0.027381388499999999 * fTemp58) - ((((0.1239419023 * fTemp54) + (0.042364577700000003 * fTemp56)) + (0.048777356199999997 * fTemp57)) + (0.056279228100000002 * fTemp55))));
-			double fTemp300 = (fConst31 * fRec618[1]);
-			double fTemp301 = (fConst32 * fRec621[1]);
-			fRec623[0] = (fTemp299 + (fTemp300 + (fRec623[1] + fTemp301)));
+			double fRec607 = fRec610;
+			double fTemp297 = (fConst27 * ((0.089397061200000003 * fTemp50) - ((0.025335723000000001 * fTemp52) + (0.0576062746 * fTemp51))));
+			double fTemp298 = (fConst28 * fRec612[1]);
+			fRec614[0] = (fTemp297 + (fRec614[1] + fTemp298));
+			fRec612[0] = fRec614[0];
+			double fRec613 = (fTemp298 + fTemp297);
+			double fTemp299 = (fConst21 * fRec615[1]);
+			double fTemp300 = (fConst23 * (((0.15083916529999999 * fTemp42) + ((0.023068706000000001 * fTemp46) + ((((0.022075648999999999 * fTemp40) + (0.051247200700000002 * fTemp43)) + (0.018022852400000001 * fTemp41)) + (0.0269553046 * fTemp45)))) - (0.041812899700000003 * fTemp44)));
+			double fTemp301 = (fConst24 * fRec618[1]);
+			double fTemp302 = (fConst25 * fRec621[1]);
+			fRec623[0] = (fTemp300 + (fTemp301 + (fRec623[1] + fTemp302)));
 			fRec621[0] = fRec623[0];
-			double fRec622 = ((fTemp301 + fTemp300) + fTemp299);
+			double fRec622 = ((fTemp302 + fTemp301) + fTemp300);
 			fRec620[0] = (fRec621[0] + fRec620[1]);
 			fRec618[0] = fRec620[0];
 			double fRec619 = fRec622;
-			fVec12[(IOTA & 1023)] = ((0.039981359000000001 * fTemp7) + (fRec580 + (fRec595 + (fRec607 + (fRec616 + fRec619)))));
+			fRec617[0] = (fTemp299 + (fRec619 + fRec617[1]));
+			fRec615[0] = fRec617[0];
+			double fRec616 = (fRec619 + fTemp299);
+			fVec12[(IOTA & 1023)] = ((0.039981359000000001 * fTemp7) + (fRec580 + (fRec595 + (fRec607 + (fRec613 + fRec616)))));
 			output12[i] = FAUSTFLOAT((0.82065997130559543 * (fRec0[0] * fVec12[((IOTA - iConst33) & 1023)])));
-			double fTemp302 = (fConst4 * fRec624[1]);
-			double fTemp303 = (fConst7 * fRec627[1]);
-			double fTemp304 = (fConst8 * fRec630[1]);
-			double fTemp305 = (fConst10 * ((((0.026474728900000001 * fTemp13) + ((((0.1114143901 * fTemp11) + (0.0106140573 * fTemp17)) + (0.010194730799999999 * fTemp18)) + (0.0183495082 * fTemp12))) + (0.040153141400000002 * fTemp19)) - ((0.1201253835 * fTemp21) + ((0.0151508322 * fTemp15) + (((0.024015584400000001 * fTemp16) + (0.0047257202000000002 * fTemp14)) + (0.0084522563000000005 * fTemp20))))));
-			double fTemp306 = (fConst11 * fRec633[1]);
-			double fTemp307 = (fConst12 * fRec636[1]);
-			fRec638[0] = (fTemp305 + (fTemp306 + (fRec638[1] + fTemp307)));
+			double fTemp303 = (fConst4 * fRec624[1]);
+			double fTemp304 = (fConst7 * fRec627[1]);
+			double fTemp305 = (fConst8 * fRec630[1]);
+			double fTemp306 = (fConst10 * ((((0.026474728900000001 * fTemp13) + ((((0.1114143901 * fTemp11) + (0.0106140573 * fTemp17)) + (0.010194730799999999 * fTemp18)) + (0.0183495082 * fTemp12))) + (0.040153141400000002 * fTemp19)) - ((0.1201253835 * fTemp21) + ((0.0151508322 * fTemp15) + (((0.024015584400000001 * fTemp16) + (0.0047257202000000002 * fTemp14)) + (0.0084522563000000005 * fTemp20))))));
+			double fTemp307 = (fConst11 * fRec633[1]);
+			double fTemp308 = (fConst12 * fRec636[1]);
+			fRec638[0] = (fTemp306 + (fTemp307 + (fRec638[1] + fTemp308)));
 			fRec636[0] = fRec638[0];
-			double fRec637 = ((fTemp307 + fTemp306) + fTemp305);
+			double fRec637 = ((fTemp308 + fTemp307) + fTemp306);
 			fRec635[0] = (fRec636[0] + fRec635[1]);
 			fRec633[0] = fRec635[0];
 			double fRec634 = fRec637;
-			fRec632[0] = (fTemp303 + (fTemp304 + (fRec634 + fRec632[1])));
+			fRec632[0] = (fTemp304 + (fTemp305 + (fRec634 + fRec632[1])));
 			fRec630[0] = fRec632[0];
-			double fRec631 = (fTemp303 + (fRec634 + fTemp304));
+			double fRec631 = (fTemp304 + (fRec634 + fTemp305));
 			fRec629[0] = (fRec630[0] + fRec629[1]);
 			fRec627[0] = fRec629[0];
 			double fRec628 = fRec631;
-			fRec626[0] = (fTemp302 + (fRec628 + fRec626[1]));
+			fRec626[0] = (fTemp303 + (fRec628 + fRec626[1]));
 			fRec624[0] = fRec626[0];
-			double fRec625 = (fRec628 + fTemp302);
-			double fTemp308 = (fConst14 * fRec639[1]);
-			double fTemp309 = (fConst15 * fRec642[1]);
-			double fTemp310 = (fConst17 * ((((0.029732732299999998 * fTemp34) + ((0.0021574609999999998 * fTemp30) + ((((0.1037123881 * fTemp27) + (0.0222648017 * fTemp32)) + (0.011088639900000001 * fTemp33)) + (0.021774037999999999 * fTemp29)))) + (0.1353870472 * fTemp35)) - ((0.0248590357 * fTemp28) + (0.020268232300000001 * fTemp31))));
-			double fTemp311 = (fConst18 * fRec645[1]);
-			double fTemp312 = (fConst19 * fRec648[1]);
-			fRec650[0] = (fTemp310 + (fTemp311 + (fRec650[1] + fTemp312)));
+			double fRec625 = (fRec628 + fTemp303);
+			double fTemp309 = (fConst17 * ((((0.029732732299999998 * fTemp34) + ((0.0021574609999999998 * fTemp27) + ((0.011088639900000001 * fTemp33) + ((0.0222648017 * fTemp32) + ((0.1037123881 * fTemp29) + (0.021774037999999999 * fTemp31)))))) + (0.1353870472 * fTemp35)) - ((0.0248590357 * fTemp28) + (0.020268232300000001 * fTemp30))));
+			double fTemp310 = (fConst18 * fRec645[1]);
+			double fTemp311 = (fConst19 * fRec648[1]);
+			fRec650[0] = (fTemp309 + (fTemp310 + (fRec650[1] + fTemp311)));
 			fRec648[0] = fRec650[0];
-			double fRec649 = ((fTemp312 + fTemp311) + fTemp310);
+			double fRec649 = ((fTemp311 + fTemp310) + fTemp309);
 			fRec647[0] = (fRec648[0] + fRec647[1]);
 			fRec645[0] = fRec647[0];
 			double fRec646 = fRec649;
-			fRec644[0] = (fTemp308 + (fTemp309 + (fRec646 + fRec644[1])));
+			double fTemp312 = (fConst15 * fRec642[1]);
+			double fTemp313 = (fConst14 * fRec639[1]);
+			fRec644[0] = (((fRec646 + fRec644[1]) + fTemp312) + fTemp313);
 			fRec642[0] = fRec644[0];
-			double fRec643 = (fTemp308 + (fRec646 + fTemp309));
+			double fRec643 = (fTemp313 + (fRec646 + fTemp312));
 			fRec641[0] = (fRec642[0] + fRec641[1]);
 			fRec639[0] = fRec641[0];
 			double fRec640 = fRec643;
-			double fTemp313 = (fConst21 * fRec651[1]);
-			double fTemp314 = (fConst23 * (((0.078072741200000004 * fTemp42) + ((0.028187833999999998 * fTemp46) + ((0.014253548499999999 * fTemp43) + (0.0086997949999999998 * fTemp45)))) - (((0.14727233419999999 * fTemp40) + (0.052188193299999998 * fTemp44)) + (0.00010377739999999999 * fTemp41))));
-			double fTemp315 = (fConst24 * fRec654[1]);
-			double fTemp316 = (fConst25 * fRec657[1]);
-			fRec659[0] = (fTemp314 + (fTemp315 + (fRec659[1] + fTemp316)));
+			double fTemp314 = (fConst21 * fRec651[1]);
+			double fTemp315 = (fConst23 * (((0.078072741200000004 * fTemp42) + ((0.028187833999999998 * fTemp46) + ((0.014253548499999999 * fTemp43) + (0.0086997949999999998 * fTemp45)))) - (((0.14727233419999999 * fTemp40) + (0.052188193299999998 * fTemp44)) + (0.00010377739999999999 * fTemp41))));
+			double fTemp316 = (fConst24 * fRec654[1]);
+			double fTemp317 = (fConst25 * fRec657[1]);
+			fRec659[0] = (fTemp315 + (fTemp316 + (fRec659[1] + fTemp317)));
 			fRec657[0] = fRec659[0];
-			double fRec658 = ((fTemp316 + fTemp315) + fTemp314);
+			double fRec658 = ((fTemp317 + fTemp316) + fTemp315);
 			fRec656[0] = (fRec657[0] + fRec656[1]);
 			fRec654[0] = fRec656[0];
 			double fRec655 = fRec658;
-			fRec653[0] = (fTemp313 + (fRec655 + fRec653[1]));
+			fRec653[0] = (fTemp314 + (fRec655 + fRec653[1]));
 			fRec651[0] = fRec653[0];
-			double fRec652 = (fRec655 + fTemp313);
-			double fTemp317 = (fConst28 * ((0.1161220323 * fTemp50) - ((0.017533206799999999 * fTemp52) + (0.0189153325 * fTemp51))));
-			double fTemp318 = (fConst27 * fRec660[1]);
-			fRec662[0] = (fTemp317 + (fRec662[1] + fTemp318));
+			double fRec652 = (fRec655 + fTemp314);
+			double fTemp318 = (fConst27 * ((0.1161220323 * fTemp50) - ((0.017533206799999999 * fTemp52) + (0.0189153325 * fTemp51))));
+			double fTemp319 = (fConst28 * fRec660[1]);
+			fRec662[0] = (fTemp318 + (fRec662[1] + fTemp319));
 			fRec660[0] = fRec662[0];
-			double fRec661 = (fTemp318 + fTemp317);
-			double fTemp319 = (fConst30 * ((0.0067589408 * fTemp58) - ((((0.047703541799999999 * fTemp54) + (0.030309711600000001 * fTemp56)) + (0.0544875051 * fTemp57)) + (0.1422203715 * fTemp55))));
-			double fTemp320 = (fConst31 * fRec663[1]);
-			double fTemp321 = (fConst32 * fRec666[1]);
-			fRec668[0] = (fTemp319 + (fTemp320 + (fRec668[1] + fTemp321)));
+			double fRec661 = (fTemp319 + fTemp318);
+			double fTemp320 = (fConst30 * ((0.0067589408 * fTemp57) - ((0.030309711600000001 * fTemp59) + ((0.047703541799999999 * fTemp56) + ((0.0544875051 * fTemp58) + (0.1422203715 * fTemp55))))));
+			double fTemp321 = (fConst32 * fRec663[1]);
+			double fTemp322 = (fConst31 * fRec666[1]);
+			fRec668[0] = (fTemp320 + (fTemp321 + (fRec668[1] + fTemp322)));
 			fRec666[0] = fRec668[0];
-			double fRec667 = ((fTemp321 + fTemp320) + fTemp319);
+			double fRec667 = ((fTemp322 + fTemp321) + fTemp320);
 			fRec665[0] = (fRec666[0] + fRec665[1]);
 			fRec663[0] = fRec665[0];
 			double fRec664 = fRec667;
-			fVec13[(IOTA & 1023)] = ((0.044157967499999999 * fTemp7) + (fRec625 + (fRec640 + (fRec652 + (fRec661 + fRec664)))));
+			fVec13[(IOTA & 1023)] = ((fRec625 + (fRec640 + (fRec652 + (fRec661 + fRec664)))) + (0.044157967499999999 * fTemp7));
 			output13[i] = FAUSTFLOAT((0.82065997130559543 * (fRec0[0] * fVec13[((IOTA - iConst33) & 1023)])));
-			double fTemp322 = (fConst28 * (((0.10853214210000001 * fTemp50) + (0.025945026199999999 * fTemp51)) - (0.026507280599999999 * fTemp52)));
-			double fTemp323 = (fConst27 * fRec669[1]);
-			fRec671[0] = (fTemp322 + (fRec671[1] + fTemp323));
-			fRec669[0] = fRec671[0];
-			double fRec670 = (fTemp323 + fTemp322);
-			double fTemp324 = (fConst4 * fRec672[1]);
-			double fTemp325 = (fConst7 * fRec675[1]);
-			double fTemp326 = (fConst8 * fRec678[1]);
-			double fTemp327 = (fConst10 * ((((0.013701101 * fTemp20) + ((0.0157222217 * fTemp19) + ((0.0084028246000000008 * fTemp14) + ((0.010899042499999999 * fTemp13) + ((((0.059784875299999998 * fTemp11) + (0.038552998599999999 * fTemp16)) + (0.0169077046 * fTemp17)) + (0.037555097000000003 * fTemp12)))))) + (0.14281515140000001 * fTemp21)) - ((0.0101432568 * fTemp18) + (0.0357300901 * fTemp15))));
-			double fTemp328 = (fConst11 * fRec681[1]);
-			double fTemp329 = (fConst12 * fRec684[1]);
-			fRec686[0] = (fTemp327 + (fTemp328 + (fRec686[1] + fTemp329)));
-			fRec684[0] = fRec686[0];
-			double fRec685 = ((fTemp329 + fTemp328) + fTemp327);
-			fRec683[0] = (fRec684[0] + fRec683[1]);
-			fRec681[0] = fRec683[0];
-			double fRec682 = fRec685;
-			fRec680[0] = (fTemp325 + (fTemp326 + (fRec682 + fRec680[1])));
+			double fTemp323 = (fConst14 * fRec669[1]);
+			double fTemp324 = (fConst15 * fRec672[1]);
+			double fTemp325 = (fConst17 * (((0.095376561900000004 * fTemp35) + ((0.031980171799999998 * fTemp34) + ((0.0016352057000000001 * fTemp28) + ((0.046470839299999997 * fTemp32) + ((0.028918850900000001 * fTemp31) + (0.034076644500000003 * fTemp30)))))) - (((0.13044209379999999 * fTemp29) + (0.016161198099999999 * fTemp33)) + (0.00064614000000000002 * fTemp27))));
+			double fTemp326 = (fConst18 * fRec675[1]);
+			double fTemp327 = (fConst19 * fRec678[1]);
+			fRec680[0] = (fTemp325 + (fTemp326 + (fRec680[1] + fTemp327)));
 			fRec678[0] = fRec680[0];
-			double fRec679 = (fTemp325 + (fRec682 + fTemp326));
+			double fRec679 = ((fTemp327 + fTemp326) + fTemp325);
 			fRec677[0] = (fRec678[0] + fRec677[1]);
 			fRec675[0] = fRec677[0];
 			double fRec676 = fRec679;
-			fRec674[0] = (fTemp324 + (fRec676 + fRec674[1]));
+			fRec674[0] = (fTemp323 + (fTemp324 + (fRec676 + fRec674[1])));
 			fRec672[0] = fRec674[0];
-			double fRec673 = (fRec676 + fTemp324);
-			double fTemp330 = (fConst14 * fRec687[1]);
-			double fTemp331 = (fConst15 * fRec690[1]);
-			double fTemp332 = (fConst17 * (((0.095376561900000004 * fTemp35) + ((0.034076644500000003 * fTemp31) + ((((0.046470839299999997 * fTemp32) + (0.0016352057000000001 * fTemp28)) + (0.028918850900000001 * fTemp29)) + (0.031980171799999998 * fTemp34)))) - (((0.13044209379999999 * fTemp27) + (0.016161198099999999 * fTemp33)) + (0.00064614000000000002 * fTemp30))));
-			double fTemp333 = (fConst18 * fRec693[1]);
-			double fTemp334 = (fConst19 * fRec696[1]);
-			fRec698[0] = (fTemp332 + (fTemp333 + (fRec698[1] + fTemp334)));
-			fRec696[0] = fRec698[0];
-			double fRec697 = ((fTemp334 + fTemp333) + fTemp332);
-			fRec695[0] = (fRec696[0] + fRec695[1]);
-			fRec693[0] = fRec695[0];
-			double fRec694 = fRec697;
-			fRec692[0] = (fTemp330 + (fTemp331 + (fRec694 + fRec692[1])));
-			fRec690[0] = fRec692[0];
-			double fRec691 = (fTemp330 + (fRec694 + fTemp331));
-			fRec689[0] = (fRec690[0] + fRec689[1]);
+			double fRec673 = (fTemp323 + (fRec676 + fTemp324));
+			fRec671[0] = (fRec672[0] + fRec671[1]);
+			fRec669[0] = fRec671[0];
+			double fRec670 = fRec673;
+			double fTemp328 = (fConst21 * fRec681[1]);
+			double fTemp329 = (fConst23 * (((0.018431099199999999 * fTemp41) + (0.052985614700000003 * fTemp46)) - (((((0.1204005487 * fTemp40) + (0.024286683900000001 * fTemp43)) + (0.0506631752 * fTemp44)) + (0.0121920274 * fTemp45)) + (0.10234423400000001 * fTemp42))));
+			double fTemp330 = (fConst24 * fRec684[1]);
+			double fTemp331 = (fConst25 * fRec687[1]);
+			fRec689[0] = (fTemp329 + (fTemp330 + (fRec689[1] + fTemp331)));
 			fRec687[0] = fRec689[0];
-			double fRec688 = fRec691;
-			double fTemp335 = (fConst30 * ((0.064337804400000004 * fTemp54) - ((((0.051300321199999999 * fTemp56) + (0.051154921200000002 * fTemp57)) + (0.0113740217 * fTemp58)) + (0.1267978988 * fTemp55))));
-			double fTemp336 = (fConst31 * fRec699[1]);
-			double fTemp337 = (fConst32 * fRec702[1]);
-			fRec704[0] = (fTemp335 + (fTemp336 + (fRec704[1] + fTemp337)));
+			double fRec688 = ((fTemp331 + fTemp330) + fTemp329);
+			fRec686[0] = (fRec687[0] + fRec686[1]);
+			fRec684[0] = fRec686[0];
+			double fRec685 = fRec688;
+			fRec683[0] = (fTemp328 + (fRec685 + fRec683[1]));
+			fRec681[0] = fRec683[0];
+			double fRec682 = (fRec685 + fTemp328);
+			double fTemp332 = (fConst30 * ((0.064337804400000004 * fTemp56) - ((0.051300321199999999 * fTemp59) + ((0.0113740217 * fTemp57) + ((0.051154921200000002 * fTemp58) + (0.1267978988 * fTemp55))))));
+			double fTemp333 = (fConst32 * fRec690[1]);
+			double fTemp334 = (fConst31 * fRec693[1]);
+			fRec695[0] = (fTemp332 + (fTemp333 + (fRec695[1] + fTemp334)));
+			fRec693[0] = fRec695[0];
+			double fRec694 = ((fTemp334 + fTemp333) + fTemp332);
+			fRec692[0] = (fRec693[0] + fRec692[1]);
+			fRec690[0] = fRec692[0];
+			double fRec691 = fRec694;
+			double fTemp335 = (fConst4 * fRec696[1]);
+			double fTemp336 = (fConst7 * fRec699[1]);
+			double fTemp337 = (fConst8 * fRec702[1]);
+			double fTemp338 = (fConst10 * ((((0.013701101 * fTemp20) + ((0.0157222217 * fTemp19) + ((0.0084028246000000008 * fTemp14) + ((0.010899042499999999 * fTemp13) + ((((0.059784875299999998 * fTemp11) + (0.038552998599999999 * fTemp16)) + (0.0169077046 * fTemp17)) + (0.037555097000000003 * fTemp12)))))) + (0.14281515140000001 * fTemp21)) - ((0.0101432568 * fTemp18) + (0.0357300901 * fTemp15))));
+			double fTemp339 = (fConst11 * fRec705[1]);
+			double fTemp340 = (fConst12 * fRec708[1]);
+			fRec710[0] = (fTemp338 + (fTemp339 + (fRec710[1] + fTemp340)));
+			fRec708[0] = fRec710[0];
+			double fRec709 = ((fTemp340 + fTemp339) + fTemp338);
+			fRec707[0] = (fRec708[0] + fRec707[1]);
+			fRec705[0] = fRec707[0];
+			double fRec706 = fRec709;
+			fRec704[0] = (fTemp336 + (fTemp337 + (fRec706 + fRec704[1])));
 			fRec702[0] = fRec704[0];
-			double fRec703 = ((fTemp337 + fTemp336) + fTemp335);
+			double fRec703 = (fTemp336 + (fRec706 + fTemp337));
 			fRec701[0] = (fRec702[0] + fRec701[1]);
 			fRec699[0] = fRec701[0];
 			double fRec700 = fRec703;
-			double fTemp338 = (fConst21 * fRec705[1]);
-			double fTemp339 = (fConst23 * (((0.018431099199999999 * fTemp41) + (0.052985614700000003 * fTemp46)) - (((((0.1204005487 * fTemp40) + (0.024286683900000001 * fTemp43)) + (0.0506631752 * fTemp44)) + (0.0121920274 * fTemp45)) + (0.10234423400000001 * fTemp42))));
-			double fTemp340 = (fConst24 * fRec708[1]);
-			double fTemp341 = (fConst25 * fRec711[1]);
-			fRec713[0] = (fTemp339 + (fTemp340 + (fRec713[1] + fTemp341)));
+			fRec698[0] = (fTemp335 + (fRec700 + fRec698[1]));
+			fRec696[0] = fRec698[0];
+			double fRec697 = (fRec700 + fTemp335);
+			double fTemp341 = (fConst27 * (((0.10853214210000001 * fTemp50) + (0.025945026199999999 * fTemp51)) - (0.026507280599999999 * fTemp52)));
+			double fTemp342 = (fConst28 * fRec711[1]);
+			fRec713[0] = (fTemp341 + (fRec713[1] + fTemp342));
 			fRec711[0] = fRec713[0];
-			double fRec712 = ((fTemp341 + fTemp340) + fTemp339);
-			fRec710[0] = (fRec711[0] + fRec710[1]);
-			fRec708[0] = fRec710[0];
-			double fRec709 = fRec712;
-			fRec707[0] = (fTemp338 + (fRec709 + fRec707[1]));
-			fRec705[0] = fRec707[0];
-			double fRec706 = (fRec709 + fTemp338);
-			fVec14[(IOTA & 1023)] = ((0.042028136299999998 * fTemp7) + (fRec670 + (fRec673 + (fRec688 + (fRec700 + fRec706)))));
+			double fRec712 = (fTemp342 + fTemp341);
+			fVec14[(IOTA & 1023)] = ((0.042028136299999998 * fTemp7) + (fRec670 + (fRec682 + (fRec691 + (fRec697 + fRec712)))));
 			output14[i] = FAUSTFLOAT((0.82065997130559543 * (fRec0[0] * fVec14[((IOTA - iConst33) & 1023)])));
-			double fTemp342 = (fConst4 * fRec714[1]);
-			double fTemp343 = (fConst7 * fRec717[1]);
-			double fTemp344 = (fConst8 * fRec720[1]);
-			double fTemp345 = (fConst10 * (((0.0241886056 * fTemp15) + ((0.0170050216 * fTemp20) + ((0.0054538012000000004 * fTemp19) + ((0.0152251552 * fTemp14) + ((0.022964218299999999 * fTemp13) + ((0.028753559200000001 * fTemp16) + (0.023056882399999999 * fTemp12))))))) - ((((0.1629328018 * fTemp11) + (0.0038877654000000002 * fTemp17)) + (0.035911923499999998 * fTemp18)) + (0.020154467400000001 * fTemp21))));
-			double fTemp346 = (fConst11 * fRec723[1]);
-			double fTemp347 = (fConst12 * fRec726[1]);
-			fRec728[0] = (fTemp345 + (fTemp346 + (fRec728[1] + fTemp347)));
+			double fTemp343 = (fConst4 * fRec714[1]);
+			double fTemp344 = (fConst7 * fRec717[1]);
+			double fTemp345 = (fConst8 * fRec720[1]);
+			double fTemp346 = (fConst10 * (((0.0241886056 * fTemp15) + ((0.0170050216 * fTemp20) + ((0.0054538012000000004 * fTemp19) + ((0.0152251552 * fTemp14) + ((0.022964218299999999 * fTemp13) + ((0.028753559200000001 * fTemp16) + (0.023056882399999999 * fTemp12))))))) - ((((0.1629328018 * fTemp11) + (0.0038877654000000002 * fTemp17)) + (0.035911923499999998 * fTemp18)) + (0.020154467400000001 * fTemp21))));
+			double fTemp347 = (fConst11 * fRec723[1]);
+			double fTemp348 = (fConst12 * fRec726[1]);
+			fRec728[0] = (fTemp346 + (fTemp347 + (fRec728[1] + fTemp348)));
 			fRec726[0] = fRec728[0];
-			double fRec727 = ((fTemp347 + fTemp346) + fTemp345);
+			double fRec727 = ((fTemp348 + fTemp347) + fTemp346);
 			fRec725[0] = (fRec726[0] + fRec725[1]);
 			fRec723[0] = fRec725[0];
 			double fRec724 = fRec727;
-			fRec722[0] = (fTemp343 + (fTemp344 + (fRec724 + fRec722[1])));
+			fRec722[0] = (fTemp344 + (fTemp345 + (fRec724 + fRec722[1])));
 			fRec720[0] = fRec722[0];
-			double fRec721 = (fTemp343 + (fRec724 + fTemp344));
+			double fRec721 = (fTemp344 + (fRec724 + fTemp345));
 			fRec719[0] = (fRec720[0] + fRec719[1]);
 			fRec717[0] = fRec719[0];
 			double fRec718 = fRec721;
-			fRec716[0] = (fTemp342 + (fRec718 + fRec716[1]));
+			fRec716[0] = (fTemp343 + (fRec718 + fRec716[1]));
 			fRec714[0] = fRec716[0];
-			double fRec715 = (fRec718 + fTemp342);
-			double fTemp348 = (fConst14 * fRec729[1]);
-			double fTemp349 = (fConst15 * fRec732[1]);
-			double fTemp350 = (fConst17 * (((0.040645646299999998 * fTemp31) + ((0.026047562999999999 * fTemp29) + (0.0103310569 * fTemp34))) - ((((((0.087717908900000002 * fTemp27) + (0.0066050248000000004 * fTemp32)) + (0.0338591741 * fTemp33)) + (0.012106038600000001 * fTemp28)) + (0.0122684904 * fTemp30)) + (0.15005854299999999 * fTemp35))));
-			double fTemp351 = (fConst18 * fRec735[1]);
-			double fTemp352 = (fConst19 * fRec738[1]);
-			fRec740[0] = (fTemp350 + (fTemp351 + (fRec740[1] + fTemp352)));
+			double fRec715 = (fRec718 + fTemp343);
+			double fTemp349 = (fConst14 * fRec729[1]);
+			double fTemp350 = (fConst15 * fRec732[1]);
+			double fTemp351 = (fConst17 * (((0.0103310569 * fTemp34) + ((0.026047562999999999 * fTemp31) + (0.040645646299999998 * fTemp30))) - ((((((0.087717908900000002 * fTemp29) + (0.0066050248000000004 * fTemp32)) + (0.0338591741 * fTemp33)) + (0.012106038600000001 * fTemp28)) + (0.0122684904 * fTemp27)) + (0.15005854299999999 * fTemp35))));
+			double fTemp352 = (fConst18 * fRec735[1]);
+			double fTemp353 = (fConst19 * fRec738[1]);
+			fRec740[0] = (fTemp351 + (fTemp352 + (fRec740[1] + fTemp353)));
 			fRec738[0] = fRec740[0];
-			double fRec739 = ((fTemp352 + fTemp351) + fTemp350);
+			double fRec739 = ((fTemp353 + fTemp352) + fTemp351);
 			fRec737[0] = (fRec738[0] + fRec737[1]);
 			fRec735[0] = fRec737[0];
 			double fRec736 = fRec739;
-			fRec734[0] = (fTemp348 + (fTemp349 + (fRec736 + fRec734[1])));
+			fRec734[0] = (fTemp349 + (fTemp350 + (fRec736 + fRec734[1])));
 			fRec732[0] = fRec734[0];
-			double fRec733 = (fTemp348 + (fRec736 + fTemp349));
+			double fRec733 = (fTemp349 + (fRec736 + fTemp350));
 			fRec731[0] = (fRec732[0] + fRec731[1]);
 			fRec729[0] = fRec731[0];
 			double fRec730 = fRec733;
-			double fTemp353 = (fConst21 * fRec741[1]);
-			double fTemp354 = (fConst23 * ((((0.065219762099999995 * fTemp40) + (0.0067015549000000001 * fTemp41)) + (0.016477597300000001 * fTemp46)) - ((((0.039722792799999997 * fTemp43) + (0.044757810600000003 * fTemp44)) + (0.034028228100000002 * fTemp45)) + (0.15897575880000001 * fTemp42))));
-			double fTemp355 = (fConst24 * fRec744[1]);
-			double fTemp356 = (fConst25 * fRec747[1]);
-			fRec749[0] = (fTemp354 + (fTemp355 + (fRec749[1] + fTemp356)));
+			double fTemp354 = (fConst21 * fRec741[1]);
+			double fTemp355 = (fConst23 * (((0.016477597300000001 * fTemp46) + ((0.065219762099999995 * fTemp40) + (0.0067015549000000001 * fTemp41))) - (((0.034028228100000002 * fTemp45) + ((0.039722792799999997 * fTemp43) + (0.044757810600000003 * fTemp44))) + (0.15897575880000001 * fTemp42))));
+			double fTemp356 = (fConst24 * fRec744[1]);
+			double fTemp357 = (fConst25 * fRec747[1]);
+			fRec749[0] = (fTemp355 + (fTemp356 + (fRec749[1] + fTemp357)));
 			fRec747[0] = fRec749[0];
-			double fRec748 = ((fTemp356 + fTemp355) + fTemp354);
+			double fRec748 = ((fTemp357 + fTemp356) + fTemp355);
 			fRec746[0] = (fRec747[0] + fRec746[1]);
 			fRec744[0] = fRec746[0];
 			double fRec745 = fRec748;
-			fRec743[0] = (fTemp353 + (fRec745 + fRec743[1]));
+			fRec743[0] = (fTemp354 + (fRec745 + fRec743[1]));
 			fRec741[0] = fRec743[0];
-			double fRec742 = (fRec745 + fTemp353);
-			double fTemp357 = (fConst28 * (((0.097414394099999996 * fTemp50) + (0.074602914500000006 * fTemp51)) - (0.021960104300000002 * fTemp52)));
-			double fTemp358 = (fConst27 * fRec750[1]);
-			fRec752[0] = (fTemp357 + (fRec752[1] + fTemp358));
+			double fRec742 = (fRec745 + fTemp354);
+			double fTemp358 = (fConst27 * (((0.097414394099999996 * fTemp50) + (0.074602914500000006 * fTemp51)) - (0.021960104300000002 * fTemp52)));
+			double fTemp359 = (fConst28 * fRec750[1]);
+			fRec752[0] = (fTemp358 + (fRec752[1] + fTemp359));
 			fRec750[0] = fRec752[0];
-			double fRec751 = (fTemp358 + fTemp357);
-			double fTemp359 = (fConst30 * ((0.15038803980000001 * fTemp54) - ((((0.033719701599999999 * fTemp56) + (0.056870280600000003 * fTemp57)) + (0.023106281400000001 * fTemp58)) + (0.040609002200000001 * fTemp55))));
-			double fTemp360 = (fConst31 * fRec753[1]);
-			double fTemp361 = (fConst32 * fRec756[1]);
-			fRec758[0] = (fTemp359 + (fTemp360 + (fRec758[1] + fTemp361)));
+			double fRec751 = (fTemp359 + fTemp358);
+			double fTemp360 = (fConst31 * fRec756[1]);
+			double fTemp361 = (fConst32 * fRec753[1]);
+			double fTemp362 = (fConst30 * ((0.15038803980000001 * fTemp56) - ((0.033719701599999999 * fTemp59) + ((0.023106281400000001 * fTemp57) + ((0.056870280600000003 * fTemp58) + (0.040609002200000001 * fTemp55))))));
+			fRec758[0] = (((fRec758[1] + fTemp360) + fTemp361) + fTemp362);
 			fRec756[0] = fRec758[0];
-			double fRec757 = ((fTemp361 + fTemp360) + fTemp359);
+			double fRec757 = ((fTemp360 + fTemp361) + fTemp362);
 			fRec755[0] = (fRec756[0] + fRec755[1]);
 			fRec753[0] = fRec755[0];
 			double fRec754 = fRec757;
 			fVec15[(IOTA & 1023)] = ((0.046153242099999998 * fTemp7) + (fRec715 + (fRec730 + (fRec742 + (fRec751 + fRec754)))));
 			output15[i] = FAUSTFLOAT((0.82065997130559543 * (fRec0[0] * fVec15[((IOTA - iConst33) & 1023)])));
-			double fTemp362 = (fConst35 * fRec759[1]);
-			double fTemp363 = (fConst37 * fRec762[1]);
-			double fTemp364 = (fConst38 * fRec765[1]);
-			double fTemp365 = (fConst40 * (((0.020474740000000002 * fTemp15) + ((0.074212676599999999 * fTemp20) + ((((0.0169936966 * fTemp11) + (0.071420858399999995 * fTemp16)) + (0.083653301900000004 * fTemp17)) + (0.032628738400000003 * fTemp19)))) - (((0.093195306000000006 * fTemp14) + (((0.001096971 * fTemp18) + (0.036926773900000001 * fTemp12)) + (0.033865697700000003 * fTemp13))) + (0.0034711658999999999 * fTemp21))));
-			double fTemp366 = (fConst41 * fRec768[1]);
-			double fTemp367 = (fConst42 * fRec771[1]);
-			fRec773[0] = (fTemp365 + (fTemp366 + (fRec773[1] + fTemp367)));
-			fRec771[0] = fRec773[0];
-			double fRec772 = ((fTemp367 + fTemp366) + fTemp365);
-			fRec770[0] = (fRec771[0] + fRec770[1]);
-			fRec768[0] = fRec770[0];
-			double fRec769 = fRec772;
-			fRec767[0] = (fTemp363 + (fTemp364 + (fRec769 + fRec767[1])));
+			double fTemp363 = (((fConst35 * fRec765[1]) + (fConst36 * fRec762[1])) + (fConst38 * (((0.040134177100000001 * fTemp42) + ((0.12855316150000001 * fTemp46) + ((((0.056955401000000003 * fTemp40) + (0.086359451000000004 * fTemp43)) + (0.022282225700000002 * fTemp44)) + (0.097156583199999993 * fTemp45)))) - (0.073542652200000003 * fTemp41))));
+			fRec767[0] = (fTemp363 + fRec767[1]);
 			fRec765[0] = fRec767[0];
-			double fRec766 = (fTemp363 + (fRec769 + fTemp364));
+			double fRec766 = fTemp363;
 			fRec764[0] = (fRec765[0] + fRec764[1]);
 			fRec762[0] = fRec764[0];
 			double fRec763 = fRec766;
-			fRec761[0] = (fTemp362 + (fRec763 + fRec761[1]));
+			double fTemp364 = (fConst39 * fRec759[1]);
+			fRec761[0] = ((fRec763 + fRec761[1]) + fTemp364);
 			fRec759[0] = fRec761[0];
-			double fRec760 = (fRec763 + fTemp362);
-			double fTemp368 = (fConst44 * fRec774[1]);
-			double fTemp369 = (fConst45 * fRec777[1]);
-			double fTemp370 = (fConst47 * (((0.0101614579 * fTemp35) + ((0.072850767799999994 * fTemp31) + ((((0.040585187299999999 * fTemp27) + (0.096664578099999995 * fTemp32)) + (0.063062869100000002 * fTemp33)) + (0.11015917629999999 * fTemp34)))) - (((0.018175261000000002 * fTemp28) + (0.094374570099999999 * fTemp29)) + (0.023501684299999999 * fTemp30))));
-			double fTemp371 = (fConst48 * fRec780[1]);
-			double fTemp372 = (fConst49 * fRec783[1]);
-			fRec785[0] = (fTemp370 + (fTemp371 + (fRec785[1] + fTemp372)));
-			fRec783[0] = fRec785[0];
-			double fRec784 = ((fTemp372 + fTemp371) + fTemp370);
-			fRec782[0] = (fRec783[0] + fRec782[1]);
-			fRec780[0] = fRec782[0];
-			double fRec781 = fRec784;
-			fRec779[0] = (fTemp368 + (fTemp369 + (fRec781 + fRec779[1])));
-			fRec777[0] = fRec779[0];
-			double fRec778 = (fTemp368 + (fRec781 + fTemp369));
-			fRec776[0] = (fRec777[0] + fRec776[1]);
+			double fRec760 = (fRec763 + fTemp364);
+			double fTemp365 = (fConst41 * (((0.0281900517 * fTemp50) + (0.078833449 * fTemp52)) + (0.091958482100000002 * fTemp51)));
+			double fTemp366 = (fConst42 * fRec768[1]);
+			fRec770[0] = (fTemp365 + (fRec770[1] + fTemp366));
+			fRec768[0] = fRec770[0];
+			double fRec769 = (fTemp366 + fTemp365);
+			double fTemp367 = (fConst44 * ((0.0437152492 * fTemp59) + ((0.053311744199999997 * fTemp56) + ((0.15057935629999999 * fTemp57) + ((0.016468254599999999 * fTemp58) + (0.075162994900000002 * fTemp55))))));
+			double fTemp368 = (fConst45 * fRec771[1]);
+			double fTemp369 = (fConst46 * fRec774[1]);
+			fRec776[0] = (fTemp367 + (fTemp368 + (fRec776[1] + fTemp369)));
 			fRec774[0] = fRec776[0];
-			double fRec775 = fRec778;
-			double fTemp373 = (fConst51 * fRec786[1]);
-			double fTemp374 = (fConst53 * (((0.040134177100000001 * fTemp42) + ((0.12855316150000001 * fTemp46) + ((((0.056955401000000003 * fTemp40) + (0.086359451000000004 * fTemp43)) + (0.022282225700000002 * fTemp44)) + (0.097156583199999993 * fTemp45)))) - (0.073542652200000003 * fTemp41)));
-			double fTemp375 = (fConst54 * fRec789[1]);
-			double fTemp376 = (fConst55 * fRec792[1]);
-			fRec794[0] = (fTemp374 + (fTemp375 + (fRec794[1] + fTemp376)));
-			fRec792[0] = fRec794[0];
-			double fRec793 = ((fTemp376 + fTemp375) + fTemp374);
-			fRec791[0] = (fRec792[0] + fRec791[1]);
-			fRec789[0] = fRec791[0];
-			double fRec790 = fRec793;
-			fRec788[0] = (fTemp373 + (fRec790 + fRec788[1]));
+			double fRec775 = ((fTemp369 + fTemp368) + fTemp367);
+			fRec773[0] = (fRec774[0] + fRec773[1]);
+			fRec771[0] = fRec773[0];
+			double fRec772 = fRec775;
+			double fTemp370 = (fConst48 * fRec777[1]);
+			double fTemp371 = (fConst49 * fRec780[1]);
+			double fTemp372 = (fConst51 * (((0.0101614579 * fTemp35) + ((0.11015917629999999 * fTemp34) + ((0.063062869100000002 * fTemp33) + ((0.096664578099999995 * fTemp32) + ((0.040585187299999999 * fTemp29) + (0.072850767799999994 * fTemp30)))))) - (((0.018175261000000002 * fTemp28) + (0.094374570099999999 * fTemp31)) + (0.023501684299999999 * fTemp27))));
+			double fTemp373 = (fConst52 * fRec783[1]);
+			double fTemp374 = (fConst53 * fRec786[1]);
+			fRec788[0] = (fTemp372 + (fTemp373 + (fRec788[1] + fTemp374)));
 			fRec786[0] = fRec788[0];
-			double fRec787 = (fRec790 + fTemp373);
-			double fTemp377 = (fConst57 * (((0.0281900517 * fTemp50) + (0.078833449 * fTemp52)) + (0.091958482100000002 * fTemp51)));
-			double fTemp378 = (fConst58 * fRec795[1]);
-			fRec797[0] = (fTemp377 + (fRec797[1] + fTemp378));
-			fRec795[0] = fRec797[0];
-			double fRec796 = (fTemp378 + fTemp377);
-			double fTemp379 = (fConst60 * (((((0.053311744199999997 * fTemp54) + (0.0437152492 * fTemp56)) + (0.016468254599999999 * fTemp57)) + (0.15057935629999999 * fTemp58)) + (0.075162994900000002 * fTemp55)));
-			double fTemp380 = (fConst61 * fRec798[1]);
-			double fTemp381 = (fConst62 * fRec801[1]);
-			fRec803[0] = (fTemp379 + (fTemp380 + (fRec803[1] + fTemp381)));
+			double fRec787 = ((fTemp374 + fTemp373) + fTemp372);
+			fRec785[0] = (fRec785[1] + fRec786[0]);
+			fRec783[0] = fRec785[0];
+			double fRec784 = fRec787;
+			fRec782[0] = ((fTemp370 + (fRec782[1] + fTemp371)) + fRec784);
+			fRec780[0] = fRec782[0];
+			double fRec781 = ((fTemp371 + fTemp370) + fRec784);
+			fRec779[0] = (fRec779[1] + fRec780[0]);
+			fRec777[0] = fRec779[0];
+			double fRec778 = fRec781;
+			double fTemp375 = (fConst55 * fRec789[1]);
+			double fTemp376 = (fConst57 * fRec792[1]);
+			double fTemp377 = (fConst58 * fRec795[1]);
+			double fTemp378 = (fConst60 * (((0.020474740000000002 * fTemp15) + ((0.074212676599999999 * fTemp20) + ((((0.0169936966 * fTemp11) + (0.071420858399999995 * fTemp16)) + (0.083653301900000004 * fTemp17)) + (0.032628738400000003 * fTemp19)))) - (((0.093195306000000006 * fTemp14) + (((0.001096971 * fTemp18) + (0.036926773900000001 * fTemp12)) + (0.033865697700000003 * fTemp13))) + (0.0034711658999999999 * fTemp21))));
+			double fTemp379 = (fConst61 * fRec798[1]);
+			double fTemp380 = (fConst62 * fRec801[1]);
+			fRec803[0] = (fTemp378 + (fTemp379 + (fRec803[1] + fTemp380)));
 			fRec801[0] = fRec803[0];
-			double fRec802 = ((fTemp381 + fTemp380) + fTemp379);
-			fRec800[0] = (fRec801[0] + fRec800[1]);
+			double fRec802 = ((fTemp380 + fTemp379) + fTemp378);
+			fRec800[0] = (fRec800[1] + fRec801[0]);
 			fRec798[0] = fRec800[0];
 			double fRec799 = fRec802;
-			fVec16[0] = ((0.044115263799999999 * fTemp7) + (fRec760 + (fRec775 + (fRec787 + (fRec796 + fRec799)))));
+			fRec797[0] = ((fTemp376 + (fRec797[1] + fTemp377)) + fRec799);
+			fRec795[0] = fRec797[0];
+			double fRec796 = ((fTemp377 + fTemp376) + fRec799);
+			fRec794[0] = (fRec794[1] + fRec795[0]);
+			fRec792[0] = fRec794[0];
+			double fRec793 = fRec796;
+			fRec791[0] = ((fRec791[1] + fTemp375) + fRec793);
+			fRec789[0] = fRec791[0];
+			double fRec790 = (fTemp375 + fRec793);
+			fVec16[0] = ((((fRec760 + (fRec769 + fRec772)) + fRec778) + fRec790) + (0.044115263799999999 * fTemp7));
 			output16[i] = FAUSTFLOAT((0.99982065997130565 * (fRec0[0] * fVec16[iConst63])));
-			double fTemp382 = (fConst35 * fRec804[1]);
-			double fTemp383 = (fConst37 * fRec807[1]);
-			double fTemp384 = (fConst38 * fRec810[1]);
-			double fTemp385 = (fConst40 * (((0.0119769087 * fTemp20) + (((0.0010077651999999999 * fTemp18) + (0.0482135567 * fTemp12)) + (0.0027752092999999999 * fTemp19))) - ((0.026146069500000001 * fTemp21) + (((0.094723847099999994 * fTemp14) + ((((0.012707311299999999 * fTemp11) + (0.075059426499999998 * fTemp16)) + (0.099849339999999995 * fTemp17)) + (0.017123138 * fTemp13))) + (0.037852361799999998 * fTemp15)))));
-			double fTemp386 = (fConst41 * fRec813[1]);
-			double fTemp387 = (fConst42 * fRec816[1]);
-			fRec818[0] = (fTemp385 + (fTemp386 + (fRec818[1] + fTemp387)));
-			fRec816[0] = fRec818[0];
-			double fRec817 = ((fTemp387 + fTemp386) + fTemp385);
-			fRec815[0] = (fRec816[0] + fRec815[1]);
+			double fTemp381 = (fConst48 * fRec804[1]);
+			double fTemp382 = (fConst49 * fRec807[1]);
+			double fTemp383 = (fConst51 * (((0.055188337400000002 * fTemp34) + ((0.0236896204 * fTemp28) + (0.0084365589000000001 * fTemp30))) - ((((0.078173961700000003 * fTemp33) + ((0.11249010600000001 * fTemp32) + ((0.041395684199999998 * fTemp29) + (0.078613613499999999 * fTemp31)))) + (0.043163302600000002 * fTemp27)) + (0.022834308399999999 * fTemp35))));
+			double fTemp384 = (fConst52 * fRec810[1]);
+			double fTemp385 = (fConst53 * fRec813[1]);
+			fRec815[0] = (fTemp383 + (fTemp384 + (fRec815[1] + fTemp385)));
 			fRec813[0] = fRec815[0];
-			double fRec814 = fRec817;
-			fRec812[0] = (fTemp383 + (fTemp384 + (fRec814 + fRec812[1])));
+			double fRec814 = ((fTemp385 + fTemp384) + fTemp383);
+			fRec812[0] = (fRec813[0] + fRec812[1]);
 			fRec810[0] = fRec812[0];
-			double fRec811 = (fTemp383 + (fRec814 + fTemp384));
-			fRec809[0] = (fRec810[0] + fRec809[1]);
+			double fRec811 = fRec814;
+			fRec809[0] = (fTemp381 + (fTemp382 + (fRec811 + fRec809[1])));
 			fRec807[0] = fRec809[0];
-			double fRec808 = fRec811;
-			fRec806[0] = (fTemp382 + (fRec808 + fRec806[1]));
+			double fRec808 = (fTemp381 + (fRec811 + fTemp382));
+			fRec806[0] = (fRec807[0] + fRec806[1]);
 			fRec804[0] = fRec806[0];
-			double fRec805 = (fRec808 + fTemp382);
-			double fTemp388 = (fConst44 * fRec819[1]);
-			double fTemp389 = (fConst45 * fRec822[1]);
-			double fTemp390 = (fConst47 * (((0.0084365589000000001 * fTemp31) + ((0.0236896204 * fTemp28) + (0.055188337400000002 * fTemp34))) - ((((((0.041395684199999998 * fTemp27) + (0.11249010600000001 * fTemp32)) + (0.078173961700000003 * fTemp33)) + (0.078613613499999999 * fTemp29)) + (0.043163302600000002 * fTemp30)) + (0.022834308399999999 * fTemp35))));
-			double fTemp391 = (fConst48 * fRec825[1]);
-			double fTemp392 = (fConst49 * fRec828[1]);
-			fRec830[0] = (fTemp390 + (fTemp391 + (fRec830[1] + fTemp392)));
-			fRec828[0] = fRec830[0];
-			double fRec829 = ((fTemp392 + fTemp391) + fTemp390);
-			fRec827[0] = (fRec828[0] + fRec827[1]);
-			fRec825[0] = fRec827[0];
-			double fRec826 = fRec829;
-			fRec824[0] = (fTemp388 + (fTemp389 + (fRec826 + fRec824[1])));
+			double fRec805 = fRec808;
+			double fTemp386 = (fConst39 * fRec816[1]);
+			double fTemp387 = (fConst38 * (((0.0032706057 * fTemp42) + ((0.054548100400000001 * fTemp45) + (0.0703668088 * fTemp46))) - ((0.069898252399999999 * fTemp41) + (((0.065421412100000007 * fTemp40) + (0.1060425436 * fTemp43)) + (0.027897146000000001 * fTemp44)))));
+			double fTemp388 = (fConst36 * fRec819[1]);
+			double fTemp389 = (fConst35 * fRec822[1]);
+			fRec824[0] = (fTemp387 + (fTemp388 + (fRec824[1] + fTemp389)));
 			fRec822[0] = fRec824[0];
-			double fRec823 = (fTemp388 + (fRec826 + fTemp389));
+			double fRec823 = ((fTemp389 + fTemp388) + fTemp387);
 			fRec821[0] = (fRec822[0] + fRec821[1]);
 			fRec819[0] = fRec821[0];
 			double fRec820 = fRec823;
-			double fTemp393 = (fConst51 * fRec831[1]);
-			double fTemp394 = (fConst53 * (((0.0032706057 * fTemp42) + ((0.054548100400000001 * fTemp45) + (0.0703668088 * fTemp46))) - ((((0.065421412100000007 * fTemp40) + (0.1060425436 * fTemp43)) + (0.027897146000000001 * fTemp44)) + (0.069898252399999999 * fTemp41))));
-			double fTemp395 = (fConst54 * fRec834[1]);
-			double fTemp396 = (fConst55 * fRec837[1]);
-			fRec839[0] = (fTemp394 + (fTemp395 + (fRec839[1] + fTemp396)));
+			fRec818[0] = (fTemp386 + (fRec820 + fRec818[1]));
+			fRec816[0] = fRec818[0];
+			double fRec817 = (fRec820 + fTemp386);
+			double fTemp390 = (fConst44 * (((0.1033192787 * fTemp57) + ((0.00093213859999999999 * fTemp58) + (0.041910794199999997 * fTemp55))) - ((0.065126837300000004 * fTemp56) + (0.055041679000000003 * fTemp59))));
+			double fTemp391 = (fConst45 * fRec825[1]);
+			double fTemp392 = (fConst46 * fRec828[1]);
+			fRec830[0] = (fTemp390 + (fTemp391 + (fRec830[1] + fTemp392)));
+			fRec828[0] = fRec830[0];
+			double fRec829 = ((fTemp392 + fTemp391) + fTemp390);
+			fRec827[0] = (fRec827[1] + fRec828[0]);
+			fRec825[0] = fRec827[0];
+			double fRec826 = fRec829;
+			double fTemp393 = (fConst55 * fRec831[1]);
+			double fTemp394 = (fConst57 * fRec834[1]);
+			double fTemp395 = (fConst58 * fRec837[1]);
+			double fTemp396 = (fConst60 * (((0.0119769087 * fTemp20) + (((0.0010077651999999999 * fTemp18) + (0.0482135567 * fTemp12)) + (0.0027752092999999999 * fTemp19))) - ((0.026146069500000001 * fTemp21) + (((0.094723847099999994 * fTemp14) + ((((0.012707311299999999 * fTemp11) + (0.075059426499999998 * fTemp16)) + (0.099849339999999995 * fTemp17)) + (0.017123138 * fTemp13))) + (0.037852361799999998 * fTemp15)))));
+			double fTemp397 = (fConst61 * fRec840[1]);
+			double fTemp398 = (fConst62 * fRec843[1]);
+			fRec845[0] = (fTemp396 + (fTemp397 + (fRec845[1] + fTemp398)));
+			fRec843[0] = fRec845[0];
+			double fRec844 = ((fTemp398 + fTemp397) + fTemp396);
+			fRec842[0] = (fRec843[0] + fRec842[1]);
+			fRec840[0] = fRec842[0];
+			double fRec841 = fRec844;
+			fRec839[0] = (fTemp394 + (fTemp395 + (fRec841 + fRec839[1])));
 			fRec837[0] = fRec839[0];
-			double fRec838 = ((fTemp396 + fTemp395) + fTemp394);
+			double fRec838 = (fTemp394 + (fRec841 + fTemp395));
 			fRec836[0] = (fRec837[0] + fRec836[1]);
 			fRec834[0] = fRec836[0];
 			double fRec835 = fRec838;
 			fRec833[0] = (fTemp393 + (fRec835 + fRec833[1]));
 			fRec831[0] = fRec833[0];
 			double fRec832 = (fRec835 + fTemp393);
-			double fTemp397 = (fConst57 * (((0.0543690374 * fTemp52) + (0.0657063648 * fTemp51)) - (0.035478256800000003 * fTemp50)));
-			double fTemp398 = (fConst58 * fRec840[1]);
-			fRec842[0] = (fTemp397 + (fRec842[1] + fTemp398));
-			fRec840[0] = fRec842[0];
-			double fRec841 = (fTemp398 + fTemp397);
-			double fTemp399 = (fConst60 * ((((0.00093213859999999999 * fTemp57) + (0.1033192787 * fTemp58)) + (0.041910794199999997 * fTemp55)) - ((0.065126837300000004 * fTemp54) + (0.055041679000000003 * fTemp56))));
-			double fTemp400 = (fConst61 * fRec843[1]);
-			double fTemp401 = (fConst62 * fRec846[1]);
-			fRec848[0] = (fTemp399 + (fTemp400 + (fRec848[1] + fTemp401)));
+			double fTemp399 = (fConst41 * (((0.0543690374 * fTemp52) + (0.0657063648 * fTemp51)) - (0.035478256800000003 * fTemp50)));
+			double fTemp400 = (fConst42 * fRec846[1]);
+			fRec848[0] = (fTemp399 + (fRec848[1] + fTemp400));
 			fRec846[0] = fRec848[0];
-			double fRec847 = ((fTemp401 + fTemp400) + fTemp399);
-			fRec845[0] = (fRec846[0] + fRec845[1]);
-			fRec843[0] = fRec845[0];
-			double fRec844 = fRec847;
-			fVec17[0] = ((0.032229144299999998 * fTemp7) + (fRec805 + (fRec820 + (fRec832 + (fRec841 + fRec844)))));
+			double fRec847 = (fTemp400 + fTemp399);
+			fVec17[0] = ((0.032229144299999998 * fTemp7) + (fRec805 + (fRec817 + (fRec826 + (fRec832 + fRec847)))));
 			output17[i] = FAUSTFLOAT((0.99982065997130565 * (fRec0[0] * fVec17[iConst63])));
-			double fTemp402 = (fConst35 * fRec849[1]);
-			double fTemp403 = (fConst37 * fRec852[1]);
-			double fTemp404 = (fConst38 * fRec855[1]);
-			double fTemp405 = (fConst40 * (((0.0295214543 * fTemp21) + ((((0.078348031499999998 * fTemp16) + (0.080305040499999994 * fTemp17)) + (0.0796940233 * fTemp12)) + (0.039505142100000001 * fTemp15))) - ((0.081482213400000003 * fTemp20) + ((0.0332389633 * fTemp19) + ((0.028991984200000001 * fTemp14) + (((0.0057374499000000002 * fTemp11) + (0.0081100540999999998 * fTemp18)) + (0.036590493000000002 * fTemp13)))))));
-			double fTemp406 = (fConst41 * fRec858[1]);
-			double fTemp407 = (fConst42 * fRec861[1]);
-			fRec863[0] = (fTemp405 + (fTemp406 + (fRec863[1] + fTemp407)));
-			fRec861[0] = fRec863[0];
-			double fRec862 = ((fTemp407 + fTemp406) + fTemp405);
-			fRec860[0] = (fRec861[0] + fRec860[1]);
+			double fTemp401 = (fConst48 * fRec849[1]);
+			double fTemp402 = (fConst49 * fRec852[1]);
+			double fTemp403 = (fConst51 * (((((0.043648645299999997 * fTemp29) + (0.083338551100000005 * fTemp32)) + (0.0130628633 * fTemp28)) + (0.0224925682 * fTemp35)) - ((0.1067235326 * fTemp34) + ((0.0100424365 * fTemp27) + ((0.058116769399999997 * fTemp33) + ((0.083597313899999998 * fTemp31) + (0.087773482200000003 * fTemp30)))))));
+			double fTemp404 = (fConst52 * fRec855[1]);
+			double fTemp405 = (fConst53 * fRec858[1]);
+			fRec860[0] = (fTemp403 + (fTemp404 + (fRec860[1] + fTemp405)));
 			fRec858[0] = fRec860[0];
-			double fRec859 = fRec862;
-			fRec857[0] = (fTemp403 + (fTemp404 + (fRec859 + fRec857[1])));
+			double fRec859 = ((fTemp405 + fTemp404) + fTemp403);
+			fRec857[0] = (fRec857[1] + fRec858[0]);
 			fRec855[0] = fRec857[0];
-			double fRec856 = (fTemp403 + (fRec859 + fTemp404));
-			fRec854[0] = (fRec855[0] + fRec854[1]);
+			double fRec856 = fRec859;
+			fRec854[0] = ((fTemp401 + (fRec854[1] + fTemp402)) + fRec856);
 			fRec852[0] = fRec854[0];
-			double fRec853 = fRec856;
-			fRec851[0] = (fTemp402 + (fRec853 + fRec851[1]));
+			double fRec853 = ((fTemp402 + fTemp401) + fRec856);
+			fRec851[0] = (fRec851[1] + fRec852[0]);
 			fRec849[0] = fRec851[0];
-			double fRec850 = (fRec853 + fTemp402);
-			double fTemp408 = (fConst44 * fRec864[1]);
-			double fTemp409 = (fConst45 * fRec867[1]);
-			double fTemp410 = (fConst47 * (((((0.043648645299999997 * fTemp27) + (0.083338551100000005 * fTemp32)) + (0.0130628633 * fTemp28)) + (0.0224925682 * fTemp35)) - ((0.087773482200000003 * fTemp31) + ((0.1067235326 * fTemp34) + (((0.058116769399999997 * fTemp33) + (0.083597313899999998 * fTemp29)) + (0.0100424365 * fTemp30))))));
-			double fTemp411 = (fConst48 * fRec870[1]);
-			double fTemp412 = (fConst49 * fRec873[1]);
-			fRec875[0] = (fTemp410 + (fTemp411 + (fRec875[1] + fTemp412)));
-			fRec873[0] = fRec875[0];
-			double fRec874 = ((fTemp412 + fTemp411) + fTemp410);
-			fRec872[0] = (fRec873[0] + fRec872[1]);
-			fRec870[0] = fRec872[0];
-			double fRec871 = fRec874;
-			fRec869[0] = (fTemp408 + (fTemp409 + (fRec871 + fRec869[1])));
-			fRec867[0] = fRec869[0];
-			double fRec868 = (fTemp408 + (fRec871 + fTemp409));
-			fRec866[0] = (fRec867[0] + fRec866[1]);
+			double fRec850 = fRec853;
+			double fTemp406 = (fConst44 * (((0.018547154999999999 * fTemp58) + (0.0350864356 * fTemp57)) - (((0.071751670000000004 * fTemp55) + (0.042410450699999998 * fTemp56)) + (0.1350041327 * fTemp59))));
+			double fTemp407 = (fConst45 * fRec861[1]);
+			double fTemp408 = (fConst46 * fRec864[1]);
+			fRec866[0] = (fTemp406 + (fTemp407 + (fRec866[1] + fTemp408)));
 			fRec864[0] = fRec866[0];
-			double fRec865 = fRec868;
-			double fTemp413 = (fConst51 * fRec876[1]);
-			double fTemp414 = (fConst53 * (((0.047245317600000003 * fTemp40) + (0.021143005100000001 * fTemp45)) - ((0.049939859500000003 * fTemp42) + ((((0.071722917799999994 * fTemp43) + (0.092138140800000004 * fTemp44)) + (0.060077751399999997 * fTemp41)) + (0.1232767149 * fTemp46)))));
-			double fTemp415 = (fConst54 * fRec879[1]);
-			double fTemp416 = (fConst55 * fRec882[1]);
+			double fRec865 = ((fTemp408 + fTemp407) + fTemp406);
+			fRec863[0] = (fRec864[0] + fRec863[1]);
+			fRec861[0] = fRec863[0];
+			double fRec862 = fRec865;
+			double fTemp409 = (fConst41 * (((0.021608423500000001 * fTemp51) + (0.070055814100000002 * fTemp52)) - (0.080986775900000002 * fTemp50)));
+			double fTemp410 = (fConst42 * fRec867[1]);
+			fRec869[0] = ((fTemp409 + fRec869[1]) + fTemp410);
+			fRec867[0] = fRec869[0];
+			double fRec868 = (fTemp409 + fTemp410);
+			double fTemp411 = (fConst55 * fRec870[1]);
+			double fTemp412 = (fConst57 * fRec873[1]);
+			double fTemp413 = (fConst58 * fRec876[1]);
+			double fTemp414 = (fConst60 * (((0.0295214543 * fTemp21) + ((((0.078348031499999998 * fTemp16) + (0.080305040499999994 * fTemp17)) + (0.0796940233 * fTemp12)) + (0.039505142100000001 * fTemp15))) - ((0.081482213400000003 * fTemp20) + ((0.0332389633 * fTemp19) + ((0.028991984200000001 * fTemp14) + (((0.0057374499000000002 * fTemp11) + (0.0081100540999999998 * fTemp18)) + (0.036590493000000002 * fTemp13)))))));
+			double fTemp415 = (fConst61 * fRec879[1]);
+			double fTemp416 = (fConst62 * fRec882[1]);
 			fRec884[0] = (fTemp414 + (fTemp415 + (fRec884[1] + fTemp416)));
 			fRec882[0] = fRec884[0];
 			double fRec883 = ((fTemp416 + fTemp415) + fTemp414);
-			fRec881[0] = (fRec882[0] + fRec881[1]);
+			fRec881[0] = (fRec881[1] + fRec882[0]);
 			fRec879[0] = fRec881[0];
 			double fRec880 = fRec883;
-			fRec878[0] = (fTemp413 + (fRec880 + fRec878[1]));
+			fRec878[0] = ((fTemp412 + (fRec878[1] + fTemp413)) + fRec880);
 			fRec876[0] = fRec878[0];
-			double fRec877 = (fRec880 + fTemp413);
-			double fTemp417 = (fConst57 * (((0.070055814100000002 * fTemp52) + (0.021608423500000001 * fTemp51)) - (0.080986775900000002 * fTemp50)));
-			double fTemp418 = (fConst58 * fRec885[1]);
-			fRec887[0] = (fTemp417 + (fRec887[1] + fTemp418));
-			fRec885[0] = fRec887[0];
-			double fRec886 = (fTemp418 + fTemp417);
-			double fTemp419 = (fConst60 * (((0.018547154999999999 * fTemp57) + (0.0350864356 * fTemp58)) - (((0.042410450699999998 * fTemp54) + (0.1350041327 * fTemp56)) + (0.071751670000000004 * fTemp55))));
-			double fTemp420 = (fConst61 * fRec888[1]);
-			double fTemp421 = (fConst62 * fRec891[1]);
-			fRec893[0] = (fTemp419 + (fTemp420 + (fRec893[1] + fTemp421)));
+			double fRec877 = ((fTemp413 + fTemp412) + fRec880);
+			fRec875[0] = (fRec875[1] + fRec876[0]);
+			fRec873[0] = fRec875[0];
+			double fRec874 = fRec877;
+			fRec872[0] = (fTemp411 + (fRec874 + fRec872[1]));
+			fRec870[0] = fRec872[0];
+			double fRec871 = (fRec874 + fTemp411);
+			double fTemp417 = (fConst38 * (((0.047245317600000003 * fTemp40) + (0.021143005100000001 * fTemp45)) - ((0.049939859500000003 * fTemp42) + ((((0.071722917799999994 * fTemp43) + (0.092138140800000004 * fTemp44)) + (0.060077751399999997 * fTemp41)) + (0.1232767149 * fTemp46)))));
+			double fTemp418 = (fConst36 * fRec888[1]);
+			double fTemp419 = (fConst35 * fRec891[1]);
+			fRec893[0] = (fTemp417 + (fTemp418 + (fRec893[1] + fTemp419)));
 			fRec891[0] = fRec893[0];
-			double fRec892 = ((fTemp421 + fTemp420) + fTemp419);
+			double fRec892 = ((fTemp419 + fTemp418) + fTemp417);
 			fRec890[0] = (fRec891[0] + fRec890[1]);
 			fRec888[0] = fRec890[0];
 			double fRec889 = fRec892;
-			fVec18[0] = ((0.0383835826 * fTemp7) + (fRec850 + (fRec865 + (fRec877 + (fRec886 + fRec889)))));
+			double fTemp420 = (fConst39 * fRec885[1]);
+			fRec887[0] = ((fRec889 + fRec887[1]) + fTemp420);
+			fRec885[0] = fRec887[0];
+			double fRec886 = (fRec889 + fTemp420);
+			fVec18[0] = ((fRec850 + (fRec862 + (fRec868 + (fRec871 + fRec886)))) + (0.0383835826 * fTemp7));
 			output18[i] = FAUSTFLOAT((0.99982065997130565 * (fRec0[0] * fVec18[iConst63])));
-			double fTemp422 = (fConst44 * fRec894[1]);
-			double fTemp423 = (fConst45 * fRec897[1]);
-			double fTemp424 = (fConst47 * ((((((0.0145871518 * fTemp32) + (0.075579532000000005 * fTemp33)) + (0.045489526500000002 * fTemp28)) + (0.023835245800000002 * fTemp30)) + (0.1124860677 * fTemp31)) - ((((0.0433767501 * fTemp27) + (0.077527310899999993 * fTemp29)) + (0.056655415000000001 * fTemp34)) + (0.018945112399999998 * fTemp35))));
-			double fTemp425 = (fConst48 * fRec900[1]);
-			double fTemp426 = (fConst49 * fRec903[1]);
-			fRec905[0] = (fTemp424 + (fTemp425 + (fRec905[1] + fTemp426)));
+			double fTemp421 = (fConst48 * fRec894[1]);
+			double fTemp422 = (fConst49 * fRec897[1]);
+			double fTemp423 = (fConst51 * (((0.023835245800000002 * fTemp27) + ((0.045489526500000002 * fTemp28) + ((0.075579532000000005 * fTemp33) + ((0.0145871518 * fTemp32) + (0.1124860677 * fTemp30))))) - ((((0.0433767501 * fTemp29) + (0.077527310899999993 * fTemp31)) + (0.056655415000000001 * fTemp34)) + (0.018945112399999998 * fTemp35))));
+			double fTemp424 = (fConst52 * fRec900[1]);
+			double fTemp425 = (fConst53 * fRec903[1]);
+			fRec905[0] = (fTemp423 + (fTemp424 + (fRec905[1] + fTemp425)));
 			fRec903[0] = fRec905[0];
-			double fRec904 = ((fTemp426 + fTemp425) + fTemp424);
+			double fRec904 = ((fTemp425 + fTemp424) + fTemp423);
 			fRec902[0] = (fRec903[0] + fRec902[1]);
 			fRec900[0] = fRec902[0];
 			double fRec901 = fRec904;
-			fRec899[0] = (fTemp422 + (fTemp423 + (fRec901 + fRec899[1])));
+			fRec899[0] = (fTemp421 + (fTemp422 + (fRec901 + fRec899[1])));
 			fRec897[0] = fRec899[0];
-			double fRec898 = (fTemp422 + (fRec901 + fTemp423));
+			double fRec898 = (fTemp421 + (fRec901 + fTemp422));
 			fRec896[0] = (fRec897[0] + fRec896[1]);
 			fRec894[0] = fRec896[0];
 			double fRec895 = fRec898;
-			double fTemp427 = (fConst51 * fRec906[1]);
-			double fTemp428 = (fConst53 * ((((0.0068898535999999998 * fTemp40) + (0.1040203792 * fTemp43)) + (0.065667936499999996 * fTemp42)) - ((((0.053256110799999999 * fTemp44) + (0.070520619500000006 * fTemp41)) + (0.026421941099999999 * fTemp45)) + (0.073658537900000001 * fTemp46))));
-			double fTemp429 = (fConst54 * fRec909[1]);
-			double fTemp430 = (fConst55 * fRec912[1]);
-			fRec914[0] = (fTemp428 + (fTemp429 + (fRec914[1] + fTemp430)));
-			fRec912[0] = fRec914[0];
-			double fRec913 = ((fTemp430 + fTemp429) + fTemp428);
-			fRec911[0] = (fRec912[0] + fRec911[1]);
-			fRec909[0] = fRec911[0];
-			double fRec910 = fRec913;
-			fRec908[0] = (fTemp427 + (fRec910 + fRec908[1]));
-			fRec906[0] = fRec908[0];
-			double fRec907 = (fRec910 + fTemp427);
-			double fTemp431 = (fConst60 * ((0.064261519200000006 * fTemp54) - ((((0.1037415875 * fTemp56) + (4.6521699999999999e-05 * fTemp57)) + (0.053477614299999997 * fTemp58)) + (0.044203078 * fTemp55))));
-			double fTemp432 = (fConst61 * fRec915[1]);
-			double fTemp433 = (fConst62 * fRec918[1]);
-			fRec920[0] = (fTemp431 + (fTemp432 + (fRec920[1] + fTemp433)));
+			double fTemp426 = (fConst60 * ((((((0.0231295272 * fTemp11) + (0.017110393200000001 * fTemp17)) + (0.095437129400000001 * fTemp12)) + (0.0466260748 * fTemp14)) + (0.099060297000000005 * fTemp20)) - ((0.016188660699999999 * fTemp21) + ((0.030910863199999999 * fTemp15) + ((((0.078616861199999999 * fTemp16) + (0.0025825903000000002 * fTemp18)) + (0.014692507 * fTemp13)) + (0.00096188879999999999 * fTemp19))))));
+			double fTemp427 = (fConst62 * fRec918[1]);
+			double fTemp428 = (fConst61 * fRec915[1]);
+			fRec920[0] = (((fTemp426 + fRec920[1]) + fTemp427) + fTemp428);
 			fRec918[0] = fRec920[0];
-			double fRec919 = ((fTemp433 + fTemp432) + fTemp431);
+			double fRec919 = ((fTemp426 + fTemp427) + fTemp428);
 			fRec917[0] = (fRec918[0] + fRec917[1]);
 			fRec915[0] = fRec917[0];
 			double fRec916 = fRec919;
-			double fTemp434 = (fConst35 * fRec921[1]);
-			double fTemp435 = (fConst37 * fRec924[1]);
-			double fTemp436 = (fConst38 * fRec927[1]);
-			double fTemp437 = (fConst40 * ((((((0.0231295272 * fTemp11) + (0.017110393200000001 * fTemp17)) + (0.095437129400000001 * fTemp12)) + (0.0466260748 * fTemp14)) + (0.099060297000000005 * fTemp20)) - ((0.016188660699999999 * fTemp21) + (((((0.078616861199999999 * fTemp16) + (0.0025825903000000002 * fTemp18)) + (0.014692507 * fTemp13)) + (0.00096188879999999999 * fTemp19)) + (0.030910863199999999 * fTemp15)))));
-			double fTemp438 = (fConst41 * fRec930[1]);
-			double fTemp439 = (fConst42 * fRec933[1]);
-			fRec935[0] = (fTemp437 + (fTemp438 + (fRec935[1] + fTemp439)));
-			fRec933[0] = fRec935[0];
-			double fRec934 = ((fTemp439 + fTemp438) + fTemp437);
-			fRec932[0] = (fRec933[0] + fRec932[1]);
-			fRec930[0] = fRec932[0];
-			double fRec931 = fRec934;
-			fRec929[0] = (fTemp435 + (fTemp436 + (fRec931 + fRec929[1])));
+			double fTemp429 = (fConst58 * fRec912[1]);
+			double fTemp430 = (fConst57 * fRec909[1]);
+			fRec914[0] = (((fRec916 + fRec914[1]) + fTemp429) + fTemp430);
+			fRec912[0] = fRec914[0];
+			double fRec913 = ((fRec916 + fTemp429) + fTemp430);
+			fRec911[0] = (fRec912[0] + fRec911[1]);
+			fRec909[0] = fRec911[0];
+			double fRec910 = fRec913;
+			double fTemp431 = (fConst55 * fRec906[1]);
+			fRec908[0] = ((fRec910 + fRec908[1]) + fTemp431);
+			fRec906[0] = fRec908[0];
+			double fRec907 = (fRec910 + fTemp431);
+			double fTemp432 = (fConst41 * ((0.054015019099999999 * fTemp52) - ((0.0664397298 * fTemp50) + (0.034699304399999999 * fTemp51))));
+			double fTemp433 = (fConst42 * fRec921[1]);
+			fRec923[0] = (fTemp432 + (fRec923[1] + fTemp433));
+			fRec921[0] = fRec923[0];
+			double fRec922 = (fTemp433 + fTemp432);
+			double fTemp434 = (fConst44 * ((0.064261519200000006 * fTemp56) - ((0.1037415875 * fTemp59) + ((0.053477614299999997 * fTemp57) + ((4.6521699999999999e-05 * fTemp58) + (0.044203078 * fTemp55))))));
+			double fTemp435 = (fConst45 * fRec924[1]);
+			double fTemp436 = (fConst46 * fRec927[1]);
+			fRec929[0] = (fTemp434 + (fTemp435 + (fRec929[1] + fTemp436)));
 			fRec927[0] = fRec929[0];
-			double fRec928 = (fTemp435 + (fRec931 + fTemp436));
+			double fRec928 = ((fTemp436 + fTemp435) + fTemp434);
 			fRec926[0] = (fRec927[0] + fRec926[1]);
 			fRec924[0] = fRec926[0];
 			double fRec925 = fRec928;
-			fRec923[0] = (fTemp434 + (fRec925 + fRec923[1]));
-			fRec921[0] = fRec923[0];
-			double fRec922 = (fRec925 + fTemp434);
-			double fTemp440 = (fConst57 * ((0.054015019099999999 * fTemp52) - ((0.0664397298 * fTemp50) + (0.034699304399999999 * fTemp51))));
-			double fTemp441 = (fConst58 * fRec936[1]);
-			fRec938[0] = (fTemp440 + (fRec938[1] + fTemp441));
+			double fTemp437 = (fConst39 * fRec930[1]);
+			double fTemp438 = (fConst38 * ((((0.0068898535999999998 * fTemp40) + (0.1040203792 * fTemp43)) + (0.065667936499999996 * fTemp42)) - ((((0.053256110799999999 * fTemp44) + (0.070520619500000006 * fTemp41)) + (0.026421941099999999 * fTemp45)) + (0.073658537900000001 * fTemp46))));
+			double fTemp439 = (fConst36 * fRec933[1]);
+			double fTemp440 = (fConst35 * fRec936[1]);
+			fRec938[0] = (fTemp438 + (fTemp439 + (fRec938[1] + fTemp440)));
 			fRec936[0] = fRec938[0];
-			double fRec937 = (fTemp441 + fTemp440);
-			fVec19[0] = ((0.032238947300000001 * fTemp7) + (fRec895 + (fRec907 + (fRec916 + (fRec922 + fRec937)))));
+			double fRec937 = ((fTemp440 + fTemp439) + fTemp438);
+			fRec935[0] = (fRec936[0] + fRec935[1]);
+			fRec933[0] = fRec935[0];
+			double fRec934 = fRec937;
+			fRec932[0] = (fTemp437 + (fRec934 + fRec932[1]));
+			fRec930[0] = fRec932[0];
+			double fRec931 = (fRec934 + fTemp437);
+			fVec19[0] = (((((fRec895 + fRec907) + fRec922) + fRec925) + fRec931) + (0.032238947300000001 * fTemp7));
 			output19[i] = FAUSTFLOAT((0.99982065997130565 * (fRec0[0] * fVec19[iConst63])));
-			double fTemp442 = (fConst35 * fRec939[1]);
-			double fTemp443 = (fConst37 * fRec942[1]);
-			double fTemp444 = (fConst38 * fRec945[1]);
-			double fTemp445 = (fConst40 * (((0.0035383988000000002 * fTemp21) + (((0.043374297999999999 * fTemp19) + ((((0.078577435000000001 * fTemp16) + (0.010637832999999999 * fTemp18)) + (0.0329223259 * fTemp12)) + (0.076734046799999997 * fTemp14))) + (0.021791978300000001 * fTemp15))) - ((((0.028979274900000001 * fTemp11) + (0.086714502900000004 * fTemp17)) + (0.045921367900000003 * fTemp13)) + (0.071380459699999996 * fTemp20))));
-			double fTemp446 = (fConst41 * fRec948[1]);
-			double fTemp447 = (fConst42 * fRec951[1]);
-			fRec953[0] = (fTemp445 + (fTemp446 + (fRec953[1] + fTemp447)));
-			fRec951[0] = fRec953[0];
-			double fRec952 = ((fTemp447 + fTemp446) + fTemp445);
-			fRec950[0] = (fRec951[0] + fRec950[1]);
-			fRec948[0] = fRec950[0];
-			double fRec949 = fRec952;
-			fRec947[0] = (fTemp443 + (fTemp444 + (fRec949 + fRec947[1])));
-			fRec945[0] = fRec947[0];
-			double fRec946 = (fTemp443 + (fRec949 + fTemp444));
-			fRec944[0] = (fRec945[0] + fRec944[1]);
+			double fTemp441 = (fConst44 * (((0.045913255100000001 * fTemp56) + ((0.022505125300000001 * fTemp58) + (0.063185170099999993 * fTemp55))) - ((0.039301915600000001 * fTemp59) + (0.1314130889 * fTemp57))));
+			double fTemp442 = (fConst45 * fRec939[1]);
+			double fTemp443 = (fConst46 * fRec942[1]);
+			fRec944[0] = (fTemp441 + (fTemp442 + (fRec944[1] + fTemp443)));
 			fRec942[0] = fRec944[0];
-			double fRec943 = fRec946;
-			fRec941[0] = (fTemp442 + (fRec943 + fRec941[1]));
+			double fRec943 = ((fTemp443 + fTemp442) + fTemp441);
+			fRec941[0] = (fRec941[1] + fRec942[0]);
 			fRec939[0] = fRec941[0];
-			double fRec940 = (fRec943 + fTemp442);
-			double fTemp448 = (fConst44 * fRec954[1]);
-			double fTemp449 = (fConst45 * fRec957[1]);
-			double fTemp450 = (fConst47 * ((((0.1056495274 * fTemp34) + ((((0.043919047000000003 * fTemp27) + (0.064873768400000004 * fTemp33)) + (0.0104497836 * fTemp28)) + (0.0025877768999999998 * fTemp30))) + (0.0110515812 * fTemp35)) - (((0.092407506799999997 * fTemp32) + (0.086044576299999995 * fTemp29)) + (0.066872495300000001 * fTemp31))));
-			double fTemp451 = (fConst48 * fRec960[1]);
-			double fTemp452 = (fConst49 * fRec963[1]);
-			fRec965[0] = (fTemp450 + (fTemp451 + (fRec965[1] + fTemp452)));
-			fRec963[0] = fRec965[0];
-			double fRec964 = ((fTemp452 + fTemp451) + fTemp450);
-			fRec962[0] = (fRec963[0] + fRec962[1]);
-			fRec960[0] = fRec962[0];
-			double fRec961 = fRec964;
-			fRec959[0] = (fTemp448 + (fTemp449 + (fRec961 + fRec959[1])));
-			fRec957[0] = fRec959[0];
-			double fRec958 = (fTemp448 + (fRec961 + fTemp449));
-			fRec956[0] = (fRec957[0] + fRec956[1]);
+			double fRec940 = fRec943;
+			double fTemp444 = (fConst41 * ((0.069779709999999995 * fTemp52) - ((0.023951475699999999 * fTemp50) + (0.076477305600000003 * fTemp51))));
+			double fTemp445 = (fConst42 * fRec945[1]);
+			fRec947[0] = (fTemp444 + (fRec947[1] + fTemp445));
+			fRec945[0] = fRec947[0];
+			double fRec946 = (fTemp445 + fTemp444);
+			double fTemp446 = (fConst39 * fRec948[1]);
+			double fTemp447 = (fConst38 * (((0.078437818600000001 * fTemp43) + (0.1128838031 * fTemp46)) - (((((0.052238148999999998 * fTemp40) + (0.0244118571 * fTemp44)) + (0.055603878099999997 * fTemp41)) + (0.097129760900000001 * fTemp45)) + (0.035842781900000002 * fTemp42))));
+			double fTemp448 = (fConst36 * fRec951[1]);
+			double fTemp449 = (fConst35 * fRec954[1]);
+			fRec956[0] = (fTemp447 + (fTemp448 + (fRec956[1] + fTemp449)));
 			fRec954[0] = fRec956[0];
-			double fRec955 = fRec958;
-			double fTemp453 = (fConst51 * fRec966[1]);
-			double fTemp454 = (fConst53 * (((0.078437818600000001 * fTemp43) + (0.1128838031 * fTemp46)) - (((((0.052238148999999998 * fTemp40) + (0.0244118571 * fTemp44)) + (0.055603878099999997 * fTemp41)) + (0.097129760900000001 * fTemp45)) + (0.035842781900000002 * fTemp42))));
-			double fTemp455 = (fConst54 * fRec969[1]);
-			double fTemp456 = (fConst55 * fRec972[1]);
-			fRec974[0] = (fTemp454 + (fTemp455 + (fRec974[1] + fTemp456)));
-			fRec972[0] = fRec974[0];
-			double fRec973 = ((fTemp456 + fTemp455) + fTemp454);
-			fRec971[0] = (fRec972[0] + fRec971[1]);
-			fRec969[0] = fRec971[0];
-			double fRec970 = fRec973;
-			fRec968[0] = (fTemp453 + (fRec970 + fRec968[1]));
+			double fRec955 = ((fTemp449 + fTemp448) + fTemp447);
+			fRec953[0] = (fRec953[1] + fRec954[0]);
+			fRec951[0] = fRec953[0];
+			double fRec952 = fRec955;
+			fRec950[0] = ((fRec950[1] + fTemp446) + fRec952);
+			fRec948[0] = fRec950[0];
+			double fRec949 = (fTemp446 + fRec952);
+			double fTemp450 = (fConst48 * fRec957[1]);
+			double fTemp451 = (fConst49 * fRec960[1]);
+			double fTemp452 = (fConst51 * ((((0.1056495274 * fTemp34) + ((((0.043919047000000003 * fTemp29) + (0.064873768400000004 * fTemp33)) + (0.0104497836 * fTemp28)) + (0.0025877768999999998 * fTemp27))) + (0.0110515812 * fTemp35)) - ((0.092407506799999997 * fTemp32) + ((0.086044576299999995 * fTemp31) + (0.066872495300000001 * fTemp30)))));
+			double fTemp453 = (fConst52 * fRec963[1]);
+			double fTemp454 = (fConst53 * fRec966[1]);
+			fRec968[0] = (fTemp452 + (fTemp453 + (fRec968[1] + fTemp454)));
 			fRec966[0] = fRec968[0];
-			double fRec967 = (fRec970 + fTemp453);
-			double fTemp457 = (fConst57 * ((0.069779709999999995 * fTemp52) - ((0.023951475699999999 * fTemp50) + (0.076477305600000003 * fTemp51))));
-			double fTemp458 = (fConst58 * fRec975[1]);
-			fRec977[0] = (fTemp457 + (fRec977[1] + fTemp458));
-			fRec975[0] = fRec977[0];
-			double fRec976 = (fTemp458 + fTemp457);
-			double fTemp459 = (fConst60 * ((((0.045913255100000001 * fTemp54) + (0.022505125300000001 * fTemp57)) + (0.063185170099999993 * fTemp55)) - ((0.039301915600000001 * fTemp56) + (0.1314130889 * fTemp58))));
-			double fTemp460 = (fConst61 * fRec978[1]);
-			double fTemp461 = (fConst62 * fRec981[1]);
-			fRec983[0] = (fTemp459 + (fTemp460 + (fRec983[1] + fTemp461)));
+			double fRec967 = ((fTemp454 + fTemp453) + fTemp452);
+			fRec965[0] = (fRec965[1] + fRec966[0]);
+			fRec963[0] = fRec965[0];
+			double fRec964 = fRec967;
+			fRec962[0] = ((fTemp450 + (fRec962[1] + fTemp451)) + fRec964);
+			fRec960[0] = fRec962[0];
+			double fRec961 = ((fTemp451 + fTemp450) + fRec964);
+			fRec959[0] = (fRec959[1] + fRec960[0]);
+			fRec957[0] = fRec959[0];
+			double fRec958 = fRec961;
+			double fTemp455 = (fConst55 * fRec969[1]);
+			double fTemp456 = (fConst57 * fRec972[1]);
+			double fTemp457 = (fConst58 * fRec975[1]);
+			double fTemp458 = (fConst60 * (((0.0035383988000000002 * fTemp21) + (((0.043374297999999999 * fTemp19) + ((((0.078577435000000001 * fTemp16) + (0.010637832999999999 * fTemp18)) + (0.0329223259 * fTemp12)) + (0.076734046799999997 * fTemp14))) + (0.021791978300000001 * fTemp15))) - ((((0.028979274900000001 * fTemp11) + (0.086714502900000004 * fTemp17)) + (0.045921367900000003 * fTemp13)) + (0.071380459699999996 * fTemp20))));
+			double fTemp459 = (fConst61 * fRec978[1]);
+			double fTemp460 = (fConst62 * fRec981[1]);
+			fRec983[0] = (fTemp458 + (fTemp459 + (fRec983[1] + fTemp460)));
 			fRec981[0] = fRec983[0];
-			double fRec982 = ((fTemp461 + fTemp460) + fTemp459);
-			fRec980[0] = (fRec981[0] + fRec980[1]);
+			double fRec982 = ((fTemp460 + fTemp459) + fTemp458);
+			fRec980[0] = (fRec980[1] + fRec981[0]);
 			fRec978[0] = fRec980[0];
 			double fRec979 = fRec982;
-			fVec20[0] = ((0.037300179099999997 * fTemp7) + (fRec940 + (fRec955 + (fRec967 + (fRec976 + fRec979)))));
+			fRec977[0] = ((fTemp456 + (fRec977[1] + fTemp457)) + fRec979);
+			fRec975[0] = fRec977[0];
+			double fRec976 = ((fTemp457 + fTemp456) + fRec979);
+			fRec974[0] = (fRec974[1] + fRec975[0]);
+			fRec972[0] = fRec974[0];
+			double fRec973 = fRec976;
+			fRec971[0] = ((fRec971[1] + fTemp455) + fRec973);
+			fRec969[0] = fRec971[0];
+			double fRec970 = (fTemp455 + fRec973);
+			fVec20[0] = ((0.037300179099999997 * fTemp7) + ((((fRec940 + fRec946) + fRec949) + fRec958) + fRec970));
 			output20[i] = FAUSTFLOAT((0.99982065997130565 * (fRec0[0] * fVec20[iConst63])));
-			double fTemp462 = (fConst35 * fRec984[1]);
-			double fTemp463 = (fConst37 * fRec987[1]);
-			double fTemp464 = (fConst38 * fRec990[1]);
-			double fTemp465 = (fConst40 * (((0.0049922300000000003 * fTemp21) + ((((0.033379710799999997 * fTemp11) + (0.090054831299999999 * fTemp17)) + (0.089483840199999998 * fTemp14)) + (0.01125635 * fTemp15))) - ((0.036266155899999999 * fTemp20) + (((((0.087821222800000001 * fTemp16) + (0.0075631995000000002 * fTemp18)) + (0.032615207 * fTemp12)) + (0.0131284674 * fTemp13)) + (0.0096290035000000003 * fTemp19)))));
-			double fTemp466 = (fConst41 * fRec993[1]);
-			double fTemp467 = (fConst42 * fRec996[1]);
-			fRec998[0] = (fTemp465 + (fTemp466 + (fRec998[1] + fTemp467)));
+			double fTemp461 = (fConst55 * fRec984[1]);
+			double fTemp462 = (fConst57 * fRec987[1]);
+			double fTemp463 = (fConst58 * fRec990[1]);
+			double fTemp464 = (fConst60 * (((0.0049922300000000003 * fTemp21) + ((((0.033379710799999997 * fTemp11) + (0.090054831299999999 * fTemp17)) + (0.089483840199999998 * fTemp14)) + (0.01125635 * fTemp15))) - ((0.036266155899999999 * fTemp20) + (((((0.087821222800000001 * fTemp16) + (0.0075631995000000002 * fTemp18)) + (0.032615207 * fTemp12)) + (0.0131284674 * fTemp13)) + (0.0096290035000000003 * fTemp19)))));
+			double fTemp465 = (fConst61 * fRec993[1]);
+			double fTemp466 = (fConst62 * fRec996[1]);
+			fRec998[0] = (fTemp464 + (fTemp465 + (fRec998[1] + fTemp466)));
 			fRec996[0] = fRec998[0];
-			double fRec997 = ((fTemp467 + fTemp466) + fTemp465);
+			double fRec997 = ((fTemp466 + fTemp465) + fTemp464);
 			fRec995[0] = (fRec996[0] + fRec995[1]);
 			fRec993[0] = fRec995[0];
 			double fRec994 = fRec997;
-			fRec992[0] = (fTemp463 + (fTemp464 + (fRec994 + fRec992[1])));
+			fRec992[0] = (fTemp462 + (fTemp463 + (fRec994 + fRec992[1])));
 			fRec990[0] = fRec992[0];
-			double fRec991 = (fTemp463 + (fRec994 + fTemp464));
+			double fRec991 = (fTemp462 + (fRec994 + fTemp463));
 			fRec989[0] = (fRec990[0] + fRec989[1]);
 			fRec987[0] = fRec989[0];
 			double fRec988 = fRec991;
-			fRec986[0] = (fTemp462 + (fRec988 + fRec986[1]));
+			fRec986[0] = (fTemp461 + (fRec988 + fRec986[1]));
 			fRec984[0] = fRec986[0];
-			double fRec985 = (fRec988 + fTemp462);
-			double fTemp468 = (fConst44 * fRec999[1]);
-			double fTemp469 = (fConst45 * fRec1002[1]);
-			double fTemp470 = (fConst47 * ((((0.059505735300000001 * fTemp34) + ((0.097242414099999994 * fTemp32) + (0.044744602500000001 * fTemp30))) + (0.0091075732999999996 * fTemp35)) - (((((0.048746585100000003 * fTemp27) + (0.063279850299999996 * fTemp33)) + (0.011885379 * fTemp28)) + (0.068825617399999997 * fTemp29)) + (0.050357124699999999 * fTemp31))));
-			double fTemp471 = (fConst48 * fRec1005[1]);
-			double fTemp472 = (fConst49 * fRec1008[1]);
-			fRec1010[0] = (fTemp470 + (fTemp471 + (fRec1010[1] + fTemp472)));
+			double fRec985 = (fRec988 + fTemp461);
+			double fTemp467 = (fConst48 * fRec999[1]);
+			double fTemp468 = (fConst49 * fRec1002[1]);
+			double fTemp469 = (fConst51 * ((((0.059505735300000001 * fTemp34) + ((0.097242414099999994 * fTemp32) + (0.044744602500000001 * fTemp27))) + (0.0091075732999999996 * fTemp35)) - ((0.011885379 * fTemp28) + ((0.063279850299999996 * fTemp33) + ((0.048746585100000003 * fTemp29) + ((0.068825617399999997 * fTemp31) + (0.050357124699999999 * fTemp30)))))));
+			double fTemp470 = (fConst52 * fRec1005[1]);
+			double fTemp471 = (fConst53 * fRec1008[1]);
+			fRec1010[0] = (fTemp469 + (fTemp470 + (fRec1010[1] + fTemp471)));
 			fRec1008[0] = fRec1010[0];
-			double fRec1009 = ((fTemp472 + fTemp471) + fTemp470);
+			double fRec1009 = ((fTemp471 + fTemp470) + fTemp469);
 			fRec1007[0] = (fRec1008[0] + fRec1007[1]);
 			fRec1005[0] = fRec1007[0];
 			double fRec1006 = fRec1009;
-			fRec1004[0] = (fTemp468 + (fTemp469 + (fRec1006 + fRec1004[1])));
+			fRec1004[0] = (fTemp467 + (fTemp468 + (fRec1006 + fRec1004[1])));
 			fRec1002[0] = fRec1004[0];
-			double fRec1003 = (fTemp468 + (fRec1006 + fTemp469));
+			double fRec1003 = (fTemp467 + (fRec1006 + fTemp468));
 			fRec1001[0] = (fRec1002[0] + fRec1001[1]);
 			fRec999[0] = fRec1001[0];
 			double fRec1000 = fRec1003;
-			double fTemp473 = (fConst51 * fRec1011[1]);
-			double fTemp474 = (fConst53 * ((((0.055364225099999997 * fTemp40) + (0.0226203967 * fTemp44)) + (0.086610066900000005 * fTemp46)) - ((((0.0788152456 * fTemp43) + (0.062527876100000004 * fTemp41)) + (0.048297728800000002 * fTemp45)) + (0.031672557800000001 * fTemp42))));
-			double fTemp475 = (fConst54 * fRec1014[1]);
-			double fTemp476 = (fConst55 * fRec1017[1]);
-			fRec1019[0] = (fTemp474 + (fTemp475 + (fRec1019[1] + fTemp476)));
+			double fTemp472 = (fConst39 * fRec1011[1]);
+			double fTemp473 = (fConst38 * ((((0.055364225099999997 * fTemp40) + (0.0226203967 * fTemp44)) + (0.086610066900000005 * fTemp46)) - ((((0.0788152456 * fTemp43) + (0.062527876100000004 * fTemp41)) + (0.048297728800000002 * fTemp45)) + (0.031672557800000001 * fTemp42))));
+			double fTemp474 = (fConst36 * fRec1014[1]);
+			double fTemp475 = (fConst35 * fRec1017[1]);
+			fRec1019[0] = (fTemp473 + (fTemp474 + (fRec1019[1] + fTemp475)));
 			fRec1017[0] = fRec1019[0];
-			double fRec1018 = ((fTemp476 + fTemp475) + fTemp474);
+			double fRec1018 = ((fTemp475 + fTemp474) + fTemp473);
 			fRec1016[0] = (fRec1017[0] + fRec1016[1]);
 			fRec1014[0] = fRec1016[0];
 			double fRec1015 = fRec1018;
-			fRec1013[0] = (fTemp473 + (fRec1015 + fRec1013[1]));
+			fRec1013[0] = (fTemp472 + (fRec1015 + fRec1013[1]));
 			fRec1011[0] = fRec1013[0];
-			double fRec1012 = (fRec1015 + fTemp473);
-			double fTemp477 = (fConst57 * (((0.023696724400000001 * fTemp50) + (0.047958737199999997 * fTemp52)) - (0.062735413399999995 * fTemp51)));
-			double fTemp478 = (fConst58 * fRec1020[1]);
-			fRec1022[0] = (fTemp477 + (fRec1022[1] + fTemp478));
+			double fRec1012 = (fRec1015 + fTemp472);
+			double fTemp476 = (fConst41 * (((0.023696724400000001 * fTemp50) + (0.047958737199999997 * fTemp52)) - (0.062735413399999995 * fTemp51)));
+			double fTemp477 = (fConst42 * fRec1020[1]);
+			fRec1022[0] = (fTemp476 + (fRec1022[1] + fTemp477));
 			fRec1020[0] = fRec1022[0];
-			double fRec1021 = (fTemp478 + fTemp477);
-			double fTemp479 = (fConst60 * ((((0.038294947400000001 * fTemp56) + (2.3156800000000002e-05 * fTemp57)) + (0.054339355200000002 * fTemp55)) - ((0.046748261499999999 * fTemp54) + (0.0971716735 * fTemp58))));
-			double fTemp480 = (fConst61 * fRec1023[1]);
-			double fTemp481 = (fConst62 * fRec1026[1]);
-			fRec1028[0] = (fTemp479 + (fTemp480 + (fRec1028[1] + fTemp481)));
+			double fRec1021 = (fTemp477 + fTemp476);
+			double fTemp478 = (fConst44 * ((((2.3156800000000002e-05 * fTemp58) + (0.054339355200000002 * fTemp55)) + (0.038294947400000001 * fTemp59)) - ((0.0971716735 * fTemp57) + (0.046748261499999999 * fTemp56))));
+			double fTemp479 = (fConst45 * fRec1023[1]);
+			double fTemp480 = (fConst46 * fRec1026[1]);
+			fRec1028[0] = (fTemp478 + (fTemp479 + (fRec1028[1] + fTemp480)));
 			fRec1026[0] = fRec1028[0];
-			double fRec1027 = ((fTemp481 + fTemp480) + fTemp479);
-			fRec1025[0] = (fRec1026[0] + fRec1025[1]);
+			double fRec1027 = ((fTemp480 + fTemp479) + fTemp478);
+			fRec1025[0] = (fRec1025[1] + fRec1026[0]);
 			fRec1023[0] = fRec1025[0];
 			double fRec1024 = fRec1027;
 			fVec21[0] = ((0.028610468399999998 * fTemp7) + (fRec985 + (fRec1000 + (fRec1012 + (fRec1021 + fRec1024)))));
 			output21[i] = FAUSTFLOAT((0.99982065997130565 * (fRec0[0] * fVec21[iConst63])));
-			double fTemp482 = (fConst35 * fRec1029[1]);
-			double fTemp483 = (fConst37 * fRec1032[1]);
-			double fTemp484 = (fConst38 * fRec1035[1]);
-			double fTemp485 = (fConst40 * (((((0.079603697599999995 * fTemp16) + (0.0011970535 * fTemp18)) + (0.044139616899999998 * fTemp14)) + (0.098030110099999998 * fTemp20)) - ((0.016403536199999999 * fTemp21) + ((((((0.024798313200000002 * fTemp11) + (0.0214425743 * fTemp17)) + (0.094877141100000006 * fTemp12)) + (0.016720051900000001 * fTemp13)) + (0.0027086555000000001 * fTemp19)) + (0.028996286100000001 * fTemp15)))));
-			double fTemp486 = (fConst41 * fRec1038[1]);
-			double fTemp487 = (fConst42 * fRec1041[1]);
-			fRec1043[0] = (fTemp485 + (fTemp486 + (fRec1043[1] + fTemp487)));
+			double fTemp481 = (fConst55 * fRec1029[1]);
+			double fTemp482 = (fConst57 * fRec1032[1]);
+			double fTemp483 = (fConst58 * fRec1035[1]);
+			double fTemp484 = (fConst60 * (((((0.079603697599999995 * fTemp16) + (0.0011970535 * fTemp18)) + (0.044139616899999998 * fTemp14)) + (0.098030110099999998 * fTemp20)) - ((0.016403536199999999 * fTemp21) + ((((((0.024798313200000002 * fTemp11) + (0.0214425743 * fTemp17)) + (0.094877141100000006 * fTemp12)) + (0.016720051900000001 * fTemp13)) + (0.0027086555000000001 * fTemp19)) + (0.028996286100000001 * fTemp15)))));
+			double fTemp485 = (fConst61 * fRec1038[1]);
+			double fTemp486 = (fConst62 * fRec1041[1]);
+			fRec1043[0] = (fTemp484 + (fTemp485 + (fRec1043[1] + fTemp486)));
 			fRec1041[0] = fRec1043[0];
-			double fRec1042 = ((fTemp487 + fTemp486) + fTemp485);
+			double fRec1042 = ((fTemp486 + fTemp485) + fTemp484);
 			fRec1040[0] = (fRec1041[0] + fRec1040[1]);
 			fRec1038[0] = fRec1040[0];
 			double fRec1039 = fRec1042;
-			fRec1037[0] = (fTemp483 + (fTemp484 + (fRec1039 + fRec1037[1])));
+			fRec1037[0] = (fTemp482 + (fTemp483 + (fRec1039 + fRec1037[1])));
 			fRec1035[0] = fRec1037[0];
-			double fRec1036 = (fTemp483 + (fRec1039 + fTemp484));
+			double fRec1036 = (fTemp482 + (fRec1039 + fTemp483));
 			fRec1034[0] = (fRec1035[0] + fRec1034[1]);
 			fRec1032[0] = fRec1034[0];
 			double fRec1033 = fRec1036;
-			fRec1031[0] = (fTemp482 + (fRec1033 + fRec1031[1]));
+			fRec1031[0] = (fTemp481 + (fRec1033 + fRec1031[1]));
 			fRec1029[0] = fRec1031[0];
-			double fRec1030 = (fRec1033 + fTemp482);
-			double fTemp488 = (fConst44 * fRec1044[1]);
-			double fTemp489 = (fConst45 * fRec1047[1]);
-			double fTemp490 = (fConst47 * ((((0.0440944396 * fTemp27) + (0.021921913299999998 * fTemp30)) + (0.11098398769999999 * fTemp31)) - ((((((0.019019686300000001 * fTemp32) + (0.073714597000000007 * fTemp33)) + (0.043403538999999998 * fTemp28)) + (0.077458675199999993 * fTemp29)) + (0.059771411400000002 * fTemp34)) + (0.017923849200000001 * fTemp35))));
-			double fTemp491 = (fConst48 * fRec1050[1]);
-			double fTemp492 = (fConst49 * fRec1053[1]);
-			fRec1055[0] = (fTemp490 + (fTemp491 + (fRec1055[1] + fTemp492)));
+			double fRec1030 = (fRec1033 + fTemp481);
+			double fTemp487 = (fConst48 * fRec1044[1]);
+			double fTemp488 = (fConst49 * fRec1047[1]);
+			double fTemp489 = (fConst51 * (((0.021921913299999998 * fTemp27) + ((0.0440944396 * fTemp29) + (0.11098398769999999 * fTemp30))) - ((((0.043403538999999998 * fTemp28) + ((0.073714597000000007 * fTemp33) + ((0.019019686300000001 * fTemp32) + (0.077458675199999993 * fTemp31)))) + (0.059771411400000002 * fTemp34)) + (0.017923849200000001 * fTemp35))));
+			double fTemp490 = (fConst52 * fRec1050[1]);
+			double fTemp491 = (fConst53 * fRec1053[1]);
+			fRec1055[0] = (fTemp489 + (fTemp490 + (fRec1055[1] + fTemp491)));
 			fRec1053[0] = fRec1055[0];
-			double fRec1054 = ((fTemp492 + fTemp491) + fTemp490);
+			double fRec1054 = ((fTemp491 + fTemp490) + fTemp489);
 			fRec1052[0] = (fRec1053[0] + fRec1052[1]);
 			fRec1050[0] = fRec1052[0];
 			double fRec1051 = fRec1054;
-			fRec1049[0] = (fTemp488 + (fTemp489 + (fRec1051 + fRec1049[1])));
+			fRec1049[0] = (fTemp487 + (fTemp488 + (fRec1051 + fRec1049[1])));
 			fRec1047[0] = fRec1049[0];
-			double fRec1048 = (fTemp488 + (fRec1051 + fTemp489));
+			double fRec1048 = (fTemp487 + (fRec1051 + fTemp488));
 			fRec1046[0] = (fRec1047[0] + fRec1046[1]);
 			fRec1044[0] = fRec1046[0];
 			double fRec1045 = fRec1048;
-			double fTemp493 = (fConst51 * fRec1056[1]);
-			double fTemp494 = (fConst53 * (((0.054851883499999997 * fTemp44) + (0.064727711499999993 * fTemp42)) - (((((0.0094053016000000007 * fTemp40) + (0.1004721038 * fTemp43)) + (0.069036295400000003 * fTemp41)) + (0.025754793200000001 * fTemp45)) + (0.076631215799999999 * fTemp46))));
-			double fTemp495 = (fConst54 * fRec1059[1]);
-			double fTemp496 = (fConst55 * fRec1062[1]);
-			fRec1064[0] = (fTemp494 + (fTemp495 + (fRec1064[1] + fTemp496)));
+			double fTemp492 = (fConst38 * (((0.064727711499999993 * fTemp42) + (0.054851883499999997 * fTemp44)) - ((((0.069036295400000003 * fTemp41) + ((0.0094053016000000007 * fTemp40) + (0.1004721038 * fTemp43))) + (0.025754793200000001 * fTemp45)) + (0.076631215799999999 * fTemp46))));
+			double fTemp493 = (fConst35 * fRec1062[1]);
+			double fTemp494 = (fConst36 * fRec1059[1]);
+			fRec1064[0] = (((fTemp492 + fRec1064[1]) + fTemp493) + fTemp494);
 			fRec1062[0] = fRec1064[0];
-			double fRec1063 = ((fTemp496 + fTemp495) + fTemp494);
+			double fRec1063 = ((fTemp492 + fTemp493) + fTemp494);
 			fRec1061[0] = (fRec1062[0] + fRec1061[1]);
 			fRec1059[0] = fRec1061[0];
 			double fRec1060 = fRec1063;
-			fRec1058[0] = (fTemp493 + (fRec1060 + fRec1058[1]));
+			double fTemp495 = (fConst39 * fRec1056[1]);
+			fRec1058[0] = ((fRec1060 + fRec1058[1]) + fTemp495);
 			fRec1056[0] = fRec1058[0];
-			double fRec1057 = (fRec1060 + fTemp493);
-			double fTemp497 = (fConst57 * (((0.066250026599999998 * fTemp50) + (0.053823551999999997 * fTemp52)) - (0.032974198099999998 * fTemp51)));
-			double fTemp498 = (fConst58 * fRec1065[1]);
-			fRec1067[0] = (fTemp497 + (fRec1067[1] + fTemp498));
+			double fRec1057 = (fRec1060 + fTemp495);
+			double fTemp496 = (fConst41 * (((0.066250026599999998 * fTemp50) + (0.053823551999999997 * fTemp52)) - (0.032974198099999998 * fTemp51)));
+			double fTemp497 = (fConst42 * fRec1065[1]);
+			fRec1067[0] = (fTemp496 + (fRec1067[1] + fTemp497));
 			fRec1065[0] = fRec1067[0];
-			double fRec1066 = (fTemp498 + fTemp497);
-			double fTemp499 = (fConst60 * (((0.1040830202 * fTemp56) + (0.00092607829999999999 * fTemp57)) - (((0.061859566300000002 * fTemp54) + (0.0510567018 * fTemp58)) + (0.045778332599999999 * fTemp55))));
-			double fTemp500 = (fConst61 * fRec1068[1]);
-			double fTemp501 = (fConst62 * fRec1071[1]);
-			fRec1073[0] = (fTemp499 + (fTemp500 + (fRec1073[1] + fTemp501)));
+			double fRec1066 = (fTemp497 + fTemp496);
+			double fTemp498 = (fConst44 * (((0.1040830202 * fTemp59) + (0.00092607829999999999 * fTemp58)) - ((0.061859566300000002 * fTemp56) + ((0.0510567018 * fTemp57) + (0.045778332599999999 * fTemp55)))));
+			double fTemp499 = (fConst45 * fRec1068[1]);
+			double fTemp500 = (fConst46 * fRec1071[1]);
+			fRec1073[0] = (fTemp498 + (fTemp499 + (fRec1073[1] + fTemp500)));
 			fRec1071[0] = fRec1073[0];
-			double fRec1072 = ((fTemp501 + fTemp500) + fTemp499);
+			double fRec1072 = ((fTemp500 + fTemp499) + fTemp498);
 			fRec1070[0] = (fRec1071[0] + fRec1070[1]);
 			fRec1068[0] = fRec1070[0];
 			double fRec1069 = fRec1072;
 			fVec22[0] = ((0.031917253200000002 * fTemp7) + (fRec1030 + (fRec1045 + (fRec1057 + (fRec1066 + fRec1069)))));
 			output22[i] = FAUSTFLOAT((0.99982065997130565 * (fRec0[0] * fVec22[iConst63])));
-			double fTemp502 = (fConst35 * fRec1074[1]);
-			double fTemp503 = (fConst37 * fRec1077[1]);
-			double fTemp504 = (fConst38 * fRec1080[1]);
-			double fTemp505 = (fConst40 * (((0.021133366099999999 * fTemp21) + ((0.0074069805000000002 * fTemp18) + (0.021892870700000001 * fTemp15))) - ((0.085894872600000005 * fTemp20) + ((0.034271112399999998 * fTemp19) + ((0.036889805999999997 * fTemp14) + (((((0.0015217369 * fTemp11) + (0.071572547900000005 * fTemp16)) + (0.069623279800000007 * fTemp17)) + (0.0909585173 * fTemp12)) + (0.041091943999999998 * fTemp13)))))));
-			double fTemp506 = (fConst41 * fRec1083[1]);
-			double fTemp507 = (fConst42 * fRec1086[1]);
-			fRec1088[0] = (fTemp505 + (fTemp506 + (fRec1088[1] + fTemp507)));
-			fRec1086[0] = fRec1088[0];
-			double fRec1087 = ((fTemp507 + fTemp506) + fTemp505);
-			fRec1085[0] = (fRec1086[0] + fRec1085[1]);
+			double fTemp501 = (fConst48 * fRec1074[1]);
+			double fTemp502 = (fConst49 * fRec1077[1]);
+			double fTemp503 = (fConst51 * (((0.067678272600000006 * fTemp33) + (0.012697883700000001 * fTemp35)) - ((0.1090647706 * fTemp34) + ((0.013688008600000001 * fTemp27) + ((0.016579980000000001 * fTemp28) + ((0.071683186300000007 * fTemp32) + ((0.040895274099999997 * fTemp29) + ((0.095707024000000002 * fTemp31) + (0.094658668500000001 * fTemp30)))))))));
+			double fTemp504 = (fConst52 * fRec1080[1]);
+			double fTemp505 = (fConst53 * fRec1083[1]);
+			fRec1085[0] = (fTemp503 + (fTemp504 + (fRec1085[1] + fTemp505)));
 			fRec1083[0] = fRec1085[0];
-			double fRec1084 = fRec1087;
-			fRec1082[0] = (fTemp503 + (fTemp504 + (fRec1084 + fRec1082[1])));
+			double fRec1084 = ((fTemp505 + fTemp504) + fTemp503);
+			fRec1082[0] = (fRec1083[0] + fRec1082[1]);
 			fRec1080[0] = fRec1082[0];
-			double fRec1081 = (fTemp503 + (fRec1084 + fTemp504));
-			fRec1079[0] = (fRec1080[0] + fRec1079[1]);
+			double fRec1081 = fRec1084;
+			fRec1079[0] = (fTemp501 + (fTemp502 + (fRec1081 + fRec1079[1])));
 			fRec1077[0] = fRec1079[0];
-			double fRec1078 = fRec1081;
-			fRec1076[0] = (fTemp502 + (fRec1078 + fRec1076[1]));
+			double fRec1078 = (fTemp501 + (fRec1081 + fTemp502));
+			fRec1076[0] = (fRec1077[0] + fRec1076[1]);
 			fRec1074[0] = fRec1076[0];
-			double fRec1075 = (fRec1078 + fTemp502);
-			double fTemp508 = (fConst44 * fRec1089[1]);
-			double fTemp509 = (fConst45 * fRec1092[1]);
-			double fTemp510 = (fConst47 * (((0.067678272600000006 * fTemp33) + (0.012697883700000001 * fTemp35)) - ((0.094658668500000001 * fTemp31) + ((0.1090647706 * fTemp34) + (((((0.040895274099999997 * fTemp27) + (0.071683186300000007 * fTemp32)) + (0.016579980000000001 * fTemp28)) + (0.095707024000000002 * fTemp29)) + (0.013688008600000001 * fTemp30))))));
-			double fTemp511 = (fConst48 * fRec1095[1]);
-			double fTemp512 = (fConst49 * fRec1098[1]);
+			double fRec1075 = fRec1078;
+			double fTemp506 = (fConst39 * fRec1086[1]);
+			double fTemp507 = (fConst38 * ((((0.085081050199999994 * fTemp43) + (0.10053376629999999 * fTemp44)) + (0.0256590675 * fTemp45)) - ((0.054497393200000001 * fTemp42) + (((0.040601600000000002 * fTemp40) + (0.069432148999999999 * fTemp41)) + (0.12571434279999999 * fTemp46)))));
+			double fTemp508 = (fConst36 * fRec1089[1]);
+			double fTemp509 = (fConst35 * fRec1092[1]);
+			fRec1094[0] = (fTemp507 + (fTemp508 + (fRec1094[1] + fTemp509)));
+			fRec1092[0] = fRec1094[0];
+			double fRec1093 = ((fTemp509 + fTemp508) + fTemp507);
+			fRec1091[0] = (fRec1092[0] + fRec1091[1]);
+			fRec1089[0] = fRec1091[0];
+			double fRec1090 = fRec1093;
+			fRec1088[0] = (fTemp506 + (fRec1090 + fRec1088[1]));
+			fRec1086[0] = fRec1088[0];
+			double fRec1087 = (fRec1090 + fTemp506);
+			double fTemp510 = (fConst44 * (((0.14844343630000001 * fTemp59) + ((0.050687280799999998 * fTemp56) + ((0.0197405766 * fTemp58) + (0.0436933511 * fTemp57)))) - (0.073096284100000006 * fTemp55)));
+			double fTemp511 = (fConst45 * fRec1095[1]);
+			double fTemp512 = (fConst46 * fRec1098[1]);
 			fRec1100[0] = (fTemp510 + (fTemp511 + (fRec1100[1] + fTemp512)));
 			fRec1098[0] = fRec1100[0];
 			double fRec1099 = ((fTemp512 + fTemp511) + fTemp510);
 			fRec1097[0] = (fRec1098[0] + fRec1097[1]);
 			fRec1095[0] = fRec1097[0];
 			double fRec1096 = fRec1099;
-			fRec1094[0] = (fTemp508 + (fTemp509 + (fRec1096 + fRec1094[1])));
-			fRec1092[0] = fRec1094[0];
-			double fRec1093 = (fTemp508 + (fRec1096 + fTemp509));
-			fRec1091[0] = (fRec1092[0] + fRec1091[1]);
-			fRec1089[0] = fRec1091[0];
-			double fRec1090 = fRec1093;
-			double fTemp513 = (fConst51 * fRec1101[1]);
-			double fTemp514 = (fConst53 * ((((0.085081050199999994 * fTemp43) + (0.10053376629999999 * fTemp44)) + (0.0256590675 * fTemp45)) - ((0.054497393200000001 * fTemp42) + (((0.040601600000000002 * fTemp40) + (0.069432148999999999 * fTemp41)) + (0.12571434279999999 * fTemp46)))));
-			double fTemp515 = (fConst54 * fRec1104[1]);
-			double fTemp516 = (fConst55 * fRec1107[1]);
-			fRec1109[0] = (fTemp514 + (fTemp515 + (fRec1109[1] + fTemp516)));
+			double fTemp513 = (fConst60 * (((0.021133366099999999 * fTemp21) + ((0.0074069805000000002 * fTemp18) + (0.021892870700000001 * fTemp15))) - ((0.085894872600000005 * fTemp20) + ((0.034271112399999998 * fTemp19) + ((0.036889805999999997 * fTemp14) + (((((0.0015217369 * fTemp11) + (0.071572547900000005 * fTemp16)) + (0.069623279800000007 * fTemp17)) + (0.0909585173 * fTemp12)) + (0.041091943999999998 * fTemp13)))))));
+			double fTemp514 = (fConst61 * fRec1110[1]);
+			double fTemp515 = (fConst62 * fRec1113[1]);
+			fRec1115[0] = (fTemp513 + (fTemp514 + (fRec1115[1] + fTemp515)));
+			fRec1113[0] = fRec1115[0];
+			double fRec1114 = ((fTemp515 + fTemp514) + fTemp513);
+			fRec1112[0] = (fRec1113[0] + fRec1112[1]);
+			fRec1110[0] = fRec1112[0];
+			double fRec1111 = fRec1114;
+			double fTemp516 = (fRec1111 + (fConst57 * fRec1104[1]));
+			double fTemp517 = (fConst58 * fRec1107[1]);
+			fRec1109[0] = ((fTemp516 + fRec1109[1]) + fTemp517);
 			fRec1107[0] = fRec1109[0];
-			double fRec1108 = ((fTemp516 + fTemp515) + fTemp514);
+			double fRec1108 = (fTemp516 + fTemp517);
 			fRec1106[0] = (fRec1107[0] + fRec1106[1]);
 			fRec1104[0] = fRec1106[0];
 			double fRec1105 = fRec1108;
-			fRec1103[0] = (fTemp513 + (fRec1105 + fRec1103[1]));
+			double fTemp518 = (fConst55 * fRec1101[1]);
+			fRec1103[0] = ((fRec1105 + fRec1103[1]) + fTemp518);
 			fRec1101[0] = fRec1103[0];
-			double fRec1102 = (fRec1105 + fTemp513);
-			double fTemp517 = (fConst57 * (((0.089160045300000004 * fTemp50) + (0.0784006914 * fTemp52)) + (0.0270881439 * fTemp51)));
-			double fTemp518 = (fConst58 * fRec1110[1]);
-			fRec1112[0] = (fTemp517 + (fRec1112[1] + fTemp518));
-			fRec1110[0] = fRec1112[0];
-			double fRec1111 = (fTemp518 + fTemp517);
-			double fTemp519 = (fConst60 * (((((0.050687280799999998 * fTemp54) + (0.14844343630000001 * fTemp56)) + (0.0197405766 * fTemp57)) + (0.0436933511 * fTemp58)) - (0.073096284100000006 * fTemp55)));
-			double fTemp520 = (fConst61 * fRec1113[1]);
-			double fTemp521 = (fConst62 * fRec1116[1]);
-			fRec1118[0] = (fTemp519 + (fTemp520 + (fRec1118[1] + fTemp521)));
+			double fRec1102 = (fRec1105 + fTemp518);
+			double fTemp519 = (fConst41 * (((0.089160045300000004 * fTemp50) + (0.0784006914 * fTemp52)) + (0.0270881439 * fTemp51)));
+			double fTemp520 = (fConst42 * fRec1116[1]);
+			fRec1118[0] = ((fTemp519 + fRec1118[1]) + fTemp520);
 			fRec1116[0] = fRec1118[0];
-			double fRec1117 = ((fTemp521 + fTemp520) + fTemp519);
-			fRec1115[0] = (fRec1116[0] + fRec1115[1]);
-			fRec1113[0] = fRec1115[0];
-			double fRec1114 = fRec1117;
-			fVec23[0] = ((0.043107296000000003 * fTemp7) + (fRec1075 + (fRec1090 + (fRec1102 + (fRec1111 + fRec1114)))));
+			double fRec1117 = (fTemp519 + fTemp520);
+			fVec23[0] = ((fRec1075 + (fRec1087 + (fRec1096 + (fRec1102 + fRec1117)))) + (0.043107296000000003 * fTemp7));
 			output23[i] = FAUSTFLOAT((0.99982065997130565 * (fRec0[0] * fVec23[iConst63])));
-			double fTemp522 = (fConst67 * fRec1122[1]);
-			double fTemp523 = (fConst68 * fRec1125[1]);
-			double fTemp524 = (fConst70 * (((0.0029138503 * fTemp19) + ((0.078024262900000002 * fTemp14) + ((0.0025175067999999999 * fTemp13) + ((((0.0015480610000000001 * fTemp16) + (0.0455379255 * fTemp17)) + (0.1053167362 * fTemp18)) + (0.076874707400000006 * fTemp12))))) - ((0.0035933012999999998 * fTemp21) + ((0.022787416200000001 * fTemp15) + ((0.0030153924000000001 * fTemp11) + (0.041343690199999998 * fTemp20))))));
-			double fTemp525 = (fConst71 * fRec1128[1]);
-			double fTemp526 = (fConst72 * fRec1131[1]);
-			fRec1133[0] = (fTemp524 + (fTemp525 + (fRec1133[1] + fTemp526)));
-			fRec1131[0] = fRec1133[0];
-			double fRec1132 = ((fTemp526 + fTemp525) + fTemp524);
-			fRec1130[0] = (fRec1131[0] + fRec1130[1]);
+			double fTemp521 = (fConst65 * fRec1119[1]);
+			double fTemp522 = (fConst66 * fRec1122[1]);
+			double fTemp523 = (fConst68 * (((0.0027013688999999999 * fTemp34) + ((0.0939784538 * fTemp27) + ((0.091984844800000007 * fTemp28) + ((0.090807622800000001 * fTemp33) + ((0.027909630299999998 * fTemp32) + ((0.0006076136 * fTemp29) + (0.036062926299999999 * fTemp31))))))) - ((0.025270048999999999 * fTemp30) + (0.0087846173999999999 * fTemp35))));
+			double fTemp524 = (fConst69 * fRec1125[1]);
+			double fTemp525 = (fConst70 * fRec1128[1]);
+			fRec1130[0] = (fTemp523 + (fTemp524 + (fRec1130[1] + fTemp525)));
 			fRec1128[0] = fRec1130[0];
-			double fRec1129 = fRec1132;
-			fRec1127[0] = (fTemp522 + (fTemp523 + (fRec1129 + fRec1127[1])));
+			double fRec1129 = ((fTemp525 + fTemp524) + fTemp523);
+			fRec1127[0] = (fRec1128[0] + fRec1127[1]);
 			fRec1125[0] = fRec1127[0];
-			double fRec1126 = (fTemp522 + (fRec1129 + fTemp523));
-			fRec1124[0] = (fRec1125[0] + fRec1124[1]);
+			double fRec1126 = fRec1129;
+			fRec1124[0] = (fTemp521 + (fTemp522 + (fRec1126 + fRec1124[1])));
 			fRec1122[0] = fRec1124[0];
-			double fRec1123 = fRec1126;
-			double fTemp527 = ((fConst65 * fRec1119[1]) + fRec1123);
-			fRec1121[0] = (fRec1121[1] + fTemp527);
+			double fRec1123 = (fTemp521 + (fRec1126 + fTemp522));
+			fRec1121[0] = (fRec1122[0] + fRec1121[1]);
 			fRec1119[0] = fRec1121[0];
-			double fRec1120 = fTemp527;
-			double fTemp528 = (fConst74 * fRec1134[1]);
-			double fTemp529 = (fConst75 * fRec1137[1]);
-			double fTemp530 = (fConst77 * ((((((((0.0006076136 * fTemp27) + (0.027909630299999998 * fTemp32)) + (0.090807622800000001 * fTemp33)) + (0.091984844800000007 * fTemp28)) + (0.036062926299999999 * fTemp29)) + (0.0939784538 * fTemp30)) + (0.0027013688999999999 * fTemp34)) - ((0.025270048999999999 * fTemp31) + (0.0087846173999999999 * fTemp35))));
-			double fTemp531 = (fConst78 * fRec1140[1]);
-			double fTemp532 = (fConst79 * fRec1143[1]);
+			double fRec1120 = fRec1123;
+			double fTemp526 = (fConst72 * fRec1131[1]);
+			double fTemp527 = (fConst74 * (((((((0.011192040300000001 * fTemp40) + (0.058673124100000001 * fTemp43)) + (0.086492296799999993 * fTemp44)) + (0.070686613800000006 * fTemp41)) + (0.088686098899999996 * fTemp45)) + (0.0018213451000000001 * fTemp46)) - (0.0101142514 * fTemp42)));
+			double fTemp528 = (fConst75 * fRec1134[1]);
+			double fTemp529 = (fConst76 * fRec1137[1]);
+			fRec1139[0] = (fTemp527 + (fTemp528 + (fRec1139[1] + fTemp529)));
+			fRec1137[0] = fRec1139[0];
+			double fRec1138 = ((fTemp529 + fTemp528) + fTemp527);
+			fRec1136[0] = (fRec1137[0] + fRec1136[1]);
+			fRec1134[0] = fRec1136[0];
+			double fRec1135 = fRec1138;
+			fRec1133[0] = (fTemp526 + (fRec1135 + fRec1133[1]));
+			fRec1131[0] = fRec1133[0];
+			double fRec1132 = (fRec1135 + fTemp526);
+			double fTemp530 = (fConst78 * ((0.060228936199999999 * fTemp59) + ((0.024401915199999999 * fTemp56) + ((0.061883417099999997 * fTemp57) + ((0.087374200299999996 * fTemp58) + (0.00077739249999999997 * fTemp55))))));
+			double fTemp531 = (fConst79 * fRec1140[1]);
+			double fTemp532 = (fConst80 * fRec1143[1]);
 			fRec1145[0] = (fTemp530 + (fTemp531 + (fRec1145[1] + fTemp532)));
 			fRec1143[0] = fRec1145[0];
 			double fRec1144 = ((fTemp532 + fTemp531) + fTemp530);
 			fRec1142[0] = (fRec1143[0] + fRec1142[1]);
 			fRec1140[0] = fRec1142[0];
 			double fRec1141 = fRec1144;
-			fRec1139[0] = (fTemp528 + (fTemp529 + (fRec1141 + fRec1139[1])));
-			fRec1137[0] = fRec1139[0];
-			double fRec1138 = (fTemp528 + (fRec1141 + fTemp529));
-			fRec1136[0] = (fRec1137[0] + fRec1136[1]);
-			fRec1134[0] = fRec1136[0];
-			double fRec1135 = fRec1138;
-			double fTemp533 = (fConst81 * fRec1146[1]);
-			double fTemp534 = (fConst83 * (((((((0.011192040300000001 * fTemp40) + (0.058673124100000001 * fTemp43)) + (0.086492296799999993 * fTemp44)) + (0.070686613800000006 * fTemp41)) + (0.088686098899999996 * fTemp45)) + (0.0018213451000000001 * fTemp46)) - (0.0101142514 * fTemp42)));
-			double fTemp535 = (fConst84 * fRec1149[1]);
-			double fTemp536 = (fConst85 * fRec1152[1]);
-			fRec1154[0] = (fTemp534 + (fTemp535 + (fRec1154[1] + fTemp536)));
+			double fTemp533 = (fConst82 * fRec1146[1]);
+			double fTemp534 = (fConst84 * fRec1149[1]);
+			double fTemp535 = (fConst85 * fRec1152[1]);
+			double fTemp536 = (fConst87 * (((0.0029138503 * fTemp19) + ((0.078024262900000002 * fTemp14) + ((0.0025175067999999999 * fTemp13) + ((((0.0015480610000000001 * fTemp16) + (0.0455379255 * fTemp17)) + (0.1053167362 * fTemp18)) + (0.076874707400000006 * fTemp12))))) - ((0.0035933012999999998 * fTemp21) + ((0.022787416200000001 * fTemp15) + ((0.0030153924000000001 * fTemp11) + (0.041343690199999998 * fTemp20))))));
+			double fTemp537 = (fConst88 * fRec1155[1]);
+			double fTemp538 = (fConst89 * fRec1158[1]);
+			fRec1160[0] = (fTemp536 + (fTemp537 + (fRec1160[1] + fTemp538)));
+			fRec1158[0] = fRec1160[0];
+			double fRec1159 = ((fTemp538 + fTemp537) + fTemp536);
+			fRec1157[0] = (fRec1158[0] + fRec1157[1]);
+			fRec1155[0] = fRec1157[0];
+			double fRec1156 = fRec1159;
+			fRec1154[0] = (fTemp534 + (fTemp535 + (fRec1156 + fRec1154[1])));
 			fRec1152[0] = fRec1154[0];
-			double fRec1153 = ((fTemp536 + fTemp535) + fTemp534);
+			double fRec1153 = (fTemp534 + (fRec1156 + fTemp535));
 			fRec1151[0] = (fRec1152[0] + fRec1151[1]);
 			fRec1149[0] = fRec1151[0];
 			double fRec1150 = fRec1153;
 			fRec1148[0] = (fTemp533 + (fRec1150 + fRec1148[1]));
 			fRec1146[0] = fRec1148[0];
 			double fRec1147 = (fRec1150 + fTemp533);
-			double fTemp537 = (fConst87 * (((0.025693251199999999 * fTemp50) + (0.072682772699999995 * fTemp52)) + (0.026429082499999999 * fTemp51)));
-			double fTemp538 = (fConst88 * fRec1155[1]);
-			fRec1157[0] = (fTemp537 + (fRec1157[1] + fTemp538));
-			fRec1155[0] = fRec1157[0];
-			double fRec1156 = (fTemp538 + fTemp537);
-			double fTemp539 = (fConst90 * (((((0.024401915199999999 * fTemp54) + (0.060228936199999999 * fTemp56)) + (0.087374200299999996 * fTemp57)) + (0.061883417099999997 * fTemp58)) + (0.00077739249999999997 * fTemp55)));
-			double fTemp540 = (fConst91 * fRec1158[1]);
-			double fTemp541 = (fConst92 * fRec1161[1]);
-			fRec1163[0] = (fTemp539 + (fTemp540 + (fRec1163[1] + fTemp541)));
+			double fTemp539 = (fConst91 * (((0.025693251199999999 * fTemp50) + (0.072682772699999995 * fTemp52)) + (0.026429082499999999 * fTemp51)));
+			double fTemp540 = (fConst92 * fRec1161[1]);
+			fRec1163[0] = (fTemp539 + (fRec1163[1] + fTemp540));
 			fRec1161[0] = fRec1163[0];
-			double fRec1162 = ((fTemp541 + fTemp540) + fTemp539);
-			fRec1160[0] = (fRec1161[0] + fRec1160[1]);
-			fRec1158[0] = fRec1160[0];
-			double fRec1159 = fRec1162;
-			fVec24[(IOTA & 511)] = ((0.028277896300000001 * fTemp7) + (fRec1120 + (fRec1135 + (fRec1147 + (fRec1156 + fRec1159)))));
+			double fRec1162 = (fTemp540 + fTemp539);
+			fVec24[(IOTA & 511)] = ((0.028277896300000001 * fTemp7) + (fRec1120 + (fRec1132 + (fRec1141 + (fRec1147 + fRec1162)))));
 			output24[i] = FAUSTFLOAT((0.91194404591104739 * (fRec0[0] * fVec24[((IOTA - iConst93) & 511)])));
-			double fTemp542 = (fConst65 * fRec1164[1]);
-			double fTemp543 = (fConst67 * fRec1167[1]);
-			double fTemp544 = (fConst68 * fRec1170[1]);
-			double fTemp545 = (fConst70 * ((((0.052171297999999998 * fTemp19) + (((0.0034057421999999999 * fTemp11) + (0.0016176167999999999 * fTemp16)) + (0.094193448099999993 * fTemp14))) + (0.0015200306999999999 * fTemp21)) - ((0.0036253367000000001 * fTemp15) + (((((0.041000995999999998 * fTemp17) + (0.10478474359999999 * fTemp18)) + (0.076193147899999994 * fTemp12)) + (0.029481640999999999 * fTemp13)) + (0.0020305364 * fTemp20)))));
-			double fTemp546 = (fConst71 * fRec1173[1]);
-			double fTemp547 = (fConst72 * fRec1176[1]);
-			fRec1178[0] = (fTemp545 + (fTemp546 + (fRec1178[1] + fTemp547)));
-			fRec1176[0] = fRec1178[0];
-			double fRec1177 = ((fTemp547 + fTemp546) + fTemp545);
-			fRec1175[0] = (fRec1176[0] + fRec1175[1]);
-			fRec1173[0] = fRec1175[0];
-			double fRec1174 = fRec1177;
-			fRec1172[0] = (fTemp543 + (fTemp544 + (fRec1174 + fRec1172[1])));
-			fRec1170[0] = fRec1172[0];
-			double fRec1171 = (fTemp543 + (fRec1174 + fTemp544));
-			fRec1169[0] = (fRec1170[0] + fRec1169[1]);
-			fRec1167[0] = fRec1169[0];
-			double fRec1168 = fRec1171;
-			fRec1166[0] = (fTemp542 + (fRec1168 + fRec1166[1]));
+			double fTemp541 = (fConst91 * (((0.098975686699999996 * fTemp52) + (0.044761492200000003 * fTemp51)) - (0.027219782000000001 * fTemp50)));
+			double fTemp542 = (fConst92 * fRec1164[1]);
+			fRec1166[0] = (fTemp541 + (fRec1166[1] + fTemp542));
 			fRec1164[0] = fRec1166[0];
-			double fRec1165 = (fRec1168 + fTemp542);
-			double fTemp548 = (fConst74 * fRec1179[1]);
-			double fTemp549 = (fConst75 * fRec1182[1]);
-			double fTemp550 = (fConst77 * (((0.049252271399999999 * fTemp34) + ((0.1358856896 * fTemp30) + ((0.00060667879999999998 * fTemp27) + (0.0192155881 * fTemp29)))) - ((0.0015592369 * fTemp35) + ((((0.025480054500000002 * fTemp32) + (0.0919065513 * fTemp33)) + (0.0939990297 * fTemp28)) + (0.0012888623000000001 * fTemp31)))));
-			double fTemp551 = (fConst78 * fRec1185[1]);
-			double fTemp552 = (fConst79 * fRec1188[1]);
-			fRec1190[0] = (fTemp550 + (fTemp551 + (fRec1190[1] + fTemp552)));
-			fRec1188[0] = fRec1190[0];
-			double fRec1189 = ((fTemp552 + fTemp551) + fTemp550);
-			fRec1187[0] = (fRec1188[0] + fRec1187[1]);
-			fRec1185[0] = fRec1187[0];
-			double fRec1186 = fRec1189;
-			fRec1184[0] = (fTemp548 + (fTemp549 + (fRec1186 + fRec1184[1])));
-			fRec1182[0] = fRec1184[0];
-			double fRec1183 = (fTemp548 + (fRec1186 + fTemp549));
-			fRec1181[0] = (fRec1182[0] + fRec1181[1]);
+			double fRec1165 = (fTemp542 + fTemp541);
+			double fTemp543 = (fConst82 * fRec1167[1]);
+			double fTemp544 = (fConst84 * fRec1170[1]);
+			double fTemp545 = (fConst85 * fRec1173[1]);
+			double fTemp546 = (fConst87 * ((((0.052171297999999998 * fTemp19) + (((0.0034057421999999999 * fTemp11) + (0.0016176167999999999 * fTemp16)) + (0.094193448099999993 * fTemp14))) + (0.0015200306999999999 * fTemp21)) - ((0.0036253367000000001 * fTemp15) + (((((0.041000995999999998 * fTemp17) + (0.10478474359999999 * fTemp18)) + (0.076193147899999994 * fTemp12)) + (0.029481640999999999 * fTemp13)) + (0.0020305364 * fTemp20)))));
+			double fTemp547 = (fConst88 * fRec1176[1]);
+			double fTemp548 = (fConst89 * fRec1179[1]);
+			fRec1181[0] = (fTemp546 + (fTemp547 + (fRec1181[1] + fTemp548)));
 			fRec1179[0] = fRec1181[0];
-			double fRec1180 = fRec1183;
-			double fTemp553 = (fConst81 * fRec1191[1]);
-			double fTemp554 = (fConst83 * (((0.033408452300000002 * fTemp46) + ((0.076988258200000007 * fTemp41) + (0.1399183775 * fTemp45))) - ((((0.010304103 * fTemp40) + (0.060022493000000003 * fTemp43)) + (0.090031089600000003 * fTemp44)) + (0.00054392489999999997 * fTemp42))));
-			double fTemp555 = (fConst84 * fRec1194[1]);
-			double fTemp556 = (fConst85 * fRec1197[1]);
-			fRec1199[0] = (fTemp554 + (fTemp555 + (fRec1199[1] + fTemp556)));
+			double fRec1180 = ((fTemp548 + fTemp547) + fTemp546);
+			fRec1178[0] = (fRec1179[0] + fRec1178[1]);
+			fRec1176[0] = fRec1178[0];
+			double fRec1177 = fRec1180;
+			fRec1175[0] = (fTemp544 + (fTemp545 + (fRec1177 + fRec1175[1])));
+			fRec1173[0] = fRec1175[0];
+			double fRec1174 = (fTemp544 + (fRec1177 + fTemp545));
+			fRec1172[0] = (fRec1173[0] + fRec1172[1]);
+			fRec1170[0] = fRec1172[0];
+			double fRec1171 = fRec1174;
+			fRec1169[0] = (fTemp543 + (fRec1171 + fRec1169[1]));
+			fRec1167[0] = fRec1169[0];
+			double fRec1168 = (fRec1171 + fTemp543);
+			double fTemp549 = (fConst65 * fRec1182[1]);
+			double fTemp550 = (fConst66 * fRec1185[1]);
+			double fTemp551 = (fConst68 * (((0.049252271399999999 * fTemp34) + ((0.1358856896 * fTemp27) + ((0.00060667879999999998 * fTemp29) + (0.0192155881 * fTemp31)))) - ((0.0015592369 * fTemp35) + ((0.0939990297 * fTemp28) + ((0.0919065513 * fTemp33) + ((0.025480054500000002 * fTemp32) + (0.0012888623000000001 * fTemp30)))))));
+			double fTemp552 = (fConst69 * fRec1188[1]);
+			double fTemp553 = (fConst70 * fRec1191[1]);
+			fRec1193[0] = (fTemp551 + (fTemp552 + (fRec1193[1] + fTemp553)));
+			fRec1191[0] = fRec1193[0];
+			double fRec1192 = ((fTemp553 + fTemp552) + fTemp551);
+			fRec1190[0] = (fRec1191[0] + fRec1190[1]);
+			fRec1188[0] = fRec1190[0];
+			double fRec1189 = fRec1192;
+			fRec1187[0] = (fTemp549 + (fTemp550 + (fRec1189 + fRec1187[1])));
+			fRec1185[0] = fRec1187[0];
+			double fRec1186 = (fTemp549 + (fRec1189 + fTemp550));
+			fRec1184[0] = (fRec1185[0] + fRec1184[1]);
+			fRec1182[0] = fRec1184[0];
+			double fRec1183 = fRec1186;
+			double fTemp554 = (((fConst80 * fRec1197[1]) + (fConst79 * fRec1194[1])) + (fConst78 * (((0.1022608322 * fTemp57) + ((0.1116717268 * fTemp58) + (0.0142804526 * fTemp55))) - ((0.025131725099999998 * fTemp56) + (0.063397700500000001 * fTemp59)))));
+			fRec1199[0] = (fTemp554 + fRec1199[1]);
 			fRec1197[0] = fRec1199[0];
-			double fRec1198 = ((fTemp556 + fTemp555) + fTemp554);
+			double fRec1198 = fTemp554;
 			fRec1196[0] = (fRec1197[0] + fRec1196[1]);
 			fRec1194[0] = fRec1196[0];
 			double fRec1195 = fRec1198;
-			fRec1193[0] = (fTemp553 + (fRec1195 + fRec1193[1]));
-			fRec1191[0] = fRec1193[0];
-			double fRec1192 = (fRec1195 + fTemp553);
-			double fTemp557 = (fConst87 * (((0.098975686699999996 * fTemp52) + (0.044761492200000003 * fTemp51)) - (0.027219782000000001 * fTemp50)));
-			double fTemp558 = (fConst88 * fRec1200[1]);
-			fRec1202[0] = (fTemp557 + (fRec1202[1] + fTemp558));
-			fRec1200[0] = fRec1202[0];
-			double fRec1201 = (fTemp558 + fTemp557);
-			double fTemp559 = (fConst90 * ((((0.1116717268 * fTemp57) + (0.1022608322 * fTemp58)) + (0.0142804526 * fTemp55)) - ((0.025131725099999998 * fTemp54) + (0.063397700500000001 * fTemp56))));
-			double fTemp560 = (fConst91 * fRec1203[1]);
-			double fTemp561 = (fConst92 * fRec1206[1]);
-			fRec1208[0] = (fTemp559 + (fTemp560 + (fRec1208[1] + fTemp561)));
+			double fTemp555 = (fConst72 * fRec1200[1]);
+			double fTemp556 = (fConst74 * (((0.033408452300000002 * fTemp46) + ((0.076988258200000007 * fTemp41) + (0.1399183775 * fTemp45))) - ((((0.010304103 * fTemp40) + (0.060022493000000003 * fTemp43)) + (0.090031089600000003 * fTemp44)) + (0.00054392489999999997 * fTemp42))));
+			double fTemp557 = (fConst75 * fRec1203[1]);
+			double fTemp558 = (fConst76 * fRec1206[1]);
+			fRec1208[0] = (fTemp556 + (fTemp557 + (fRec1208[1] + fTemp558)));
 			fRec1206[0] = fRec1208[0];
-			double fRec1207 = ((fTemp561 + fTemp560) + fTemp559);
+			double fRec1207 = ((fTemp558 + fTemp557) + fTemp556);
 			fRec1205[0] = (fRec1206[0] + fRec1205[1]);
 			fRec1203[0] = fRec1205[0];
 			double fRec1204 = fRec1207;
-			fVec25[(IOTA & 511)] = ((0.039466712600000002 * fTemp7) + (fRec1165 + (fRec1180 + (fRec1192 + (fRec1201 + fRec1204)))));
+			fRec1202[0] = (fTemp555 + (fRec1204 + fRec1202[1]));
+			fRec1200[0] = fRec1202[0];
+			double fRec1201 = (fRec1204 + fTemp555);
+			fVec25[(IOTA & 511)] = ((0.039466712600000002 * fTemp7) + (fRec1165 + (fRec1168 + (fRec1183 + (fRec1195 + fRec1201)))));
 			output25[i] = FAUSTFLOAT((0.91194404591104739 * (fRec0[0] * fVec25[((IOTA - iConst93) & 511)])));
-			double fTemp562 = (fConst65 * fRec1209[1]);
-			double fTemp563 = (fConst67 * fRec1212[1]);
-			double fTemp564 = (fConst68 * fRec1215[1]);
-			double fTemp565 = (fConst70 * ((((0.1058031181 * fTemp18) + (0.042804204899999997 * fTemp20)) + (0.0027031256 * fTemp21)) - (((0.0519703075 * fTemp19) + ((0.076446778600000001 * fTemp14) + (((((0.0018871877 * fTemp11) + (6.3802900000000005e-05 * fTemp16)) + (0.00056284480000000001 * fTemp17)) + (0.093089472100000001 * fTemp12)) + (0.029118537999999999 * fTemp13)))) + (0.0023293280999999999 * fTemp15))));
-			double fTemp566 = (fConst71 * fRec1218[1]);
-			double fTemp567 = (fConst72 * fRec1221[1]);
-			fRec1223[0] = (fTemp565 + (fTemp566 + (fRec1223[1] + fTemp567)));
+			double fTemp559 = (fConst82 * fRec1209[1]);
+			double fTemp560 = (fConst84 * fRec1212[1]);
+			double fTemp561 = (fConst85 * fRec1215[1]);
+			double fTemp562 = (fConst87 * ((((0.1058031181 * fTemp18) + (0.042804204899999997 * fTemp20)) + (0.0027031256 * fTemp21)) - (((0.0519703075 * fTemp19) + ((0.076446778600000001 * fTemp14) + (((((0.0018871877 * fTemp11) + (6.3802900000000005e-05 * fTemp16)) + (0.00056284480000000001 * fTemp17)) + (0.093089472100000001 * fTemp12)) + (0.029118537999999999 * fTemp13)))) + (0.0023293280999999999 * fTemp15))));
+			double fTemp563 = (fConst88 * fRec1218[1]);
+			double fTemp564 = (fConst89 * fRec1221[1]);
+			fRec1223[0] = (fTemp562 + (fTemp563 + (fRec1223[1] + fTemp564)));
 			fRec1221[0] = fRec1223[0];
-			double fRec1222 = ((fTemp567 + fTemp566) + fTemp565);
+			double fRec1222 = ((fTemp564 + fTemp563) + fTemp562);
 			fRec1220[0] = (fRec1221[0] + fRec1220[1]);
 			fRec1218[0] = fRec1220[0];
 			double fRec1219 = fRec1222;
-			fRec1217[0] = (fTemp563 + (fTemp564 + (fRec1219 + fRec1217[1])));
+			fRec1217[0] = (fTemp560 + (fTemp561 + (fRec1219 + fRec1217[1])));
 			fRec1215[0] = fRec1217[0];
-			double fRec1216 = (fTemp563 + (fRec1219 + fTemp564));
+			double fRec1216 = (fTemp560 + (fRec1219 + fTemp561));
 			fRec1214[0] = (fRec1215[0] + fRec1214[1]);
 			fRec1212[0] = fRec1214[0];
 			double fRec1213 = fRec1216;
-			fRec1211[0] = (fTemp562 + (fRec1213 + fRec1211[1]));
+			fRec1211[0] = (fTemp559 + (fRec1213 + fRec1211[1]));
 			fRec1209[0] = fRec1211[0];
-			double fRec1210 = (fRec1213 + fTemp562);
-			double fTemp568 = (fConst74 * fRec1224[1]);
-			double fTemp569 = (fConst75 * fRec1227[1]);
-			double fTemp570 = (fConst77 * (((((2.4005000000000001e-05 * fTemp32) + (0.092680634600000006 * fTemp33)) + (0.0190862501 * fTemp29)) + (0.0266160906 * fTemp31)) - (((0.049832324900000002 * fTemp34) + (((8.1458600000000006e-05 * fTemp27) + (0.13495003289999999 * fTemp28)) + (0.094228893300000005 * fTemp30))) + (0.00096497369999999996 * fTemp35))));
-			double fTemp571 = (fConst78 * fRec1230[1]);
-			double fTemp572 = (fConst79 * fRec1233[1]);
-			fRec1235[0] = (fTemp570 + (fTemp571 + (fRec1235[1] + fTemp572)));
+			double fRec1210 = (fRec1213 + fTemp559);
+			double fTemp565 = (fConst65 * fRec1224[1]);
+			double fTemp566 = (fConst66 * fRec1227[1]);
+			double fTemp567 = (fConst68 * (((0.092680634600000006 * fTemp33) + ((2.4005000000000001e-05 * fTemp32) + ((0.0190862501 * fTemp31) + (0.0266160906 * fTemp30)))) - (((0.049832324900000002 * fTemp34) + (((8.1458600000000006e-05 * fTemp29) + (0.13495003289999999 * fTemp28)) + (0.094228893300000005 * fTemp27))) + (0.00096497369999999996 * fTemp35))));
+			double fTemp568 = (fConst69 * fRec1230[1]);
+			double fTemp569 = (fConst70 * fRec1233[1]);
+			fRec1235[0] = (fTemp567 + (fTemp568 + (fRec1235[1] + fTemp569)));
 			fRec1233[0] = fRec1235[0];
-			double fRec1234 = ((fTemp572 + fTemp571) + fTemp570);
+			double fRec1234 = ((fTemp569 + fTemp568) + fTemp567);
 			fRec1232[0] = (fRec1233[0] + fRec1232[1]);
 			fRec1230[0] = fRec1232[0];
 			double fRec1231 = fRec1234;
-			fRec1229[0] = (fTemp568 + (fTemp569 + (fRec1231 + fRec1229[1])));
+			fRec1229[0] = (fTemp565 + (fTemp566 + (fRec1231 + fRec1229[1])));
 			fRec1227[0] = fRec1229[0];
-			double fRec1228 = (fTemp568 + (fRec1231 + fTemp569));
+			double fRec1228 = (fTemp565 + (fRec1231 + fTemp566));
 			fRec1226[0] = (fRec1227[0] + fRec1226[1]);
 			fRec1224[0] = fRec1226[0];
 			double fRec1225 = fRec1228;
-			double fTemp573 = (fConst81 * fRec1236[1]);
-			double fTemp574 = (fConst83 * (((((0.0001059945 * fTemp40) + (0.060452572199999999 * fTemp43)) + (0.076532351999999998 * fTemp41)) + (0.0107665221 * fTemp42)) - (((0.13940843359999999 * fTemp44) + (0.090126801300000003 * fTemp45)) + (0.034150383999999999 * fTemp46))));
-			double fTemp575 = (fConst84 * fRec1239[1]);
-			double fTemp576 = (fConst85 * fRec1242[1]);
-			fRec1244[0] = (fTemp574 + (fTemp575 + (fRec1244[1] + fTemp576)));
+			double fTemp570 = (fConst72 * fRec1236[1]);
+			double fTemp571 = (fConst74 * (((((0.0001059945 * fTemp40) + (0.060452572199999999 * fTemp43)) + (0.076532351999999998 * fTemp41)) + (0.0107665221 * fTemp42)) - (((0.13940843359999999 * fTemp44) + (0.090126801300000003 * fTemp45)) + (0.034150383999999999 * fTemp46))));
+			double fTemp572 = (fConst75 * fRec1239[1]);
+			double fTemp573 = (fConst76 * fRec1242[1]);
+			fRec1244[0] = (fTemp571 + (fTemp572 + (fRec1244[1] + fTemp573)));
 			fRec1242[0] = fRec1244[0];
-			double fRec1243 = ((fTemp576 + fTemp575) + fTemp574);
+			double fRec1243 = ((fTemp573 + fTemp572) + fTemp571);
 			fRec1241[0] = (fRec1242[0] + fRec1241[1]);
 			fRec1239[0] = fRec1241[0];
 			double fRec1240 = fRec1243;
-			fRec1238[0] = (fTemp573 + (fRec1240 + fRec1238[1]));
+			fRec1238[0] = (fTemp570 + (fRec1240 + fRec1238[1]));
 			fRec1236[0] = fRec1238[0];
-			double fRec1237 = (fRec1240 + fTemp573);
-			double fTemp577 = (fConst87 * ((0.098575644399999995 * fTemp52) - ((0.0447537187 * fTemp50) + (0.0271909304 * fTemp51))));
-			double fTemp578 = (fConst88 * fRec1245[1]);
-			fRec1247[0] = (fTemp577 + (fRec1247[1] + fTemp578));
+			double fRec1237 = (fRec1240 + fTemp570);
+			double fTemp574 = (fConst91 * ((0.098575644399999995 * fTemp52) - ((0.0447537187 * fTemp50) + (0.0271909304 * fTemp51))));
+			double fTemp575 = (fConst92 * fRec1245[1]);
+			fRec1247[0] = (fTemp574 + (fRec1247[1] + fTemp575));
 			fRec1245[0] = fRec1247[0];
-			double fRec1246 = (fTemp578 + fTemp577);
-			double fTemp579 = (fConst90 * (((0.025286161500000001 * fTemp54) + (0.111138168 * fTemp57)) - (((0.1021079309 * fTemp56) + (0.063386494599999996 * fTemp58)) + (0.014697878399999999 * fTemp55))));
-			double fTemp580 = (fConst91 * fRec1248[1]);
-			double fTemp581 = (fConst92 * fRec1251[1]);
-			fRec1253[0] = (fTemp579 + (fTemp580 + (fRec1253[1] + fTemp581)));
+			double fRec1246 = (fTemp575 + fTemp574);
+			double fTemp576 = (fConst78 * (((0.025286161500000001 * fTemp56) + (0.111138168 * fTemp58)) - ((0.1021079309 * fTemp59) + ((0.063386494599999996 * fTemp57) + (0.014697878399999999 * fTemp55)))));
+			double fTemp577 = (fConst79 * fRec1248[1]);
+			double fTemp578 = (fConst80 * fRec1251[1]);
+			fRec1253[0] = (fTemp576 + (fTemp577 + (fRec1253[1] + fTemp578)));
 			fRec1251[0] = fRec1253[0];
-			double fRec1252 = ((fTemp581 + fTemp580) + fTemp579);
+			double fRec1252 = ((fTemp578 + fTemp577) + fTemp576);
 			fRec1250[0] = (fRec1251[0] + fRec1250[1]);
 			fRec1248[0] = fRec1250[0];
 			double fRec1249 = fRec1252;
 			fVec26[(IOTA & 511)] = ((0.039321185100000003 * fTemp7) + (fRec1210 + (fRec1225 + (fRec1237 + (fRec1246 + fRec1249)))));
 			output26[i] = FAUSTFLOAT((0.91194404591104739 * (fRec0[0] * fVec26[((IOTA - iConst93) & 511)])));
-			double fTemp582 = (fConst65 * fRec1254[1]);
-			double fTemp583 = (fConst67 * fRec1257[1]);
-			double fTemp584 = (fConst68 * fRec1260[1]);
-			double fTemp585 = (fConst70 * (((((0.0012908243 * fTemp11) + (0.00079707439999999997 * fTemp17)) + (0.093320637499999998 * fTemp12)) + (0.015188454400000001 * fTemp15)) - (((0.0044106976000000001 * fTemp20) + ((0.0019461305000000001 * fTemp19) + ((0.090389738299999994 * fTemp14) + (((0.0031039086 * fTemp16) + (0.1003440801 * fTemp18)) + (0.0585758267 * fTemp13))))) + (0.00079454630000000003 * fTemp21))));
-			double fTemp586 = (fConst71 * fRec1263[1]);
-			double fTemp587 = (fConst72 * fRec1266[1]);
-			fRec1268[0] = (fTemp585 + (fTemp586 + (fRec1268[1] + fTemp587)));
+			double fTemp579 = (fConst82 * fRec1254[1]);
+			double fTemp580 = (fConst84 * fRec1257[1]);
+			double fTemp581 = (fConst85 * fRec1260[1]);
+			double fTemp582 = (fConst87 * (((((0.0012908243 * fTemp11) + (0.00079707439999999997 * fTemp17)) + (0.093320637499999998 * fTemp12)) + (0.015188454400000001 * fTemp15)) - (((0.0044106976000000001 * fTemp20) + ((0.0019461305000000001 * fTemp19) + ((0.090389738299999994 * fTemp14) + (((0.0031039086 * fTemp16) + (0.1003440801 * fTemp18)) + (0.0585758267 * fTemp13))))) + (0.00079454630000000003 * fTemp21))));
+			double fTemp583 = (fConst88 * fRec1263[1]);
+			double fTemp584 = (fConst89 * fRec1266[1]);
+			fRec1268[0] = (fTemp582 + (fTemp583 + (fRec1268[1] + fTemp584)));
 			fRec1266[0] = fRec1268[0];
-			double fRec1267 = ((fTemp587 + fTemp586) + fTemp585);
+			double fRec1267 = ((fTemp584 + fTemp583) + fTemp582);
 			fRec1265[0] = (fRec1266[0] + fRec1265[1]);
 			fRec1263[0] = fRec1265[0];
 			double fRec1264 = fRec1267;
-			fRec1262[0] = (fTemp583 + (fTemp584 + (fRec1264 + fRec1262[1])));
+			fRec1262[0] = (fTemp580 + (fTemp581 + (fRec1264 + fRec1262[1])));
 			fRec1260[0] = fRec1262[0];
-			double fRec1261 = (fTemp583 + (fRec1264 + fTemp584));
+			double fRec1261 = (fTemp580 + (fRec1264 + fTemp581));
 			fRec1259[0] = (fRec1260[0] + fRec1259[1]);
 			fRec1257[0] = fRec1259[0];
 			double fRec1258 = fRec1261;
-			fRec1256[0] = (fTemp582 + (fRec1258 + fRec1256[1]));
+			fRec1256[0] = (fTemp579 + (fRec1258 + fRec1256[1]));
 			fRec1254[0] = fRec1256[0];
-			double fRec1255 = (fRec1258 + fTemp582);
-			double fTemp588 = (fConst74 * fRec1269[1]);
-			double fTemp589 = (fConst75 * fRec1272[1]);
-			double fTemp590 = (fConst77 * (((((0.0010672493 * fTemp32) + (0.13586683799999999 * fTemp28)) + (0.0036924124000000001 * fTemp29)) + (0.0055953964 * fTemp35)) - ((0.0028198214999999999 * fTemp31) + ((0.00059164440000000003 * fTemp34) + (((0.0012463516999999999 * fTemp27) + (0.088789019699999999 * fTemp33)) + (0.1322510533 * fTemp30))))));
-			double fTemp591 = (fConst78 * fRec1275[1]);
-			double fTemp592 = (fConst79 * fRec1278[1]);
-			fRec1280[0] = (fTemp590 + (fTemp591 + (fRec1280[1] + fTemp592)));
+			double fRec1255 = (fRec1258 + fTemp579);
+			double fTemp585 = (fConst65 * fRec1269[1]);
+			double fTemp586 = (fConst66 * fRec1272[1]);
+			double fTemp587 = (fConst68 * ((((0.13586683799999999 * fTemp28) + ((0.0010672493 * fTemp32) + (0.0036924124000000001 * fTemp31))) + (0.0055953964 * fTemp35)) - ((0.00059164440000000003 * fTemp34) + ((0.1322510533 * fTemp27) + ((0.088789019699999999 * fTemp33) + ((0.0012463516999999999 * fTemp29) + (0.0028198214999999999 * fTemp30)))))));
+			double fTemp588 = (fConst69 * fRec1275[1]);
+			double fTemp589 = (fConst70 * fRec1278[1]);
+			fRec1280[0] = (fTemp587 + (fTemp588 + (fRec1280[1] + fTemp589)));
 			fRec1278[0] = fRec1280[0];
-			double fRec1279 = ((fTemp592 + fTemp591) + fTemp590);
+			double fRec1279 = ((fTemp589 + fTemp588) + fTemp587);
 			fRec1277[0] = (fRec1278[0] + fRec1277[1]);
 			fRec1275[0] = fRec1277[0];
 			double fRec1276 = fRec1279;
-			fRec1274[0] = (fTemp588 + (fTemp589 + (fRec1276 + fRec1274[1])));
+			fRec1274[0] = (fTemp585 + (fTemp586 + (fRec1276 + fRec1274[1])));
 			fRec1272[0] = fRec1274[0];
-			double fRec1273 = (fTemp588 + (fRec1276 + fTemp589));
+			double fRec1273 = (fTemp585 + (fRec1276 + fTemp586));
 			fRec1271[0] = (fRec1272[0] + fRec1271[1]);
 			fRec1269[0] = fRec1271[0];
 			double fRec1270 = fRec1273;
-			double fTemp593 = (fConst81 * fRec1281[1]);
-			double fTemp594 = (fConst83 * (((((0.0005972525 * fTemp40) + (0.1404162883 * fTemp44)) + (0.082464826599999999 * fTemp41)) + (0.00015633220000000001 * fTemp46)) - (((0.058301012999999999 * fTemp43) + (0.13735216589999999 * fTemp45)) + (0.0011643383999999999 * fTemp42))));
-			double fTemp595 = (fConst84 * fRec1284[1]);
-			double fTemp596 = (fConst85 * fRec1287[1]);
-			fRec1289[0] = (fTemp594 + (fTemp595 + (fRec1289[1] + fTemp596)));
+			double fTemp590 = (fConst72 * fRec1281[1]);
+			double fTemp591 = (fConst74 * (((((0.0005972525 * fTemp40) + (0.1404162883 * fTemp44)) + (0.082464826599999999 * fTemp41)) + (0.00015633220000000001 * fTemp46)) - (((0.058301012999999999 * fTemp43) + (0.13735216589999999 * fTemp45)) + (0.0011643383999999999 * fTemp42))));
+			double fTemp592 = (fConst75 * fRec1284[1]);
+			double fTemp593 = (fConst76 * fRec1287[1]);
+			fRec1289[0] = (fTemp591 + (fTemp592 + (fRec1289[1] + fTemp593)));
 			fRec1287[0] = fRec1289[0];
-			double fRec1288 = ((fTemp596 + fTemp595) + fTemp594);
+			double fRec1288 = ((fTemp593 + fTemp592) + fTemp591);
 			fRec1286[0] = (fRec1287[0] + fRec1286[1]);
 			fRec1284[0] = fRec1286[0];
 			double fRec1285 = fRec1288;
-			fRec1283[0] = (fTemp593 + (fRec1285 + fRec1283[1]));
+			fRec1283[0] = (fTemp590 + (fRec1285 + fRec1283[1]));
 			fRec1281[0] = fRec1283[0];
-			double fRec1282 = (fRec1285 + fTemp593);
-			double fTemp597 = (fConst87 * (((0.045034125000000001 * fTemp50) + (0.1228019665 * fTemp52)) - (0.044324561300000002 * fTemp51)));
-			double fTemp598 = (fConst88 * fRec1290[1]);
-			fRec1292[0] = (fTemp597 + (fRec1292[1] + fTemp598));
+			double fRec1282 = (fRec1285 + fTemp590);
+			double fTemp594 = (fConst91 * (((0.045034125000000001 * fTemp50) + (0.1228019665 * fTemp52)) - (0.044324561300000002 * fTemp51)));
+			double fTemp595 = (fConst92 * fRec1290[1]);
+			fRec1292[0] = (fTemp594 + (fRec1292[1] + fTemp595));
 			fRec1290[0] = fRec1292[0];
-			double fRec1291 = (fTemp598 + fTemp597);
-			double fTemp599 = (fConst90 * ((((0.1028001122 * fTemp56) + (0.13358412450000001 * fTemp57)) + (0.0002261756 * fTemp55)) - ((0.024492843800000001 * fTemp54) + (0.1009329288 * fTemp58))));
-			double fTemp600 = (fConst91 * fRec1293[1]);
-			double fTemp601 = (fConst92 * fRec1296[1]);
-			fRec1298[0] = (fTemp599 + (fTemp600 + (fRec1298[1] + fTemp601)));
+			double fRec1291 = (fTemp595 + fTemp594);
+			double fTemp596 = (fConst78 * (((0.1028001122 * fTemp59) + ((0.13358412450000001 * fTemp58) + (0.0002261756 * fTemp55))) - ((0.024492843800000001 * fTemp56) + (0.1009329288 * fTemp57))));
+			double fTemp597 = (fConst79 * fRec1293[1]);
+			double fTemp598 = (fConst80 * fRec1296[1]);
+			fRec1298[0] = (fTemp596 + (fTemp597 + (fRec1298[1] + fTemp598)));
 			fRec1296[0] = fRec1298[0];
-			double fRec1297 = ((fTemp601 + fTemp600) + fTemp599);
+			double fRec1297 = ((fTemp598 + fTemp597) + fTemp596);
 			fRec1295[0] = (fRec1296[0] + fRec1295[1]);
 			fRec1293[0] = fRec1295[0];
 			double fRec1294 = fRec1297;
 			fVec27[(IOTA & 511)] = ((0.049621748200000003 * fTemp7) + (fRec1255 + (fRec1270 + (fRec1282 + (fRec1291 + fRec1294)))));
 			output27[i] = FAUSTFLOAT((0.91194404591104739 * (fRec0[0] * fVec27[((IOTA - iConst93) & 511)])));
-			double fTemp602 = (fConst95 * fRec1299[1]);
-			double fTemp603 = (fConst97 * fRec1302[1]);
-			double fTemp604 = (fConst98 * fRec1305[1]);
-			double fTemp605 = (fConst100 * (((((((((2.5699999999999999e-08 * fTemp11) + (1.1880999999999999e-06 * fTemp16)) + (4.8663000000000003e-06 * fTemp17)) + (1.28405e-05 * fTemp18)) + (2.6307100000000001e-05 * fTemp12)) + (0.0916704765 * fTemp13)) + (7.3862999999999999e-06 * fTemp20)) + (4.2000000000000004e-09 * fTemp21)) - (((8.3396699999999994e-05 * fTemp14) + (1.9692000000000001e-05 * fTemp19)) + (9.8370300000000002e-05 * fTemp15))));
-			double fTemp606 = (fConst101 * fRec1308[1]);
-			double fTemp607 = (fConst102 * fRec1311[1]);
-			fRec1313[0] = (fTemp605 + (fTemp606 + (fRec1313[1] + fTemp607)));
-			fRec1311[0] = fRec1313[0];
-			double fRec1312 = ((fTemp607 + fTemp606) + fTemp605);
-			fRec1310[0] = (fRec1311[0] + fRec1310[1]);
-			fRec1308[0] = fRec1310[0];
-			double fRec1309 = fRec1312;
-			fRec1307[0] = (fTemp603 + (fTemp604 + (fRec1309 + fRec1307[1])));
+			double fTemp599 = (fConst96 * ((((((6.3099999999999997e-07 * fTemp40) + (3.4688999999999999e-06 * fTemp43)) + (1.10318e-05 * fTemp44)) + (0.066280089799999997 * fTemp41)) + (1.0543e-06 * fTemp42)) - ((4.2822599999999999e-05 * fTemp45) + (5.2900000000000002e-06 * fTemp46))));
+			double fTemp600 = (fConst97 * fRec1302[1]);
+			double fTemp601 = (fConst98 * fRec1305[1]);
+			fRec1307[0] = (fTemp599 + (fTemp600 + (fRec1307[1] + fTemp601)));
 			fRec1305[0] = fRec1307[0];
-			double fRec1306 = (fTemp603 + (fRec1309 + fTemp604));
+			double fRec1306 = ((fTemp601 + fTemp600) + fTemp599);
 			fRec1304[0] = (fRec1305[0] + fRec1304[1]);
 			fRec1302[0] = fRec1304[0];
 			double fRec1303 = fRec1306;
-			fRec1301[0] = (fTemp602 + (fRec1303 + fRec1301[1]));
+			double fTemp602 = (fConst99 * fRec1299[1]);
+			fRec1301[0] = ((fRec1303 + fRec1301[1]) + fTemp602);
 			fRec1299[0] = fRec1301[0];
 			double fRec1300 = (fRec1303 + fTemp602);
-			double fTemp608 = (fConst104 * fRec1314[1]);
-			double fTemp609 = (fConst105 * fRec1317[1]);
-			double fTemp610 = (fConst107 * (((((((3.3640000000000002e-07 * fTemp27) + (2.0760999999999999e-06 * fTemp32)) + (7.3386999999999997e-06 * fTemp33)) + (1.80029e-05 * fTemp28)) + (0.080551933800000003 * fTemp29)) + (3.3268999999999999e-06 * fTemp31)) - (((6.3924199999999994e-05 * fTemp30) + (1.12209e-05 * fTemp34)) + (2.7866699999999999e-05 * fTemp35))));
-			double fTemp611 = (fConst108 * fRec1320[1]);
-			double fTemp612 = (fConst109 * fRec1323[1]);
-			fRec1325[0] = (fTemp610 + (fTemp611 + (fRec1325[1] + fTemp612)));
-			fRec1323[0] = fRec1325[0];
-			double fRec1324 = ((fTemp612 + fTemp611) + fTemp610);
-			fRec1322[0] = (fRec1323[0] + fRec1322[1]);
-			fRec1320[0] = fRec1322[0];
-			double fRec1321 = fRec1324;
-			fRec1319[0] = (fTemp608 + (fTemp609 + (fRec1321 + fRec1319[1])));
+			double fTemp603 = (fConst102 * (((1.80029e-05 * fTemp28) + ((7.3386999999999997e-06 * fTemp33) + ((2.0760999999999999e-06 * fTemp32) + ((3.3640000000000002e-07 * fTemp29) + ((0.080551933800000003 * fTemp31) + (3.3268999999999999e-06 * fTemp30)))))) - (((6.3924199999999994e-05 * fTemp27) + (1.12209e-05 * fTemp34)) + (2.7866699999999999e-05 * fTemp35))));
+			double fTemp604 = (fConst103 * fRec1317[1]);
+			double fTemp605 = (fConst104 * fRec1314[1]);
+			fRec1319[0] = (((fTemp603 + fRec1319[1]) + fTemp604) + fTemp605);
 			fRec1317[0] = fRec1319[0];
-			double fRec1318 = (fTemp608 + (fRec1321 + fTemp609));
+			double fRec1318 = ((fTemp603 + fTemp604) + fTemp605);
 			fRec1316[0] = (fRec1317[0] + fRec1316[1]);
 			fRec1314[0] = fRec1316[0];
 			double fRec1315 = fRec1318;
-			double fTemp613 = (fConst111 * fRec1326[1]);
-			double fTemp614 = (fConst113 * ((((((6.3099999999999997e-07 * fTemp40) + (3.4688999999999999e-06 * fTemp43)) + (1.10318e-05 * fTemp44)) + (0.066280089799999997 * fTemp41)) + (1.0543e-06 * fTemp42)) - ((4.2822599999999999e-05 * fTemp45) + (5.2900000000000002e-06 * fTemp46))));
-			double fTemp615 = (fConst114 * fRec1329[1]);
-			double fTemp616 = (fConst115 * fRec1332[1]);
-			fRec1334[0] = (fTemp614 + (fTemp615 + (fRec1334[1] + fTemp616)));
-			fRec1332[0] = fRec1334[0];
-			double fRec1333 = ((fTemp616 + fTemp615) + fTemp614);
-			fRec1331[0] = (fRec1332[0] + fRec1331[1]);
-			fRec1329[0] = fRec1331[0];
-			double fRec1330 = fRec1333;
-			fRec1328[0] = (fTemp613 + (fRec1330 + fRec1328[1]));
+			double fTemp606 = (fConst105 * fRec1311[1]);
+			double fTemp607 = (fConst106 * fRec1308[1]);
+			fRec1313[0] = (((fRec1315 + fRec1313[1]) + fTemp606) + fTemp607);
+			fRec1311[0] = fRec1313[0];
+			double fRec1312 = ((fRec1315 + fTemp606) + fTemp607);
+			fRec1310[0] = (fRec1311[0] + fRec1310[1]);
+			fRec1308[0] = fRec1310[0];
+			double fRec1309 = fRec1312;
+			double fTemp608 = (fConst108 * (((1.9657000000000001e-06 * fTemp50) + (0.0304481074 * fTemp52)) - (8.5176999999999998e-06 * fTemp51)));
+			double fTemp609 = (fConst109 * fRec1320[1]);
+			fRec1322[0] = (fTemp608 + (fRec1322[1] + fTemp609));
+			fRec1320[0] = fRec1322[0];
+			double fRec1321 = (fTemp609 + fTemp608);
+			double fTemp610 = (fConst111 * (((5.6354999999999997e-06 * fTemp59) + ((1.1512000000000001e-06 * fTemp56) + (0.049362916700000002 * fTemp58))) - ((2.3371799999999999e-05 * fTemp57) + (1.7517999999999999e-06 * fTemp55))));
+			double fTemp611 = (fConst112 * fRec1323[1]);
+			double fTemp612 = (fConst113 * fRec1326[1]);
+			fRec1328[0] = (fTemp610 + (fTemp611 + (fRec1328[1] + fTemp612)));
 			fRec1326[0] = fRec1328[0];
-			double fRec1327 = (fRec1330 + fTemp613);
-			double fTemp617 = (fConst117 * (((1.9657000000000001e-06 * fTemp50) + (0.0304481074 * fTemp52)) - (8.5176999999999998e-06 * fTemp51)));
-			double fTemp618 = (fConst118 * fRec1335[1]);
-			fRec1337[0] = (fTemp617 + (fRec1337[1] + fTemp618));
-			fRec1335[0] = fRec1337[0];
-			double fRec1336 = (fTemp618 + fTemp617);
-			double fTemp619 = (fConst120 * ((((1.1512000000000001e-06 * fTemp54) + (5.6354999999999997e-06 * fTemp56)) + (0.049362916700000002 * fTemp57)) - ((2.3371799999999999e-05 * fTemp58) + (1.7517999999999999e-06 * fTemp55))));
-			double fTemp620 = (fConst121 * fRec1338[1]);
-			double fTemp621 = (fConst122 * fRec1341[1]);
-			fRec1343[0] = (fTemp619 + (fTemp620 + (fRec1343[1] + fTemp621)));
+			double fRec1327 = ((fTemp612 + fTemp611) + fTemp610);
+			fRec1325[0] = (fRec1326[0] + fRec1325[1]);
+			fRec1323[0] = fRec1325[0];
+			double fRec1324 = fRec1327;
+			double fTemp613 = (fConst115 * fRec1329[1]);
+			double fTemp614 = (fConst117 * fRec1332[1]);
+			double fTemp615 = (fConst118 * fRec1335[1]);
+			double fTemp616 = (fConst120 * (((((((((2.5699999999999999e-08 * fTemp11) + (1.1880999999999999e-06 * fTemp16)) + (4.8663000000000003e-06 * fTemp17)) + (1.28405e-05 * fTemp18)) + (2.6307100000000001e-05 * fTemp12)) + (0.0916704765 * fTemp13)) + (7.3862999999999999e-06 * fTemp20)) + (4.2000000000000004e-09 * fTemp21)) - (((8.3396699999999994e-05 * fTemp14) + (1.9692000000000001e-05 * fTemp19)) + (9.8370300000000002e-05 * fTemp15))));
+			double fTemp617 = (fConst121 * fRec1338[1]);
+			double fTemp618 = (fConst122 * fRec1341[1]);
+			fRec1343[0] = (fTemp616 + (fTemp617 + (fRec1343[1] + fTemp618)));
 			fRec1341[0] = fRec1343[0];
-			double fRec1342 = ((fTemp621 + fTemp620) + fTemp619);
-			fRec1340[0] = (fRec1341[0] + fRec1340[1]);
+			double fRec1342 = ((fTemp618 + fTemp617) + fTemp616);
+			fRec1340[0] = (fRec1340[1] + fRec1341[0]);
 			fRec1338[0] = fRec1340[0];
 			double fRec1339 = fRec1342;
-			output28[i] = FAUSTFLOAT((fRec0[0] * ((0.0102900397 * fTemp7) + (fRec1300 + (fRec1315 + (fRec1327 + (fRec1336 + fRec1339)))))));
+			fRec1337[0] = ((fTemp614 + (fRec1337[1] + fTemp615)) + fRec1339);
+			fRec1335[0] = fRec1337[0];
+			double fRec1336 = ((fTemp615 + fTemp614) + fRec1339);
+			fRec1334[0] = (fRec1334[1] + fRec1335[0]);
+			fRec1332[0] = fRec1334[0];
+			double fRec1333 = fRec1336;
+			fRec1331[0] = ((fRec1331[1] + fTemp613) + fRec1333);
+			fRec1329[0] = fRec1331[0];
+			double fRec1330 = (fTemp613 + fRec1333);
+			output28[i] = FAUSTFLOAT(((((((fRec1300 + fRec1309) + fRec1321) + fRec1324) + fRec1330) + (0.0102900397 * fTemp7)) * fRec0[0]));
 			fRec0[1] = fRec0[0];
 			fRec1[1] = fRec1[0];
 			fRec2[2] = fRec2[1];
@@ -9192,58 +9189,56 @@ class mydsp : public dsp {
 			fRec87[1] = fRec87[0];
 			fRec86[1] = fRec86[0];
 			fRec84[1] = fRec84[0];
-			fRec110[1] = fRec110[0];
-			fRec108[1] = fRec108[0];
 			fRec107[1] = fRec107[0];
 			fRec105[1] = fRec105[0];
 			fRec104[1] = fRec104[0];
 			fRec102[1] = fRec102[0];
 			fRec101[1] = fRec101[0];
 			fRec99[1] = fRec99[0];
-			fRec119[1] = fRec119[0];
-			fRec117[1] = fRec117[0];
+			fRec110[1] = fRec110[0];
+			fRec108[1] = fRec108[0];
 			fRec116[1] = fRec116[0];
 			fRec114[1] = fRec114[0];
 			fRec113[1] = fRec113[0];
 			fRec111[1] = fRec111[0];
-			fRec122[1] = fRec122[0];
-			fRec120[1] = fRec120[0];
 			fRec128[1] = fRec128[0];
 			fRec126[1] = fRec126[0];
 			fRec125[1] = fRec125[0];
 			fRec123[1] = fRec123[0];
-			fRec143[1] = fRec143[0];
-			fRec141[1] = fRec141[0];
-			fRec140[1] = fRec140[0];
-			fRec138[1] = fRec138[0];
-			fRec137[1] = fRec137[0];
-			fRec135[1] = fRec135[0];
+			fRec122[1] = fRec122[0];
+			fRec120[1] = fRec120[0];
+			fRec119[1] = fRec119[0];
+			fRec117[1] = fRec117[0];
 			fRec134[1] = fRec134[0];
 			fRec132[1] = fRec132[0];
 			fRec131[1] = fRec131[0];
 			fRec129[1] = fRec129[0];
-			fRec155[1] = fRec155[0];
-			fRec153[1] = fRec153[0];
+			fRec137[1] = fRec137[0];
+			fRec135[1] = fRec135[0];
 			fRec152[1] = fRec152[0];
 			fRec150[1] = fRec150[0];
 			fRec149[1] = fRec149[0];
 			fRec147[1] = fRec147[0];
 			fRec146[1] = fRec146[0];
 			fRec144[1] = fRec144[0];
-			fRec164[1] = fRec164[0];
-			fRec162[1] = fRec162[0];
+			fRec143[1] = fRec143[0];
+			fRec141[1] = fRec141[0];
+			fRec140[1] = fRec140[0];
+			fRec138[1] = fRec138[0];
 			fRec161[1] = fRec161[0];
 			fRec159[1] = fRec159[0];
 			fRec158[1] = fRec158[0];
 			fRec156[1] = fRec156[0];
-			fRec167[1] = fRec167[0];
-			fRec165[1] = fRec165[0];
+			fRec155[1] = fRec155[0];
+			fRec153[1] = fRec153[0];
 			fRec173[1] = fRec173[0];
 			fRec171[1] = fRec171[0];
 			fRec170[1] = fRec170[0];
 			fRec168[1] = fRec168[0];
-			fRec188[1] = fRec188[0];
-			fRec186[1] = fRec186[0];
+			fRec167[1] = fRec167[0];
+			fRec165[1] = fRec165[0];
+			fRec164[1] = fRec164[0];
+			fRec162[1] = fRec162[0];
 			fRec185[1] = fRec185[0];
 			fRec183[1] = fRec183[0];
 			fRec182[1] = fRec182[0];
@@ -9252,26 +9247,28 @@ class mydsp : public dsp {
 			fRec177[1] = fRec177[0];
 			fRec176[1] = fRec176[0];
 			fRec174[1] = fRec174[0];
-			fRec200[1] = fRec200[0];
-			fRec198[1] = fRec198[0];
-			fRec197[1] = fRec197[0];
-			fRec195[1] = fRec195[0];
 			fRec194[1] = fRec194[0];
 			fRec192[1] = fRec192[0];
 			fRec191[1] = fRec191[0];
 			fRec189[1] = fRec189[0];
+			fRec188[1] = fRec188[0];
+			fRec186[1] = fRec186[0];
+			fRec200[1] = fRec200[0];
+			fRec198[1] = fRec198[0];
+			fRec197[1] = fRec197[0];
+			fRec195[1] = fRec195[0];
+			fRec215[1] = fRec215[0];
+			fRec213[1] = fRec213[0];
+			fRec212[1] = fRec212[0];
+			fRec210[1] = fRec210[0];
 			fRec209[1] = fRec209[0];
 			fRec207[1] = fRec207[0];
 			fRec206[1] = fRec206[0];
 			fRec204[1] = fRec204[0];
 			fRec203[1] = fRec203[0];
 			fRec201[1] = fRec201[0];
-			fRec212[1] = fRec212[0];
-			fRec210[1] = fRec210[0];
 			fRec218[1] = fRec218[0];
 			fRec216[1] = fRec216[0];
-			fRec215[1] = fRec215[0];
-			fRec213[1] = fRec213[0];
 			fRec233[1] = fRec233[0];
 			fRec231[1] = fRec231[0];
 			fRec230[1] = fRec230[0];
@@ -9302,38 +9299,36 @@ class mydsp : public dsp {
 			fRec261[1] = fRec261[0];
 			fRec260[1] = fRec260[0];
 			fRec258[1] = fRec258[0];
-			fRec278[1] = fRec278[0];
-			fRec276[1] = fRec276[0];
-			fRec275[1] = fRec275[0];
-			fRec273[1] = fRec273[0];
 			fRec272[1] = fRec272[0];
 			fRec270[1] = fRec270[0];
 			fRec269[1] = fRec269[0];
 			fRec267[1] = fRec267[0];
 			fRec266[1] = fRec266[0];
 			fRec264[1] = fRec264[0];
+			fRec278[1] = fRec278[0];
+			fRec276[1] = fRec276[0];
+			fRec275[1] = fRec275[0];
+			fRec273[1] = fRec273[0];
+			fRec281[1] = fRec281[0];
+			fRec279[1] = fRec279[0];
+			fRec296[1] = fRec296[0];
+			fRec294[1] = fRec294[0];
+			fRec293[1] = fRec293[0];
+			fRec291[1] = fRec291[0];
 			fRec290[1] = fRec290[0];
 			fRec288[1] = fRec288[0];
 			fRec287[1] = fRec287[0];
 			fRec285[1] = fRec285[0];
 			fRec284[1] = fRec284[0];
 			fRec282[1] = fRec282[0];
-			fRec281[1] = fRec281[0];
-			fRec279[1] = fRec279[0];
-			fRec299[1] = fRec299[0];
-			fRec297[1] = fRec297[0];
-			fRec296[1] = fRec296[0];
-			fRec294[1] = fRec294[0];
-			fRec293[1] = fRec293[0];
-			fRec291[1] = fRec291[0];
-			fRec302[1] = fRec302[0];
-			fRec300[1] = fRec300[0];
 			fRec308[1] = fRec308[0];
 			fRec306[1] = fRec306[0];
 			fRec305[1] = fRec305[0];
 			fRec303[1] = fRec303[0];
-			fRec323[1] = fRec323[0];
-			fRec321[1] = fRec321[0];
+			fRec302[1] = fRec302[0];
+			fRec300[1] = fRec300[0];
+			fRec299[1] = fRec299[0];
+			fRec297[1] = fRec297[0];
 			fRec320[1] = fRec320[0];
 			fRec318[1] = fRec318[0];
 			fRec317[1] = fRec317[0];
@@ -9342,56 +9337,60 @@ class mydsp : public dsp {
 			fRec312[1] = fRec312[0];
 			fRec311[1] = fRec311[0];
 			fRec309[1] = fRec309[0];
-			fRec335[1] = fRec335[0];
-			fRec333[1] = fRec333[0];
-			fRec332[1] = fRec332[0];
-			fRec330[1] = fRec330[0];
 			fRec329[1] = fRec329[0];
 			fRec327[1] = fRec327[0];
 			fRec326[1] = fRec326[0];
 			fRec324[1] = fRec324[0];
-			fRec344[1] = fRec344[0];
-			fRec342[1] = fRec342[0];
-			fRec341[1] = fRec341[0];
-			fRec339[1] = fRec339[0];
+			fRec323[1] = fRec323[0];
+			fRec321[1] = fRec321[0];
+			fRec332[1] = fRec332[0];
+			fRec330[1] = fRec330[0];
 			fRec338[1] = fRec338[0];
 			fRec336[1] = fRec336[0];
-			fRec347[1] = fRec347[0];
-			fRec345[1] = fRec345[0];
+			fRec335[1] = fRec335[0];
+			fRec333[1] = fRec333[0];
 			fRec353[1] = fRec353[0];
 			fRec351[1] = fRec351[0];
 			fRec350[1] = fRec350[0];
 			fRec348[1] = fRec348[0];
+			fRec347[1] = fRec347[0];
+			fRec345[1] = fRec345[0];
+			fRec344[1] = fRec344[0];
+			fRec342[1] = fRec342[0];
+			fRec341[1] = fRec341[0];
+			fRec339[1] = fRec339[0];
+			fRec368[1] = fRec368[0];
+			fRec366[1] = fRec366[0];
+			fRec365[1] = fRec365[0];
+			fRec363[1] = fRec363[0];
+			fRec362[1] = fRec362[0];
+			fRec360[1] = fRec360[0];
 			fRec359[1] = fRec359[0];
 			fRec357[1] = fRec357[0];
 			fRec356[1] = fRec356[0];
 			fRec354[1] = fRec354[0];
-			fRec362[1] = fRec362[0];
-			fRec360[1] = fRec360[0];
 			fRec377[1] = fRec377[0];
 			fRec375[1] = fRec375[0];
 			fRec374[1] = fRec374[0];
 			fRec372[1] = fRec372[0];
 			fRec371[1] = fRec371[0];
 			fRec369[1] = fRec369[0];
-			fRec368[1] = fRec368[0];
-			fRec366[1] = fRec366[0];
-			fRec365[1] = fRec365[0];
-			fRec363[1] = fRec363[0];
+			fRec389[1] = fRec389[0];
+			fRec387[1] = fRec387[0];
 			fRec386[1] = fRec386[0];
 			fRec384[1] = fRec384[0];
 			fRec383[1] = fRec383[0];
 			fRec381[1] = fRec381[0];
 			fRec380[1] = fRec380[0];
 			fRec378[1] = fRec378[0];
+			fRec392[1] = fRec392[0];
+			fRec390[1] = fRec390[0];
 			fRec398[1] = fRec398[0];
 			fRec396[1] = fRec396[0];
 			fRec395[1] = fRec395[0];
 			fRec393[1] = fRec393[0];
-			fRec392[1] = fRec392[0];
-			fRec390[1] = fRec390[0];
-			fRec389[1] = fRec389[0];
-			fRec387[1] = fRec387[0];
+			fRec401[1] = fRec401[0];
+			fRec399[1] = fRec399[0];
 			fRec413[1] = fRec413[0];
 			fRec411[1] = fRec411[0];
 			fRec410[1] = fRec410[0];
@@ -9400,8 +9399,8 @@ class mydsp : public dsp {
 			fRec405[1] = fRec405[0];
 			fRec404[1] = fRec404[0];
 			fRec402[1] = fRec402[0];
-			fRec401[1] = fRec401[0];
-			fRec399[1] = fRec399[0];
+			fRec428[1] = fRec428[0];
+			fRec426[1] = fRec426[0];
 			fRec425[1] = fRec425[0];
 			fRec423[1] = fRec423[0];
 			fRec422[1] = fRec422[0];
@@ -9414,14 +9413,12 @@ class mydsp : public dsp {
 			fRec432[1] = fRec432[0];
 			fRec431[1] = fRec431[0];
 			fRec429[1] = fRec429[0];
-			fRec428[1] = fRec428[0];
-			fRec426[1] = fRec426[0];
-			fRec437[1] = fRec437[0];
-			fRec435[1] = fRec435[0];
 			fRec443[1] = fRec443[0];
 			fRec441[1] = fRec441[0];
 			fRec440[1] = fRec440[0];
 			fRec438[1] = fRec438[0];
+			fRec437[1] = fRec437[0];
+			fRec435[1] = fRec435[0];
 			fRec458[1] = fRec458[0];
 			fRec456[1] = fRec456[0];
 			fRec455[1] = fRec455[0];
@@ -9452,30 +9449,30 @@ class mydsp : public dsp {
 			fRec486[1] = fRec486[0];
 			fRec485[1] = fRec485[0];
 			fRec483[1] = fRec483[0];
-			fRec503[1] = fRec503[0];
-			fRec501[1] = fRec501[0];
-			fRec500[1] = fRec500[0];
-			fRec498[1] = fRec498[0];
 			fRec497[1] = fRec497[0];
 			fRec495[1] = fRec495[0];
 			fRec494[1] = fRec494[0];
 			fRec492[1] = fRec492[0];
 			fRec491[1] = fRec491[0];
 			fRec489[1] = fRec489[0];
-			fRec515[1] = fRec515[0];
-			fRec513[1] = fRec513[0];
-			fRec512[1] = fRec512[0];
-			fRec510[1] = fRec510[0];
 			fRec509[1] = fRec509[0];
 			fRec507[1] = fRec507[0];
 			fRec506[1] = fRec506[0];
 			fRec504[1] = fRec504[0];
+			fRec503[1] = fRec503[0];
+			fRec501[1] = fRec501[0];
+			fRec500[1] = fRec500[0];
+			fRec498[1] = fRec498[0];
 			fRec524[1] = fRec524[0];
 			fRec522[1] = fRec522[0];
 			fRec521[1] = fRec521[0];
 			fRec519[1] = fRec519[0];
 			fRec518[1] = fRec518[0];
 			fRec516[1] = fRec516[0];
+			fRec515[1] = fRec515[0];
+			fRec513[1] = fRec513[0];
+			fRec512[1] = fRec512[0];
+			fRec510[1] = fRec510[0];
 			fRec527[1] = fRec527[0];
 			fRec525[1] = fRec525[0];
 			fRec533[1] = fRec533[0];
@@ -9530,18 +9527,18 @@ class mydsp : public dsp {
 			fRec597[1] = fRec597[0];
 			fRec596[1] = fRec596[0];
 			fRec594[1] = fRec594[0];
-			fRec614[1] = fRec614[0];
-			fRec612[1] = fRec612[0];
 			fRec611[1] = fRec611[0];
 			fRec609[1] = fRec609[0];
 			fRec608[1] = fRec608[0];
 			fRec606[1] = fRec606[0];
-			fRec617[1] = fRec617[0];
-			fRec615[1] = fRec615[0];
+			fRec614[1] = fRec614[0];
+			fRec612[1] = fRec612[0];
 			fRec623[1] = fRec623[0];
 			fRec621[1] = fRec621[0];
 			fRec620[1] = fRec620[0];
 			fRec618[1] = fRec618[0];
+			fRec617[1] = fRec617[0];
+			fRec615[1] = fRec615[0];
 			fRec638[1] = fRec638[0];
 			fRec636[1] = fRec636[0];
 			fRec635[1] = fRec635[0];
@@ -9572,36 +9569,36 @@ class mydsp : public dsp {
 			fRec666[1] = fRec666[0];
 			fRec665[1] = fRec665[0];
 			fRec663[1] = fRec663[0];
-			fRec671[1] = fRec671[0];
-			fRec669[1] = fRec669[0];
-			fRec686[1] = fRec686[0];
-			fRec684[1] = fRec684[0];
-			fRec683[1] = fRec683[0];
-			fRec681[1] = fRec681[0];
 			fRec680[1] = fRec680[0];
 			fRec678[1] = fRec678[0];
 			fRec677[1] = fRec677[0];
 			fRec675[1] = fRec675[0];
 			fRec674[1] = fRec674[0];
 			fRec672[1] = fRec672[0];
-			fRec698[1] = fRec698[0];
-			fRec696[1] = fRec696[0];
+			fRec671[1] = fRec671[0];
+			fRec669[1] = fRec669[0];
+			fRec689[1] = fRec689[0];
+			fRec687[1] = fRec687[0];
+			fRec686[1] = fRec686[0];
+			fRec684[1] = fRec684[0];
+			fRec683[1] = fRec683[0];
+			fRec681[1] = fRec681[0];
 			fRec695[1] = fRec695[0];
 			fRec693[1] = fRec693[0];
 			fRec692[1] = fRec692[0];
 			fRec690[1] = fRec690[0];
-			fRec689[1] = fRec689[0];
-			fRec687[1] = fRec687[0];
-			fRec704[1] = fRec704[0];
-			fRec702[1] = fRec702[0];
-			fRec701[1] = fRec701[0];
-			fRec699[1] = fRec699[0];
-			fRec713[1] = fRec713[0];
-			fRec711[1] = fRec711[0];
 			fRec710[1] = fRec710[0];
 			fRec708[1] = fRec708[0];
 			fRec707[1] = fRec707[0];
 			fRec705[1] = fRec705[0];
+			fRec704[1] = fRec704[0];
+			fRec702[1] = fRec702[0];
+			fRec701[1] = fRec701[0];
+			fRec699[1] = fRec699[0];
+			fRec698[1] = fRec698[0];
+			fRec696[1] = fRec696[0];
+			fRec713[1] = fRec713[0];
+			fRec711[1] = fRec711[0];
 			fRec728[1] = fRec728[0];
 			fRec726[1] = fRec726[0];
 			fRec725[1] = fRec725[0];
@@ -9632,39 +9629,37 @@ class mydsp : public dsp {
 			fRec756[1] = fRec756[0];
 			fRec755[1] = fRec755[0];
 			fRec753[1] = fRec753[0];
-			fRec773[1] = fRec773[0];
-			fRec771[1] = fRec771[0];
-			fRec770[1] = fRec770[0];
-			fRec768[1] = fRec768[0];
 			fRec767[1] = fRec767[0];
 			fRec765[1] = fRec765[0];
 			fRec764[1] = fRec764[0];
 			fRec762[1] = fRec762[0];
 			fRec761[1] = fRec761[0];
 			fRec759[1] = fRec759[0];
+			fRec770[1] = fRec770[0];
+			fRec768[1] = fRec768[0];
+			fRec776[1] = fRec776[0];
+			fRec774[1] = fRec774[0];
+			fRec773[1] = fRec773[0];
+			fRec771[1] = fRec771[0];
+			fRec788[1] = fRec788[0];
+			fRec786[1] = fRec786[0];
 			fRec785[1] = fRec785[0];
 			fRec783[1] = fRec783[0];
 			fRec782[1] = fRec782[0];
 			fRec780[1] = fRec780[0];
 			fRec779[1] = fRec779[0];
 			fRec777[1] = fRec777[0];
-			fRec776[1] = fRec776[0];
-			fRec774[1] = fRec774[0];
-			fRec794[1] = fRec794[0];
-			fRec792[1] = fRec792[0];
-			fRec791[1] = fRec791[0];
-			fRec789[1] = fRec789[0];
-			fRec788[1] = fRec788[0];
-			fRec786[1] = fRec786[0];
-			fRec797[1] = fRec797[0];
-			fRec795[1] = fRec795[0];
 			fRec803[1] = fRec803[0];
 			fRec801[1] = fRec801[0];
 			fRec800[1] = fRec800[0];
 			fRec798[1] = fRec798[0];
+			fRec797[1] = fRec797[0];
+			fRec795[1] = fRec795[0];
+			fRec794[1] = fRec794[0];
+			fRec792[1] = fRec792[0];
+			fRec791[1] = fRec791[0];
+			fRec789[1] = fRec789[0];
 			fVec16[1] = fVec16[0];
-			fRec818[1] = fRec818[0];
-			fRec816[1] = fRec816[0];
 			fRec815[1] = fRec815[0];
 			fRec813[1] = fRec813[0];
 			fRec812[1] = fRec812[0];
@@ -9673,29 +9668,29 @@ class mydsp : public dsp {
 			fRec807[1] = fRec807[0];
 			fRec806[1] = fRec806[0];
 			fRec804[1] = fRec804[0];
-			fRec830[1] = fRec830[0];
-			fRec828[1] = fRec828[0];
-			fRec827[1] = fRec827[0];
-			fRec825[1] = fRec825[0];
 			fRec824[1] = fRec824[0];
 			fRec822[1] = fRec822[0];
 			fRec821[1] = fRec821[0];
 			fRec819[1] = fRec819[0];
+			fRec818[1] = fRec818[0];
+			fRec816[1] = fRec816[0];
+			fRec830[1] = fRec830[0];
+			fRec828[1] = fRec828[0];
+			fRec827[1] = fRec827[0];
+			fRec825[1] = fRec825[0];
+			fRec845[1] = fRec845[0];
+			fRec843[1] = fRec843[0];
+			fRec842[1] = fRec842[0];
+			fRec840[1] = fRec840[0];
 			fRec839[1] = fRec839[0];
 			fRec837[1] = fRec837[0];
 			fRec836[1] = fRec836[0];
 			fRec834[1] = fRec834[0];
 			fRec833[1] = fRec833[0];
 			fRec831[1] = fRec831[0];
-			fRec842[1] = fRec842[0];
-			fRec840[1] = fRec840[0];
 			fRec848[1] = fRec848[0];
 			fRec846[1] = fRec846[0];
-			fRec845[1] = fRec845[0];
-			fRec843[1] = fRec843[0];
 			fVec17[1] = fVec17[0];
-			fRec863[1] = fRec863[0];
-			fRec861[1] = fRec861[0];
 			fRec860[1] = fRec860[0];
 			fRec858[1] = fRec858[0];
 			fRec857[1] = fRec857[0];
@@ -9704,26 +9699,28 @@ class mydsp : public dsp {
 			fRec852[1] = fRec852[0];
 			fRec851[1] = fRec851[0];
 			fRec849[1] = fRec849[0];
-			fRec875[1] = fRec875[0];
-			fRec873[1] = fRec873[0];
-			fRec872[1] = fRec872[0];
-			fRec870[1] = fRec870[0];
-			fRec869[1] = fRec869[0];
-			fRec867[1] = fRec867[0];
 			fRec866[1] = fRec866[0];
 			fRec864[1] = fRec864[0];
+			fRec863[1] = fRec863[0];
+			fRec861[1] = fRec861[0];
+			fRec869[1] = fRec869[0];
+			fRec867[1] = fRec867[0];
 			fRec884[1] = fRec884[0];
 			fRec882[1] = fRec882[0];
 			fRec881[1] = fRec881[0];
 			fRec879[1] = fRec879[0];
 			fRec878[1] = fRec878[0];
 			fRec876[1] = fRec876[0];
-			fRec887[1] = fRec887[0];
-			fRec885[1] = fRec885[0];
+			fRec875[1] = fRec875[0];
+			fRec873[1] = fRec873[0];
+			fRec872[1] = fRec872[0];
+			fRec870[1] = fRec870[0];
 			fRec893[1] = fRec893[0];
 			fRec891[1] = fRec891[0];
 			fRec890[1] = fRec890[0];
 			fRec888[1] = fRec888[0];
+			fRec887[1] = fRec887[0];
+			fRec885[1] = fRec885[0];
 			fVec18[1] = fVec18[0];
 			fRec905[1] = fRec905[0];
 			fRec903[1] = fRec903[0];
@@ -9733,59 +9730,59 @@ class mydsp : public dsp {
 			fRec897[1] = fRec897[0];
 			fRec896[1] = fRec896[0];
 			fRec894[1] = fRec894[0];
+			fRec920[1] = fRec920[0];
+			fRec918[1] = fRec918[0];
+			fRec917[1] = fRec917[0];
+			fRec915[1] = fRec915[0];
 			fRec914[1] = fRec914[0];
 			fRec912[1] = fRec912[0];
 			fRec911[1] = fRec911[0];
 			fRec909[1] = fRec909[0];
 			fRec908[1] = fRec908[0];
 			fRec906[1] = fRec906[0];
-			fRec920[1] = fRec920[0];
-			fRec918[1] = fRec918[0];
-			fRec917[1] = fRec917[0];
-			fRec915[1] = fRec915[0];
-			fRec935[1] = fRec935[0];
-			fRec933[1] = fRec933[0];
-			fRec932[1] = fRec932[0];
-			fRec930[1] = fRec930[0];
+			fRec923[1] = fRec923[0];
+			fRec921[1] = fRec921[0];
 			fRec929[1] = fRec929[0];
 			fRec927[1] = fRec927[0];
 			fRec926[1] = fRec926[0];
 			fRec924[1] = fRec924[0];
-			fRec923[1] = fRec923[0];
-			fRec921[1] = fRec921[0];
 			fRec938[1] = fRec938[0];
 			fRec936[1] = fRec936[0];
+			fRec935[1] = fRec935[0];
+			fRec933[1] = fRec933[0];
+			fRec932[1] = fRec932[0];
+			fRec930[1] = fRec930[0];
 			fVec19[1] = fVec19[0];
-			fRec953[1] = fRec953[0];
-			fRec951[1] = fRec951[0];
-			fRec950[1] = fRec950[0];
-			fRec948[1] = fRec948[0];
-			fRec947[1] = fRec947[0];
-			fRec945[1] = fRec945[0];
 			fRec944[1] = fRec944[0];
 			fRec942[1] = fRec942[0];
 			fRec941[1] = fRec941[0];
 			fRec939[1] = fRec939[0];
+			fRec947[1] = fRec947[0];
+			fRec945[1] = fRec945[0];
+			fRec956[1] = fRec956[0];
+			fRec954[1] = fRec954[0];
+			fRec953[1] = fRec953[0];
+			fRec951[1] = fRec951[0];
+			fRec950[1] = fRec950[0];
+			fRec948[1] = fRec948[0];
+			fRec968[1] = fRec968[0];
+			fRec966[1] = fRec966[0];
 			fRec965[1] = fRec965[0];
 			fRec963[1] = fRec963[0];
 			fRec962[1] = fRec962[0];
 			fRec960[1] = fRec960[0];
 			fRec959[1] = fRec959[0];
 			fRec957[1] = fRec957[0];
-			fRec956[1] = fRec956[0];
-			fRec954[1] = fRec954[0];
-			fRec974[1] = fRec974[0];
-			fRec972[1] = fRec972[0];
-			fRec971[1] = fRec971[0];
-			fRec969[1] = fRec969[0];
-			fRec968[1] = fRec968[0];
-			fRec966[1] = fRec966[0];
-			fRec977[1] = fRec977[0];
-			fRec975[1] = fRec975[0];
 			fRec983[1] = fRec983[0];
 			fRec981[1] = fRec981[0];
 			fRec980[1] = fRec980[0];
 			fRec978[1] = fRec978[0];
+			fRec977[1] = fRec977[0];
+			fRec975[1] = fRec975[0];
+			fRec974[1] = fRec974[0];
+			fRec972[1] = fRec972[0];
+			fRec971[1] = fRec971[0];
+			fRec969[1] = fRec969[0];
 			fVec20[1] = fVec20[0];
 			fRec998[1] = fRec998[0];
 			fRec996[1] = fRec996[0];
@@ -9849,8 +9846,6 @@ class mydsp : public dsp {
 			fRec1070[1] = fRec1070[0];
 			fRec1068[1] = fRec1068[0];
 			fVec22[1] = fVec22[0];
-			fRec1088[1] = fRec1088[0];
-			fRec1086[1] = fRec1086[0];
 			fRec1085[1] = fRec1085[0];
 			fRec1083[1] = fRec1083[0];
 			fRec1082[1] = fRec1082[0];
@@ -9859,29 +9854,29 @@ class mydsp : public dsp {
 			fRec1077[1] = fRec1077[0];
 			fRec1076[1] = fRec1076[0];
 			fRec1074[1] = fRec1074[0];
-			fRec1100[1] = fRec1100[0];
-			fRec1098[1] = fRec1098[0];
-			fRec1097[1] = fRec1097[0];
-			fRec1095[1] = fRec1095[0];
 			fRec1094[1] = fRec1094[0];
 			fRec1092[1] = fRec1092[0];
 			fRec1091[1] = fRec1091[0];
 			fRec1089[1] = fRec1089[0];
+			fRec1088[1] = fRec1088[0];
+			fRec1086[1] = fRec1086[0];
+			fRec1100[1] = fRec1100[0];
+			fRec1098[1] = fRec1098[0];
+			fRec1097[1] = fRec1097[0];
+			fRec1095[1] = fRec1095[0];
+			fRec1115[1] = fRec1115[0];
+			fRec1113[1] = fRec1113[0];
+			fRec1112[1] = fRec1112[0];
+			fRec1110[1] = fRec1110[0];
 			fRec1109[1] = fRec1109[0];
 			fRec1107[1] = fRec1107[0];
 			fRec1106[1] = fRec1106[0];
 			fRec1104[1] = fRec1104[0];
 			fRec1103[1] = fRec1103[0];
 			fRec1101[1] = fRec1101[0];
-			fRec1112[1] = fRec1112[0];
-			fRec1110[1] = fRec1110[0];
 			fRec1118[1] = fRec1118[0];
 			fRec1116[1] = fRec1116[0];
-			fRec1115[1] = fRec1115[0];
-			fRec1113[1] = fRec1113[0];
 			fVec23[1] = fVec23[0];
-			fRec1133[1] = fRec1133[0];
-			fRec1131[1] = fRec1131[0];
 			fRec1130[1] = fRec1130[0];
 			fRec1128[1] = fRec1128[0];
 			fRec1127[1] = fRec1127[0];
@@ -9890,26 +9885,32 @@ class mydsp : public dsp {
 			fRec1122[1] = fRec1122[0];
 			fRec1121[1] = fRec1121[0];
 			fRec1119[1] = fRec1119[0];
-			fRec1145[1] = fRec1145[0];
-			fRec1143[1] = fRec1143[0];
-			fRec1142[1] = fRec1142[0];
-			fRec1140[1] = fRec1140[0];
 			fRec1139[1] = fRec1139[0];
 			fRec1137[1] = fRec1137[0];
 			fRec1136[1] = fRec1136[0];
 			fRec1134[1] = fRec1134[0];
+			fRec1133[1] = fRec1133[0];
+			fRec1131[1] = fRec1131[0];
+			fRec1145[1] = fRec1145[0];
+			fRec1143[1] = fRec1143[0];
+			fRec1142[1] = fRec1142[0];
+			fRec1140[1] = fRec1140[0];
+			fRec1160[1] = fRec1160[0];
+			fRec1158[1] = fRec1158[0];
+			fRec1157[1] = fRec1157[0];
+			fRec1155[1] = fRec1155[0];
 			fRec1154[1] = fRec1154[0];
 			fRec1152[1] = fRec1152[0];
 			fRec1151[1] = fRec1151[0];
 			fRec1149[1] = fRec1149[0];
 			fRec1148[1] = fRec1148[0];
 			fRec1146[1] = fRec1146[0];
-			fRec1157[1] = fRec1157[0];
-			fRec1155[1] = fRec1155[0];
 			fRec1163[1] = fRec1163[0];
 			fRec1161[1] = fRec1161[0];
-			fRec1160[1] = fRec1160[0];
-			fRec1158[1] = fRec1158[0];
+			fRec1166[1] = fRec1166[0];
+			fRec1164[1] = fRec1164[0];
+			fRec1181[1] = fRec1181[0];
+			fRec1179[1] = fRec1179[0];
 			fRec1178[1] = fRec1178[0];
 			fRec1176[1] = fRec1176[0];
 			fRec1175[1] = fRec1175[0];
@@ -9918,28 +9919,24 @@ class mydsp : public dsp {
 			fRec1170[1] = fRec1170[0];
 			fRec1169[1] = fRec1169[0];
 			fRec1167[1] = fRec1167[0];
-			fRec1166[1] = fRec1166[0];
-			fRec1164[1] = fRec1164[0];
+			fRec1193[1] = fRec1193[0];
+			fRec1191[1] = fRec1191[0];
 			fRec1190[1] = fRec1190[0];
 			fRec1188[1] = fRec1188[0];
 			fRec1187[1] = fRec1187[0];
 			fRec1185[1] = fRec1185[0];
 			fRec1184[1] = fRec1184[0];
 			fRec1182[1] = fRec1182[0];
-			fRec1181[1] = fRec1181[0];
-			fRec1179[1] = fRec1179[0];
 			fRec1199[1] = fRec1199[0];
 			fRec1197[1] = fRec1197[0];
 			fRec1196[1] = fRec1196[0];
 			fRec1194[1] = fRec1194[0];
-			fRec1193[1] = fRec1193[0];
-			fRec1191[1] = fRec1191[0];
-			fRec1202[1] = fRec1202[0];
-			fRec1200[1] = fRec1200[0];
 			fRec1208[1] = fRec1208[0];
 			fRec1206[1] = fRec1206[0];
 			fRec1205[1] = fRec1205[0];
 			fRec1203[1] = fRec1203[0];
+			fRec1202[1] = fRec1202[0];
+			fRec1200[1] = fRec1200[0];
 			fRec1223[1] = fRec1223[0];
 			fRec1221[1] = fRec1221[0];
 			fRec1220[1] = fRec1220[0];
@@ -10000,36 +9997,36 @@ class mydsp : public dsp {
 			fRec1296[1] = fRec1296[0];
 			fRec1295[1] = fRec1295[0];
 			fRec1293[1] = fRec1293[0];
-			fRec1313[1] = fRec1313[0];
-			fRec1311[1] = fRec1311[0];
-			fRec1310[1] = fRec1310[0];
-			fRec1308[1] = fRec1308[0];
 			fRec1307[1] = fRec1307[0];
 			fRec1305[1] = fRec1305[0];
 			fRec1304[1] = fRec1304[0];
 			fRec1302[1] = fRec1302[0];
 			fRec1301[1] = fRec1301[0];
 			fRec1299[1] = fRec1299[0];
-			fRec1325[1] = fRec1325[0];
-			fRec1323[1] = fRec1323[0];
-			fRec1322[1] = fRec1322[0];
-			fRec1320[1] = fRec1320[0];
 			fRec1319[1] = fRec1319[0];
 			fRec1317[1] = fRec1317[0];
 			fRec1316[1] = fRec1316[0];
 			fRec1314[1] = fRec1314[0];
-			fRec1334[1] = fRec1334[0];
-			fRec1332[1] = fRec1332[0];
-			fRec1331[1] = fRec1331[0];
-			fRec1329[1] = fRec1329[0];
+			fRec1313[1] = fRec1313[0];
+			fRec1311[1] = fRec1311[0];
+			fRec1310[1] = fRec1310[0];
+			fRec1308[1] = fRec1308[0];
+			fRec1322[1] = fRec1322[0];
+			fRec1320[1] = fRec1320[0];
 			fRec1328[1] = fRec1328[0];
 			fRec1326[1] = fRec1326[0];
-			fRec1337[1] = fRec1337[0];
-			fRec1335[1] = fRec1335[0];
+			fRec1325[1] = fRec1325[0];
+			fRec1323[1] = fRec1323[0];
 			fRec1343[1] = fRec1343[0];
 			fRec1341[1] = fRec1341[0];
 			fRec1340[1] = fRec1340[0];
 			fRec1338[1] = fRec1338[0];
+			fRec1337[1] = fRec1337[0];
+			fRec1335[1] = fRec1335[0];
+			fRec1334[1] = fRec1334[0];
+			fRec1332[1] = fRec1332[0];
+			fRec1331[1] = fRec1331[0];
+			fRec1329[1] = fRec1329[0];
 			
 		}
 		

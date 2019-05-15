@@ -1757,18 +1757,18 @@ class mydsp : public dsp {
 	double fRec51[2];
 	double fRec49[2];
 	double fVec1[1024];
-	double fRec57[2];
-	double fRec55[2];
 	double fRec63[2];
 	double fRec61[2];
 	double fRec60[2];
 	double fRec58[2];
+	double fRec57[2];
+	double fRec55[2];
+	double fRec66[2];
+	double fRec64[2];
 	double fRec72[2];
 	double fRec70[2];
 	double fRec69[2];
 	double fRec67[2];
-	double fRec66[2];
-	double fRec64[2];
 	double fVec2[1024];
 	double fRec81[2];
 	double fRec79[2];
@@ -1809,31 +1809,31 @@ class mydsp : public dsp {
 	double fRec123[2];
 	double fRec121[2];
 	double fVec5[1024];
-	double fRec129[2];
-	double fRec127[2];
 	double fRec135[2];
 	double fRec133[2];
 	double fRec132[2];
 	double fRec130[2];
+	double fRec129[2];
+	double fRec127[2];
+	double fRec138[2];
+	double fRec136[2];
 	double fRec144[2];
 	double fRec142[2];
 	double fRec141[2];
 	double fRec139[2];
-	double fRec138[2];
-	double fRec136[2];
 	double fVec6[1024];
-	double fRec153[2];
-	double fRec151[2];
 	double fRec150[2];
 	double fRec148[2];
 	double fRec147[2];
 	double fRec145[2];
-	double fRec156[2];
-	double fRec154[2];
-	double fRec162[2];
-	double fRec160[2];
 	double fRec159[2];
 	double fRec157[2];
+	double fRec156[2];
+	double fRec154[2];
+	double fRec153[2];
+	double fRec151[2];
+	double fRec162[2];
+	double fRec160[2];
 	double fVec7[1024];
 	double fRec171[2];
 	double fRec169[2];
@@ -1841,25 +1841,25 @@ class mydsp : public dsp {
 	double fRec166[2];
 	double fRec165[2];
 	double fRec163[2];
+	double fRec177[2];
+	double fRec175[2];
 	double fRec174[2];
 	double fRec172[2];
 	double fRec180[2];
 	double fRec178[2];
-	double fRec177[2];
-	double fRec175[2];
 	double fVec8[1024];
+	double fRec189[2];
+	double fRec187[2];
 	double fRec186[2];
 	double fRec184[2];
 	double fRec183[2];
 	double fRec181[2];
-	double fRec195[2];
-	double fRec193[2];
 	double fRec192[2];
 	double fRec190[2];
-	double fRec189[2];
-	double fRec187[2];
 	double fRec198[2];
 	double fRec196[2];
+	double fRec195[2];
+	double fRec193[2];
 	double fVec9[1024];
 	double fRec207[2];
 	double fRec205[2];
@@ -1926,18 +1926,18 @@ class mydsp : public dsp {
 	double fRec285[2];
 	double fRec283[2];
 	double fVec14[1024];
+	double fRec291[2];
+	double fRec289[2];
 	double fRec297[2];
 	double fRec295[2];
 	double fRec294[2];
 	double fRec292[2];
-	double fRec291[2];
-	double fRec289[2];
-	double fRec300[2];
-	double fRec298[2];
 	double fRec306[2];
 	double fRec304[2];
 	double fRec303[2];
 	double fRec301[2];
+	double fRec300[2];
+	double fRec298[2];
 	double fVec15[1024];
 	double fConst18;
 	double fConst19;
@@ -1964,7 +1964,7 @@ class mydsp : public dsp {
 	double fRec322[2];
 	double fRec321[2];
 	double fRec319[2];
-	double fVec16[2];
+	double fVec16[512];
 	int iConst31;
 	double fRec333[2];
 	double fRec331[2];
@@ -1978,7 +1978,7 @@ class mydsp : public dsp {
 	double fRec340[2];
 	double fRec339[2];
 	double fRec337[2];
-	double fVec17[2];
+	double fVec17[512];
 	double fRec351[2];
 	double fRec349[2];
 	double fRec348[2];
@@ -1991,20 +1991,20 @@ class mydsp : public dsp {
 	double fRec358[2];
 	double fRec357[2];
 	double fRec355[2];
-	double fVec18[2];
-	double fRec369[2];
-	double fRec367[2];
+	double fVec18[512];
 	double fRec366[2];
 	double fRec364[2];
 	double fRec363[2];
 	double fRec361[2];
-	double fRec372[2];
-	double fRec370[2];
-	double fRec378[2];
-	double fRec376[2];
 	double fRec375[2];
 	double fRec373[2];
-	double fVec19[2];
+	double fRec372[2];
+	double fRec370[2];
+	double fRec369[2];
+	double fRec367[2];
+	double fRec378[2];
+	double fRec376[2];
+	double fVec19[512];
 	double fRec387[2];
 	double fRec385[2];
 	double fRec384[2];
@@ -2017,20 +2017,20 @@ class mydsp : public dsp {
 	double fRec394[2];
 	double fRec393[2];
 	double fRec391[2];
-	double fVec20[2];
-	double fRec405[2];
-	double fRec403[2];
+	double fVec20[512];
 	double fRec402[2];
 	double fRec400[2];
 	double fRec399[2];
 	double fRec397[2];
-	double fRec408[2];
-	double fRec406[2];
-	double fRec414[2];
-	double fRec412[2];
 	double fRec411[2];
 	double fRec409[2];
-	double fVec21[2];
+	double fRec408[2];
+	double fRec406[2];
+	double fRec405[2];
+	double fRec403[2];
+	double fRec414[2];
+	double fRec412[2];
+	double fVec21[512];
 	double fRec423[2];
 	double fRec421[2];
 	double fRec420[2];
@@ -2043,46 +2043,46 @@ class mydsp : public dsp {
 	double fRec430[2];
 	double fRec429[2];
 	double fRec427[2];
-	double fVec22[2];
+	double fVec22[512];
+	double fRec435[2];
+	double fRec433[2];
 	double fRec441[2];
 	double fRec439[2];
 	double fRec438[2];
 	double fRec436[2];
-	double fRec435[2];
-	double fRec433[2];
-	double fRec444[2];
-	double fRec442[2];
 	double fRec450[2];
 	double fRec448[2];
 	double fRec447[2];
 	double fRec445[2];
-	double fVec23[2];
+	double fRec444[2];
+	double fRec442[2];
+	double fVec23[512];
 	double fConst32;
 	double fConst33;
 	double fConst34;
+	double fRec453[2];
+	double fRec451[2];
 	double fConst35;
 	double fConst36;
 	double fConst37;
+	double fConst38;
 	double fRec459[2];
 	double fRec457[2];
 	double fRec456[2];
 	double fRec454[2];
-	double fRec453[2];
-	double fRec451[2];
-	double fConst38;
 	double fConst39;
 	double fConst40;
-	double fRec462[2];
-	double fRec460[2];
 	double fConst41;
 	double fConst42;
 	double fConst43;
-	double fConst44;
 	double fRec468[2];
 	double fRec466[2];
 	double fRec465[2];
 	double fRec463[2];
-	double fVec24[512];
+	double fConst44;
+	double fRec462[2];
+	double fRec460[2];
+	double fVec24[256];
 	int iConst45;
 	double fRec477[2];
 	double fRec475[2];
@@ -2096,7 +2096,7 @@ class mydsp : public dsp {
 	double fRec484[2];
 	double fRec483[2];
 	double fRec481[2];
-	double fVec25[512];
+	double fVec25[256];
 	double fRec495[2];
 	double fRec493[2];
 	double fRec492[2];
@@ -2109,7 +2109,7 @@ class mydsp : public dsp {
 	double fRec502[2];
 	double fRec501[2];
 	double fRec499[2];
-	double fVec26[512];
+	double fVec26[256];
 	double fRec513[2];
 	double fRec511[2];
 	double fRec510[2];
@@ -2122,7 +2122,7 @@ class mydsp : public dsp {
 	double fRec520[2];
 	double fRec519[2];
 	double fRec517[2];
-	double fVec27[512];
+	double fVec27[256];
 	double fConst46;
 	double fConst47;
 	double fConst48;
@@ -2382,49 +2382,49 @@ class mydsp : public dsp {
 		iConst0 = std::min(192000, std::max(1, fSamplingFreq));
 		fConst1 = (3.1415926535897931 / double(iConst0));
 		fConst2 = double(iConst0);
-		fConst3 = ((87.085661089049111 / fConst2) + 1.0);
-		fConst4 = (0.0 - (174.17132217809822 / (fConst2 * fConst3)));
-		fConst5 = ((((9084.3512875420056 / fConst2) + 137.92392545983725) / fConst2) + 1.0);
+		fConst3 = ((86.443380725268696 / fConst2) + 1.0);
+		fConst4 = (0.0 - (172.88676145053739 / (fConst2 * fConst3)));
+		fConst5 = ((((8950.8463194903634 / fConst2) + 136.90669911154342) / fConst2) + 1.0);
 		fConst6 = (1.0 / (fConst3 * fConst5));
 		fConst7 = mydsp_faustpower2_f(fConst2);
-		fConst8 = (0.0 - (36337.405150168022 / (fConst7 * fConst5)));
-		fConst9 = (0.0 - (((36337.405150168022 / fConst2) + 275.8478509196745) / (fConst2 * fConst5)));
-		fConst10 = ((37.501597758147724 / fConst2) + 1.0);
+		fConst8 = (0.0 - (35803.385277961454 / (fConst7 * fConst5)));
+		fConst9 = (0.0 - (((35803.385277961454 / fConst2) + 273.81339822308684) / (fConst2 * fConst5)));
+		fConst10 = ((37.225013306135352 / fConst2) + 1.0);
 		fConst11 = (1.0 / fConst10);
-		fConst12 = (0.0 - (75.003195516295449 / (fConst2 * fConst10)));
-		fConst13 = ((((4219.1095032417315 / fConst2) + 112.50479327444317) / fConst2) + 1.0);
+		fConst12 = (0.0 - (74.450026612270705 / (fConst2 * fConst10)));
+		fConst13 = ((((4157.1048469258621 / fConst2) + 111.67503991840606) / fConst2) + 1.0);
 		fConst14 = (1.0 / fConst13);
-		fConst15 = (0.0 - (16876.438012966926 / (fConst7 * fConst13)));
-		fConst16 = (0.0 - (((16876.438012966926 / fConst2) + 225.00958654888635) / (fConst2 * fConst13)));
-		iConst17 = int(((0.002913628773109936 * double(iConst0)) + 0.5));
-		fConst18 = ((71.480535451746846 / fConst2) + 1.0);
-		fConst19 = (0.0 - (142.96107090349369 / (fConst2 * fConst18)));
-		fConst20 = ((((6120.3492872630823 / fConst2) + 113.20894760613724) / fConst2) + 1.0);
+		fConst15 = (0.0 - (((16628.419387703449 / fConst2) + 223.35007983681211) / (fConst2 * fConst13)));
+		fConst16 = (0.0 - (16628.419387703449 / (fConst7 * fConst13)));
+		iConst17 = int(((0.0028145653948241961 * double(iConst0)) + 0.5));
+		fConst18 = ((81.627198923287324 / fConst2) + 1.0);
+		fConst19 = (0.0 - (163.25439784657465 / (fConst2 * fConst18)));
+		fConst20 = ((((7981.2405656089695 / fConst2) + 129.27896003773355) / fConst2) + 1.0);
 		fConst21 = (1.0 / (fConst18 * fConst20));
-		fConst22 = (0.0 - (24481.397149052329 / (fConst7 * fConst20)));
-		fConst23 = (0.0 - (((24481.397149052329 / fConst2) + 226.41789521227449) / (fConst2 * fConst20)));
-		fConst24 = ((30.781580509647348 / fConst2) + 1.0);
+		fConst22 = (0.0 - (31924.962262435878 / (fConst7 * fConst20)));
+		fConst23 = (0.0 - (((31924.962262435878 / fConst2) + 258.55792007546711) / (fConst2 * fConst20)));
+		fConst24 = ((35.15102649350348 / fConst2) + 1.0);
 		fConst25 = (1.0 / fConst24);
-		fConst26 = (0.0 - (61.563161019294697 / (fConst2 * fConst24)));
-		fConst27 = ((((2842.5170960157047 / fConst2) + 92.344741528942052) / fConst2) + 1.0);
+		fConst26 = (0.0 - (70.302052987006959 / (fConst2 * fConst24)));
+		fConst27 = ((((3706.7839906409508 / fConst2) + 105.45307948051044) / fConst2) + 1.0);
 		fConst28 = (1.0 / fConst27);
-		fConst29 = (0.0 - (11370.068384062819 / (fConst7 * fConst27)));
-		fConst30 = (0.0 - (((11370.068384062819 / fConst2) + 184.6894830578841) / (fConst2 * fConst27)));
-		iConst31 = int(((2.9136287731083211e-06 * double(iConst0)) + 0.5));
-		fConst32 = ((78.36853198495352 / fConst2) + 1.0);
-		fConst33 = (0.0 - (156.73706396990704 / (fConst2 * fConst32)));
-		fConst34 = ((((7356.7167809554639 / fConst2) + 124.11797107260868) / fConst2) + 1.0);
-		fConst35 = (1.0 / (fConst32 * fConst34));
-		fConst36 = (0.0 - (29426.867123821856 / (fConst7 * fConst34)));
-		fConst37 = (0.0 - (((29426.867123821856 / fConst2) + 248.23594214521736) / (fConst2 * fConst34)));
-		fConst38 = ((33.7477505095937 / fConst2) + 1.0);
-		fConst39 = (1.0 / fConst38);
-		fConst40 = (0.0 - (67.495501019187401 / (fConst2 * fConst38)));
-		fConst41 = ((((3416.7319933733456 / fConst2) + 101.2432515287811) / fConst2) + 1.0);
-		fConst42 = (1.0 / fConst41);
-		fConst43 = (0.0 - (13666.927973493383 / (fConst7 * fConst41)));
-		fConst44 = (0.0 - (((13666.927973493383 / fConst2) + 202.4865030575622) / (fConst2 * fConst41)));
-		iConst45 = int(((0.0014305917275969774 * double(iConst0)) + 0.5));
+		fConst29 = (0.0 - (14827.135962563803 / (fConst7 * fConst27)));
+		fConst30 = (0.0 - (((14827.135962563803 / fConst2) + 210.90615896102088) / (fConst2 * fConst27)));
+		iConst31 = int(((0.0020220583685382951 * double(iConst0)) + 0.5));
+		fConst32 = ((32.275213718503664 / fConst2) + 1.0);
+		fConst33 = (1.0 / fConst32);
+		fConst34 = (0.0 - (64.550427437007329 / (fConst32 * fConst2)));
+		fConst35 = ((((3125.0682617252614 / fConst2) + 96.825641155510993) / fConst2) + 1.0);
+		fConst36 = (1.0 / fConst35);
+		fConst37 = (0.0 - (12500.273046901046 / (fConst35 * fConst7)));
+		fConst38 = (0.0 - (((12500.273046901046 / fConst2) + 193.65128231102199) / (fConst35 * fConst2)));
+		fConst39 = ((74.949028614536147 / fConst2) + 1.0);
+		fConst40 = ((((6728.7226997184644 / fConst2) + 118.70225369648584) / fConst2) + 1.0);
+		fConst41 = (1.0 / (fConst39 * fConst40));
+		fConst42 = (0.0 - (26914.890798873857 / (fConst40 * fConst7)));
+		fConst43 = (0.0 - (((26914.890798873857 / fConst2) + 237.40450739297168) / (fConst40 * fConst2)));
+		fConst44 = (0.0 - (149.89805722907229 / (fConst39 * fConst2)));
+		iConst45 = int(((0.0007546298522354718 * double(iConst0)) + 0.5));
 		fConst46 = ((71.467716130467849 / fConst2) + 1.0);
 		fConst47 = (0.0 - (142.9354322609357 / (fConst2 * fConst46)));
 		fConst48 = ((((6118.1542368773398 / fConst2) + 113.18864471022512) / fConst2) + 1.0);
@@ -2632,51 +2632,51 @@ class mydsp : public dsp {
 			
 		}
 		for (int l45 = 0; (l45 < 2); l45 = (l45 + 1)) {
-			fRec57[l45] = 0.0;
+			fRec63[l45] = 0.0;
 			
 		}
 		for (int l46 = 0; (l46 < 2); l46 = (l46 + 1)) {
-			fRec55[l46] = 0.0;
+			fRec61[l46] = 0.0;
 			
 		}
 		for (int l47 = 0; (l47 < 2); l47 = (l47 + 1)) {
-			fRec63[l47] = 0.0;
+			fRec60[l47] = 0.0;
 			
 		}
 		for (int l48 = 0; (l48 < 2); l48 = (l48 + 1)) {
-			fRec61[l48] = 0.0;
+			fRec58[l48] = 0.0;
 			
 		}
 		for (int l49 = 0; (l49 < 2); l49 = (l49 + 1)) {
-			fRec60[l49] = 0.0;
+			fRec57[l49] = 0.0;
 			
 		}
 		for (int l50 = 0; (l50 < 2); l50 = (l50 + 1)) {
-			fRec58[l50] = 0.0;
+			fRec55[l50] = 0.0;
 			
 		}
 		for (int l51 = 0; (l51 < 2); l51 = (l51 + 1)) {
-			fRec72[l51] = 0.0;
+			fRec66[l51] = 0.0;
 			
 		}
 		for (int l52 = 0; (l52 < 2); l52 = (l52 + 1)) {
-			fRec70[l52] = 0.0;
+			fRec64[l52] = 0.0;
 			
 		}
 		for (int l53 = 0; (l53 < 2); l53 = (l53 + 1)) {
-			fRec69[l53] = 0.0;
+			fRec72[l53] = 0.0;
 			
 		}
 		for (int l54 = 0; (l54 < 2); l54 = (l54 + 1)) {
-			fRec67[l54] = 0.0;
+			fRec70[l54] = 0.0;
 			
 		}
 		for (int l55 = 0; (l55 < 2); l55 = (l55 + 1)) {
-			fRec66[l55] = 0.0;
+			fRec69[l55] = 0.0;
 			
 		}
 		for (int l56 = 0; (l56 < 2); l56 = (l56 + 1)) {
-			fRec64[l56] = 0.0;
+			fRec67[l56] = 0.0;
 			
 		}
 		for (int l57 = 0; (l57 < 1024); l57 = (l57 + 1)) {
@@ -2840,51 +2840,51 @@ class mydsp : public dsp {
 			
 		}
 		for (int l97 = 0; (l97 < 2); l97 = (l97 + 1)) {
-			fRec129[l97] = 0.0;
+			fRec135[l97] = 0.0;
 			
 		}
 		for (int l98 = 0; (l98 < 2); l98 = (l98 + 1)) {
-			fRec127[l98] = 0.0;
+			fRec133[l98] = 0.0;
 			
 		}
 		for (int l99 = 0; (l99 < 2); l99 = (l99 + 1)) {
-			fRec135[l99] = 0.0;
+			fRec132[l99] = 0.0;
 			
 		}
 		for (int l100 = 0; (l100 < 2); l100 = (l100 + 1)) {
-			fRec133[l100] = 0.0;
+			fRec130[l100] = 0.0;
 			
 		}
 		for (int l101 = 0; (l101 < 2); l101 = (l101 + 1)) {
-			fRec132[l101] = 0.0;
+			fRec129[l101] = 0.0;
 			
 		}
 		for (int l102 = 0; (l102 < 2); l102 = (l102 + 1)) {
-			fRec130[l102] = 0.0;
+			fRec127[l102] = 0.0;
 			
 		}
 		for (int l103 = 0; (l103 < 2); l103 = (l103 + 1)) {
-			fRec144[l103] = 0.0;
+			fRec138[l103] = 0.0;
 			
 		}
 		for (int l104 = 0; (l104 < 2); l104 = (l104 + 1)) {
-			fRec142[l104] = 0.0;
+			fRec136[l104] = 0.0;
 			
 		}
 		for (int l105 = 0; (l105 < 2); l105 = (l105 + 1)) {
-			fRec141[l105] = 0.0;
+			fRec144[l105] = 0.0;
 			
 		}
 		for (int l106 = 0; (l106 < 2); l106 = (l106 + 1)) {
-			fRec139[l106] = 0.0;
+			fRec142[l106] = 0.0;
 			
 		}
 		for (int l107 = 0; (l107 < 2); l107 = (l107 + 1)) {
-			fRec138[l107] = 0.0;
+			fRec141[l107] = 0.0;
 			
 		}
 		for (int l108 = 0; (l108 < 2); l108 = (l108 + 1)) {
-			fRec136[l108] = 0.0;
+			fRec139[l108] = 0.0;
 			
 		}
 		for (int l109 = 0; (l109 < 1024); l109 = (l109 + 1)) {
@@ -2892,27 +2892,27 @@ class mydsp : public dsp {
 			
 		}
 		for (int l110 = 0; (l110 < 2); l110 = (l110 + 1)) {
-			fRec153[l110] = 0.0;
+			fRec150[l110] = 0.0;
 			
 		}
 		for (int l111 = 0; (l111 < 2); l111 = (l111 + 1)) {
-			fRec151[l111] = 0.0;
+			fRec148[l111] = 0.0;
 			
 		}
 		for (int l112 = 0; (l112 < 2); l112 = (l112 + 1)) {
-			fRec150[l112] = 0.0;
+			fRec147[l112] = 0.0;
 			
 		}
 		for (int l113 = 0; (l113 < 2); l113 = (l113 + 1)) {
-			fRec148[l113] = 0.0;
+			fRec145[l113] = 0.0;
 			
 		}
 		for (int l114 = 0; (l114 < 2); l114 = (l114 + 1)) {
-			fRec147[l114] = 0.0;
+			fRec159[l114] = 0.0;
 			
 		}
 		for (int l115 = 0; (l115 < 2); l115 = (l115 + 1)) {
-			fRec145[l115] = 0.0;
+			fRec157[l115] = 0.0;
 			
 		}
 		for (int l116 = 0; (l116 < 2); l116 = (l116 + 1)) {
@@ -2924,19 +2924,19 @@ class mydsp : public dsp {
 			
 		}
 		for (int l118 = 0; (l118 < 2); l118 = (l118 + 1)) {
-			fRec162[l118] = 0.0;
+			fRec153[l118] = 0.0;
 			
 		}
 		for (int l119 = 0; (l119 < 2); l119 = (l119 + 1)) {
-			fRec160[l119] = 0.0;
+			fRec151[l119] = 0.0;
 			
 		}
 		for (int l120 = 0; (l120 < 2); l120 = (l120 + 1)) {
-			fRec159[l120] = 0.0;
+			fRec162[l120] = 0.0;
 			
 		}
 		for (int l121 = 0; (l121 < 2); l121 = (l121 + 1)) {
-			fRec157[l121] = 0.0;
+			fRec160[l121] = 0.0;
 			
 		}
 		for (int l122 = 0; (l122 < 1024); l122 = (l122 + 1)) {
@@ -2968,27 +2968,27 @@ class mydsp : public dsp {
 			
 		}
 		for (int l129 = 0; (l129 < 2); l129 = (l129 + 1)) {
-			fRec174[l129] = 0.0;
+			fRec177[l129] = 0.0;
 			
 		}
 		for (int l130 = 0; (l130 < 2); l130 = (l130 + 1)) {
-			fRec172[l130] = 0.0;
+			fRec175[l130] = 0.0;
 			
 		}
 		for (int l131 = 0; (l131 < 2); l131 = (l131 + 1)) {
-			fRec180[l131] = 0.0;
+			fRec174[l131] = 0.0;
 			
 		}
 		for (int l132 = 0; (l132 < 2); l132 = (l132 + 1)) {
-			fRec178[l132] = 0.0;
+			fRec172[l132] = 0.0;
 			
 		}
 		for (int l133 = 0; (l133 < 2); l133 = (l133 + 1)) {
-			fRec177[l133] = 0.0;
+			fRec180[l133] = 0.0;
 			
 		}
 		for (int l134 = 0; (l134 < 2); l134 = (l134 + 1)) {
-			fRec175[l134] = 0.0;
+			fRec178[l134] = 0.0;
 			
 		}
 		for (int l135 = 0; (l135 < 1024); l135 = (l135 + 1)) {
@@ -2996,27 +2996,27 @@ class mydsp : public dsp {
 			
 		}
 		for (int l136 = 0; (l136 < 2); l136 = (l136 + 1)) {
-			fRec186[l136] = 0.0;
+			fRec189[l136] = 0.0;
 			
 		}
 		for (int l137 = 0; (l137 < 2); l137 = (l137 + 1)) {
-			fRec184[l137] = 0.0;
+			fRec187[l137] = 0.0;
 			
 		}
 		for (int l138 = 0; (l138 < 2); l138 = (l138 + 1)) {
-			fRec183[l138] = 0.0;
+			fRec186[l138] = 0.0;
 			
 		}
 		for (int l139 = 0; (l139 < 2); l139 = (l139 + 1)) {
-			fRec181[l139] = 0.0;
+			fRec184[l139] = 0.0;
 			
 		}
 		for (int l140 = 0; (l140 < 2); l140 = (l140 + 1)) {
-			fRec195[l140] = 0.0;
+			fRec183[l140] = 0.0;
 			
 		}
 		for (int l141 = 0; (l141 < 2); l141 = (l141 + 1)) {
-			fRec193[l141] = 0.0;
+			fRec181[l141] = 0.0;
 			
 		}
 		for (int l142 = 0; (l142 < 2); l142 = (l142 + 1)) {
@@ -3028,19 +3028,19 @@ class mydsp : public dsp {
 			
 		}
 		for (int l144 = 0; (l144 < 2); l144 = (l144 + 1)) {
-			fRec189[l144] = 0.0;
+			fRec198[l144] = 0.0;
 			
 		}
 		for (int l145 = 0; (l145 < 2); l145 = (l145 + 1)) {
-			fRec187[l145] = 0.0;
+			fRec196[l145] = 0.0;
 			
 		}
 		for (int l146 = 0; (l146 < 2); l146 = (l146 + 1)) {
-			fRec198[l146] = 0.0;
+			fRec195[l146] = 0.0;
 			
 		}
 		for (int l147 = 0; (l147 < 2); l147 = (l147 + 1)) {
-			fRec196[l147] = 0.0;
+			fRec193[l147] = 0.0;
 			
 		}
 		for (int l148 = 0; (l148 < 1024); l148 = (l148 + 1)) {
@@ -3308,51 +3308,51 @@ class mydsp : public dsp {
 			
 		}
 		for (int l214 = 0; (l214 < 2); l214 = (l214 + 1)) {
-			fRec297[l214] = 0.0;
+			fRec291[l214] = 0.0;
 			
 		}
 		for (int l215 = 0; (l215 < 2); l215 = (l215 + 1)) {
-			fRec295[l215] = 0.0;
+			fRec289[l215] = 0.0;
 			
 		}
 		for (int l216 = 0; (l216 < 2); l216 = (l216 + 1)) {
-			fRec294[l216] = 0.0;
+			fRec297[l216] = 0.0;
 			
 		}
 		for (int l217 = 0; (l217 < 2); l217 = (l217 + 1)) {
-			fRec292[l217] = 0.0;
+			fRec295[l217] = 0.0;
 			
 		}
 		for (int l218 = 0; (l218 < 2); l218 = (l218 + 1)) {
-			fRec291[l218] = 0.0;
+			fRec294[l218] = 0.0;
 			
 		}
 		for (int l219 = 0; (l219 < 2); l219 = (l219 + 1)) {
-			fRec289[l219] = 0.0;
+			fRec292[l219] = 0.0;
 			
 		}
 		for (int l220 = 0; (l220 < 2); l220 = (l220 + 1)) {
-			fRec300[l220] = 0.0;
+			fRec306[l220] = 0.0;
 			
 		}
 		for (int l221 = 0; (l221 < 2); l221 = (l221 + 1)) {
-			fRec298[l221] = 0.0;
+			fRec304[l221] = 0.0;
 			
 		}
 		for (int l222 = 0; (l222 < 2); l222 = (l222 + 1)) {
-			fRec306[l222] = 0.0;
+			fRec303[l222] = 0.0;
 			
 		}
 		for (int l223 = 0; (l223 < 2); l223 = (l223 + 1)) {
-			fRec304[l223] = 0.0;
+			fRec301[l223] = 0.0;
 			
 		}
 		for (int l224 = 0; (l224 < 2); l224 = (l224 + 1)) {
-			fRec303[l224] = 0.0;
+			fRec300[l224] = 0.0;
 			
 		}
 		for (int l225 = 0; (l225 < 2); l225 = (l225 + 1)) {
-			fRec301[l225] = 0.0;
+			fRec298[l225] = 0.0;
 			
 		}
 		for (int l226 = 0; (l226 < 1024); l226 = (l226 + 1)) {
@@ -3407,7 +3407,7 @@ class mydsp : public dsp {
 			fRec319[l238] = 0.0;
 			
 		}
-		for (int l239 = 0; (l239 < 2); l239 = (l239 + 1)) {
+		for (int l239 = 0; (l239 < 512); l239 = (l239 + 1)) {
 			fVec16[l239] = 0.0;
 			
 		}
@@ -3459,7 +3459,7 @@ class mydsp : public dsp {
 			fRec337[l251] = 0.0;
 			
 		}
-		for (int l252 = 0; (l252 < 2); l252 = (l252 + 1)) {
+		for (int l252 = 0; (l252 < 512); l252 = (l252 + 1)) {
 			fVec17[l252] = 0.0;
 			
 		}
@@ -3511,32 +3511,32 @@ class mydsp : public dsp {
 			fRec355[l264] = 0.0;
 			
 		}
-		for (int l265 = 0; (l265 < 2); l265 = (l265 + 1)) {
+		for (int l265 = 0; (l265 < 512); l265 = (l265 + 1)) {
 			fVec18[l265] = 0.0;
 			
 		}
 		for (int l266 = 0; (l266 < 2); l266 = (l266 + 1)) {
-			fRec369[l266] = 0.0;
+			fRec366[l266] = 0.0;
 			
 		}
 		for (int l267 = 0; (l267 < 2); l267 = (l267 + 1)) {
-			fRec367[l267] = 0.0;
+			fRec364[l267] = 0.0;
 			
 		}
 		for (int l268 = 0; (l268 < 2); l268 = (l268 + 1)) {
-			fRec366[l268] = 0.0;
+			fRec363[l268] = 0.0;
 			
 		}
 		for (int l269 = 0; (l269 < 2); l269 = (l269 + 1)) {
-			fRec364[l269] = 0.0;
+			fRec361[l269] = 0.0;
 			
 		}
 		for (int l270 = 0; (l270 < 2); l270 = (l270 + 1)) {
-			fRec363[l270] = 0.0;
+			fRec375[l270] = 0.0;
 			
 		}
 		for (int l271 = 0; (l271 < 2); l271 = (l271 + 1)) {
-			fRec361[l271] = 0.0;
+			fRec373[l271] = 0.0;
 			
 		}
 		for (int l272 = 0; (l272 < 2); l272 = (l272 + 1)) {
@@ -3548,22 +3548,22 @@ class mydsp : public dsp {
 			
 		}
 		for (int l274 = 0; (l274 < 2); l274 = (l274 + 1)) {
-			fRec378[l274] = 0.0;
+			fRec369[l274] = 0.0;
 			
 		}
 		for (int l275 = 0; (l275 < 2); l275 = (l275 + 1)) {
-			fRec376[l275] = 0.0;
+			fRec367[l275] = 0.0;
 			
 		}
 		for (int l276 = 0; (l276 < 2); l276 = (l276 + 1)) {
-			fRec375[l276] = 0.0;
+			fRec378[l276] = 0.0;
 			
 		}
 		for (int l277 = 0; (l277 < 2); l277 = (l277 + 1)) {
-			fRec373[l277] = 0.0;
+			fRec376[l277] = 0.0;
 			
 		}
-		for (int l278 = 0; (l278 < 2); l278 = (l278 + 1)) {
+		for (int l278 = 0; (l278 < 512); l278 = (l278 + 1)) {
 			fVec19[l278] = 0.0;
 			
 		}
@@ -3615,32 +3615,32 @@ class mydsp : public dsp {
 			fRec391[l290] = 0.0;
 			
 		}
-		for (int l291 = 0; (l291 < 2); l291 = (l291 + 1)) {
+		for (int l291 = 0; (l291 < 512); l291 = (l291 + 1)) {
 			fVec20[l291] = 0.0;
 			
 		}
 		for (int l292 = 0; (l292 < 2); l292 = (l292 + 1)) {
-			fRec405[l292] = 0.0;
+			fRec402[l292] = 0.0;
 			
 		}
 		for (int l293 = 0; (l293 < 2); l293 = (l293 + 1)) {
-			fRec403[l293] = 0.0;
+			fRec400[l293] = 0.0;
 			
 		}
 		for (int l294 = 0; (l294 < 2); l294 = (l294 + 1)) {
-			fRec402[l294] = 0.0;
+			fRec399[l294] = 0.0;
 			
 		}
 		for (int l295 = 0; (l295 < 2); l295 = (l295 + 1)) {
-			fRec400[l295] = 0.0;
+			fRec397[l295] = 0.0;
 			
 		}
 		for (int l296 = 0; (l296 < 2); l296 = (l296 + 1)) {
-			fRec399[l296] = 0.0;
+			fRec411[l296] = 0.0;
 			
 		}
 		for (int l297 = 0; (l297 < 2); l297 = (l297 + 1)) {
-			fRec397[l297] = 0.0;
+			fRec409[l297] = 0.0;
 			
 		}
 		for (int l298 = 0; (l298 < 2); l298 = (l298 + 1)) {
@@ -3652,22 +3652,22 @@ class mydsp : public dsp {
 			
 		}
 		for (int l300 = 0; (l300 < 2); l300 = (l300 + 1)) {
-			fRec414[l300] = 0.0;
+			fRec405[l300] = 0.0;
 			
 		}
 		for (int l301 = 0; (l301 < 2); l301 = (l301 + 1)) {
-			fRec412[l301] = 0.0;
+			fRec403[l301] = 0.0;
 			
 		}
 		for (int l302 = 0; (l302 < 2); l302 = (l302 + 1)) {
-			fRec411[l302] = 0.0;
+			fRec414[l302] = 0.0;
 			
 		}
 		for (int l303 = 0; (l303 < 2); l303 = (l303 + 1)) {
-			fRec409[l303] = 0.0;
+			fRec412[l303] = 0.0;
 			
 		}
-		for (int l304 = 0; (l304 < 2); l304 = (l304 + 1)) {
+		for (int l304 = 0; (l304 < 512); l304 = (l304 + 1)) {
 			fVec21[l304] = 0.0;
 			
 		}
@@ -3719,111 +3719,111 @@ class mydsp : public dsp {
 			fRec427[l316] = 0.0;
 			
 		}
-		for (int l317 = 0; (l317 < 2); l317 = (l317 + 1)) {
+		for (int l317 = 0; (l317 < 512); l317 = (l317 + 1)) {
 			fVec22[l317] = 0.0;
 			
 		}
 		for (int l318 = 0; (l318 < 2); l318 = (l318 + 1)) {
-			fRec441[l318] = 0.0;
+			fRec435[l318] = 0.0;
 			
 		}
 		for (int l319 = 0; (l319 < 2); l319 = (l319 + 1)) {
-			fRec439[l319] = 0.0;
+			fRec433[l319] = 0.0;
 			
 		}
 		for (int l320 = 0; (l320 < 2); l320 = (l320 + 1)) {
-			fRec438[l320] = 0.0;
+			fRec441[l320] = 0.0;
 			
 		}
 		for (int l321 = 0; (l321 < 2); l321 = (l321 + 1)) {
-			fRec436[l321] = 0.0;
+			fRec439[l321] = 0.0;
 			
 		}
 		for (int l322 = 0; (l322 < 2); l322 = (l322 + 1)) {
-			fRec435[l322] = 0.0;
+			fRec438[l322] = 0.0;
 			
 		}
 		for (int l323 = 0; (l323 < 2); l323 = (l323 + 1)) {
-			fRec433[l323] = 0.0;
+			fRec436[l323] = 0.0;
 			
 		}
 		for (int l324 = 0; (l324 < 2); l324 = (l324 + 1)) {
-			fRec444[l324] = 0.0;
+			fRec450[l324] = 0.0;
 			
 		}
 		for (int l325 = 0; (l325 < 2); l325 = (l325 + 1)) {
-			fRec442[l325] = 0.0;
+			fRec448[l325] = 0.0;
 			
 		}
 		for (int l326 = 0; (l326 < 2); l326 = (l326 + 1)) {
-			fRec450[l326] = 0.0;
+			fRec447[l326] = 0.0;
 			
 		}
 		for (int l327 = 0; (l327 < 2); l327 = (l327 + 1)) {
-			fRec448[l327] = 0.0;
+			fRec445[l327] = 0.0;
 			
 		}
 		for (int l328 = 0; (l328 < 2); l328 = (l328 + 1)) {
-			fRec447[l328] = 0.0;
+			fRec444[l328] = 0.0;
 			
 		}
 		for (int l329 = 0; (l329 < 2); l329 = (l329 + 1)) {
-			fRec445[l329] = 0.0;
+			fRec442[l329] = 0.0;
 			
 		}
-		for (int l330 = 0; (l330 < 2); l330 = (l330 + 1)) {
+		for (int l330 = 0; (l330 < 512); l330 = (l330 + 1)) {
 			fVec23[l330] = 0.0;
 			
 		}
 		for (int l331 = 0; (l331 < 2); l331 = (l331 + 1)) {
-			fRec459[l331] = 0.0;
+			fRec453[l331] = 0.0;
 			
 		}
 		for (int l332 = 0; (l332 < 2); l332 = (l332 + 1)) {
-			fRec457[l332] = 0.0;
+			fRec451[l332] = 0.0;
 			
 		}
 		for (int l333 = 0; (l333 < 2); l333 = (l333 + 1)) {
-			fRec456[l333] = 0.0;
+			fRec459[l333] = 0.0;
 			
 		}
 		for (int l334 = 0; (l334 < 2); l334 = (l334 + 1)) {
-			fRec454[l334] = 0.0;
+			fRec457[l334] = 0.0;
 			
 		}
 		for (int l335 = 0; (l335 < 2); l335 = (l335 + 1)) {
-			fRec453[l335] = 0.0;
+			fRec456[l335] = 0.0;
 			
 		}
 		for (int l336 = 0; (l336 < 2); l336 = (l336 + 1)) {
-			fRec451[l336] = 0.0;
+			fRec454[l336] = 0.0;
 			
 		}
 		for (int l337 = 0; (l337 < 2); l337 = (l337 + 1)) {
-			fRec462[l337] = 0.0;
+			fRec468[l337] = 0.0;
 			
 		}
 		for (int l338 = 0; (l338 < 2); l338 = (l338 + 1)) {
-			fRec460[l338] = 0.0;
+			fRec466[l338] = 0.0;
 			
 		}
 		for (int l339 = 0; (l339 < 2); l339 = (l339 + 1)) {
-			fRec468[l339] = 0.0;
+			fRec465[l339] = 0.0;
 			
 		}
 		for (int l340 = 0; (l340 < 2); l340 = (l340 + 1)) {
-			fRec466[l340] = 0.0;
+			fRec463[l340] = 0.0;
 			
 		}
 		for (int l341 = 0; (l341 < 2); l341 = (l341 + 1)) {
-			fRec465[l341] = 0.0;
+			fRec462[l341] = 0.0;
 			
 		}
 		for (int l342 = 0; (l342 < 2); l342 = (l342 + 1)) {
-			fRec463[l342] = 0.0;
+			fRec460[l342] = 0.0;
 			
 		}
-		for (int l343 = 0; (l343 < 512); l343 = (l343 + 1)) {
+		for (int l343 = 0; (l343 < 256); l343 = (l343 + 1)) {
 			fVec24[l343] = 0.0;
 			
 		}
@@ -3875,7 +3875,7 @@ class mydsp : public dsp {
 			fRec481[l355] = 0.0;
 			
 		}
-		for (int l356 = 0; (l356 < 512); l356 = (l356 + 1)) {
+		for (int l356 = 0; (l356 < 256); l356 = (l356 + 1)) {
 			fVec25[l356] = 0.0;
 			
 		}
@@ -3927,7 +3927,7 @@ class mydsp : public dsp {
 			fRec499[l368] = 0.0;
 			
 		}
-		for (int l369 = 0; (l369 < 512); l369 = (l369 + 1)) {
+		for (int l369 = 0; (l369 < 256); l369 = (l369 + 1)) {
 			fVec26[l369] = 0.0;
 			
 		}
@@ -3979,7 +3979,7 @@ class mydsp : public dsp {
 			fRec517[l381] = 0.0;
 			
 		}
-		for (int l382 = 0; (l382 < 512); l382 = (l382 + 1)) {
+		for (int l382 = 0; (l382 < 256); l382 = (l382 + 1)) {
 			fVec27[l382] = 0.0;
 			
 		}
@@ -4122,27 +4122,27 @@ class mydsp : public dsp {
 			double fTemp2 = ((fTemp0 * (fTemp0 + -2.0)) + 1.0);
 			double fTemp3 = (fTemp1 + -1.0);
 			double fTemp4 = ((fTemp0 * (fTemp0 + 2.0)) + 1.0);
-			fRec2[0] = (double(input0[i]) - (((fRec2[2] * fTemp2) + (2.0 * (fRec2[1] * fTemp3))) / fTemp4));
+			fRec2[0] = (double(input0[i]) - (((fRec2[2] * fTemp2) + (2.0 * (fTemp3 * fRec2[1]))) / fTemp4));
 			fRec3[0] = (fSlow2 + (0.999 * fRec3[1]));
-			double fTemp5 = (fRec3[0] * fTemp4);
+			double fTemp5 = (fTemp4 * fRec3[0]);
 			double fTemp6 = (0.0 - (2.0 / fTemp4));
-			double fTemp7 = (((fTemp1 * (fRec2[2] + (fRec2[0] + (2.0 * fRec2[1])))) / fTemp5) + (fRec3[0] * (0.0 - ((fRec2[1] * fTemp6) + ((fRec2[0] + fRec2[2]) / fTemp4)))));
+			double fTemp7 = (((fTemp1 * (fRec2[2] + ((2.0 * fRec2[1]) + fRec2[0]))) / fTemp5) + (fRec3[0] * (0.0 - ((fRec2[1] * fTemp6) + ((fRec2[2] + fRec2[0]) / fTemp4)))));
 			double fTemp8 = (fConst4 * fRec4[1]);
 			fRec13[0] = (double(input9[i]) - (((fTemp2 * fRec13[2]) + (2.0 * (fTemp3 * fRec13[1]))) / fTemp4));
-			double fTemp9 = (((fTemp1 * (fRec13[2] + (fRec13[0] + (2.0 * fRec13[1])))) / fTemp5) + (0.30474698500000003 * (fRec3[0] * (0.0 - ((fTemp6 * fRec13[1]) + ((fRec13[0] + fRec13[2]) / fTemp4))))));
-			fRec14[0] = (double(input12[i]) - (((fTemp2 * fRec14[2]) + (2.0 * (fTemp3 * fRec14[1]))) / fTemp4));
-			double fTemp10 = (((fTemp1 * (fRec14[2] + (fRec14[0] + (2.0 * fRec14[1])))) / fTemp5) + (0.30474698500000003 * (fRec3[0] * (0.0 - ((fTemp6 * fRec14[1]) + ((fRec14[0] + fRec14[2]) / fTemp4))))));
-			fRec15[0] = (double(input15[i]) - (((fTemp2 * fRec15[2]) + (2.0 * (fTemp3 * fRec15[1]))) / fTemp4));
-			double fTemp11 = (((fTemp1 * (fRec15[2] + (fRec15[0] + (2.0 * fRec15[1])))) / fTemp5) + (0.30474698500000003 * (fRec3[0] * (0.0 - ((fTemp6 * fRec15[1]) + ((fRec15[0] + fRec15[2]) / fTemp4))))));
-			fRec16[0] = (double(input10[i]) - (((fTemp2 * fRec16[2]) + (2.0 * (fTemp3 * fRec16[1]))) / fTemp4));
-			double fTemp12 = (((fTemp1 * (fRec16[2] + (fRec16[0] + (2.0 * fRec16[1])))) / fTemp5) + (0.30474698500000003 * (fRec3[0] * (0.0 - ((fTemp6 * fRec16[1]) + ((fRec16[0] + fRec16[2]) / fTemp4))))));
-			fRec17[0] = (double(input11[i]) - (((fTemp2 * fRec17[2]) + (2.0 * (fTemp3 * fRec17[1]))) / fTemp4));
-			double fTemp13 = (((fTemp1 * (fRec17[2] + (fRec17[0] + (2.0 * fRec17[1])))) / fTemp5) + (0.30474698500000003 * (fRec3[0] * (0.0 - ((fTemp6 * fRec17[1]) + ((fRec17[0] + fRec17[2]) / fTemp4))))));
-			fRec18[0] = (double(input13[i]) - (((fTemp2 * fRec18[2]) + (2.0 * (fTemp3 * fRec18[1]))) / fTemp4));
-			double fTemp14 = (((fTemp1 * (fRec18[2] + (fRec18[0] + (2.0 * fRec18[1])))) / fTemp5) + (0.30474698500000003 * (fRec3[0] * (0.0 - ((fTemp6 * fRec18[1]) + ((fRec18[0] + fRec18[2]) / fTemp4))))));
-			fRec19[0] = (double(input14[i]) - (((fTemp2 * fRec19[2]) + (2.0 * (fTemp3 * fRec19[1]))) / fTemp4));
+			double fTemp9 = (((fTemp1 * (fRec13[2] + (fRec13[0] + (2.0 * fRec13[1])))) / fTemp5) + (0.30474698500000003 * (fRec3[0] * (0.0 - ((fRec13[1] * fTemp6) + ((fRec13[0] + fRec13[2]) / fTemp4))))));
+			fRec14[0] = (double(input10[i]) - (((fTemp2 * fRec14[2]) + (2.0 * (fTemp3 * fRec14[1]))) / fTemp4));
+			double fTemp10 = (((fTemp1 * (fRec14[2] + (fRec14[0] + (2.0 * fRec14[1])))) / fTemp5) + (0.30474698500000003 * (fRec3[0] * (0.0 - ((fRec14[1] * fTemp6) + ((fRec14[0] + fRec14[2]) / fTemp4))))));
+			fRec15[0] = (double(input11[i]) - (((fTemp2 * fRec15[2]) + (2.0 * (fTemp3 * fRec15[1]))) / fTemp4));
+			double fTemp11 = (((fTemp1 * (fRec15[2] + (fRec15[0] + (2.0 * fRec15[1])))) / fTemp5) + (0.30474698500000003 * (fRec3[0] * (0.0 - ((fRec15[1] * fTemp6) + ((fRec15[0] + fRec15[2]) / fTemp4))))));
+			fRec16[0] = (double(input12[i]) - (((fTemp2 * fRec16[2]) + (2.0 * (fTemp3 * fRec16[1]))) / fTemp4));
+			double fTemp12 = (((fTemp1 * (fRec16[2] + (fRec16[0] + (2.0 * fRec16[1])))) / fTemp5) + (0.30474698500000003 * (fRec3[0] * (0.0 - ((fRec16[1] * fTemp6) + ((fRec16[0] + fRec16[2]) / fTemp4))))));
+			fRec17[0] = (double(input13[i]) - (((fTemp2 * fRec17[2]) + (2.0 * (fTemp3 * fRec17[1]))) / fTemp4));
+			double fTemp13 = (((fTemp1 * (fRec17[2] + (fRec17[0] + (2.0 * fRec17[1])))) / fTemp5) + (0.30474698500000003 * (fRec3[0] * (0.0 - ((fRec17[1] * fTemp6) + ((fRec17[0] + fRec17[2]) / fTemp4))))));
+			fRec18[0] = (double(input14[i]) - (((fTemp2 * fRec18[2]) + (2.0 * (fTemp3 * fRec18[1]))) / fTemp4));
+			double fTemp14 = (((fTemp1 * (fRec18[2] + (fRec18[0] + (2.0 * fRec18[1])))) / fTemp5) + (0.30474698500000003 * (fRec3[0] * (0.0 - ((fRec18[1] * fTemp6) + ((fRec18[0] + fRec18[2]) / fTemp4))))));
+			fRec19[0] = (double(input15[i]) - (((fTemp2 * fRec19[2]) + (2.0 * (fTemp3 * fRec19[1]))) / fTemp4));
 			double fTemp15 = (((fTemp1 * (fRec19[2] + (fRec19[0] + (2.0 * fRec19[1])))) / fTemp5) + (0.30474698500000003 * (fRec3[0] * (0.0 - ((fTemp6 * fRec19[1]) + ((fRec19[0] + fRec19[2]) / fTemp4))))));
-			double fTemp16 = (fConst6 * ((((0.1509013957 * fTemp9) + (0.017599064599999999 * fTemp10)) + (0.0031030061000000002 * fTemp11)) - ((((0.048377653299999997 * fTemp12) + (0.024264610999999998 * fTemp13)) + (0.042728553900000001 * fTemp14)) + (0.027189593000000001 * fTemp15))));
+			double fTemp16 = (fConst6 * ((0.16180628280000001 * fTemp9) - ((((((0.0257567013 * fTemp10) + (0.0298221862 * fTemp11)) + (0.0010001545 * fTemp12)) + (0.041748318800000003 * fTemp13)) + (0.014311979400000001 * fTemp14)) + (0.0529030131 * fTemp15))));
 			double fTemp17 = (fConst8 * fRec7[1]);
 			double fTemp18 = (fConst9 * fRec10[1]);
 			fRec12[0] = (fTemp16 + (fTemp17 + (fRec12[1] + fTemp18)));
@@ -4160,34 +4160,34 @@ class mydsp : public dsp {
 			double fTemp20 = (((fTemp1 * (fRec24[2] + (fRec24[0] + (2.0 * fRec24[1])))) / fTemp5) + (0.86113631160000004 * (fRec3[0] * (0.0 - ((fTemp6 * fRec24[1]) + ((fRec24[0] + fRec24[2]) / fTemp4))))));
 			fRec25[0] = (double(input2[i]) - (((fTemp2 * fRec25[2]) + (2.0 * (fTemp3 * fRec25[1]))) / fTemp4));
 			double fTemp21 = (((fTemp1 * (fRec25[2] + (fRec25[0] + (2.0 * fRec25[1])))) / fTemp5) + (0.86113631160000004 * (fRec3[0] * (0.0 - ((fTemp6 * fRec25[1]) + ((fRec25[0] + fRec25[2]) / fTemp4))))));
-			double fTemp22 = (fConst11 * (((0.0519228334 * fTemp19) + (0.091305722199999995 * fTemp20)) - (0.0250128604 * fTemp21)));
+			double fTemp22 = (fConst11 * (((0.070742905300000006 * fTemp19) + (0.097028387899999999 * fTemp20)) - (0.016958429600000002 * fTemp21)));
 			double fTemp23 = (fConst12 * fRec20[1]);
 			fRec22[0] = (fTemp22 + (fRec22[1] + fTemp23));
 			fRec20[0] = fRec22[0];
 			double fRec21 = (fTemp23 + fTemp22);
-			fRec32[0] = (double(input4[i]) - (((fTemp2 * fRec32[2]) + (2.0 * (fTemp3 * fRec32[1]))) / fTemp4));
-			double fTemp24 = (((fTemp1 * (fRec32[2] + (fRec32[0] + (2.0 * fRec32[1])))) / fTemp5) + (0.61233362069999997 * (fRec3[0] * (0.0 - ((fTemp6 * fRec32[1]) + ((fRec32[0] + fRec32[2]) / fTemp4))))));
-			fRec33[0] = (double(input8[i]) - (((fTemp2 * fRec33[2]) + (2.0 * (fTemp3 * fRec33[1]))) / fTemp4));
+			fRec32[0] = (double(input8[i]) - (((fTemp2 * fRec32[2]) + (2.0 * (fTemp3 * fRec32[1]))) / fTemp4));
+			double fTemp24 = (((fTemp1 * (fRec32[2] + (fRec32[0] + (2.0 * fRec32[1])))) / fTemp5) + (0.61233362069999997 * (fRec3[0] * (0.0 - ((fRec32[1] * fTemp6) + ((fRec32[0] + fRec32[2]) / fTemp4))))));
+			fRec33[0] = (double(input4[i]) - (((fTemp2 * fRec33[2]) + (2.0 * (fTemp3 * fRec33[1]))) / fTemp4));
 			double fTemp25 = (((fTemp1 * (fRec33[2] + (fRec33[0] + (2.0 * fRec33[1])))) / fTemp5) + (0.61233362069999997 * (fRec3[0] * (0.0 - ((fTemp6 * fRec33[1]) + ((fRec33[0] + fRec33[2]) / fTemp4))))));
-			fRec34[0] = (double(input5[i]) - (((fTemp2 * fRec34[2]) + (2.0 * (fTemp3 * fRec34[1]))) / fTemp4));
-			double fTemp26 = (((fTemp1 * (fRec34[2] + (fRec34[0] + (2.0 * fRec34[1])))) / fTemp5) + (0.61233362069999997 * (fRec3[0] * (0.0 - ((fTemp6 * fRec34[1]) + ((fRec34[0] + fRec34[2]) / fTemp4))))));
-			fRec35[0] = (double(input6[i]) - (((fTemp2 * fRec35[2]) + (2.0 * (fTemp3 * fRec35[1]))) / fTemp4));
+			fRec34[0] = (double(input7[i]) - (((fTemp2 * fRec34[2]) + (2.0 * (fTemp3 * fRec34[1]))) / fTemp4));
+			double fTemp26 = ((0.61233362069999997 * (fRec3[0] * (0.0 - ((fTemp6 * fRec34[1]) + ((fRec34[0] + fRec34[2]) / fTemp4))))) + ((fTemp1 * (fRec34[2] + (fRec34[0] + (2.0 * fRec34[1])))) / fTemp5));
+			fRec35[0] = (double(input5[i]) - (((fTemp2 * fRec35[2]) + (2.0 * (fTemp3 * fRec35[1]))) / fTemp4));
 			double fTemp27 = (((fTemp1 * (fRec35[2] + (fRec35[0] + (2.0 * fRec35[1])))) / fTemp5) + (0.61233362069999997 * (fRec3[0] * (0.0 - ((fTemp6 * fRec35[1]) + ((fRec35[0] + fRec35[2]) / fTemp4))))));
-			fRec36[0] = (double(input7[i]) - (((fTemp2 * fRec36[2]) + (2.0 * (fTemp3 * fRec36[1]))) / fTemp4));
+			fRec36[0] = (double(input6[i]) - (((fTemp2 * fRec36[2]) + (2.0 * (fTemp3 * fRec36[1]))) / fTemp4));
 			double fTemp28 = (((fTemp1 * (fRec36[2] + (fRec36[0] + (2.0 * fRec36[1])))) / fTemp5) + (0.61233362069999997 * (fRec3[0] * (0.0 - ((fTemp6 * fRec36[1]) + ((fRec36[0] + fRec36[2]) / fTemp4))))));
-			double fTemp29 = (fConst14 * (((0.11562328049999999 * fTemp24) + (0.068831033900000005 * fTemp25)) - (((0.025030843699999999 * fTemp26) + (0.048101867700000002 * fTemp27)) + (0.0429812631 * fTemp28))));
-			double fTemp30 = (fConst15 * fRec26[1]);
-			double fTemp31 = (fConst16 * fRec29[1]);
-			fRec31[0] = (fTemp29 + (fTemp30 + (fRec31[1] + fTemp31)));
+			double fTemp29 = (fConst14 * (((0.046934944999999999 * fTemp24) + (0.14569512300000001 * fTemp25)) - (((0.025161482900000001 * fTemp26) + (0.015562004000000001 * fTemp27)) + (0.0546592729 * fTemp28))));
+			double fTemp30 = (fConst15 * fRec29[1]);
+			double fTemp31 = (fConst16 * fRec26[1]);
+			fRec31[0] = (((fTemp29 + fRec31[1]) + fTemp30) + fTemp31);
 			fRec29[0] = fRec31[0];
-			double fRec30 = ((fTemp31 + fTemp30) + fTemp29);
+			double fRec30 = ((fTemp29 + fTemp30) + fTemp31);
 			fRec28[0] = (fRec29[0] + fRec28[1]);
 			fRec26[0] = fRec28[0];
 			double fRec27 = fRec30;
-			fVec0[(IOTA & 1023)] = ((0.039486611599999999 * fTemp7) + (fRec5 + (fRec21 + fRec27)));
-			output0[i] = FAUSTFLOAT((0.82065997130559543 * (fRec0[0] * fVec0[((IOTA - iConst17) & 1023)])));
+			fVec0[(IOTA & 1023)] = ((0.045124266699999999 * fTemp7) + (fRec5 + (fRec21 + fRec27)));
+			output0[i] = FAUSTFLOAT((0.8267575322812053 * (fRec0[0] * fVec0[((IOTA - iConst17) & 1023)])));
 			double fTemp32 = (fConst4 * fRec37[1]);
-			double fTemp33 = (fConst6 * ((((0.061102555500000003 * fTemp9) + (0.0164224673 * fTemp10)) + (0.1307991432 * fTemp11)) - ((((0.012514683299999999 * fTemp12) + (0.0068264971000000004 * fTemp13)) + (0.046029363900000002 * fTemp14)) + (0.051041985099999999 * fTemp15))));
+			double fTemp33 = (fConst6 * ((((0.097059238699999995 * fTemp9) + (0.0137764659 * fTemp12)) + (0.1218701485 * fTemp15)) - ((0.046133351199999999 * fTemp14) + (((0.019583497200000001 * fTemp10) + (0.0110642116 * fTemp11)) + (0.048826395799999998 * fTemp13)))));
 			double fTemp34 = (fConst8 * fRec40[1]);
 			double fTemp35 = (fConst9 * fRec43[1]);
 			fRec45[0] = (fTemp33 + (fTemp34 + (fRec45[1] + fTemp35)));
@@ -4199,53 +4199,53 @@ class mydsp : public dsp {
 			fRec39[0] = (fTemp32 + (fRec41 + fRec39[1]));
 			fRec37[0] = fRec39[0];
 			double fRec38 = (fRec41 + fTemp32);
-			double fTemp36 = (fConst11 * (((0.0144140317 * fTemp19) + (0.098432117499999999 * fTemp20)) - (0.023507075700000001 * fTemp21)));
+			double fTemp36 = (fConst11 * (((0.024070503100000001 * fTemp19) + (0.1057768072 * fTemp20)) - (0.023531261000000001 * fTemp21)));
 			double fTemp37 = (fConst12 * fRec46[1]);
 			fRec48[0] = (fTemp36 + (fRec48[1] + fTemp37));
 			fRec46[0] = fRec48[0];
 			double fRec47 = (fTemp37 + fTemp36);
-			double fTemp38 = (fConst14 * (((0.036718164800000001 * fTemp24) + (0.1225290872 * fTemp25)) - (((0.0057987613999999996 * fTemp26) + (0.045539167899999997 * fTemp27)) + (0.046448097600000002 * fTemp28))));
-			double fTemp39 = (fConst15 * fRec49[1]);
-			double fTemp40 = (fConst16 * fRec52[1]);
+			double fTemp38 = (fConst14 * (((0.0601762198 * fTemp25) + (0.12525324409999999 * fTemp24)) - ((0.049692294599999999 * fTemp28) + ((0.0093175714000000003 * fTemp27) + (0.0448848897 * fTemp26)))));
+			double fTemp39 = (fConst16 * fRec49[1]);
+			double fTemp40 = (fConst15 * fRec52[1]);
 			fRec54[0] = (fTemp38 + (fTemp39 + (fRec54[1] + fTemp40)));
 			fRec52[0] = fRec54[0];
 			double fRec53 = ((fTemp40 + fTemp39) + fTemp38);
 			fRec51[0] = (fRec52[0] + fRec51[1]);
 			fRec49[0] = fRec51[0];
 			double fRec50 = fRec53;
-			fVec1[(IOTA & 1023)] = ((0.037347541200000001 * fTemp7) + (fRec38 + (fRec47 + fRec50)));
-			output1[i] = FAUSTFLOAT((0.82065997130559543 * (fRec0[0] * fVec1[((IOTA - iConst17) & 1023)])));
-			double fTemp41 = (fConst11 * ((0.1156078598 * fTemp20) - ((0.027880441299999999 * fTemp19) + (0.018629593999999999 * fTemp21))));
-			double fTemp42 = (fConst12 * fRec55[1]);
-			fRec57[0] = (fTemp41 + (fRec57[1] + fTemp42));
-			fRec55[0] = fRec57[0];
-			double fRec56 = (fTemp42 + fTemp41);
-			double fTemp43 = (fConst14 * (((0.0105931689 * fTemp26) + (0.1346317631 * fTemp25)) - (((0.069048685400000004 * fTemp24) + (0.055113220300000001 * fTemp27)) + (0.031872700499999997 * fTemp28))));
-			double fTemp44 = (fConst15 * fRec58[1]);
-			double fTemp45 = (fConst16 * fRec61[1]);
-			fRec63[0] = (fTemp43 + (fTemp44 + (fRec63[1] + fTemp45)));
+			fVec1[(IOTA & 1023)] = ((fRec38 + (fRec47 + fRec50)) + (0.040761164599999997 * fTemp7));
+			output1[i] = FAUSTFLOAT((0.8267575322812053 * (fRec0[0] * fVec1[((IOTA - iConst17) & 1023)])));
+			double fTemp41 = (fConst4 * fRec55[1]);
+			double fTemp42 = (fConst6 * ((((0.011611095700000001 * fTemp10) + (0.0087429369999999992 * fTemp11)) + (0.1567158914 * fTemp15)) - ((((0.082122956999999996 * fTemp9) + (0.005187601 * fTemp12)) + (0.051569369800000001 * fTemp13)) + (0.021165256100000002 * fTemp14))));
+			double fTemp43 = (fConst8 * fRec58[1]);
+			double fTemp44 = (fConst9 * fRec61[1]);
+			fRec63[0] = (fTemp42 + (fTemp43 + (fRec63[1] + fTemp44)));
 			fRec61[0] = fRec63[0];
-			double fRec62 = ((fTemp45 + fTemp44) + fTemp43);
+			double fRec62 = ((fTemp44 + fTemp43) + fTemp42);
 			fRec60[0] = (fRec61[0] + fRec60[1]);
 			fRec58[0] = fRec60[0];
 			double fRec59 = fRec62;
-			double fTemp46 = (fConst4 * fRec64[1]);
-			double fTemp47 = (fConst6 * (((((0.022031477899999999 * fTemp12) + (0.012939878700000001 * fTemp13)) + (0.0015555148000000001 * fTemp10)) + (0.1267827846 * fTemp11)) - (((0.1095552786 * fTemp9) + (0.052195738300000002 * fTemp14)) + (0.0272433116 * fTemp15))));
-			double fTemp48 = (fConst8 * fRec67[1]);
-			double fTemp49 = (fConst9 * fRec70[1]);
+			fRec57[0] = (fTemp41 + (fRec59 + fRec57[1]));
+			fRec55[0] = fRec57[0];
+			double fRec56 = (fRec59 + fTemp41);
+			double fTemp45 = (fConst11 * ((0.1246030601 * fTemp20) - ((0.0200812517 * fTemp19) + (0.0154586829 * fTemp21))));
+			double fTemp46 = (fConst12 * fRec64[1]);
+			fRec66[0] = (fTemp45 + (fRec66[1] + fTemp46));
+			fRec64[0] = fRec66[0];
+			double fRec65 = (fTemp46 + fTemp45);
+			double fTemp47 = (fConst14 * (((0.0057809942999999999 * fTemp27) + (0.1520361871 * fTemp24)) - ((0.057169674400000002 * fTemp28) + ((0.050456993499999998 * fTemp25) + (0.0249199872 * fTemp26)))));
+			double fTemp48 = (fConst16 * fRec67[1]);
+			double fTemp49 = (fConst15 * fRec70[1]);
 			fRec72[0] = (fTemp47 + (fTemp48 + (fRec72[1] + fTemp49)));
 			fRec70[0] = fRec72[0];
 			double fRec71 = ((fTemp49 + fTemp48) + fTemp47);
 			fRec69[0] = (fRec70[0] + fRec69[1]);
 			fRec67[0] = fRec69[0];
 			double fRec68 = fRec71;
-			fRec66[0] = (fTemp46 + (fRec68 + fRec66[1]));
-			fRec64[0] = fRec66[0];
-			double fRec65 = (fRec68 + fTemp46);
-			fVec2[(IOTA & 1023)] = ((0.044675587599999997 * fTemp7) + (fRec56 + (fRec59 + fRec65)));
-			output2[i] = FAUSTFLOAT((0.82065997130559543 * (fRec0[0] * fVec2[((IOTA - iConst17) & 1023)])));
+			fVec2[(IOTA & 1023)] = ((0.047497211400000003 * fTemp7) + (fRec56 + (fRec65 + fRec68)));
+			output2[i] = FAUSTFLOAT((0.8267575322812053 * (fRec0[0] * fVec2[((IOTA - iConst17) & 1023)])));
 			double fTemp50 = (fConst4 * fRec73[1]);
-			double fTemp51 = (fConst6 * ((((0.052194571500000002 * fTemp12) + (0.028151060700000001 * fTemp13)) + (0.017443871 * fTemp10)) - ((0.044784871499999997 * fTemp11) + (((0.1416670478 * fTemp9) + (0.039066768799999999 * fTemp14)) + (0.016165409499999998 * fTemp15)))));
+			double fTemp51 = (fConst6 * ((((0.046078562500000003 * fTemp10) + (0.027191311199999998 * fTemp11)) + (0.014190940799999999 * fTemp12)) - ((0.022159950300000002 * fTemp15) + (((0.1546017945 * fTemp9) + (0.042259808500000003 * fTemp13)) + (0.020538963300000001 * fTemp14)))));
 			double fTemp52 = (fConst8 * fRec76[1]);
 			double fTemp53 = (fConst9 * fRec79[1]);
 			fRec81[0] = (fTemp51 + (fTemp52 + (fRec81[1] + fTemp53)));
@@ -4257,24 +4257,24 @@ class mydsp : public dsp {
 			fRec75[0] = (fTemp50 + (fRec77 + fRec75[1]));
 			fRec73[0] = fRec75[0];
 			double fRec74 = (fRec77 + fTemp50);
-			double fTemp54 = (fConst11 * ((0.083485984799999996 * fTemp20) - ((0.060291803099999999 * fTemp19) + (0.024531132800000001 * fTemp21))));
+			double fTemp54 = (fConst11 * ((0.091439154999999994 * fTemp20) - ((0.058773238499999998 * fTemp19) + (0.0236447732 * fTemp21))));
 			double fTemp55 = (fConst12 * fRec82[1]);
 			fRec84[0] = (fTemp54 + (fRec84[1] + fTemp55));
 			fRec82[0] = fRec84[0];
 			double fRec83 = (fTemp55 + fTemp54);
-			double fTemp56 = (fConst14 * (((0.028936670300000002 * fTemp26) + (0.0415360226 * fTemp25)) - (((0.12542443810000001 * fTemp24) + (0.047173413499999997 * fTemp27)) + (0.039396397800000003 * fTemp28))));
-			double fTemp57 = (fConst15 * fRec85[1]);
-			double fTemp58 = (fConst16 * fRec88[1]);
+			double fTemp56 = (fConst14 * (((0.025116380099999999 * fTemp27) + (0.057856088799999997 * fTemp24)) - ((0.049890570400000001 * fTemp28) + ((0.12667996510000001 * fTemp25) + (0.038757813600000003 * fTemp26)))));
+			double fTemp57 = (fConst16 * fRec85[1]);
+			double fTemp58 = (fConst15 * fRec88[1]);
 			fRec90[0] = (fTemp56 + (fTemp57 + (fRec90[1] + fTemp58)));
 			fRec88[0] = fRec90[0];
 			double fRec89 = ((fTemp58 + fTemp57) + fTemp56);
 			fRec87[0] = (fRec88[0] + fRec87[1]);
 			fRec85[0] = fRec87[0];
 			double fRec86 = fRec89;
-			fVec3[(IOTA & 1023)] = ((0.0386870822 * fTemp7) + (fRec74 + (fRec83 + fRec86)));
-			output3[i] = FAUSTFLOAT((0.82065997130559543 * (fRec0[0] * fVec3[((IOTA - iConst17) & 1023)])));
+			fVec3[(IOTA & 1023)] = ((0.040825519800000001 * fTemp7) + (fRec74 + (fRec83 + fRec86)));
+			output3[i] = FAUSTFLOAT((0.8267575322812053 * (fRec0[0] * fVec3[((IOTA - iConst17) & 1023)])));
 			double fTemp59 = (fConst4 * fRec91[1]);
-			double fTemp60 = (fConst6 * (((((0.030819063300000001 * fTemp12) + (0.039677604300000002 * fTemp13)) + (0.0050476471000000002 * fTemp10)) + (0.017963184300000001 * fTemp15)) - (((0.0235969597 * fTemp9) + (0.0256761691 * fTemp14)) + (0.1479492198 * fTemp11))));
+			double fTemp60 = (fConst6 * (((((0.029853848299999999 * fTemp10) + (0.043369304099999999 * fTemp11)) + (0.0013038934999999999 * fTemp12)) + (0.014439392699999999 * fTemp14)) - (((0.045209108800000002 * fTemp9) + (0.030143084899999999 * fTemp13)) + (0.16663157670000001 * fTemp15))));
 			double fTemp61 = (fConst8 * fRec94[1]);
 			double fTemp62 = (fConst9 * fRec97[1]);
 			fRec99[0] = (fTemp60 + (fTemp61 + (fRec99[1] + fTemp62)));
@@ -4286,24 +4286,24 @@ class mydsp : public dsp {
 			fRec93[0] = (fTemp59 + (fRec95 + fRec93[1]));
 			fRec91[0] = fRec93[0];
 			double fRec92 = (fRec95 + fTemp59);
-			double fTemp63 = (fConst11 * ((0.056038754199999999 * fTemp20) - ((0.0861693548 * fTemp19) + (0.018113735299999999 * fTemp21))));
+			double fTemp63 = (fConst11 * ((0.070138230900000001 * fTemp20) - ((0.099851178099999993 * fTemp19) + (0.0186894622 * fTemp21))));
 			double fTemp64 = (fConst12 * fRec100[1]);
 			fRec102[0] = (fTemp63 + (fRec102[1] + fTemp64));
 			fRec100[0] = fRec102[0];
 			double fRec101 = (fTemp64 + fTemp63);
-			double fTemp65 = (fConst14 * ((0.029012070500000001 * fTemp26) - ((((0.12105266670000001 * fTemp24) + (0.047438930300000001 * fTemp27)) + (0.017077355900000001 * fTemp28)) + (0.053725982700000001 * fTemp25))));
-			double fTemp66 = (fConst15 * fRec103[1]);
-			double fTemp67 = (fConst16 * fRec106[1]);
+			double fTemp65 = (fConst14 * ((0.0279181776 * fTemp27) - ((0.0555825546 * fTemp28) + ((0.1462149878 * fTemp25) + ((0.017963499899999999 * fTemp26) + (0.052779637099999999 * fTemp24))))));
+			double fTemp66 = (fConst16 * fRec103[1]);
+			double fTemp67 = (fConst15 * fRec106[1]);
 			fRec108[0] = (fTemp65 + (fTemp66 + (fRec108[1] + fTemp67)));
 			fRec106[0] = fRec108[0];
 			double fRec107 = ((fTemp67 + fTemp66) + fTemp65);
 			fRec105[0] = (fRec106[0] + fRec105[1]);
 			fRec103[0] = fRec105[0];
 			double fRec104 = fRec107;
-			fVec4[(IOTA & 1023)] = ((0.038480182100000003 * fTemp7) + (fRec92 + (fRec101 + fRec104)));
-			output4[i] = FAUSTFLOAT((0.82065997130559543 * (fRec0[0] * fVec4[((IOTA - iConst17) & 1023)])));
+			fVec4[(IOTA & 1023)] = ((0.045883732099999998 * fTemp7) + (fRec92 + (fRec101 + fRec104)));
+			output4[i] = FAUSTFLOAT((0.8267575322812053 * (fRec0[0] * fVec4[((IOTA - iConst17) & 1023)])));
 			double fTemp68 = (fConst4 * fRec109[1]);
-			double fTemp69 = (fConst6 * ((((((0.12184012869999999 * fTemp9) + (0.019390164000000001 * fTemp12)) + (0.046860719799999999 * fTemp13)) + (0.017100411400000001 * fTemp10)) + (0.0504461997 * fTemp15)) - ((0.0094964516000000006 * fTemp14) + (0.083315496599999997 * fTemp11))));
+			double fTemp69 = (fConst6 * ((((((0.12815799589999999 * fTemp9) + (0.018275929199999999 * fTemp10)) + (0.049752041699999999 * fTemp11)) + (0.0141515627 * fTemp12)) + (0.047388156600000002 * fTemp14)) - ((0.0103759639 * fTemp13) + (0.091354549399999999 * fTemp15))));
 			double fTemp70 = (fConst8 * fRec112[1]);
 			double fTemp71 = (fConst9 * fRec115[1]);
 			fRec117[0] = (fTemp69 + (fTemp70 + (fRec117[1] + fTemp71)));
@@ -4315,82 +4315,82 @@ class mydsp : public dsp {
 			fRec111[0] = (fTemp68 + (fRec113 + fRec111[1]));
 			fRec109[0] = fRec111[0];
 			double fRec110 = (fRec113 + fTemp68);
-			double fTemp72 = (fConst11 * ((0.020230615800000001 * fTemp20) - ((0.10014234869999999 * fTemp19) + (0.024249416699999998 * fTemp21))));
+			double fTemp72 = (fConst11 * ((0.0224882187 * fTemp20) - ((0.1075533969 * fTemp19) + (0.0238195688 * fTemp21))));
 			double fTemp73 = (fConst12 * fRec118[1]);
 			fRec120[0] = (fTemp72 + (fRec120[1] + fTemp73));
 			fRec118[0] = fRec120[0];
 			double fRec119 = (fTemp73 + fTemp72);
-			double fTemp74 = (fConst14 * ((0.047463243000000002 * fTemp26) - ((((0.0509714852 * fTemp24) + (0.046807208199999999 * fTemp27)) + (0.0089290974000000006 * fTemp28)) + (0.1208345966 * fTemp25))));
-			double fTemp75 = (fConst15 * fRec121[1]);
-			double fTemp76 = (fConst16 * fRec124[1]);
+			double fTemp74 = (fConst14 * ((0.0456690347 * fTemp27) - ((0.050466321500000001 * fTemp28) + ((0.056378535100000002 * fTemp25) + ((0.0086800188999999993 * fTemp26) + (0.12882164700000001 * fTemp24))))));
+			double fTemp75 = (fConst16 * fRec121[1]);
+			double fTemp76 = (fConst15 * fRec124[1]);
 			fRec126[0] = (fTemp74 + (fTemp75 + (fRec126[1] + fTemp76)));
 			fRec124[0] = fRec126[0];
 			double fRec125 = ((fTemp76 + fTemp75) + fTemp74);
 			fRec123[0] = (fRec124[0] + fRec123[1]);
 			fRec121[0] = fRec123[0];
 			double fRec122 = fRec125;
-			fVec5[(IOTA & 1023)] = ((0.038373513900000003 * fTemp7) + (fRec110 + (fRec119 + fRec122)));
-			output5[i] = FAUSTFLOAT((0.82065997130559543 * (fRec0[0] * fVec5[((IOTA - iConst17) & 1023)])));
-			double fTemp77 = (fConst11 * (0.0 - (((0.1157432811 * fTemp19) + (0.019877845500000001 * fTemp21)) + (0.0202146242 * fTemp20))));
-			double fTemp78 = (fConst12 * fRec127[1]);
-			fRec129[0] = (fTemp77 + (fRec129[1] + fTemp78));
-			fRec127[0] = fRec129[0];
-			double fRec128 = (fTemp78 + fTemp77);
-			double fTemp79 = (fConst14 * ((((0.050852656400000001 * fTemp24) + (0.0355767445 * fTemp26)) + (0.0082006522000000002 * fTemp28)) - ((0.054427415600000001 * fTemp27) + (0.14093518390000001 * fTemp25))));
-			double fTemp80 = (fConst15 * fRec130[1]);
-			double fTemp81 = (fConst16 * fRec133[1]);
-			fRec135[0] = (fTemp79 + (fTemp80 + (fRec135[1] + fTemp81)));
+			fVec5[(IOTA & 1023)] = ((0.041283035900000001 * fTemp7) + (fRec110 + (fRec119 + fRec122)));
+			output5[i] = FAUSTFLOAT((0.8267575322812053 * (fRec0[0] * fVec5[((IOTA - iConst17) & 1023)])));
+			double fTemp77 = (fConst4 * fRec127[1]);
+			double fTemp78 = (fConst6 * (((0.094423353500000001 * fTemp15) + ((0.0245960741 * fTemp14) + (((0.14949616560000001 * fTemp9) + (0.052506193299999997 * fTemp11)) + (0.0105500761 * fTemp13)))) - ((0.016903074099999998 * fTemp10) + (0.0019129273999999999 * fTemp12))));
+			double fTemp79 = (fConst8 * fRec130[1]);
+			double fTemp80 = (fConst9 * fRec133[1]);
+			fRec135[0] = (fTemp78 + (fTemp79 + (fRec135[1] + fTemp80)));
 			fRec133[0] = fRec135[0];
-			double fRec134 = ((fTemp81 + fTemp80) + fTemp79);
+			double fRec134 = ((fTemp80 + fTemp79) + fTemp78);
 			fRec132[0] = (fRec133[0] + fRec132[1]);
 			fRec130[0] = fRec132[0];
 			double fRec131 = fRec134;
-			double fTemp82 = (fConst4 * fRec136[1]);
-			double fTemp83 = (fConst6 * (((0.082880557699999996 * fTemp11) + ((0.033838185999999999 * fTemp15) + ((((0.14442842610000001 * fTemp9) + (0.052791545799999999 * fTemp13)) + (0.0042994838 * fTemp10)) + (0.0094045086 * fTemp14)))) - (0.017559348299999999 * fTemp12)));
-			double fTemp84 = (fConst8 * fRec139[1]);
-			double fTemp85 = (fConst9 * fRec142[1]);
+			fRec129[0] = (fTemp77 + (fRec131 + fRec129[1]));
+			fRec127[0] = fRec129[0];
+			double fRec128 = (fRec131 + fTemp77);
+			double fTemp81 = (fConst11 * (0.0 - (((0.12414152420000001 * fTemp19) + (0.0174064037 * fTemp21)) + (0.023448789000000001 * fTemp20))));
+			double fTemp82 = (fConst12 * fRec136[1]);
+			fRec138[0] = (fTemp81 + (fRec138[1] + fTemp82));
+			fRec136[0] = fRec138[0];
+			double fRec137 = (fTemp82 + fTemp81);
+			double fTemp83 = (fConst14 * (((0.028949595700000001 * fTemp27) + ((0.058589913299999997 * fTemp25) + (0.0081857836999999992 * fTemp26))) - ((0.057461898499999997 * fTemp28) + (0.14917678640000001 * fTemp24))));
+			double fTemp84 = (fConst16 * fRec139[1]);
+			double fTemp85 = (fConst15 * fRec142[1]);
 			fRec144[0] = (fTemp83 + (fTemp84 + (fRec144[1] + fTemp85)));
 			fRec142[0] = fRec144[0];
 			double fRec143 = ((fTemp85 + fTemp84) + fTemp83);
 			fRec141[0] = (fRec142[0] + fRec141[1]);
 			fRec139[0] = fRec141[0];
 			double fRec140 = fRec143;
-			fRec138[0] = (fTemp82 + (fRec140 + fRec138[1]));
-			fRec136[0] = fRec138[0];
-			double fRec137 = (fRec140 + fTemp82);
-			fVec6[(IOTA & 1023)] = ((0.044118517000000003 * fTemp7) + (fRec128 + (fRec131 + fRec137)));
-			output6[i] = FAUSTFLOAT((0.82065997130559543 * (fRec0[0] * fVec6[((IOTA - iConst17) & 1023)])));
-			double fTemp86 = (fConst4 * fRec145[1]);
-			double fTemp87 = (fConst6 * (((0.15588323439999999 * fTemp11) + ((0.019238960699999998 * fTemp15) + (((0.043789402700000001 * fTemp13) + (0.018948800299999999 * fTemp10)) + (0.030336761600000001 * fTemp14)))) - ((0.039012974999999998 * fTemp9) + (0.056323312600000001 * fTemp12))));
-			double fTemp88 = (fConst8 * fRec148[1]);
-			double fTemp89 = (fConst9 * fRec151[1]);
-			fRec153[0] = (fTemp87 + (fTemp88 + (fRec153[1] + fTemp89)));
-			fRec151[0] = fRec153[0];
-			double fRec152 = ((fTemp89 + fTemp88) + fTemp87);
-			fRec150[0] = (fRec151[0] + fRec150[1]);
+			fVec6[(IOTA & 1023)] = ((0.0475581666 * fTemp7) + (fRec128 + (fRec137 + fRec140)));
+			output6[i] = FAUSTFLOAT((0.8267575322812053 * (fRec0[0] * fVec6[((IOTA - iConst17) & 1023)])));
+			double fTemp86 = (fConst14 * (((0.038372802400000003 * fTemp27) + ((0.13290044710000001 * fTemp25) + (0.027371650099999999 * fTemp26))) - ((0.051111494100000002 * fTemp28) + (0.051283751799999999 * fTemp24))));
+			double fTemp87 = (fConst16 * fRec145[1]);
+			double fTemp88 = (fConst15 * fRec148[1]);
+			fRec150[0] = (fTemp86 + (fTemp87 + (fRec150[1] + fTemp88)));
 			fRec148[0] = fRec150[0];
-			double fRec149 = fRec152;
-			fRec147[0] = (fTemp86 + (fRec149 + fRec147[1]));
+			double fRec149 = ((fTemp88 + fTemp87) + fTemp86);
+			fRec147[0] = (fRec148[0] + fRec147[1]);
 			fRec145[0] = fRec147[0];
-			double fRec146 = (fRec149 + fTemp86);
-			double fTemp90 = (fConst11 * (0.0 - (((0.093781532599999995 * fTemp19) + (0.027175271300000001 * fTemp21)) + (0.0650333201 * fTemp20))));
-			double fTemp91 = (fConst12 * fRec154[1]);
-			fRec156[0] = (fTemp90 + (fRec156[1] + fTemp91));
-			fRec154[0] = fRec156[0];
-			double fRec155 = (fTemp91 + fTemp90);
-			double fTemp92 = (fConst14 * ((((0.13586002450000001 * fTemp24) + (0.043857336500000003 * fTemp26)) + (0.031218894399999999 * fTemp28)) - ((0.052343153699999999 * fTemp27) + (0.0509730906 * fTemp25))));
-			double fTemp93 = (fConst15 * fRec157[1]);
-			double fTemp94 = (fConst16 * fRec160[1]);
-			fRec162[0] = (fTemp92 + (fTemp93 + (fRec162[1] + fTemp94)));
-			fRec160[0] = fRec162[0];
-			double fRec161 = ((fTemp94 + fTemp93) + fTemp92);
-			fRec159[0] = (fRec160[0] + fRec159[1]);
+			double fRec146 = fRec149;
+			double fTemp89 = (fConst4 * fRec151[1]);
+			double fTemp90 = (fConst6 * (((0.15483944129999999 * fTemp15) + ((0.0163560596 * fTemp14) + (((0.042418395800000001 * fTemp11) + (0.014233097300000001 * fTemp12)) + (0.029136868 * fTemp13)))) - ((0.036693249499999997 * fTemp9) + (0.048724794500000002 * fTemp10))));
+			double fTemp91 = (fConst8 * fRec154[1]);
+			double fTemp92 = (fConst9 * fRec157[1]);
+			fRec159[0] = (fTemp90 + (fTemp91 + (fRec159[1] + fTemp92)));
 			fRec157[0] = fRec159[0];
-			double fRec158 = fRec161;
-			fVec7[(IOTA & 1023)] = ((0.043013200600000003 * fTemp7) + (fRec146 + (fRec155 + fRec158)));
-			output7[i] = FAUSTFLOAT((0.82065997130559543 * (fRec0[0] * fVec7[((IOTA - iConst17) & 1023)])));
+			double fRec158 = ((fTemp92 + fTemp91) + fTemp90);
+			fRec156[0] = (fRec157[0] + fRec156[1]);
+			fRec154[0] = fRec156[0];
+			double fRec155 = fRec158;
+			fRec153[0] = (fTemp89 + (fRec155 + fRec153[1]));
+			fRec151[0] = fRec153[0];
+			double fRec152 = (fRec155 + fTemp89);
+			double fTemp93 = (fConst11 * (0.0 - (((0.091892606200000004 * fTemp19) + (0.024202001500000001 * fTemp21)) + (0.063052502799999993 * fTemp20))));
+			double fTemp94 = (fConst12 * fRec160[1]);
+			fRec162[0] = (fTemp93 + (fRec162[1] + fTemp94));
+			fRec160[0] = fRec162[0];
+			double fRec161 = (fTemp94 + fTemp93);
+			fVec7[(IOTA & 1023)] = ((0.041900611499999997 * fTemp7) + (fRec146 + (fRec152 + fRec161)));
+			output7[i] = FAUSTFLOAT((0.8267575322812053 * (fRec0[0] * fVec7[((IOTA - iConst17) & 1023)])));
 			double fTemp95 = (fConst4 * fRec163[1]);
-			double fTemp96 = (fConst6 * (((((0.030602520000000001 * fTemp13) + (0.0069865526000000002 * fTemp10)) + (0.048410404999999997 * fTemp14)) + (0.0217216826 * fTemp11)) - (((0.17263160999999999 * fTemp9) + (0.0367705173 * fTemp12)) + (0.024484749199999999 * fTemp15))));
+			double fTemp96 = (fConst6 * ((((0.027751674300000001 * fTemp11) + (0.0428594791 * fTemp13)) + (0.031066263699999999 * fTemp15)) - ((((0.16669111519999999 * fTemp9) + (0.023699060599999999 * fTemp10)) + (0.0011684028999999999 * fTemp12)) + (0.0173965362 * fTemp14))));
 			double fTemp97 = (fConst8 * fRec166[1]);
 			double fTemp98 = (fConst9 * fRec169[1]);
 			fRec171[0] = (fTemp96 + (fTemp97 + (fRec171[1] + fTemp98)));
@@ -4402,82 +4402,82 @@ class mydsp : public dsp {
 			fRec165[0] = (fTemp95 + (fRec167 + fRec165[1]));
 			fRec163[0] = fRec165[0];
 			double fRec164 = (fRec167 + fTemp95);
-			double fTemp99 = (fConst11 * (0.0 - (((0.067107245400000001 * fTemp19) + (0.022493231999999998 * fTemp21)) + (0.1055430831 * fTemp20))));
-			double fTemp100 = (fConst12 * fRec172[1]);
-			fRec174[0] = (fTemp99 + (fRec174[1] + fTemp100));
-			fRec172[0] = fRec174[0];
-			double fRec173 = (fTemp100 + fTemp99);
-			double fTemp101 = (fConst14 * (((((0.143392194 * fTemp24) + (0.020290013999999999 * fTemp26)) + (0.036669744900000002 * fTemp28)) + (0.067279233100000002 * fTemp25)) - (0.057986305799999999 * fTemp27)));
-			double fTemp102 = (fConst15 * fRec175[1]);
-			double fTemp103 = (fConst16 * fRec178[1]);
-			fRec180[0] = (fTemp101 + (fTemp102 + (fRec180[1] + fTemp103)));
-			fRec178[0] = fRec180[0];
-			double fRec179 = ((fTemp103 + fTemp102) + fTemp101);
-			fRec177[0] = (fRec178[0] + fRec177[1]);
+			double fTemp99 = (fConst14 * (((0.0138843228 * fTemp27) + ((0.14050126869999999 * fTemp25) + ((0.0257576653 * fTemp26) + (0.059271900299999999 * fTemp24)))) - (0.054474888800000003 * fTemp28)));
+			double fTemp100 = (fConst16 * fRec172[1]);
+			double fTemp101 = (fConst15 * fRec175[1]);
+			fRec177[0] = (fTemp99 + (fTemp100 + (fRec177[1] + fTemp101)));
 			fRec175[0] = fRec177[0];
-			double fRec176 = fRec179;
-			fVec8[(IOTA & 1023)] = ((0.047086569199999997 * fTemp7) + (fRec164 + (fRec173 + fRec176)));
-			output8[i] = FAUSTFLOAT((0.82065997130559543 * (fRec0[0] * fVec8[((IOTA - iConst17) & 1023)])));
-			double fTemp104 = (fConst14 * (((((0.035572504300000002 * fTemp24) + (0.0065747543 * fTemp26)) + (0.033802809400000002 * fTemp28)) + (0.13974363040000001 * fTemp25)) - (0.052231796900000002 * fTemp27)));
-			double fTemp105 = (fConst15 * fRec181[1]);
-			double fTemp106 = (fConst16 * fRec184[1]);
-			fRec186[0] = (fTemp104 + (fTemp105 + (fRec186[1] + fTemp106)));
-			fRec184[0] = fRec186[0];
-			double fRec185 = ((fTemp106 + fTemp105) + fTemp104);
-			fRec183[0] = (fRec184[0] + fRec183[1]);
-			fRec181[0] = fRec183[0];
-			double fRec182 = fRec185;
-			double fTemp107 = (fConst4 * fRec187[1]);
-			double fTemp108 = (fConst6 * ((((0.0066033454999999998 * fTemp13) + (0.0036201546000000002 * fTemp10)) + (0.051068044899999998 * fTemp14)) - ((0.149838998 * fTemp11) + (((0.059068788599999998 * fTemp9) + (0.0146100555 * fTemp12)) + (0.033138250700000003 * fTemp15)))));
-			double fTemp109 = (fConst8 * fRec190[1]);
-			double fTemp110 = (fConst9 * fRec193[1]);
-			fRec195[0] = (fTemp108 + (fTemp109 + (fRec195[1] + fTemp110)));
-			fRec193[0] = fRec195[0];
-			double fRec194 = ((fTemp110 + fTemp109) + fTemp108);
-			fRec192[0] = (fRec193[0] + fRec192[1]);
-			fRec190[0] = fRec192[0];
-			double fRec191 = fRec194;
-			fRec189[0] = (fTemp107 + (fRec191 + fRec189[1]));
+			double fRec176 = ((fTemp101 + fTemp100) + fTemp99);
+			fRec174[0] = (fRec175[0] + fRec174[1]);
+			fRec172[0] = fRec174[0];
+			double fRec173 = fRec176;
+			double fTemp102 = (fConst11 * (0.0 - (((0.066198228799999995 * fTemp19) + (0.016762492 * fTemp21)) + (0.099666691900000007 * fTemp20))));
+			double fTemp103 = (fConst12 * fRec178[1]);
+			fRec180[0] = (fTemp102 + (fRec180[1] + fTemp103));
+			fRec178[0] = fRec180[0];
+			double fRec179 = (fTemp103 + fTemp102);
+			fVec8[(IOTA & 1023)] = ((0.044961095299999997 * fTemp7) + (fRec164 + (fRec173 + fRec179)));
+			output8[i] = FAUSTFLOAT((0.8267575322812053 * (fRec0[0] * fVec8[((IOTA - iConst17) & 1023)])));
+			double fTemp104 = (fConst4 * fRec181[1]);
+			double fTemp105 = (fConst6 * ((((0.0089660369 * fTemp11) + (0.013488270700000001 * fTemp12)) + (0.048320912600000002 * fTemp13)) - ((0.13048397419999999 * fTemp15) + (((0.080823659199999995 * fTemp9) + (0.015366606200000001 * fTemp10)) + (0.046761184800000001 * fTemp14)))));
+			double fTemp106 = (fConst8 * fRec184[1]);
+			double fTemp107 = (fConst9 * fRec187[1]);
+			fRec189[0] = (fTemp105 + (fTemp106 + (fRec189[1] + fTemp107)));
 			fRec187[0] = fRec189[0];
-			double fRec188 = (fRec191 + fTemp107);
-			double fTemp111 = (fConst11 * (0.0 - (((0.0139901699 * fTemp19) + (0.0187740081 * fTemp21)) + (0.1118847164 * fTemp20))));
-			double fTemp112 = (fConst12 * fRec196[1]);
-			fRec198[0] = (fTemp111 + (fRec198[1] + fTemp112));
+			double fRec188 = ((fTemp107 + fTemp106) + fTemp105);
+			fRec186[0] = (fRec187[0] + fRec186[1]);
+			fRec184[0] = fRec186[0];
+			double fRec185 = fRec188;
+			fRec183[0] = (fTemp104 + (fRec185 + fRec183[1]));
+			fRec181[0] = fRec183[0];
+			double fRec182 = (fRec185 + fTemp104);
+			double fTemp108 = (fConst11 * (0.0 - (((0.019530439399999999 * fTemp19) + (0.023037598499999999 * fTemp21)) + (0.1046513612 * fTemp20))));
+			double fTemp109 = (fConst12 * fRec190[1]);
+			fRec192[0] = (fTemp108 + (fRec192[1] + fTemp109));
+			fRec190[0] = fRec192[0];
+			double fRec191 = (fTemp109 + fTemp108);
+			double fTemp110 = (fConst14 * (((0.0072978202999999997 * fTemp27) + ((0.049297972900000001 * fTemp25) + ((0.044320212400000003 * fTemp26) + (0.12735651549999999 * fTemp24)))) - (0.048764577199999999 * fTemp28)));
+			double fTemp111 = (fConst16 * fRec193[1]);
+			double fTemp112 = (fConst15 * fRec196[1]);
+			fRec198[0] = (fTemp110 + (fTemp111 + (fRec198[1] + fTemp112)));
 			fRec196[0] = fRec198[0];
-			double fRec197 = (fTemp112 + fTemp111);
-			fVec9[(IOTA & 1023)] = ((0.042293780500000003 * fTemp7) + (fRec182 + (fRec188 + fRec197)));
-			output9[i] = FAUSTFLOAT((0.82065997130559543 * (fRec0[0] * fVec9[((IOTA - iConst17) & 1023)])));
-			double fTemp113 = (fConst4 * fRec199[1]);
-			double fTemp114 = (fConst6 * (((((0.091916881000000006 * fTemp9) + (0.0214102085 * fTemp12)) + (0.016141917499999998 * fTemp10)) + (0.044214239099999997 * fTemp14)) - ((0.108020109 * fTemp11) + ((0.010632809700000001 * fTemp13) + (0.0469183803 * fTemp15)))));
+			double fRec197 = ((fTemp112 + fTemp111) + fTemp110);
+			fRec195[0] = (fRec196[0] + fRec195[1]);
+			fRec193[0] = fRec195[0];
+			double fRec194 = fRec197;
+			fVec9[(IOTA & 1023)] = ((0.0399788659 * fTemp7) + (fRec182 + (fRec191 + fRec194)));
+			output9[i] = FAUSTFLOAT((0.8267575322812053 * (fRec0[0] * fVec9[((IOTA - iConst17) & 1023)])));
+			double fTemp113 = (fConst6 * ((((0.094878414699999997 * fTemp9) + (0.016993767 * fTemp10)) + (0.0508948231 * fTemp13)) - ((0.14456309880000001 * fTemp15) + (((0.010550514299999999 * fTemp11) + (0.0021433779 * fTemp12)) + (0.0231844722 * fTemp14)))));
+			double fTemp114 = (fConst9 * fRec205[1]);
 			double fTemp115 = (fConst8 * fRec202[1]);
-			double fTemp116 = (fConst9 * fRec205[1]);
-			fRec207[0] = (fTemp114 + (fTemp115 + (fRec207[1] + fTemp116)));
+			fRec207[0] = (((fTemp113 + fRec207[1]) + fTemp114) + fTemp115);
 			fRec205[0] = fRec207[0];
-			double fRec206 = ((fTemp116 + fTemp115) + fTemp114);
+			double fRec206 = ((fTemp113 + fTemp114) + fTemp115);
 			fRec204[0] = (fRec205[0] + fRec204[1]);
 			fRec202[0] = fRec204[0];
 			double fRec203 = fRec206;
-			fRec201[0] = (fTemp113 + (fRec203 + fRec201[1]));
+			double fTemp116 = (fConst4 * fRec199[1]);
+			fRec201[0] = ((fRec203 + fRec201[1]) + fTemp116);
 			fRec199[0] = fRec201[0];
-			double fRec200 = (fRec203 + fTemp113);
-			double fTemp117 = (fConst11 * ((0.022604914399999999 * fTemp19) - ((0.0230256566 * fTemp21) + (0.094607951100000004 * fTemp20))));
+			double fRec200 = (fRec203 + fTemp116);
+			double fTemp117 = (fConst11 * ((0.023461992500000001 * fTemp19) - ((0.016708421899999999 * fTemp21) + (0.12047736990000001 * fTemp20))));
 			double fTemp118 = (fConst12 * fRec208[1]);
 			fRec210[0] = (fTemp117 + (fRec210[1] + fTemp118));
 			fRec208[0] = fRec210[0];
 			double fRec209 = (fTemp118 + fTemp117);
-			double fTemp119 = (fConst14 * (((0.044813985399999999 * fTemp28) + (0.1117277515 * fTemp25)) - (((0.056689465500000001 * fTemp24) + (0.0098900816999999992 * fTemp26)) + (0.0444895337 * fTemp27))));
-			double fTemp120 = (fConst15 * fRec211[1]);
-			double fTemp121 = (fConst16 * fRec214[1]);
+			double fTemp119 = (fConst14 * (((0.027657065299999999 * fTemp26) + (0.14461740770000001 * fTemp24)) - (((0.058713292600000001 * fTemp25) + (0.0082194270999999992 * fTemp27)) + (0.055807850200000002 * fTemp28))));
+			double fTemp120 = (fConst16 * fRec211[1]);
+			double fTemp121 = (fConst15 * fRec214[1]);
 			fRec216[0] = (fTemp119 + (fTemp120 + (fRec216[1] + fTemp121)));
 			fRec214[0] = fRec216[0];
 			double fRec215 = ((fTemp121 + fTemp120) + fTemp119);
 			fRec213[0] = (fRec214[0] + fRec213[1]);
 			fRec211[0] = fRec213[0];
 			double fRec212 = fRec215;
-			fVec10[(IOTA & 1023)] = ((0.036496616699999998 * fTemp7) + (fRec200 + (fRec209 + fRec212)));
-			output10[i] = FAUSTFLOAT((0.82065997130559543 * (fRec0[0] * fVec10[((IOTA - iConst17) & 1023)])));
+			fVec10[(IOTA & 1023)] = ((fRec200 + (fRec209 + fRec212)) + (0.046161764799999998 * fTemp7));
+			output10[i] = FAUSTFLOAT((0.8267575322812053 * (fRec0[0] * fVec10[((IOTA - iConst17) & 1023)])));
 			double fTemp122 = (fConst4 * fRec217[1]);
-			double fTemp123 = (fConst6 * ((((((0.15345727319999999 * fTemp9) + (0.039850505899999999 * fTemp12)) + (0.0086045681999999991 * fTemp10)) + (0.042071925199999999 * fTemp14)) + (0.047569668799999999 * fTemp11)) - ((0.030255153100000001 * fTemp13) + (0.016565007 * fTemp15))));
+			double fTemp123 = (fConst6 * ((((((0.16010779789999999 * fTemp9) + (0.029928229000000001 * fTemp10)) + (0.0026006186000000001 * fTemp12)) + (0.041685327299999998 * fTemp13)) + (0.041087843499999999 * fTemp15)) - ((0.028595012699999998 * fTemp11) + (0.015765182499999999 * fTemp14))));
 			double fTemp124 = (fConst8 * fRec220[1]);
 			double fTemp125 = (fConst9 * fRec223[1]);
 			fRec225[0] = (fTemp123 + (fTemp124 + (fRec225[1] + fTemp125)));
@@ -4489,24 +4489,24 @@ class mydsp : public dsp {
 			fRec219[0] = (fTemp122 + (fRec221 + fRec219[1]));
 			fRec217[0] = fRec219[0];
 			double fRec218 = (fRec221 + fTemp122);
-			double fTemp126 = (fConst11 * ((0.065558011599999994 * fTemp19) - ((0.021438986600000001 * fTemp21) + (0.091018033600000006 * fTemp20))));
+			double fTemp126 = (fConst11 * ((0.065972200499999994 * fTemp19) - ((0.018382570899999999 * fTemp21) + (0.094852899399999996 * fTemp20))));
 			double fTemp127 = (fConst12 * fRec226[1]);
 			fRec228[0] = (fTemp126 + (fRec228[1] + fTemp127));
 			fRec226[0] = fRec228[0];
 			double fRec227 = (fTemp127 + fTemp126);
-			double fTemp128 = (fConst14 * (((0.033551486899999997 * fTemp28) + (0.045523567799999998 * fTemp25)) - (((0.13618199319999999 * fTemp24) + (0.022724650200000002 * fTemp26)) + (0.051775444300000001 * fTemp27))));
-			double fTemp129 = (fConst15 * fRec229[1]);
-			double fTemp130 = (fConst16 * fRec232[1]);
+			double fTemp128 = (fConst14 * (((0.0281516445 * fTemp26) + (0.051463798300000002 * fTemp24)) - (((0.13854785920000001 * fTemp25) + (0.0175209744 * fTemp27)) + (0.052704122800000003 * fTemp28))));
+			double fTemp129 = (fConst16 * fRec229[1]);
+			double fTemp130 = (fConst15 * fRec232[1]);
 			fRec234[0] = (fTemp128 + (fTemp129 + (fRec234[1] + fTemp130)));
 			fRec232[0] = fRec234[0];
 			double fRec233 = ((fTemp130 + fTemp129) + fTemp128);
 			fRec231[0] = (fRec232[0] + fRec231[1]);
 			fRec229[0] = fRec231[0];
 			double fRec230 = fRec233;
-			fVec11[(IOTA & 1023)] = ((0.042104407699999999 * fTemp7) + (fRec218 + (fRec227 + fRec230)));
-			output11[i] = FAUSTFLOAT((0.82065997130559543 * (fRec0[0] * fVec11[((IOTA - iConst17) & 1023)])));
+			fVec11[(IOTA & 1023)] = ((0.043382809600000002 * fTemp7) + (fRec218 + (fRec227 + fRec230)));
+			output11[i] = FAUSTFLOAT((0.8267575322812053 * (fRec0[0] * fVec11[((IOTA - iConst17) & 1023)])));
 			double fTemp131 = (fConst4 * fRec235[1]);
-			double fTemp132 = (fConst6 * (((0.15083916529999999 * fTemp11) + ((0.023068706000000001 * fTemp15) + ((((0.022075648999999999 * fTemp9) + (0.051247200700000002 * fTemp12)) + (0.018022852400000001 * fTemp10)) + (0.0269553046 * fTemp14)))) - (0.041812899700000003 * fTemp13)));
+			double fTemp132 = (fConst6 * (((0.14667196960000001 * fTemp15) + ((0.017590017400000001 * fTemp14) + ((((0.030680239599999999 * fTemp9) + (0.044914732200000002 * fTemp10)) + (0.0134922315 * fTemp12)) + (0.026635491899999999 * fTemp13)))) - (0.039574464900000002 * fTemp11)));
 			double fTemp133 = (fConst8 * fRec238[1]);
 			double fTemp134 = (fConst9 * fRec241[1]);
 			fRec243[0] = (fTemp132 + (fTemp133 + (fRec243[1] + fTemp134)));
@@ -4518,24 +4518,24 @@ class mydsp : public dsp {
 			fRec237[0] = (fTemp131 + (fRec239 + fRec237[1]));
 			fRec235[0] = fRec237[0];
 			double fRec236 = (fRec239 + fTemp131);
-			double fTemp135 = (fConst11 * ((0.089397061200000003 * fTemp19) - ((0.025335723000000001 * fTemp21) + (0.0576062746 * fTemp20))));
+			double fTemp135 = (fConst11 * ((0.085599634499999994 * fTemp19) - ((0.022456194700000001 * fTemp21) + (0.057619944999999999 * fTemp20))));
 			double fTemp136 = (fConst12 * fRec244[1]);
 			fRec246[0] = (fTemp135 + (fRec246[1] + fTemp136));
 			fRec244[0] = fRec246[0];
 			double fRec245 = (fTemp136 + fTemp135);
-			double fTemp137 = (fConst14 * ((0.027381388499999999 * fTemp28) - ((((0.1239419023 * fTemp24) + (0.042364577700000003 * fTemp26)) + (0.048777356199999997 * fTemp27)) + (0.056279228100000002 * fTemp25))));
-			double fTemp138 = (fConst15 * fRec247[1]);
-			double fTemp139 = (fConst16 * fRec250[1]);
+			double fTemp137 = (fConst14 * ((0.024727392099999999 * fTemp26) - ((0.047288228100000003 * fTemp28) + ((0.036318669400000003 * fTemp27) + ((0.1229567887 * fTemp25) + (0.049966668399999997 * fTemp24))))));
+			double fTemp138 = (fConst16 * fRec247[1]);
+			double fTemp139 = (fConst15 * fRec250[1]);
 			fRec252[0] = (fTemp137 + (fTemp138 + (fRec252[1] + fTemp139)));
 			fRec250[0] = fRec252[0];
 			double fRec251 = ((fTemp139 + fTemp138) + fTemp137);
 			fRec249[0] = (fRec250[0] + fRec249[1]);
 			fRec247[0] = fRec249[0];
 			double fRec248 = fRec251;
-			fVec12[(IOTA & 1023)] = ((0.039981359000000001 * fTemp7) + (fRec236 + (fRec245 + fRec248)));
-			output12[i] = FAUSTFLOAT((0.82065997130559543 * (fRec0[0] * fVec12[((IOTA - iConst17) & 1023)])));
+			fVec12[(IOTA & 1023)] = ((0.038706476900000002 * fTemp7) + (fRec236 + (fRec245 + fRec248)));
+			output12[i] = FAUSTFLOAT((0.8267575322812053 * (fRec0[0] * fVec12[((IOTA - iConst17) & 1023)])));
 			double fTemp140 = (fConst4 * fRec253[1]);
-			double fTemp141 = (fConst6 * (((0.078072741200000004 * fTemp11) + ((0.028187833999999998 * fTemp15) + ((0.014253548499999999 * fTemp12) + (0.0086997949999999998 * fTemp14)))) - (((0.14727233419999999 * fTemp9) + (0.052188193299999998 * fTemp13)) + (0.00010377739999999999 * fTemp10))));
+			double fTemp141 = (fConst6 * (((0.096690428300000006 * fTemp15) + ((0.0161371121 * fTemp14) + ((0.0143749068 * fTemp10) + (0.0105535747 * fTemp13)))) - (((0.1441337774 * fTemp9) + (0.049371188199999999 * fTemp11)) + (0.0071147340999999998 * fTemp12))));
 			double fTemp142 = (fConst8 * fRec256[1]);
 			double fTemp143 = (fConst9 * fRec259[1]);
 			fRec261[0] = (fTemp141 + (fTemp142 + (fRec261[1] + fTemp143)));
@@ -4547,27 +4547,27 @@ class mydsp : public dsp {
 			fRec255[0] = (fTemp140 + (fRec257 + fRec255[1]));
 			fRec253[0] = fRec255[0];
 			double fRec254 = (fRec257 + fTemp140);
-			double fTemp144 = (fConst11 * ((0.1161220323 * fTemp19) - ((0.017533206799999999 * fTemp21) + (0.0189153325 * fTemp20))));
+			double fTemp144 = (fConst11 * ((0.1213047735 * fTemp19) - ((0.0139538947 * fTemp21) + (0.023953113599999999 * fTemp20))));
 			double fTemp145 = (fConst12 * fRec262[1]);
 			fRec264[0] = (fTemp144 + (fRec264[1] + fTemp145));
 			fRec262[0] = fRec264[0];
 			double fRec263 = (fTemp145 + fTemp144);
-			double fTemp146 = (fConst14 * ((0.0067589408 * fTemp28) - ((((0.047703541799999999 * fTemp24) + (0.030309711600000001 * fTemp26)) + (0.0544875051 * fTemp27)) + (0.1422203715 * fTemp25))));
-			double fTemp147 = (fConst15 * fRec265[1]);
-			double fTemp148 = (fConst16 * fRec268[1]);
+			double fTemp146 = (fConst14 * ((0.0071390068000000001 * fTemp26) - ((0.055829351499999999 * fTemp28) + ((0.021372881900000001 * fTemp27) + ((0.059902543400000001 * fTemp25) + (0.145095156 * fTemp24))))));
+			double fTemp147 = (fConst16 * fRec265[1]);
+			double fTemp148 = (fConst15 * fRec268[1]);
 			fRec270[0] = (fTemp146 + (fTemp147 + (fRec270[1] + fTemp148)));
 			fRec268[0] = fRec270[0];
 			double fRec269 = ((fTemp148 + fTemp147) + fTemp146);
 			fRec267[0] = (fRec268[0] + fRec267[1]);
 			fRec265[0] = fRec267[0];
 			double fRec266 = fRec269;
-			fVec13[(IOTA & 1023)] = ((0.044157967499999999 * fTemp7) + (fRec254 + (fRec263 + fRec266)));
-			output13[i] = FAUSTFLOAT((0.82065997130559543 * (fRec0[0] * fVec13[((IOTA - iConst17) & 1023)])));
+			fVec13[(IOTA & 1023)] = ((0.046531786700000001 * fTemp7) + (fRec254 + (fRec263 + fRec266)));
+			output13[i] = FAUSTFLOAT((0.8267575322812053 * (fRec0[0] * fVec13[((IOTA - iConst17) & 1023)])));
 			double fTemp149 = (fConst4 * fRec271[1]);
-			double fTemp150 = (fConst8 * fRec274[1]);
-			double fTemp151 = (fConst9 * fRec277[1]);
-			double fTemp152 = (fConst6 * (((0.052985614700000003 * fTemp15) + (0.018431099199999999 * fTemp10)) - (((0.0121920274 * fTemp14) + (((0.1204005487 * fTemp9) + (0.024286683900000001 * fTemp12)) + (0.0506631752 * fTemp13))) + (0.10234423400000001 * fTemp11))));
-			fRec279[0] = (fTemp150 + (fTemp151 + (fTemp152 + fRec279[1])));
+			double fTemp150 = (fConst6 * (((0.013391813299999999 * fTemp12) + (0.047462497100000001 * fTemp14)) - (((((0.13265680990000001 * fTemp9) + (0.0140899296 * fTemp10)) + (0.048936198899999998 * fTemp11)) + (0.0088437891000000008 * fTemp13)) + (0.079728888799999995 * fTemp15))));
+			double fTemp151 = (fConst8 * fRec274[1]);
+			double fTemp152 = (fConst9 * fRec277[1]);
+			fRec279[0] = (fTemp150 + (fTemp151 + (fRec279[1] + fTemp152)));
 			fRec277[0] = fRec279[0];
 			double fRec278 = ((fTemp152 + fTemp151) + fTemp150);
 			fRec276[0] = (fRec277[0] + fRec276[1]);
@@ -4576,53 +4576,53 @@ class mydsp : public dsp {
 			fRec273[0] = (fTemp149 + (fRec275 + fRec273[1]));
 			fRec271[0] = fRec273[0];
 			double fRec272 = (fRec275 + fTemp149);
-			double fTemp153 = (fConst11 * (((0.10853214210000001 * fTemp19) + (0.025945026199999999 * fTemp20)) - (0.026507280599999999 * fTemp21)));
+			double fTemp153 = (fConst11 * (((0.105980887 * fTemp19) + (0.019292321300000002 * fTemp20)) - (0.023193111900000001 * fTemp21)));
 			double fTemp154 = (fConst12 * fRec280[1]);
 			fRec282[0] = (fTemp153 + (fRec282[1] + fTemp154));
 			fRec280[0] = fRec282[0];
 			double fRec281 = (fTemp154 + fTemp153);
-			double fTemp155 = (fConst14 * ((0.064337804400000004 * fTemp24) - ((((0.051300321199999999 * fTemp26) + (0.051154921200000002 * fTemp27)) + (0.0113740217 * fTemp28)) + (0.1267978988 * fTemp25))));
-			double fTemp156 = (fConst15 * fRec283[1]);
-			double fTemp157 = (fConst16 * fRec286[1]);
+			double fTemp155 = (fConst14 * ((0.048676876399999999 * fTemp25) - ((0.0493727006 * fTemp28) + ((0.044655882700000003 * fTemp27) + ((0.0067672833000000003 * fTemp26) + (0.12914204709999999 * fTemp24))))));
+			double fTemp156 = (fConst16 * fRec283[1]);
+			double fTemp157 = (fConst15 * fRec286[1]);
 			fRec288[0] = (fTemp155 + (fTemp156 + (fRec288[1] + fTemp157)));
 			fRec286[0] = fRec288[0];
 			double fRec287 = ((fTemp157 + fTemp156) + fTemp155);
 			fRec285[0] = (fRec286[0] + fRec285[1]);
 			fRec283[0] = fRec285[0];
 			double fRec284 = fRec287;
-			fVec14[(IOTA & 1023)] = ((0.042028136299999998 * fTemp7) + (fRec272 + (fRec281 + fRec284)));
-			output14[i] = FAUSTFLOAT((0.82065997130559543 * (fRec0[0] * fVec14[((IOTA - iConst17) & 1023)])));
-			double fTemp158 = (fConst4 * fRec289[1]);
-			double fTemp159 = (fConst6 * ((((0.065219762099999995 * fTemp9) + (0.0067015549000000001 * fTemp10)) + (0.016477597300000001 * fTemp15)) - ((((0.039722792799999997 * fTemp12) + (0.044757810600000003 * fTemp13)) + (0.034028228100000002 * fTemp14)) + (0.15897575880000001 * fTemp11))));
-			double fTemp160 = (fConst8 * fRec292[1]);
-			double fTemp161 = (fConst9 * fRec295[1]);
-			fRec297[0] = (fTemp159 + (fTemp160 + (fRec297[1] + fTemp161)));
+			fVec14[(IOTA & 1023)] = ((0.040469928199999998 * fTemp7) + (fRec272 + (fRec281 + fRec284)));
+			output14[i] = FAUSTFLOAT((0.8267575322812053 * (fRec0[0] * fVec14[((IOTA - iConst17) & 1023)])));
+			double fTemp158 = (fConst11 * (((0.091741054000000002 * fTemp19) + (0.057925282000000002 * fTemp20)) - (0.023552314800000002 * fTemp21)));
+			double fTemp159 = (fConst12 * fRec289[1]);
+			fRec291[0] = (fTemp158 + (fRec291[1] + fTemp159));
+			fRec289[0] = fRec291[0];
+			double fRec290 = (fTemp159 + fTemp158);
+			double fTemp160 = (fConst14 * ((0.12548498159999999 * fTemp25) - ((0.049788724200000002 * fTemp28) + ((0.038495402999999997 * fTemp27) + ((0.0251407791 * fTemp26) + (0.059797928 * fTemp24))))));
+			double fTemp161 = (fConst16 * fRec292[1]);
+			double fTemp162 = (fConst15 * fRec295[1]);
+			fRec297[0] = (fTemp160 + (fTemp161 + (fRec297[1] + fTemp162)));
 			fRec295[0] = fRec297[0];
-			double fRec296 = ((fTemp161 + fTemp160) + fTemp159);
+			double fRec296 = ((fTemp162 + fTemp161) + fTemp160);
 			fRec294[0] = (fRec295[0] + fRec294[1]);
 			fRec292[0] = fRec294[0];
 			double fRec293 = fRec296;
-			fRec291[0] = (fTemp158 + (fRec293 + fRec291[1]));
-			fRec289[0] = fRec291[0];
-			double fRec290 = (fRec293 + fTemp158);
-			double fTemp162 = (fConst11 * (((0.097414394099999996 * fTemp19) + (0.074602914500000006 * fTemp20)) - (0.021960104300000002 * fTemp21)));
-			double fTemp163 = (fConst12 * fRec298[1]);
-			fRec300[0] = (fTemp162 + (fRec300[1] + fTemp163));
-			fRec298[0] = fRec300[0];
-			double fRec299 = (fTemp163 + fTemp162);
-			double fTemp164 = (fConst14 * ((0.15038803980000001 * fTemp24) - ((((0.033719701599999999 * fTemp26) + (0.056870280600000003 * fTemp27)) + (0.023106281400000001 * fTemp28)) + (0.040609002200000001 * fTemp25))));
-			double fTemp165 = (fConst15 * fRec301[1]);
-			double fTemp166 = (fConst16 * fRec304[1]);
+			double fTemp163 = (fConst4 * fRec298[1]);
+			double fTemp164 = (fConst6 * ((((0.018327309 * fTemp9) + (0.014015242900000001 * fTemp12)) + (0.019917368299999998 * fTemp14)) - ((((0.046159971700000003 * fTemp10) + (0.042394780100000001 * fTemp11)) + (0.02680014 * fTemp13)) + (0.1547987254 * fTemp15))));
+			double fTemp165 = (fConst8 * fRec301[1]);
+			double fTemp166 = (fConst9 * fRec304[1]);
 			fRec306[0] = (fTemp164 + (fTemp165 + (fRec306[1] + fTemp166)));
 			fRec304[0] = fRec306[0];
 			double fRec305 = ((fTemp166 + fTemp165) + fTemp164);
 			fRec303[0] = (fRec304[0] + fRec303[1]);
 			fRec301[0] = fRec303[0];
 			double fRec302 = fRec305;
-			fVec15[(IOTA & 1023)] = ((0.046153242099999998 * fTemp7) + (fRec290 + (fRec299 + fRec302)));
-			output15[i] = FAUSTFLOAT((0.82065997130559543 * (fRec0[0] * fVec15[((IOTA - iConst17) & 1023)])));
+			fRec300[0] = (fTemp163 + (fRec302 + fRec300[1]));
+			fRec298[0] = fRec300[0];
+			double fRec299 = (fRec302 + fTemp163);
+			fVec15[(IOTA & 1023)] = ((0.040752299300000003 * fTemp7) + (fRec290 + (fRec293 + fRec299)));
+			output15[i] = FAUSTFLOAT((0.8267575322812053 * (fRec0[0] * fVec15[((IOTA - iConst17) & 1023)])));
 			double fTemp167 = (fConst19 * fRec307[1]);
-			double fTemp168 = (fConst21 * (((0.040134177100000001 * fTemp11) + ((0.12855316150000001 * fTemp15) + ((((0.056955401000000003 * fTemp9) + (0.086359451000000004 * fTemp12)) + (0.022282225700000002 * fTemp13)) + (0.097156583199999993 * fTemp14)))) - (0.073542652200000003 * fTemp10)));
+			double fTemp168 = (fConst21 * (((0.042563988800000001 * fTemp15) + ((0.1233410524 * fTemp14) + ((((0.0485006568 * fTemp9) + (0.076425757900000002 * fTemp10)) + (0.026652550899999999 * fTemp11)) + (0.1061954093 * fTemp13)))) - (0.057878097400000002 * fTemp12)));
 			double fTemp169 = (fConst22 * fRec310[1]);
 			double fTemp170 = (fConst23 * fRec313[1]);
 			fRec315[0] = (fTemp168 + (fTemp169 + (fRec315[1] + fTemp170)));
@@ -4634,12 +4634,12 @@ class mydsp : public dsp {
 			fRec309[0] = (fTemp167 + (fRec311 + fRec309[1]));
 			fRec307[0] = fRec309[0];
 			double fRec308 = (fRec311 + fTemp167);
-			double fTemp171 = (fConst25 * (((0.0281900517 * fTemp19) + (0.078833449 * fTemp21)) + (0.091958482100000002 * fTemp20)));
+			double fTemp171 = (fConst25 * (((0.023295590800000002 * fTemp19) + (0.076028668899999999 * fTemp21)) + (0.082965067300000001 * fTemp20)));
 			double fTemp172 = (fConst26 * fRec316[1]);
 			fRec318[0] = (fTemp171 + (fRec318[1] + fTemp172));
 			fRec316[0] = fRec318[0];
 			double fRec317 = (fTemp172 + fTemp171);
-			double fTemp173 = (fConst28 * (((((0.053311744199999997 * fTemp24) + (0.0437152492 * fTemp26)) + (0.016468254599999999 * fTemp27)) + (0.15057935629999999 * fTemp28)) + (0.075162994900000002 * fTemp25)));
+			double fTemp173 = (fConst28 * ((0.025739382700000001 * fTemp28) + ((0.039209839599999997 * fTemp27) + ((0.043716146800000001 * fTemp25) + ((0.14254484149999999 * fTemp26) + (0.069833326299999998 * fTemp24))))));
 			double fTemp174 = (fConst29 * fRec319[1]);
 			double fTemp175 = (fConst30 * fRec322[1]);
 			fRec324[0] = (fTemp173 + (fTemp174 + (fRec324[1] + fTemp175)));
@@ -4648,10 +4648,10 @@ class mydsp : public dsp {
 			fRec321[0] = (fRec322[0] + fRec321[1]);
 			fRec319[0] = fRec321[0];
 			double fRec320 = fRec323;
-			fVec16[0] = ((0.044115263799999999 * fTemp7) + (fRec308 + (fRec317 + fRec320)));
-			output16[i] = FAUSTFLOAT((0.99982065997130565 * (fRec0[0] * fVec16[iConst31])));
+			fVec16[(IOTA & 511)] = ((0.040475573799999998 * fTemp7) + (fRec308 + (fRec317 + fRec320)));
+			output16[i] = FAUSTFLOAT((0.87553802008608317 * (fRec0[0] * fVec16[((IOTA - iConst31) & 511)])));
 			double fTemp176 = (fConst19 * fRec325[1]);
-			double fTemp177 = (fConst21 * (((0.0032706057 * fTemp11) + ((0.054548100400000001 * fTemp14) + (0.0703668088 * fTemp15))) - ((((0.065421412100000007 * fTemp9) + (0.1060425436 * fTemp12)) + (0.027897146000000001 * fTemp13)) + (0.069898252399999999 * fTemp10))));
+			double fTemp177 = (fConst21 * (((0.0038544516999999999 * fTemp15) + ((0.063923281799999995 * fTemp13) + (0.070769605799999996 * fTemp14))) - ((((0.062680386000000005 * fTemp9) + (0.10543705019999999 * fTemp10)) + (0.032594364600000002 * fTemp11)) + (0.064469338200000004 * fTemp12))));
 			double fTemp178 = (fConst22 * fRec328[1]);
 			double fTemp179 = (fConst23 * fRec331[1]);
 			fRec333[0] = (fTemp177 + (fTemp178 + (fRec333[1] + fTemp179)));
@@ -4663,12 +4663,12 @@ class mydsp : public dsp {
 			fRec327[0] = (fTemp176 + (fRec329 + fRec327[1]));
 			fRec325[0] = fRec327[0];
 			double fRec326 = (fRec329 + fTemp176);
-			double fTemp180 = (fConst25 * (((0.0543690374 * fTemp21) + (0.0657063648 * fTemp20)) - (0.035478256800000003 * fTemp19)));
+			double fTemp180 = (fConst25 * (((0.0562496943 * fTemp21) + (0.064361761300000001 * fTemp20)) - (0.034483663300000002 * fTemp19)));
 			double fTemp181 = (fConst26 * fRec334[1]);
 			fRec336[0] = (fTemp180 + (fRec336[1] + fTemp181));
 			fRec334[0] = fRec336[0];
 			double fRec335 = (fTemp181 + fTemp180);
-			double fTemp182 = (fConst28 * ((((0.00093213859999999999 * fTemp27) + (0.1033192787 * fTemp28)) + (0.041910794199999997 * fTemp25)) - ((0.065126837300000004 * fTemp24) + (0.055041679000000003 * fTemp26))));
+			double fTemp182 = (fConst28 * (((0.0068731542999999999 * fTemp28) + ((0.10495084339999999 * fTemp26) + (0.040837234399999998 * fTemp24))) - ((0.062556863800000001 * fTemp25) + (0.055513413599999999 * fTemp27))));
 			double fTemp183 = (fConst29 * fRec337[1]);
 			double fTemp184 = (fConst30 * fRec340[1]);
 			fRec342[0] = (fTemp182 + (fTemp183 + (fRec342[1] + fTemp184)));
@@ -4677,10 +4677,10 @@ class mydsp : public dsp {
 			fRec339[0] = (fRec340[0] + fRec339[1]);
 			fRec337[0] = fRec339[0];
 			double fRec338 = fRec341;
-			fVec17[0] = ((0.032229144299999998 * fTemp7) + (fRec326 + (fRec335 + fRec338)));
-			output17[i] = FAUSTFLOAT((0.99982065997130565 * (fRec0[0] * fVec17[iConst31])));
+			fVec17[(IOTA & 511)] = ((0.032115255099999997 * fTemp7) + (fRec326 + (fRec335 + fRec338)));
+			output17[i] = FAUSTFLOAT((0.87553802008608317 * (fRec0[0] * fVec17[((IOTA - iConst31) & 511)])));
 			double fTemp185 = (fConst19 * fRec343[1]);
-			double fTemp186 = (fConst21 * (((0.047245317600000003 * fTemp9) + (0.021143005100000001 * fTemp14)) - ((0.049939859500000003 * fTemp11) + ((((0.071722917799999994 * fTemp12) + (0.092138140800000004 * fTemp13)) + (0.060077751399999997 * fTemp10)) + (0.1232767149 * fTemp15)))));
+			double fTemp186 = (fConst21 * (((0.044845176100000002 * fTemp9) + (0.0235595049 * fTemp13)) - ((0.047232217399999998 * fTemp15) + ((((0.070324862599999996 * fTemp10) + (0.098345280300000004 * fTemp11)) + (0.052868477300000001 * fTemp12)) + (0.1199472793 * fTemp14)))));
 			double fTemp187 = (fConst22 * fRec346[1]);
 			double fTemp188 = (fConst23 * fRec349[1]);
 			fRec351[0] = (fTemp186 + (fTemp187 + (fRec351[1] + fTemp188)));
@@ -4692,12 +4692,12 @@ class mydsp : public dsp {
 			fRec345[0] = (fTemp185 + (fRec347 + fRec345[1]));
 			fRec343[0] = fRec345[0];
 			double fRec344 = (fRec347 + fTemp185);
-			double fTemp189 = (fConst25 * (((0.070055814100000002 * fTemp21) + (0.021608423500000001 * fTemp20)) - (0.080986775900000002 * fTemp19)));
+			double fTemp189 = (fConst25 * (((0.0701143454 * fTemp21) + (0.020780704800000001 * fTemp20)) - (0.077646526800000004 * fTemp19)));
 			double fTemp190 = (fConst26 * fRec352[1]);
 			fRec354[0] = (fTemp189 + (fRec354[1] + fTemp190));
 			fRec352[0] = fRec354[0];
 			double fRec353 = (fTemp190 + fTemp189);
-			double fTemp191 = (fConst28 * (((0.018547154999999999 * fTemp27) + (0.0350864356 * fTemp28)) - (((0.042410450699999998 * fTemp24) + (0.1350041327 * fTemp26)) + (0.071751670000000004 * fTemp25))));
+			double fTemp191 = (fConst28 * (((0.023592267399999999 * fTemp28) + (0.034873484699999999 * fTemp26)) - ((0.1329189811 * fTemp27) + ((0.040287761800000002 * fTemp25) + (0.068113341699999996 * fTemp24)))));
 			double fTemp192 = (fConst29 * fRec355[1]);
 			double fTemp193 = (fConst30 * fRec358[1]);
 			fRec360[0] = (fTemp191 + (fTemp192 + (fRec360[1] + fTemp193)));
@@ -4706,39 +4706,39 @@ class mydsp : public dsp {
 			fRec357[0] = (fRec358[0] + fRec357[1]);
 			fRec355[0] = fRec357[0];
 			double fRec356 = fRec359;
-			fVec18[0] = ((0.0383835826 * fTemp7) + (fRec344 + (fRec353 + fRec356)));
-			output18[i] = FAUSTFLOAT((0.99982065997130565 * (fRec0[0] * fVec18[iConst31])));
-			double fTemp194 = (fConst19 * fRec361[1]);
-			double fTemp195 = (fConst21 * ((((0.0068898535999999998 * fTemp9) + (0.1040203792 * fTemp12)) + (0.065667936499999996 * fTemp11)) - ((((0.053256110799999999 * fTemp13) + (0.070520619500000006 * fTemp10)) + (0.026421941099999999 * fTemp14)) + (0.073658537900000001 * fTemp15))));
-			double fTemp196 = (fConst22 * fRec364[1]);
-			double fTemp197 = (fConst23 * fRec367[1]);
-			fRec369[0] = (fTemp195 + (fTemp196 + (fRec369[1] + fTemp197)));
-			fRec367[0] = fRec369[0];
-			double fRec368 = ((fTemp197 + fTemp196) + fTemp195);
-			fRec366[0] = (fRec367[0] + fRec366[1]);
+			fVec18[(IOTA & 511)] = ((0.037405591100000003 * fTemp7) + (fRec344 + (fRec353 + fRec356)));
+			output18[i] = FAUSTFLOAT((0.87553802008608317 * (fRec0[0] * fVec18[((IOTA - iConst31) & 511)])));
+			double fTemp194 = (fConst28 * (((0.061587189200000003 * fTemp25) + (0.0062667456999999996 * fTemp28)) - ((0.10430949270000001 * fTemp27) + ((0.053937413900000002 * fTemp26) + (0.041737140800000003 * fTemp24)))));
+			double fTemp195 = (fConst29 * fRec361[1]);
+			double fTemp196 = (fConst30 * fRec364[1]);
+			fRec366[0] = (fTemp194 + (fTemp195 + (fRec366[1] + fTemp196)));
 			fRec364[0] = fRec366[0];
-			double fRec365 = fRec368;
-			fRec363[0] = (fTemp194 + (fRec365 + fRec363[1]));
+			double fRec365 = ((fTemp196 + fTemp195) + fTemp194);
+			fRec363[0] = (fRec364[0] + fRec363[1]);
 			fRec361[0] = fRec363[0];
-			double fRec362 = (fRec365 + fTemp194);
-			double fTemp198 = (fConst25 * ((0.054015019099999999 * fTemp21) - ((0.0664397298 * fTemp19) + (0.034699304399999999 * fTemp20))));
-			double fTemp199 = (fConst26 * fRec370[1]);
-			fRec372[0] = (fTemp198 + (fRec372[1] + fTemp199));
-			fRec370[0] = fRec372[0];
-			double fRec371 = (fTemp199 + fTemp198);
-			double fTemp200 = (fConst28 * ((0.064261519200000006 * fTemp24) - ((((0.1037415875 * fTemp26) + (4.6521699999999999e-05 * fTemp27)) + (0.053477614299999997 * fTemp28)) + (0.044203078 * fTemp25))));
-			double fTemp201 = (fConst29 * fRec373[1]);
-			double fTemp202 = (fConst30 * fRec376[1]);
-			fRec378[0] = (fTemp200 + (fTemp201 + (fRec378[1] + fTemp202)));
-			fRec376[0] = fRec378[0];
-			double fRec377 = ((fTemp202 + fTemp201) + fTemp200);
-			fRec375[0] = (fRec376[0] + fRec375[1]);
+			double fRec362 = fRec365;
+			double fTemp197 = (fConst19 * fRec367[1]);
+			double fTemp198 = (fConst21 * ((((0.0057115324999999998 * fTemp9) + (0.1033305972 * fTemp10)) + (0.062514519199999993 * fTemp15)) - ((((0.062919267599999995 * fTemp11) + (0.064254195 * fTemp12)) + (0.0310701998 * fTemp13)) + (0.072436876799999994 * fTemp14))));
+			double fTemp199 = (fConst22 * fRec370[1]);
+			double fTemp200 = (fConst23 * fRec373[1]);
+			fRec375[0] = (fTemp198 + (fTemp199 + (fRec375[1] + fTemp200)));
 			fRec373[0] = fRec375[0];
-			double fRec374 = fRec377;
-			fVec19[0] = ((0.032238947300000001 * fTemp7) + (fRec362 + (fRec371 + fRec374)));
-			output19[i] = FAUSTFLOAT((0.99982065997130565 * (fRec0[0] * fVec19[iConst31])));
+			double fRec374 = ((fTemp200 + fTemp199) + fTemp198);
+			fRec372[0] = (fRec373[0] + fRec372[1]);
+			fRec370[0] = fRec372[0];
+			double fRec371 = fRec374;
+			fRec369[0] = (fTemp197 + (fRec371 + fRec369[1]));
+			fRec367[0] = fRec369[0];
+			double fRec368 = (fRec371 + fTemp197);
+			double fTemp201 = (fConst26 * fRec376[1]);
+			double fTemp202 = (fConst25 * ((0.0554719974 * fTemp21) - ((0.064131318399999998 * fTemp19) + (0.033694832799999998 * fTemp20))));
+			fRec378[0] = ((fRec378[1] + fTemp201) + fTemp202);
+			fRec376[0] = fRec378[0];
+			double fRec377 = (fTemp201 + fTemp202);
+			fVec19[(IOTA & 511)] = ((fRec362 + (fRec368 + fRec377)) + (0.031777949200000002 * fTemp7));
+			output19[i] = FAUSTFLOAT((0.87553802008608317 * (fRec0[0] * fVec19[((IOTA - iConst31) & 511)])));
 			double fTemp203 = (fConst19 * fRec379[1]);
-			double fTemp204 = (fConst21 * (((0.078437818600000001 * fTemp12) + (0.1128838031 * fTemp15)) - (((((0.052238148999999998 * fTemp9) + (0.0244118571 * fTemp13)) + (0.055603878099999997 * fTemp10)) + (0.097129760900000001 * fTemp14)) + (0.035842781900000002 * fTemp11))));
+			double fTemp204 = (fConst21 * (((0.075643023000000004 * fTemp10) + (0.1189246105 * fTemp14)) - (((((0.048221615299999999 * fTemp9) + (0.027085472199999999 * fTemp11)) + (0.054429183800000003 * fTemp12)) + (0.1010001279 * fTemp13)) + (0.042849990599999999 * fTemp15))));
 			double fTemp205 = (fConst22 * fRec382[1]);
 			double fTemp206 = (fConst23 * fRec385[1]);
 			fRec387[0] = (fTemp204 + (fTemp205 + (fRec387[1] + fTemp206)));
@@ -4750,12 +4750,12 @@ class mydsp : public dsp {
 			fRec381[0] = (fTemp203 + (fRec383 + fRec381[1]));
 			fRec379[0] = fRec381[0];
 			double fRec380 = (fRec383 + fTemp203);
-			double fTemp207 = (fConst25 * ((0.069779709999999995 * fTemp21) - ((0.023951475699999999 * fTemp19) + (0.076477305600000003 * fTemp20))));
+			double fTemp207 = (fConst25 * ((0.072288250299999995 * fTemp21) - ((0.022634717299999999 * fTemp19) + (0.079112625300000003 * fTemp20))));
 			double fTemp208 = (fConst26 * fRec388[1]);
 			fRec390[0] = (fTemp207 + (fRec390[1] + fTemp208));
 			fRec388[0] = fRec390[0];
 			double fRec389 = (fTemp208 + fTemp207);
-			double fTemp209 = (fConst28 * ((((0.045913255100000001 * fTemp24) + (0.022505125300000001 * fTemp27)) + (0.063185170099999993 * fTemp25)) - ((0.039301915600000001 * fTemp26) + (0.1314130889 * fTemp28))));
+			double fTemp209 = (fConst28 * (((0.0246467857 * fTemp28) + ((0.042729092699999999 * fTemp25) + (0.067618972200000002 * fTemp24))) - ((0.038533329499999998 * fTemp27) + (0.13576165060000001 * fTemp26))));
 			double fTemp210 = (fConst29 * fRec391[1]);
 			double fTemp211 = (fConst30 * fRec394[1]);
 			fRec396[0] = (fTemp209 + (fTemp210 + (fRec396[1] + fTemp211)));
@@ -4764,39 +4764,39 @@ class mydsp : public dsp {
 			fRec393[0] = (fRec394[0] + fRec393[1]);
 			fRec391[0] = fRec393[0];
 			double fRec392 = fRec395;
-			fVec20[0] = ((0.037300179099999997 * fTemp7) + (fRec380 + (fRec389 + fRec392)));
-			output20[i] = FAUSTFLOAT((0.99982065997130565 * (fRec0[0] * fVec20[iConst31])));
-			double fTemp212 = (fConst19 * fRec397[1]);
-			double fTemp213 = (fConst21 * ((((0.055364225099999997 * fTemp9) + (0.0226203967 * fTemp13)) + (0.086610066900000005 * fTemp15)) - ((((0.0788152456 * fTemp12) + (0.062527876100000004 * fTemp10)) + (0.048297728800000002 * fTemp14)) + (0.031672557800000001 * fTemp11))));
-			double fTemp214 = (fConst22 * fRec400[1]);
-			double fTemp215 = (fConst23 * fRec403[1]);
-			fRec405[0] = (fTemp213 + (fTemp214 + (fRec405[1] + fTemp215)));
-			fRec403[0] = fRec405[0];
-			double fRec404 = ((fTemp215 + fTemp214) + fTemp213);
-			fRec402[0] = (fRec403[0] + fRec402[1]);
+			fVec20[(IOTA & 511)] = ((0.038473530700000001 * fTemp7) + (fRec380 + (fRec389 + fRec392)));
+			output20[i] = FAUSTFLOAT((0.87553802008608317 * (fRec0[0] * fVec20[((IOTA - iConst31) & 511)])));
+			double fTemp212 = (fConst28 * (((0.0086520877999999996 * fTemp28) + ((0.037635413399999998 * fTemp27) + (0.043542585799999999 * fTemp24))) - ((0.043369038399999997 * fTemp25) + (0.090103452700000003 * fTemp26))));
+			double fTemp213 = (fConst29 * fRec397[1]);
+			double fTemp214 = (fConst30 * fRec400[1]);
+			fRec402[0] = (fTemp212 + (fTemp213 + (fRec402[1] + fTemp214)));
 			fRec400[0] = fRec402[0];
-			double fRec401 = fRec404;
-			fRec399[0] = (fTemp212 + (fRec401 + fRec399[1]));
+			double fRec401 = ((fTemp214 + fTemp213) + fTemp212);
+			fRec399[0] = (fRec400[0] + fRec399[1]);
 			fRec397[0] = fRec399[0];
-			double fRec398 = (fRec401 + fTemp212);
-			double fTemp216 = (fConst25 * (((0.023696724400000001 * fTemp19) + (0.047958737199999997 * fTemp21)) - (0.062735413399999995 * fTemp20)));
-			double fTemp217 = (fConst26 * fRec406[1]);
-			fRec408[0] = (fTemp216 + (fRec408[1] + fTemp217));
-			fRec406[0] = fRec408[0];
-			double fRec407 = (fTemp217 + fTemp216);
-			double fTemp218 = (fConst28 * ((((0.038294947400000001 * fTemp26) + (2.3156800000000002e-05 * fTemp27)) + (0.054339355200000002 * fTemp25)) - ((0.046748261499999999 * fTemp24) + (0.0971716735 * fTemp28))));
-			double fTemp219 = (fConst29 * fRec409[1]);
-			double fTemp220 = (fConst30 * fRec412[1]);
-			fRec414[0] = (fTemp218 + (fTemp219 + (fRec414[1] + fTemp220)));
-			fRec412[0] = fRec414[0];
-			double fRec413 = ((fTemp220 + fTemp219) + fTemp218);
-			fRec411[0] = (fRec412[0] + fRec411[1]);
+			double fRec398 = fRec401;
+			double fTemp215 = (fConst19 * fRec403[1]);
+			double fTemp216 = (fConst21 * ((((0.0508219673 * fTemp9) + (0.025562280400000002 * fTemp11)) + (0.075833757000000002 * fTemp14)) - ((((0.076128866700000006 * fTemp10) + (0.049512441599999998 * fTemp12)) + (0.058995702699999999 * fTemp13)) + (0.021110925400000001 * fTemp15))));
+			double fTemp217 = (fConst22 * fRec406[1]);
+			double fTemp218 = (fConst23 * fRec409[1]);
+			fRec411[0] = (fTemp216 + (fTemp217 + (fRec411[1] + fTemp218)));
 			fRec409[0] = fRec411[0];
-			double fRec410 = fRec413;
-			fVec21[0] = ((0.028610468399999998 * fTemp7) + (fRec398 + (fRec407 + fRec410)));
-			output21[i] = FAUSTFLOAT((0.99982065997130565 * (fRec0[0] * fVec21[iConst31])));
+			double fRec410 = ((fTemp218 + fTemp217) + fTemp216);
+			fRec408[0] = (fRec409[0] + fRec408[1]);
+			fRec406[0] = fRec408[0];
+			double fRec407 = fRec410;
+			fRec405[0] = (fTemp215 + (fRec407 + fRec405[1]));
+			fRec403[0] = fRec405[0];
+			double fRec404 = (fRec407 + fTemp215);
+			double fTemp219 = (fConst25 * (((0.022357459 * fTemp19) + (0.046194822599999998 * fTemp21)) - (0.053970872099999997 * fTemp20)));
+			double fTemp220 = (fConst26 * fRec412[1]);
+			fRec414[0] = (fTemp219 + (fRec414[1] + fTemp220));
+			fRec412[0] = fRec414[0];
+			double fRec413 = (fTemp220 + fTemp219);
+			fVec21[(IOTA & 511)] = ((0.0257030829 * fTemp7) + (fRec398 + (fRec404 + fRec413)));
+			output21[i] = FAUSTFLOAT((0.87553802008608317 * (fRec0[0] * fVec21[((IOTA - iConst31) & 511)])));
 			double fTemp221 = (fConst19 * fRec415[1]);
-			double fTemp222 = (fConst21 * (((0.054851883499999997 * fTemp13) + (0.064727711499999993 * fTemp11)) - (((((0.0094053016000000007 * fTemp9) + (0.1004721038 * fTemp12)) + (0.069036295400000003 * fTemp10)) + (0.025754793200000001 * fTemp14)) + (0.076631215799999999 * fTemp15))));
+			double fTemp222 = (fConst21 * (((0.064468129499999999 * fTemp11) + (0.061405121 * fTemp15)) - (((((0.0063776305000000002 * fTemp9) + (0.10013716540000001 * fTemp10)) + (0.0621276339 * fTemp12)) + (0.0300374726 * fTemp13)) + (0.073665160300000004 * fTemp14))));
 			double fTemp223 = (fConst22 * fRec418[1]);
 			double fTemp224 = (fConst23 * fRec421[1]);
 			fRec423[0] = (fTemp222 + (fTemp223 + (fRec423[1] + fTemp224)));
@@ -4808,12 +4808,12 @@ class mydsp : public dsp {
 			fRec417[0] = (fTemp221 + (fRec419 + fRec417[1]));
 			fRec415[0] = fRec417[0];
 			double fRec416 = (fRec419 + fTemp221);
-			double fTemp225 = (fConst25 * (((0.066250026599999998 * fTemp19) + (0.053823551999999997 * fTemp21)) - (0.032974198099999998 * fTemp20)));
+			double fTemp225 = (fConst25 * (((0.063292331399999999 * fTemp19) + (0.0550108526 * fTemp21)) - (0.032274938199999999 * fTemp20)));
 			double fTemp226 = (fConst26 * fRec424[1]);
 			fRec426[0] = (fTemp225 + (fRec426[1] + fTemp226));
 			fRec424[0] = fRec426[0];
 			double fRec425 = (fTemp226 + fTemp225);
-			double fTemp227 = (fConst28 * (((0.1040830202 * fTemp26) + (0.00092607829999999999 * fTemp27)) - (((0.061859566300000002 * fTemp24) + (0.0510567018 * fTemp28)) + (0.045778332599999999 * fTemp25))));
+			double fTemp227 = (fConst28 * (((0.10378082080000001 * fTemp27) + (0.0073576036999999997 * fTemp28)) - ((0.059576756600000003 * fTemp25) + ((0.051757501599999998 * fTemp26) + (0.0419578008 * fTemp24)))));
 			double fTemp228 = (fConst29 * fRec427[1]);
 			double fTemp229 = (fConst30 * fRec430[1]);
 			fRec432[0] = (fTemp227 + (fTemp228 + (fRec432[1] + fTemp229)));
@@ -4822,70 +4822,70 @@ class mydsp : public dsp {
 			fRec429[0] = (fRec430[0] + fRec429[1]);
 			fRec427[0] = fRec429[0];
 			double fRec428 = fRec431;
-			fVec22[0] = ((0.031917253200000002 * fTemp7) + (fRec416 + (fRec425 + fRec428)));
-			output22[i] = FAUSTFLOAT((0.99982065997130565 * (fRec0[0] * fVec22[iConst31])));
-			double fTemp230 = (fConst19 * fRec433[1]);
-			double fTemp231 = (fConst21 * ((((0.085081050199999994 * fTemp12) + (0.10053376629999999 * fTemp13)) + (0.0256590675 * fTemp14)) - ((0.054497393200000001 * fTemp11) + (((0.040601600000000002 * fTemp9) + (0.069432148999999999 * fTemp10)) + (0.12571434279999999 * fTemp15)))));
-			double fTemp232 = (fConst22 * fRec436[1]);
-			double fTemp233 = (fConst23 * fRec439[1]);
-			fRec441[0] = (fTemp231 + (fTemp232 + (fRec441[1] + fTemp233)));
+			fVec22[(IOTA & 511)] = ((0.031281046999999999 * fTemp7) + (fRec416 + (fRec425 + fRec428)));
+			output22[i] = FAUSTFLOAT((0.87553802008608317 * (fRec0[0] * fVec22[((IOTA - iConst31) & 511)])));
+			double fTemp230 = (fConst25 * (((0.090214964800000005 * fTemp19) + (0.081602806700000002 * fTemp21)) + (0.030457182400000001 * fTemp20)));
+			double fTemp231 = (fConst26 * fRec433[1]);
+			fRec435[0] = (fTemp230 + (fRec435[1] + fTemp231));
+			fRec433[0] = fRec435[0];
+			double fRec434 = (fTemp231 + fTemp230);
+			double fTemp232 = (fConst28 * (((0.0227154878 * fTemp28) + ((0.15179735320000001 * fTemp27) + ((0.0558699982 * fTemp25) + (0.048678285199999997 * fTemp26)))) - (0.069630374699999997 * fTemp24)));
+			double fTemp233 = (fConst29 * fRec436[1]);
+			double fTemp234 = (fConst30 * fRec439[1]);
+			fRec441[0] = (fTemp232 + (fTemp233 + (fRec441[1] + fTemp234)));
 			fRec439[0] = fRec441[0];
-			double fRec440 = ((fTemp233 + fTemp232) + fTemp231);
+			double fRec440 = ((fTemp234 + fTemp233) + fTemp232);
 			fRec438[0] = (fRec439[0] + fRec438[1]);
 			fRec436[0] = fRec438[0];
 			double fRec437 = fRec440;
-			fRec435[0] = (fTemp230 + (fRec437 + fRec435[1]));
-			fRec433[0] = fRec435[0];
-			double fRec434 = (fRec437 + fTemp230);
-			double fTemp234 = (fConst25 * (((0.089160045300000004 * fTemp19) + (0.0784006914 * fTemp21)) + (0.0270881439 * fTemp20)));
-			double fTemp235 = (fConst26 * fRec442[1]);
-			fRec444[0] = (fTemp234 + (fRec444[1] + fTemp235));
-			fRec442[0] = fRec444[0];
-			double fRec443 = (fTemp235 + fTemp234);
-			double fTemp236 = (fConst28 * (((((0.050687280799999998 * fTemp24) + (0.14844343630000001 * fTemp26)) + (0.0197405766 * fTemp27)) + (0.0436933511 * fTemp28)) - (0.073096284100000006 * fTemp25)));
-			double fTemp237 = (fConst29 * fRec445[1]);
-			double fTemp238 = (fConst30 * fRec448[1]);
+			double fTemp235 = (fConst19 * fRec442[1]);
+			double fTemp236 = (fConst21 * ((((0.093267913600000002 * fTemp10) + (0.10672714279999999 * fTemp11)) + (0.027974631100000001 * fTemp13)) - ((0.057060779399999997 * fTemp15) + (((0.032683747800000003 * fTemp9) + (0.0684279359 * fTemp12)) + (0.1225543714 * fTemp14)))));
+			double fTemp237 = (fConst22 * fRec445[1]);
+			double fTemp238 = (fConst23 * fRec448[1]);
 			fRec450[0] = (fTemp236 + (fTemp237 + (fRec450[1] + fTemp238)));
 			fRec448[0] = fRec450[0];
 			double fRec449 = ((fTemp238 + fTemp237) + fTemp236);
-			fRec447[0] = (fRec448[0] + fRec447[1]);
+			fRec447[0] = (fRec447[1] + fRec448[0]);
 			fRec445[0] = fRec447[0];
 			double fRec446 = fRec449;
-			fVec23[0] = ((0.043107296000000003 * fTemp7) + (fRec434 + (fRec443 + fRec446)));
-			output23[i] = FAUSTFLOAT((0.99982065997130565 * (fRec0[0] * fVec23[iConst31])));
-			double fTemp239 = (fConst33 * fRec451[1]);
-			double fTemp240 = (fConst35 * (((((((0.011192040300000001 * fTemp9) + (0.058673124100000001 * fTemp12)) + (0.086492296799999993 * fTemp13)) + (0.070686613800000006 * fTemp10)) + (0.088686098899999996 * fTemp14)) + (0.0018213451000000001 * fTemp15)) - (0.0101142514 * fTemp11)));
-			double fTemp241 = (fConst36 * fRec454[1]);
-			double fTemp242 = (fConst37 * fRec457[1]);
-			fRec459[0] = (fTemp240 + (fTemp241 + (fRec459[1] + fTemp242)));
+			fRec444[0] = ((fRec444[1] + fTemp235) + fRec446);
+			fRec442[0] = fRec444[0];
+			double fRec443 = (fTemp235 + fRec446);
+			fVec23[(IOTA & 511)] = ((0.044487948399999998 * fTemp7) + ((fRec434 + fRec437) + fRec443));
+			output23[i] = FAUSTFLOAT((0.87553802008608317 * (fRec0[0] * fVec23[((IOTA - iConst31) & 511)])));
+			double fTemp239 = (fConst33 * (((0.021154517599999999 * fTemp19) + (0.065608851600000004 * fTemp21)) + (0.021761191700000002 * fTemp20)));
+			double fTemp240 = (fConst34 * fRec451[1]);
+			fRec453[0] = (fTemp239 + (fRec453[1] + fTemp240));
+			fRec451[0] = fRec453[0];
+			double fRec452 = (fTemp240 + fTemp239);
+			double fTemp241 = (fConst36 * ((0.082907137500000005 * fTemp28) + ((0.051209975599999999 * fTemp27) + ((0.018586012400000001 * fTemp25) + ((0.052623969899999998 * fTemp26) + (0.00059964480000000004 * fTemp24))))));
+			double fTemp242 = (fConst37 * fRec454[1]);
+			double fTemp243 = (fConst38 * fRec457[1]);
+			fRec459[0] = (fTemp241 + (fTemp242 + (fRec459[1] + fTemp243)));
 			fRec457[0] = fRec459[0];
-			double fRec458 = ((fTemp242 + fTemp241) + fTemp240);
-			fRec456[0] = (fRec457[0] + fRec456[1]);
+			double fRec458 = ((fTemp243 + fTemp242) + fTemp241);
+			fRec456[0] = (fRec456[1] + fRec457[0]);
 			fRec454[0] = fRec456[0];
 			double fRec455 = fRec458;
-			fRec453[0] = (fTemp239 + (fRec455 + fRec453[1]));
-			fRec451[0] = fRec453[0];
-			double fRec452 = (fRec455 + fTemp239);
-			double fTemp243 = (fConst39 * (((0.025693251199999999 * fTemp19) + (0.072682772699999995 * fTemp21)) + (0.026429082499999999 * fTemp20)));
-			double fTemp244 = (fConst40 * fRec460[1]);
-			fRec462[0] = (fTemp243 + (fRec462[1] + fTemp244));
-			fRec460[0] = fRec462[0];
-			double fRec461 = (fTemp244 + fTemp243);
-			double fTemp245 = (fConst42 * (((((0.024401915199999999 * fTemp24) + (0.060228936199999999 * fTemp26)) + (0.087374200299999996 * fTemp27)) + (0.061883417099999997 * fTemp28)) + (0.00077739249999999997 * fTemp25)));
-			double fTemp246 = (fConst43 * fRec463[1]);
-			double fTemp247 = (fConst44 * fRec466[1]);
-			fRec468[0] = (fTemp245 + (fTemp246 + (fRec468[1] + fTemp247)));
+			double fTemp244 = (fConst41 * (((((((0.0079158467999999992 * fTemp9) + (0.046548178799999999 * fTemp10)) + (0.0773368418 * fTemp11)) + (0.073443689800000003 * fTemp12)) + (0.079328456500000005 * fTemp13)) + (0.0014660808999999999 * fTemp14)) - (0.0071390237999999998 * fTemp15)));
+			double fTemp245 = (fConst42 * fRec463[1]);
+			double fTemp246 = (fConst43 * fRec466[1]);
+			fRec468[0] = (fTemp244 + (fTemp245 + (fRec468[1] + fTemp246)));
 			fRec466[0] = fRec468[0];
-			double fRec467 = ((fTemp247 + fTemp246) + fTemp245);
-			fRec465[0] = (fRec466[0] + fRec465[1]);
+			double fRec467 = ((fTemp246 + fTemp245) + fTemp244);
+			fRec465[0] = (fRec465[1] + fRec466[0]);
 			fRec463[0] = fRec465[0];
 			double fRec464 = fRec467;
-			fVec24[(IOTA & 511)] = ((0.028277896300000001 * fTemp7) + (fRec452 + (fRec461 + fRec464)));
-			output24[i] = FAUSTFLOAT((0.91194404591104739 * (fRec0[0] * fVec24[((IOTA - iConst45) & 511)])));
-			double fTemp248 = (fConst33 * fRec469[1]);
-			double fTemp249 = (fConst35 * (((0.033408452300000002 * fTemp15) + ((0.076988258200000007 * fTemp10) + (0.1399183775 * fTemp14))) - ((((0.010304103 * fTemp9) + (0.060022493000000003 * fTemp12)) + (0.090031089600000003 * fTemp13)) + (0.00054392489999999997 * fTemp11))));
-			double fTemp250 = (fConst36 * fRec472[1]);
-			double fTemp251 = (fConst37 * fRec475[1]);
+			double fTemp247 = (fConst44 * fRec460[1]);
+			fRec462[0] = (fRec464 + (fRec462[1] + fTemp247));
+			fRec460[0] = fRec462[0];
+			double fRec461 = (fTemp247 + fRec464);
+			fVec24[(IOTA & 255)] = ((0.024950363999999999 * fTemp7) + ((fRec452 + fRec455) + fRec461));
+			output24[i] = FAUSTFLOAT((0.95355093256814927 * (fRec0[0] * fVec24[((IOTA - iConst45) & 255)])));
+			double fTemp248 = (fConst44 * fRec469[1]);
+			double fTemp249 = (fConst41 * (((0.025398556999999999 * fTemp14) + ((0.083503454599999999 * fTemp12) + (0.12367298039999999 * fTemp13))) - ((((0.0072702692999999999 * fTemp9) + (0.047585210400000001 * fTemp10)) + (0.080531180699999996 * fTemp11)) + (0.00067932219999999996 * fTemp15))));
+			double fTemp250 = (fConst42 * fRec472[1]);
+			double fTemp251 = (fConst43 * fRec475[1]);
 			fRec477[0] = (fTemp249 + (fTemp250 + (fRec477[1] + fTemp251)));
 			fRec475[0] = fRec477[0];
 			double fRec476 = ((fTemp251 + fTemp250) + fTemp249);
@@ -4895,26 +4895,26 @@ class mydsp : public dsp {
 			fRec471[0] = (fTemp248 + (fRec473 + fRec471[1]));
 			fRec469[0] = fRec471[0];
 			double fRec470 = (fRec473 + fTemp248);
-			double fTemp252 = (fConst39 * (((0.098975686699999996 * fTemp21) + (0.044761492200000003 * fTemp20)) - (0.027219782000000001 * fTemp19)));
-			double fTemp253 = (fConst40 * fRec478[1]);
+			double fTemp252 = (fConst33 * (((0.087943642599999997 * fTemp21) + (0.035929583899999999 * fTemp20)) - (0.022348230199999999 * fTemp19)));
+			double fTemp253 = (fConst34 * fRec478[1]);
 			fRec480[0] = (fTemp252 + (fRec480[1] + fTemp253));
 			fRec478[0] = fRec480[0];
 			double fRec479 = (fTemp253 + fTemp252);
-			double fTemp254 = (fConst42 * ((((0.1116717268 * fTemp27) + (0.1022608322 * fTemp28)) + (0.0142804526 * fTemp25)) - ((0.025131725099999998 * fTemp24) + (0.063397700500000001 * fTemp26))));
-			double fTemp255 = (fConst43 * fRec481[1]);
-			double fTemp256 = (fConst44 * fRec484[1]);
-			fRec486[0] = (fTemp254 + (fTemp255 + (fRec486[1] + fTemp256)));
+			double fTemp254 = (fConst38 * fRec484[1]);
+			double fTemp255 = (fConst37 * fRec481[1]);
+			double fTemp256 = (fConst36 * (((0.1057034124 * fTemp28) + ((0.085134512800000006 * fTemp26) + (0.010368371899999999 * fTemp24))) - ((0.0191079452 * fTemp25) + (0.053809960900000002 * fTemp27))));
+			fRec486[0] = (((fRec486[1] + fTemp254) + fTemp255) + fTemp256);
 			fRec484[0] = fRec486[0];
-			double fRec485 = ((fTemp256 + fTemp255) + fTemp254);
+			double fRec485 = ((fTemp254 + fTemp255) + fTemp256);
 			fRec483[0] = (fRec484[0] + fRec483[1]);
 			fRec481[0] = fRec483[0];
 			double fRec482 = fRec485;
-			fVec25[(IOTA & 511)] = ((0.039466712600000002 * fTemp7) + (fRec470 + (fRec479 + fRec482)));
-			output25[i] = FAUSTFLOAT((0.91194404591104739 * (fRec0[0] * fVec25[((IOTA - iConst45) & 511)])));
-			double fTemp257 = (fConst33 * fRec487[1]);
-			double fTemp258 = (fConst35 * (((((0.0001059945 * fTemp9) + (0.060452572199999999 * fTemp12)) + (0.076532351999999998 * fTemp10)) + (0.0107665221 * fTemp11)) - (((0.13940843359999999 * fTemp13) + (0.090126801300000003 * fTemp14)) + (0.034150383999999999 * fTemp15))));
-			double fTemp259 = (fConst36 * fRec490[1]);
-			double fTemp260 = (fConst37 * fRec493[1]);
+			fVec25[(IOTA & 255)] = ((fRec470 + (fRec479 + fRec482)) + (0.034127876500000001 * fTemp7));
+			output25[i] = FAUSTFLOAT((0.95355093256814927 * (fRec0[0] * fVec25[((IOTA - iConst45) & 255)])));
+			double fTemp257 = (fConst44 * fRec487[1]);
+			double fTemp258 = (fConst41 * ((((0.047892361899999999 * fTemp10) + (0.083063305300000001 * fTemp12)) + (0.0075846198999999998 * fTemp15)) - ((((0.00013548499999999999 * fTemp9) + (0.12352071570000001 * fTemp11)) + (0.080642031099999997 * fTemp13)) + (0.026178806400000001 * fTemp14))));
+			double fTemp259 = (fConst42 * fRec490[1]);
+			double fTemp260 = (fConst43 * fRec493[1]);
 			fRec495[0] = (fTemp258 + (fTemp259 + (fRec495[1] + fTemp260)));
 			fRec493[0] = fRec495[0];
 			double fRec494 = ((fTemp260 + fTemp259) + fTemp258);
@@ -4924,26 +4924,26 @@ class mydsp : public dsp {
 			fRec489[0] = (fTemp257 + (fRec491 + fRec489[1]));
 			fRec487[0] = fRec489[0];
 			double fRec488 = (fRec491 + fTemp257);
-			double fTemp261 = (fConst39 * ((0.098575644399999995 * fTemp21) - ((0.0447537187 * fTemp19) + (0.0271909304 * fTemp20))));
-			double fTemp262 = (fConst40 * fRec496[1]);
+			double fTemp261 = (fConst33 * ((0.087746924800000001 * fTemp21) - ((0.036021007299999998 * fTemp19) + (0.0223415236 * fTemp20))));
+			double fTemp262 = (fConst34 * fRec496[1]);
 			fRec498[0] = (fTemp261 + (fRec498[1] + fTemp262));
 			fRec496[0] = fRec498[0];
 			double fRec497 = (fTemp262 + fTemp261);
-			double fTemp263 = (fConst42 * (((0.025286161500000001 * fTemp24) + (0.111138168 * fTemp27)) - (((0.1021079309 * fTemp26) + (0.063386494599999996 * fTemp28)) + (0.014697878399999999 * fTemp25))));
-			double fTemp264 = (fConst43 * fRec499[1]);
-			double fTemp265 = (fConst44 * fRec502[1]);
+			double fTemp263 = (fConst36 * (((0.0192173694 * fTemp25) + (0.1053520488 * fTemp28)) - ((0.0852277699 * fTemp27) + ((0.0538309155 * fTemp26) + (0.010759918699999999 * fTemp24)))));
+			double fTemp264 = (fConst37 * fRec499[1]);
+			double fTemp265 = (fConst38 * fRec502[1]);
 			fRec504[0] = (fTemp263 + (fTemp264 + (fRec504[1] + fTemp265)));
 			fRec502[0] = fRec504[0];
 			double fRec503 = ((fTemp265 + fTemp264) + fTemp263);
 			fRec501[0] = (fRec502[0] + fRec501[1]);
 			fRec499[0] = fRec501[0];
 			double fRec500 = fRec503;
-			fVec26[(IOTA & 511)] = ((0.039321185100000003 * fTemp7) + (fRec488 + (fRec497 + fRec500)));
-			output26[i] = FAUSTFLOAT((0.91194404591104739 * (fRec0[0] * fVec26[((IOTA - iConst45) & 511)])));
-			double fTemp266 = (fConst33 * fRec505[1]);
-			double fTemp267 = (fConst35 * (((((0.0005972525 * fTemp9) + (0.1404162883 * fTemp13)) + (0.082464826599999999 * fTemp10)) + (0.00015633220000000001 * fTemp15)) - (((0.058301012999999999 * fTemp12) + (0.13735216589999999 * fTemp14)) + (0.0011643383999999999 * fTemp11))));
-			double fTemp268 = (fConst36 * fRec508[1]);
-			double fTemp269 = (fConst37 * fRec511[1]);
+			fVec26[(IOTA & 255)] = ((0.034068688299999997 * fTemp7) + (fRec488 + (fRec497 + fRec500)));
+			output26[i] = FAUSTFLOAT((0.95355093256814927 * (fRec0[0] * fVec26[((IOTA - iConst45) & 255)])));
+			double fTemp266 = (fConst44 * fRec505[1]);
+			double fTemp267 = (fConst41 * (((((0.00075124160000000003 * fTemp9) + (0.1240391971 * fTemp11)) + (0.092414590699999993 * fTemp12)) + (0.00044447019999999999 * fTemp14)) - (((0.0462631009 * fTemp10) + (0.1218422706 * fTemp13)) + (0.00061281840000000003 * fTemp15))));
+			double fTemp268 = (fConst42 * fRec508[1]);
+			double fTemp269 = (fConst43 * fRec511[1]);
 			fRec513[0] = (fTemp267 + (fTemp268 + (fRec513[1] + fTemp269)));
 			fRec511[0] = fRec513[0];
 			double fRec512 = ((fTemp269 + fTemp268) + fTemp267);
@@ -4953,24 +4953,24 @@ class mydsp : public dsp {
 			fRec507[0] = (fTemp266 + (fRec509 + fRec507[1]));
 			fRec505[0] = fRec507[0];
 			double fRec506 = (fRec509 + fTemp266);
-			double fTemp270 = (fConst39 * (((0.045034125000000001 * fTemp19) + (0.1228019665 * fTemp21)) - (0.044324561300000002 * fTemp20)));
-			double fTemp271 = (fConst40 * fRec514[1]);
+			double fTemp270 = (fConst33 * (((0.036112482199999997 * fTemp19) + (0.10826246990000001 * fTemp21)) - (0.0356745864 * fTemp20)));
+			double fTemp271 = (fConst34 * fRec514[1]);
 			fRec516[0] = (fTemp270 + (fRec516[1] + fTemp271));
 			fRec514[0] = fRec516[0];
 			double fRec515 = (fTemp271 + fTemp270);
-			double fTemp272 = (fConst42 * ((((0.1028001122 * fTemp26) + (0.13358412450000001 * fTemp27)) + (0.0002261756 * fTemp25)) - ((0.024492843800000001 * fTemp24) + (0.1009329288 * fTemp28))));
-			double fTemp273 = (fConst43 * fRec517[1]);
-			double fTemp274 = (fConst44 * fRec520[1]);
+			double fTemp272 = (fConst36 * (((0.1263397231 * fTemp28) + ((0.085505278700000006 * fTemp27) + (0.00028705439999999999 * fTemp24))) - ((0.0186310144 * fTemp25) + (0.0842805046 * fTemp26))));
+			double fTemp273 = (fConst37 * fRec517[1]);
+			double fTemp274 = (fConst38 * fRec520[1]);
 			fRec522[0] = (fTemp272 + (fTemp273 + (fRec522[1] + fTemp274)));
 			fRec520[0] = fRec522[0];
 			double fRec521 = ((fTemp274 + fTemp273) + fTemp272);
 			fRec519[0] = (fRec520[0] + fRec519[1]);
 			fRec517[0] = fRec519[0];
 			double fRec518 = fRec521;
-			fVec27[(IOTA & 511)] = ((0.049621748200000003 * fTemp7) + (fRec506 + (fRec515 + fRec518)));
-			output27[i] = FAUSTFLOAT((0.91194404591104739 * (fRec0[0] * fVec27[((IOTA - iConst45) & 511)])));
+			fVec27[(IOTA & 255)] = ((0.042491665099999999 * fTemp7) + (fRec506 + (fRec515 + fRec518)));
+			output27[i] = FAUSTFLOAT((0.95355093256814927 * (fRec0[0] * fVec27[((IOTA - iConst45) & 255)])));
 			double fTemp275 = (fConst47 * fRec523[1]);
-			double fTemp276 = (fConst49 * ((((((6.3099999999999997e-07 * fTemp9) + (3.4688999999999999e-06 * fTemp12)) + (1.10318e-05 * fTemp13)) + (0.066280089799999997 * fTemp10)) + (1.0543e-06 * fTemp11)) - ((4.2822599999999999e-05 * fTemp14) + (5.2900000000000002e-06 * fTemp15))));
+			double fTemp276 = (fConst49 * ((((((6.3099999999999997e-07 * fTemp9) + (3.4688999999999999e-06 * fTemp10)) + (1.10318e-05 * fTemp11)) + (0.066280089799999997 * fTemp12)) + (1.0543e-06 * fTemp15)) - ((4.2822599999999999e-05 * fTemp13) + (5.2900000000000002e-06 * fTemp14))));
 			double fTemp277 = (fConst50 * fRec526[1]);
 			double fTemp278 = (fConst51 * fRec529[1]);
 			fRec531[0] = (fTemp276 + (fTemp277 + (fRec531[1] + fTemp278)));
@@ -4987,7 +4987,7 @@ class mydsp : public dsp {
 			fRec534[0] = (fTemp279 + (fRec534[1] + fTemp280));
 			fRec532[0] = fRec534[0];
 			double fRec533 = (fTemp280 + fTemp279);
-			double fTemp281 = (fConst56 * ((((1.1512000000000001e-06 * fTemp24) + (5.6354999999999997e-06 * fTemp26)) + (0.049362916700000002 * fTemp27)) - ((2.3371799999999999e-05 * fTemp28) + (1.7517999999999999e-06 * fTemp25))));
+			double fTemp281 = (fConst56 * ((((1.1512000000000001e-06 * fTemp25) + (5.6354999999999997e-06 * fTemp27)) + (0.049362916700000002 * fTemp28)) - ((2.3371799999999999e-05 * fTemp26) + (1.7517999999999999e-06 * fTemp24))));
 			double fTemp282 = (fConst57 * fRec535[1]);
 			double fTemp283 = (fConst58 * fRec538[1]);
 			fRec540[0] = (fTemp281 + (fTemp282 + (fRec540[1] + fTemp283)));
@@ -5057,18 +5057,18 @@ class mydsp : public dsp {
 			fRec52[1] = fRec52[0];
 			fRec51[1] = fRec51[0];
 			fRec49[1] = fRec49[0];
-			fRec57[1] = fRec57[0];
-			fRec55[1] = fRec55[0];
 			fRec63[1] = fRec63[0];
 			fRec61[1] = fRec61[0];
 			fRec60[1] = fRec60[0];
 			fRec58[1] = fRec58[0];
+			fRec57[1] = fRec57[0];
+			fRec55[1] = fRec55[0];
+			fRec66[1] = fRec66[0];
+			fRec64[1] = fRec64[0];
 			fRec72[1] = fRec72[0];
 			fRec70[1] = fRec70[0];
 			fRec69[1] = fRec69[0];
 			fRec67[1] = fRec67[0];
-			fRec66[1] = fRec66[0];
-			fRec64[1] = fRec64[0];
 			fRec81[1] = fRec81[0];
 			fRec79[1] = fRec79[0];
 			fRec78[1] = fRec78[0];
@@ -5105,54 +5105,54 @@ class mydsp : public dsp {
 			fRec124[1] = fRec124[0];
 			fRec123[1] = fRec123[0];
 			fRec121[1] = fRec121[0];
-			fRec129[1] = fRec129[0];
-			fRec127[1] = fRec127[0];
 			fRec135[1] = fRec135[0];
 			fRec133[1] = fRec133[0];
 			fRec132[1] = fRec132[0];
 			fRec130[1] = fRec130[0];
+			fRec129[1] = fRec129[0];
+			fRec127[1] = fRec127[0];
+			fRec138[1] = fRec138[0];
+			fRec136[1] = fRec136[0];
 			fRec144[1] = fRec144[0];
 			fRec142[1] = fRec142[0];
 			fRec141[1] = fRec141[0];
 			fRec139[1] = fRec139[0];
-			fRec138[1] = fRec138[0];
-			fRec136[1] = fRec136[0];
-			fRec153[1] = fRec153[0];
-			fRec151[1] = fRec151[0];
 			fRec150[1] = fRec150[0];
 			fRec148[1] = fRec148[0];
 			fRec147[1] = fRec147[0];
 			fRec145[1] = fRec145[0];
-			fRec156[1] = fRec156[0];
-			fRec154[1] = fRec154[0];
-			fRec162[1] = fRec162[0];
-			fRec160[1] = fRec160[0];
 			fRec159[1] = fRec159[0];
 			fRec157[1] = fRec157[0];
+			fRec156[1] = fRec156[0];
+			fRec154[1] = fRec154[0];
+			fRec153[1] = fRec153[0];
+			fRec151[1] = fRec151[0];
+			fRec162[1] = fRec162[0];
+			fRec160[1] = fRec160[0];
 			fRec171[1] = fRec171[0];
 			fRec169[1] = fRec169[0];
 			fRec168[1] = fRec168[0];
 			fRec166[1] = fRec166[0];
 			fRec165[1] = fRec165[0];
 			fRec163[1] = fRec163[0];
+			fRec177[1] = fRec177[0];
+			fRec175[1] = fRec175[0];
 			fRec174[1] = fRec174[0];
 			fRec172[1] = fRec172[0];
 			fRec180[1] = fRec180[0];
 			fRec178[1] = fRec178[0];
-			fRec177[1] = fRec177[0];
-			fRec175[1] = fRec175[0];
+			fRec189[1] = fRec189[0];
+			fRec187[1] = fRec187[0];
 			fRec186[1] = fRec186[0];
 			fRec184[1] = fRec184[0];
 			fRec183[1] = fRec183[0];
 			fRec181[1] = fRec181[0];
-			fRec195[1] = fRec195[0];
-			fRec193[1] = fRec193[0];
 			fRec192[1] = fRec192[0];
 			fRec190[1] = fRec190[0];
-			fRec189[1] = fRec189[0];
-			fRec187[1] = fRec187[0];
 			fRec198[1] = fRec198[0];
 			fRec196[1] = fRec196[0];
+			fRec195[1] = fRec195[0];
+			fRec193[1] = fRec193[0];
 			fRec207[1] = fRec207[0];
 			fRec205[1] = fRec205[0];
 			fRec204[1] = fRec204[0];
@@ -5213,18 +5213,18 @@ class mydsp : public dsp {
 			fRec286[1] = fRec286[0];
 			fRec285[1] = fRec285[0];
 			fRec283[1] = fRec283[0];
+			fRec291[1] = fRec291[0];
+			fRec289[1] = fRec289[0];
 			fRec297[1] = fRec297[0];
 			fRec295[1] = fRec295[0];
 			fRec294[1] = fRec294[0];
 			fRec292[1] = fRec292[0];
-			fRec291[1] = fRec291[0];
-			fRec289[1] = fRec289[0];
-			fRec300[1] = fRec300[0];
-			fRec298[1] = fRec298[0];
 			fRec306[1] = fRec306[0];
 			fRec304[1] = fRec304[0];
 			fRec303[1] = fRec303[0];
 			fRec301[1] = fRec301[0];
+			fRec300[1] = fRec300[0];
+			fRec298[1] = fRec298[0];
 			fRec315[1] = fRec315[0];
 			fRec313[1] = fRec313[0];
 			fRec312[1] = fRec312[0];
@@ -5237,7 +5237,6 @@ class mydsp : public dsp {
 			fRec322[1] = fRec322[0];
 			fRec321[1] = fRec321[0];
 			fRec319[1] = fRec319[0];
-			fVec16[1] = fVec16[0];
 			fRec333[1] = fRec333[0];
 			fRec331[1] = fRec331[0];
 			fRec330[1] = fRec330[0];
@@ -5250,7 +5249,6 @@ class mydsp : public dsp {
 			fRec340[1] = fRec340[0];
 			fRec339[1] = fRec339[0];
 			fRec337[1] = fRec337[0];
-			fVec17[1] = fVec17[0];
 			fRec351[1] = fRec351[0];
 			fRec349[1] = fRec349[0];
 			fRec348[1] = fRec348[0];
@@ -5263,20 +5261,18 @@ class mydsp : public dsp {
 			fRec358[1] = fRec358[0];
 			fRec357[1] = fRec357[0];
 			fRec355[1] = fRec355[0];
-			fVec18[1] = fVec18[0];
-			fRec369[1] = fRec369[0];
-			fRec367[1] = fRec367[0];
 			fRec366[1] = fRec366[0];
 			fRec364[1] = fRec364[0];
 			fRec363[1] = fRec363[0];
 			fRec361[1] = fRec361[0];
-			fRec372[1] = fRec372[0];
-			fRec370[1] = fRec370[0];
-			fRec378[1] = fRec378[0];
-			fRec376[1] = fRec376[0];
 			fRec375[1] = fRec375[0];
 			fRec373[1] = fRec373[0];
-			fVec19[1] = fVec19[0];
+			fRec372[1] = fRec372[0];
+			fRec370[1] = fRec370[0];
+			fRec369[1] = fRec369[0];
+			fRec367[1] = fRec367[0];
+			fRec378[1] = fRec378[0];
+			fRec376[1] = fRec376[0];
 			fRec387[1] = fRec387[0];
 			fRec385[1] = fRec385[0];
 			fRec384[1] = fRec384[0];
@@ -5289,20 +5285,18 @@ class mydsp : public dsp {
 			fRec394[1] = fRec394[0];
 			fRec393[1] = fRec393[0];
 			fRec391[1] = fRec391[0];
-			fVec20[1] = fVec20[0];
-			fRec405[1] = fRec405[0];
-			fRec403[1] = fRec403[0];
 			fRec402[1] = fRec402[0];
 			fRec400[1] = fRec400[0];
 			fRec399[1] = fRec399[0];
 			fRec397[1] = fRec397[0];
-			fRec408[1] = fRec408[0];
-			fRec406[1] = fRec406[0];
-			fRec414[1] = fRec414[0];
-			fRec412[1] = fRec412[0];
 			fRec411[1] = fRec411[0];
 			fRec409[1] = fRec409[0];
-			fVec21[1] = fVec21[0];
+			fRec408[1] = fRec408[0];
+			fRec406[1] = fRec406[0];
+			fRec405[1] = fRec405[0];
+			fRec403[1] = fRec403[0];
+			fRec414[1] = fRec414[0];
+			fRec412[1] = fRec412[0];
 			fRec423[1] = fRec423[0];
 			fRec421[1] = fRec421[0];
 			fRec420[1] = fRec420[0];
@@ -5315,32 +5309,30 @@ class mydsp : public dsp {
 			fRec430[1] = fRec430[0];
 			fRec429[1] = fRec429[0];
 			fRec427[1] = fRec427[0];
-			fVec22[1] = fVec22[0];
+			fRec435[1] = fRec435[0];
+			fRec433[1] = fRec433[0];
 			fRec441[1] = fRec441[0];
 			fRec439[1] = fRec439[0];
 			fRec438[1] = fRec438[0];
 			fRec436[1] = fRec436[0];
-			fRec435[1] = fRec435[0];
-			fRec433[1] = fRec433[0];
-			fRec444[1] = fRec444[0];
-			fRec442[1] = fRec442[0];
 			fRec450[1] = fRec450[0];
 			fRec448[1] = fRec448[0];
 			fRec447[1] = fRec447[0];
 			fRec445[1] = fRec445[0];
-			fVec23[1] = fVec23[0];
+			fRec444[1] = fRec444[0];
+			fRec442[1] = fRec442[0];
+			fRec453[1] = fRec453[0];
+			fRec451[1] = fRec451[0];
 			fRec459[1] = fRec459[0];
 			fRec457[1] = fRec457[0];
 			fRec456[1] = fRec456[0];
 			fRec454[1] = fRec454[0];
-			fRec453[1] = fRec453[0];
-			fRec451[1] = fRec451[0];
-			fRec462[1] = fRec462[0];
-			fRec460[1] = fRec460[0];
 			fRec468[1] = fRec468[0];
 			fRec466[1] = fRec466[0];
 			fRec465[1] = fRec465[0];
 			fRec463[1] = fRec463[0];
+			fRec462[1] = fRec462[0];
+			fRec460[1] = fRec460[0];
 			fRec477[1] = fRec477[0];
 			fRec475[1] = fRec475[0];
 			fRec474[1] = fRec474[0];

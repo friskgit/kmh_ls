@@ -1997,11 +1997,11 @@ class mydsp : public dsp {
 		iConst6 = int(((0.002913628773109936 * double(iConst0)) + 0.5));
 		fConst7 = ((30.781580509647348 / fConst1) + 1.0);
 		fConst8 = (1.0 / fConst7);
-		fConst9 = (0.0 - (61.563161019294697 / (fConst1 * fConst7)));
+		fConst9 = (0.0 - (61.563161019294697 / (fConst7 * fConst1)));
 		iConst10 = int(((2.9136287731083211e-06 * double(iConst0)) + 0.5));
 		fConst11 = ((33.7477505095937 / fConst1) + 1.0);
 		fConst12 = (1.0 / fConst11);
-		fConst13 = (0.0 - (67.495501019187401 / (fConst1 * fConst11)));
+		fConst13 = (0.0 - (67.495501019187401 / (fConst11 * fConst1)));
 		iConst14 = int(((0.0014305917275969774 * double(iConst0)) + 0.5));
 		fConst15 = ((30.776060140115494 / fConst1) + 1.0);
 		fConst16 = (1.0 / fConst15);
