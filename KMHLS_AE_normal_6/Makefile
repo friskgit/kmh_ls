@@ -275,6 +275,9 @@ ambixinstall :
 clean_all :
 	@rm  -rf $(REQUIRED_DIRS)
 
+clean_svg :
+	@rm $(svg)/*.svg
+
 clean :
 	@rm -rf $(bindir)/*
 
