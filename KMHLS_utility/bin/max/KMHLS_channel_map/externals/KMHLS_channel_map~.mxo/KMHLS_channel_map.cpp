@@ -2,7 +2,7 @@
 author: " Henrik Frisk "
 copyright: "(c) dinergy 2018 "
 license: " BSD "
-name: "KMHLSChannelMap 29+16+4"
+name: "KMHLS ChannelMap - 29+16+4"
 version: " 0.1 "
 Code generated with Faust 2.6.3 (https://faust.grame.fr)
 Compilation options: cpp, -double -ftz 0
@@ -1698,7 +1698,7 @@ class mydsp : public dsp {
 		m->declare("copyright", "(c) dinergy 2018 ");
 		m->declare("filename", "KMHLS_channel_map");
 		m->declare("license", " BSD ");
-		m->declare("name", "KMHLSChannelMap 29+16+4");
+		m->declare("name", "KMHLS ChannelMap - 29+16+4");
 		m->declare("signals.lib/name", "Faust Signal Routing Library");
 		m->declare("signals.lib/version", "0.0");
 		m->declare("version", " 0.1 ");
@@ -2204,7 +2204,7 @@ class mydsp : public dsp {
 	}
 	
 	virtual void buildUserInterface(UI* ui_interface) {
-		ui_interface->openVerticalBox("KMHLSChannelMap 29+16+4");
+		ui_interface->openVerticalBox("KMHLS ChannelMap - 29+16+4");
 		ui_interface->openHorizontalBox("floor ring");
 		ui_interface->addHorizontalSlider("Volume floor", &fHslider1, 1.0, 0.0, 1.0, 0.001);
 		ui_interface->closeBox();
@@ -2328,60 +2328,60 @@ class mydsp : public dsp {
 		double fSlow2 = (0.0010000000000000009 * double(fHslider2));
 		for (int i = 0; (i < count); i = (i + 1)) {
 			fRec0[0] = (fSlow0 + (0.999 * fRec0[1]));
-			output0[i] = FAUSTFLOAT((fRec0[0] * double(input0[i])));
-			output1[i] = FAUSTFLOAT((fRec0[0] * double(input1[i])));
-			output2[i] = FAUSTFLOAT((fRec0[0] * double(input2[i])));
-			output3[i] = FAUSTFLOAT((fRec0[0] * double(input3[i])));
-			output4[i] = FAUSTFLOAT((fRec0[0] * double(input4[i])));
-			output5[i] = FAUSTFLOAT((fRec0[0] * double(input5[i])));
-			output6[i] = FAUSTFLOAT((fRec0[0] * double(input6[i])));
-			output7[i] = FAUSTFLOAT((fRec0[0] * double(input7[i])));
-			output8[i] = FAUSTFLOAT((fRec0[0] * double(input8[i])));
-			output9[i] = FAUSTFLOAT((fRec0[0] * double(input9[i])));
-			output10[i] = FAUSTFLOAT((fRec0[0] * double(input10[i])));
-			output11[i] = FAUSTFLOAT((fRec0[0] * double(input11[i])));
-			output12[i] = FAUSTFLOAT((fRec0[0] * double(input12[i])));
-			output13[i] = FAUSTFLOAT((fRec0[0] * double(input13[i])));
-			output14[i] = FAUSTFLOAT((fRec0[0] * double(input14[i])));
-			output15[i] = FAUSTFLOAT((fRec0[0] * double(input15[i])));
-			output16[i] = FAUSTFLOAT((fRec0[0] * double(input16[i])));
-			output17[i] = FAUSTFLOAT((fRec0[0] * double(input17[i])));
-			output18[i] = FAUSTFLOAT((fRec0[0] * double(input18[i])));
-			output19[i] = FAUSTFLOAT((fRec0[0] * double(input19[i])));
-			output20[i] = FAUSTFLOAT((fRec0[0] * double(input20[i])));
-			output21[i] = FAUSTFLOAT((fRec0[0] * double(input21[i])));
-			output22[i] = FAUSTFLOAT((fRec0[0] * double(input22[i])));
-			output23[i] = FAUSTFLOAT((fRec0[0] * double(input23[i])));
-			output24[i] = FAUSTFLOAT((fRec0[0] * double(input24[i])));
-			output25[i] = FAUSTFLOAT((fRec0[0] * double(input25[i])));
-			output26[i] = FAUSTFLOAT((fRec0[0] * double(input26[i])));
-			output27[i] = FAUSTFLOAT((fRec0[0] * double(input27[i])));
-			output28[i] = FAUSTFLOAT((fRec0[0] * double(input28[i])));
+			output0[i] = FAUSTFLOAT((double(input0[i]) * fRec0[0]));
+			output1[i] = FAUSTFLOAT((double(input1[i]) * fRec0[0]));
+			output2[i] = FAUSTFLOAT((double(input2[i]) * fRec0[0]));
+			output3[i] = FAUSTFLOAT((double(input3[i]) * fRec0[0]));
+			output4[i] = FAUSTFLOAT((double(input4[i]) * fRec0[0]));
+			output5[i] = FAUSTFLOAT((double(input5[i]) * fRec0[0]));
+			output6[i] = FAUSTFLOAT((double(input6[i]) * fRec0[0]));
+			output7[i] = FAUSTFLOAT((double(input7[i]) * fRec0[0]));
+			output8[i] = FAUSTFLOAT((double(input8[i]) * fRec0[0]));
+			output9[i] = FAUSTFLOAT((double(input9[i]) * fRec0[0]));
+			output10[i] = FAUSTFLOAT((double(input10[i]) * fRec0[0]));
+			output11[i] = FAUSTFLOAT((double(input11[i]) * fRec0[0]));
+			output12[i] = FAUSTFLOAT((double(input12[i]) * fRec0[0]));
+			output13[i] = FAUSTFLOAT((double(input13[i]) * fRec0[0]));
+			output14[i] = FAUSTFLOAT((double(input14[i]) * fRec0[0]));
+			output15[i] = FAUSTFLOAT((double(input15[i]) * fRec0[0]));
+			output16[i] = FAUSTFLOAT((double(input16[i]) * fRec0[0]));
+			output17[i] = FAUSTFLOAT((double(input17[i]) * fRec0[0]));
+			output18[i] = FAUSTFLOAT((double(input18[i]) * fRec0[0]));
+			output19[i] = FAUSTFLOAT((double(input19[i]) * fRec0[0]));
+			output20[i] = FAUSTFLOAT((double(input20[i]) * fRec0[0]));
+			output21[i] = FAUSTFLOAT((double(input21[i]) * fRec0[0]));
+			output22[i] = FAUSTFLOAT((double(input22[i]) * fRec0[0]));
+			output23[i] = FAUSTFLOAT((double(input23[i]) * fRec0[0]));
+			output24[i] = FAUSTFLOAT((double(input24[i]) * fRec0[0]));
+			output25[i] = FAUSTFLOAT((double(input25[i]) * fRec0[0]));
+			output26[i] = FAUSTFLOAT((double(input26[i]) * fRec0[0]));
+			output27[i] = FAUSTFLOAT((double(input27[i]) * fRec0[0]));
+			output28[i] = FAUSTFLOAT((double(input28[i]) * fRec0[0]));
 			output29[i] = FAUSTFLOAT(0);
 			output30[i] = FAUSTFLOAT(0);
 			output31[i] = FAUSTFLOAT(0);
 			fRec1[0] = (fSlow1 + (0.999 * fRec1[1]));
-			output32[i] = FAUSTFLOAT((fRec1[0] * double(input29[i])));
-			output33[i] = FAUSTFLOAT((fRec1[0] * double(input30[i])));
-			output34[i] = FAUSTFLOAT((fRec1[0] * double(input31[i])));
-			output35[i] = FAUSTFLOAT((fRec1[0] * double(input32[i])));
-			output36[i] = FAUSTFLOAT((fRec1[0] * double(input33[i])));
-			output37[i] = FAUSTFLOAT((fRec1[0] * double(input34[i])));
-			output38[i] = FAUSTFLOAT((fRec1[0] * double(input35[i])));
-			output39[i] = FAUSTFLOAT((fRec1[0] * double(input36[i])));
-			output40[i] = FAUSTFLOAT((fRec1[0] * double(input37[i])));
-			output41[i] = FAUSTFLOAT((fRec1[0] * double(input38[i])));
-			output42[i] = FAUSTFLOAT((fRec1[0] * double(input39[i])));
-			output43[i] = FAUSTFLOAT((fRec1[0] * double(input40[i])));
-			output44[i] = FAUSTFLOAT((fRec1[0] * double(input41[i])));
-			output45[i] = FAUSTFLOAT((fRec1[0] * double(input42[i])));
-			output46[i] = FAUSTFLOAT((fRec1[0] * double(input43[i])));
-			output47[i] = FAUSTFLOAT((fRec1[0] * double(input44[i])));
+			output32[i] = FAUSTFLOAT((double(input29[i]) * fRec1[0]));
+			output33[i] = FAUSTFLOAT((double(input30[i]) * fRec1[0]));
+			output34[i] = FAUSTFLOAT((double(input31[i]) * fRec1[0]));
+			output35[i] = FAUSTFLOAT((double(input32[i]) * fRec1[0]));
+			output36[i] = FAUSTFLOAT((double(input33[i]) * fRec1[0]));
+			output37[i] = FAUSTFLOAT((double(input34[i]) * fRec1[0]));
+			output38[i] = FAUSTFLOAT((double(input35[i]) * fRec1[0]));
+			output39[i] = FAUSTFLOAT((double(input36[i]) * fRec1[0]));
+			output40[i] = FAUSTFLOAT((double(input37[i]) * fRec1[0]));
+			output41[i] = FAUSTFLOAT((double(input38[i]) * fRec1[0]));
+			output42[i] = FAUSTFLOAT((double(input39[i]) * fRec1[0]));
+			output43[i] = FAUSTFLOAT((double(input40[i]) * fRec1[0]));
+			output44[i] = FAUSTFLOAT((double(input41[i]) * fRec1[0]));
+			output45[i] = FAUSTFLOAT((double(input42[i]) * fRec1[0]));
+			output46[i] = FAUSTFLOAT((double(input43[i]) * fRec1[0]));
+			output47[i] = FAUSTFLOAT((double(input44[i]) * fRec1[0]));
 			fRec2[0] = (fSlow2 + (0.999 * fRec2[1]));
-			output48[i] = FAUSTFLOAT((fRec2[0] * double(input45[i])));
-			output49[i] = FAUSTFLOAT((fRec2[0] * double(input46[i])));
-			output50[i] = FAUSTFLOAT((fRec2[0] * double(input47[i])));
-			output51[i] = FAUSTFLOAT((fRec2[0] * double(input48[i])));
+			output48[i] = FAUSTFLOAT((double(input45[i]) * fRec2[0]));
+			output49[i] = FAUSTFLOAT((double(input46[i]) * fRec2[0]));
+			output50[i] = FAUSTFLOAT((double(input47[i]) * fRec2[0]));
+			output51[i] = FAUSTFLOAT((double(input48[i]) * fRec2[0]));
 			fRec0[1] = fRec0[0];
 			fRec1[1] = fRec1[0];
 			fRec2[1] = fRec2[0];

@@ -83,6 +83,134 @@ The last step can be made for `scinstall`, `vstinstall` and `pdinstall`
 In Klangkupolen the channel order from the mixer is channel 1-29 for the regular dome. The lower ring starts at channel 33-48 and the subs are at 49-52. This is the reason that in the decoder the names for the sixteen floor speakers start at 33.
 
 The layout is ordered clockwise starting at speaker one.
+### Channel output mapping
+
+In principle the output of the decoders should be mapped to the speakers according to the following table:
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">Decoder output</th>
+<th scope="col" class="org-left">KMH114</th>
+<th scope="col" class="org-left">KMH114\_C</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td class="org-right">1</td>
+<td class="org-left">1 (L)</td>
+<td class="org-left">1 (L)</td>
+</tr>
+
+
+<tr>
+<td class="org-right">2</td>
+<td class="org-left">2 (R)</td>
+<td class="org-left">2 (R)</td>
+</tr>
+
+
+<tr>
+<td class="org-right">3</td>
+<td class="org-left">5 (LSR)</td>
+<td class="org-left">3 (C)</td>
+</tr>
+
+
+<tr>
+<td class="org-right">4</td>
+<td class="org-left">6 (RSR)</td>
+<td class="org-left">5 (LSR)</td>
+</tr>
+
+
+<tr>
+<td class="org-right">5</td>
+<td class="org-left">7 (LSF)</td>
+<td class="org-left">6 (RSR)</td>
+</tr>
+
+
+<tr>
+<td class="org-right">6</td>
+<td class="org-left">8 (RSF)</td>
+<td class="org-left">7 (LSF)</td>
+</tr>
+
+
+<tr>
+<td class="org-right">7</td>
+<td class="org-left">9 (RL)</td>
+<td class="org-left">8 (RSF)</td>
+</tr>
+
+
+<tr>
+<td class="org-right">8</td>
+<td class="org-left">10 (RR)</td>
+<td class="org-left">9 (RL)</td>
+</tr>
+
+
+<tr>
+<td class="org-right">9</td>
+<td class="org-left">11 (ULF)</td>
+<td class="org-left">10 (RR)</td>
+</tr>
+
+
+<tr>
+<td class="org-right">10</td>
+<td class="org-left">12 (URF)</td>
+<td class="org-left">11 (ULF)</td>
+</tr>
+
+
+<tr>
+<td class="org-right">11</td>
+<td class="org-left">13 (URL)</td>
+<td class="org-left">12 (URF)</td>
+</tr>
+
+
+<tr>
+<td class="org-right">12</td>
+<td class="org-left">14 (URR)</td>
+<td class="org-left">13 (URL)</td>
+</tr>
+
+
+<tr>
+<td class="org-right">13</td>
+<td class="org-left">15 (VOG)</td>
+<td class="org-left">14 (URR)</td>
+</tr>
+
+
+<tr>
+<td class="org-right">14</td>
+<td class="org-left">-</td>
+<td class="org-left">15 (VOG)</td>
+</tr>
+</tbody>
+</table>
+
+L, R, LSR, RSR, LSF, RSF, RL, RR, ULF, URF, URL, URR, VOG 
+
+
+### Utility program
+
+For studios 108 and 114 there is a small utitlity program that wraps your channels around. For 114, this means that you can insert `KMH114_channel_map` after your decoder and your channels will come out in the right order for a linear routing on the SSL (1 -> 1, 2 -> 2, etc)
 
 
 <a id="org27fae52"></a>

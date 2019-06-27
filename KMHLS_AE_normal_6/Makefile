@@ -52,7 +52,8 @@ ambixdir:= ambix
 pdinstdir	:= ~/Documents/Pd/externals/ADT
 vstinstdir	:= ~/Library/Audio/Plug-Ins/VST/ADT
 ambixinstdir	:= ~/Library/ambix/binaural_presets
-maxinstall	:= ~/Documents/Max\ 7/Packages/ADT
+# maxinstall	:= ~/Documents/Max\ 7/Packages
+maxinstall	:= $(maxdir)
 
 ## Variables
 amb108		:= kmh_108

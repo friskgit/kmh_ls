@@ -1,4 +1,4 @@
-declare name	"KMHLSChannelMap 29+16+4";
+declare name	"KMHLS ChannelMap - 29+16+4";
 declare version " 0.1 ";
 declare author " Henrik Frisk " ;
 declare license " BSD ";
@@ -7,7 +7,7 @@ declare copyright "(c) dinergy 2018 ";
 //---------------`Channel mapping plugin` --------------------------
 //
 // Channel mapping plugin that takes 52 inputs, although only the 49 first channels are routed.
-// these are routed to the Crescendo mixer channel layout.
+// These are routed to the Crescendo mixer channel layout.
 // 
 // Insert this plugin on the master track or similar to get channels to map correctly to the Crescendo, i.e.:
 // 
