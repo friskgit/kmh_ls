@@ -26,7 +26,7 @@ subdirs := $(wildcard ./KMH*)
 target_makefile	:=  ~/Music/faust/faust_stuff.git/Makefile.adt
 target 	:= all
 
-.PHONY : all $(subdirs) update_makefile test
+.PHONY : all $(subdirs) update_makefile
 
 clean_svg :
 	$(foreach var, $(subdirs), $(shell rm "$(var)"/doc/*-svg/*.svg))
@@ -34,7 +34,7 @@ clean_svg :
 all : $(subdirs)
 
 $(subdirs) :
-	@echo "Installing files for $@..."
+	@echo "Installing sc files for $@..."
 	$(MAKE) -C $@ $(target)
 
 update_makefile : $(target_makefile)

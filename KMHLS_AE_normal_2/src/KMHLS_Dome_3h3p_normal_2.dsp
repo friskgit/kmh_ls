@@ -1,6 +1,6 @@
 // Faust Decoder Configuration File
 // Written by Ambisonic Decoder Toolbox, version 8.0
-// run by henrik_frisk on  (x86_64-apple-darwin17.6.0) at 15-May-2019 19:42:16
+// run by henrik_frisk on  (x86_64-apple-darwin17.6.0) at 27-Jun-2019 12:07:13
 
 //------- decoder information -------
 // decoder file = ../decoders/KMHLS_Dome_3h3p_pinv_even_energy_rV_max_rE_2_band.dsp

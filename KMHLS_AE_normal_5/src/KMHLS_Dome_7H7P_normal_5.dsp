@@ -1,6 +1,6 @@
 // Faust Decoder Configuration File
 // Written by Ambisonic Decoder Toolbox, version 8.0
-// run by henrik_frisk on  (x86_64-apple-darwin17.6.0) at 15-May-2019 19:49:33
+// run by henrik_frisk on  (x86_64-apple-darwin17.6.0) at 27-Jun-2019 12:06:57
 
 //------- decoder information -------
 // decoder file = ../decoders/KMHLS_Dome_7H7P_Slepian41_2_band.dsp

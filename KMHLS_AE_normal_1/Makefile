@@ -275,11 +275,9 @@ ambixinstall :
 clean_all :
 	@rm  -rf $(REQUIRED_DIRS)
 
-clean_svg :
-	@rm $(svg)/*.svg
 clean :
 	@rm -rf $(bindir)/*
 
-.PHONY: all test clean doc runapp viewsvg oct octview sc max binclean mdoc scinstall pdinstall vstinstall install ambixinstall clean_svg
+.PHONY: all test clean doc runapp viewsvg oct octview sc max binclean mdoc scinstall pdinstall vstinstall install ambixinstall
 
 .SUFFIXES: .app .dsp .html .md

@@ -1,6 +1,6 @@
 // Faust Decoder Configuration File
 // Written by Ambisonic Decoder Toolbox, version 8.0
-// run by henrik_frisk on  (x86_64-apple-darwin17.6.0) at 15-May-2019 20:09:33
+// run by henrik_frisk on  (x86_64-apple-darwin17.6.0) at 27-Jun-2019 12:13:04
 
 //------- decoder information -------
 // decoder file = ../decoders/KMHLS_Dome_4h3v_allrad_5200_rE_max_2_band.dsp

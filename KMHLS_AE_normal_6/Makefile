@@ -29,6 +29,9 @@
 # * clean_all (will clean all required dirs)
 # * clean (will only clean the bin directory)
 #
+# maxinstall, scinstall, vstinstall etc attempts to install in default positions, the exact
+# location can be specified below under respective argument (see Install directories)
+# 
 # 30 Juni 2018	Henrik Frisk	mail@henrikfrisk.com
 
 ## Specify the sources to build here
@@ -44,9 +47,14 @@ maxdir	:= $(bindir)/max
 vstdir	:= $(bindir)/vst
 pddir	:= $(bindir)/pd
 ambixdir:= ambix
+
+## Install directories
 pdinstdir	:= ~/Documents/Pd/externals/ADT
 vstinstdir	:= ~/Library/Audio/Plug-Ins/VST/ADT
 ambixinstdir	:= ~/Library/ambix/binaural_presets
+maxinstall	:= ~/Documents/Max\ 7/Packages/ADT
+
+## Variables
 amb108		:= kmh_108
 amb114		:= kmh_114
 ambls		:= kmh_ls
@@ -104,8 +112,7 @@ LOCLS		:= KMHLS
 
 SC_INSTALL	:= ~/Library/Application\ Support/SuperCollider/Extensions/ADT
 VST_INSTALL	:= $(vstinstdir)
-##MAX_INSTALL	:= ~/Documents/Max\ 7/Packages
-MAX_INSTALL	:= $(maxdir)
+MAX_INSTALL	:= $(maxinstall)
 PD_INSTALL	:= $(pdinstdir)
 AMBIX_INSTALL	:= $(ambixinstdir)
 MAX_HELP	:= help
@@ -274,9 +281,6 @@ ambixinstall :
 
 clean_all :
 	@rm  -rf $(REQUIRED_DIRS)
-
-clean_svg :
-	@rm $(svg)/*.svg
 
 clean :
 	@rm -rf $(bindir)/*
