@@ -1688,8 +1688,8 @@ class mydsp : public dsp {
 	
  private:
 	
-	FAUSTFLOAT fCheckbox0;
 	FAUSTFLOAT fHslider0;
+	FAUSTFLOAT fCheckbox0;
 	double fRec0[2];
 	int fSamplingFreq;
 	int iConst0;
@@ -2010,8 +2010,8 @@ class mydsp : public dsp {
 	}
 	
 	virtual void instanceResetUserInterface() {
-		fCheckbox0 = FAUSTFLOAT(0.0);
 		fHslider0 = FAUSTFLOAT(-10.0);
+		fCheckbox0 = FAUSTFLOAT(0.0);
 		fHslider1 = FAUSTFLOAT(400.0);
 		fHslider2 = FAUSTFLOAT(0.0);
 		
@@ -2459,7 +2459,7 @@ class mydsp : public dsp {
 		FAUSTFLOAT* output26 = outputs[26];
 		FAUSTFLOAT* output27 = outputs[27];
 		FAUSTFLOAT* output28 = outputs[28];
-		double fSlow0 = (0.0010000000000000009 * (double((double(fCheckbox0) < 0.5)) * std::pow(10.0, (0.050000000000000003 * double(fHslider0)))));
+		double fSlow0 = (0.0010000000000000009 * (std::pow(10.0, (0.050000000000000003 * double(fHslider0))) * double((double(fCheckbox0) < 0.5))));
 		double fSlow1 = (0.0010000000000000009 * double(fHslider1));
 		double fSlow2 = (0.0010000000000000009 * std::pow(10.0, (0.050000000000000003 * double(fHslider2))));
 		for (int i = 0; (i < count); i = (i + 1)) {
@@ -2509,27 +2509,27 @@ class mydsp : public dsp {
 			double fRec17 = (fTemp18 + fTemp17);
 			fVec3[(IOTA & 1023)] = (fRec17 + (0.040882448600000003 * fTemp12));
 			output3[i] = FAUSTFLOAT((0.8267575322812053 * (fRec0[0] * fVec3[((IOTA - iConst6) & 1023)])));
-			double fTemp19 = (fConst3 * ((0.072509489100000005 * fTemp8) - ((0.1016666058 * fTemp7) + (0.017216940600000001 * fTemp9))));
+			double fTemp19 = (fConst3 * ((0.072509489100000005 * fTemp8) - ((0.017216940600000001 * fTemp9) + (0.1016666058 * fTemp7))));
 			double fTemp20 = (fConst5 * fRec19[1]);
-			fRec21[0] = (fTemp19 + (fRec21[1] + fTemp20));
+			fRec21[0] = ((fTemp19 + fRec21[1]) + fTemp20);
 			fRec19[0] = fRec21[0];
-			double fRec20 = (fTemp20 + fTemp19);
+			double fRec20 = (fTemp19 + fTemp20);
 			fVec4[(IOTA & 1023)] = (fRec20 + (0.047004010800000003 * fTemp12));
-			output4[i] = FAUSTFLOAT((0.8267575322812053 * (fRec0[0] * fVec4[((IOTA - iConst6) & 1023)])));
+			output4[i] = FAUSTFLOAT((0.8267575322812053 * (fVec4[((IOTA - iConst6) & 1023)] * fRec0[0])));
 			double fTemp21 = (fConst3 * ((0.0224882187 * fTemp8) - ((0.1075533969 * fTemp7) + (0.0238195688 * fTemp9))));
 			double fTemp22 = (fConst5 * fRec22[1]);
 			fRec24[0] = (fTemp21 + (fRec24[1] + fTemp22));
 			fRec22[0] = fRec24[0];
 			double fRec23 = (fTemp22 + fTemp21);
-			fVec5[(IOTA & 1023)] = (fRec23 + (0.041283035900000001 * fTemp12));
-			output5[i] = FAUSTFLOAT((0.8267575322812053 * (fRec0[0] * fVec5[((IOTA - iConst6) & 1023)])));
+			fVec5[(IOTA & 1023)] = ((0.041283035900000001 * fTemp12) + fRec23);
+			output5[i] = FAUSTFLOAT((0.8267575322812053 * (fVec5[((IOTA - iConst6) & 1023)] * fRec0[0])));
 			double fTemp23 = (fConst3 * (0.0 - (((0.12414152420000001 * fTemp7) + (0.0174064037 * fTemp9)) + (0.023448789000000001 * fTemp8))));
 			double fTemp24 = (fConst5 * fRec25[1]);
 			fRec27[0] = (fTemp23 + (fRec27[1] + fTemp24));
 			fRec25[0] = fRec27[0];
 			double fRec26 = (fTemp24 + fTemp23);
-			fVec6[(IOTA & 1023)] = (fRec26 + (0.0475581666 * fTemp12));
-			output6[i] = FAUSTFLOAT((0.8267575322812053 * (fRec0[0] * fVec6[((IOTA - iConst6) & 1023)])));
+			fVec6[(IOTA & 1023)] = ((0.0475581666 * fTemp12) + fRec26);
+			output6[i] = FAUSTFLOAT((0.8267575322812053 * (fVec6[((IOTA - iConst6) & 1023)] * fRec0[0])));
 			double fTemp25 = (fConst3 * (0.0 - (((0.091892606200000004 * fTemp7) + (0.024202001500000001 * fTemp9)) + (0.063052502799999993 * fTemp8))));
 			double fTemp26 = (fConst5 * fRec28[1]);
 			fRec30[0] = (fTemp25 + (fRec30[1] + fTemp26));
