@@ -1,0 +1,25 @@
+#+TITLE:     About ambisonics in Klangkupoler in Lilla Salen at KMH
+#+AUTHOR:    Henrik Frisk
+#+EMAIL:     henrik.frisk@kmh.se
+#+DATE:      [2019-06-29 Lör]
+#+DESCRIPTION: This is the basis for the README.md that should bo with the GitHub repository kmh_114.
+#+STARTUP: indent
+#+LANGUAGE:  en
+#+OPTIONS:   H:3 num:nil toc:nil \n:nil @:t ::t |:t ^:nil -:t f:t *:t <:t
+#+OPTIONS: broken-links:n
+#+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
+#+EXPORT_SELECT_TAGS: export
+#+EXPORT_EXCLUDE_TAGS: noexport
+#+EXPORT_FILE_NAME: /Users/henrik_frisk/Music/ambidecodertoolbox/examples/decoders/KMHLS/README
+#+LATEX_HEADER: \usepackage[lf]{ebgaramond}
+
+* COMMENT Guide to the file
+  The first headline includes the generic info from kmh-studios.org
+* General information
+
+Scroll down to [[*Klangkupolen, Lilla Salen][Klangkupolen, Lilla Salen]] for specifics
+
+#+INCLUDE: "~/org/kmh-studios.org::#github:readme_template" :only-contents
+* Klangkupolen, Lilla Salen
+#+INCLUDE: "~/org/kmh-studios.org::#github:readme_ls" :only-contents
+
