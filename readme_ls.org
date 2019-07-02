@@ -16,9 +16,7 @@
 * COMMENT Guide to the file
   The first headline includes the generic info from kmh-studios.org
 * General information
-
 Scroll down to [[*Klangkupolen, Lilla Salen][Klangkupolen, Lilla Salen]] for specifics
-
 #+INCLUDE: "~/org/kmh-studios.org::#github:readme_template" :only-contents
 * Klangkupolen, Lilla Salen
 #+INCLUDE: "~/org/kmh-studios.org::#github:readme_ls" :only-contents
