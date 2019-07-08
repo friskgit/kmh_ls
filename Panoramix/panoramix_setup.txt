@@ -1,0 +1,34 @@
+/speaker/number 29
+/speaker/correction/delay "off"
+/speaker/correction/gain "off"
+/speakers/aed
+-34.689614 12.910417 4.61 -13.383763 12.910417 4.61 10.440725 12.910417 4.61 32.117788 12.910417 4.61 55.741675 12.910417 4.61 78.207673 12.910417 4.61 101.49442 12.910417 4.61 124.85167 12.910417 4.61 147.91193 12.910417 4.61 169.17789 12.910417 4.61 -167.82013 12.910417 4.61 -145.63454 12.910417 4.61 -123.784 12.910417 4.61 -102.64182 12.910417 4.61 -79.887731 12.910417 4.61 -57.926139 12.910417 4.61 -22.349553 34.696822 4.882 22.843958 34.696822 4.882 69.013292 34.696822 4.882 115.56544 34.696822 4.882 158.89992 34.696822 4.882 -158.89763 34.696822 4.882 -114.65354 34.696822 4.882 -68.170128 34.696822 4.882 -45 69.185799 5.317 45 69.185799 5.317 135 69.185799 5.317 -135 69.185799 5.317 0 90 5.576
+/speaker/1/delay 0
+/speaker/2/delay 0
+/speaker/3/delay 0
+/speaker/4/delay 0
+/speaker/5/delay 0
+/speaker/6/delay 0
+/speaker/7/delay 0
+/speaker/8/delay 0
+/speaker/9/delay 0
+/speaker/10/delay 0
+/speaker/11/delay 0
+/speaker/12/delay 0
+/speaker/13/delay 0
+/speaker/14/delay 0
+/speaker/15/delay 0
+/speaker/16/delay 0
+/speaker/17/delay 0
+/speaker/18/delay 0
+/speaker/19/delay 0
+/speaker/20/delay 0
+/speaker/21/delay 0
+/speaker/22/delay 0
+/speaker/23/delay 0
+/speaker/24/delay 0
+/speaker/25/delay 0
+/speaker/26/delay 0
+/speaker/27/delay 0
+/speaker/28/delay 0
+/speaker/29/delay 0
