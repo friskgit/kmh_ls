@@ -2,7 +2,7 @@
 
 # General information
 
-Scroll down to [Klangkupolen, Lilla Salen](#org904cb39) for specifics
+Scroll down to [Klangkupolen, Lilla Salen](#org62c4f61) for specifics
 
 
 ## Ambisonics in KMH studios and Lilla salen
@@ -17,7 +17,7 @@ In principle, any kind of encoder may be combined with any kind of decoder provi
 
 ### About the compiled decoders
 
-All decoders use ACN channel order (see [Component order](#orgf54eb98)) and SN3D normalization (see [Normalisation](#org6f73ec0)) and are dual-band, max-rE/rV.
+All decoders use ACN channel order (see [Component order](#orgec28b69)) and SN3D normalization (see [Normalisation](#org15c475d)) and are dual-band, max-rE/rV.
 
 -   A guide to the file names
 
@@ -194,7 +194,7 @@ All decoders use ACN channel order (see [Component order](#orgf54eb98)) and SN3D
         `$ make -k target=install all`
 
 
-<a id="org904cb39"></a>
+<a id="org62c4f61"></a>
 
 # Klangkupolen, Lilla Salen
 
@@ -209,13 +209,13 @@ In Klangkupolen the channel order from the mixer is channel 1-29 for the regular
 The layout is ordered clockwise starting at speaker one.
 
 
-<a id="org9292fc8"></a>
+<a id="org9928ad5"></a>
 
 ### Speaker positions
 
 All distances and heigths are measured from 1.25m height from floor.
 
-<table id="org012d419" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table id="org92f7c7c" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -651,7 +651,7 @@ All distances and heigths are measured from 1.25m height from floor.
 
 -   29 speakers
 
-    A setup file for the current speaker arrangments in Lilla Salen (29 speakers) according to [Speaker positions](#org9292fc8) for use with the Ircam spat package. 
+    A setup file for the current speaker arrangments in Lilla Salen (29 speakers) according to [Speaker positions](#org9928ad5) for use with the Ircam spat package. 
     
     The following file may be used for a `spat.viewer @numspeakers 29 @showlistener 1 @viewpoint top @width 1200 @height 600`:
     
@@ -660,7 +660,7 @@ All distances and heigths are measured from 1.25m height from floor.
 
 -   45 speakers
 
-    A setup file for the current speaker arrangments in Lilla Salen (45 speakers) according to [Speaker positions](#org9292fc8) for use with the Ircam spat package. 
+    A setup file for the current speaker arrangments in Lilla Salen (45 speakers) according to [Speaker positions](#org9928ad5) for use with the Ircam spat package. 
     
     The following file may be used for a `spat.viewer @numspeakers 29 @showlistener 1 @viewpoint top @width 1200 @height 600`:
     
@@ -672,7 +672,7 @@ All distances and heigths are measured from 1.25m height from floor.
 
 -   29 speakers
 
-    A setup file for the current speaker arrangments in Lilla Salen (29 speakers) according to [Speaker positions](#org9292fc8) for use with the Ircam panoramix package. 
+    A setup file for the current speaker arrangments in Lilla Salen (29 speakers) according to [Speaker positions](#org9928ad5) for use with the Ircam panoramix package. 
     
     ![img](./images/panoramix-hoabus.png "A HOA bus in Panoramix")
     
