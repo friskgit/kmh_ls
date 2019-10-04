@@ -2,7 +2,7 @@
 
 # General information
 
-Scroll down to [Klangkupolen, Lilla Salen](#org034fda8) for specifics
+Scroll down to [Klangkupolen, Lilla Salen](#org904cb39) for specifics
 
 
 ## Ambisonics in KMH studios and Lilla salen
@@ -17,7 +17,7 @@ In principle, any kind of encoder may be combined with any kind of decoder provi
 
 ### About the compiled decoders
 
-All decoders use ACN channel order (see [Component order](#orgd6f62e7)) and SN3D normalization (see [Normalisation](#orgac8f963)) and are dual-band, max-rE/rV.
+All decoders use ACN channel order (see [Component order](#orgf54eb98)) and SN3D normalization (see [Normalisation](#org6f73ec0)) and are dual-band, max-rE/rV.
 
 -   A guide to the file names
 
@@ -194,7 +194,505 @@ All decoders use ACN channel order (see [Component order](#orgd6f62e7)) and SN3D
         `$ make -k target=install all`
 
 
-<a id="org034fda8"></a>
+<a id="org904cb39"></a>
 
 # Klangkupolen, Lilla Salen
+
+
+## Specific info for Klangkupolen
+
+
+### Output
+
+In Klangkupolen the channel order from the mixer is channel 1-29 for the regular dome. The lower ring starts at channel 33-48 and the subs are at 49-52. This is the reason that in the decoder the names for the sixteen floor speakers start at 33.
+
+The layout is ordered clockwise starting at speaker one.
+
+
+<a id="org9292fc8"></a>
+
+### Speaker positions
+
+All distances and heigths are measured from 1.25m height from floor.
+
+<table id="org012d419" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">ndx</th>
+<th scope="col" class="org-right">azimuth</th>
+<th scope="col" class="org-right">elevation</th>
+<th scope="col" class="org-right">distance</th>
+<th scope="col" class="org-right">radius</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td class="org-right">1</td>
+<td class="org-right">-34.689614</td>
+<td class="org-right">12.910417</td>
+<td class="org-right">4.61</td>
+<td class="org-right">4.5789148</td>
+</tr>
+
+
+<tr>
+<td class="org-right">2</td>
+<td class="org-right">-13.383763</td>
+<td class="org-right">12.910417</td>
+<td class="org-right">4.61</td>
+<td class="org-right">4.5577825</td>
+</tr>
+
+
+<tr>
+<td class="org-right">3</td>
+<td class="org-right">10.440725</td>
+<td class="org-right">12.910417</td>
+<td class="org-right">4.61</td>
+<td class="org-right">4.5635592</td>
+</tr>
+
+
+<tr>
+<td class="org-right">4</td>
+<td class="org-right">32.117788</td>
+<td class="org-right">12.910417</td>
+<td class="org-right">4.61</td>
+<td class="org-right">4.5386017</td>
+</tr>
+
+
+<tr>
+<td class="org-right">5</td>
+<td class="org-right">55.741675</td>
+<td class="org-right">12.910417</td>
+<td class="org-right">4.61</td>
+<td class="org-right">4.4464181</td>
+</tr>
+
+
+<tr>
+<td class="org-right">6</td>
+<td class="org-right">78.207673</td>
+<td class="org-right">12.910417</td>
+<td class="org-right">4.61</td>
+<td class="org-right">4.4723909</td>
+</tr>
+
+
+<tr>
+<td class="org-right">7</td>
+<td class="org-right">101.49442</td>
+<td class="org-right">12.910417</td>
+<td class="org-right">4.61</td>
+<td class="org-right">4.4461719</td>
+</tr>
+
+
+<tr>
+<td class="org-right">8</td>
+<td class="org-right">124.85167</td>
+<td class="org-right">12.910417</td>
+<td class="org-right">4.61</td>
+<td class="org-right">4.5148007</td>
+</tr>
+
+
+<tr>
+<td class="org-right">9</td>
+<td class="org-right">147.91193</td>
+<td class="org-right">12.910417</td>
+<td class="org-right">4.61</td>
+<td class="org-right">4.5536496</td>
+</tr>
+
+
+<tr>
+<td class="org-right">10</td>
+<td class="org-right">169.17789</td>
+<td class="org-right">12.910417</td>
+<td class="org-right">4.61</td>
+<td class="org-right">4.6069350</td>
+</tr>
+
+
+<tr>
+<td class="org-right">11</td>
+<td class="org-right">-167.82013</td>
+<td class="org-right">12.910417</td>
+<td class="org-right">4.61</td>
+<td class="org-right">4.7018379</td>
+</tr>
+
+
+<tr>
+<td class="org-right">12</td>
+<td class="org-right">-145.63454</td>
+<td class="org-right">12.910417</td>
+<td class="org-right">4.61</td>
+<td class="org-right">4.6822723</td>
+</tr>
+
+
+<tr>
+<td class="org-right">13</td>
+<td class="org-right">-123.78400</td>
+<td class="org-right">12.910417</td>
+<td class="org-right">4.61</td>
+<td class="org-right">4.7368687</td>
+</tr>
+
+
+<tr>
+<td class="org-right">14</td>
+<td class="org-right">-102.64182</td>
+<td class="org-right">12.910417</td>
+<td class="org-right">4.61</td>
+<td class="org-right">4.6743181</td>
+</tr>
+
+
+<tr>
+<td class="org-right">15</td>
+<td class="org-right">-79.887731</td>
+<td class="org-right">12.910417</td>
+<td class="org-right">4.61</td>
+<td class="org-right">4.7101696</td>
+</tr>
+
+
+<tr>
+<td class="org-right">16</td>
+<td class="org-right">-57.926139</td>
+<td class="org-right">12.910417</td>
+<td class="org-right">4.61</td>
+<td class="org-right">4.6119481</td>
+</tr>
+
+
+<tr>
+<td class="org-right">17</td>
+<td class="org-right">-22.349553</td>
+<td class="org-right">34.696822</td>
+<td class="org-right">4.882</td>
+<td class="org-right">4.0761992</td>
+</tr>
+
+
+<tr>
+<td class="org-right">18</td>
+<td class="org-right">22.843958</td>
+<td class="org-right">34.696822</td>
+<td class="org-right">4.882</td>
+<td class="org-right">3.7761827</td>
+</tr>
+
+
+<tr>
+<td class="org-right">19</td>
+<td class="org-right">69.013292</td>
+<td class="org-right">34.696822</td>
+<td class="org-right">4.882</td>
+<td class="org-right">4.0485676</td>
+</tr>
+
+
+<tr>
+<td class="org-right">20</td>
+<td class="org-right">115.56544</td>
+<td class="org-right">34.696822</td>
+<td class="org-right">4.882</td>
+<td class="org-right">4.1015729</td>
+</tr>
+
+
+<tr>
+<td class="org-right">21</td>
+<td class="org-right">158.89992</td>
+<td class="org-right">34.696822</td>
+<td class="org-right">4.882</td>
+<td class="org-right">3.9444645</td>
+</tr>
+
+
+<tr>
+<td class="org-right">22</td>
+<td class="org-right">-158.89763</td>
+<td class="org-right">34.696822</td>
+<td class="org-right">4.882</td>
+<td class="org-right">3.8051807</td>
+</tr>
+
+
+<tr>
+<td class="org-right">23</td>
+<td class="org-right">-114.65354</td>
+<td class="org-right">34.696822</td>
+<td class="org-right">4.882</td>
+<td class="org-right">3.6199724</td>
+</tr>
+
+
+<tr>
+<td class="org-right">24</td>
+<td class="org-right">-68.170128</td>
+<td class="org-right">34.696822</td>
+<td class="org-right">4.882</td>
+<td class="org-right">3.7380476</td>
+</tr>
+
+
+<tr>
+<td class="org-right">25</td>
+<td class="org-right">-45.</td>
+<td class="org-right">69.185799</td>
+<td class="org-right">5.317</td>
+<td class="org-right">1.7225121</td>
+</tr>
+
+
+<tr>
+<td class="org-right">26</td>
+<td class="org-right">45.</td>
+<td class="org-right">69.185799</td>
+<td class="org-right">5.317</td>
+<td class="org-right">1.7225121</td>
+</tr>
+
+
+<tr>
+<td class="org-right">27</td>
+<td class="org-right">135.</td>
+<td class="org-right">69.185799</td>
+<td class="org-right">5.317</td>
+<td class="org-right">1.7225121</td>
+</tr>
+
+
+<tr>
+<td class="org-right">28</td>
+<td class="org-right">-135.</td>
+<td class="org-right">69.185799</td>
+<td class="org-right">5.317</td>
+<td class="org-right">1.7225121</td>
+</tr>
+
+
+<tr>
+<td class="org-right">29</td>
+<td class="org-right">0.</td>
+<td class="org-right">90.</td>
+<td class="org-right">5.576</td>
+<td class="org-right">0</td>
+</tr>
+
+
+<tr>
+<td class="org-right">33</td>
+<td class="org-right">-8.439614</td>
+<td class="org-right">-3.089583</td>
+<td class="org-right">4.61</td>
+<td class="org-right">4.5789148</td>
+</tr>
+
+
+<tr>
+<td class="org-right">34</td>
+<td class="org-right">-2.133763</td>
+<td class="org-right">-3.089583</td>
+<td class="org-right">4.61</td>
+<td class="org-right">4.5577825</td>
+</tr>
+
+
+<tr>
+<td class="org-right">35</td>
+<td class="org-right">21.690725</td>
+<td class="org-right">-3.089583</td>
+<td class="org-right">4.61</td>
+<td class="org-right">4.5635592</td>
+</tr>
+
+
+<tr>
+<td class="org-right">36</td>
+<td class="org-right">43.367788</td>
+<td class="org-right">-3.089583</td>
+<td class="org-right">4.61</td>
+<td class="org-right">4.5386017</td>
+</tr>
+
+
+<tr>
+<td class="org-right">37</td>
+<td class="org-right">66.991675</td>
+<td class="org-right">-3.089583</td>
+<td class="org-right">4.61</td>
+<td class="org-right">4.4464181</td>
+</tr>
+
+
+<tr>
+<td class="org-right">38</td>
+<td class="org-right">89.457673</td>
+<td class="org-right">-3.089583</td>
+<td class="org-right">4.61</td>
+<td class="org-right">4.4723909</td>
+</tr>
+
+
+<tr>
+<td class="org-right">39</td>
+<td class="org-right">112.74442</td>
+<td class="org-right">-3.089583</td>
+<td class="org-right">4.61</td>
+<td class="org-right">4.4461719</td>
+</tr>
+
+
+<tr>
+<td class="org-right">40</td>
+<td class="org-right">136.10167</td>
+<td class="org-right">-3.089583</td>
+<td class="org-right">4.61</td>
+<td class="org-right">4.5148007</td>
+</tr>
+
+
+<tr>
+<td class="org-right">41</td>
+<td class="org-right">159.16193</td>
+<td class="org-right">-3.089583</td>
+<td class="org-right">4.61</td>
+<td class="org-right">4.5536496</td>
+</tr>
+
+
+<tr>
+<td class="org-right">42</td>
+<td class="org-right">180.42789</td>
+<td class="org-right">-3.089583</td>
+<td class="org-right">4.61</td>
+<td class="org-right">4.6069350</td>
+</tr>
+
+
+<tr>
+<td class="org-right">43</td>
+<td class="org-right">-156.57013</td>
+<td class="org-right">-3.089583</td>
+<td class="org-right">4.61</td>
+<td class="org-right">4.7018379</td>
+</tr>
+
+
+<tr>
+<td class="org-right">44</td>
+<td class="org-right">-134.38454</td>
+<td class="org-right">-3.089583</td>
+<td class="org-right">4.61</td>
+<td class="org-right">4.6822723</td>
+</tr>
+
+
+<tr>
+<td class="org-right">45</td>
+<td class="org-right">-112.534</td>
+<td class="org-right">-3.089583</td>
+<td class="org-right">4.61</td>
+<td class="org-right">4.7368687</td>
+</tr>
+
+
+<tr>
+<td class="org-right">46</td>
+<td class="org-right">-91.39182</td>
+<td class="org-right">-3.089583</td>
+<td class="org-right">4.61</td>
+<td class="org-right">4.6743181</td>
+</tr>
+
+
+<tr>
+<td class="org-right">47</td>
+<td class="org-right">-68.637731</td>
+<td class="org-right">-3.089583</td>
+<td class="org-right">4.61</td>
+<td class="org-right">4.7101696</td>
+</tr>
+
+
+<tr>
+<td class="org-right">48</td>
+<td class="org-right">-46.676139</td>
+<td class="org-right">-3.089583</td>
+<td class="org-right">4.61</td>
+<td class="org-right">4.6119481</td>
+</tr>
+</tbody>
+</table>
+
+
+### Spat
+
+-   29 speakers
+
+    A setup file for the current speaker arrangments in Lilla Salen (29 speakers) according to [Speaker positions](#org9292fc8) for use with the Ircam spat package. 
+    
+    The following file may be used for a `spat.viewer @numspeakers 29 @showlistener 1 @viewpoint top @width 1200 @height 600`:
+    
+        speakers aed
+        0 12.910417 4.61 -26.34 12.910417 4.61 -58.7 12.910417 4.61 -106 12.910417 4.61 -129.35 12.910417 4.61 129.35 12.910417 4.61 106 12.910417 4.61 58.7 12.910417 4.61 45 12.910417 4.61 -45 12.910417 4.61 -135 12.910417 4.61 135 12.910417 4.61 0 12.910417 4.61 hline 12.910417 4.61
+
+-   45 speakers
+
+    A setup file for the current speaker arrangments in Lilla Salen (45 speakers) according to [Speaker positions](#org9292fc8) for use with the Ircam spat package. 
+    
+    The following file may be used for a `spat.viewer @numspeakers 29 @showlistener 1 @viewpoint top @width 1200 @height 600`:
+    
+        speakers aed
+        0 12.910417 4.61 -26.34 12.910417 4.61 -58.7 12.910417 4.61 -106 12.910417 4.61 -129.35 12.910417 4.61 129.35 12.910417 4.61 106 12.910417 4.61 58.7 12.910417 4.61 45 12.910417 4.61 -45 12.910417 4.61 -135 12.910417 4.61 135 12.910417 4.61 0 12.910417 4.61 hline 12.910417 4.61
+
+
+### Panoramix
+
+-   29 speakers
+
+    A setup file for the current speaker arrangments in Lilla Salen (29 speakers) according to [Speaker positions](#org9292fc8) for use with the Ircam panoramix package. 
+    
+    ![img](./images/panoramix-hoabus.png "A HOA bus in Panoramix")
+    
+    The following file may be loaded in a HOA bus track (See [fig:hoabus](#fig:hoabus)) in panormaix by selecting the text below, clicking the `spekers...` button and click `paste` in the upper left corner of the newly opened window. 
+    
+        /speaker/number 13
+        /speaker/correction/delay off
+        /speaker/correction/gain off
+        /speakers/aed 24.6 0 3.26 -26.34 0 3.3 -58.7 0 3.35 -106 0 3.27 -129.35 0 3.364 129.35 0 3.376 106 0 3.262 58.7 0 3.296 45 18 3.02 -45 18 3.02 -135 18 3.05 135 18 3.02 0 90 1.6
+        /speaker/1/delay 0
+        /speaker/2/delay 0
+        /speaker/3/delay 0
+        /speaker/4/delay 0
+        /speaker/5/delay 0
+        /speaker/6/delay 0
+        /speaker/7/delay 0
+        /speaker/8/delay 0
+        /speaker/9/delay 0
+        /speaker/10/delay 0
+        /speaker/11/delay 0
+        /speaker/12/delay 0
+        /speaker/13/delay 0
 
