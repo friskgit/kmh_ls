@@ -113,7 +113,7 @@ input_mask(1) = (_,_,_,_);
 
 //declare name		"Fill in name in configuration section below";
 declare version 	"1.2";
-declare author 		"AmbisonicDecoderToolkit";
+declare author 		"AmbisonicDecoderToolkit, Henrik Frisk";
 declare license 	"BSD 3-Clause License";
 declare copyright	"(c) Aaron J. Heller 2013";
 
@@ -487,9 +487,9 @@ gate_bus(order,o)       =  gate(order==o);
 
 
 // route (not used)
-route(n_inputs,n_outputs,outs) = m.bus(n_inputs)
-                               <: par(i,n_outputs,(0,gate_bus(i,outs)):>_)
-                               : m.bus(n_outputs);
+//route(n_inputs,n_outputs,outs) = m.bus(n_inputs)
+//                               <: par(i,n_outputs,(0,gate_bus(i,outs)):>_
+
 
 //process = route(4,4,(3,1,1,2)); // test
 

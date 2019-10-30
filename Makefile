@@ -28,6 +28,9 @@ target 	:= all
 
 .PHONY : all $(subdirs) update_makefile
 
+print_subdirs :
+	@echo $(subdirs)
+
 clean_svg :
 	$(foreach var, $(subdirs), $(shell rm "$(var)"/doc/*-svg/*.svg))
 
@@ -38,4 +41,5 @@ $(subdirs) :
 	$(MAKE) -C $@ $(target)
 
 update_makefile : $(target_makefile)
-	$(foreach var, $(subdirs), $(shell cp "$<" "$(var)/Makefile")) 
+	$(foreach var, $(subdirs), $(shell cp "$<" "$(var)/Makefile"))
+

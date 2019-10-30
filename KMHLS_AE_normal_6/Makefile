@@ -18,7 +18,7 @@
 # * jack
 # * app
 # * runapp (will run the application)
-# * max
+# * max  (made a test with faust2msp for max 8 compatibility 30/10 2019)
 # * sc (supercollider)
 # * pd
 # * mdoc
@@ -280,6 +280,12 @@ ambixinstall :
 	$(if $(ambix), $(if $(wildcard $(srcdir)/$(LOC114)*.dsp), install $(wildcard $(ambixdir)/*.config) $(AMBIX_INSTALL)/$(amb114))) \
 	$(if $(ambix), $(if $(wildcard $(srcdir)/$(LOCLS)*.dsp), install $(wildcard $(ambixdir)/*.config) $(AMBIX_INSTALL)/$(ambls)))
 
+update_author :
+	$(foreach var, $(src), $(shell sed -i.bu 's/AmbisonicDecoderToolkit"/AmbisonicDecoderToolkit, Henrik Frisk"/' $(var)))
+
+clean_max :
+	  @rm -rf $(maxdir)/*
+	  
 clean_all :
 	@rm  -rf $(REQUIRED_DIRS)
 

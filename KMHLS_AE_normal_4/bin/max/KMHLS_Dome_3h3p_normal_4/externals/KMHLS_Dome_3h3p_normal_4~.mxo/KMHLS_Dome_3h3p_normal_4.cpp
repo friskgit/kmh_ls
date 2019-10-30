@@ -1,11 +1,11 @@
 /* ------------------------------------------------------------
-author: "AmbisonicDecoderToolkit"
+author: "AmbisonicDecoderToolkit, Henrik Frisk"
 copyright: "(c) Aaron J. Heller 2013"
 license: "BSD 3-Clause License"
 name: "KMHLS_Dome_3h3p_normal_4"
 version: "1.2"
-Code generated with Faust 2.6.3 (https://faust.grame.fr)
-Compilation options: cpp, -double -ftz 0
+Code generated with Faust 2.18.3 (https://faust.grame.fr)
+Compilation options: -lang cpp -double -ftz 0
 ------------------------------------------------------------ */
 
 #ifndef  __mydsp_H__
@@ -62,7 +62,6 @@ Compilation options: cpp, -double -ftz 0
 #include <string>
 #include <vector>
 #include <map>
-#include <math.h>
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -81,6 +80,7 @@ Compilation options: cpp, -double -ftz 0
 
 #define FAUSTFLOAT double
 
+/************************** BEGIN UI.h **************************/
 /************************************************************************
  FAUST Architecture File
  Copyright (C) 2003-2017 GRAME, Centre National de Creation Musicale
@@ -120,45 +120,56 @@ Compilation options: cpp, -double -ftz 0
 
 struct Soundfile;
 
-class UI
+template <typename REAL>
+class UIReal
+{
+    
+    public:
+        
+        UIReal() {}
+        virtual ~UIReal() {}
+        
+        // -- widget's layouts
+        
+        virtual void openTabBox(const char* label) = 0;
+        virtual void openHorizontalBox(const char* label) = 0;
+        virtual void openVerticalBox(const char* label) = 0;
+        virtual void closeBox() = 0;
+        
+        // -- active widgets
+        
+        virtual void addButton(const char* label, REAL* zone) = 0;
+        virtual void addCheckButton(const char* label, REAL* zone) = 0;
+        virtual void addVerticalSlider(const char* label, REAL* zone, REAL init, REAL min, REAL max, REAL step) = 0;
+        virtual void addHorizontalSlider(const char* label, REAL* zone, REAL init, REAL min, REAL max, REAL step) = 0;
+        virtual void addNumEntry(const char* label, REAL* zone, REAL init, REAL min, REAL max, REAL step) = 0;
+        
+        // -- passive widgets
+        
+        virtual void addHorizontalBargraph(const char* label, REAL* zone, REAL min, REAL max) = 0;
+        virtual void addVerticalBargraph(const char* label, REAL* zone, REAL min, REAL max) = 0;
+        
+        // -- soundfiles
+        
+        virtual void addSoundfile(const char* label, const char* filename, Soundfile** sf_zone) = 0;
+        
+        // -- metadata declarations
+        
+        virtual void declare(REAL* zone, const char* key, const char* val) {}
+};
+
+class UI : public UIReal<FAUSTFLOAT>
 {
 
     public:
 
         UI() {}
-
         virtual ~UI() {}
-
-        // -- widget's layouts
-
-        virtual void openTabBox(const char* label) = 0;
-        virtual void openHorizontalBox(const char* label) = 0;
-        virtual void openVerticalBox(const char* label) = 0;
-        virtual void closeBox() = 0;
-
-        // -- active widgets
-
-        virtual void addButton(const char* label, FAUSTFLOAT* zone) = 0;
-        virtual void addCheckButton(const char* label, FAUSTFLOAT* zone) = 0;
-        virtual void addVerticalSlider(const char* label, FAUSTFLOAT* zone, FAUSTFLOAT init, FAUSTFLOAT min, FAUSTFLOAT max, FAUSTFLOAT step) = 0;
-        virtual void addHorizontalSlider(const char* label, FAUSTFLOAT* zone, FAUSTFLOAT init, FAUSTFLOAT min, FAUSTFLOAT max, FAUSTFLOAT step) = 0;
-        virtual void addNumEntry(const char* label, FAUSTFLOAT* zone, FAUSTFLOAT init, FAUSTFLOAT min, FAUSTFLOAT max, FAUSTFLOAT step) = 0;
-
-        // -- passive widgets
-
-        virtual void addHorizontalBargraph(const char* label, FAUSTFLOAT* zone, FAUSTFLOAT min, FAUSTFLOAT max) = 0;
-        virtual void addVerticalBargraph(const char* label, FAUSTFLOAT* zone, FAUSTFLOAT min, FAUSTFLOAT max) = 0;
-    
-        // -- soundfiles
-    
-        virtual void addSoundfile(const char* label, const char* filename, Soundfile** sf_zone) = 0;
-
-        // -- metadata declarations
-
-        virtual void declare(FAUSTFLOAT*, const char*, const char*) {}
 };
 
 #endif
+/**************************  END  UI.h **************************/
+/************************** BEGIN JSONUI.h **************************/
 /************************************************************************
  FAUST Architecture File
  Copyright (C) 2003-2017 GRAME, Centre National de Creation Musicale
@@ -189,9 +200,11 @@ class UI
 #include <map>
 #include <string>
 #include <iostream>
+#include <iomanip>
 #include <sstream>
-#include <assert.h>
+#include <algorithm>
 
+/************************** BEGIN PathBuilder.h **************************/
 /************************************************************************
  FAUST Architecture File
  Copyright (C) 2003-2017 GRAME, Centre National de Creation Musicale
@@ -251,9 +264,14 @@ class PathBuilder
             return res;
         }
     
+        void pushLabel(const std::string& label) { fControlsLevel.push_back(label); }
+        void popLabel() { fControlsLevel.pop_back(); }
+    
 };
 
 #endif  // FAUST_PATHBUILDER_H
+/**************************  END  PathBuilder.h **************************/
+/************************** BEGIN meta.h **************************/
 /************************************************************************
  FAUST Architecture File
  Copyright (C) 2003-2017 GRAME, Centre National de Creation Musicale
@@ -282,11 +300,13 @@ class PathBuilder
 
 struct Meta
 {
-    virtual void declare(const char* key, const char* value) = 0;
     virtual ~Meta() {};
+    virtual void declare(const char* key, const char* value) = 0;
+    
 };
 
 #endif
+/**************************  END  meta.h **************************/
 
 /*******************************************************************************
  * JSONUI : Faust User Interface
@@ -294,29 +314,31 @@ struct Meta
  ******************************************************************************/
 
 template <typename REAL>
-class JSONUIAux : public PathBuilder, public Meta, public UI
+class JSONUIAux : public PathBuilder, public Meta, public UIReal<REAL>
 {
 
     protected:
     
-        std::stringstream fJSON;
         std::stringstream fUI;
         std::stringstream fMeta;
         std::vector<std::pair <std::string, std::string> > fMetaAux;
-        std::string fVersion;
-        std::string fOptions;
+        std::string fVersion;           // Compiler version
+        std::string fCompileOptions;    // Compilation options
+        std::vector<std::string> fLibraryList;
+        std::vector<std::string> fIncludePathnames;
         std::string fName;
         std::string fFileName;
         std::string fExpandedCode;
         std::string fSHAKey;
-        std::string fDSPSize;
+        int fDSPSize;                   // In bytes
         std::map<std::string, int> fPathTable;
+        bool fExtended;
     
         char fCloseUIPar;
         char fCloseMetaPar;
         int fTab;
     
-        int fInputs, fOutputs;
+        int fInputs, fOutputs, fSRIndex;
          
         void tab(int n, std::ostream& fout)
         {
@@ -324,6 +346,22 @@ class JSONUIAux : public PathBuilder, public Meta, public UI
             while (n-- > 0) {
                 fout << '\t';
             }
+        }
+    
+        std::string flatten(const std::string& src)
+        {
+            std::string dst;
+            for (size_t i = 0; i < src.size(); i++) {
+                switch (src[i]) {
+                    case '\n':
+                    case '\t':
+                        break;
+                    default:
+                        dst += src[i];
+                        break;
+                }
+            }
+            return dst;
         }
     
         void addMeta(int tab_val, bool quote = true)
@@ -341,42 +379,9 @@ class JSONUIAux : public PathBuilder, public Meta, public UI
             }
         }
     
-        // Add escape (that is  '\') for internal strings
-        inline std::string flatten(const std::string& src)
+        int getAddressIndex(const std::string& path)
         {
-            bool in_string = false;
-            std::stringstream dst;
-            for (size_t i = 0; i < src.size(); i++) {
-                switch (src[i]) {
-                    case '\n':
-                    case '\t':
-                        break;
-                    case ' ':
-                        if (in_string) dst << src[i];
-                        break;
-                    case '"':
-                        dst << "\\" << '"';
-                        in_string = !in_string;
-                        break;
-                    case '\\':
-                        dst << '\\' << '\\';
-                        break;
-                    default:
-                        dst << src[i];
-                        break;
-                }
-            }
-            return dst.str();
-        }
-    
-        inline std::string getAddressIndex(const std::string& path)
-        {
-            if (fPathTable.find(path) != fPathTable.end()) {
-                std::stringstream num; num << fPathTable[path];
-                return num.str();
-            } else {
-                return "-1";
-            }
+            return (fPathTable.find(path) != fPathTable.end()) ? fPathTable[path] : -1;
         }
       
      public:
@@ -385,29 +390,32 @@ class JSONUIAux : public PathBuilder, public Meta, public UI
                   const std::string& filename,
                   int inputs,
                   int outputs,
+                  int sr_index,
                   const std::string& sha_key,
                   const std::string& dsp_code,
                   const std::string& version,
-                  const std::string& options,
-                  const std::string& size,
+                  const std::string& compile_options,
+                  const std::vector<std::string>& library_list,
+                  const std::vector<std::string>& include_pathnames,
+                  int size,
                   const std::map<std::string, int>& path_table)
         {
-            init(name, filename, inputs, outputs, sha_key, dsp_code,  version, options, size, path_table);
+            init(name, filename, inputs, outputs, sr_index, sha_key, dsp_code, version, compile_options, library_list, include_pathnames, size, path_table);
         }
 
         JSONUIAux(const std::string& name, const std::string& filename, int inputs, int outputs)
         {
-            init(name, filename, inputs, outputs, "", "", "", "", "", std::map<std::string, int>());
+            init(name, filename, inputs, outputs, -1, "", "", "", "", std::vector<std::string>(), std::vector<std::string>(), -1, std::map<std::string, int>());
         }
 
         JSONUIAux(int inputs, int outputs)
         {
-            init("", "", inputs, outputs, "", "","", "", "", std::map<std::string, int>());
+            init("", "", inputs, outputs, -1, "", "","", "", std::vector<std::string>(), std::vector<std::string>(), -1, std::map<std::string, int>());
         }
         
         JSONUIAux()
         {
-            init("", "", -1, -1, "", "", "", "", "", std::map<std::string, int>());
+            init("", "", -1, -1, -1, "", "", "", "", std::vector<std::string>(), std::vector<std::string>(), -1, std::map<std::string, int>());
         }
  
         virtual ~JSONUIAux() {}
@@ -415,19 +423,30 @@ class JSONUIAux : public PathBuilder, public Meta, public UI
         void setInputs(int inputs) { fInputs = inputs; }
         void setOutputs(int outputs) { fOutputs = outputs; }
     
+        void setSRIndex(int sr_index) { fSRIndex = sr_index; }
+    
         // Init may be called multiple times so fMeta and fUI are reinitialized
         void init(const std::string& name,
                   const std::string& filename,
                   int inputs,
                   int outputs,
+                  int sr_index,
                   const std::string& sha_key,
                   const std::string& dsp_code,
                   const std::string& version,
-                  const std::string& options,
-                  const std::string& size,
-                  const std::map<std::string, int>& path_table)
+                  const std::string& compile_options,
+                  const std::vector<std::string>& library_list,
+                  const std::vector<std::string>& include_pathnames,
+                  int size,
+                  const std::map<std::string, int>& path_table,
+                  bool extended = false)
         {
             fTab = 1;
+            fExtended = extended;
+            if (fExtended) {
+                fUI << std::setprecision(std::numeric_limits<REAL>::max_digits10);
+                fMeta << std::setprecision(std::numeric_limits<REAL>::max_digits10);
+            }
             
             // Start Meta generation
             fMeta.str("");
@@ -444,25 +463,28 @@ class JSONUIAux : public PathBuilder, public Meta, public UI
             fFileName = filename;
             fInputs = inputs;
             fOutputs = outputs;
+            fSRIndex = sr_index;
             fExpandedCode = dsp_code;
             fSHAKey = sha_key;
             fDSPSize = size;
             fPathTable = path_table;
             fVersion = version;
-            fOptions = options;
+            fCompileOptions = compile_options;
+            fLibraryList = library_list;
+            fIncludePathnames = include_pathnames;
         }
    
         // -- widget's layouts
     
         virtual void openGenericGroup(const char* label, const char* name)
         {
-            fControlsLevel.push_back(label);
+            pushLabel(label);
             fUI << fCloseUIPar;
             tab(fTab, fUI); fUI << "{";
             fTab += 1;
             tab(fTab, fUI); fUI << "\"type\": \"" << name << "\",";
             tab(fTab, fUI); fUI << "\"label\": \"" << label << "\",";
-            addMeta(fTab + 1);
+            addMeta(fTab);
             tab(fTab, fUI); fUI << "\"items\": [";
             fCloseUIPar = ' ';
             fTab += 1;
@@ -485,7 +507,7 @@ class JSONUIAux : public PathBuilder, public Meta, public UI
     
         virtual void closeBox()
         {
-            fControlsLevel.pop_back();
+            popLabel();
             fTab -= 1;
             tab(fTab, fUI); fUI << "]";
             fTab -= 1;
@@ -498,19 +520,20 @@ class JSONUIAux : public PathBuilder, public Meta, public UI
         virtual void addGenericButton(const char* label, const char* name)
         {
             std::string path = buildPath(label);
-            std::string index = getAddressIndex(path);
             
             fUI << fCloseUIPar;
             tab(fTab, fUI); fUI << "{";
-            tab(fTab + 1, fUI); fUI << "\"type\": \"" << name << "\",";
-            tab(fTab + 1, fUI); fUI << "\"label\": \"" << label << "\",";
+            fTab += 1;
+            tab(fTab, fUI); fUI << "\"type\": \"" << name << "\",";
+            tab(fTab, fUI); fUI << "\"label\": \"" << label << "\",";
             if (fPathTable.size() > 0) {
-                tab(fTab + 1, fUI); fUI << "\"address\": \"" << path << "\",";
-                tab(fTab + 1, fUI); fUI << "\"index\": \"" << index << "\"" << ((fMetaAux.size() > 0) ? "," : "");
+                tab(fTab, fUI); fUI << "\"address\": \"" << path << "\",";
+                tab(fTab, fUI); fUI << "\"index\": " << getAddressIndex(path) << ((fMetaAux.size() > 0) ? "," : "");
             } else {
-                tab(fTab + 1, fUI); fUI << "\"address\": \"" << path << "\"" << ((fMetaAux.size() > 0) ? "," : "");
+                tab(fTab, fUI); fUI << "\"address\": \"" << path << "\"" << ((fMetaAux.size() > 0) ? "," : "");
             }
-            addMeta(fTab + 1, false);
+            addMeta(fTab, false);
+            fTab -= 1;
             tab(fTab, fUI); fUI << "}";
             fCloseUIPar = ',';
         }
@@ -528,21 +551,22 @@ class JSONUIAux : public PathBuilder, public Meta, public UI
         virtual void addGenericEntry(const char* label, const char* name, REAL init, REAL min, REAL max, REAL step)
         {
             std::string path = buildPath(label);
-            std::string index = getAddressIndex(path);
             
             fUI << fCloseUIPar;
             tab(fTab, fUI); fUI << "{";
-            tab(fTab + 1, fUI); fUI << "\"type\": \"" << name << "\",";
-            tab(fTab + 1, fUI); fUI << "\"label\": \"" << label << "\",";
-            tab(fTab + 1, fUI); fUI << "\"address\": \"" << path << "\",";
+            fTab += 1;
+            tab(fTab, fUI); fUI << "\"type\": \"" << name << "\",";
+            tab(fTab, fUI); fUI << "\"label\": \"" << label << "\",";
+            tab(fTab, fUI); fUI << "\"address\": \"" << path << "\",";
             if (fPathTable.size() > 0) {
-                tab(fTab + 1, fUI); fUI << "\"index\": \"" << index << "\",";
+                tab(fTab, fUI); fUI << "\"index\": " << getAddressIndex(path) << ",";
             }
-            addMeta(fTab + 1);
-            tab(fTab + 1, fUI); fUI << "\"init\": \"" << init << "\",";
-            tab(fTab + 1, fUI); fUI << "\"min\": \"" << min << "\",";
-            tab(fTab + 1, fUI); fUI << "\"max\": \"" << max << "\",";
-            tab(fTab + 1, fUI); fUI << "\"step\": \"" << step << "\"";
+            addMeta(fTab);
+            tab(fTab, fUI); fUI << "\"init\": " << init << ",";
+            tab(fTab, fUI); fUI << "\"min\": " << min << ",";
+            tab(fTab, fUI); fUI << "\"max\": " << max << ",";
+            tab(fTab, fUI); fUI << "\"step\": " << step;
+            fTab -= 1;
             tab(fTab, fUI); fUI << "}";
             fCloseUIPar = ',';
         }
@@ -567,19 +591,20 @@ class JSONUIAux : public PathBuilder, public Meta, public UI
         virtual void addGenericBargraph(const char* label, const char* name, REAL min, REAL max) 
         {
             std::string path = buildPath(label);
-            std::string index = getAddressIndex(path);
             
             fUI << fCloseUIPar;
             tab(fTab, fUI); fUI << "{";
-            tab(fTab + 1, fUI); fUI << "\"type\": \"" << name << "\",";
-            tab(fTab + 1, fUI); fUI << "\"label\": \"" << label << "\",";
-            tab(fTab + 1, fUI); fUI << "\"address\": \"" << path << "\",";
+            fTab += 1;
+            tab(fTab, fUI); fUI << "\"type\": \"" << name << "\",";
+            tab(fTab, fUI); fUI << "\"label\": \"" << label << "\",";
+            tab(fTab, fUI); fUI << "\"address\": \"" << path << "\",";
             if (fPathTable.size() > 0) {
-                tab(fTab + 1, fUI); fUI << "\"index\": \"" << index << "\",";
+                tab(fTab, fUI); fUI << "\"index\": " << getAddressIndex(path) << ",";
             }
-            addMeta(fTab + 1);
-            tab(fTab + 1, fUI); fUI << "\"min\": \"" << min << "\",";
-            tab(fTab + 1, fUI); fUI << "\"max\": \"" << max << "\"";
+            addMeta(fTab);
+            tab(fTab, fUI); fUI << "\"min\": " << min << ",";
+            tab(fTab, fUI); fUI << "\"max\": " << max;
+            fTab -= 1;
             tab(fTab, fUI); fUI << "}";
             fCloseUIPar = ',';
         }
@@ -596,13 +621,19 @@ class JSONUIAux : public PathBuilder, public Meta, public UI
     
         virtual void addSoundfile(const char* label, const char* url, Soundfile** zone)
         {
+            std::string path = buildPath(label);
+            
             fUI << fCloseUIPar;
             tab(fTab, fUI); fUI << "{";
-            tab(fTab + 1, fUI); fUI << "\"type\": \"" << "soundfile" << "\",";
-            tab(fTab + 1, fUI); fUI << "\"label\": \"" << label << "\"" << ",";
-            tab(fTab + 1, fUI); fUI << "\"url\": \"" << url << "\"" << ",";
-            tab(fTab + 1, fUI); fUI << "\"address\": \"" << buildPath(label) << "\"" << ((fMetaAux.size() > 0) ? "," : "");
-            addMeta(fTab + 1, false);
+            fTab += 1;
+            tab(fTab, fUI); fUI << "\"type\": \"" << "soundfile" << "\",";
+            tab(fTab, fUI); fUI << "\"label\": \"" << label << "\"" << ",";
+            tab(fTab, fUI); fUI << "\"url\": \"" << url << "\"" << ",";
+            tab(fTab, fUI); fUI << "\"address\": \"" << path << "\"" << ((fPathTable.size() > 0) ? "," : "");
+            if (fPathTable.size() > 0) {
+                tab(fTab, fUI); fUI << "\"index\": " << getAddressIndex(path);
+            }
+            fTab -= 1;
             tab(fTab, fUI); fUI << "}";
             fCloseUIPar = ',';
         }
@@ -629,34 +660,57 @@ class JSONUIAux : public PathBuilder, public Meta, public UI
         std::string JSON(bool flat = false)
         {
             fTab = 0;
-            fJSON << "{";
+            std::stringstream JSON;
+            if (fExtended) {
+                JSON << std::setprecision(std::numeric_limits<REAL>::max_digits10);
+            }
+            JSON << "{";
             fTab += 1;
-            tab(fTab, fJSON); fJSON << "\"name\": \"" << fName << "\",";
-            tab(fTab, fJSON); fJSON << "\"filename\": \"" << fFileName << "\",";
-            if (fVersion != "") { tab(fTab, fJSON); fJSON << "\"version\": \"" << fVersion << "\","; }
-            if (fOptions != "") { tab(fTab, fJSON); fJSON << "\"options\": \"" << fOptions << "\","; }
-            if (fDSPSize != "") { tab(fTab, fJSON); fJSON << "\"size\": \"" << fDSPSize << "\","; }
-            if (fSHAKey != "") { tab(fTab, fJSON); fJSON << "\"sha_key\": \"" << fSHAKey << "\","; }
-            if (fExpandedCode != "") { tab(fTab, fJSON); fJSON << "\"code\": \"" << fExpandedCode << "\","; }
-            tab(fTab, fJSON); fJSON << "\"inputs\": \"" << fInputs << "\","; 
-            tab(fTab, fJSON); fJSON << "\"outputs\": \"" << fOutputs << "\",";
+            tab(fTab, JSON); JSON << "\"name\": \"" << fName << "\",";
+            tab(fTab, JSON); JSON << "\"filename\": \"" << fFileName << "\",";
+            if (fVersion != "") { tab(fTab, JSON); JSON << "\"version\": \"" << fVersion << "\","; }
+            if (fCompileOptions != "") { tab(fTab, JSON); JSON << "\"compile_options\": \"" <<  fCompileOptions << "\","; }
+            if (fLibraryList.size() > 0) {
+                tab(fTab, JSON);
+                JSON << "\"library_list\": [";
+                for (size_t i = 0; i < fLibraryList.size(); i++) {
+                    JSON << "\"" << fLibraryList[i] << "\"";
+                    if (i < (fLibraryList.size() - 1)) JSON << ",";
+                }
+                JSON << "],";
+            }
+            if (fIncludePathnames.size() > 0) {
+                tab(fTab, JSON);
+                JSON << "\"include_pathnames\": [";
+                for (size_t i = 0; i < fIncludePathnames.size(); i++) {
+                    JSON << "\"" << fIncludePathnames[i] << "\"";
+                    if (i < (fIncludePathnames.size() - 1)) JSON << ",";
+                }
+                JSON << "],";
+            }
+            if (fDSPSize != -1) { tab(fTab, JSON); JSON << "\"size\": " << fDSPSize << ","; }
+            if (fSHAKey != "") { tab(fTab, JSON); JSON << "\"sha_key\": \"" << fSHAKey << "\","; }
+            if (fExpandedCode != "") { tab(fTab, JSON); JSON << "\"code\": \"" << fExpandedCode << "\","; }
+            tab(fTab, JSON); JSON << "\"inputs\": " << fInputs << ",";
+            tab(fTab, JSON); JSON << "\"outputs\": " << fOutputs << ",";
+            if (fSRIndex != -1) { tab(fTab, JSON); JSON << "\"sr_index\": " << fSRIndex << ","; }
             tab(fTab, fMeta); fMeta << "],";
             tab(fTab, fUI); fUI << "]";
             fTab -= 1;
             if (fCloseMetaPar == ',') { // If "declare" has been called, fCloseMetaPar state is now ','
-                fJSON << fMeta.str() << fUI.str();
+                JSON << fMeta.str() << fUI.str();
             } else {
-                fJSON << fUI.str();
+                JSON << fUI.str();
             }
-            tab(fTab, fJSON); fJSON << "}";
-            return (flat) ? flatten(fJSON.str()) : fJSON.str();
+            tab(fTab, JSON); JSON << "}";
+            return (flat) ? flatten(JSON.str()) : JSON.str();
         }
     
 };
 
 // Externally available class using FAUSTFLOAT
 
-class JSONUI : public JSONUIAux<FAUSTFLOAT>
+class JSONUI : public JSONUIAux<FAUSTFLOAT>, public UI
 {
     public :
     
@@ -664,16 +718,21 @@ class JSONUI : public JSONUIAux<FAUSTFLOAT>
                const std::string& filename,
                int inputs,
                int outputs,
+               int sr_index,
                const std::string& sha_key,
                const std::string& dsp_code,
                const std::string& version,
-               const std::string& options,
-               const std::string& size,
+               const std::string& compile_options,
+               const std::vector<std::string>& library_list,
+               const std::vector<std::string>& include_pathnames,
+               int size,
                const std::map<std::string, int>& path_table):
         JSONUIAux<FAUSTFLOAT>(name, filename,
                               inputs, outputs,
+                              sr_index,
                               sha_key, dsp_code,
-                              version, options,
+                              version, compile_options,
+                              library_list, include_pathnames,
                               size, path_table)
         {}
         
@@ -687,11 +746,286 @@ class JSONUI : public JSONUIAux<FAUSTFLOAT>
         JSONUI():JSONUIAux<FAUSTFLOAT>()
         {}
     
+        virtual void openTabBox(const char* label)
+        {
+            JSONUIAux<FAUSTFLOAT>::openTabBox(label);
+        }
+        virtual void openHorizontalBox(const char* label)
+        {
+            JSONUIAux<FAUSTFLOAT>::openHorizontalBox(label);
+        }
+        virtual void openVerticalBox(const char* label)
+        {
+            JSONUIAux<FAUSTFLOAT>::openVerticalBox(label);
+        }
+        virtual void closeBox()
+        {
+            JSONUIAux<FAUSTFLOAT>::closeBox();
+        }
+        
+        // -- active widgets
+        
+        virtual void addButton(const char* label, FAUSTFLOAT* zone)
+        {
+            JSONUIAux<FAUSTFLOAT>::addButton(label, zone);
+        }
+        virtual void addCheckButton(const char* label, FAUSTFLOAT* zone)
+        {
+            JSONUIAux<FAUSTFLOAT>::addCheckButton(label, zone);
+        }
+        virtual void addVerticalSlider(const char* label, FAUSTFLOAT* zone, FAUSTFLOAT init, FAUSTFLOAT min, FAUSTFLOAT max, FAUSTFLOAT step)
+        {
+            JSONUIAux<FAUSTFLOAT>::addVerticalSlider(label, zone, init, min, max, step);
+        }
+        virtual void addHorizontalSlider(const char* label, FAUSTFLOAT* zone, FAUSTFLOAT init, FAUSTFLOAT min, FAUSTFLOAT max, FAUSTFLOAT step)
+        {
+            JSONUIAux<FAUSTFLOAT>::addHorizontalSlider(label, zone, init, min, max, step);
+        }
+        virtual void addNumEntry(const char* label, FAUSTFLOAT* zone, FAUSTFLOAT init, FAUSTFLOAT min, FAUSTFLOAT max, FAUSTFLOAT step)
+        {
+            JSONUIAux<FAUSTFLOAT>::addNumEntry(label, zone, init, min, max, step);
+        }
+        
+        // -- passive widgets
+        
+        virtual void addHorizontalBargraph(const char* label, FAUSTFLOAT* zone, FAUSTFLOAT min, FAUSTFLOAT max)
+        {
+            JSONUIAux<FAUSTFLOAT>::addHorizontalBargraph(label, zone, min, max);
+        }
+        virtual void addVerticalBargraph(const char* label, FAUSTFLOAT* zone, FAUSTFLOAT min, FAUSTFLOAT max)
+        {
+            JSONUIAux<FAUSTFLOAT>::addVerticalBargraph(label, zone, min, max);
+        }
+        
+        // -- soundfiles
+        
+        virtual void addSoundfile(const char* label, const char* filename, Soundfile** sf_zone)
+        {
+            JSONUIAux<FAUSTFLOAT>::addSoundfile(label, filename, sf_zone);
+        }
+        
+        // -- metadata declarations
+        
+        virtual void declare(FAUSTFLOAT* zone, const char* key, const char* val)
+        {
+            JSONUIAux<FAUSTFLOAT>::declare(zone, key, val);
+        }
+    
+        virtual void declare(const char* key, const char* val)
+        {
+            JSONUIAux<FAUSTFLOAT>::declare(key, val);
+        }
+    
         virtual ~JSONUI() {}
     
 };
 
 #endif // FAUST_JSONUI_H
+/**************************  END  JSONUI.h **************************/
+/************************** BEGIN JSONUIDecoder.h **************************/
+/************************************************************************
+ FAUST Architecture File
+ Copyright (C) 2003-2017 GRAME, Centre National de Creation Musicale
+ ---------------------------------------------------------------------
+ This Architecture section is free software; you can redistribute it
+ and/or modify it under the terms of the GNU General Public License
+ as published by the Free Software Foundation; either version 3 of
+ the License, or (at your option) any later version.
+ 
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+ 
+ You should have received a copy of the GNU General Public License
+ along with this program; If not, see <http://www.gnu.org/licenses/>.
+ 
+ EXCEPTION : As a special exception, you may create a larger work
+ that contains this FAUST architecture section and distribute
+ that work under terms of your choice, so long as this FAUST
+ architecture section is not modified.
+ ************************************************************************/
+
+#ifndef __JSONUIDecoder__
+#define __JSONUIDecoder__
+
+#include <vector>
+#include <map>
+#include <utility>
+#include <cstdlib>
+#include <sstream>
+#include <functional>
+
+/************************** BEGIN CGlue.h **************************/
+/************************************************************************
+ FAUST Architecture File
+ Copyright (C) 2018 GRAME, Centre National de Creation Musicale
+ ---------------------------------------------------------------------
+ This Architecture section is free software; you can redistribute it
+ and/or modify it under the terms of the GNU General Public License
+ as published by the Free Software Foundation; either version 3 of
+ the License, or (at your option) any later version.
+ 
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+ 
+ You should have received a copy of the GNU General Public License
+ along with this program; If not, see <http://www.gnu.org/licenses/>.
+ 
+ EXCEPTION : As a special exception, you may create a larger work
+ that contains this FAUST architecture section and distribute
+ that work under terms of your choice, so long as this FAUST
+ architecture section is not modified.
+ ************************************************************************/
+
+#ifndef CGLUE_H
+#define CGLUE_H
+
+/************************** BEGIN CInterface.h **************************/
+/************************************************************************
+ FAUST Architecture File
+ Copyright (C) 2018 GRAME, Centre National de Creation Musicale
+ ---------------------------------------------------------------------
+ This Architecture section is free software; you can redistribute it
+ and/or modify it under the terms of the GNU General Public License
+ as published by the Free Software Foundation; either version 3 of
+ the License, or (at your option) any later version.
+ 
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+ 
+ You should have received a copy of the GNU General Public License
+ along with this program; If not, see <http://www.gnu.org/licenses/>.
+ 
+ EXCEPTION : As a special exception, you may create a larger work
+ that contains this FAUST architecture section and distribute
+ that work under terms of your choice, so long as this FAUST
+ architecture section is not modified.
+ ************************************************************************/
+
+#ifndef CINTERFACE_H
+#define CINTERFACE_H
+
+#ifndef FAUSTFLOAT
+#define FAUSTFLOAT float
+#endif
+
+#include <stdlib.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+    
+struct Soundfile;
+
+/*******************************************************************************
+ * UI and Meta classes for C or LLVM generated code.
+ ******************************************************************************/
+
+// -- widget's layouts
+
+typedef void (* openTabBoxFun) (void* ui_interface, const char* label);
+typedef void (* openHorizontalBoxFun) (void* ui_interface, const char* label);
+typedef void (* openVerticalBoxFun) (void* ui_interface, const char* label);
+typedef void (*closeBoxFun) (void* ui_interface);
+
+// -- active widgets
+
+typedef void (* addButtonFun) (void* ui_interface, const char* label, FAUSTFLOAT* zone);
+typedef void (* addCheckButtonFun) (void* ui_interface, const char* label, FAUSTFLOAT* zone);
+typedef void (* addVerticalSliderFun) (void* ui_interface, const char* label, FAUSTFLOAT* zone, FAUSTFLOAT init, FAUSTFLOAT min, FAUSTFLOAT max, FAUSTFLOAT step);
+typedef void (* addHorizontalSliderFun) (void* ui_interface, const char* label, FAUSTFLOAT* zone, FAUSTFLOAT init, FAUSTFLOAT min, FAUSTFLOAT max, FAUSTFLOAT step);
+typedef void (* addNumEntryFun) (void* ui_interface, const char* label, FAUSTFLOAT* zone, FAUSTFLOAT init, FAUSTFLOAT min, FAUSTFLOAT max, FAUSTFLOAT step);
+
+// -- passive widgets
+
+typedef void (* addHorizontalBargraphFun) (void* ui_interface, const char* label, FAUSTFLOAT* zone, FAUSTFLOAT min, FAUSTFLOAT max);
+typedef void (* addVerticalBargraphFun) (void* ui_interface, const char* label, FAUSTFLOAT* zone, FAUSTFLOAT min, FAUSTFLOAT max);
+
+// -- soundfiles
+    
+typedef void (* addSoundfileFun) (void* ui_interface, const char* label, const char* url, struct Soundfile** sf_zone);
+
+typedef void (* declareFun) (void* ui_interface, FAUSTFLOAT* zone, const char* key, const char* value);
+
+typedef struct {
+
+    void* uiInterface;
+
+    openTabBoxFun openTabBox;
+    openHorizontalBoxFun openHorizontalBox;
+    openVerticalBoxFun openVerticalBox;
+    closeBoxFun closeBox;
+    addButtonFun addButton;
+    addCheckButtonFun addCheckButton;
+    addVerticalSliderFun addVerticalSlider;
+    addHorizontalSliderFun addHorizontalSlider;
+    addNumEntryFun addNumEntry;
+    addHorizontalBargraphFun addHorizontalBargraph;
+    addVerticalBargraphFun addVerticalBargraph;
+    addSoundfileFun addSoundfile;
+    declareFun declare;
+
+} UIGlue;
+
+typedef void (* metaDeclareFun) (void* ui_interface, const char* key, const char* value);
+
+typedef struct {
+
+    void* metaInterface;
+    
+    metaDeclareFun declare;
+
+} MetaGlue;
+
+/***************************************
+ *  Interface for the DSP object
+ ***************************************/
+
+typedef char dsp_imp;
+    
+typedef dsp_imp* (* newDspFun) ();
+typedef void (* deleteDspFun) (dsp_imp* dsp);
+typedef void (* allocateDspFun) (dsp_imp* dsp);
+typedef void (* destroyDspFun) (dsp_imp* dsp);
+typedef int (* getNumInputsFun) (dsp_imp* dsp);
+typedef int (* getNumOutputsFun) (dsp_imp* dsp);
+typedef void (* buildUserInterfaceFun) (dsp_imp* dsp, UIGlue* ui);
+typedef void (* initFun) (dsp_imp* dsp, int sample_rate);
+typedef void (* clearFun) (dsp_imp* dsp);
+typedef int (* getSampleRateFun) (dsp_imp* dsp);
+typedef void (* computeFun) (dsp_imp* dsp, int len, FAUSTFLOAT** inputs, FAUSTFLOAT** outputs);
+typedef void (* metadataFun) (MetaGlue* meta);
+typedef void (* classInitFun) (int sample_rate);
+typedef const char* (* getJSONFun) ();
+    
+/***************************************
+ * DSP memory manager functions
+ ***************************************/
+
+typedef void* (* allocateFun) (void* manager_interface, size_t size);
+typedef void (* destroyFun) (void* manager_interface, void* ptr);
+
+typedef struct {
+    
+    void* managerInterface;
+    
+    allocateFun allocate;
+    destroyFun destroy;
+    
+} ManagerGlue;
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif
+/**************************  END  CInterface.h **************************/
+/************************** BEGIN dsp.h **************************/
 /************************************************************************
  FAUST Architecture File
  Copyright (C) 2003-2017 GRAME, Centre National de Creation Musicale
@@ -774,23 +1108,23 @@ class dsp {
          * - static class 'classInit': static tables initialization
          * - 'instanceInit': constants and instance state initialization
          *
-         * @param samplingRate - the sampling rate in Hertz
+         * @param sample_rate - the sampling rate in Hertz
          */
-        virtual void init(int samplingRate) = 0;
+        virtual void init(int sample_rate) = 0;
 
         /**
          * Init instance state
          *
-         * @param samplingRate - the sampling rate in Hertz
+         * @param sample_rate - the sampling rate in Hertz
          */
-        virtual void instanceInit(int samplingRate) = 0;
+        virtual void instanceInit(int sample_rate) = 0;
 
         /**
          * Init instance constant state
          *
-         * @param samplingRate - the sampling rate in Hertz
+         * @param sample_rate - the sampling rate in Hertz
          */
-        virtual void instanceConstants(int samplingRate) = 0;
+        virtual void instanceConstants(int sample_rate) = 0;
     
         /* Init default control parameters values */
         virtual void instanceResetUserInterface() = 0;
@@ -827,8 +1161,8 @@ class dsp {
          *
          * @param date_usec - the timestamp in microsec given by audio driver.
          * @param count - the number of frames to compute
-         * @param inputs - the input audio buffers as an array of non-interleaved FAUSTFLOAT samples (eiher float, double or quad)
-         * @param outputs - the output audio buffers as an array of non-interleaved FAUSTFLOAT samples (eiher float, double or quad)
+         * @param inputs - the input audio buffers as an array of non-interleaved FAUSTFLOAT samples (either float, double or quad)
+         * @param outputs - the output audio buffers as an array of non-interleaved FAUSTFLOAT samples (either float, double or quad)
          *
          */
         virtual void compute(double /*date_usec*/, int count, FAUSTFLOAT** inputs, FAUSTFLOAT** outputs) { compute(count, inputs, outputs); }
@@ -854,9 +1188,9 @@ class decorator_dsp : public dsp {
         virtual int getNumOutputs() { return fDSP->getNumOutputs(); }
         virtual void buildUserInterface(UI* ui_interface) { fDSP->buildUserInterface(ui_interface); }
         virtual int getSampleRate() { return fDSP->getSampleRate(); }
-        virtual void init(int samplingRate) { fDSP->init(samplingRate); }
-        virtual void instanceInit(int samplingRate) { fDSP->instanceInit(samplingRate); }
-        virtual void instanceConstants(int samplingRate) { fDSP->instanceConstants(samplingRate); }
+        virtual void init(int sample_rate) { fDSP->init(sample_rate); }
+        virtual void instanceInit(int sample_rate) { fDSP->instanceInit(sample_rate); }
+        virtual void instanceConstants(int sample_rate) { fDSP->instanceConstants(sample_rate); }
         virtual void instanceResetUserInterface() { fDSP->instanceResetUserInterface(); }
         virtual void instanceClear() { fDSP->instanceClear(); }
         virtual decorator_dsp* clone() { return new decorator_dsp(fDSP->clone()); }
@@ -883,9 +1217,9 @@ class dsp_factory {
         virtual std::string getName() = 0;
         virtual std::string getSHAKey() = 0;
         virtual std::string getDSPCode() = 0;
-    
-        virtual std::vector<std::string> getDSPFactoryLibraryList() = 0;
-        virtual std::vector<std::string> getDSPFactoryIncludePathnames() = 0;
+        virtual std::string getCompileOptions() = 0;
+        virtual std::vector<std::string> getLibraryList() = 0;
+        virtual std::vector<std::string> getIncludePathnames() = 0;
     
         virtual dsp* createDSPInstance() = 0;
     
@@ -911,6 +1245,2025 @@ class dsp_factory {
 #endif
 
 #endif
+/**************************  END  dsp.h **************************/
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/*******************************************************************************
+ * UI glue code
+ ******************************************************************************/
+ 
+class UIFloat
+{
+
+    public:
+
+        UIFloat() {}
+
+        virtual ~UIFloat() {}
+
+        // -- widget's layouts
+
+        virtual void openTabBox(const char* label) = 0;
+        virtual void openHorizontalBox(const char* label) = 0;
+        virtual void openVerticalBox(const char* label) = 0;
+        virtual void closeBox() = 0;
+
+        // -- active widgets
+
+        virtual void addButton(const char* label, float* zone) = 0;
+        virtual void addCheckButton(const char* label, float* zone) = 0;
+        virtual void addVerticalSlider(const char* label, float* zone, float init, float min, float max, float step) = 0;
+        virtual void addHorizontalSlider(const char* label, float* zone, float init, float min, float max, float step) = 0;
+        virtual void addNumEntry(const char* label, float* zone, float init, float min, float max, float step) = 0;
+
+        // -- passive widgets
+
+        virtual void addHorizontalBargraph(const char* label, float* zone, float min, float max) = 0;
+        virtual void addVerticalBargraph(const char* label, float* zone, float min, float max) = 0;
+    
+        // -- soundfiles
+    
+        virtual void addSoundfile(const char* label, const char* filename, Soundfile** sf_zone) = 0;
+
+        // -- metadata declarations
+
+        virtual void declare(float* zone, const char* key, const char* val) {}
+};
+
+static void openTabBoxGlueFloat(void* cpp_interface, const char* label)
+{
+    UIFloat* ui_interface = static_cast<UIFloat*>(cpp_interface);
+    ui_interface->openTabBox(label);
+}
+
+static void openHorizontalBoxGlueFloat(void* cpp_interface, const char* label)
+{
+    UIFloat* ui_interface = static_cast<UIFloat*>(cpp_interface);
+    ui_interface->openHorizontalBox(label);
+}
+
+static void openVerticalBoxGlueFloat(void* cpp_interface, const char* label)
+{
+    UIFloat* ui_interface = static_cast<UIFloat*>(cpp_interface);
+    ui_interface->openVerticalBox(label);
+}
+
+static void closeBoxGlueFloat(void* cpp_interface)
+{
+    UIFloat* ui_interface = static_cast<UIFloat*>(cpp_interface);
+    ui_interface->closeBox();
+}
+
+static void addButtonGlueFloat(void* cpp_interface, const char* label, float* zone)
+{
+    UIFloat* ui_interface = static_cast<UIFloat*>(cpp_interface);
+    ui_interface->addButton(label, zone);
+}
+
+static void addCheckButtonGlueFloat(void* cpp_interface, const char* label, float* zone)
+{
+    UIFloat* ui_interface = static_cast<UIFloat*>(cpp_interface);
+    ui_interface->addCheckButton(label, zone);
+}
+
+static void addVerticalSliderGlueFloat(void* cpp_interface, const char* label, float* zone, float init, float min, float max, float step)
+{
+    UIFloat* ui_interface = static_cast<UIFloat*>(cpp_interface);
+    ui_interface->addVerticalSlider(label, zone, init, min, max, step);
+}
+
+static void addHorizontalSliderGlueFloat(void* cpp_interface, const char* label, float* zone, float init, float min, float max, float step)
+{
+    UIFloat* ui_interface = static_cast<UIFloat*>(cpp_interface);
+    ui_interface->addHorizontalSlider(label, zone, init, min, max, step);
+}
+
+static void addNumEntryGlueFloat(void* cpp_interface, const char* label, float* zone, float init, float min, float max, float step)
+{
+    UIFloat* ui_interface = static_cast<UIFloat*>(cpp_interface);
+    ui_interface->addNumEntry(label, zone, init, min, max, step);
+}
+
+static void addHorizontalBargraphGlueFloat(void* cpp_interface, const char* label, float* zone, float min, float max)
+{
+    UIFloat* ui_interface = static_cast<UIFloat*>(cpp_interface);
+    ui_interface->addHorizontalBargraph(label, zone, min, max);
+}
+
+static void addVerticalBargraphGlueFloat(void* cpp_interface, const char* label, float* zone, float min, float max)
+{
+    UIFloat* ui_interface = static_cast<UIFloat*>(cpp_interface);
+    ui_interface->addVerticalBargraph(label, zone, min, max);
+}
+    
+static void addSoundfileGlueFloat(void* cpp_interface, const char* label, const char* url, Soundfile** sf_zone)
+{
+    UIFloat* ui_interface = static_cast<UIFloat*>(cpp_interface);
+    ui_interface->addSoundfile(label, url, sf_zone);
+}
+
+static void declareGlueFloat(void* cpp_interface, float* zone, const char* key, const char* value)
+{
+    UIFloat* ui_interface = static_cast<UIFloat*>(cpp_interface);
+    ui_interface->declare(zone, key, value);
+}
+
+class UIDouble
+{
+
+    public:
+
+        UIDouble() {}
+
+        virtual ~UIDouble() {}
+
+        // -- widget's layouts
+
+        virtual void openTabBox(const char* label) = 0;
+        virtual void openHorizontalBox(const char* label) = 0;
+        virtual void openVerticalBox(const char* label) = 0;
+        virtual void closeBox() = 0;
+
+        // -- active widgets
+
+        virtual void addButton(const char* label, double* zone) = 0;
+        virtual void addCheckButton(const char* label, double* zone) = 0;
+        virtual void addVerticalSlider(const char* label, double* zone, double init, double min, double max, double step) = 0;
+        virtual void addHorizontalSlider(const char* label, double* zone, double init, double min, double max, double step) = 0;
+        virtual void addNumEntry(const char* label, double* zone, double init, double min, double max, double step) = 0;
+
+        // -- passive widgets
+
+        virtual void addHorizontalBargraph(const char* label, double* zone, double min, double max) = 0;
+        virtual void addVerticalBargraph(const char* label, double* zone, double min, double max) = 0;
+    
+        // -- soundfiles
+    
+        virtual void addSoundfile(const char* label, const char* filename, Soundfile** sf_zone) = 0;
+
+        // -- metadata declarations
+
+        virtual void declare(double* zone, const char* key, const char* val) {}
+};
+
+static void openTabBoxGlueDouble(void* cpp_interface, const char* label)
+{
+    UIDouble* ui_interface = static_cast<UIDouble*>(cpp_interface);
+    ui_interface->openTabBox(label);
+}
+
+static void openHorizontalBoxGlueDouble(void* cpp_interface, const char* label)
+{
+    UIDouble* ui_interface = static_cast<UIDouble*>(cpp_interface);
+    ui_interface->openHorizontalBox(label);
+}
+
+static void openVerticalBoxGlueDouble(void* cpp_interface, const char* label)
+{
+    UIDouble* ui_interface = static_cast<UIDouble*>(cpp_interface);
+    ui_interface->openVerticalBox(label);
+}
+
+static void closeBoxGlueDouble(void* cpp_interface)
+{
+    UIDouble* ui_interface = static_cast<UIDouble*>(cpp_interface);
+    ui_interface->closeBox();
+}
+
+static void addButtonGlueDouble(void* cpp_interface, const char* label, double* zone)
+{
+    UIDouble* ui_interface = static_cast<UIDouble*>(cpp_interface);
+    ui_interface->addButton(label, zone);
+}
+
+static void addCheckButtonGlueDouble(void* cpp_interface, const char* label, double* zone)
+{
+    UIDouble* ui_interface = static_cast<UIDouble*>(cpp_interface);
+    ui_interface->addCheckButton(label, zone);
+}
+
+static void addVerticalSliderGlueDouble(void* cpp_interface, const char* label, double* zone, double init, double min, double max, double step)
+{
+    UIDouble* ui_interface = static_cast<UIDouble*>(cpp_interface);
+    ui_interface->addVerticalSlider(label, zone, init, min, max, step);
+}
+
+static void addHorizontalSliderGlueDouble(void* cpp_interface, const char* label, double* zone, double init, double min, double max, double step)
+{
+    UIDouble* ui_interface = static_cast<UIDouble*>(cpp_interface);
+    ui_interface->addHorizontalSlider(label, zone, init, min, max, step);
+}
+
+static void addNumEntryGlueDouble(void* cpp_interface, const char* label, double* zone, double init, double min, double max, double step)
+{
+    UIDouble* ui_interface = static_cast<UIDouble*>(cpp_interface);
+    ui_interface->addNumEntry(label, zone, init, min, max, step);
+}
+
+static void addHorizontalBargraphGlueDouble(void* cpp_interface, const char* label, double* zone, double min, double max)
+{
+    UIDouble* ui_interface = static_cast<UIDouble*>(cpp_interface);
+    ui_interface->addHorizontalBargraph(label, zone, min, max);
+}
+
+static void addVerticalBargraphGlueDouble(void* cpp_interface, const char* label, double* zone, double min, double max)
+{
+    UIDouble* ui_interface = static_cast<UIDouble*>(cpp_interface);
+    ui_interface->addVerticalBargraph(label, zone, min, max);
+}
+    
+static void addSoundfileGlueDouble(void* cpp_interface, const char* label, const char* url, Soundfile** sf_zone)
+{
+    UIDouble* ui_interface = static_cast<UIDouble*>(cpp_interface);
+    ui_interface->addSoundfile(label, url, sf_zone);
+}
+
+static void declareGlueDouble(void* cpp_interface, double* zone, const char* key, const char* value)
+{
+    UIDouble* ui_interface = static_cast<UIDouble*>(cpp_interface);
+    ui_interface->declare(zone, key, value);
+}
+
+static void buildUIGlue(UIGlue* glue, UI* ui_interface, bool is_double)
+{
+    glue->uiInterface = ui_interface;
+    
+    if (is_double) {
+        glue->openTabBox = reinterpret_cast<openTabBoxFun>(openTabBoxGlueDouble);
+        glue->openHorizontalBox = reinterpret_cast<openHorizontalBoxFun>(openHorizontalBoxGlueDouble);
+        glue->openVerticalBox = reinterpret_cast<openVerticalBoxFun>(openVerticalBoxGlueDouble);
+        glue->closeBox = reinterpret_cast<closeBoxFun>(closeBoxGlueDouble);
+        glue->addButton = reinterpret_cast<addButtonFun>(addButtonGlueDouble);
+        glue->addCheckButton = reinterpret_cast<addCheckButtonFun>(addCheckButtonGlueDouble);
+        glue->addVerticalSlider = reinterpret_cast<addVerticalSliderFun>(addVerticalSliderGlueDouble);
+        glue->addHorizontalSlider = reinterpret_cast<addHorizontalSliderFun>(addHorizontalSliderGlueDouble);
+        glue->addNumEntry = reinterpret_cast<addNumEntryFun>(addNumEntryGlueDouble);
+        glue->addHorizontalBargraph = reinterpret_cast<addHorizontalBargraphFun>(addHorizontalBargraphGlueDouble);
+        glue->addVerticalBargraph = reinterpret_cast<addVerticalBargraphFun>(addVerticalBargraphGlueDouble);
+        glue->addSoundfile = reinterpret_cast<addSoundfileFun>(addSoundfileGlueDouble);
+        glue->declare = reinterpret_cast<declareFun>(declareGlueDouble);
+    } else {
+        glue->openTabBox = reinterpret_cast<openTabBoxFun>(openTabBoxGlueFloat);
+        glue->openHorizontalBox = reinterpret_cast<openHorizontalBoxFun>(openHorizontalBoxGlueFloat);
+        glue->openVerticalBox = reinterpret_cast<openVerticalBoxFun>(openVerticalBoxGlueFloat);
+        glue->closeBox = reinterpret_cast<closeBoxFun>(closeBoxGlueFloat);
+        glue->addButton = reinterpret_cast<addButtonFun>(addButtonGlueFloat);
+        glue->addCheckButton = reinterpret_cast<addCheckButtonFun>(addCheckButtonGlueFloat);
+        glue->addVerticalSlider = reinterpret_cast<addVerticalSliderFun>(addVerticalSliderGlueFloat);
+        glue->addHorizontalSlider = reinterpret_cast<addHorizontalSliderFun>(addHorizontalSliderGlueFloat);
+        glue->addNumEntry = reinterpret_cast<addNumEntryFun>(addNumEntryGlueFloat);
+        glue->addHorizontalBargraph = reinterpret_cast<addHorizontalBargraphFun>(addHorizontalBargraphGlueFloat);
+        glue->addVerticalBargraph = reinterpret_cast<addVerticalBargraphFun>(addVerticalBargraphGlueFloat);
+        glue->addSoundfile = reinterpret_cast<addSoundfileFun>(addSoundfileGlueFloat);
+        glue->declare = reinterpret_cast<declareFun>(declareGlueFloat);
+    }
+}
+    
+class UITemplate
+{
+    
+    private:
+        
+        void* fCPPInterface;
+        
+    public:
+        
+        UITemplate(void* cpp_interface):fCPPInterface(cpp_interface)
+        {}
+        
+        virtual ~UITemplate() {}
+        
+        // -- widget's layouts
+        
+        virtual void openTabBox(const char* label)
+        {
+            openTabBoxGlueFloat(fCPPInterface, label);
+        }
+        virtual void openHorizontalBox(const char* label)
+        {
+            openHorizontalBoxGlueFloat(fCPPInterface, label);
+        }
+        virtual void openVerticalBox(const char* label)
+        {
+            openVerticalBoxGlueFloat(fCPPInterface, label);
+        }
+        virtual void closeBox()
+        {
+            closeBoxGlueFloat(fCPPInterface);
+        }
+        
+        // float version
+        
+        // -- active widgets
+        
+        virtual void addButton(const char* label, float* zone)
+        {
+            addButtonGlueFloat(fCPPInterface, label, zone);
+        }
+        virtual void addCheckButton(const char* label, float* zone)
+        {
+            addCheckButtonGlueFloat(fCPPInterface, label, zone);
+        }
+        
+        virtual void addVerticalSlider(const char* label, float* zone, float init, float min, float max, float step)
+        {
+            addVerticalSliderGlueFloat(fCPPInterface, label, zone, init, min, max, step);
+        }
+        
+        virtual void addHorizontalSlider(const char* label, float* zone, float init, float min, float max, float step)
+        {
+            addHorizontalSliderGlueFloat(fCPPInterface, label, zone, init, min, max, step);
+        }
+        
+        virtual void addNumEntry(const char* label, float* zone, float init, float min, float max, float step)
+        {
+            addNumEntryGlueFloat(fCPPInterface, label, zone, init, min, max, step);
+        }
+        
+        // -- passive widgets
+        
+        virtual void addHorizontalBargraph(const char* label, float* zone, float min, float max)
+        {
+            addHorizontalBargraphGlueFloat(fCPPInterface, label, zone, min, max);
+        }
+        
+        virtual void addVerticalBargraph(const char* label, float* zone, float min, float max)
+        {
+            addVerticalBargraphGlueFloat(fCPPInterface, label, zone, min, max);
+        }
+    
+        // -- metadata declarations
+        
+        virtual void declare(float* zone, const char* key, const char* val)
+        {
+            declareGlueFloat(fCPPInterface, zone, key, val);
+        }
+        
+        // double version
+        
+        virtual void addButton(const char* label, double* zone)
+        {
+            addButtonGlueDouble(fCPPInterface, label, zone);
+        }
+        virtual void addCheckButton(const char* label, double* zone)
+        {
+            addCheckButtonGlueDouble(fCPPInterface, label, zone);
+        }
+        
+        virtual void addVerticalSlider(const char* label, double* zone, double init, double min, double max, double step)
+        {
+            addVerticalSliderGlueDouble(fCPPInterface, label, zone, init, min, max, step);
+        }
+        
+        virtual void addHorizontalSlider(const char* label, double* zone, double init, double min, double max, double step)
+        {
+            addHorizontalSliderGlueDouble(fCPPInterface, label, zone, init, min, max, step);
+        }
+        
+        virtual void addNumEntry(const char* label, double* zone, double init, double min, double max, double step)
+        {
+            addNumEntryGlueDouble(fCPPInterface, label, zone, init, min, max, step);
+        }
+    
+        // -- soundfiles
+        
+        virtual void addSoundfile(const char* label, const char* url, Soundfile** sf_zone)
+        {
+            addSoundfileGlueFloat(fCPPInterface, label, url, sf_zone);
+        }
+    
+        // -- passive widgets
+        
+        virtual void addHorizontalBargraph(const char* label, double* zone, double min, double max)
+        {
+            addHorizontalBargraphGlueDouble(fCPPInterface, label, zone, min, max);
+        }
+        
+        virtual void addVerticalBargraph(const char* label, double* zone, double min, double max)
+        {
+            addVerticalBargraphGlueDouble(fCPPInterface, label, zone, min, max);
+        }
+    
+        // -- metadata declarations
+        
+        virtual void declare(double* zone, const char* key, const char* val)
+        {
+            declareGlueDouble(fCPPInterface, zone, key, val);
+        }
+
+};
+
+/*******************************************************************************
+ * Meta glue code
+ ******************************************************************************/
+
+static void declareMetaGlue(void* cpp_interface, const char* key, const char* value)
+{
+    Meta* meta_interface = static_cast<Meta*>(cpp_interface);
+    meta_interface->declare(key, value);
+}
+
+static void buildMetaGlue(MetaGlue* glue, Meta* meta)
+{
+    glue->metaInterface = meta;
+    glue->declare = declareMetaGlue;
+}
+    
+/*******************************************************************************
+ * Memory manager glue code
+ ******************************************************************************/
+
+static void* allocateManagerGlue(void* cpp_interface, size_t size)
+{
+    dsp_memory_manager* manager_interface = static_cast<dsp_memory_manager*>(cpp_interface);
+    return manager_interface->allocate(size);
+}
+    
+static void destroyManagerGlue(void* cpp_interface, void* ptr)
+{
+    dsp_memory_manager* manager_interface = static_cast<dsp_memory_manager*>(cpp_interface);
+    manager_interface->destroy(ptr);
+}
+
+static void buildManagerGlue(ManagerGlue* glue, dsp_memory_manager* manager)
+{
+    glue->managerInterface = manager;
+    glue->allocate = allocateManagerGlue;
+    glue->destroy = destroyManagerGlue;
+}
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif
+/**************************  END  CGlue.h **************************/
+/************************** BEGIN SimpleParser.h **************************/
+/************************************************************************
+ FAUST Architecture File
+ Copyright (C) 2003-2017 GRAME, Centre National de Creation Musicale
+ ---------------------------------------------------------------------
+ This Architecture section is free software; you can redistribute it
+ and/or modify it under the terms of the GNU General Public License
+ as published by the Free Software Foundation; either version 3 of
+ the License, or (at your option) any later version.
+ 
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+ 
+ You should have received a copy of the GNU General Public License
+ along with this program; If not, see <http://www.gnu.org/licenses/>.
+ 
+ EXCEPTION : As a special exception, you may create a larger work
+ that contains this FAUST architecture section and distribute
+ that work under terms of your choice, so long as this FAUST
+ architecture section is not modified.
+ ************************************************************************/
+
+#ifndef SIMPLEPARSER_H
+#define SIMPLEPARSER_H
+
+// ---------------------------------------------------------------------
+//                          Simple Parser
+// A parser returns true if it was able to parse what it is
+// supposed to parse and advance the pointer. Otherwise it returns false
+// and the pointer is not advanced so that another parser can be tried.
+// ---------------------------------------------------------------------
+
+#include <vector>
+#include <map>
+#include <string>
+#include <fstream>
+#include <iostream>
+#include <ctype.h>
+
+#ifndef _WIN32
+# pragma GCC diagnostic ignored "-Wunused-function"
+#endif
+
+struct itemInfo {
+    std::string type;
+    std::string label;
+    std::string url;
+    std::string address;
+    int index;
+    double init;
+    double min;
+    double max;
+    double step;
+    std::vector<std::pair<std::string, std::string> > meta;
+    
+    itemInfo():index(0), init(0.), min(0.), max(0.), step(0.)
+    {}
+};
+
+// ---------------------------------------------------------------------
+//                          Elementary parsers
+// ---------------------------------------------------------------------
+
+// Report a parsing error
+static bool parseError(const char*& p, const char* errmsg)
+{
+    std::cerr << "Parse error : " << errmsg << " here : " << p << std::endl;
+    return true;
+}
+
+/**
+ * @brief skipBlank : advance pointer p to the first non blank character
+ * @param p the string to parse, then the remaining string
+ */
+static void skipBlank(const char*& p)
+{
+    while (isspace(*p)) { p++; }
+}
+
+// Parse character x, but don't report error if fails
+static bool tryChar(const char*& p, char x)
+{
+    skipBlank(p);
+    if (x == *p) {
+        p++;
+        return true;
+    } else {
+        return false;
+    }
+}
+
+/**
+ * @brief parseChar : parse a specific character x
+ * @param p the string to parse, then the remaining string
+ * @param x the character to recognize
+ * @return true if x was found at the begin of p
+ */
+static bool parseChar(const char*& p, char x)
+{
+    skipBlank(p);
+    if (x == *p) {
+        p++;
+        return true;
+    } else {
+        return false;
+    }
+}
+
+/**
+ * @brief parseWord : parse a specific string w
+ * @param p the string to parse, then the remaining string
+ * @param w the string to recognize
+ * @return true if string w was found at the begin of p
+ */
+static bool parseWord(const char*& p, const char* w)
+{
+    skipBlank(p);
+    const char* saved = p;  // to restore position if we fail
+    while ((*w == *p) && (*w)) {++w; ++p;}
+    if (*w) {
+        p = saved;
+        return false;
+    } else {
+        return true;
+    }
+}
+
+/**
+ * @brief parseDouble : parse number [s]dddd[.dddd] and store the result in x
+ * @param p the string to parse, then the remaining string
+ * @param x the float number found if any
+ * @return true if a float number was found at the begin of p
+ */
+static bool parseDouble(const char*& p, double& x)
+{
+    double sign = +1.0;    // sign of the number
+    double ipart = 0;      // integral part of the number
+    double dpart = 0;      // decimal part of the number before division
+    double dcoef = 1.0;    // division factor for the decimal part
+    
+    bool valid = false;    // true if the number contains at least one digit
+    skipBlank(p);
+    const char* saved = p; // to restore position if we fail
+    
+    if (parseChar(p, '+')) {
+        sign = 1.0;
+    } else if (parseChar(p, '-')) {
+        sign = -1.0;
+    }
+    while (isdigit(*p)) {
+        valid = true;
+        ipart = ipart*10 + (*p - '0');
+        p++;
+    }
+    if (parseChar(p, '.')) {
+        while (isdigit(*p)) {
+            valid = true;
+            dpart = dpart*10 + (*p - '0');
+            dcoef *= 10.0;
+            p++;
+        }
+    }
+    if (valid)  {
+        x = sign*(ipart + dpart/dcoef);
+    } else {
+        p = saved;
+    }
+ 
+    return valid;
+}
+
+/**
+ * @brief parseString, parse an arbitrary quoted string q...q and store the result in s
+ * @param p the string to parse, then the remaining string
+ * @param quote the character used to quote the string
+ * @param s the (unquoted) string found if any
+ * @return true if a string was found at the begin of p
+ */
+static bool parseString(const char*& p, char quote, std::string& s)
+{
+    std::string str;
+    skipBlank(p);
+    
+    const char* saved = p;  // to restore position if we fail
+    if (*p++ == quote) {
+        while ((*p != 0) && (*p != quote)) {
+            str += *p++;
+        }
+        if (*p++ == quote) {
+            s = str;
+            return true;
+        }
+    }
+    p = saved;
+    return false;
+}
+
+/**
+ * @brief parseSQString, parse a single quoted string '...' and store the result in s
+ * @param p the string to parse, then the remaining string
+ * @param s the (unquoted) string found if any
+ * @return true if a string was found at the begin of p
+ */
+static bool parseSQString(const char*& p, std::string& s)
+{
+    return parseString(p, '\'', s);
+}
+
+/**
+ * @brief parseDQString, parse a double quoted string "..." and store the result in s
+ * @param p the string to parse, then the remaining string
+ * @param s the (unquoted) string found if any
+ * @return true if a string was found at the begin of p
+ */
+static bool parseDQString(const char*& p, std::string& s)
+{
+    return parseString(p, '"', s);
+}
+
+// ---------------------------------------------------------------------
+//
+//                          IMPLEMENTATION
+// 
+// ---------------------------------------------------------------------
+
+/**
+ * @brief parseMenuItem, parse a menu item ...'low':440.0...
+ * @param p the string to parse, then the remaining string
+ * @param name the name found
+ * @param value the value found
+ * @return true if a nemu item was found
+ */
+static bool parseMenuItem(const char*& p, std::string& name, double& value)
+{
+    const char* saved = p;  // to restore position if we fail
+    if (parseSQString(p, name) && parseChar(p, ':') && parseDouble(p, value)) {
+        return true;
+    } else {
+        p = saved;
+        return false;
+    }
+}
+
+static bool parseMenuItem2(const char*& p, std::string& name)
+{
+    const char* saved = p;  // to restore position if we fail
+    
+    // single quoted
+    if (parseSQString(p, name)) {
+        return true;
+    } else {
+        p = saved;
+        return false;
+    }
+}
+
+/**
+ * @brief parseMenuList, parse a menu list {'low' : 440.0; 'mid' : 880.0; 'hi' : 1760.0}...
+ * @param p the string to parse, then the remaining string
+ * @param names the vector of names found
+ * @param values the vector of values found
+ * @return true if a menu list was found
+ */
+static bool parseMenuList(const char*& p, std::vector<std::string>& names, std::vector<double>& values)
+{
+    std::vector<std::string> tmpnames;
+    std::vector<double> tmpvalues;
+    const char* saved = p; // to restore position if we fail
+
+    if (parseChar(p, '{')) {
+        do {
+            std::string n;
+            double v;
+            if (parseMenuItem(p, n, v)) {
+                tmpnames.push_back(n);
+                tmpvalues.push_back(v);
+            } else {
+                p = saved;
+                return false;
+            }
+        } while (parseChar(p, ';'));
+        if (parseChar(p, '}')) {
+            // we suceeded
+            names = tmpnames;
+            values = tmpvalues;
+            return true;
+        }
+    }
+    p = saved;
+    return false;
+}
+
+static bool parseMenuList2(const char*& p, std::vector<std::string>& names, bool debug)
+{
+    std::vector<std::string> tmpnames;
+    const char* saved = p;  // to restore position if we fail
+    
+    if (parseChar(p, '{')) {
+        do {
+            std::string n;
+            if (parseMenuItem2(p, n)) {
+                tmpnames.push_back(n);
+            } else {
+                goto error;
+            }
+        } while (parseChar(p, ';'));
+        if (parseChar(p, '}')) {
+            // we suceeded
+            names = tmpnames;
+            return true;
+        }
+    }
+    
+error:
+    if (debug) { std::cerr << "parseMenuList2 : (" << saved << ") is not a valid list !\n"; }
+    p = saved;
+    return false;
+}
+
+/// ---------------------------------------------------------------------
+// Parse list of strings
+/// ---------------------------------------------------------------------
+static bool parseList(const char*& p, std::vector<std::string>& items)
+{
+    const char* saved = p;  // to restore position if we fail
+    if (parseChar(p, '[')) {
+        do {
+            std::string item;
+            if (!parseDQString(p, item)) {
+                p = saved;
+                return false;
+            }
+            items.push_back(item);
+        } while (tryChar(p, ','));
+        return parseChar(p, ']');
+    } else {
+        p = saved;
+        return false;
+    }
+}
+
+static bool parseMetaData(const char*& p, std::map<std::string, std::string>& metadatas)
+{
+    std::string metaKey, metaValue;
+    if (parseChar(p, ':') && parseChar(p, '[')) {
+        do { 
+            if (parseChar(p, '{') && parseDQString(p, metaKey) && parseChar(p, ':') && parseDQString(p, metaValue) && parseChar(p, '}')) {
+                metadatas[metaKey] = metaValue;
+            }
+        } while (tryChar(p, ','));
+        return parseChar(p, ']');
+    } else {
+        return false;
+    }
+}
+
+static bool parseItemMetaData(const char*& p, std::vector<std::pair<std::string, std::string> >& metadatas)
+{
+    std::string metaKey, metaValue;
+    if (parseChar(p, ':') && parseChar(p, '[')) {
+        do { 
+            if (parseChar(p, '{') && parseDQString(p, metaKey) && parseChar(p, ':') && parseDQString(p, metaValue) && parseChar(p, '}')) {
+                metadatas.push_back(std::make_pair(metaKey, metaValue));
+            }
+        } while (tryChar(p, ','));
+        return parseChar(p, ']');
+    } else {
+        return false;
+    }
+}
+
+// ---------------------------------------------------------------------
+// Parse metadatas of the interface:
+// "name" : "...", "inputs" : "...", "outputs" : "...", ...
+// and store the result as key/value
+/// ---------------------------------------------------------------------
+static bool parseGlobalMetaData(const char*& p, std::string& key, std::string& value, double& dbl, std::map<std::string, std::string>& metadatas, std::vector<std::string>& items)
+{
+    if (parseDQString(p, key)) {
+        if (key == "meta") {
+            return parseMetaData(p, metadatas);
+        } else {
+            return parseChar(p, ':') && (parseDQString(p, value) || parseList(p, items) || parseDouble(p, dbl));
+        }
+    } else {
+        return false;
+    }
+}
+
+// ---------------------------------------------------------------------
+// Parse gui:
+// "type" : "...", "label" : "...", "address" : "...", ...
+// and store the result in uiItems Vector
+/// ---------------------------------------------------------------------
+static bool parseUI(const char*& p, std::vector<itemInfo>& uiItems, int& numItems)
+{
+    if (parseChar(p, '{')) {
+   
+        std::string label;
+        std::string value;
+        double dbl = 0;
+        
+        do {
+            if (parseDQString(p, label)) {
+                if (label == "type") {
+                    if (uiItems.size() != 0) {
+                        numItems++;
+                    }
+                    if (parseChar(p, ':') && parseDQString(p, value)) {   
+                        itemInfo item;
+                        item.type = value;
+                        uiItems.push_back(item);
+                    }
+                }
+                
+                else if (label == "label") {
+                    if (parseChar(p, ':') && parseDQString(p, value)) {
+                        uiItems[numItems].label = value;
+                    }
+                }
+                
+                else if (label == "url") {
+                    if (parseChar(p, ':') && parseDQString(p, value)) {
+                        uiItems[numItems].url = value;
+                    }
+                }
+                
+                else if (label == "address") {
+                    if (parseChar(p, ':') && parseDQString(p, value)) {
+                        uiItems[numItems].address = value;
+                    }
+                }
+                
+                else if (label == "index") {
+                    if (parseChar(p, ':') && parseDouble(p, dbl)) {
+                        uiItems[numItems].index = dbl;
+                    }
+                }
+                
+                else if (label == "meta") {
+                    if (!parseItemMetaData(p, uiItems[numItems].meta)) {
+                        return false;
+                    }
+                }
+                
+                else if (label == "init") {
+                    if (parseChar(p, ':') && parseDouble(p, dbl)) {
+                        uiItems[numItems].init = dbl;
+                    }
+                }
+                
+                else if (label == "min") {
+                    if (parseChar(p, ':') && parseDouble(p, dbl)) {
+                        uiItems[numItems].min = dbl;
+                    }
+                }
+                
+                else if (label == "max") {
+                    if (parseChar(p, ':') && parseDouble(p, dbl)) {
+                        uiItems[numItems].max = dbl;
+                    }
+                }
+                
+                else if (label == "step"){
+                    if (parseChar(p, ':') && parseDouble(p, dbl)) {
+                        uiItems[numItems].step = dbl;
+                    }
+                }
+                
+                else if (label == "items") {
+                    if (parseChar(p, ':') && parseChar(p, '[')) {
+                        do { 
+                            if (!parseUI(p, uiItems, numItems)) {
+                                return false;
+                            }
+                        } while (tryChar(p, ','));
+                        if (parseChar(p, ']')) {
+                            itemInfo item;
+                            item.type = "close";
+                            uiItems.push_back(item);
+                            numItems++;
+                        }
+                    }
+                }
+            } else {
+                return false;
+            }
+            
+        } while (tryChar(p, ','));
+        
+        return parseChar(p, '}');
+    } else {
+        return false;
+    }
+}
+
+// ---------------------------------------------------------------------
+// Parse full JSON record describing a JSON/Faust interface :
+// {"metadatas": "...", "ui": [{ "type": "...", "label": "...", "items": [...], "address": "...","init": "...", "min": "...", "max": "...","step": "..."}]}
+//
+// and store the result in map Metadatas and vector containing the items of the interface. Returns true if parsing was successfull.
+/// ---------------------------------------------------------------------
+static bool parseJson(const char*& p,
+                      std::map<std::string, std::pair<std::string, double> >& metaDatas0,
+                      std::map<std::string, std::string>& metaDatas1,
+                      std::map<std::string, std::vector<std::string> >& metaDatas2,
+                      std::vector<itemInfo>& uiItems)
+{
+    parseChar(p, '{');
+    
+    do {
+        std::string key;
+        std::string value;
+        double dbl = 0;
+        std::vector<std::string> items;
+        if (parseGlobalMetaData(p, key, value, dbl, metaDatas1, items)) {
+            if (key != "meta") {
+                // keep "name", "inputs", "outputs" key/value pairs
+                if (items.size() > 0) {
+                    metaDatas2[key] = items;
+                    items.clear();
+                } else if (value != "") {
+                    metaDatas0[key].first = value;
+                } else {
+                    metaDatas0[key].second = dbl;
+                }
+            }
+        } else if (key == "ui") {
+            int numItems = 0;
+            parseChar(p, '[') && parseUI(p, uiItems, numItems);
+        }
+    } while (tryChar(p, ','));
+    
+    return parseChar(p, '}');
+}
+
+#endif // SIMPLEPARSER_H
+/**************************  END  SimpleParser.h **************************/
+
+#ifdef _WIN32
+#include <windows.h>
+#define snprintf _snprintf
+#endif
+
+//-------------------------------------------------------------------
+//  Decode a dsp JSON description and implement 'buildUserInterface'
+//-------------------------------------------------------------------
+
+#define REAL_UI(ui_interface)  reinterpret_cast<UIReal<REAL>*>(ui_interface)
+#define REAL_ADR(offset)       reinterpret_cast<REAL*>(&memory_block[offset])
+#define SOUNDFILE_ADR(offset)  reinterpret_cast<Soundfile**>(&memory_block[offset])
+
+typedef std::function<void(double)> ReflectFunction;
+typedef std::function<double()> ModifyFunction;
+
+struct ExtZoneParam {
+
+    virtual void reflectZone() = 0;
+    virtual void modifyZone() = 0;
+    
+    virtual void setReflectZoneFun(ReflectFunction reflect) = 0;
+    virtual void setModifyZoneFun(ModifyFunction modify) = 0;
+    
+};
+
+template <typename REAL>
+struct JSONUIDecoderAux {
+    
+    struct ZoneParam : public ExtZoneParam {
+        
+        REAL fZone;
+        int fIndex;
+        ReflectFunction fReflect;
+        ModifyFunction fModify;
+        
+    #if defined(TARGET_OS_IPHONE) || defined(WIN32)
+        ZoneParam(int index, ReflectFunction reflect = nullptr, ModifyFunction modify = nullptr)
+        :fIndex(index), fReflect(reflect), fModify(modify)
+        {}
+        void reflectZone() { if (fReflect) fReflect(fZone); }
+        void modifyZone() { if (fModify) fZone = fModify(); }
+    #else
+        ZoneParam(int index, ReflectFunction reflect = [](REAL value) {}, ModifyFunction modify = []() { return REAL(-1); })
+        :fIndex(index), fReflect(reflect), fModify(modify)
+        {}
+        void reflectZone() { fReflect(fZone); }
+        void modifyZone() { fZone = fModify(); }
+    #endif
+        
+        void setReflectZoneFun(ReflectFunction reflect) { fReflect = reflect; }
+        void setModifyZoneFun(ModifyFunction modify) { fModify = modify; }
+        
+    };
+
+    typedef std::vector<ExtZoneParam*> controlMap;
+  
+    std::string fName;
+    std::string fFileName;
+    std::string fJSON;
+    std::string fVersion;
+    std::string fCompileOptions;
+    
+    std::map<std::string, std::string> fMetadata;
+    std::vector<itemInfo> fUiItems;
+    
+    std::vector<std::string> fLibraryList;
+    std::vector<std::string> fIncludePathnames;
+    
+    Soundfile** fSoundfiles;
+    
+    int fNumInputs, fNumOutputs, fSRIndex;
+    int fSoundfileItems;
+    int fDSPSize;
+    
+    controlMap fPathInputTable;     // [path, ZoneParam]
+    controlMap fPathOutputTable;    // [path, ZoneParam]
+
+    bool isInput(const std::string& type)
+    {
+        return (type == "vslider" || type == "hslider" || type == "nentry" || type == "button" || type == "checkbox");
+    }
+    bool isOutput(const std::string& type) { return (type == "hbargraph" || type == "vbargraph"); }
+    bool isSoundfile(const std::string& type) { return (type == "soundfile"); }
+    
+    std::string getString(std::map<std::string, std::pair<std::string, double> >& map, const std::string& key)
+    {
+        return (map.find(key) != map.end()) ? map[key].first : "";
+    }
+    
+    int getInt(std::map<std::string, std::pair<std::string, double> >& map, const std::string& key)
+    {
+        return (map.find(key) != map.end()) ? int(map[key].second) : -1;
+    }
+    
+    void setReflectZoneFun(int index, ReflectFunction fun)
+    {
+        fPathInputTable[index]->setReflectZoneFun(fun);
+    }
+    
+    void setModifyZoneFun(int index, ModifyFunction fun)
+    {
+        fPathOutputTable[index]->setModifyZoneFun(fun);
+    }
+
+    JSONUIDecoderAux(const std::string& json)
+    {
+        fJSON = json;
+        const char* p = fJSON.c_str();
+        std::map<std::string, std::pair<std::string, double> > meta_data1;
+        std::map<std::string, std::vector<std::string> > meta_data2;
+        parseJson(p, meta_data1, fMetadata, meta_data2, fUiItems);
+        
+        // meta_data1 contains <name : val>, <inputs : val>, <ouputs : val> pairs etc...
+        fName = getString(meta_data1, "name");
+        fFileName = getString(meta_data1, "filename");
+        fVersion = getString(meta_data1, "version");
+        fCompileOptions = getString(meta_data1, "compile_options");
+        
+        if (meta_data2.find("library_list") != meta_data2.end()) {
+            fLibraryList = meta_data2["library_list"];
+        }
+        if (meta_data2.find("include_pathnames") != meta_data2.end()) {
+            fIncludePathnames = meta_data2["include_pathnames"];
+        }
+        
+        fDSPSize = getInt(meta_data1, "size");
+        fNumInputs = getInt(meta_data1, "inputs");
+        fNumOutputs = getInt(meta_data1, "outputs");
+        fSRIndex = getInt(meta_data1, "sr_index");
+       
+        fSoundfileItems = 0;
+        for (auto& it : fUiItems) {
+            std::string type = it.type;
+            if (isSoundfile(type)) {
+                fSoundfileItems++;
+            }
+        }
+        
+        fSoundfiles = new Soundfile*[fSoundfileItems];
+        
+        // Prepare the fPathTable and init zone
+        for (auto& it : fUiItems) {
+            std::string type = it.type;
+            // Meta data declaration for input items
+            if (isInput(type)) {
+                ZoneParam* param = new ZoneParam(it.index);
+                fPathInputTable.push_back(param);
+                param->fZone = it.init;
+            }
+            // Meta data declaration for output items
+            else if (isOutput(type)) {
+                ZoneParam* param = new ZoneParam(it.index);
+                fPathOutputTable.push_back(param);
+                param->fZone = REAL(0);
+            }
+        }
+    }
+    
+    virtual ~JSONUIDecoderAux()
+    {
+        delete [] fSoundfiles;
+    }
+    
+    void metadata(Meta* m)
+    {
+        for (auto& it : fMetadata) {
+            m->declare(it.first.c_str(), it.second.c_str());
+        }
+    }
+    
+    void metadata(MetaGlue* m)
+    {
+        for (auto& it : fMetadata) {
+            m->declare(m->metaInterface, it.first.c_str(), it.second.c_str());
+        }
+    }
+    
+    void resetUserInterface()
+    {
+        int item = 0;
+        for (auto& it : fUiItems) {
+            if (isInput(it.type)) {
+                static_cast<ZoneParam*>(fPathInputTable[item++])->fZone = it.init;
+            }
+        }
+    }
+    
+    void resetUserInterface(char* memory_block, Soundfile* defaultsound = nullptr)
+    {
+        for (auto& it : fUiItems) {
+            int offset = it.index;
+            if (isInput(it.type)) {
+                *REAL_ADR(offset) = it.init;
+            } else if (isSoundfile(it.type)) {
+                if (*SOUNDFILE_ADR(offset) == nullptr) {
+                    *SOUNDFILE_ADR(offset) = defaultsound;
+                }
+            }
+        }
+    }
+    
+    int getSampleRate(char* memory_block)
+    {
+        return *reinterpret_cast<int*>(&memory_block[fSRIndex]);
+    }
+   
+    void buildUserInterface(UI* ui_interface)
+    {
+        // MANDATORY: to be sure floats or double are correctly parsed
+        char* tmp_local = setlocale(LC_ALL, nullptr);
+        setlocale(LC_ALL, "C");
+        
+        int countIn = 0;
+        int countOut = 0;
+        int countSound = 0;
+        
+        for (auto& it : fUiItems) {
+            
+            std::string type = it.type;
+            REAL init = it.init;
+            REAL min = it.min;
+            REAL max = it.max;
+            REAL step = it.step;
+            
+            // Meta data declaration for input items
+            if (isInput(type)) {
+                for (size_t i = 0; i < it.meta.size(); i++) {
+                    REAL_UI(ui_interface)->declare(&static_cast<ZoneParam*>(fPathInputTable[countIn])->fZone, it.meta[i].first.c_str(), it.meta[i].second.c_str());
+                }
+            }
+            // Meta data declaration for output items
+            else if (isOutput(type)) {
+                for (size_t i = 0; i < it.meta.size(); i++) {
+                    REAL_UI(ui_interface)->declare(&static_cast<ZoneParam*>(fPathOutputTable[countOut])->fZone, it.meta[i].first.c_str(), it.meta[i].second.c_str());
+                }
+            }
+            // Meta data declaration for group opening or closing
+            else {
+                for (size_t i = 0; i < it.meta.size(); i++) {
+                    REAL_UI(ui_interface)->declare(0, it.meta[i].first.c_str(), it.meta[i].second.c_str());
+                }
+            }
+            
+            if (type == "hgroup") {
+                REAL_UI(ui_interface)->openHorizontalBox(it.label.c_str());
+            } else if (type == "vgroup") { 
+                REAL_UI(ui_interface)->openVerticalBox(it.label.c_str());
+            } else if (type == "tgroup") {
+                REAL_UI(ui_interface)->openTabBox(it.label.c_str());
+            } else if (type == "vslider") {
+                REAL_UI(ui_interface)->addVerticalSlider(it.label.c_str(), &static_cast<ZoneParam*>(fPathInputTable[countIn])->fZone, init, min, max, step);
+            } else if (type == "hslider") {
+                REAL_UI(ui_interface)->addHorizontalSlider(it.label.c_str(), &static_cast<ZoneParam*>(fPathInputTable[countIn])->fZone, init, min, max, step);
+            } else if (type == "checkbox") {
+                REAL_UI(ui_interface)->addCheckButton(it.label.c_str(), &static_cast<ZoneParam*>(fPathInputTable[countIn])->fZone);
+            } else if (type == "soundfile") {
+                REAL_UI(ui_interface)->addSoundfile(it.label.c_str(), it.url.c_str(), &fSoundfiles[countSound]);
+            } else if (type == "hbargraph") {
+                REAL_UI(ui_interface)->addHorizontalBargraph(it.label.c_str(), &static_cast<ZoneParam*>(fPathOutputTable[countOut])->fZone, min, max);
+            } else if (type == "vbargraph") {
+                REAL_UI(ui_interface)->addVerticalBargraph(it.label.c_str(), &static_cast<ZoneParam*>(fPathOutputTable[countOut])->fZone, min, max);
+            } else if (type == "nentry") {
+                REAL_UI(ui_interface)->addNumEntry(it.label.c_str(), &static_cast<ZoneParam*>(fPathInputTable[countIn])->fZone, init, min, max, step);
+            } else if (type == "button") {
+                REAL_UI(ui_interface)->addButton(it.label.c_str(), &static_cast<ZoneParam*>(fPathInputTable[countIn])->fZone);
+            } else if (type == "close") {
+                REAL_UI(ui_interface)->closeBox();
+            }
+            
+            if (isInput(type)) {
+                countIn++;
+            } else if (isOutput(type)) {
+                countOut++;
+            } else if (isSoundfile(type)) {
+                countSound++;
+            }
+        }
+        
+        setlocale(LC_ALL, tmp_local);
+    }
+    
+    void buildUserInterface(UI* ui_interface, char* memory_block)
+    {
+        // MANDATORY: to be sure floats or double are correctly parsed
+        char* tmp_local = setlocale(LC_ALL, nullptr);
+        setlocale(LC_ALL, "C");
+        
+        for (auto& it : fUiItems) {
+            
+            std::string type = it.type;
+            int offset = it.index;
+            REAL init = it.init;
+            REAL min = it.min;
+            REAL max = it.max;
+            REAL step = it.step;
+            
+            // Meta data declaration for input items
+            if (isInput(type)) {
+                for (size_t i = 0; i < it.meta.size(); i++) {
+                    REAL_UI(ui_interface)->declare(REAL_ADR(offset), it.meta[i].first.c_str(), it.meta[i].second.c_str());
+                }
+            }
+            // Meta data declaration for output items
+            else if (isOutput(type)) {
+                for (size_t i = 0; i < it.meta.size(); i++) {
+                    REAL_UI(ui_interface)->declare(REAL_ADR(offset), it.meta[i].first.c_str(), it.meta[i].second.c_str());
+                }
+            }
+            // Meta data declaration for group opening or closing
+            else {
+                for (size_t i = 0; i < it.meta.size(); i++) {
+                    REAL_UI(ui_interface)->declare(0, it.meta[i].first.c_str(), it.meta[i].second.c_str());
+                }
+            }
+            
+            if (type == "hgroup") {
+                REAL_UI(ui_interface)->openHorizontalBox(it.label.c_str());
+            } else if (type == "vgroup") {
+                REAL_UI(ui_interface)->openVerticalBox(it.label.c_str());
+            } else if (type == "tgroup") {
+                REAL_UI(ui_interface)->openTabBox(it.label.c_str());
+            } else if (type == "vslider") {
+                REAL_UI(ui_interface)->addVerticalSlider(it.label.c_str(), REAL_ADR(offset), init, min, max, step);
+            } else if (type == "hslider") {
+                REAL_UI(ui_interface)->addHorizontalSlider(it.label.c_str(), REAL_ADR(offset), init, min, max, step);
+            } else if (type == "checkbox") {
+                REAL_UI(ui_interface)->addCheckButton(it.label.c_str(), REAL_ADR(offset));
+            } else if (type == "soundfile") {
+                REAL_UI(ui_interface)->addSoundfile(it.label.c_str(), it.url.c_str(), SOUNDFILE_ADR(offset));
+            } else if (type == "hbargraph") {
+                REAL_UI(ui_interface)->addHorizontalBargraph(it.label.c_str(), REAL_ADR(offset), min, max);
+            } else if (type == "vbargraph") {
+                REAL_UI(ui_interface)->addVerticalBargraph(it.label.c_str(), REAL_ADR(offset), min, max);
+            } else if (type == "nentry") {
+                REAL_UI(ui_interface)->addNumEntry(it.label.c_str(), REAL_ADR(offset), init, min, max, step);
+            } else if (type == "button") {
+                REAL_UI(ui_interface)->addButton(it.label.c_str(), REAL_ADR(offset));
+            } else if (type == "close") {
+                REAL_UI(ui_interface)->closeBox();
+            }
+        }
+        
+        setlocale(LC_ALL, tmp_local);
+    }
+    
+    void buildUserInterface(UIGlue* ui_interface, char* memory_block)
+    {
+        // TODO
+    }
+    
+    bool hasCompileOption(const std::string& option)
+    {
+        std::istringstream iss(fCompileOptions);
+        std::string token;
+        while (std::getline(iss, token, ' ')) {
+            if (token == option) return true;
+        }
+        return false;
+    }
+    
+};
+
+// Templated decoder
+
+struct JSONUITemplatedDecoder
+{
+
+    virtual ~JSONUITemplatedDecoder()
+    {}
+    
+    virtual void metadata(Meta* m) = 0;
+    virtual void metadata(MetaGlue* glue) = 0;
+    virtual int getDSPSize() = 0;
+    virtual std::string getName() = 0;
+    virtual std::string getLibVersion() = 0;
+    virtual std::string getCompileOptions() = 0;
+    virtual std::vector<std::string> getLibraryList() = 0;
+    virtual std::vector<std::string> getIncludePathnames() = 0;
+    virtual int getNumInputs() = 0;
+    virtual int getNumOutputs() = 0;
+    virtual int getSampleRate(char* memory_block) = 0;
+    virtual void setReflectZoneFun(int index, ReflectFunction fun) = 0;
+    virtual void setModifyZoneFun(int index, ModifyFunction fun) = 0;
+    virtual std::vector<ExtZoneParam*>& getInputControls() = 0;
+    virtual std::vector<ExtZoneParam*>& getOutputControls() = 0;
+    virtual void resetUserInterface(char* memory_block, Soundfile* defaultsound = nullptr) = 0;
+    virtual void buildUserInterface(UI* ui_interface) = 0;
+    virtual void buildUserInterface(UI* ui_interface, char* memory_block) = 0;
+    virtual void buildUserInterface(UIGlue* ui_interface, char* memory_block) = 0;
+    virtual bool hasCompileOption(const std::string& option) = 0;
+};
+
+struct JSONUIFloatDecoder : public JSONUIDecoderAux<float>, public JSONUITemplatedDecoder
+{
+    JSONUIFloatDecoder(const std::string& json):JSONUIDecoderAux<float>(json)
+    {}
+    
+    void metadata(Meta* m) { JSONUIDecoderAux<float>::metadata(m); }
+    void metadata(MetaGlue* glue) { JSONUIDecoderAux<float>::metadata(glue); }
+    int getDSPSize() { return fDSPSize; }
+    std::string getName() { return fName; }
+    std::string getLibVersion() { return fVersion; }
+    std::string getCompileOptions() { return fCompileOptions; }
+    std::vector<std::string> getLibraryList() { return fLibraryList; }
+    std::vector<std::string> getIncludePathnames() { return fIncludePathnames; }
+    int getNumInputs() { return fNumInputs; }
+    int getNumOutputs() { return fNumOutputs; }
+    int getSampleRate(char* memory_block)  { return JSONUIDecoderAux<float>::getSampleRate(memory_block); }
+    void setReflectZoneFun(int index, ReflectFunction fun)
+    {
+        JSONUIDecoderAux<float>::setReflectZoneFun(index, fun);
+    }
+    void setModifyZoneFun(int index, ModifyFunction fun)
+    {
+        JSONUIDecoderAux<float>::setModifyZoneFun(index, fun);
+    }
+    std::vector<ExtZoneParam*>& getInputControls()
+    {
+        return fPathInputTable;
+    }
+    std::vector<ExtZoneParam*>& getOutputControls()
+    {
+        return fPathOutputTable;
+    }
+    void resetUserInterface(char* memory_block, Soundfile* defaultsound = nullptr)
+    {
+        JSONUIDecoderAux<float>::resetUserInterface(memory_block, defaultsound);
+    }
+    void buildUserInterface(UI* ui_interface)
+    {
+        JSONUIDecoderAux<float>::buildUserInterface(ui_interface);
+    }
+    void buildUserInterface(UI* ui_interface, char* memory_block)
+    {
+        JSONUIDecoderAux<float>::buildUserInterface(ui_interface, memory_block);
+    }
+    void buildUserInterface(UIGlue* ui_interface, char* memory_block)
+    {
+        JSONUIDecoderAux<float>::buildUserInterface(ui_interface, memory_block);
+    }
+    bool hasCompileOption(const std::string& option) { return JSONUIDecoderAux<float>::hasCompileOption(option); }
+};
+
+struct JSONUIDoubleDecoder : public JSONUIDecoderAux<double>, public JSONUITemplatedDecoder
+{
+    JSONUIDoubleDecoder(const std::string& json):JSONUIDecoderAux<double>(json)
+    {}
+    
+    void metadata(Meta* m) { JSONUIDecoderAux<double>::metadata(m); }
+    void metadata(MetaGlue* glue) { JSONUIDecoderAux<double>::metadata(glue); }
+    int getDSPSize() { return fDSPSize; }
+    std::string getName() { return fName; }
+    std::string getLibVersion() { return fVersion; }
+    std::string getCompileOptions() { return fCompileOptions; }
+    std::vector<std::string> getLibraryList() { return fLibraryList; }
+    std::vector<std::string> getIncludePathnames() { return fIncludePathnames; }
+    int getNumInputs() { return fNumInputs; }
+    int getNumOutputs() { return fNumOutputs; }
+    int getSampleRate(char* memory_block) { return JSONUIDecoderAux<double>::getSampleRate(memory_block); }
+    void setReflectZoneFun(int index, ReflectFunction fun)
+    {
+        JSONUIDecoderAux<double>::setReflectZoneFun(index, fun);
+    }
+    void setModifyZoneFun(int index, ModifyFunction fun)
+    {
+        JSONUIDecoderAux<double>::setModifyZoneFun(index, fun);
+    }
+    std::vector<ExtZoneParam*>& getInputControls()
+    {
+        return fPathInputTable;
+    }
+    std::vector<ExtZoneParam*>& getOutputControls()
+    {
+        return fPathOutputTable;
+    }
+    void resetUserInterface(char* memory_block, Soundfile* defaultsound = nullptr)
+    {
+        JSONUIDecoderAux<double>::resetUserInterface(memory_block, defaultsound);
+    }
+    void buildUserInterface(UI* ui_interface)
+    {
+        JSONUIDecoderAux<double>::buildUserInterface(ui_interface);
+    }
+    void buildUserInterface(UI* ui_interface, char* memory_block)
+    {
+        JSONUIDecoderAux<double>::buildUserInterface(ui_interface, memory_block);
+    }
+    void buildUserInterface(UIGlue* ui_interface, char* memory_block)
+    {
+        JSONUIDecoderAux<double>::buildUserInterface(ui_interface, memory_block);
+    }
+    bool hasCompileOption(const std::string& option) { return JSONUIDecoderAux<double>::hasCompileOption(option); }
+};
+
+// FAUSTFLOAT decoder
+
+struct JSONUIDecoder : public JSONUIDecoderAux<FAUSTFLOAT>
+{
+    JSONUIDecoder(const std::string& json):JSONUIDecoderAux<FAUSTFLOAT>(json)
+    {}
+};
+
+static JSONUITemplatedDecoder* createJSONUIDecoder(const std::string& json)
+{
+    JSONUIDecoder decoder(json);
+    if (decoder.hasCompileOption("-double")) {
+        return new JSONUIDoubleDecoder(json);
+    } else {
+        return new JSONUIFloatDecoder(json);
+    }
+}
+
+#endif
+/**************************  END  JSONUIDecoder.h **************************/
+/************************** BEGIN dsp-combiner.h **************************/
+/************************************************************************
+ FAUST Architecture File
+ Copyright (C) 2003-2019 GRAME, Centre National de Creation Musicale
+ ---------------------------------------------------------------------
+ This Architecture section is free software; you can redistribute it
+ and/or modify it under the terms of the GNU General Public License
+ as published by the Free Software Foundation; either version 3 of
+ the License, or (at your option) any later version.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this program; If not, see <http://www.gnu.org/licenses/>.
+
+ EXCEPTION : As a special exception, you may create a larger work
+ that contains this FAUST architecture section and distribute
+ that work under terms of your choice, so long as this FAUST
+ architecture section is not modified.
+ ************************************************************************/
+
+#ifndef __dsp_combiner__
+#define __dsp_combiner__
+
+#include <string.h>
+#include <string>
+#include <assert.h>
+#include <sstream>
+
+
+// Base class and common code for binary combiners
+
+class dsp_binary_combiner : public dsp {
+
+    protected:
+
+        dsp* fDSP1;
+        dsp* fDSP2;
+
+        void buildUserInterfaceAux(UI* ui_interface, const char* name)
+        {
+            ui_interface->openTabBox(name);
+            ui_interface->openVerticalBox("DSP1");
+            fDSP1->buildUserInterface(ui_interface);
+            ui_interface->closeBox();
+            ui_interface->openVerticalBox("DSP2");
+            fDSP2->buildUserInterface(ui_interface);
+            ui_interface->closeBox();
+            ui_interface->closeBox();
+        }
+
+        FAUSTFLOAT** allocateChannels(int num, int buffer_size)
+        {
+            FAUSTFLOAT** channels = new FAUSTFLOAT*[num];
+            for (int chan = 0; chan < num; chan++) {
+                channels[chan] = new FAUSTFLOAT[buffer_size];
+                memset(channels[chan], 0, sizeof(FAUSTFLOAT) * buffer_size);
+            }
+            return channels;
+        }
+
+        void deleteChannels(FAUSTFLOAT** channels, int num)
+        {
+            for (int chan = 0; chan < num; chan++) {
+                delete [] channels[chan];
+            }
+            delete [] channels;
+        }
+
+     public:
+
+        dsp_binary_combiner(dsp* dsp1, dsp* dsp2):fDSP1(dsp1), fDSP2(dsp2)
+        {}
+
+        virtual ~dsp_binary_combiner()
+        {
+            delete fDSP1;
+            delete fDSP2;
+        }
+
+        virtual int getSampleRate()
+        {
+            return fDSP1->getSampleRate();
+        }
+        virtual void init(int sample_rate)
+        {
+            fDSP1->init(sample_rate);
+            fDSP2->init(sample_rate);
+        }
+        virtual void instanceInit(int sample_rate)
+        {
+            fDSP1->instanceInit(sample_rate);
+            fDSP2->instanceInit(sample_rate);
+        }
+        virtual void instanceConstants(int sample_rate)
+        {
+            fDSP1->instanceConstants(sample_rate);
+            fDSP2->instanceConstants(sample_rate);
+        }
+
+        virtual void instanceResetUserInterface()
+        {
+            fDSP1->instanceResetUserInterface();
+            fDSP2->instanceResetUserInterface();
+        }
+
+        virtual void instanceClear()
+        {
+            fDSP1->instanceClear();
+            fDSP2->instanceClear();
+        }
+
+        virtual void metadata(Meta* m)
+        {
+            fDSP1->metadata(m);
+            fDSP2->metadata(m);
+        }
+
+};
+
+// Combine two 'compatible' DSP in sequence
+
+class dsp_sequencer : public dsp_binary_combiner {
+
+    private:
+
+        FAUSTFLOAT** fDSP1Outputs;
+
+    public:
+
+        dsp_sequencer(dsp* dsp1, dsp* dsp2, int buffer_size = 4096):dsp_binary_combiner(dsp1, dsp2)
+        {
+            fDSP1Outputs = allocateChannels(fDSP1->getNumOutputs(), buffer_size);
+        }
+
+        virtual ~dsp_sequencer()
+        {
+            deleteChannels(fDSP1Outputs, fDSP1->getNumOutputs());
+        }
+
+        virtual int getNumInputs() { return fDSP1->getNumInputs(); }
+        virtual int getNumOutputs() { return fDSP2->getNumOutputs(); }
+
+        virtual void buildUserInterface(UI* ui_interface)
+        {
+            buildUserInterfaceAux(ui_interface, "Sequencer");
+        }
+
+        virtual dsp* clone()
+        {
+            return new dsp_sequencer(fDSP1->clone(), fDSP2->clone());
+        }
+
+        virtual void compute(int count, FAUSTFLOAT** inputs, FAUSTFLOAT** outputs)
+        {
+            fDSP1->compute(count, inputs, fDSP1Outputs);
+            fDSP2->compute(count, fDSP1Outputs, outputs);
+        }
+
+        virtual void compute(double date_usec, int count, FAUSTFLOAT** inputs, FAUSTFLOAT** outputs) { compute(count, inputs, outputs); }
+
+};
+
+// Combine two DSP in parallel
+
+class dsp_parallelizer : public dsp_binary_combiner {
+
+    private:
+
+        FAUSTFLOAT** fDSP2Inputs;
+        FAUSTFLOAT** fDSP2Outputs;
+
+    public:
+
+        dsp_parallelizer(dsp* dsp1, dsp* dsp2, int buffer_size = 4096):dsp_binary_combiner(dsp1, dsp2)
+        {
+            fDSP2Inputs = new FAUSTFLOAT*[fDSP2->getNumInputs()];
+            fDSP2Outputs = new FAUSTFLOAT*[fDSP2->getNumOutputs()];
+        }
+
+        virtual ~dsp_parallelizer()
+        {
+            delete [] fDSP2Inputs;
+            delete [] fDSP2Outputs;
+        }
+
+        virtual int getNumInputs() { return fDSP1->getNumInputs() + fDSP2->getNumInputs(); }
+        virtual int getNumOutputs() { return fDSP1->getNumOutputs() + fDSP2->getNumOutputs(); }
+
+        virtual void buildUserInterface(UI* ui_interface)
+        {
+            buildUserInterfaceAux(ui_interface, "Parallelizer");
+        }
+
+        virtual dsp* clone()
+        {
+            return new dsp_parallelizer(fDSP1->clone(), fDSP2->clone());
+        }
+
+        virtual void compute(int count, FAUSTFLOAT** inputs, FAUSTFLOAT** outputs)
+        {
+            fDSP1->compute(count, inputs, outputs);
+
+            // Shift inputs/outputs channels for fDSP2
+            for (int chan = 0; chan < fDSP2->getNumInputs(); chan++) {
+                fDSP2Inputs[chan] = inputs[fDSP1->getNumInputs() + chan];
+            }
+            for (int chan = 0; chan < fDSP2->getNumOutputs(); chan++) {
+                fDSP2Outputs[chan] = outputs[fDSP1->getNumOutputs() + chan];
+            }
+
+            fDSP2->compute(count, fDSP2Inputs, fDSP2Outputs);
+        }
+
+        virtual void compute(double date_usec, int count, FAUSTFLOAT** inputs, FAUSTFLOAT** outputs) { compute(count, inputs, outputs); }
+
+};
+
+// Combine two 'compatible' DSP in splitter
+
+class dsp_splitter : public dsp_binary_combiner {
+
+    private:
+
+        FAUSTFLOAT** fDSP1Outputs;
+        FAUSTFLOAT** fDSP2Inputs;
+
+    public:
+
+        dsp_splitter(dsp* dsp1, dsp* dsp2, int buffer_size = 4096):dsp_binary_combiner(dsp1, dsp2)
+        {
+            fDSP1Outputs = allocateChannels(fDSP1->getNumOutputs(), buffer_size);
+            fDSP2Inputs = new FAUSTFLOAT*[fDSP2->getNumInputs()];
+        }
+
+        virtual ~dsp_splitter()
+        {
+            deleteChannels(fDSP1Outputs, fDSP1->getNumOutputs());
+            delete [] fDSP2Inputs;
+        }
+
+        virtual int getNumInputs() { return fDSP1->getNumInputs(); }
+        virtual int getNumOutputs() { return fDSP2->getNumOutputs(); }
+
+        virtual void buildUserInterface(UI* ui_interface)
+        {
+            buildUserInterfaceAux(ui_interface, "Splitter");
+        }
+
+        virtual dsp* clone()
+        {
+            return new dsp_splitter(fDSP1->clone(), fDSP2->clone());
+        }
+
+        virtual void compute(int count, FAUSTFLOAT** inputs, FAUSTFLOAT** outputs)
+        {
+            fDSP1->compute(count, inputs, fDSP1Outputs);
+
+            for (int chan = 0; chan < fDSP2->getNumInputs(); chan++) {
+                 fDSP2Inputs[chan] = fDSP1Outputs[chan % fDSP1->getNumOutputs()];
+            }
+
+            fDSP2->compute(count, fDSP2Inputs, outputs);
+        }
+};
+
+// Combine two 'compatible' DSP in merger
+
+class dsp_merger : public dsp_binary_combiner {
+
+    private:
+
+        FAUSTFLOAT** fDSP1Inputs;
+        FAUSTFLOAT** fDSP1Outputs;
+        FAUSTFLOAT** fDSP2Inputs;
+
+        void mix(int count, FAUSTFLOAT* dst, FAUSTFLOAT* src)
+        {
+            for (int frame = 0; frame < count; frame++) {
+                dst[frame] += src[frame];
+            }
+        }
+
+    public:
+
+        dsp_merger(dsp* dsp1, dsp* dsp2, int buffer_size = 4096):dsp_binary_combiner(dsp1, dsp2)
+        {
+            fDSP1Inputs = allocateChannels(fDSP1->getNumInputs(), buffer_size);
+            fDSP1Outputs = allocateChannels(fDSP1->getNumOutputs(), buffer_size);
+            fDSP2Inputs = new FAUSTFLOAT*[fDSP2->getNumInputs()];
+        }
+
+        virtual ~dsp_merger()
+        {
+            deleteChannels(fDSP1Inputs, fDSP1->getNumInputs());
+            deleteChannels(fDSP1Outputs, fDSP1->getNumOutputs());
+            delete [] fDSP2Inputs;
+        }
+
+        virtual int getNumInputs() { return fDSP1->getNumInputs(); }
+        virtual int getNumOutputs() { return fDSP2->getNumOutputs(); }
+
+        virtual void buildUserInterface(UI* ui_interface)
+        {
+            buildUserInterfaceAux(ui_interface, "Merge");
+        }
+
+        virtual dsp* clone()
+        {
+            return new dsp_merger(fDSP1->clone(), fDSP2->clone());
+        }
+
+        virtual void compute(int count, FAUSTFLOAT** inputs, FAUSTFLOAT** outputs)
+        {
+            fDSP1->compute(count, fDSP1Inputs, fDSP1Outputs);
+
+            memset(fDSP2Inputs, 0, sizeof(FAUSTFLOAT*) * fDSP2->getNumInputs());
+
+            for (int chan = 0; chan < fDSP1->getNumOutputs(); chan++) {
+                int mchan = chan % fDSP2->getNumInputs();
+                if (fDSP2Inputs[mchan]) {
+                    mix(count, fDSP2Inputs[mchan], fDSP1Outputs[chan]);
+                } else {
+                    fDSP2Inputs[mchan] = fDSP1Outputs[chan];
+                }
+            }
+
+            fDSP2->compute(count, fDSP2Inputs, outputs);
+        }
+};
+
+// Combine two 'compatible' DSP in a recursive way
+
+class dsp_recursiver : public dsp_binary_combiner {
+
+    private:
+
+        FAUSTFLOAT** fDSP1Inputs;
+        FAUSTFLOAT** fDSP1Outputs;
+
+        FAUSTFLOAT** fDSP2Inputs;
+        FAUSTFLOAT** fDSP2Outputs;
+
+    public:
+
+        dsp_recursiver(dsp* dsp1, dsp* dsp2):dsp_binary_combiner(dsp1, dsp2)
+        {
+            fDSP1Inputs = allocateChannels(fDSP1->getNumInputs(), 1);
+            fDSP1Outputs = allocateChannels(fDSP1->getNumOutputs(), 1);
+            fDSP2Inputs = allocateChannels(fDSP2->getNumInputs(), 1);
+            fDSP2Outputs = allocateChannels(fDSP2->getNumOutputs(), 1);
+        }
+
+        virtual ~dsp_recursiver()
+        {
+            deleteChannels(fDSP1Inputs, fDSP1->getNumInputs());
+            deleteChannels(fDSP1Outputs, fDSP1->getNumOutputs());
+            deleteChannels(fDSP2Inputs, fDSP2->getNumInputs());
+            deleteChannels(fDSP2Outputs, fDSP2->getNumOutputs());
+        }
+
+        virtual int getNumInputs() { return fDSP1->getNumInputs() - fDSP2->getNumOutputs(); }
+        virtual int getNumOutputs() { return fDSP1->getNumOutputs(); }
+
+        virtual void buildUserInterface(UI* ui_interface)
+        {
+            buildUserInterfaceAux(ui_interface, "Recursiver");
+        }
+
+        virtual dsp* clone()
+        {
+            return new dsp_recursiver(fDSP1->clone(), fDSP2->clone());
+        }
+
+        virtual void compute(int count, FAUSTFLOAT** inputs, FAUSTFLOAT** outputs)
+        {
+            for (int frame = 0; (frame < count); frame++) {
+
+                for (int chan = 0; chan < fDSP2->getNumOutputs(); chan++) {
+                    fDSP1Inputs[chan][0] = fDSP2Outputs[chan][0];
+                }
+
+                for (int chan = 0; chan < fDSP1->getNumInputs() - fDSP2->getNumOutputs(); chan++) {
+                    fDSP1Inputs[chan + fDSP2->getNumOutputs()][0] = inputs[chan][frame];
+                }
+
+                fDSP1->compute(1, fDSP1Inputs, fDSP1Outputs);
+
+                for (int chan = 0; chan < fDSP1->getNumOutputs(); chan++) {
+                    outputs[chan][frame] = fDSP1Outputs[chan][0];
+                }
+
+                for (int chan = 0; chan < fDSP2->getNumInputs(); chan++) {
+                    fDSP2Inputs[chan][0] = fDSP1Outputs[chan][0];
+                }
+
+                fDSP2->compute(1, fDSP2Inputs, fDSP2Outputs);
+            }
+        }
+
+        virtual void compute(double date_usec, int count, FAUSTFLOAT** inputs, FAUSTFLOAT** outputs) { compute(count, inputs, outputs); }
+
+};
+
+#ifndef __dsp_algebra_api__
+#define __dsp_algebra_api__
+// DSP algebra API
+/*
+ Each operation takes two DSP as parameters, returns the combined DSPs, or null if failure with an error message.
+ */
+
+static dsp* createDSPSequencer(dsp* dsp1, dsp* dsp2, std::string& error)
+{
+    if (dsp1->getNumOutputs() != dsp2->getNumInputs()) {
+        std::stringstream error_aux;
+        error_aux << "Connection error int dsp_sequencer : the number of outputs ("
+                  << dsp1->getNumOutputs() << ") of A "
+                  << "must be equal to the number of inputs (" << dsp2->getNumInputs() << ") of B" << std::endl;
+        error = error_aux.str();
+        return nullptr;
+    } else {
+        return new dsp_sequencer(dsp1, dsp2);
+    }
+}
+
+static dsp* createDSPParallelize(dsp* dsp1, dsp* dsp2, std::string& error)
+{
+    return new dsp_parallelizer(dsp1, dsp2);
+}
+
+static dsp* createDSPSplitter(dsp* dsp1, dsp* dsp2, std::string& error)
+{
+    if (dsp1->getNumOutputs() == 0) {
+        error = "Connection error in dsp_splitter : the first expression has no outputs\n";
+        return nullptr;
+    } else if (dsp2->getNumInputs() == 0) {
+        error = "Connection error in dsp_splitter : the second expression has no inputs\n";
+        return nullptr;
+    } else if (dsp2->getNumInputs() % dsp1->getNumOutputs() != 0) {
+        std::stringstream error_aux;
+        error_aux << "Connection error in dsp_splitter : the number of outputs (" << dsp1->getNumOutputs()
+                  << ") of the first expression should be a divisor of the number of inputs ("
+                  << dsp2->getNumInputs()
+                  << ") of the second expression" << std::endl;
+        error = error_aux.str();
+        return nullptr;
+    } else if (dsp2->getNumInputs() == dsp1->getNumOutputs()) {
+        return new dsp_sequencer(dsp1, dsp2);
+    } else {
+        return new dsp_splitter(dsp1, dsp2);
+    }
+}
+
+static dsp* createDSPMerger(dsp* dsp1, dsp* dsp2, std::string& error)
+{
+    if (dsp1->getNumOutputs() == 0) {
+        error = "Connection error in dsp_merger : the first expression has no outputs\n";
+        return nullptr;
+    } else if (dsp2->getNumInputs() == 0) {
+        error = "Connection error in dsp_merger : the second expression has no inputs\n";
+        return nullptr;
+    } else if (dsp1->getNumOutputs() % dsp2->getNumInputs() != 0) {
+        std::stringstream error_aux;
+        error_aux << "Connection error in dsp_merger : the number of outputs (" << dsp1->getNumOutputs()
+                  << ") of the first expression should be a multiple of the number of inputs ("
+                  << dsp2->getNumInputs()
+                  << ") of the second expression" << std::endl;
+        error = error_aux.str();
+        return nullptr;
+    } else if (dsp2->getNumInputs() == dsp1->getNumOutputs()) {
+        return new dsp_sequencer(dsp1, dsp2);
+    } else {
+        return new dsp_merger(dsp1, dsp2);
+    }
+}
+
+static dsp* createDSPRecursiver(dsp* dsp1, dsp* dsp2, std::string& error)
+{
+    if ((dsp2->getNumInputs() > dsp1->getNumOutputs()) || (dsp2->getNumOutputs() > dsp1->getNumInputs())) {
+        std::stringstream error_aux;
+        error_aux << "Connection error in : dsp_recursiver" << std::endl;
+        if (dsp2->getNumInputs() > dsp1->getNumOutputs()) {
+            error_aux << "The number of outputs " << dsp1->getNumOutputs()
+                      << " of the first expression should be greater or equal to the number of inputs ("
+                      << dsp2->getNumInputs()
+                      << ") of the second expression" << std::endl;
+        }
+        if (dsp2->getNumOutputs() > dsp1->getNumInputs()) {
+            error_aux << "The number of inputs " << dsp1->getNumInputs()
+                      << " of the first expression should be greater or equal to the number of outputs ("
+                      << dsp2->getNumOutputs()
+                      << ") of the second expression" << std::endl;
+        }
+        error = error_aux.str();
+        return nullptr;
+    } else {
+        return new dsp_recursiver(dsp1, dsp2);
+    }
+}
+#endif
+
+#endif
+/**************************  END  dsp-combiner.h **************************/
+/************************** BEGIN misc.h **************************/
 /************************************************************************
  FAUST Architecture File
  Copyright (C) 2003-2017 GRAME, Centre National de Creation Musicale
@@ -939,9 +3292,10 @@ class dsp_factory {
 
 #include <algorithm>
 #include <map>
-#include <string.h>
-#include <stdlib.h>
 #include <cstdlib>
+#include <string.h>
+#include <fstream>
+#include <string>
 
 
 using std::max;
@@ -949,43 +3303,65 @@ using std::min;
 
 struct XXXX_Meta : std::map<const char*, const char*>
 {
-    void declare(const char* key, const char* value) { (*this)[key]=value; }
+    void declare(const char* key, const char* value) { (*this)[key] = value; }
 };
 
 struct MY_Meta : Meta, std::map<const char*, const char*>
 {
-    void declare(const char* key, const char* value) { (*this)[key]=value; }
+    void declare(const char* key, const char* value) { (*this)[key] = value; }
 };
 
-inline int lsr(int x, int n)	{ return int(((unsigned int)x) >> n); }
+static int lsr(int x, int n) { return int(((unsigned int)x) >> n); }
 
-inline int int2pow2(int x)		{ int r = 0; while ((1<<r) < x) r++; return r; }
+static int int2pow2(int x) { int r = 0; while ((1<<r) < x) r++; return r; }
 
-inline long lopt(char* argv[], const char* name, long def)
+static long lopt(char* argv[], const char* name, long def)
 {
 	int	i;
     for (i = 0; argv[i]; i++) if (!strcmp(argv[i], name)) return std::atoi(argv[i+1]);
 	return def;
 }
 
-inline bool isopt(char* argv[], const char* name)
+static bool isopt(char* argv[], const char* name)
 {
 	int	i;
 	for (i = 0; argv[i]; i++) if (!strcmp(argv[i], name)) return true;
 	return false;
 }
 
-inline const char* lopts(char* argv[], const char* name, const char* def)
+static const char* lopts(char* argv[], const char* name, const char* def)
 {
 	int	i;
 	for (i = 0; argv[i]; i++) if (!strcmp(argv[i], name)) return argv[i+1];
 	return def;
 }
 
+static std::string pathToContent(const std::string& path)
+{
+    std::ifstream file(path.c_str(), std::ifstream::binary);
+    
+    file.seekg(0, file.end);
+    int size = int(file.tellg());
+    file.seekg(0, file.beg);
+    
+    // And allocate buffer to that a single line can be read...
+    char* buffer = new char[size + 1];
+    file.read(buffer, size);
+    
+    // Terminate the string
+    buffer[size] = 0;
+    std::string result = buffer;
+    file.close();
+    delete [] buffer;
+    return result;
+}
+
 #endif
 
+/**************************  END  misc.h **************************/
 
-#ifdef POLY2
+// Always included
+/************************** BEGIN OSCUI.h **************************/
 /************************************************************************
  FAUST Architecture File
  Copyright (C) 2003-2017 GRAME, Centre National de Creation Musicale
@@ -1009,230 +3385,2077 @@ inline const char* lopts(char* argv[], const char* name, const char* def)
  architecture section is not modified.
  ************************************************************************/
 
-#ifndef __dsp_combiner__
-#define __dsp_combiner__
+#ifndef __OSCUI__
+#define __OSCUI__
 
-#include <string.h>
-#include <assert.h>
+#include <vector>
+#include <string>
 
+/*
 
-// Combine two DSP in sequence
+  Faust Project
 
-class dsp_sequencer : public dsp {
-    
-    private:
-        
-        dsp* fDSP1;
-        dsp* fDSP2;
-        FAUSTFLOAT** fSeqBuffer;
-         
-    public:
-        
-        dsp_sequencer(dsp* dsp1, dsp* dsp2, int buffer_size = 4096)
-            :fDSP1(dsp1), fDSP2(dsp2)
-        {
-            assert(fDSP1->getNumOutputs() == fDSP2->getNumInputs());
-            fSeqBuffer = new FAUSTFLOAT*[fDSP1->getNumOutputs()];
-            for (int i = 0; i < fDSP1->getNumOutputs(); i++) {
-                fSeqBuffer[i] = new FAUSTFLOAT[buffer_size];
-            }
-        }
-        
-        virtual ~dsp_sequencer()
-        {
-            for (int i = 0; i < fDSP1->getNumOutputs(); i++) {
-               delete [] fSeqBuffer[i];
-            }
-            
-            delete [] fSeqBuffer;
-            delete fDSP1;
-            delete fDSP2;
-        }
-               
-        virtual int getNumInputs() { return fDSP1->getNumInputs(); }
-        virtual int getNumOutputs() { return fDSP2->getNumOutputs(); }
-    
-        virtual void buildUserInterface(UI* ui_interface)
-        {
-            ui_interface->openTabBox("Sequencer");
-            ui_interface->openVerticalBox("DSP1");
-            fDSP1->buildUserInterface(ui_interface);
-            ui_interface->closeBox();
-            ui_interface->openVerticalBox("DSP2");
-            fDSP2->buildUserInterface(ui_interface);
-            ui_interface->closeBox();
-            ui_interface->closeBox();
-        }
-        
-        virtual int getSampleRate()
-        {
-            return fDSP1->getSampleRate();
-        }
-    
-        virtual void init(int samplingRate)
-        {
-            fDSP1->init(samplingRate);
-            fDSP2->init(samplingRate);
-        }
-    
-        virtual void instanceInit(int samplingRate)
-        {
-            fDSP1->instanceInit(samplingRate);
-            fDSP2->instanceInit(samplingRate);
-        }
-    
-        virtual void instanceConstants(int samplingRate)
-        {
-            fDSP1->instanceConstants(samplingRate);
-            fDSP2->instanceConstants(samplingRate);
-        }
-    
-        virtual void instanceResetUserInterface()
-        {
-            fDSP1->instanceResetUserInterface();
-            fDSP2->instanceResetUserInterface();
-        }
-    
-        virtual void instanceClear()
-        {
-            fDSP1->instanceClear();
-            fDSP2->instanceClear();
-        }
-        
-        virtual dsp* clone()
-        {
-            return new dsp_sequencer(fDSP1->clone(), fDSP2->clone());
-        }
-    
-        virtual void metadata(Meta* m)
-        {
-            fDSP1->metadata(m);
-            fDSP2->metadata(m);
-        }
- 
-        virtual void compute(int count, FAUSTFLOAT** inputs, FAUSTFLOAT** outputs)
-        {
-            fDSP1->compute(count, inputs, fSeqBuffer);
-            fDSP2->compute(count, fSeqBuffer, outputs);
-        }
-        virtual void compute(double date_usec, int count, FAUSTFLOAT** inputs, FAUSTFLOAT** outputs) { compute(count, inputs, outputs); }
+  Copyright (C) 2011 Grame
+
+  This library is free software; you can redistribute it and/or
+  modify it under the terms of the GNU Lesser General Public
+  License as published by the Free Software Foundation; either
+  version 2.1 of the License, or (at your option) any later version.
+
+  This library is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  Lesser General Public License for more details.
+
+  You should have received a copy of the GNU Lesser General Public
+  License along with this library; if not, write to the Free Software
+  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+
+  Grame Research Laboratory, 9 rue du Garet, 69001 Lyon - France
+  research@grame.fr
+
+*/
+
+#ifndef __OSCControler__
+#define __OSCControler__
+
+#include <string>
+/*
+
+  Copyright (C) 2011 Grame
+
+  This library is free software; you can redistribute it and/or
+  modify it under the terms of the GNU Lesser General Public
+  License as published by the Free Software Foundation; either
+  version 2.1 of the License, or (at your option) any later version.
+
+  This library is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  Lesser General Public License for more details.
+
+  You should have received a copy of the GNU Lesser General Public
+  License along with this library; if not, write to the Free Software
+  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+
+  Grame Research Laboratory, 9 rue du Garet, 69001 Lyon - France
+  research@grame.fr
+
+*/
+
+#ifndef __FaustFactory__
+#define __FaustFactory__
+
+#include <stack>
+#include <string>
+#include <sstream>
+
+/*
+
+  Copyright (C) 2011 Grame
+
+  This library is free software; you can redistribute it and/or
+  modify it under the terms of the GNU Lesser General Public
+  License as published by the Free Software Foundation; either
+  version 2.1 of the License, or (at your option) any later version.
+
+  This library is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  Lesser General Public License for more details.
+
+  You should have received a copy of the GNU Lesser General Public
+  License along with this library; if not, write to the Free Software
+  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+
+  Grame Research Laboratory, 9 rue du Garet, 69001 Lyon - France
+  research@grame.fr
+
+*/
+
+#ifndef __FaustNode__
+#define __FaustNode__
+
+#include <string>
+#include <vector>
+
+/*
+
+  Copyright (C) 2011 Grame
+
+  This library is free software; you can redistribute it and/or
+  modify it under the terms of the GNU Lesser General Public
+  License as published by the Free Software Foundation; either
+  version 2.1 of the License, or (at your option) any later version.
+
+  This library is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  Lesser General Public License for more details.
+
+  You should have received a copy of the GNU Lesser General Public
+  License along with this library; if not, write to the Free Software
+  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+
+  Grame Research Laboratory, 9 rue du Garet, 69001 Lyon - France
+  research@grame.fr
+
+*/
+
+#ifndef __MessageDriven__
+#define __MessageDriven__
+
+#include <string>
+#include <vector>
+
+/*
+
+  Copyright (C) 2010  Grame
+
+  This library is free software; you can redistribute it and/or
+  modify it under the terms of the GNU Lesser General Public
+  License as published by the Free Software Foundation; either
+  version 2.1 of the License, or (at your option) any later version.
+
+  This library is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  Lesser General Public License for more details.
+
+  You should have received a copy of the GNU Lesser General Public
+  License along with this library; if not, write to the Free Software
+  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+
+  Grame Research Laboratory, 9 rue du Garet, 69001 Lyon - France
+  research@grame.fr
+
+*/
+
+#ifndef __MessageProcessor__
+#define __MessageProcessor__
+
+namespace oscfaust
+{
+
+class Message;
+//--------------------------------------------------------------------------
+/*!
+	\brief an abstract class for objects able to process OSC messages	
+*/
+class MessageProcessor
+{
+	public:
+		virtual		~MessageProcessor() {}
+		virtual void processMessage( const Message* msg ) = 0;
 };
 
-// Combine two DSP in parallel
+} // end namespoace
 
-class dsp_parallelizer : public dsp {
-    
-    private:
-        
-        dsp* fDSP1;
-        dsp* fDSP2;
-    
-        FAUSTFLOAT** fInputsDSP2;
-        FAUSTFLOAT** fOutputsDSP2;
-    
-    public:
-        
-        dsp_parallelizer(dsp* dsp1, dsp* dsp2, int buffer_size = 4096)
-            :fDSP1(dsp1), fDSP2(dsp2)
-        {
-            fInputsDSP2 = new FAUSTFLOAT*[fDSP2->getNumInputs()];
-            fOutputsDSP2 = new FAUSTFLOAT*[fDSP2->getNumOutputs()];
-        }
-        
-        virtual ~dsp_parallelizer()
-        {
-            delete fDSP1;
-            delete fDSP2;
-            delete [] fInputsDSP2;
-            delete [] fOutputsDSP2;
-        }
-               
-        virtual int getNumInputs() { return fDSP1->getNumInputs() + fDSP2->getNumInputs(); }
-        virtual int getNumOutputs() { return fDSP1->getNumOutputs() + fDSP2->getNumOutputs(); }
-    
-        virtual void buildUserInterface(UI* ui_interface)
-        {
-            ui_interface->openTabBox("Parallelizer");
-            ui_interface->openVerticalBox("DSP1");
-            fDSP1->buildUserInterface(ui_interface);
-            ui_interface->closeBox();
-            ui_interface->openVerticalBox("DSP2");
-            fDSP2->buildUserInterface(ui_interface);
-            ui_interface->closeBox();
-            ui_interface->closeBox();
-        }
-        
-        virtual int getSampleRate()
-        {
-            return fDSP1->getSampleRate();
-        }
-    
-        virtual void init(int samplingRate)
-        {
-            fDSP1->init(samplingRate);
-            fDSP2->init(samplingRate);
-        }
-    
-        virtual void instanceInit(int samplingRate)
-        {
-            fDSP1->instanceInit(samplingRate);
-            fDSP2->instanceInit(samplingRate);
-        }
-    
-        virtual void instanceConstants(int samplingRate)
-        {
-            fDSP1->instanceConstants(samplingRate);
-            fDSP2->instanceConstants(samplingRate);
-        }
-        
-        virtual void instanceResetUserInterface()
-        {
-            fDSP1->instanceResetUserInterface();
-            fDSP2->instanceResetUserInterface();
-        }
+#endif
+/*
 
-        virtual void instanceClear()
-        {
-            fDSP1->instanceClear();
-            fDSP2->instanceClear();
-        }
-        
-        virtual dsp* clone()
-        {
-            return new dsp_parallelizer(fDSP1->clone(), fDSP2->clone());
-        }
+  Copyright (C) 2011 Grame
 
-        virtual void metadata(Meta* m)
-        {
-            fDSP1->metadata(m);
-            fDSP2->metadata(m);
+  This library is free software; you can redistribute it and/or
+  modify it under the terms of the GNU Lesser General Public
+  License as published by the Free Software Foundation; either
+  version 2.1 of the License, or (at your option) any later version.
+
+  This library is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  Lesser General Public License for more details.
+
+  You should have received a copy of the GNU Lesser General Public
+  License along with this library; if not, write to the Free Software
+  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+
+  Grame Research Laboratory, 9 rue du Garet, 69001 Lyon - France
+  research@grame.fr
+
+*/
+
+#ifndef __smartpointer__
+#define __smartpointer__
+
+#include <cassert>
+
+namespace oscfaust
+{
+
+/*!
+\brief the base class for smart pointers implementation
+
+	Any object that want to support smart pointers should
+	inherit from the smartable class which provides reference counting
+	and automatic delete when the reference count drops to zero.
+*/
+class smartable {
+	private:
+		unsigned 	refCount;		
+	public:
+		//! gives the reference count of the object
+		unsigned refs() const         { return refCount; }
+		//! addReference increments the ref count and checks for refCount overflow
+		void addReference()           { refCount++; assert(refCount != 0); }
+		//! removeReference delete the object when refCount is zero		
+		void removeReference()		  { if (--refCount == 0) delete this; }
+		
+	protected:
+		smartable() : refCount(0) {}
+		smartable(const smartable&): refCount(0) {}
+		//! destructor checks for non-zero refCount
+		virtual ~smartable()    
+        { 
+            /* 
+                See "Static SFaustNode create (const char* name, C* zone, C init, C min, C max, const char* prefix, GUI* ui)" comment.
+                assert (refCount == 0); 
+            */
         }
-    
-        virtual void compute(int count, FAUSTFLOAT** inputs, FAUSTFLOAT** outputs)
-        {
-            fDSP1->compute(count, inputs, outputs);
-            
-            // Shift inputs/outputs channels for fDSP2
-            for (int chan = 0; chan < fDSP2->getNumInputs(); chan++) {
-                fInputsDSP2[chan] = inputs[fDSP1->getNumInputs() + chan];
-            }
-            for (int chan = 0; chan < fDSP2->getNumOutputs(); chan++) {
-                fOutputsDSP2[chan] = outputs[fDSP1->getNumOutputs() + chan];
-            }
-            
-            fDSP2->compute(count, fInputsDSP2, fOutputsDSP2);
-        }
-        virtual void compute(double date_usec, int count, FAUSTFLOAT** inputs, FAUSTFLOAT** outputs) { compute(count, inputs, outputs); }
+		smartable& operator=(const smartable&) { return *this; }
 };
 
-#endif
-#include "effect.cpp"
+/*!
+\brief the smart pointer implementation
+
+	A smart pointer is in charge of maintaining the objects reference count 
+	by the way of pointers operators overloading. It supports class 
+	inheritance and conversion whenever possible.
+\n	Instances of the SMARTP class are supposed to use \e smartable types (or at least
+	objects that implements the \e addReference and \e removeReference
+	methods in a consistent way).
+*/
+template<class T> class SMARTP {
+	private:
+		//! the actual pointer to the class
+		T* fSmartPtr;
+
+	public:
+		//! an empty constructor - points to null
+		SMARTP()	: fSmartPtr(0) {}
+		//! build a smart pointer from a class pointer
+		SMARTP(T* rawptr) : fSmartPtr(rawptr)              { if (fSmartPtr) fSmartPtr->addReference(); }
+		//! build a smart pointer from an convertible class reference
+		template<class T2> 
+		SMARTP(const SMARTP<T2>& ptr) : fSmartPtr((T*)ptr) { if (fSmartPtr) fSmartPtr->addReference(); }
+		//! build a smart pointer from another smart pointer reference
+		SMARTP(const SMARTP& ptr) : fSmartPtr((T*)ptr)     { if (fSmartPtr) fSmartPtr->addReference(); }
+
+		//! the smart pointer destructor: simply removes one reference count
+		~SMARTP()  { if (fSmartPtr) fSmartPtr->removeReference(); }
+		
+		//! cast operator to retrieve the actual class pointer
+		operator T*() const  { return fSmartPtr;	}
+
+		//! '*' operator to access the actual class pointer
+		T& operator*() const {
+			// checks for null dereference
+			assert (fSmartPtr != 0);
+			return *fSmartPtr;
+		}
+
+		//! operator -> overloading to access the actual class pointer
+		T* operator->() const	{ 
+			// checks for null dereference
+			assert (fSmartPtr != 0);
+			return fSmartPtr;
+		}
+
+		//! operator = that moves the actual class pointer
+		template <class T2>
+		SMARTP& operator=(T2 p1_)	{ *this=(T*)p1_; return *this; }
+
+		//! operator = that moves the actual class pointer
+		SMARTP& operator=(T* p_)	{
+			// check first that pointers differ
+			if (fSmartPtr != p_) {
+				// increments the ref count of the new pointer if not null
+				if (p_ != 0) p_->addReference();
+				// decrements the ref count of the old pointer if not null
+				if (fSmartPtr != 0) fSmartPtr->removeReference();
+				// and finally stores the new actual pointer
+				fSmartPtr = p_;
+			}
+			return *this;
+		}
+		//! operator < to support SMARTP map with Visual C++
+		bool operator<(const SMARTP<T>& p_)	const			  { return fSmartPtr < ((T *) p_); }
+		//! operator = to support inherited class reference
+		SMARTP& operator=(const SMARTP<T>& p_)                { return operator=((T *) p_); }
+		//! dynamic cast support
+		template<class T2> SMARTP& cast(T2* p_)               { return operator=(dynamic_cast<T*>(p_)); }
+		//! dynamic cast support
+		template<class T2> SMARTP& cast(const SMARTP<T2>& p_) { return operator=(dynamic_cast<T*>(p_)); }
+};
+
+}
+
 #endif
 
-#if SOUNDFILE
+namespace oscfaust
+{
+
+class Message;
+class OSCRegexp;
+class MessageDriven;
+typedef class SMARTP<MessageDriven>	SMessageDriven;
+
+//--------------------------------------------------------------------------
+/*!
+	\brief a base class for objects accepting OSC messages
+	
+	Message driven objects are hierarchically organized in a tree.
+	They provides the necessary to dispatch an OSC message to its destination
+	node, according to the message OSC address. 
+	
+	The principle of the dispatch is the following:
+	- first the processMessage() method should be called on the top level node
+	- next processMessage call propose 
+*/
+class MessageDriven : public MessageProcessor, public smartable
+{
+	std::string						fName;			///< the node name
+	std::string						fOSCPrefix;		///< the node OSC address prefix (OSCAddress = fOSCPrefix + '/' + fName)
+	std::vector<SMessageDriven>		fSubNodes;		///< the subnodes of the current node
+
+	protected:
+				 MessageDriven(const char *name, const char *oscprefix) : fName (name), fOSCPrefix(oscprefix) {}
+		virtual ~MessageDriven() {}
+
+	public:
+		static SMessageDriven create(const char* name, const char *oscprefix)	{ return new MessageDriven(name, oscprefix); }
+
+		/*!
+			\brief OSC message processing method.
+			\param msg the osc message to be processed
+			The method should be called on the top level node.
+		*/
+		virtual void	processMessage(const Message* msg);
+
+		/*!
+			\brief propose an OSc message at a given hierarchy level.
+			\param msg the osc message currently processed
+			\param regexp a regular expression based on the osc address head
+			\param addrTail the osc address tail
+			
+			The method first tries to match the regular expression with the object name. 
+			When it matches:
+			- it calls \c accept when \c addrTail is empty 
+			- or it \c propose the message to its subnodes when \c addrTail is not empty. 
+			  In this case a new \c regexp is computed with the head of \c addrTail and a new \c addrTail as well.
+		*/
+		virtual void	propose(const Message* msg, const OSCRegexp* regexp, const std::string addrTail);
+
+		/*!
+			\brief accept an OSC message. 
+			\param msg the osc message currently processed
+			\return true when the message is processed by the node
+			
+			The method is called only for the destination nodes. The real message acceptance is the node 
+			responsability and may depend on the message content.
+		*/
+		virtual bool	accept(const Message* msg);
+
+		/*!
+			\brief handler for the \c 'get' message
+			\param ipdest the output message destination IP
+			
+			The \c 'get' message is supported by every node:
+			- it is propagated to the subnodes until it reaches terminal nodes
+			- a terminal node send its state on \c 'get' request to the IP address given as parameter.
+			The \c get method is basically called by the accept method.
+		*/
+		virtual void	get(unsigned long ipdest) const;
+
+		/*!
+			\brief handler for the \c 'get' 'attribute' message
+			\param ipdest the output message destination IP
+			\param what the requested attribute
+			
+			The \c 'get' message is supported by every node:
+			- it is propagated to the subnodes until it reaches terminal nodes
+			- a terminal node send its state on \c 'get' request to the IP address given as parameter.
+			The \c get method is basically called by the accept method.
+		*/
+		virtual void	get (unsigned long ipdest, const std::string & what) const {}
+
+		void			add(SMessageDriven node)	{ fSubNodes.push_back (node); }
+		const char*		getName() const				{ return fName.c_str(); }
+		std::string		getOSCAddress() const;
+		int				size() const				{ return (int)fSubNodes.size (); }
+		
+		const std::string&	name() const			{ return fName; }
+		SMessageDriven	subnode(int i)              { return fSubNodes[i]; }
+};
+
+} // end namespoace
+
+#endif
+/*
+
+  Copyright (C) 2011  Grame
+
+  This library is free software; you can redistribute it and/or
+  modify it under the terms of the GNU Lesser General Public
+  License as published by the Free Software Foundation; either
+  version 2.1 of the License, or (at your option) any later version.
+
+  This library is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  Lesser General Public License for more details.
+
+  You should have received a copy of the GNU Lesser General Public
+  License along with this library; if not, write to the Free Software
+  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+
+  Grame Research Laboratory, 9 rue du Garet, 69001 Lyon - France
+  research@grame.fr
+
+*/
+
+
+#ifndef __Message__
+#define __Message__
+
+#include <string>
+#include <vector>
+
+namespace oscfaust
+{
+
+class OSCStream;
+template <typename T> class MsgParam;
+class baseparam;
+typedef SMARTP<baseparam>	Sbaseparam;
+
+//--------------------------------------------------------------------------
+/*!
+	\brief base class of a message parameters
+*/
+class baseparam : public smartable
+{
+	public:
+		virtual ~baseparam() {}
+
+		/*!
+		 \brief utility for parameter type checking
+		*/
+		template<typename X> bool isType() const { return dynamic_cast<const MsgParam<X>*> (this) != 0; }
+		/*!
+		 \brief utility for parameter convertion
+		 \param errvalue the returned value when no conversion applies
+		 \return the parameter value when the type matches
+		*/
+		template<typename X> X	value(X errvalue) const 
+			{ const MsgParam<X>* o = dynamic_cast<const MsgParam<X>*> (this); return o ? o->getValue() : errvalue; }
+		/*!
+		 \brief utility for parameter comparison
+		*/
+		template<typename X> bool	equal(const baseparam& p) const 
+			{ 
+				const MsgParam<X>* a = dynamic_cast<const MsgParam<X>*> (this); 
+				const MsgParam<X>* b = dynamic_cast<const MsgParam<X>*> (&p);
+				return a && b && (a->getValue() == b->getValue());
+			}
+		/*!
+		 \brief utility for parameter comparison
+		*/
+		bool operator==(const baseparam& p) const 
+			{ 
+				return equal<float>(p) || equal<int>(p) || equal<std::string>(p);
+			}
+		bool operator!=(const baseparam& p) const
+			{ 
+				return !equal<float>(p) && !equal<int>(p) && !equal<std::string>(p);
+			}
+			
+		virtual SMARTP<baseparam> copy() const = 0;
+};
+
+//--------------------------------------------------------------------------
+/*!
+	\brief template for a message parameter
+*/
+template <typename T> class MsgParam : public baseparam
+{
+	T fParam;
+	public:
+				 MsgParam(T val) : fParam(val)	{}
+		virtual ~MsgParam() {}
+		
+		T getValue() const { return fParam; }
+		
+		virtual Sbaseparam copy() const { return new MsgParam<T>(fParam); }
+};
+
+//--------------------------------------------------------------------------
+/*!
+	\brief a message description
+	
+	A message is composed of an address (actually an OSC address),
+	a message string that may be viewed as a method name
+	and a list of message parameters.
+*/
+class Message
+{
+    public:
+        typedef SMARTP<baseparam>		argPtr;		///< a message argument ptr type
+        typedef std::vector<argPtr>		argslist;	///< args list type
+
+    private:
+        unsigned long	fSrcIP;			///< the message source IP number
+        std::string	fAddress;			///< the message osc destination address
+        std::string	fAlias;             ///< the message alias osc destination address
+        argslist	fArguments;			///< the message arguments
+
+    public:
+            /*!
+                \brief an empty message constructor
+            */
+             Message() {}
+            /*!
+                \brief a message constructor
+                \param address the message destination address
+            */
+            Message(const std::string& address) : fAddress(address), fAlias("") {}
+             
+            Message(const std::string& address, const std::string& alias) : fAddress(address), fAlias(alias) {}
+            /*!
+                \brief a message constructor
+                \param address the message destination address
+                \param args the message parameters
+            */
+            Message(const std::string& address, const argslist& args) 
+                : fAddress(address), fArguments(args) {}
+            /*!
+                \brief a message constructor
+                \param msg a message
+            */
+             Message(const Message& msg);
+    virtual ~Message() {} //{ freed++; std::cout << "running messages: " << (allocated - freed) << std::endl; }
+
+    /*!
+        \brief adds a parameter to the message
+        \param val the parameter
+    */
+    template <typename T> void add(T val)	{ fArguments.push_back(new MsgParam<T>(val)); }
+    /*!
+        \brief adds a float parameter to the message
+        \param val the parameter value
+    */
+    void	add(float val)					{ add<float>(val); }
+    /*!
+        \brief adds an int parameter to the message
+        \param val the parameter value
+    */
+    void	add(int val)					{ add<int>(val); }
+    /*!
+        \brief adds a string parameter to the message
+        \param val the parameter value
+    */
+    void	add(const std::string& val)		{ add<std::string>(val); }
+
+    /*!
+        \brief adds a parameter to the message
+        \param val the parameter
+    */
+    void	add(argPtr val)                 { fArguments.push_back( val ); }
+
+    /*!
+        \brief sets the message address
+        \param addr the address
+    */
+    void				setSrcIP(unsigned long addr)		{ fSrcIP = addr; }
+
+    /*!
+        \brief sets the message address
+        \param addr the address
+    */
+    void				setAddress(const std::string& addr)		{ fAddress = addr; }
+    /*!
+        \brief print the message
+        \param out the output stream
+    */
+    void				print(std::ostream& out) const;
+    /*!
+        \brief send the message to OSC
+        \param out the OSC output stream
+    */
+    void				print(OSCStream& out) const;
+    /*!
+        \brief print message arguments
+        \param out the OSC output stream
+    */
+    void				printArgs(OSCStream& out) const;
+
+    /// \brief gives the message address
+    const std::string&	address() const		{ return fAddress; }
+    /// \brief gives the message alias
+    const std::string&	alias() const		{ return fAlias; }
+    /// \brief gives the message parameters list
+    const argslist&		params() const		{ return fArguments; }
+    /// \brief gives the message parameters list
+    argslist&			params()			{ return fArguments; }
+    /// \brief gives the message source IP 
+    unsigned long		src() const			{ return fSrcIP; }
+    /// \brief gives the message parameters count
+    int					size() const		{ return (int)fArguments.size(); }
+
+    bool operator == (const Message& other) const;	
+
+    /*!
+        \brief gives a message float parameter
+        \param i the parameter index (0 <= i < size())
+        \param val on output: the parameter value when the parameter type matches
+        \return false when types don't match
+    */
+    bool	param(int i, float& val) const		{ val = params()[i]->value<float>(val); return params()[i]->isType<float>(); }
+    /*!
+        \brief gives a message int parameter
+        \param i the parameter index (0 <= i < size())
+        \param val on output: the parameter value when the parameter type matches
+        \return false when types don't match
+    */
+    bool	param(int i, int& val) const		{ val = params()[i]->value<int>(val); return params()[i]->isType<int>(); }
+    /*!
+        \brief gives a message int parameter
+        \param i the parameter index (0 <= i < size())
+        \param val on output: the parameter value when the parameter type matches
+        \return false when types don't match
+    */
+    bool	param(int i, unsigned int& val) const		{ val = params()[i]->value<int>(val); return params()[i]->isType<int>(); }
+    /*!
+        \brief gives a message int parameter
+        \param i the parameter index (0 <= i < size())
+        \param val on output: the parameter value when the parameter type matches
+        \return false when types don't match
+        \note a boolean value is handled as integer
+    */
+    bool	param(int i, bool& val) const		{ int ival = 0; ival = params()[i]->value<int>(ival); val = ival!=0; return params()[i]->isType<int>(); }
+    /*!
+        \brief gives a message int parameter
+        \param i the parameter index (0 <= i < size())
+        \param val on output: the parameter value when the parameter type matches
+        \return false when types don't match
+    */
+    bool	param(int i, long int& val) const	{ val = long(params()[i]->value<int>(val)); return params()[i]->isType<int>(); }
+    /*!
+        \brief gives a message string parameter
+        \param i the parameter index (0 <= i < size())
+        \param val on output: the parameter value when the parameter type matches
+        \return false when types don't match
+    */
+    bool	param(int i, std::string& val) const { val = params()[i]->value<std::string>(val); return params()[i]->isType<std::string>(); }
+};
+
+
+} // end namespoace
+
+#endif
+/************************** BEGIN GUI.h **************************/
 /************************************************************************
  FAUST Architecture File
  Copyright (C) 2003-2017 GRAME, Centre National de Creation Musicale
+ ---------------------------------------------------------------------
+ This Architecture section is free software; you can redistribute it
+ and/or modify it under the terms of the GNU General Public License
+ as published by the Free Software Foundation; either version 3 of
+ the License, or (at your option) any later version.
+ 
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+ 
+ You should have received a copy of the GNU General Public License
+ along with this program; If not, see <http://www.gnu.org/licenses/>.
+ 
+ EXCEPTION : As a special exception, you may create a larger work
+ that contains this FAUST architecture section and distribute
+ that work under terms of your choice, so long as this FAUST
+ architecture section is not modified.
+ ************************************************************************/
+ 
+#ifndef __GUI_H__
+#define __GUI_H__
+
+#include <list>
+#include <map>
+#include <vector>
+#include <iostream>
+
+#ifdef _WIN32
+# pragma warning (disable: 4100)
+#else
+# pragma GCC diagnostic ignored "-Wunused-parameter"
+#endif
+
+/************************** BEGIN ring-buffer.h **************************/
+/*
+  Copyright (C) 2000 Paul Davis
+  Copyright (C) 2003 Rohan Drape
+  Copyright (C) 2016 GRAME (renaming for internal use)
+
+  This program is free software; you can redistribute it and/or modify
+  it under the terms of the GNU Lesser General Public License as published by
+  the Free Software Foundation; either version 2.1 of the License, or
+  (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU Lesser General Public License for more details.
+
+  You should have received a copy of the GNU Lesser General Public License
+  along with this program; if not, write to the Free Software
+  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+
+  ISO/POSIX C version of Paul Davis's lock free ringbuffer C++ code.
+  This is safe for the case of one read thread and one write thread.
+*/
+
+#ifndef __ring_buffer__
+#define __ring_buffer__
+
+#include <stdlib.h>
+#include <string.h>
+
+#ifdef WIN32
+# pragma warning (disable: 4334)
+#else
+# pragma GCC diagnostic ignored "-Wunused-function"
+#endif
+
+typedef struct {
+    char *buf;
+    size_t len;
+}
+ringbuffer_data_t;
+
+typedef struct {
+    char *buf;
+    volatile size_t write_ptr;
+    volatile size_t read_ptr;
+    size_t	size;
+    size_t	size_mask;
+    int	mlocked;
+}
+ringbuffer_t;
+
+static ringbuffer_t *ringbuffer_create(size_t sz);
+static void ringbuffer_free(ringbuffer_t *rb);
+static void ringbuffer_get_read_vector(const ringbuffer_t *rb,
+                                         ringbuffer_data_t *vec);
+static void ringbuffer_get_write_vector(const ringbuffer_t *rb,
+                                          ringbuffer_data_t *vec);
+static size_t ringbuffer_read(ringbuffer_t *rb, char *dest, size_t cnt);
+static size_t ringbuffer_peek(ringbuffer_t *rb, char *dest, size_t cnt);
+static void ringbuffer_read_advance(ringbuffer_t *rb, size_t cnt);
+static size_t ringbuffer_read_space(const ringbuffer_t *rb);
+static int ringbuffer_mlock(ringbuffer_t *rb);
+static void ringbuffer_reset(ringbuffer_t *rb);
+static void ringbuffer_reset_size (ringbuffer_t * rb, size_t sz);
+static size_t ringbuffer_write(ringbuffer_t *rb, const char *src,
+                                 size_t cnt);
+static void ringbuffer_write_advance(ringbuffer_t *rb, size_t cnt);
+static size_t ringbuffer_write_space(const ringbuffer_t *rb);
+
+/* Create a new ringbuffer to hold at least `sz' bytes of data. The
+   actual buffer size is rounded up to the next power of two. */
+
+static ringbuffer_t *
+ringbuffer_create (size_t sz)
+{
+	size_t power_of_two;
+	ringbuffer_t *rb;
+
+	if ((rb = (ringbuffer_t *) malloc (sizeof (ringbuffer_t))) == NULL) {
+		return NULL;
+	}
+
+	for (power_of_two = 1u; 1u << power_of_two < sz; power_of_two++);
+
+	rb->size = 1u << power_of_two;
+	rb->size_mask = rb->size;
+	rb->size_mask -= 1;
+	rb->write_ptr = 0;
+	rb->read_ptr = 0;
+	if ((rb->buf = (char *) malloc (rb->size)) == NULL) {
+		free (rb);
+		return NULL;
+	}
+	rb->mlocked = 0;
+
+	return rb;
+}
+
+/* Free all data associated with the ringbuffer `rb'. */
+
+static void
+ringbuffer_free (ringbuffer_t * rb)
+{
+#ifdef USE_MLOCK
+	if (rb->mlocked) {
+		munlock (rb->buf, rb->size);
+	}
+#endif /* USE_MLOCK */
+	free (rb->buf);
+	free (rb);
+}
+
+/* Lock the data block of `rb' using the system call 'mlock'.  */
+
+static int
+ringbuffer_mlock (ringbuffer_t * rb)
+{
+#ifdef USE_MLOCK
+	if (mlock (rb->buf, rb->size)) {
+		return -1;
+	}
+#endif /* USE_MLOCK */
+	rb->mlocked = 1;
+	return 0;
+}
+
+/* Reset the read and write pointers to zero. This is not thread
+   safe. */
+
+static void
+ringbuffer_reset (ringbuffer_t * rb)
+{
+	rb->read_ptr = 0;
+	rb->write_ptr = 0;
+    memset(rb->buf, 0, rb->size);
+}
+
+/* Reset the read and write pointers to zero. This is not thread
+   safe. */
+
+static void
+ringbuffer_reset_size (ringbuffer_t * rb, size_t sz)
+{
+    rb->size = sz;
+    rb->size_mask = rb->size;
+    rb->size_mask -= 1;
+    rb->read_ptr = 0;
+    rb->write_ptr = 0;
+}
+
+/* Return the number of bytes available for reading. This is the
+   number of bytes in front of the read pointer and behind the write
+   pointer.  */
+
+static size_t
+ringbuffer_read_space (const ringbuffer_t * rb)
+{
+	size_t w, r;
+
+	w = rb->write_ptr;
+	r = rb->read_ptr;
+
+	if (w > r) {
+		return w - r;
+	} else {
+		return (w - r + rb->size) & rb->size_mask;
+	}
+}
+
+/* Return the number of bytes available for writing. This is the
+   number of bytes in front of the write pointer and behind the read
+   pointer.  */
+
+static size_t
+ringbuffer_write_space (const ringbuffer_t * rb)
+{
+	size_t w, r;
+
+	w = rb->write_ptr;
+	r = rb->read_ptr;
+
+	if (w > r) {
+		return ((r - w + rb->size) & rb->size_mask) - 1;
+	} else if (w < r) {
+		return (r - w) - 1;
+	} else {
+		return rb->size - 1;
+	}
+}
+
+/* The copying data reader. Copy at most `cnt' bytes from `rb' to
+   `dest'.  Returns the actual number of bytes copied. */
+
+static size_t
+ringbuffer_read (ringbuffer_t * rb, char *dest, size_t cnt)
+{
+	size_t free_cnt;
+	size_t cnt2;
+	size_t to_read;
+	size_t n1, n2;
+
+	if ((free_cnt = ringbuffer_read_space (rb)) == 0) {
+		return 0;
+	}
+
+	to_read = cnt > free_cnt ? free_cnt : cnt;
+
+	cnt2 = rb->read_ptr + to_read;
+
+	if (cnt2 > rb->size) {
+		n1 = rb->size - rb->read_ptr;
+		n2 = cnt2 & rb->size_mask;
+	} else {
+		n1 = to_read;
+		n2 = 0;
+	}
+
+	memcpy (dest, &(rb->buf[rb->read_ptr]), n1);
+	rb->read_ptr = (rb->read_ptr + n1) & rb->size_mask;
+
+	if (n2) {
+		memcpy (dest + n1, &(rb->buf[rb->read_ptr]), n2);
+		rb->read_ptr = (rb->read_ptr + n2) & rb->size_mask;
+	}
+
+	return to_read;
+}
+
+/* The copying data reader w/o read pointer advance. Copy at most
+   `cnt' bytes from `rb' to `dest'.  Returns the actual number of bytes
+   copied. */
+
+static size_t
+ringbuffer_peek (ringbuffer_t * rb, char *dest, size_t cnt)
+{
+	size_t free_cnt;
+	size_t cnt2;
+	size_t to_read;
+	size_t n1, n2;
+	size_t tmp_read_ptr;
+
+	tmp_read_ptr = rb->read_ptr;
+
+	if ((free_cnt = ringbuffer_read_space (rb)) == 0) {
+		return 0;
+	}
+
+	to_read = cnt > free_cnt ? free_cnt : cnt;
+
+	cnt2 = tmp_read_ptr + to_read;
+
+	if (cnt2 > rb->size) {
+		n1 = rb->size - tmp_read_ptr;
+		n2 = cnt2 & rb->size_mask;
+	} else {
+		n1 = to_read;
+		n2 = 0;
+	}
+
+	memcpy (dest, &(rb->buf[tmp_read_ptr]), n1);
+	tmp_read_ptr = (tmp_read_ptr + n1) & rb->size_mask;
+
+	if (n2) {
+		memcpy (dest + n1, &(rb->buf[tmp_read_ptr]), n2);
+	}
+
+	return to_read;
+}
+
+/* The copying data writer. Copy at most `cnt' bytes to `rb' from
+   `src'.  Returns the actual number of bytes copied. */
+
+static size_t
+ringbuffer_write (ringbuffer_t * rb, const char *src, size_t cnt)
+{
+	size_t free_cnt;
+	size_t cnt2;
+	size_t to_write;
+	size_t n1, n2;
+
+	if ((free_cnt = ringbuffer_write_space (rb)) == 0) {
+		return 0;
+	}
+
+	to_write = cnt > free_cnt ? free_cnt : cnt;
+
+	cnt2 = rb->write_ptr + to_write;
+
+	if (cnt2 > rb->size) {
+		n1 = rb->size - rb->write_ptr;
+		n2 = cnt2 & rb->size_mask;
+	} else {
+		n1 = to_write;
+		n2 = 0;
+	}
+
+	memcpy (&(rb->buf[rb->write_ptr]), src, n1);
+	rb->write_ptr = (rb->write_ptr + n1) & rb->size_mask;
+
+	if (n2) {
+		memcpy (&(rb->buf[rb->write_ptr]), src + n1, n2);
+		rb->write_ptr = (rb->write_ptr + n2) & rb->size_mask;
+	}
+
+	return to_write;
+}
+
+/* Advance the read pointer `cnt' places. */
+
+static void
+ringbuffer_read_advance (ringbuffer_t * rb, size_t cnt)
+{
+	size_t tmp = (rb->read_ptr + cnt) & rb->size_mask;
+	rb->read_ptr = tmp;
+}
+
+/* Advance the write pointer `cnt' places. */
+
+static void
+ringbuffer_write_advance (ringbuffer_t * rb, size_t cnt)
+{
+	size_t tmp = (rb->write_ptr + cnt) & rb->size_mask;
+	rb->write_ptr = tmp;
+}
+
+/* The non-copying data reader. `vec' is an array of two places. Set
+   the values at `vec' to hold the current readable data at `rb'. If
+   the readable data is in one segment the second segment has zero
+   length. */
+
+static void
+ringbuffer_get_read_vector (const ringbuffer_t * rb,
+				 ringbuffer_data_t * vec)
+{
+	size_t free_cnt;
+	size_t cnt2;
+	size_t w, r;
+
+	w = rb->write_ptr;
+	r = rb->read_ptr;
+
+	if (w > r) {
+		free_cnt = w - r;
+	} else {
+		free_cnt = (w - r + rb->size) & rb->size_mask;
+	}
+
+	cnt2 = r + free_cnt;
+
+	if (cnt2 > rb->size) {
+
+		/* Two part vector: the rest of the buffer after the current write
+		   ptr, plus some from the start of the buffer. */
+
+		vec[0].buf = &(rb->buf[r]);
+		vec[0].len = rb->size - r;
+		vec[1].buf = rb->buf;
+		vec[1].len = cnt2 & rb->size_mask;
+
+	} else {
+
+		/* Single part vector: just the rest of the buffer */
+
+		vec[0].buf = &(rb->buf[r]);
+		vec[0].len = free_cnt;
+		vec[1].len = 0;
+	}
+}
+
+/* The non-copying data writer. `vec' is an array of two places. Set
+   the values at `vec' to hold the current writeable data at `rb'. If
+   the writeable data is in one segment the second segment has zero
+   length. */
+
+static void
+ringbuffer_get_write_vector (const ringbuffer_t * rb,
+				  ringbuffer_data_t * vec)
+{
+	size_t free_cnt;
+	size_t cnt2;
+	size_t w, r;
+
+	w = rb->write_ptr;
+	r = rb->read_ptr;
+
+	if (w > r) {
+		free_cnt = ((r - w + rb->size) & rb->size_mask) - 1;
+	} else if (w < r) {
+		free_cnt = (r - w) - 1;
+	} else {
+		free_cnt = rb->size - 1;
+	}
+
+	cnt2 = w + free_cnt;
+
+	if (cnt2 > rb->size) {
+
+		/* Two part vector: the rest of the buffer after the current write
+		   ptr, plus some from the start of the buffer. */
+
+		vec[0].buf = &(rb->buf[w]);
+		vec[0].len = rb->size - w;
+		vec[1].buf = rb->buf;
+		vec[1].len = cnt2 & rb->size_mask;
+	} else {
+		vec[0].buf = &(rb->buf[w]);
+		vec[0].len = free_cnt;
+		vec[1].len = 0;
+	}
+}
+
+#endif // __ring_buffer__
+/**************************  END  ring-buffer.h **************************/
+
+/*******************************************************************************
+ * GUI : Abstract Graphic User Interface
+ * Provides additional mechanisms to synchronize widgets and zones. Widgets
+ * should both reflect the value of a zone and allow to change this value.
+ ******************************************************************************/
+
+class uiItem;
+class GUI;
+struct clist;
+
+typedef void (*uiCallback)(FAUSTFLOAT val, void* data);
+
+struct uiItemBase
+{
+    
+    uiItemBase(GUI* ui, FAUSTFLOAT* zone) {}
+    
+    virtual ~uiItemBase()
+    {}
+    
+    virtual void modifyZone(FAUSTFLOAT v) = 0;
+    virtual void modifyZone(double date, FAUSTFLOAT v) {}
+    virtual double cache() = 0;
+    virtual void reflectZone() = 0;
+};
+
+
+static void deleteClist(clist* cl);
+
+struct clist : public std::list<uiItemBase*>
+{
+    
+    virtual ~clist()
+    {
+        deleteClist(this);
+    }
+        
+};
+
+static void createUiCallbackItem(GUI* ui, FAUSTFLOAT* zone, uiCallback foo, void* data);
+
+typedef std::map<FAUSTFLOAT*, clist*> zmap;
+
+typedef std::map<FAUSTFLOAT*, ringbuffer_t*> ztimedmap;
+
+class GUI : public UI
+{
+		
+    private:
+     
+        static std::list<GUI*> fGuiList;
+        zmap fZoneMap;
+        bool fStopped;
+        
+     public:
+            
+        GUI():fStopped(false)
+        {	
+            fGuiList.push_back(this);
+        }
+        
+        virtual ~GUI() 
+        {   
+            // delete all items
+            zmap::iterator it;
+            for (it = fZoneMap.begin(); it != fZoneMap.end(); it++) {
+                delete (*it).second;
+            }
+            // suppress 'this' in static fGuiList
+            fGuiList.remove(this);
+        }
+
+        // -- registerZone(z,c) : zone management
+        
+        void registerZone(FAUSTFLOAT* z, uiItemBase* c)
+        {
+            if (fZoneMap.find(z) == fZoneMap.end()) fZoneMap[z] = new clist();
+            fZoneMap[z]->push_back(c);
+        }
+ 
+        void updateAllZones()
+        {
+            for (zmap::iterator m = fZoneMap.begin(); m != fZoneMap.end(); m++) {
+                FAUSTFLOAT* z = m->first;
+                clist* l = m->second;
+                if (z) {
+                    FAUSTFLOAT v = *z;
+                    for (clist::iterator c = l->begin(); c != l->end(); c++) {
+                        if ((*c)->cache() != v) (*c)->reflectZone();
+                    }
+                }
+            }
+        }
+        
+        void updateZone(FAUSTFLOAT* z)
+        {
+            FAUSTFLOAT v = *z;
+            clist* l = fZoneMap[z];
+            for (clist::iterator c = l->begin(); c != l->end(); c++) {
+                if ((*c)->cache() != v) (*c)->reflectZone();
+            }
+        }
+    
+        static void updateAllGuis()
+        {
+            std::list<GUI*>::iterator g;
+            for (g = fGuiList.begin(); g != fGuiList.end(); g++) {
+                (*g)->updateAllZones();
+            }
+        }
+    
+        void addCallback(FAUSTFLOAT* zone, uiCallback foo, void* data)
+        {
+            createUiCallbackItem(this, zone, foo, data);
+        }
+
+        virtual void show() {};	
+        virtual bool run() { return false; };
+
+        static void runAllGuis() {
+            std::list<GUI*>::iterator g;
+            for (g = fGuiList.begin(); g != fGuiList.end(); g++) {
+                (*g)->run();
+            }
+        }
+    
+        virtual void stop() { fStopped = true; }
+        bool stopped() { return fStopped; }
+    
+        // -- widget's layouts
+        
+        virtual void openTabBox(const char* label) {};
+        virtual void openHorizontalBox(const char* label) {}
+        virtual void openVerticalBox(const char* label) {}
+        virtual void closeBox() {}
+        
+        // -- active widgets
+        
+        virtual void addButton(const char* label, FAUSTFLOAT* zone) {}
+        virtual void addCheckButton(const char* label, FAUSTFLOAT* zone) {}
+        virtual void addVerticalSlider(const char* label, FAUSTFLOAT* zone, FAUSTFLOAT init, FAUSTFLOAT min, FAUSTFLOAT max, FAUSTFLOAT step) {}
+        virtual void addHorizontalSlider(const char* label, FAUSTFLOAT* zone, FAUSTFLOAT init, FAUSTFLOAT min, FAUSTFLOAT max, FAUSTFLOAT step) {}
+        virtual void addNumEntry(const char* label, FAUSTFLOAT* zone, FAUSTFLOAT init, FAUSTFLOAT min, FAUSTFLOAT max, FAUSTFLOAT step) {}
+    
+        // -- passive widgets
+        
+        virtual void addHorizontalBargraph(const char* label, FAUSTFLOAT* zone, FAUSTFLOAT min, FAUSTFLOAT max) {}
+        virtual void addVerticalBargraph(const char* label, FAUSTFLOAT* zone, FAUSTFLOAT min, FAUSTFLOAT max) {}
+    
+        // -- soundfiles
+    
+        virtual void addSoundfile(const char* label, const char* filename, Soundfile** sf_zone) {}
+    
+        // -- metadata declarations
+
+        virtual void declare(FAUSTFLOAT*, const char*, const char*) {}
+    
+        // Static global for timed zones, shared between all UI that will set timed values
+        static ztimedmap gTimedZoneMap;
+
+};
+
+/**
+ * User Interface Item: abstract definition
+ */
+
+template <typename REAL>
+class uiTypedItem : public uiItemBase
+{
+    protected:
+        
+        GUI* fGUI;
+        REAL* fZone;
+        REAL fCache;
+        
+        uiTypedItem(GUI* ui, REAL* zone):uiItemBase(ui, static_cast<FAUSTFLOAT*>(zone)),
+        fGUI(ui), fZone(zone), fCache(REAL(-123456.654321))
+        {
+            ui->registerZone(zone, this);
+        }
+        
+    public:
+        
+        virtual ~uiTypedItem()
+        {}
+    
+        void modifyZone(REAL v)
+        {
+            fCache = v;
+            if (*fZone != v) {
+                *fZone = v;
+                fGUI->updateZone(fZone);
+            }
+        }
+    
+        double cache() { return fCache; }
+    
+};
+
+class uiItem : public uiTypedItem<FAUSTFLOAT> {
+    
+    protected:
+    
+        uiItem(GUI* ui, FAUSTFLOAT* zone):uiTypedItem<FAUSTFLOAT>(ui, zone)
+        {}
+
+    public:
+
+        virtual ~uiItem() 
+        {}
+
+		void modifyZone(FAUSTFLOAT v)
+		{
+			fCache = v;
+			if (*fZone != v) {
+				*fZone = v;
+				fGUI->updateZone(fZone);
+			}
+		}
+
+};
+
+/**
+ * User Interface item owned (and so deleted) by external code
+ */
+
+class uiOwnedItem : public uiItem {
+    
+    protected:
+    
+        uiOwnedItem(GUI* ui, FAUSTFLOAT* zone):uiItem(ui, zone)
+        {}
+    
+     public:
+    
+        virtual ~uiOwnedItem()
+        {}
+    
+        virtual void reflectZone() {}
+};
+
+/**
+ * Callback Item
+ */
+
+class uiCallbackItem : public uiItem {
+    
+    protected:
+    
+        uiCallback fCallback;
+        void* fData;
+    
+    public:
+    
+        uiCallbackItem(GUI* ui, FAUSTFLOAT* zone, uiCallback foo, void* data)
+        : uiItem(ui, zone), fCallback(foo), fData(data) {}
+        
+        virtual void reflectZone() 
+        {		
+            FAUSTFLOAT v = *fZone;
+            fCache = v; 
+            fCallback(v, fData);	
+        }
+};
+
+/**
+ *  For timestamped control
+ */
+
+struct DatedControl {
+    
+    double fDate;
+    FAUSTFLOAT fValue;
+    
+    DatedControl(double d = 0., FAUSTFLOAT v = FAUSTFLOAT(0)):fDate(d), fValue(v) {}
+    
+};
+
+/**
+ * Base class for timed items
+ */
+
+class uiTimedItem : public uiItem
+{
+    
+    protected:
+        
+        bool fDelete;
+        
+    public:
+    
+        using uiItem::modifyZone;
+        
+        uiTimedItem(GUI* ui, FAUSTFLOAT* zone):uiItem(ui, zone)
+        {
+            if (GUI::gTimedZoneMap.find(fZone) == GUI::gTimedZoneMap.end()) {
+                GUI::gTimedZoneMap[fZone] = ringbuffer_create(8192);
+                fDelete = true;
+            } else {
+                fDelete = false;
+            }
+        }
+        
+        virtual ~uiTimedItem()
+        {
+            ztimedmap::iterator it;
+            if (fDelete && ((it = GUI::gTimedZoneMap.find(fZone)) != GUI::gTimedZoneMap.end())) {
+                ringbuffer_free((*it).second);
+                GUI::gTimedZoneMap.erase(it);
+            }
+        }
+        
+        virtual void modifyZone(double date, FAUSTFLOAT v)
+        {
+            size_t res;
+            DatedControl dated_val(date, v);
+            if ((res = ringbuffer_write(GUI::gTimedZoneMap[fZone], (const char*)&dated_val, sizeof(DatedControl))) != sizeof(DatedControl)) {
+                std::cerr << "ringbuffer_write error DatedControl" << std::endl;
+            }
+        }
+    
+};
+
+/**
+ * Allows to group a set of zones
+ */
+
+class uiGroupItem : public uiItem
+{
+    protected:
+    
+        std::vector<FAUSTFLOAT*> fZoneMap;
+
+    public:
+    
+        uiGroupItem(GUI* ui, FAUSTFLOAT* zone):uiItem(ui, zone)
+        {}
+        virtual ~uiGroupItem() 
+        {}
+        
+        virtual void reflectZone() 
+        {
+            FAUSTFLOAT v = *fZone;
+            fCache = v;
+            
+            // Update all zones of the same group
+            std::vector<FAUSTFLOAT*>::iterator it;
+            for (it = fZoneMap.begin(); it != fZoneMap.end(); it++) {
+                (*(*it)) = v;
+            }
+        }
+        
+        void addZone(FAUSTFLOAT* zone) { fZoneMap.push_back(zone); }
+
+};
+
+// Can not be defined as method in the classes
+
+static void createUiCallbackItem(GUI* ui, FAUSTFLOAT* zone, uiCallback foo, void* data)
+{
+    new uiCallbackItem(ui, zone, foo, data);
+}
+
+static void deleteClist(clist* cl)
+{
+    std::list<uiItemBase*>::iterator it;
+    for (it = cl->begin(); it != cl->end(); it++) {
+        uiOwnedItem* owned = dynamic_cast<uiOwnedItem*>(*it);
+        // owned items are deleted by external code
+        if (!owned) {
+            delete (*it);
+        }
+    }
+}
+
+#endif
+/**************************  END  GUI.h **************************/
+/*
+
+  Copyright (C) 2011 Grame
+
+  This library is free software; you can redistribute it and/or
+  modify it under the terms of the GNU Lesser General Public
+  License as published by the Free Software Foundation; either
+  version 2.1 of the License, or (at your option) any later version.
+
+  This library is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  Lesser General Public License for more details.
+
+  You should have received a copy of the GNU Lesser General Public
+  License along with this library; if not, write to the Free Software
+  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+
+  Grame Research Laboratory, 9 rue du Garet, 69001 Lyon - France
+  research@grame.fr
+
+*/
+
+#ifndef __RootNode__
+#define __RootNode__
+
+#include <map>
+#include <string>
+#include <vector>
+
+
+namespace oscfaust
+{
+
+class OSCIO;
+class RootNode;
+typedef class SMARTP<RootNode> SRootNode;
+
+/**
+ * an alias target includes a map to rescale input values to output values
+ * and a target osc address. The input values can be given in reversed order
+ * to reverse the control
+ */
+struct aliastarget
+{
+	float       fMinIn;
+	float       fMaxIn;
+	float       fMinOut;
+	float       fMaxOut;
+	std::string fTarget;	// the real osc address
+
+	aliastarget(const char* address, float imin, float imax, float omin, float omax)
+		: fMinIn(imin), fMaxIn(imax), fMinOut(omin), fMaxOut(omax), fTarget(address) {}
+
+	aliastarget(const aliastarget& t)
+		: fMinIn(t.fMinIn), fMaxIn(t.fMaxIn), fMinOut(t.fMinOut), fMaxOut(t.fMaxOut), fTarget(t.fTarget) {}
+
+	float scale(float x) const 
+    {
+        if (fMinIn < fMaxIn) {
+            // increasing control
+            float z = (x < fMinIn) ? fMinIn : (x > fMaxIn) ? fMaxIn : x;
+            return fMinOut + (z-fMinIn)*(fMaxOut-fMinOut)/(fMaxIn-fMinIn);
+            
+        } else if (fMinIn > fMaxIn) {
+            // reversed control
+            float z = (x < fMaxIn) ? fMaxIn : (x > fMinIn) ? fMinIn : x;
+            return fMinOut + (fMinIn-z)*(fMaxOut-fMinOut)/(fMinIn-fMaxIn);
+            
+        } else {
+            // no control !
+            return (fMinOut+fMaxOut)/2.0f;
+        }
+    }
+    
+    float invscale(float x) const
+    {
+        if (fMinOut < fMaxOut) {
+            // increasing control
+            float z = (x < fMinOut) ? fMinOut : (x > fMaxOut) ? fMaxOut : x;
+            return fMinIn + (z-fMinOut)*(fMaxIn-fMinIn)/(fMaxOut-fMinOut);
+            
+        } else if (fMinOut > fMaxOut) {
+            // reversed control
+            float z = (x < fMaxOut) ? fMaxOut : (x > fMinOut) ? fMinOut : x;
+            return fMinIn + (fMinOut-z)*(fMaxIn-fMinIn)/(fMinOut-fMaxOut);
+            
+        } else {
+            // no control !
+            return (fMinIn+fMaxIn)/2.0f;
+        }
+    }
+};
+
+//--------------------------------------------------------------------------
+/*!
+	\brief a faust root node
+
+	A Faust root node handles the \c 'hello' message and provides support
+	for incoming osc signal data. 
+*/
+class RootNode : public MessageDriven
+{
+
+    private:
+        int *fUPDIn, *fUDPOut, *fUDPErr;    // the osc port numbers (required by the hello method)
+        OSCIO* fIO;                         // an OSC IO controler
+        JSONUI* fJSON;
+
+        typedef std::map<std::string, std::vector<aliastarget> > TAliasMap;
+        TAliasMap fAliases;
+
+        void processAlias(const std::string& address, float val);
+        void eraseAliases(const std::string& target);
+        void eraseAlias(const std::string& target, const std::string& alias);
+        bool aliasError(const Message* msg);
+
+    protected:
+        RootNode(const char *name, JSONUI* json, OSCIO* io = NULL) : MessageDriven(name, ""), fUPDIn(0), fUDPOut(0), fUDPErr(0), fIO(io), fJSON(json) {}
+        virtual ~RootNode() {}
+
+    public:
+        static SRootNode create(const char* name, JSONUI* json, OSCIO* io = NULL) { return new RootNode(name, json, io); }
+
+        virtual void processMessage(const Message* msg);
+        virtual bool accept(const Message* msg);
+        virtual void get(unsigned long ipdest) const;
+        virtual void get(unsigned long ipdest, const std::string& what) const;
+
+        bool aliasMsg(const Message* msg, float omin, float omax);
+        void addAlias(const char* alias, const char* address, float imin, float imax, float omin, float omax);
+        bool acceptSignal(const Message* msg);      ///< handler for signal data
+        void hello(unsigned long ipdest) const;     ///< handler for the 'hello' message
+        void setPorts(int* in, int* out, int* err);
+
+        std::vector<std::pair<std::string, double> > getAliases(const std::string& address, double value);
+};
+
+} // end namespoace
+
+#endif
+
+namespace oscfaust
+{
+
+/**
+ * map (rescale) input values to output values
+ */
+template <typename C> struct mapping
+{
+	const C fMinOut;
+	const C fMaxOut;
+	mapping(C omin, C omax) : fMinOut(omin), fMaxOut(omax) {}
+	C clip (C x) { return (x < fMinOut) ? fMinOut : (x > fMaxOut) ? fMaxOut : x; }
+};
+
+//--------------------------------------------------------------------------
+/*!
+	\brief a faust node is a terminal node and represents a faust parameter controler
+*/
+template <typename C> class FaustNode : public MessageDriven, public uiTypedItem<C>
+{
+	mapping<C>	fMapping;
+    RootNode* fRoot;
+    bool fInput;  // true for input nodes (slider, button...)
+	
+	//---------------------------------------------------------------------
+	// Warning !!!
+	// The cast (C *)fZone is necessary because the real size allocated is
+	// only known at execution time. When the library is compiled, fZone is
+	// uniquely defined by FAUSTFLOAT.
+	//---------------------------------------------------------------------
+	bool	store(C val) { *(C *)this->fZone = fMapping.clip(val); return true; }
+	void	sendOSC() const;
+
+	protected:
+		FaustNode(RootNode* root, const char *name, C* zone, C init, C min, C max, const char* prefix, GUI* ui, bool initZone, bool input) 
+			: MessageDriven(name, prefix), uiTypedItem<C>(ui, zone), fMapping(min, max), fRoot(root), fInput(input)
+			{
+                if (initZone) {
+                    *zone = init; 
+                }
+            }
+			
+		virtual ~FaustNode() {}
+
+	public:
+		typedef SMARTP<FaustNode<C> > SFaustNode;
+		static SFaustNode create(RootNode* root, const char* name, C* zone, C init, C min, C max, const char* prefix, GUI* ui, bool initZone, bool input)	
+        { 
+            SFaustNode node = new FaustNode(root, name, zone, init, min, max, prefix, ui, initZone, input); 
+            /*
+                Since FaustNode is a subclass of uiItem, the pointer will also be kept in the GUI class, and it's desallocation will be done there.
+                So we don't want to have smartpointer logic desallocate it and we increment the refcount.
+            */
+            node->addReference();
+            return node; 
+        }
+    
+		bool accept(const Message* msg);
+		void get(unsigned long ipdest) const;		///< handler for the 'get' message
+		virtual void reflectZone() { sendOSC(); this->fCache = *this->fZone; }
+};
+
+} // end namespace
+
+#endif
+
+class GUI;
+namespace oscfaust
+{
+
+class OSCIO;
+class RootNode;
+typedef class SMARTP<RootNode> SRootNode;
+class MessageDriven;
+typedef class SMARTP<MessageDriven>	SMessageDriven;
+
+//--------------------------------------------------------------------------
+/*!
+	\brief a factory to build a OSC UI hierarchy
+	
+	Actually, makes use of a stack to build the UI hierarchy.
+	It includes a pointer to a OSCIO controler, but just to give it to the root node.
+*/
+class FaustFactory
+{
+	std::stack<SMessageDriven>	fNodes;		///< maintains the current hierarchy level
+	SRootNode					fRoot;		///< keep track of the root node
+	OSCIO*                      fIO;		///< hack to support audio IO via OSC, actually the field is given to the root node
+	GUI*						fGUI;		///< a GUI pointer to support updateAllGuis(), required for bi-directionnal OSC
+    JSONUI*                     fJSON;
+    
+	private:
+		std::string addressFirst(const std::string& address) const;
+		std::string addressTail(const std::string& address) const;
+
+	public:
+				 FaustFactory(GUI* ui, JSONUI* json, OSCIO * io = NULL);
+		virtual ~FaustFactory(); 
+
+		template <typename C> void addnode(const char* label, C* zone, C init, C min, C max, bool initZone, bool input);
+		template <typename C> void addAlias(const std::string& fullpath, C* zone, C imin, C imax, C init, C min, C max, const char* label);
+        
+		void addAlias(const char* alias, const char* address, float imin, float imax, float omin, float omax);
+		void opengroup(const char* label);
+		void closegroup();
+
+		SRootNode root() const; 
+};
+
+/**
+ * Add a node to the OSC UI tree in the current group at the top of the stack 
+ */
+template <typename C> void FaustFactory::addnode(const char* label, C* zone, C init, C min, C max, bool initZone, bool input) 
+{
+	SMessageDriven top;
+	if (fNodes.size()) top = fNodes.top();
+	if (top) {
+		std::string prefix = top->getOSCAddress();
+		top->add(FaustNode<C>::create(root(), label, zone, init, min, max, prefix.c_str(), fGUI, initZone, input));
+	}
+}
+
+/**
+ * Add an alias (actually stored and handled at root node level
+ */
+template <typename C> void FaustFactory::addAlias(const std::string& fullpath, C* zone, C imin, C imax, C init, C min, C max, const char* label)
+{
+	std::istringstream 	ss(fullpath);
+	std::string 		realpath; 
+ 
+	ss >> realpath >> imin >> imax;
+	SMessageDriven top = fNodes.top();
+	if (top) {
+		std::string target = top->getOSCAddress() + "/" + label;
+		addAlias(realpath.c_str(), target.c_str(), float(imin), float(imax), float(min), float(max));
+	}
+}
+
+} // end namespoace
+
+#endif
+
+class GUI;
+
+typedef void (*ErrorCallback)(void*);  
+
+namespace oscfaust
+{
+
+class OSCIO;
+class OSCSetup;
+class OSCRegexp;
+    
+//--------------------------------------------------------------------------
+/*!
+	\brief the main Faust OSC Lib API
+	
+	The OSCControler is essentially a glue between the memory representation (in charge of the FaustFactory),
+	and the network services (in charge of OSCSetup).
+*/
+class OSCControler
+{
+	int fUDPPort,   fUDPOut, fUPDErr;	// the udp ports numbers
+	std::string     fDestAddress;		// the osc messages destination address, used at initialization only
+										// to collect the address from the command line
+	std::string     fBindAddress;		// when non empty, the address used to bind the socket for listening
+	OSCSetup*		fOsc;				// the network manager (handles the udp sockets)
+	OSCIO*			fIO;				// hack for OSC IO support (actually only relayed to the factory)
+	FaustFactory*	fFactory;			// a factory to build the memory representation
+
+    bool            fInit;
+    
+	public:
+		/*
+			base udp port is chosen in an unassigned range from IANA PORT NUMBERS (last updated 2011-01-24)
+			see at http://www.iana.org/assignments/port-numbers
+			5507-5552  Unassigned
+		*/
+		enum { kUDPBasePort = 5510 };
+            
+        OSCControler(int argc, char* argv[], GUI* ui, JSONUI* json, OSCIO* io = NULL, ErrorCallback errCallback = NULL, void* arg = NULL, bool init = true);
+
+        virtual ~OSCControler();
+	
+		//--------------------------------------------------------------------------
+		// addnode, opengroup and closegroup are simply relayed to the factory
+		//--------------------------------------------------------------------------
+		// Add a node in the current group (top of the group stack)
+		template <typename T> void addnode(const char* label, T* zone, T init, T min, T max, bool input = true)
+							{ fFactory->addnode(label, zone, init, min, max, fInit, input); }
+		
+		//--------------------------------------------------------------------------
+		// This method is used for alias messages. The arguments imin and imax allow
+		// to map incomming values from the alias input range to the actual range 
+		template <typename T> void addAlias(const std::string& fullpath, T* zone, T imin, T imax, T init, T min, T max, const char* label)
+							{ fFactory->addAlias(fullpath, zone, imin, imax, init, min, max, label); }
+
+		void opengroup(const char* label)		{ fFactory->opengroup(label); }
+		void closegroup()						{ fFactory->closegroup(); }
+	   
+		//--------------------------------------------------------------------------
+		void run();				// starts the network services
+		void endBundle();		// when bundle mode is on, close and send the current bundle (if any)
+		void stop();			// stop the network services
+		std::string getInfos() const; // gives information about the current environment (version, port numbers,...)
+
+		int	getUDPPort() const			{ return fUDPPort; }
+		int	getUDPOut()	const			{ return fUDPOut; }
+		int	getUDPErr()	const			{ return fUPDErr; }
+		const char*	getDestAddress() const { return fDestAddress.c_str(); }
+		const char*	getRootName() const;	// probably useless, introduced for UI extension experiments
+    
+        void setUDPPort(int port) { fUDPPort = port; }
+        void setUDPOut(int port) { fUDPOut = port; }
+        void setUDPErr(int port) { fUPDErr = port; }
+        void setDestAddress(const char* address) { fDestAddress = address; }
+
+        // By default, an osc interface emits all parameters. You can filter specific params dynamically.
+        static std::vector<OSCRegexp*>     fFilteredPaths; // filtered paths will not be emitted
+        static void addFilteredPath(std::string path);
+        static bool isPathFiltered(std::string path);
+        static void resetFilteredPaths();
+    
+		static float version();				// the Faust OSC library version number
+		static const char* versionstr();	// the Faust OSC library version number as a string
+		static int gXmit;                   // a static variable to control the transmission of values
+                                            // i.e. the use of the interface as a controler
+		static int gBundle;                 // a static variable to control the osc bundle mode
+};
+
+#define kNoXmit     0
+#define kAll        1
+#define kAlias      2
+
+}
+
+#endif
+
+#ifdef _WIN32
+#define strcasecmp _stricmp
+#endif
+
+/******************************************************************************
+ *******************************************************************************
+ 
+ OSC (Open Sound Control) USER INTERFACE
+ 
+ *******************************************************************************
+ *******************************************************************************/
+/*
+ 
+ Note about the OSC addresses and the Faust UI names:
+ ----------------------------------------------------
+ There are potential conflicts between the Faust UI objects naming scheme and
+ the OSC address space. An OSC symbolic names is an ASCII string consisting of
+ printable characters other than the following:
+	space
+ #	number sign
+ *	asterisk
+ ,	comma
+ /	forward
+ ?	question mark
+ [	open bracket
+ ]	close bracket
+ {	open curly brace
+ }	close curly brace
+ 
+ a simple solution to address the problem consists in replacing
+ space or tabulation with '_' (underscore)
+ all the other osc excluded characters with '-' (hyphen)
+ 
+ This solution is implemented in the proposed OSC UI;
+ */
+
+class OSCUI : public GUI
+{
+    
+    private:
+        
+        oscfaust::OSCControler*	fCtrl;
+        std::vector<const char*> fAlias;
+        JSONUI fJSON;
+        
+        const char* tr(const char* label) const
+        {
+            static char buffer[1024];
+            char * ptr = buffer; int n=1;
+            while (*label && (n++ < 1024)) {
+                switch (*label) {
+                    case ' ': case '	':
+                        *ptr++ = '_';
+                        break;
+                    case '#': case '*': case ',': case '/': case '?':
+                    case '[': case ']': case '{': case '}': case '(': case ')':
+                        *ptr++ = '_';
+                        break;
+                    default:
+                        *ptr++ = *label;
+                }
+                label++;
+            }
+            *ptr = 0;
+            return buffer;
+        }
+        
+        // add all accumulated alias
+        void addalias(FAUSTFLOAT* zone, FAUSTFLOAT init, FAUSTFLOAT min, FAUSTFLOAT max, const char* label)
+        {
+            for (unsigned int i = 0; i < fAlias.size(); i++) {
+                fCtrl->addAlias(fAlias[i], zone, FAUSTFLOAT(0), FAUSTFLOAT(1), init, min, max, label);
+            }
+            fAlias.clear();
+        }
+        
+    public:
+        
+        OSCUI(const char* /*applicationname*/, int argc, char* argv[], oscfaust::OSCIO* io = NULL, ErrorCallback errCallback = NULL, void* arg = NULL, bool init = true) : GUI()
+        {
+            fCtrl = new oscfaust::OSCControler(argc, argv, this, &fJSON, io, errCallback, arg, init);
+            //		fCtrl->opengroup(applicationname);
+        }
+        
+        virtual ~OSCUI() { delete fCtrl; }
+        
+        // -- widget's layouts
+        
+        virtual void openTabBox(const char* label)          { fCtrl->opengroup(tr(label)); fJSON.openTabBox(label); }
+        virtual void openHorizontalBox(const char* label)   { fCtrl->opengroup(tr(label)); fJSON.openHorizontalBox(label); }
+        virtual void openVerticalBox(const char* label)     { fCtrl->opengroup(tr(label)); fJSON.openVerticalBox(label); }
+        virtual void closeBox()                             { fCtrl->closegroup(); fJSON.closeBox(); }
+        
+        // -- active widgets
+        virtual void addButton(const char* label, FAUSTFLOAT* zone)
+        {
+            const char* l = tr(label);
+            addalias(zone, 0, 0, 1, l);
+            fCtrl->addnode(l, zone, FAUSTFLOAT(0), FAUSTFLOAT(0), FAUSTFLOAT(1));
+            fJSON.addButton(label, zone);
+        }
+        virtual void addCheckButton(const char* label, FAUSTFLOAT* zone)
+        {
+            const char* l = tr(label);
+            addalias(zone, 0, 0, 1, l);
+            fCtrl->addnode(l, zone, FAUSTFLOAT(0), FAUSTFLOAT(0), FAUSTFLOAT(1));
+            fJSON.addCheckButton(label, zone);
+        }
+        virtual void addVerticalSlider(const char* label, FAUSTFLOAT* zone, FAUSTFLOAT init, FAUSTFLOAT min, FAUSTFLOAT max, FAUSTFLOAT step)
+        {
+            const char* l = tr(label);
+            addalias(zone, init, min, max, l);
+            fCtrl->addnode(l, zone, init, min, max);
+            fJSON.addVerticalSlider(label, zone, init, min, max, step);
+        }
+        virtual void addHorizontalSlider(const char* label, FAUSTFLOAT* zone, FAUSTFLOAT init, FAUSTFLOAT min, FAUSTFLOAT max, FAUSTFLOAT step)
+        {
+            const char* l = tr(label);
+            addalias(zone, init, min, max, l);
+            fCtrl->addnode(l, zone, init, min, max);
+            fJSON.addHorizontalSlider(label, zone, init, min, max, step);
+        }
+        virtual void addNumEntry(const char* label, FAUSTFLOAT* zone, FAUSTFLOAT init, FAUSTFLOAT min, FAUSTFLOAT max, FAUSTFLOAT step)
+        {
+            const char* l = tr(label);
+            addalias(zone, init, min, max, l);
+            fCtrl->addnode(l, zone, init, min, max);
+            fJSON.addNumEntry(label, zone, init, min, max, step);
+        }
+        
+        // -- passive widgets
+        
+        virtual void addHorizontalBargraph(const char* label, FAUSTFLOAT* zone, FAUSTFLOAT min, FAUSTFLOAT max)
+        {
+            const char* l = tr(label);
+            addalias(zone, 0, min, max, l);
+            fCtrl->addnode(l, zone, FAUSTFLOAT(0), min, max, false);
+            fJSON.addHorizontalBargraph(label, zone, min, max);
+        }
+        virtual void addVerticalBargraph(const char* label, FAUSTFLOAT* zone, FAUSTFLOAT min, FAUSTFLOAT max)
+        {
+            const char* l = tr(label);
+            addalias(zone, 0, min, max, l);
+            fCtrl->addnode(l, zone, FAUSTFLOAT(0), min, max, false);
+            fJSON.addVerticalBargraph(label, zone, min, max);
+        }
+            
+        // -- metadata declarations
+        
+        virtual void declare(FAUSTFLOAT* zone, const char* key, const char* alias)
+        {
+            if (strcasecmp(key, "OSC") == 0) fAlias.push_back(alias);
+            fJSON.declare(zone, key, alias);
+        }
+        
+        virtual void show() {}
+        
+        bool run()
+        {
+            fCtrl->run();
+            return true;
+        }
+        
+        void stop()			{ fCtrl->stop(); }
+        void endBundle() 	{ fCtrl->endBundle(); }
+        
+        std::string getInfos()          { return fCtrl->getInfos(); }
+        
+        const char* getRootName()		{ return fCtrl->getRootName(); }
+        int getUDPPort()                { return fCtrl->getUDPPort(); }
+        int getUDPOut()                 { return fCtrl->getUDPOut(); }
+        int getUDPErr()                 { return fCtrl->getUDPErr(); }
+        const char* getDestAddress()    { return fCtrl->getDestAddress(); }
+        
+        void setUDPPort(int port)       { fCtrl->setUDPPort(port); }
+        void setUDPOut(int port)        { fCtrl->setUDPOut(port); }
+        void setUDPErr(int port)        { fCtrl->setUDPErr(port); }
+        void setDestAddress(const char* address)    { return fCtrl->setDestAddress(address); }
+    
+};
+
+#endif // __OSCUI__
+/**************************  END  OSCUI.h **************************/
+
+#ifdef POLY2
+#include "effect.h"
+#endif
+
+#if SOUNDFILE
+/************************** BEGIN SoundUI.h **************************/
+/************************************************************************
+ FAUST Architecture File
+ Copyright (C) 2018 GRAME, Centre National de Creation Musicale
  ---------------------------------------------------------------------
  This Architecture section is free software; you can redistribute it
  and/or modify it under the terms of the GNU General Public License
@@ -1260,10 +5483,7 @@ class dsp_parallelizer : public dsp {
 #include <vector>
 #include <string>
 
-#ifdef __APPLE__
-#include <CoreFoundation/CFBundle.h>
-#endif
-
+/************************** BEGIN DecoratorUI.h **************************/
 /************************************************************************
  FAUST Architecture File
  Copyright (C) 2003-2017 GRAME, Centre National de Creation Musicale
@@ -1373,9 +5593,322 @@ class DecoratorUI : public UI
 };
 
 #endif
+/**************************  END  DecoratorUI.h **************************/
+
+#ifdef __APPLE__
+#include <CoreFoundation/CFBundle.h>
+#endif
+
+// Always included otherwise -i mode later on will not always include it (with the conditional includes)
+/************************** BEGIN Soundfile.h **************************/
 /************************************************************************
  FAUST Architecture File
  Copyright (C) 2017 GRAME, Centre National de Creation Musicale
+ ---------------------------------------------------------------------
+ This Architecture section is free software; you can redistribute it
+ and/or modify it under the terms of the GNU General Public License
+ as published by the Free Software Foundation; either version 3 of
+ the License, or (at your option) any later version.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this program; If not, see <http://www.gnu.org/licenses/>.
+
+ EXCEPTION : As a special exception, you may create a larger work
+ that contains this FAUST architecture section and distribute
+ that work under terms of your choice, so long as this FAUST
+ architecture section is not modified.
+ ************************************************************************/
+
+#ifndef __Soundfile__
+#define __Soundfile__
+
+#include <iostream>
+#include <string.h>
+
+#ifndef FAUSTFLOAT
+#define FAUSTFLOAT float
+#endif
+
+#define BUFFER_SIZE 16384
+#define SAMPLE_RATE 44100
+#define MAX_CHAN 64
+#define MAX_SOUNDFILE_PARTS 256
+
+#ifdef _MSC_VER
+#define PRE_PACKED_STRUCTURE __pragma(pack(push, 1))
+#define POST_PACKED_STRUCTURE \
+    ;                         \
+    __pragma(pack(pop))
+#else
+#define PRE_PACKED_STRUCTURE
+#define POST_PACKED_STRUCTURE __attribute__((__packed__))
+#endif
+
+/*
+ The soundfile structure to be used by the DSP code. Soundfile has a MAX_SOUNDFILE_PARTS parts 
+ (even a single soundfile or an empty soundfile). 
+ fLength, fOffset and fSR fields are filled accordingly by repeating
+ the actual parts if needed.
+ 
+ It has to be 'packed' to that the LLVM backend can correctly access it.
+
+ Index computation:
+    - p is the current part number [0..MAX_SOUNDFILE_PARTS-1] (must be proved by the type system)
+    - i is the current position in the part. It will be constrained between [0..length]
+    - idx(p,i) = fOffset[p] + max(0, min(i, fLength[p]));
+*/
+
+PRE_PACKED_STRUCTURE
+struct Soundfile {
+    FAUSTFLOAT** fBuffers;
+    int* fLength;   // length of each part
+    int* fSR;       // sample rate of each part
+    int* fOffset;   // offset of each part in the global buffer
+    int fChannels;  // max number of channels of all concatenated files
+
+    Soundfile()
+    {
+        fBuffers  = NULL;
+        fChannels = -1;
+        fLength   = new int[MAX_SOUNDFILE_PARTS];
+        fSR       = new int[MAX_SOUNDFILE_PARTS];
+        fOffset   = new int[MAX_SOUNDFILE_PARTS];
+    }
+
+    ~Soundfile()
+    {
+        // Free the real channels only
+        for (int chan = 0; chan < fChannels; chan++) {
+            delete fBuffers[chan];
+        }
+        delete[] fBuffers;
+        delete[] fLength;
+        delete[] fSR;
+        delete[] fOffset;
+    }
+
+} POST_PACKED_STRUCTURE;
+
+/*
+ The generic soundfile reader.
+ */
+
+class SoundfileReader {
+    
+   protected:
+    
+    int fDriverSR;
+    
+    void emptyFile(Soundfile* soundfile, int part, int& offset)
+    {
+        soundfile->fLength[part] = BUFFER_SIZE;
+        soundfile->fSR[part] = SAMPLE_RATE;
+        soundfile->fOffset[part] = offset;
+        // Update offset
+        offset += soundfile->fLength[part];
+    }
+
+    Soundfile* createSoundfile(int cur_chan, int length, int max_chan)
+    {
+        Soundfile* soundfile = new Soundfile();
+        if (!soundfile) {
+            throw std::bad_alloc();
+        }
+        
+        soundfile->fBuffers = new FAUSTFLOAT*[max_chan];
+        if (!soundfile->fBuffers) {
+            throw std::bad_alloc();
+        }
+        
+        for (int chan = 0; chan < cur_chan; chan++) {
+            soundfile->fBuffers[chan] = new FAUSTFLOAT[length];
+            if (!soundfile->fBuffers[chan]) {
+                throw std::bad_alloc();
+            }
+            memset(soundfile->fBuffers[chan], 0, sizeof(FAUSTFLOAT) * length);
+        }
+        
+        soundfile->fChannels = cur_chan;
+        return soundfile;
+    }
+
+    void getBuffersOffset(Soundfile* soundfile, FAUSTFLOAT** buffers, int offset)
+    {
+        for (int chan = 0; chan < soundfile->fChannels; chan++) {
+            buffers[chan] = &soundfile->fBuffers[chan][offset];
+        }
+    }
+    
+    // Check if a soundfile exists and return its real path_name
+    std::string checkFile(const std::vector<std::string>& sound_directories, const std::string& file_name)
+    {
+        if (checkFile(file_name)) {
+            return file_name;
+        } else {
+            for (size_t i = 0; i < sound_directories.size(); i++) {
+                std::string path_name = sound_directories[i] + "/" + file_name;
+                if (checkFile(path_name)) { return path_name; }
+            }
+            return "";
+        }
+    }
+    
+    bool isResampling(int sample_rate) { return (fDriverSR > 0 && fDriverSR != sample_rate); }
+ 
+    // To be implemented by subclasses
+
+    /**
+     * Check the availability of a sound resource.
+     *
+     * @param path_name - the name of the file, or sound resource identified this way
+     *
+     * @return true if the sound resource is available, false otherwise.
+     */
+    virtual bool checkFile(const std::string& path_name) = 0;
+    
+    /**
+     * Check the availability of a sound resource.
+     *
+     * @param buffer - the sound buffer
+     * @param buffer - the sound buffer length
+     *
+     * @return true if the sound resource is available, false otherwise.
+     */
+
+    virtual bool checkFile(unsigned char* buffer, size_t length) { return true; }
+
+    /**
+     * Get the channels and length values of the given sound resource.
+     *
+     * @param path_name - the name of the file, or sound resource identified this way
+     * @param channels - the channels value to be filled with the sound resource number of channels
+     * @param length - the length value to be filled with the sound resource length in frames
+     *
+     */
+    virtual void getParamsFile(const std::string& path_name, int& channels, int& length) = 0;
+    
+    /**
+     * Get the channels and length values of the given sound resource.
+     *
+     * @param buffer - the sound buffer
+     * @param buffer - the sound buffer length
+     * @param channels - the channels value to be filled with the sound resource number of channels
+     * @param length - the length value to be filled with the sound resource length in frames
+     *
+     */
+    virtual void getParamsFile(unsigned char* buffer, size_t size, int& channels, int& length) {}
+
+    /**
+     * Read one sound resource and fill the 'soundfile' structure accordingly
+     *
+     * @param path_name - the name of the file, or sound resource identified this way
+     * @param part - the part number to be filled in the soundfile
+     * @param offset - the offset value to be incremented with the actual sound resource length in frames
+     * @param max_chan - the maximum number of mono channels to fill
+     *
+     */
+    virtual void readFile(Soundfile* soundfile, const std::string& path_name, int part, int& offset, int max_chan) = 0;
+    
+    /**
+     * Read one sound resource and fill the 'soundfile' structure accordingly
+     *
+     * @param buffer - the sound buffer
+     * @param buffer - the sound buffer length
+     * @param part - the part number to be filled in the soundfile
+     * @param offset - the offset value to be incremented with the actual sound resource length in frames
+     * @param max_chan - the maximum number of mono channels to fill
+     *
+     */
+    virtual void readFile(Soundfile* soundfile, unsigned char* buffer, size_t length, int part, int& offset, int max_chan) {}
+
+  public:
+    
+    virtual ~SoundfileReader() {}
+    
+    void setSampleRate(int sample_rate) { fDriverSR = sample_rate; }
+   
+    Soundfile* createSoundfile(const std::vector<std::string>& path_name_list, int max_chan)
+    {
+        try {
+            int cur_chan = 1; // At least one buffer
+            int total_length = 0;
+            
+            // Compute total length and channels max of all files
+            for (int i = 0; i < int(path_name_list.size()); i++) {
+                int chan, length;
+                if (path_name_list[i] == "__empty_sound__") {
+                    length = BUFFER_SIZE;
+                    chan = 1;
+                } else {
+                    getParamsFile(path_name_list[i], chan, length);
+                }
+                cur_chan = std::max<int>(cur_chan, chan);
+                total_length += length;
+            }
+           
+            // Complete with empty parts
+            total_length += (MAX_SOUNDFILE_PARTS - path_name_list.size()) * BUFFER_SIZE;
+            
+            // Create the soundfile
+            Soundfile* soundfile = createSoundfile(cur_chan, total_length, max_chan);
+            
+            // Init offset
+            int offset = 0;
+            
+            // Read all files
+            for (int i = 0; i < int(path_name_list.size()); i++) {
+                if (path_name_list[i] == "__empty_sound__") {
+                    emptyFile(soundfile, i, offset);
+                } else {
+                    readFile(soundfile, path_name_list[i], i, offset, max_chan);
+                }
+            }
+            
+            // Complete with empty parts
+            for (int i = int(path_name_list.size()); i < MAX_SOUNDFILE_PARTS; i++) {
+                emptyFile(soundfile, i, offset);
+            }
+            
+            // Share the same buffers for all other channels so that we have max_chan channels available
+            for (int chan = cur_chan; chan < max_chan; chan++) {
+                soundfile->fBuffers[chan] = soundfile->fBuffers[chan % cur_chan];
+            }
+            
+            return soundfile;
+            
+        } catch (...) {
+            return NULL;
+        }
+    }
+
+    // Check if all soundfiles exist and return their real path_name
+    std::vector<std::string> checkFiles(const std::vector<std::string>& sound_directories,
+                                        const std::vector<std::string>& file_name_list)
+    {
+        std::vector<std::string> path_name_list;
+        for (size_t i = 0; i < file_name_list.size(); i++) {
+            std::string path_name = checkFile(sound_directories, file_name_list[i]);
+            // If 'path_name' is not found, it is replaced by an empty sound (= silence)
+            path_name_list.push_back((path_name == "") ? "__empty_sound__" : path_name);
+        }
+        return path_name_list;
+    }
+
+};
+
+#endif
+/**************************  END  Soundfile.h **************************/
+
+#if defined(JUCE_32BIT) || defined(JUCE_64BIT)
+/************************** BEGIN JuceReader.h **************************/
+/************************************************************************
+ FAUST Architecture File
+ Copyright (C) 2018 GRAME, Centre National de Creation Musicale
  ---------------------------------------------------------------------
  This Architecture section is free software; you can redistribute it
  and/or modify it under the terms of the GNU General Public License
@@ -1396,256 +5929,605 @@ class DecoratorUI : public UI
  architecture section is not modified.
  ************************************************************************/
 
-#ifndef __soundfile__
-#define __soundfile__
+#ifndef __JuceReader__
+#define __JuceReader__
 
+#include <assert.h>
+
+
+struct JuceReader : public SoundfileReader {
+    
+    AudioFormatManager fFormatManager;
+    
+    JuceReader() { fFormatManager.registerBasicFormats(); }
+    
+    bool checkFile(const std::string& path_name)
+    {
+        File file(path_name);
+        if (file.existsAsFile()) {
+            return true;
+        } else {
+            std::cerr << "ERROR : cannot open '" << path_name << "'" << std::endl;
+            return false;
+        }
+    }
+    
+    void getParamsFile(const std::string& path_name, int& channels, int& length)
+    {
+        ScopedPointer<AudioFormatReader> formatReader = fFormatManager.createReaderFor(File(path_name));
+        assert(formatReader);
+        channels = int(formatReader->numChannels);
+        length = int(formatReader->lengthInSamples);
+    }
+    
+    void readFile(Soundfile* soundfile, const std::string& path_name, int part, int& offset, int max_chan)
+    {
+        ScopedPointer<AudioFormatReader> formatReader = fFormatManager.createReaderFor(File(path_name));
+        
+        int channels = std::min<int>(max_chan, int(formatReader->numChannels));
+        
+        soundfile->fLength[part] = int(formatReader->lengthInSamples);
+        soundfile->fSR[part] = int(formatReader->sampleRate);
+        soundfile->fOffset[part] = offset;
+        
+        FAUSTFLOAT* buffers[soundfile->fChannels];
+        getBuffersOffset(soundfile, buffers, offset);
+        
+        if (formatReader->read(reinterpret_cast<int *const *>(buffers), int(formatReader->numChannels), 0, int(formatReader->lengthInSamples), false)) {
+            
+            // Possibly concert samples
+            if (!formatReader->usesFloatingPointData) {
+                for (int chan = 0; chan < int(formatReader->numChannels); ++chan) {
+                    FAUSTFLOAT* buffer = &soundfile->fBuffers[chan][soundfile->fOffset[part]];
+                    FloatVectorOperations::convertFixedToFloat(buffer, reinterpret_cast<const int*>(buffer), 1.0f/0x7fffffff, int(formatReader->lengthInSamples));
+                }
+            }
+            
+        } else {
+            std::cerr << "Error reading the file : " << path_name << std::endl;
+        }
+            
+        // Update offset
+        offset += soundfile->fLength[part];
+    }
+    
+};
+
+#endif
+/**************************  END  JuceReader.h **************************/
+JuceReader gReader;
+#elif defined(MEMORY_READER)
+/************************** BEGIN MemoryReader.h **************************/
+/************************************************************************
+ FAUST Architecture File
+ Copyright (C) 2018 GRAME, Centre National de Creation Musicale
+ ---------------------------------------------------------------------
+ This Architecture section is free software; you can redistribute it
+ and/or modify it under the terms of the GNU General Public License
+ as published by the Free Software Foundation; either version 3 of
+ the License, or (at your option) any later version.
+ 
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+ 
+ You should have received a copy of the GNU General Public License
+ along with this program; If not, see <http://www.gnu.org/licenses/>.
+ 
+ EXCEPTION : As a special exception, you may create a larger work
+ that contains this FAUST architecture section and distribute
+ that work under terms of your choice, so long as this FAUST
+ architecture section is not modified.
+ ************************************************************************/
+
+#ifndef __MemoryReader__
+#define __MemoryReader__
+
+
+/*
+ A 'MemoryReader' object can be used to prepare a set of sound resources in memory, to be used by SoundUI::addSoundfile.
+ 
+ A Soundfile* object will have to be filled with a list of sound resources: the fLength, fOffset, fSampleRate and fBuffers fields 
+ have to be completed with the appropriate values, and will be accessed in the DSP object while running.
+ *
+ */
+
+// To adapt for a real case use
+
+#define SOUND_CHAN      2
+#define SOUND_LENGTH    4096
+#define SOUND_SR        40100
+
+struct MemoryReader : public SoundfileReader {
+    
+    MemoryReader()
+    {}
+    
+    /**
+     * Check the availability of a sound resource.
+     *
+     * @param path_name - the name of the file, or sound resource identified this way
+     *
+     * @return true if the sound resource is available, false otherwise.
+     */
+    virtual bool checkFile(const std::string& path_name) { return true; }
+    
+    /**
+     * Get the channels and length values of the given sound resource.
+     *
+     * @param path_name - the name of the file, or sound resource identified this way
+     * @param channels - the channels value to be filled with the sound resource number of channels
+     * @param length - the length value to be filled with the sound resource length in frames
+     *
+     */
+    virtual void getParamsFile(const std::string& path_name, int& channels, int& length)
+    {
+        channels = SOUND_CHAN;
+        length = SOUND_LENGTH;
+    }
+    
+    /**
+     * Read one sound resource and fill the 'soundfile' structure accordingly
+     *
+     * @param path_name - the name of the file, or sound resource identified this way
+     * @param part - the part number to be filled in the soundfile
+     * @param offset - the offset value to be incremented with the actual sound resource length in frames
+     * @param max_chan - the maximum number of mono channels to fill
+     *
+     */
+    virtual void readFile(Soundfile* soundfile, const std::string& path_name, int part, int& offset, int max_chan)
+    {
+        soundfile->fLength[part] = SOUND_LENGTH;
+        soundfile->fSR[part] = SOUND_SR;
+        soundfile->fOffset[part] = offset;
+        
+        // Audio frames have to be written for each chan
+        for (int sample = 0; sample < SOUND_LENGTH; sample++) {
+            for (int chan = 0; chan < SOUND_CHAN; chan++) {
+                soundfile->fBuffers[chan][offset + sample] = 0.f;
+            }
+        }
+        
+        // Update offset
+        offset += SOUND_LENGTH;
+    }
+    
+};
+
+#endif
+/**************************  END  MemoryReader.h **************************/
+MemoryReader gReader;
+#else
+/************************** BEGIN LibsndfileReader.h **************************/
+/************************************************************************
+ FAUST Architecture File
+ Copyright (C) 2018 GRAME, Centre National de Creation Musicale
+ ---------------------------------------------------------------------
+ This Architecture section is free software; you can redistribute it
+ and/or modify it under the terms of the GNU General Public License
+ as published by the Free Software Foundation; either version 3 of
+ the License, or (at your option) any later version.
+ 
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+ 
+ You should have received a copy of the GNU General Public License
+ along with this program; If not, see <http://www.gnu.org/licenses/>.
+ 
+ EXCEPTION : As a special exception, you may create a larger work
+ that contains this FAUST architecture section and distribute
+ that work under terms of your choice, so long as this FAUST
+ architecture section is not modified.
+ ************************************************************************/
+
+#ifndef __LibsndfileReader__
+#define __LibsndfileReader__
+
+#ifdef SAMPLERATE
+#include <samplerate.h>
+#endif
 #include <sndfile.h>
 #include <string.h>
-#include <stdio.h>
+#include <assert.h>
 #include <iostream>
-#include <fstream>
-#include <sstream>
 
-#ifndef FAUSTFLOAT
-#define FAUSTFLOAT float
-#endif
 
-#define BUFFER_SIZE     1024
-#define SAMPLE_RATE     44100
-#define MAX_CHAN        64
-
-#define MIN_CHAN(a,b) ((a) < (b) ? (a) : (b))
-
-#define PRE_PACKED_STRUCTURE
-#define POST_PACKED_STRUCTURE __attribute__((__packed__))
-
-PRE_PACKED_STRUCTURE
-struct Soundfile {
+struct VFLibsndfile {
     
-    FAUSTFLOAT** fBuffers;
-    int fLength;
-    int fSampleRate;
-    int fChannels;
+    #define SIGNED_SIZEOF(x) ((int)sizeof(x))
     
+    unsigned char* fBuffer;
+    size_t fLength;
+    size_t fOffset;
+    SF_VIRTUAL_IO fVIO;
+    
+    VFLibsndfile(unsigned char* buffer, size_t length):fBuffer(buffer), fLength(length), fOffset(0)
+    {
+        fVIO.get_filelen = vfget_filelen;
+        fVIO.seek = vfseek;
+        fVIO.read = vfread;
+        fVIO.write = vfwrite;
+        fVIO.tell = vftell;
+    }
+    
+    static sf_count_t vfget_filelen(void* user_data)
+    {
+        VFLibsndfile* vf = static_cast<VFLibsndfile*>(user_data);
+        return vf->fLength;
+    }
+  
+    static sf_count_t vfseek(sf_count_t offset, int whence, void* user_data)
+    {
+        VFLibsndfile* vf = static_cast<VFLibsndfile*>(user_data);
+        switch (whence) {
+            case SEEK_SET:
+                vf->fOffset = offset;
+                break;
+                
+            case SEEK_CUR:
+                vf->fOffset = vf->fOffset + offset;
+                break;
+                
+            case SEEK_END:
+                vf->fOffset = vf->fLength + offset;
+                break;
+                
+            default:
+                break;
+        };
+        
+        return vf->fOffset;
+    }
+    
+    static sf_count_t vfread(void* ptr, sf_count_t count, void* user_data)
+    {
+        VFLibsndfile* vf = static_cast<VFLibsndfile*>(user_data);
+        
+        /*
+         **	This will break badly for files over 2Gig in length, but
+         **	is sufficient for testing.
+         */
+        if (vf->fOffset + count > vf->fLength) {
+            count = vf->fLength - vf->fOffset;
+        }
+        
+        memcpy(ptr, vf->fBuffer + vf->fOffset, count);
+        vf->fOffset += count;
+        
+        return count;
+    }
+    
+    static sf_count_t vfwrite(const void* ptr, sf_count_t count, void* user_data)
+    {
+        VFLibsndfile* vf = static_cast<VFLibsndfile*>(user_data);
+        
+        /*
+         **	This will break badly for files over 2Gig in length, but
+         **	is sufficient for testing.
+         */
+        if (vf->fOffset >= SIGNED_SIZEOF(vf->fBuffer)) {
+            return 0;
+        }
+        
+        if (vf->fOffset + count > SIGNED_SIZEOF(vf->fBuffer)) {
+            count = sizeof (vf->fBuffer) - vf->fOffset;
+        }
+        
+        memcpy(vf->fBuffer + vf->fOffset, ptr, (size_t)count);
+        vf->fOffset += count;
+        
+        if (vf->fOffset > vf->fLength) {
+            vf->fLength = vf->fOffset;
+        }
+        
+        return count;
+    }
+    
+    static sf_count_t vftell(void* user_data)
+    {
+        VFLibsndfile* vf = static_cast<VFLibsndfile*>(user_data);
+        return vf->fOffset;
+    }
+ 
+};
+
+struct LibsndfileReader : public SoundfileReader {
+	
+    LibsndfileReader() {}
+	
     typedef sf_count_t (* sample_read)(SNDFILE* sndfile, FAUSTFLOAT* ptr, sf_count_t frames);
-    
-    static std::string CheckAux(const std::string& path_name_str, std::string& sha_key)
+	
+    // Check file
+    bool checkFile(const std::string& path_name)
     {
         SF_INFO snd_info;
         snd_info.format = 0;
-        SNDFILE* snd_file = sf_open(path_name_str.c_str(), SFM_READ, &snd_info);
+        SNDFILE* snd_file = sf_open(path_name.c_str(), SFM_READ, &snd_info);
+        return checkFileAux(snd_file, path_name);
+    }
+    
+    bool checkFile(unsigned char* buffer, size_t length)
+    {
+        SF_INFO snd_info;
+        snd_info.format = 0;
+        VFLibsndfile vio(buffer, length);
+        SNDFILE* snd_file = sf_open_virtual(&vio.fVIO, SFM_READ, &snd_info, &vio);
+        return checkFileAux(snd_file, "virtual file");
+    }
+    
+    bool checkFileAux(SNDFILE* snd_file, const std::string& path_name)
+    {
         if (snd_file) {
             sf_close(snd_file);
-            // Possibly read associated SHA_KEY file
-            std::string sha_key_path_name_str = path_name_str + "_sha_key";
-            std::ifstream reader(sha_key_path_name_str.c_str());
-            if (reader.is_open()) {
-                std::string sha_key_line;
-                getline(reader, sha_key_line);
-                std::stringstream line_reader(sha_key_line);
-                line_reader >> sha_key;
-            }
-            return path_name_str;
+            return true;
         } else {
-            std::cerr << "ERROR : cannot open '" << path_name_str << "' (" << sf_strerror(NULL) << ")" << std::endl;
-            return "";
+            std::cerr << "ERROR : cannot open '" << path_name << "' (" << sf_strerror(NULL) << ")" << std::endl;
+            return false;
         }
     }
-    
-    // Check if soundfile exists and return the real path_name
-    static std::string Check(const std::vector<std::string>& sound_directories, const std::string& file_name_str, std::string& sha_key)
+
+    // Open the file and returns its length and channels
+    void getParamsFile(const std::string& path_name, int& channels, int& length)
     {
-        std::string path_name_str = CheckAux(file_name_str, sha_key);
-        if (path_name_str != "") {
-            return path_name_str;
-        } else {
-            for (int i = 0; i < sound_directories.size(); i++) {
-                std::string res = CheckAux(sound_directories[i] + "/" + file_name_str, sha_key);
-                if (res != "") { return res; }
-            }
-            return "";
-        }
-    }
-    
-    Soundfile(const std::string& path_name_str, int max_chan)
-    {
-        fBuffers = new FAUSTFLOAT*[max_chan];
-        if (!fBuffers) {
-            throw std::bad_alloc();
-        }
-     
-        // Open sndfile
         SF_INFO	snd_info;
         snd_info.format = 0;
-        SNDFILE* snd_file = sf_open(path_name_str.c_str(), SFM_READ, &snd_info);
-        
-        if (snd_file) {
-            
-            fChannels = MIN_CHAN(max_chan, snd_info.channels);
-            fLength = int(snd_info.frames);
-            fSampleRate = snd_info.samplerate;
-            
-            for (int chan = 0; chan < fChannels; chan++) {
-                fBuffers[chan] = new FAUSTFLOAT[snd_info.frames];
-                if (!fBuffers[chan]) {
-                    throw std::bad_alloc();
-                }
-            }
-            
-            // Read and fill snd_info.channels number of channels
-            sf_count_t nbf, index = 0;
-            FAUSTFLOAT buffer[BUFFER_SIZE * snd_info.channels];
-            sample_read reader;
-            if (sizeof(FAUSTFLOAT) == 4) {
-                reader = reinterpret_cast<sample_read>(sf_readf_float);
-            } else {
-                reader = reinterpret_cast<sample_read>(sf_readf_double);
-            }
-            do {
-                nbf = reader(snd_file, buffer, BUFFER_SIZE);
-                for (int sample = 0; sample < nbf; sample++) {
-                    for (int chan = 0; chan < fChannels; chan++) {
-                        fBuffers[chan][index + sample] = buffer[sample * snd_info.channels + chan];
-                    }
-                }
-                index += nbf;
-            } while (nbf == BUFFER_SIZE);
-            
-            // Share the same buffers for all other channels so that we have max_chan channels available
-            for (int chan = fChannels; chan < max_chan; chan++) {
-                fBuffers[chan] = fBuffers[chan % snd_info.channels];
-            }
-       
-            sf_close(snd_file);
-            
-        } else {
-            
-            if (path_name_str != "") {
-                std::cerr << "Error opening the file : " << path_name_str << std::endl;
-            }
-            
-            fChannels = 1;
-            fLength = BUFFER_SIZE;
-            fSampleRate = SAMPLE_RATE;
-            
-            // Allocate 1 channel
-            fBuffers[0] = new FAUSTFLOAT[BUFFER_SIZE];
-            if (!fBuffers[0]) {
-                throw std::bad_alloc();
-            }
-            memset(fBuffers[0], 0, BUFFER_SIZE * sizeof(FAUSTFLOAT));
-            
-            // Share the same buffer for all other channels so that we have max_chan channels available
-            for (int chan = fChannels; chan < max_chan; chan++) {
-                fBuffers[chan] = fBuffers[0];
-            }
-        }
+        SNDFILE* snd_file = sf_open(path_name.c_str(), SFM_READ, &snd_info);
+        getParamsFileAux(snd_file, snd_info, channels, length);
     }
     
-    ~Soundfile()
+    void getParamsFile(unsigned char* buffer, size_t size, int& channels, int& length)
     {
-        // Free the real channels only
-        for (int chan = 0; chan < fChannels; chan++) {
-            delete fBuffers[chan];
-        }
-        delete [] fBuffers;
+        SF_INFO	snd_info;
+        snd_info.format = 0;
+        VFLibsndfile vio(buffer, size);
+        SNDFILE* snd_file = sf_open_virtual(&vio.fVIO, SFM_READ, &snd_info, &vio);
+        getParamsFileAux(snd_file, snd_info, channels, length);
     }
     
-} POST_PACKED_STRUCTURE;
+    void getParamsFileAux(SNDFILE* snd_file, const SF_INFO& snd_info, int& channels, int& length)
+    {
+        assert(snd_file);
+        channels = int(snd_info.channels);
+    #ifdef SAMPLERATE
+        length = (isResampling(snd_info.samplerate)) ? ((double(snd_info.frames) * double(fDriverSR) / double(snd_info.samplerate)) + BUFFER_SIZE) : int(snd_info.frames);
+    #else
+        length = int(snd_info.frames);
+    #endif
+        sf_close(snd_file);
+    }
+    
+    // Read the file
+    void copyToOut(Soundfile* soundfile, int size, int channels, int max_channels, int offset, FAUSTFLOAT* buffer)
+    {
+        for (int sample = 0; sample < size; sample++) {
+            for (int chan = 0; chan < channels; chan++) {
+                soundfile->fBuffers[chan][offset + sample] = buffer[sample * max_channels + chan];
+            }
+        }
+    }
+    
+    void readFile(Soundfile* soundfile, const std::string& path_name, int part, int& offset, int max_chan)
+    {
+        SF_INFO	snd_info;
+        snd_info.format = 0;
+        SNDFILE* snd_file = sf_open(path_name.c_str(), SFM_READ, &snd_info);
+        readFileAux(soundfile, snd_file, snd_info, part, offset, max_chan);
+    }
+    
+    void readFile(Soundfile* soundfile, unsigned char* buffer, size_t length, int part, int& offset, int max_chan)
+    {
+        SF_INFO	snd_info;
+        snd_info.format = 0;
+        VFLibsndfile vio(buffer, length);
+        SNDFILE* snd_file = sf_open_virtual(&vio.fVIO, SFM_READ, &snd_info, &vio);
+        readFileAux(soundfile, snd_file, snd_info, part, offset, max_chan);
+    }
+	
+    // Will be called to fill all parts from 0 to MAX_SOUNDFILE_PARTS-1
+    void readFileAux(Soundfile* soundfile, SNDFILE* snd_file, const SF_INFO& snd_info, int part, int& offset, int max_chan)
+    {
+        assert(snd_file);
+        int channels = std::min<int>(max_chan, snd_info.channels);
+    #ifdef SAMPLERATE
+        if (isResampling(snd_info.samplerate)) {
+            soundfile->fLength[part] = int(double(snd_info.frames) * double(fDriverSR) / double(snd_info.samplerate));
+            soundfile->fSR[part] = fDriverSR;
+        } else {
+            soundfile->fLength[part] = int(snd_info.frames);
+            soundfile->fSR[part] = snd_info.samplerate;
+        }
+    #else
+        soundfile->fLength[part] = int(snd_info.frames);
+        soundfile->fSR[part] = snd_info.samplerate;
+    #endif
+        soundfile->fOffset[part] = offset;
+		
+        // Read and fill snd_info.channels number of channels
+        sf_count_t nbf;
+        FAUSTFLOAT* buffer_in = (FAUSTFLOAT*)alloca(BUFFER_SIZE * sizeof(FAUSTFLOAT) * snd_info.channels);
+        sample_read reader;
+        
+        if (sizeof(FAUSTFLOAT) == 4) {
+            reader = reinterpret_cast<sample_read>(sf_readf_float);
+        } else {
+            reader = reinterpret_cast<sample_read>(sf_readf_double);
+        }
+        
+    #ifdef SAMPLERATE
+        // Resampling
+        SRC_STATE* resampler = nullptr;
+        FAUSTFLOAT* buffer_out = nullptr;
+        if  (isResampling(snd_info.samplerate)) {
+            int error;
+            resampler = src_new(SRC_SINC_FASTEST, channels, &error);
+            if (error != 0) {
+                std::cerr << "ERROR : src_new " << src_strerror(error) << std::endl;
+                throw -1;
+            }
+            buffer_out = (FAUSTFLOAT*)alloca(BUFFER_SIZE * sizeof(FAUSTFLOAT) * snd_info.channels);
+        }
+    #endif
+        
+        do {
+            nbf = reader(snd_file, buffer_in, BUFFER_SIZE);
+        #ifdef SAMPLERATE
+            // Resampling
+            if  (isResampling(snd_info.samplerate)) {
+                int in_offset = 0;
+                SRC_DATA src_data;
+                src_data.src_ratio = double(fDriverSR)/double(snd_info.samplerate);
+                do {
+                    src_data.data_in = &buffer_in[in_offset * snd_info.channels];
+                    src_data.data_out = buffer_out;
+                    src_data.input_frames = nbf - in_offset;
+                    src_data.output_frames = BUFFER_SIZE;
+                    src_data.end_of_input = (nbf < BUFFER_SIZE);
+                    int res = src_process(resampler, &src_data);
+                    if (res != 0) {
+                        std::cerr << "ERROR : src_process " << src_strerror(res) << std::endl;
+                        throw -1;
+                    }
+                    copyToOut(soundfile, src_data.output_frames_gen, channels, snd_info.channels, offset, buffer_out);
+                    in_offset += src_data.input_frames_used;
+                    // Update offset
+                    offset += src_data.output_frames_gen;
+                } while (in_offset < nbf);
+            } else {
+                copyToOut(soundfile, nbf, channels, snd_info.channels, offset, buffer_in);
+                // Update offset
+                offset += nbf;
+            }
+        #else
+            copyToOut(soundfile, nbf, channels, snd_info.channels, offset, buffer_in);
+            // Update offset
+            offset += nbf;
+        #endif
+        } while (nbf == BUFFER_SIZE);
+		
+        sf_close(snd_file);
+    #ifdef SAMPLERATE
+        if (resampler) src_delete(resampler);
+    #endif
+    }
+
+};
 
 #endif
+/**************************  END  LibsndfileReader.h **************************/
+LibsndfileReader gReader;
+#endif
 
-// To be used by dsp code if no SoundUI is used or when soundfile is not found
-extern "C" Soundfile* defaultsound = new Soundfile("", MAX_CHAN);
+// To be used by DSP code if no SoundUI is used
+std::vector<std::string> path_name_list;
+Soundfile* defaultsound = gReader.createSoundfile(path_name_list, MAX_CHAN);
 
 class SoundUI : public GenericUI
 {
 		
     private:
     
-        std::vector<std::string> fSoundfileDir;        // The soundfile directories
-        std::map<std::string, Soundfile*> fSFMap;      // Map to share loaded soundfiles
-    
+        std::vector<std::string> fSoundfileDir;             // The soundfile directories
+        std::map<std::string, Soundfile*> fSoundfileMap;    // Map to share loaded soundfiles
+        SoundfileReader* fSoundReader;
+
      public:
-            
-        SoundUI(const std::string& sound_directory = "")
+    
+        SoundUI(const std::string& sound_directory = "", int sample_rate = -1, SoundfileReader* reader = nullptr)
         {
             fSoundfileDir.push_back(sound_directory);
+            fSoundReader = (reader) ? reader : &gReader;
+            fSoundReader->setSampleRate(sample_rate);
         }
     
-        SoundUI(const std::vector<std::string>& sound_directories):fSoundfileDir(sound_directories)
-        {}
+        SoundUI(const std::vector<std::string>& sound_directories, int sample_rate = -1, SoundfileReader* reader = nullptr)
+        :fSoundfileDir(sound_directories)
+        {
+            fSoundReader = (reader) ? reader : &gReader;
+            fSoundReader->setSampleRate(sample_rate);
+        }
     
         virtual ~SoundUI()
         {   
-            // delete all soundfiles
+            // Delete all soundfiles
             std::map<std::string, Soundfile*>::iterator it;
-            for (it = fSFMap.begin(); it != fSFMap.end(); it++) {
+            for (it = fSoundfileMap.begin(); it != fSoundfileMap.end(); it++) {
                 delete (*it).second;
             }
         }
 
         // -- soundfiles
-        virtual void addSoundfile(const char* label, const char* file_name, Soundfile** sf_zone)
+        virtual void addSoundfile(const char* label, const char* url, Soundfile** sf_zone)
         {
-            // If no filename was given, assume label is the filename
-            std::string file_name_str;
-            if (strlen(file_name) == 0) {
-                file_name_str = label;
-            } else {
-                file_name_str = file_name;
+            const char* saved_url = url; // 'url' is consumed by parseMenuList2
+            std::vector<std::string> file_name_list;
+            
+            bool menu = parseMenuList2(url, file_name_list, true);
+            // If not a list, we have as single file
+            if (!menu) { file_name_list.push_back(saved_url); }
+            
+            // Parse the possible list
+            if (fSoundfileMap.find(saved_url) == fSoundfileMap.end()) {
+                // Check all files and get their complete path
+                std::vector<std::string> path_name_list = fSoundReader->checkFiles(fSoundfileDir, file_name_list);
+                // Read them and create the Soundfile
+                Soundfile* sound_file = fSoundReader->createSoundfile(path_name_list, MAX_CHAN);
+                if (sound_file) {
+                    fSoundfileMap[saved_url] = sound_file;
+                } else {
+                    // If failure, use 'defaultsound'
+                    std::cerr << "addSoundfile : soundfile for " << saved_url << " cannot be created !" << std::endl;
+                    *sf_zone = defaultsound;
+                    return;
+                }
             }
             
-            std::string sha_key;
-            std::string path_name_str = Soundfile::Check(fSoundfileDir, file_name_str, sha_key);
-            if (path_name_str != "") {
-                std::string file_key = (sha_key == "") ? path_name_str : sha_key;
-                // Check if 'file_key' is already loaded
-                if (fSFMap.find(file_key) == fSFMap.end()) {
-                    fSFMap[file_key] = new Soundfile(path_name_str, 64);
+            // Get the soundfile
+            *sf_zone = fSoundfileMap[saved_url];
+        }
+    
+        static std::string getBinaryPath(std::string folder = "")
+        {
+            std::string bundle_path_str;
+        #ifdef __APPLE__
+            CFURLRef bundle_ref = CFBundleCopyBundleURL(CFBundleGetMainBundle());
+            if (bundle_ref) {
+                UInt8 bundle_path[512];
+                if (CFURLGetFileSystemRepresentation(bundle_ref, true, bundle_path, 512)) {
+                    bundle_path_str = std::string((char*)bundle_path) + folder;
                 }
-                // Get the soundfile
-                *sf_zone = fSFMap[file_key];
-            } else {
-                // Take the defaultsound
-                std::cout << "addSoundfile : defaultsound\n";
-                *sf_zone = defaultsound;
             }
+        #endif
+        #ifdef ANDROID_DRIVER
+            bundle_path_str = "/data/data/__CURRENT_ANDROID_PACKAGE__/files";
+        #endif
+            return bundle_path_str;
         }
-    
-    static std::string getBinaryPath(std::string folder = "")
-    {
-        std::string bundle_path_str;
-    #ifdef __APPLE__
-        CFURLRef bundle_ref = CFBundleCopyBundleURL(CFBundleGetMainBundle());
-        if (bundle_ref) {
-            UInt8 bundle_path[512];
-            if (CFURLGetFileSystemRepresentation(bundle_ref, true, bundle_path, 512)) {
-                bundle_path_str = std::string((char*)bundle_path) + folder;
+        
+        static std::string getBinaryPathFrom(const std::string& path)
+        {
+            std::string bundle_path_str;
+        #ifdef __APPLE__
+            CFBundleRef bundle = CFBundleGetBundleWithIdentifier(CFStringCreateWithCString(kCFAllocatorDefault, path.c_str(), CFStringGetSystemEncoding()));
+            CFURLRef bundle_ref = CFBundleCopyBundleURL(bundle);
+            if (bundle_ref) {
+                UInt8 bundle_path[512];
+                if (CFURLGetFileSystemRepresentation(bundle_ref, true, bundle_path, 512)) {
+                    bundle_path_str = std::string((char*)bundle_path);
+                }
             }
+        #endif
+        #ifdef ANDROID_DRIVER
+            bundle_path_str = "/data/data/__CURRENT_ANDROID_PACKAGE__/files";
+        #endif
+            return bundle_path_str;
         }
-    #endif
-        return bundle_path_str;
-    }
-    
-    static std::string getBinaryPathFrom(const std::string& path)
-    {
-        std::string bundle_path_str;
-    #ifdef __APPLE__
-        CFBundleRef bundle = CFBundleGetBundleWithIdentifier(CFStringCreateWithCString(kCFAllocatorDefault, path.c_str(), CFStringGetSystemEncoding()));
-        CFURLRef bundle_ref = CFBundleCopyBundleURL(bundle);
-        if (bundle_ref) {
-            UInt8 bundle_path[512];
-            if (CFURLGetFileSystemRepresentation(bundle_ref, true, bundle_path, 512)) {
-                bundle_path_str = std::string((char*)bundle_path);
-            }
-        }
-    #endif
-        return bundle_path_str;
-    }
 };
 
 #endif
+/**************************  END  SoundUI.h **************************/
 #endif
 
 using namespace std;
@@ -1671,7 +6553,7 @@ using namespace std;
 #include <cmath>
 #include <math.h>
 
-double mydsp_faustpower2_f(double value) {
+static double mydsp_faustpower2_f(double value) {
 	return (value * value);
 	
 }
@@ -1691,8 +6573,8 @@ class mydsp : public dsp {
 	FAUSTFLOAT fCheckbox0;
 	FAUSTFLOAT fHslider0;
 	double fRec0[2];
-	int fSamplingFreq;
-	int iConst0;
+	int fSampleRate;
+	double fConst0;
 	double fConst1;
 	FAUSTFLOAT fHslider1;
 	double fRec1[2];
@@ -1700,50 +6582,47 @@ class mydsp : public dsp {
 	FAUSTFLOAT fHslider2;
 	double fRec3[2];
 	double fConst2;
+	double fRec10[3];
+	double fRec11[3];
+	double fRec12[3];
+	double fRec13[3];
+	double fRec14[3];
 	double fConst3;
 	double fConst4;
 	double fConst5;
-	double fConst6;
-	double fRec13[3];
-	double fRec14[3];
-	double fRec15[3];
-	double fRec16[3];
-	double fRec17[3];
-	double fRec18[3];
-	double fRec19[3];
-	double fConst7;
-	double fConst8;
-	double fConst9;
-	double fRec12[2];
-	double fRec10[2];
 	double fRec9[2];
 	double fRec7[2];
 	double fRec6[2];
 	double fRec4[2];
+	double fConst6;
+	double fRec18[3];
+	double fRec19[3];
+	double fRec20[3];
+	double fConst7;
+	double fRec17[2];
+	double fRec15[2];
+	double fConst8;
+	double fConst9;
 	double fConst10;
 	double fConst11;
-	double fRec23[3];
-	double fRec24[3];
-	double fRec25[3];
 	double fConst12;
-	double fRec22[2];
-	double fRec20[2];
-	double fConst13;
-	double fConst14;
+	double fRec30[3];
+	double fRec31[3];
 	double fRec32[3];
 	double fRec33[3];
 	double fRec34[3];
 	double fRec35[3];
 	double fRec36[3];
-	double fConst15;
-	double fConst16;
-	double fRec31[2];
 	double fRec29[2];
-	double fRec28[2];
+	double fRec27[2];
 	double fRec26[2];
+	double fRec24[2];
+	double fConst13;
+	double fRec23[2];
+	double fRec21[2];
 	int IOTA;
 	double fVec0[1024];
-	int iConst17;
+	int iConst14;
 	double fRec45[2];
 	double fRec43[2];
 	double fRec42[2];
@@ -1939,33 +6818,31 @@ class mydsp : public dsp {
 	double fRec303[2];
 	double fRec301[2];
 	double fVec15[1024];
+	double fConst15;
+	double fConst16;
+	double fConst17;
 	double fConst18;
 	double fConst19;
-	double fConst20;
-	double fConst21;
-	double fConst22;
-	double fConst23;
 	double fRec315[2];
 	double fRec313[2];
 	double fRec312[2];
 	double fRec310[2];
+	double fConst20;
 	double fRec309[2];
 	double fRec307[2];
-	double fConst24;
-	double fConst25;
-	double fConst26;
+	double fConst21;
+	double fConst22;
 	double fRec318[2];
 	double fRec316[2];
-	double fConst27;
-	double fConst28;
-	double fConst29;
-	double fConst30;
+	double fConst23;
+	double fConst24;
+	double fConst25;
 	double fRec324[2];
 	double fRec322[2];
 	double fRec321[2];
 	double fRec319[2];
 	double fVec16[512];
-	int iConst31;
+	int iConst26;
 	double fRec333[2];
 	double fRec331[2];
 	double fRec330[2];
@@ -1979,31 +6856,31 @@ class mydsp : public dsp {
 	double fRec339[2];
 	double fRec337[2];
 	double fVec17[512];
+	double fRec345[2];
+	double fRec343[2];
 	double fRec351[2];
 	double fRec349[2];
 	double fRec348[2];
 	double fRec346[2];
-	double fRec345[2];
-	double fRec343[2];
-	double fRec354[2];
-	double fRec352[2];
 	double fRec360[2];
 	double fRec358[2];
 	double fRec357[2];
 	double fRec355[2];
+	double fRec354[2];
+	double fRec352[2];
 	double fVec18[512];
+	double fRec363[2];
+	double fRec361[2];
 	double fRec369[2];
 	double fRec367[2];
 	double fRec366[2];
 	double fRec364[2];
-	double fRec363[2];
-	double fRec361[2];
-	double fRec372[2];
-	double fRec370[2];
 	double fRec378[2];
 	double fRec376[2];
 	double fRec375[2];
 	double fRec373[2];
+	double fRec372[2];
+	double fRec370[2];
 	double fVec19[512];
 	double fRec387[2];
 	double fRec385[2];
@@ -2057,33 +6934,31 @@ class mydsp : public dsp {
 	double fRec447[2];
 	double fRec445[2];
 	double fVec23[512];
-	double fConst32;
-	double fConst33;
-	double fConst34;
-	double fConst35;
-	double fConst36;
-	double fConst37;
+	double fConst27;
+	double fConst28;
+	double fConst29;
+	double fConst30;
+	double fConst31;
 	double fRec459[2];
 	double fRec457[2];
 	double fRec456[2];
 	double fRec454[2];
+	double fConst32;
 	double fRec453[2];
 	double fRec451[2];
-	double fConst38;
-	double fConst39;
-	double fConst40;
+	double fConst33;
+	double fConst34;
 	double fRec462[2];
 	double fRec460[2];
-	double fConst41;
-	double fConst42;
-	double fConst43;
-	double fConst44;
+	double fConst35;
+	double fConst36;
+	double fConst37;
 	double fRec468[2];
 	double fRec466[2];
 	double fRec465[2];
 	double fRec463[2];
 	double fVec24[256];
-	int iConst45;
+	int iConst38;
 	double fRec477[2];
 	double fRec475[2];
 	double fRec474[2];
@@ -2123,27 +6998,25 @@ class mydsp : public dsp {
 	double fRec519[2];
 	double fRec517[2];
 	double fVec27[256];
-	double fConst46;
-	double fConst47;
-	double fConst48;
-	double fConst49;
-	double fConst50;
-	double fConst51;
+	double fConst39;
+	double fConst40;
+	double fConst41;
+	double fConst42;
+	double fConst43;
 	double fRec531[2];
 	double fRec529[2];
 	double fRec528[2];
 	double fRec526[2];
+	double fConst44;
 	double fRec525[2];
 	double fRec523[2];
-	double fConst52;
-	double fConst53;
-	double fConst54;
+	double fConst45;
+	double fConst46;
 	double fRec534[2];
 	double fRec532[2];
-	double fConst55;
-	double fConst56;
-	double fConst57;
-	double fConst58;
+	double fConst47;
+	double fConst48;
+	double fConst49;
 	double fRec540[2];
 	double fRec538[2];
 	double fRec537[2];
@@ -2152,9 +7025,9 @@ class mydsp : public dsp {
  public:
 	
 	void metadata(Meta* m) { 
-		m->declare("author", "AmbisonicDecoderToolkit");
+		m->declare("author", "AmbisonicDecoderToolkit, Henrik Frisk");
 		m->declare("copyright", "(c) Aaron J. Heller 2013");
-		m->declare("filename", "KMHLS_Dome_3h3p_normal_4");
+		m->declare("filename", "KMHLS_Dome_3h3p_normal_4.dsp");
 		m->declare("license", "BSD 3-Clause License");
 		m->declare("name", "KMHLS_Dome_3h3p_normal_4");
 		m->declare("version", "1.2");
@@ -2373,71 +7246,62 @@ class mydsp : public dsp {
 		
 	}
 	
-	static void classInit(int samplingFreq) {
+	static void classInit(int sample_rate) {
 		
 	}
 	
-	virtual void instanceConstants(int samplingFreq) {
-		fSamplingFreq = samplingFreq;
-		iConst0 = std::min(192000, std::max(1, fSamplingFreq));
-		fConst1 = (3.1415926535897931 / double(iConst0));
-		fConst2 = double(iConst0);
-		fConst3 = ((86.443380725268696 / fConst2) + 1.0);
-		fConst4 = (0.0 - (172.88676145053739 / (fConst2 * fConst3)));
-		fConst5 = ((((8950.8463194903634 / fConst2) + 136.90669911154342) / fConst2) + 1.0);
-		fConst6 = (1.0 / (fConst3 * fConst5));
-		fConst7 = mydsp_faustpower2_f(fConst2);
-		fConst8 = (0.0 - (35803.385277961454 / (fConst7 * fConst5)));
-		fConst9 = (0.0 - (((35803.385277961454 / fConst2) + 273.81339822308684) / (fConst2 * fConst5)));
-		fConst10 = ((37.225013306135352 / fConst2) + 1.0);
-		fConst11 = (1.0 / fConst10);
-		fConst12 = (0.0 - (74.450026612270705 / (fConst2 * fConst10)));
-		fConst13 = ((((4157.1048469258621 / fConst2) + 111.67503991840606) / fConst2) + 1.0);
-		fConst14 = (1.0 / fConst13);
-		fConst15 = (0.0 - (16628.419387703449 / (fConst7 * fConst13)));
-		fConst16 = (0.0 - (((16628.419387703449 / fConst2) + 223.35007983681211) / (fConst2 * fConst13)));
-		iConst17 = int(((0.0028145653948241961 * double(iConst0)) + 0.5));
-		fConst18 = ((81.627198923287324 / fConst2) + 1.0);
-		fConst19 = (0.0 - (163.25439784657465 / (fConst2 * fConst18)));
-		fConst20 = ((((7981.2405656089695 / fConst2) + 129.27896003773355) / fConst2) + 1.0);
-		fConst21 = (1.0 / (fConst18 * fConst20));
-		fConst22 = (0.0 - (31924.962262435878 / (fConst7 * fConst20)));
-		fConst23 = (0.0 - (((31924.962262435878 / fConst2) + 258.55792007546711) / (fConst2 * fConst20)));
-		fConst24 = ((35.15102649350348 / fConst2) + 1.0);
-		fConst25 = (1.0 / fConst24);
-		fConst26 = (0.0 - (70.302052987006959 / (fConst2 * fConst24)));
-		fConst27 = ((((3706.7839906409508 / fConst2) + 105.45307948051044) / fConst2) + 1.0);
-		fConst28 = (1.0 / fConst27);
-		fConst29 = (0.0 - (14827.135962563803 / (fConst7 * fConst27)));
-		fConst30 = (0.0 - (((14827.135962563803 / fConst2) + 210.90615896102088) / (fConst2 * fConst27)));
-		iConst31 = int(((0.0020220583685382951 * double(iConst0)) + 0.5));
-		fConst32 = ((74.949028614536147 / fConst2) + 1.0);
-		fConst33 = (0.0 - (149.89805722907229 / (fConst2 * fConst32)));
-		fConst34 = ((((6728.7226997184644 / fConst2) + 118.70225369648584) / fConst2) + 1.0);
-		fConst35 = (1.0 / (fConst32 * fConst34));
-		fConst36 = (0.0 - (26914.890798873857 / (fConst7 * fConst34)));
-		fConst37 = (0.0 - (((26914.890798873857 / fConst2) + 237.40450739297168) / (fConst2 * fConst34)));
-		fConst38 = ((32.275213718503664 / fConst2) + 1.0);
-		fConst39 = (1.0 / fConst38);
-		fConst40 = (0.0 - (64.550427437007329 / (fConst2 * fConst38)));
-		fConst41 = ((((3125.0682617252614 / fConst2) + 96.825641155510993) / fConst2) + 1.0);
-		fConst42 = (1.0 / fConst41);
-		fConst43 = (0.0 - (12500.273046901046 / (fConst7 * fConst41)));
-		fConst44 = (0.0 - (((12500.273046901046 / fConst2) + 193.65128231102199) / (fConst2 * fConst41)));
-		iConst45 = int(((0.0007546298522354718 * double(iConst0)) + 0.5));
-		fConst46 = ((71.467716130467849 / fConst2) + 1.0);
-		fConst47 = (0.0 - (142.9354322609357 / (fConst2 * fConst46)));
-		fConst48 = ((((6118.1542368773398 / fConst2) + 113.18864471022512) / fConst2) + 1.0);
-		fConst49 = (1.0 / (fConst46 * fConst48));
-		fConst50 = (0.0 - (24472.616947509359 / (fConst7 * fConst48)));
-		fConst51 = (0.0 - (((24472.616947509359 / fConst2) + 226.37728942045024) / (fConst2 * fConst48)));
-		fConst52 = ((30.776060140115494 / fConst2) + 1.0);
-		fConst53 = (1.0 / fConst52);
-		fConst54 = (0.0 - (61.552120280230987 / (fConst2 * fConst52)));
-		fConst55 = ((((2841.4976332440169 / fConst2) + 92.328180420346484) / fConst2) + 1.0);
-		fConst56 = (1.0 / fConst55);
-		fConst57 = (0.0 - (11365.990532976068 / (fConst7 * fConst55)));
-		fConst58 = (0.0 - (((11365.990532976068 / fConst2) + 184.65636084069297) / (fConst2 * fConst55)));
+	virtual void instanceConstants(int sample_rate) {
+		fSampleRate = sample_rate;
+		fConst0 = double(std::min<int>(192000, std::max<int>(1, fSampleRate)));
+		fConst1 = (3.1415926535897931 / fConst0);
+		fConst2 = (1.0 / ((((4157.1048469258621 / fConst0) + 111.67503991840606) / fConst0) + 1.0));
+		fConst3 = (1.0 / fConst0);
+		fConst4 = (16628.419387703449 / fConst0);
+		fConst5 = (fConst4 + 223.35007983681211);
+		fConst6 = (1.0 / ((37.225013306135352 / fConst0) + 1.0));
+		fConst7 = (74.450026612270705 / fConst0);
+		fConst8 = (1.0 / ((((8950.8463194903634 / fConst0) + 136.90669911154342) / fConst0) + 1.0));
+		fConst9 = (35803.385277961454 / fConst0);
+		fConst10 = (fConst9 + 273.81339822308684);
+		fConst11 = ((86.443380725268696 / fConst0) + 1.0);
+		fConst12 = (1.0 / fConst11);
+		fConst13 = (172.88676145053739 / (fConst0 * fConst11));
+		iConst14 = int(((0.0028145653948241961 * fConst0) + 0.5));
+		fConst15 = (1.0 / ((((7981.2405656089695 / fConst0) + 129.27896003773355) / fConst0) + 1.0));
+		fConst16 = (31924.962262435878 / fConst0);
+		fConst17 = (fConst16 + 258.55792007546711);
+		fConst18 = ((81.627198923287324 / fConst0) + 1.0);
+		fConst19 = (1.0 / fConst18);
+		fConst20 = (163.25439784657465 / (fConst0 * fConst18));
+		fConst21 = (1.0 / ((35.15102649350348 / fConst0) + 1.0));
+		fConst22 = (70.302052987006959 / fConst0);
+		fConst23 = (1.0 / ((((3706.7839906409508 / fConst0) + 105.45307948051044) / fConst0) + 1.0));
+		fConst24 = (14827.135962563803 / fConst0);
+		fConst25 = (fConst24 + 210.90615896102088);
+		iConst26 = int(((0.0020220583685382951 * fConst0) + 0.5));
+		fConst27 = (1.0 / ((((6728.7226997184644 / fConst0) + 118.70225369648584) / fConst0) + 1.0));
+		fConst28 = (26914.890798873857 / fConst0);
+		fConst29 = (fConst28 + 237.40450739297168);
+		fConst30 = ((74.949028614536147 / fConst0) + 1.0);
+		fConst31 = (1.0 / fConst30);
+		fConst32 = (149.89805722907229 / (fConst0 * fConst30));
+		fConst33 = (1.0 / ((32.275213718503664 / fConst0) + 1.0));
+		fConst34 = (64.550427437007329 / fConst0);
+		fConst35 = (1.0 / ((((3125.0682617252614 / fConst0) + 96.825641155510993) / fConst0) + 1.0));
+		fConst36 = (12500.273046901046 / fConst0);
+		fConst37 = (fConst36 + 193.65128231102199);
+		iConst38 = int(((0.0007546298522354718 * fConst0) + 0.5));
+		fConst39 = (1.0 / ((((6118.1542368773398 / fConst0) + 113.18864471022512) / fConst0) + 1.0));
+		fConst40 = (24472.616947509359 / fConst0);
+		fConst41 = (fConst40 + 226.37728942045024);
+		fConst42 = ((71.467716130467849 / fConst0) + 1.0);
+		fConst43 = (1.0 / fConst42);
+		fConst44 = (142.9354322609357 / (fConst0 * fConst42));
+		fConst45 = (1.0 / ((30.776060140115494 / fConst0) + 1.0));
+		fConst46 = (61.552120280230987 / fConst0);
+		fConst47 = (1.0 / ((((2841.4976332440169 / fConst0) + 92.328180420346484) / fConst0) + 1.0));
+		fConst48 = (11365.990532976068 / fConst0);
+		fConst49 = (fConst48 + 184.65636084069297);
 		
 	}
 	
@@ -2467,111 +7331,111 @@ class mydsp : public dsp {
 			
 		}
 		for (int l4 = 0; (l4 < 3); l4 = (l4 + 1)) {
-			fRec13[l4] = 0.0;
+			fRec10[l4] = 0.0;
 			
 		}
 		for (int l5 = 0; (l5 < 3); l5 = (l5 + 1)) {
-			fRec14[l5] = 0.0;
+			fRec11[l5] = 0.0;
 			
 		}
 		for (int l6 = 0; (l6 < 3); l6 = (l6 + 1)) {
-			fRec15[l6] = 0.0;
+			fRec12[l6] = 0.0;
 			
 		}
 		for (int l7 = 0; (l7 < 3); l7 = (l7 + 1)) {
-			fRec16[l7] = 0.0;
+			fRec13[l7] = 0.0;
 			
 		}
 		for (int l8 = 0; (l8 < 3); l8 = (l8 + 1)) {
-			fRec17[l8] = 0.0;
+			fRec14[l8] = 0.0;
 			
 		}
-		for (int l9 = 0; (l9 < 3); l9 = (l9 + 1)) {
-			fRec18[l9] = 0.0;
+		for (int l9 = 0; (l9 < 2); l9 = (l9 + 1)) {
+			fRec9[l9] = 0.0;
 			
 		}
-		for (int l10 = 0; (l10 < 3); l10 = (l10 + 1)) {
-			fRec19[l10] = 0.0;
+		for (int l10 = 0; (l10 < 2); l10 = (l10 + 1)) {
+			fRec7[l10] = 0.0;
 			
 		}
 		for (int l11 = 0; (l11 < 2); l11 = (l11 + 1)) {
-			fRec12[l11] = 0.0;
+			fRec6[l11] = 0.0;
 			
 		}
 		for (int l12 = 0; (l12 < 2); l12 = (l12 + 1)) {
-			fRec10[l12] = 0.0;
+			fRec4[l12] = 0.0;
 			
 		}
-		for (int l13 = 0; (l13 < 2); l13 = (l13 + 1)) {
-			fRec9[l13] = 0.0;
+		for (int l13 = 0; (l13 < 3); l13 = (l13 + 1)) {
+			fRec18[l13] = 0.0;
 			
 		}
-		for (int l14 = 0; (l14 < 2); l14 = (l14 + 1)) {
-			fRec7[l14] = 0.0;
+		for (int l14 = 0; (l14 < 3); l14 = (l14 + 1)) {
+			fRec19[l14] = 0.0;
 			
 		}
-		for (int l15 = 0; (l15 < 2); l15 = (l15 + 1)) {
-			fRec6[l15] = 0.0;
+		for (int l15 = 0; (l15 < 3); l15 = (l15 + 1)) {
+			fRec20[l15] = 0.0;
 			
 		}
 		for (int l16 = 0; (l16 < 2); l16 = (l16 + 1)) {
-			fRec4[l16] = 0.0;
+			fRec17[l16] = 0.0;
 			
 		}
-		for (int l17 = 0; (l17 < 3); l17 = (l17 + 1)) {
-			fRec23[l17] = 0.0;
+		for (int l17 = 0; (l17 < 2); l17 = (l17 + 1)) {
+			fRec15[l17] = 0.0;
 			
 		}
 		for (int l18 = 0; (l18 < 3); l18 = (l18 + 1)) {
-			fRec24[l18] = 0.0;
+			fRec30[l18] = 0.0;
 			
 		}
 		for (int l19 = 0; (l19 < 3); l19 = (l19 + 1)) {
-			fRec25[l19] = 0.0;
+			fRec31[l19] = 0.0;
 			
 		}
-		for (int l20 = 0; (l20 < 2); l20 = (l20 + 1)) {
-			fRec22[l20] = 0.0;
+		for (int l20 = 0; (l20 < 3); l20 = (l20 + 1)) {
+			fRec32[l20] = 0.0;
 			
 		}
-		for (int l21 = 0; (l21 < 2); l21 = (l21 + 1)) {
-			fRec20[l21] = 0.0;
+		for (int l21 = 0; (l21 < 3); l21 = (l21 + 1)) {
+			fRec33[l21] = 0.0;
 			
 		}
 		for (int l22 = 0; (l22 < 3); l22 = (l22 + 1)) {
-			fRec32[l22] = 0.0;
+			fRec34[l22] = 0.0;
 			
 		}
 		for (int l23 = 0; (l23 < 3); l23 = (l23 + 1)) {
-			fRec33[l23] = 0.0;
+			fRec35[l23] = 0.0;
 			
 		}
 		for (int l24 = 0; (l24 < 3); l24 = (l24 + 1)) {
-			fRec34[l24] = 0.0;
+			fRec36[l24] = 0.0;
 			
 		}
-		for (int l25 = 0; (l25 < 3); l25 = (l25 + 1)) {
-			fRec35[l25] = 0.0;
+		for (int l25 = 0; (l25 < 2); l25 = (l25 + 1)) {
+			fRec29[l25] = 0.0;
 			
 		}
-		for (int l26 = 0; (l26 < 3); l26 = (l26 + 1)) {
-			fRec36[l26] = 0.0;
+		for (int l26 = 0; (l26 < 2); l26 = (l26 + 1)) {
+			fRec27[l26] = 0.0;
 			
 		}
 		for (int l27 = 0; (l27 < 2); l27 = (l27 + 1)) {
-			fRec31[l27] = 0.0;
+			fRec26[l27] = 0.0;
 			
 		}
 		for (int l28 = 0; (l28 < 2); l28 = (l28 + 1)) {
-			fRec29[l28] = 0.0;
+			fRec24[l28] = 0.0;
 			
 		}
 		for (int l29 = 0; (l29 < 2); l29 = (l29 + 1)) {
-			fRec28[l29] = 0.0;
+			fRec23[l29] = 0.0;
 			
 		}
 		for (int l30 = 0; (l30 < 2); l30 = (l30 + 1)) {
-			fRec26[l30] = 0.0;
+			fRec21[l30] = 0.0;
 			
 		}
 		IOTA = 0;
@@ -3464,51 +8328,51 @@ class mydsp : public dsp {
 			
 		}
 		for (int l253 = 0; (l253 < 2); l253 = (l253 + 1)) {
-			fRec351[l253] = 0.0;
+			fRec345[l253] = 0.0;
 			
 		}
 		for (int l254 = 0; (l254 < 2); l254 = (l254 + 1)) {
-			fRec349[l254] = 0.0;
+			fRec343[l254] = 0.0;
 			
 		}
 		for (int l255 = 0; (l255 < 2); l255 = (l255 + 1)) {
-			fRec348[l255] = 0.0;
+			fRec351[l255] = 0.0;
 			
 		}
 		for (int l256 = 0; (l256 < 2); l256 = (l256 + 1)) {
-			fRec346[l256] = 0.0;
+			fRec349[l256] = 0.0;
 			
 		}
 		for (int l257 = 0; (l257 < 2); l257 = (l257 + 1)) {
-			fRec345[l257] = 0.0;
+			fRec348[l257] = 0.0;
 			
 		}
 		for (int l258 = 0; (l258 < 2); l258 = (l258 + 1)) {
-			fRec343[l258] = 0.0;
+			fRec346[l258] = 0.0;
 			
 		}
 		for (int l259 = 0; (l259 < 2); l259 = (l259 + 1)) {
-			fRec354[l259] = 0.0;
+			fRec360[l259] = 0.0;
 			
 		}
 		for (int l260 = 0; (l260 < 2); l260 = (l260 + 1)) {
-			fRec352[l260] = 0.0;
+			fRec358[l260] = 0.0;
 			
 		}
 		for (int l261 = 0; (l261 < 2); l261 = (l261 + 1)) {
-			fRec360[l261] = 0.0;
+			fRec357[l261] = 0.0;
 			
 		}
 		for (int l262 = 0; (l262 < 2); l262 = (l262 + 1)) {
-			fRec358[l262] = 0.0;
+			fRec355[l262] = 0.0;
 			
 		}
 		for (int l263 = 0; (l263 < 2); l263 = (l263 + 1)) {
-			fRec357[l263] = 0.0;
+			fRec354[l263] = 0.0;
 			
 		}
 		for (int l264 = 0; (l264 < 2); l264 = (l264 + 1)) {
-			fRec355[l264] = 0.0;
+			fRec352[l264] = 0.0;
 			
 		}
 		for (int l265 = 0; (l265 < 512); l265 = (l265 + 1)) {
@@ -3516,51 +8380,51 @@ class mydsp : public dsp {
 			
 		}
 		for (int l266 = 0; (l266 < 2); l266 = (l266 + 1)) {
-			fRec369[l266] = 0.0;
+			fRec363[l266] = 0.0;
 			
 		}
 		for (int l267 = 0; (l267 < 2); l267 = (l267 + 1)) {
-			fRec367[l267] = 0.0;
+			fRec361[l267] = 0.0;
 			
 		}
 		for (int l268 = 0; (l268 < 2); l268 = (l268 + 1)) {
-			fRec366[l268] = 0.0;
+			fRec369[l268] = 0.0;
 			
 		}
 		for (int l269 = 0; (l269 < 2); l269 = (l269 + 1)) {
-			fRec364[l269] = 0.0;
+			fRec367[l269] = 0.0;
 			
 		}
 		for (int l270 = 0; (l270 < 2); l270 = (l270 + 1)) {
-			fRec363[l270] = 0.0;
+			fRec366[l270] = 0.0;
 			
 		}
 		for (int l271 = 0; (l271 < 2); l271 = (l271 + 1)) {
-			fRec361[l271] = 0.0;
+			fRec364[l271] = 0.0;
 			
 		}
 		for (int l272 = 0; (l272 < 2); l272 = (l272 + 1)) {
-			fRec372[l272] = 0.0;
+			fRec378[l272] = 0.0;
 			
 		}
 		for (int l273 = 0; (l273 < 2); l273 = (l273 + 1)) {
-			fRec370[l273] = 0.0;
+			fRec376[l273] = 0.0;
 			
 		}
 		for (int l274 = 0; (l274 < 2); l274 = (l274 + 1)) {
-			fRec378[l274] = 0.0;
+			fRec375[l274] = 0.0;
 			
 		}
 		for (int l275 = 0; (l275 < 2); l275 = (l275 + 1)) {
-			fRec376[l275] = 0.0;
+			fRec373[l275] = 0.0;
 			
 		}
 		for (int l276 = 0; (l276 < 2); l276 = (l276 + 1)) {
-			fRec375[l276] = 0.0;
+			fRec372[l276] = 0.0;
 			
 		}
 		for (int l277 = 0; (l277 < 2); l277 = (l277 + 1)) {
-			fRec373[l277] = 0.0;
+			fRec370[l277] = 0.0;
 			
 		}
 		for (int l278 = 0; (l278 < 512); l278 = (l278 + 1)) {
@@ -4034,12 +8898,12 @@ class mydsp : public dsp {
 		
 	}
 	
-	virtual void init(int samplingFreq) {
-		classInit(samplingFreq);
-		instanceInit(samplingFreq);
+	virtual void init(int sample_rate) {
+		classInit(sample_rate);
+		instanceInit(sample_rate);
 	}
-	virtual void instanceInit(int samplingFreq) {
-		instanceConstants(samplingFreq);
+	virtual void instanceInit(int sample_rate) {
+		instanceConstants(sample_rate);
 		instanceResetUserInterface();
 		instanceClear();
 	}
@@ -4047,8 +8911,9 @@ class mydsp : public dsp {
 	virtual mydsp* clone() {
 		return new mydsp();
 	}
+	
 	virtual int getSampleRate() {
-		return fSamplingFreq;
+		return fSampleRate;
 		
 	}
 	
@@ -4127,872 +8992,727 @@ class mydsp : public dsp {
 			double fTemp5 = (fRec3[0] * fTemp4);
 			double fTemp6 = (0.0 - (2.0 / fTemp4));
 			double fTemp7 = (((fTemp1 * (fRec2[2] + (fRec2[0] + (2.0 * fRec2[1])))) / fTemp5) + (2.2458618069999998 * (fRec3[0] * (0.0 - ((fRec2[1] * fTemp6) + ((fRec2[0] + fRec2[2]) / fTemp4))))));
-			double fTemp8 = (fConst4 * fRec4[1]);
-			fRec13[0] = (double(input9[i]) - (((fTemp2 * fRec13[2]) + (2.0 * (fTemp3 * fRec13[1]))) / fTemp4));
-			double fTemp9 = (((fTemp1 * (fRec13[2] + (fRec13[0] + (2.0 * fRec13[1])))) / fTemp5) + (0.68441961419999997 * (fRec3[0] * (0.0 - ((fTemp6 * fRec13[1]) + ((fRec13[0] + fRec13[2]) / fTemp4))))));
-			fRec14[0] = (double(input10[i]) - (((fTemp2 * fRec14[2]) + (2.0 * (fTemp3 * fRec14[1]))) / fTemp4));
-			double fTemp10 = (((fTemp1 * (fRec14[2] + (fRec14[0] + (2.0 * fRec14[1])))) / fTemp5) + (0.68441961419999997 * (fRec3[0] * (0.0 - ((fTemp6 * fRec14[1]) + ((fRec14[0] + fRec14[2]) / fTemp4))))));
-			fRec15[0] = (double(input11[i]) - (((fTemp2 * fRec15[2]) + (2.0 * (fTemp3 * fRec15[1]))) / fTemp4));
-			double fTemp11 = (((fTemp1 * (fRec15[2] + (fRec15[0] + (2.0 * fRec15[1])))) / fTemp5) + (0.68441961419999997 * (fRec3[0] * (0.0 - ((fTemp6 * fRec15[1]) + ((fRec15[0] + fRec15[2]) / fTemp4))))));
-			fRec16[0] = (double(input12[i]) - (((fTemp2 * fRec16[2]) + (2.0 * (fTemp3 * fRec16[1]))) / fTemp4));
-			double fTemp12 = (((fTemp1 * (fRec16[2] + (fRec16[0] + (2.0 * fRec16[1])))) / fTemp5) + (0.68441961419999997 * (fRec3[0] * (0.0 - ((fTemp6 * fRec16[1]) + ((fRec16[0] + fRec16[2]) / fTemp4))))));
-			fRec17[0] = (double(input13[i]) - (((fTemp2 * fRec17[2]) + (2.0 * (fTemp3 * fRec17[1]))) / fTemp4));
-			double fTemp13 = (((fTemp1 * (fRec17[2] + (fRec17[0] + (2.0 * fRec17[1])))) / fTemp5) + (0.68441961419999997 * (fRec3[0] * (0.0 - ((fTemp6 * fRec17[1]) + ((fRec17[0] + fRec17[2]) / fTemp4))))));
-			fRec18[0] = (double(input14[i]) - (((fTemp2 * fRec18[2]) + (2.0 * (fTemp3 * fRec18[1]))) / fTemp4));
-			double fTemp14 = (((fTemp1 * (fRec18[2] + (fRec18[0] + (2.0 * fRec18[1])))) / fTemp5) + (0.68441961419999997 * (fRec3[0] * (0.0 - ((fTemp6 * fRec18[1]) + ((fRec18[0] + fRec18[2]) / fTemp4))))));
-			fRec19[0] = (double(input15[i]) - (((fTemp2 * fRec19[2]) + (2.0 * (fTemp3 * fRec19[1]))) / fTemp4));
-			double fTemp15 = (((fTemp1 * (fRec19[2] + (fRec19[0] + (2.0 * fRec19[1])))) / fTemp5) + (0.68441961419999997 * (fRec3[0] * (0.0 - ((fTemp6 * fRec19[1]) + ((fRec19[0] + fRec19[2]) / fTemp4))))));
-			double fTemp16 = (fConst6 * ((1.3925654629999999 * fTemp9) - ((((((0.076270190700000004 * fTemp10) + (0.36349651760000001 * fTemp11)) + (0.062615854499999998 * fTemp12)) + (0.49698454949999998 * fTemp13)) + (0.036951039900000003 * fTemp14)) + (0.34401895729999998 * fTemp15))));
-			double fTemp17 = (fConst8 * fRec7[1]);
-			double fTemp18 = (fConst9 * fRec10[1]);
-			fRec12[0] = (fTemp16 + (fTemp17 + (fRec12[1] + fTemp18)));
-			fRec10[0] = fRec12[0];
-			double fRec11 = ((fTemp18 + fTemp17) + fTemp16);
-			fRec9[0] = (fRec10[0] + fRec9[1]);
+			fRec10[0] = (double(input4[i]) - (((fTemp2 * fRec10[2]) + (2.0 * (fTemp3 * fRec10[1]))) / fTemp4));
+			double fTemp8 = (((fTemp1 * (fRec10[2] + (fRec10[0] + (2.0 * fRec10[1])))) / fTemp5) + (1.375216692 * (fRec3[0] * (0.0 - ((fTemp6 * fRec10[1]) + ((fRec10[0] + fRec10[2]) / fTemp4))))));
+			fRec11[0] = (double(input8[i]) - (((fTemp2 * fRec11[2]) + (2.0 * (fTemp3 * fRec11[1]))) / fTemp4));
+			double fTemp9 = (((fTemp1 * (fRec11[2] + (fRec11[0] + (2.0 * fRec11[1])))) / fTemp5) + (1.375216692 * (fRec3[0] * (0.0 - ((fTemp6 * fRec11[1]) + ((fRec11[0] + fRec11[2]) / fTemp4))))));
+			fRec12[0] = (double(input5[i]) - (((fTemp2 * fRec12[2]) + (2.0 * (fTemp3 * fRec12[1]))) / fTemp4));
+			double fTemp10 = (((fTemp1 * (fRec12[2] + (fRec12[0] + (2.0 * fRec12[1])))) / fTemp5) + (1.375216692 * (fRec3[0] * (0.0 - ((fTemp6 * fRec12[1]) + ((fRec12[0] + fRec12[2]) / fTemp4))))));
+			fRec13[0] = (double(input6[i]) - (((fTemp2 * fRec13[2]) + (2.0 * (fTemp3 * fRec13[1]))) / fTemp4));
+			double fTemp11 = (((fTemp1 * (fRec13[2] + (fRec13[0] + (2.0 * fRec13[1])))) / fTemp5) + (1.375216692 * (fRec3[0] * (0.0 - ((fTemp6 * fRec13[1]) + ((fRec13[0] + fRec13[2]) / fTemp4))))));
+			fRec14[0] = (double(input7[i]) - (((fTemp2 * fRec14[2]) + (2.0 * (fTemp3 * fRec14[1]))) / fTemp4));
+			double fTemp12 = (((fTemp1 * (fRec14[2] + (fRec14[0] + (2.0 * fRec14[1])))) / fTemp5) + (1.375216692 * (fRec3[0] * (0.0 - ((fTemp6 * fRec14[1]) + ((fRec14[0] + fRec14[2]) / fTemp4))))));
+			double fTemp13 = (fConst2 * ((((1.4868323299999999 * fTemp8) + (0.56302839959999995 * fTemp9)) - (((0.13239045120000001 * fTemp10) + (0.33594115879999997 * fTemp11)) + (0.20054954110000001 * fTemp12))) + (fConst3 * (0.0 - ((fConst5 * fRec7[1]) + (fConst4 * fRec4[1]))))));
+			fRec9[0] = (fRec9[1] + fTemp13);
 			fRec7[0] = fRec9[0];
-			double fRec8 = fRec11;
-			fRec6[0] = (fTemp8 + (fRec8 + fRec6[1]));
+			double fRec8 = fTemp13;
+			fRec6[0] = (fRec7[0] + fRec6[1]);
 			fRec4[0] = fRec6[0];
-			double fRec5 = (fRec8 + fTemp8);
-			fRec23[0] = (double(input1[i]) - (((fTemp2 * fRec23[2]) + (2.0 * (fTemp3 * fRec23[1]))) / fTemp4));
-			double fTemp19 = (((fTemp1 * (fRec23[2] + (fRec23[0] + (2.0 * fRec23[1])))) / fTemp5) + (1.9339931530000001 * (fRec3[0] * (0.0 - ((fTemp6 * fRec23[1]) + ((fRec23[0] + fRec23[2]) / fTemp4))))));
-			fRec24[0] = (double(input3[i]) - (((fTemp2 * fRec24[2]) + (2.0 * (fTemp3 * fRec24[1]))) / fTemp4));
-			double fTemp20 = (((fTemp1 * (fRec24[2] + (fRec24[0] + (2.0 * fRec24[1])))) / fTemp5) + (1.9339931530000001 * (fRec3[0] * (0.0 - ((fTemp6 * fRec24[1]) + ((fRec24[0] + fRec24[2]) / fTemp4))))));
-			fRec25[0] = (double(input2[i]) - (((fTemp2 * fRec25[2]) + (2.0 * (fTemp3 * fRec25[1]))) / fTemp4));
-			double fTemp21 = (((fTemp1 * (fRec25[2] + (fRec25[0] + (2.0 * fRec25[1])))) / fTemp5) + (1.9339931530000001 * (fRec3[0] * (0.0 - ((fTemp6 * fRec25[1]) + ((fRec25[0] + fRec25[2]) / fTemp4))))));
-			double fTemp22 = (fConst11 * (((0.84152105629999996 * fTemp19) + (1.228074221 * fTemp20)) - (0.56694025550000005 * fTemp21)));
-			double fTemp23 = (fConst12 * fRec20[1]);
-			fRec22[0] = (fTemp22 + (fRec22[1] + fTemp23));
-			fRec20[0] = fRec22[0];
-			double fRec21 = (fTemp23 + fTemp22);
-			fRec32[0] = (double(input4[i]) - (((fTemp2 * fRec32[2]) + (2.0 * (fTemp3 * fRec32[1]))) / fTemp4));
-			double fTemp24 = (((fTemp1 * (fRec32[2] + (fRec32[0] + (2.0 * fRec32[1])))) / fTemp5) + (1.375216692 * (fRec3[0] * (0.0 - ((fTemp6 * fRec32[1]) + ((fRec32[0] + fRec32[2]) / fTemp4))))));
-			fRec33[0] = (double(input8[i]) - (((fTemp2 * fRec33[2]) + (2.0 * (fTemp3 * fRec33[1]))) / fTemp4));
-			double fTemp25 = (((fTemp1 * (fRec33[2] + (fRec33[0] + (2.0 * fRec33[1])))) / fTemp5) + (1.375216692 * (fRec3[0] * (0.0 - ((fTemp6 * fRec33[1]) + ((fRec33[0] + fRec33[2]) / fTemp4))))));
-			fRec34[0] = (double(input5[i]) - (((fTemp2 * fRec34[2]) + (2.0 * (fTemp3 * fRec34[1]))) / fTemp4));
-			double fTemp26 = (((fTemp1 * (fRec34[2] + (fRec34[0] + (2.0 * fRec34[1])))) / fTemp5) + (1.375216692 * (fRec3[0] * (0.0 - ((fTemp6 * fRec34[1]) + ((fRec34[0] + fRec34[2]) / fTemp4))))));
-			fRec35[0] = (double(input6[i]) - (((fTemp2 * fRec35[2]) + (2.0 * (fTemp3 * fRec35[1]))) / fTemp4));
-			double fTemp27 = (((fTemp1 * (fRec35[2] + (fRec35[0] + (2.0 * fRec35[1])))) / fTemp5) + (1.375216692 * (fRec3[0] * (0.0 - ((fTemp6 * fRec35[1]) + ((fRec35[0] + fRec35[2]) / fTemp4))))));
-			fRec36[0] = (double(input7[i]) - (((fTemp2 * fRec36[2]) + (2.0 * (fTemp3 * fRec36[1]))) / fTemp4));
-			double fTemp28 = (((fTemp1 * (fRec36[2] + (fRec36[0] + (2.0 * fRec36[1])))) / fTemp5) + (1.375216692 * (fRec3[0] * (0.0 - ((fTemp6 * fRec36[1]) + ((fRec36[0] + fRec36[2]) / fTemp4))))));
-			double fTemp29 = (fConst14 * (((1.4868323299999999 * fTemp24) + (0.56302839959999995 * fTemp25)) - (((0.13239045120000001 * fTemp26) + (0.33594115879999997 * fTemp27)) + (0.20054954110000001 * fTemp28))));
-			double fTemp30 = (fConst15 * fRec26[1]);
-			double fTemp31 = (fConst16 * fRec29[1]);
-			fRec31[0] = (fTemp29 + (fTemp30 + (fRec31[1] + fTemp31)));
-			fRec29[0] = fRec31[0];
-			double fRec30 = ((fTemp31 + fTemp30) + fTemp29);
-			fRec28[0] = (fRec29[0] + fRec28[1]);
-			fRec26[0] = fRec28[0];
-			double fRec27 = fRec30;
-			fVec0[(IOTA & 1023)] = ((1.0665085750000001 * fTemp7) + (fRec5 + (fRec21 + fRec27)));
-			output0[i] = FAUSTFLOAT((0.8267575322812053 * (fRec0[0] * fVec0[((IOTA - iConst17) & 1023)])));
-			double fTemp32 = (fConst4 * fRec37[1]);
-			double fTemp33 = (fConst6 * (((0.92281460630000001 * fTemp9) + (1.1008850969999999 * fTemp15)) - (((((0.038206074299999997 * fTemp10) + (0.15285063069999999 * fTemp11)) + (0.0614555647 * fTemp12)) + (0.55855250729999995 * fTemp13)) + (0.087495470199999995 * fTemp14))));
-			double fTemp34 = (fConst8 * fRec40[1]);
-			double fTemp35 = (fConst9 * fRec43[1]);
-			fRec45[0] = (fTemp33 + (fTemp34 + (fRec45[1] + fTemp35)));
+			double fRec5 = fRec8;
+			fRec18[0] = (double(input1[i]) - (((fTemp2 * fRec18[2]) + (2.0 * (fTemp3 * fRec18[1]))) / fTemp4));
+			double fTemp14 = (((fTemp1 * (fRec18[2] + (fRec18[0] + (2.0 * fRec18[1])))) / fTemp5) + (1.9339931530000001 * (fRec3[0] * (0.0 - ((fTemp6 * fRec18[1]) + ((fRec18[0] + fRec18[2]) / fTemp4))))));
+			fRec19[0] = (double(input3[i]) - (((fTemp2 * fRec19[2]) + (2.0 * (fTemp3 * fRec19[1]))) / fTemp4));
+			double fTemp15 = (((fTemp1 * (fRec19[2] + (fRec19[0] + (2.0 * fRec19[1])))) / fTemp5) + (1.9339931530000001 * (fRec3[0] * (0.0 - ((fTemp6 * fRec19[1]) + ((fRec19[0] + fRec19[2]) / fTemp4))))));
+			fRec20[0] = (double(input2[i]) - (((fTemp2 * fRec20[2]) + (2.0 * (fTemp3 * fRec20[1]))) / fTemp4));
+			double fTemp16 = (((fTemp1 * (fRec20[2] + (fRec20[0] + (2.0 * fRec20[1])))) / fTemp5) + (1.9339931530000001 * (fRec3[0] * (0.0 - ((fTemp6 * fRec20[1]) + ((fRec20[0] + fRec20[2]) / fTemp4))))));
+			double fTemp17 = (fConst6 * ((((0.84152105629999996 * fTemp14) + (1.228074221 * fTemp15)) - (0.56694025550000005 * fTemp16)) - (fConst7 * fRec15[1])));
+			fRec17[0] = (fRec17[1] + fTemp17);
+			fRec15[0] = fRec17[0];
+			double fRec16 = fTemp17;
+			fRec30[0] = (double(input9[i]) - (((fTemp2 * fRec30[2]) + (2.0 * (fTemp3 * fRec30[1]))) / fTemp4));
+			double fTemp18 = (((fTemp1 * (fRec30[2] + (fRec30[0] + (2.0 * fRec30[1])))) / fTemp5) + (0.68441961419999997 * (fRec3[0] * (0.0 - ((fTemp6 * fRec30[1]) + ((fRec30[0] + fRec30[2]) / fTemp4))))));
+			fRec31[0] = (double(input10[i]) - (((fTemp2 * fRec31[2]) + (2.0 * (fTemp3 * fRec31[1]))) / fTemp4));
+			double fTemp19 = (((fTemp1 * (fRec31[2] + (fRec31[0] + (2.0 * fRec31[1])))) / fTemp5) + (0.68441961419999997 * (fRec3[0] * (0.0 - ((fTemp6 * fRec31[1]) + ((fRec31[0] + fRec31[2]) / fTemp4))))));
+			fRec32[0] = (double(input11[i]) - (((fTemp2 * fRec32[2]) + (2.0 * (fTemp3 * fRec32[1]))) / fTemp4));
+			double fTemp20 = (((fTemp1 * (fRec32[2] + (fRec32[0] + (2.0 * fRec32[1])))) / fTemp5) + (0.68441961419999997 * (fRec3[0] * (0.0 - ((fTemp6 * fRec32[1]) + ((fRec32[0] + fRec32[2]) / fTemp4))))));
+			fRec33[0] = (double(input12[i]) - (((fTemp2 * fRec33[2]) + (2.0 * (fTemp3 * fRec33[1]))) / fTemp4));
+			double fTemp21 = (((fTemp1 * (fRec33[2] + (fRec33[0] + (2.0 * fRec33[1])))) / fTemp5) + (0.68441961419999997 * (fRec3[0] * (0.0 - ((fTemp6 * fRec33[1]) + ((fRec33[0] + fRec33[2]) / fTemp4))))));
+			fRec34[0] = (double(input13[i]) - (((fTemp2 * fRec34[2]) + (2.0 * (fTemp3 * fRec34[1]))) / fTemp4));
+			double fTemp22 = (((fTemp1 * (fRec34[2] + (fRec34[0] + (2.0 * fRec34[1])))) / fTemp5) + (0.68441961419999997 * (fRec3[0] * (0.0 - ((fTemp6 * fRec34[1]) + ((fRec34[0] + fRec34[2]) / fTemp4))))));
+			fRec35[0] = (double(input14[i]) - (((fTemp2 * fRec35[2]) + (2.0 * (fTemp3 * fRec35[1]))) / fTemp4));
+			double fTemp23 = (((fTemp1 * (fRec35[2] + (fRec35[0] + (2.0 * fRec35[1])))) / fTemp5) + (0.68441961419999997 * (fRec3[0] * (0.0 - ((fTemp6 * fRec35[1]) + ((fRec35[0] + fRec35[2]) / fTemp4))))));
+			fRec36[0] = (double(input15[i]) - (((fTemp2 * fRec36[2]) + (2.0 * (fTemp3 * fRec36[1]))) / fTemp4));
+			double fTemp24 = (((fTemp1 * (fRec36[2] + (fRec36[0] + (2.0 * fRec36[1])))) / fTemp5) + (0.68441961419999997 * (fRec3[0] * (0.0 - ((fTemp6 * fRec36[1]) + ((fRec36[0] + fRec36[2]) / fTemp4))))));
+			double fTemp25 = (fConst8 * ((fConst3 * (0.0 - ((fConst10 * fRec27[1]) + (fConst9 * fRec24[1])))) + (fConst12 * ((1.3925654629999999 * fTemp18) - ((((((0.076270190700000004 * fTemp19) + (0.36349651760000001 * fTemp20)) + (0.062615854499999998 * fTemp21)) + (0.49698454949999998 * fTemp22)) + (0.036951039900000003 * fTemp23)) + (0.34401895729999998 * fTemp24))))));
+			fRec29[0] = (fRec29[1] + fTemp25);
+			fRec27[0] = fRec29[0];
+			double fRec28 = fTemp25;
+			fRec26[0] = (fRec27[0] + fRec26[1]);
+			fRec24[0] = fRec26[0];
+			double fRec25 = fRec28;
+			double fTemp26 = (fConst13 * fRec21[1]);
+			fRec23[0] = ((fRec25 + fRec23[1]) - fTemp26);
+			fRec21[0] = fRec23[0];
+			double fRec22 = (fRec25 - fTemp26);
+			fVec0[(IOTA & 1023)] = ((1.0665085750000001 * fTemp7) + (fRec5 + (fRec16 + fRec22)));
+			output0[i] = FAUSTFLOAT((0.8267575322812053 * (fRec0[0] * fVec0[((IOTA - iConst14) & 1023)])));
+			double fTemp27 = (fConst8 * ((fConst3 * (0.0 - ((fConst10 * fRec43[1]) + (fConst9 * fRec40[1])))) + (fConst12 * (((0.92281460630000001 * fTemp18) + (1.1008850969999999 * fTemp24)) - (((((0.038206074299999997 * fTemp19) + (0.15285063069999999 * fTemp20)) + (0.0614555647 * fTemp21)) + (0.55855250729999995 * fTemp22)) + (0.087495470199999995 * fTemp23))))));
+			fRec45[0] = (fRec45[1] + fTemp27);
 			fRec43[0] = fRec45[0];
-			double fRec44 = ((fTemp35 + fTemp34) + fTemp33);
+			double fRec44 = fTemp27;
 			fRec42[0] = (fRec43[0] + fRec42[1]);
 			fRec40[0] = fRec42[0];
 			double fRec41 = fRec44;
-			fRec39[0] = (fTemp32 + (fRec41 + fRec39[1]));
+			double fTemp28 = (fConst13 * fRec37[1]);
+			fRec39[0] = ((fRec41 + fRec39[1]) - fTemp28);
 			fRec37[0] = fRec39[0];
-			double fRec38 = (fRec41 + fTemp32);
-			double fTemp36 = (fConst11 * (((0.33362882919999998 * fTemp19) + (1.482728388 * fTemp20)) - (0.56669289099999998 * fTemp21)));
-			double fTemp37 = (fConst12 * fRec46[1]);
-			fRec48[0] = (fTemp36 + (fRec48[1] + fTemp37));
+			double fRec38 = (fRec41 - fTemp28);
+			double fTemp29 = (fConst6 * ((((0.33362882919999998 * fTemp14) + (1.482728388 * fTemp15)) - (0.56669289099999998 * fTemp16)) - (fConst7 * fRec46[1])));
+			fRec48[0] = (fRec48[1] + fTemp29);
 			fRec46[0] = fRec48[0];
-			double fRec47 = (fTemp37 + fTemp36);
-			double fTemp38 = (fConst14 * (((0.7198417963 * fTemp24) + (1.434814721 * fTemp25)) - (((0.047957165099999997 * fTemp26) + (0.33691092969999997 * fTemp27)) + (0.27088000420000002 * fTemp28))));
-			double fTemp39 = (fConst15 * fRec49[1]);
-			double fTemp40 = (fConst16 * fRec52[1]);
-			fRec54[0] = (fTemp38 + (fTemp39 + (fRec54[1] + fTemp40)));
+			double fRec47 = fTemp29;
+			double fTemp30 = (fConst2 * ((((0.7198417963 * fTemp8) + (1.434814721 * fTemp9)) - (((0.047957165099999997 * fTemp10) + (0.33691092969999997 * fTemp11)) + (0.27088000420000002 * fTemp12))) + (fConst3 * (0.0 - ((fConst5 * fRec52[1]) + (fConst4 * fRec49[1]))))));
+			fRec54[0] = (fRec54[1] + fTemp30);
 			fRec52[0] = fRec54[0];
-			double fRec53 = ((fTemp40 + fTemp39) + fTemp38);
+			double fRec53 = fTemp30;
 			fRec51[0] = (fRec52[0] + fRec51[1]);
 			fRec49[0] = fRec51[0];
 			double fRec50 = fRec53;
 			fVec1[(IOTA & 1023)] = ((1.0657059419999999 * fTemp7) + (fRec38 + (fRec47 + fRec50)));
-			output1[i] = FAUSTFLOAT((0.8267575322812053 * (fRec0[0] * fVec1[((IOTA - iConst17) & 1023)])));
-			double fTemp41 = (fConst4 * fRec55[1]);
-			double fTemp42 = (fConst6 * ((((0.0278889368 * fTemp10) + (0.1227732133 * fTemp11)) + (1.2231313109999999 * fTemp15)) - ((((0.75194049139999997 * fTemp9) + (0.061871997599999999 * fTemp12)) + (0.56509627669999996 * fTemp13)) + (0.092671218400000005 * fTemp14))));
-			double fTemp43 = (fConst8 * fRec58[1]);
-			double fTemp44 = (fConst9 * fRec61[1]);
-			fRec63[0] = (fTemp42 + (fTemp43 + (fRec63[1] + fTemp44)));
+			output1[i] = FAUSTFLOAT((0.8267575322812053 * (fRec0[0] * fVec1[((IOTA - iConst14) & 1023)])));
+			double fTemp31 = (fConst8 * ((fConst3 * (0.0 - ((fConst10 * fRec61[1]) + (fConst9 * fRec58[1])))) + (fConst12 * ((((0.0278889368 * fTemp19) + (0.1227732133 * fTemp20)) + (1.2231313109999999 * fTemp24)) - ((((0.75194049139999997 * fTemp18) + (0.061871997599999999 * fTemp21)) + (0.56509627669999996 * fTemp22)) + (0.092671218400000005 * fTemp23))))));
+			fRec63[0] = (fRec63[1] + fTemp31);
 			fRec61[0] = fRec63[0];
-			double fRec62 = ((fTemp44 + fTemp43) + fTemp42);
+			double fRec62 = fTemp31;
 			fRec60[0] = (fRec61[0] + fRec60[1]);
 			fRec58[0] = fRec60[0];
 			double fRec59 = fRec62;
-			fRec57[0] = (fTemp41 + (fRec59 + fRec57[1]));
+			double fTemp32 = (fConst13 * fRec55[1]);
+			fRec57[0] = ((fRec59 + fRec57[1]) - fTemp32);
 			fRec55[0] = fRec57[0];
-			double fRec56 = (fRec59 + fTemp41);
-			double fTemp45 = (fConst11 * ((1.50834983 * fTemp20) - ((0.26978006319999998 * fTemp19) + (0.56821876029999996 * fTemp21))));
-			double fTemp46 = (fConst12 * fRec64[1]);
-			fRec66[0] = (fTemp45 + (fRec66[1] + fTemp46));
+			double fRec56 = (fRec59 - fTemp32);
+			double fTemp33 = (fConst6 * (((1.50834983 * fTemp15) - ((0.26978006319999998 * fTemp14) + (0.56821876029999996 * fTemp16))) - (fConst7 * fRec64[1])));
+			fRec66[0] = (fRec66[1] + fTemp33);
 			fRec64[0] = fRec66[0];
-			double fRec65 = (fTemp46 + fTemp45);
-			double fTemp47 = (fConst14 * (((0.041937807299999998 * fTemp26) + (1.505555771 * fTemp25)) - (((0.56970140550000004 * fTemp24) + (0.33565037559999999 * fTemp27)) + (0.2784267507 * fTemp28))));
-			double fTemp48 = (fConst15 * fRec67[1]);
-			double fTemp49 = (fConst16 * fRec70[1]);
-			fRec72[0] = (fTemp47 + (fTemp48 + (fRec72[1] + fTemp49)));
+			double fRec65 = fTemp33;
+			double fTemp34 = (fConst2 * ((((0.041937807299999998 * fTemp10) + (1.505555771 * fTemp9)) - (((0.56970140550000004 * fTemp8) + (0.33565037559999999 * fTemp11)) + (0.2784267507 * fTemp12))) + (fConst3 * (0.0 - ((fConst5 * fRec70[1]) + (fConst4 * fRec67[1]))))));
+			fRec72[0] = (fRec72[1] + fTemp34);
 			fRec70[0] = fRec72[0];
-			double fRec71 = ((fTemp49 + fTemp48) + fTemp47);
+			double fRec71 = fTemp34;
 			fRec69[0] = (fRec70[0] + fRec69[1]);
 			fRec67[0] = fRec69[0];
 			double fRec68 = fRec71;
 			fVec2[(IOTA & 1023)] = ((1.0665035 * fTemp7) + (fRec56 + (fRec65 + fRec68)));
-			output2[i] = FAUSTFLOAT((0.8267575322812053 * (fRec0[0] * fVec2[((IOTA - iConst17) & 1023)])));
-			double fTemp50 = (fConst4 * fRec73[1]);
-			double fTemp51 = (fConst6 * (((0.078813672099999996 * fTemp10) + (0.3437761533 * fTemp11)) - ((0.16759274460000001 * fTemp15) + ((((1.4325079220000001 * fTemp9) + (0.063259728799999998 * fTemp12)) + (0.51313294730000003 * fTemp13)) + (0.046700683 * fTemp14)))));
-			double fTemp52 = (fConst8 * fRec76[1]);
-			double fTemp53 = (fConst9 * fRec79[1]);
-			fRec81[0] = (fTemp51 + (fTemp52 + (fRec81[1] + fTemp53)));
+			output2[i] = FAUSTFLOAT((0.8267575322812053 * (fRec0[0] * fVec2[((IOTA - iConst14) & 1023)])));
+			double fTemp35 = (fConst8 * ((fConst3 * (0.0 - ((fConst10 * fRec79[1]) + (fConst9 * fRec76[1])))) + (fConst12 * (((0.078813672099999996 * fTemp19) + (0.3437761533 * fTemp20)) - (((((1.4325079220000001 * fTemp18) + (0.063259728799999998 * fTemp21)) + (0.51313294730000003 * fTemp22)) + (0.046700683 * fTemp23)) + (0.16759274460000001 * fTemp24))))));
+			fRec81[0] = (fRec81[1] + fTemp35);
 			fRec79[0] = fRec81[0];
-			double fRec80 = ((fTemp53 + fTemp52) + fTemp51);
+			double fRec80 = fTemp35;
 			fRec78[0] = (fRec79[0] + fRec78[1]);
 			fRec76[0] = fRec78[0];
 			double fRec77 = fRec80;
-			fRec75[0] = (fTemp50 + (fRec77 + fRec75[1]));
+			double fTemp36 = (fConst13 * fRec73[1]);
+			fRec75[0] = ((fRec77 + fRec75[1]) - fTemp36);
 			fRec73[0] = fRec75[0];
-			double fRec74 = (fRec77 + fTemp50);
-			double fTemp54 = (fConst11 * ((1.2830417300000001 * fTemp20) - ((0.78835692359999998 * fTemp19) + (0.5727268391 * fTemp21))));
-			double fTemp55 = (fConst12 * fRec82[1]);
-			fRec84[0] = (fTemp54 + (fRec84[1] + fTemp55));
+			double fRec74 = (fRec77 - fTemp36);
+			double fTemp37 = (fConst6 * (((1.2830417300000001 * fTemp15) - ((0.78835692359999998 * fTemp14) + (0.5727268391 * fTemp16))) - (fConst7 * fRec82[1])));
+			fRec84[0] = (fRec84[1] + fTemp37);
 			fRec82[0] = fRec84[0];
-			double fRec83 = (fTemp55 + fTemp54);
-			double fTemp56 = (fConst14 * (((0.1218270894 * fTemp26) + (0.70090004809999995 * fTemp25)) - (((1.448817893 * fTemp24) + (0.33415562250000003 * fTemp27)) + (0.2155405135 * fTemp28))));
-			double fTemp57 = (fConst15 * fRec85[1]);
-			double fTemp58 = (fConst16 * fRec88[1]);
-			fRec90[0] = (fTemp56 + (fTemp57 + (fRec90[1] + fTemp58)));
+			double fRec83 = fTemp37;
+			double fTemp38 = (fConst2 * ((((0.1218270894 * fTemp10) + (0.70090004809999995 * fTemp9)) - (((1.448817893 * fTemp8) + (0.33415562250000003 * fTemp11)) + (0.2155405135 * fTemp12))) + (fConst3 * (0.0 - ((fConst5 * fRec88[1]) + (fConst4 * fRec85[1]))))));
+			fRec90[0] = (fRec90[1] + fTemp38);
 			fRec88[0] = fRec90[0];
-			double fRec89 = ((fTemp58 + fTemp57) + fTemp56);
+			double fRec89 = fTemp38;
 			fRec87[0] = (fRec88[0] + fRec87[1]);
 			fRec85[0] = fRec87[0];
 			double fRec86 = fRec89;
 			fVec3[(IOTA & 1023)] = ((1.0713199250000001 * fTemp7) + (fRec74 + (fRec83 + fRec86)));
-			output3[i] = FAUSTFLOAT((0.8267575322812053 * (fRec0[0] * fVec3[((IOTA - iConst17) & 1023)])));
-			double fTemp59 = (fConst4 * fRec91[1]);
-			double fTemp60 = (fConst6 * ((((0.088482695299999997 * fTemp10) + (0.50206555529999997 * fTemp11)) + (0.031979214399999997 * fTemp14)) - ((((0.3191530373 * fTemp9) + (0.064766785499999993 * fTemp12)) + (0.36727417099999998 * fTemp13)) + (1.4083297699999999 * fTemp15))));
-			double fTemp61 = (fConst8 * fRec94[1]);
-			double fTemp62 = (fConst9 * fRec97[1]);
-			fRec99[0] = (fTemp60 + (fTemp61 + (fRec99[1] + fTemp62)));
+			output3[i] = FAUSTFLOAT((0.8267575322812053 * (fRec0[0] * fVec3[((IOTA - iConst14) & 1023)])));
+			double fTemp39 = (fConst8 * ((fConst3 * (0.0 - ((fConst10 * fRec97[1]) + (fConst9 * fRec94[1])))) + (fConst12 * ((((0.088482695299999997 * fTemp19) + (0.50206555529999997 * fTemp20)) + (0.031979214399999997 * fTemp23)) - ((((0.3191530373 * fTemp18) + (0.064766785499999993 * fTemp21)) + (0.36727417099999998 * fTemp22)) + (1.4083297699999999 * fTemp24))))));
+			fRec99[0] = (fRec99[1] + fTemp39);
 			fRec97[0] = fRec99[0];
-			double fRec98 = ((fTemp62 + fTemp61) + fTemp60);
+			double fRec98 = fTemp39;
 			fRec96[0] = (fRec97[0] + fRec96[1]);
 			fRec94[0] = fRec96[0];
 			double fRec95 = fRec98;
-			fRec93[0] = (fTemp59 + (fRec95 + fRec93[1]));
+			double fTemp40 = (fConst13 * fRec91[1]);
+			fRec93[0] = ((fRec95 + fRec93[1]) - fTemp40);
 			fRec91[0] = fRec93[0];
-			double fRec92 = (fRec95 + fTemp59);
-			double fTemp63 = (fConst11 * ((0.83079338940000003 * fTemp20) - ((1.2497382829999999 * fTemp19) + (0.57821260969999999 * fTemp21))));
-			double fTemp64 = (fConst12 * fRec100[1]);
-			fRec102[0] = (fTemp63 + (fRec102[1] + fTemp64));
+			double fRec92 = (fRec95 - fTemp40);
+			double fTemp41 = (fConst6 * (((0.83079338940000003 * fTemp15) - ((1.2497382829999999 * fTemp14) + (0.57821260969999999 * fTemp16))) - (fConst7 * fRec100[1])));
+			fRec102[0] = (fRec102[1] + fTemp41);
 			fRec100[0] = fRec102[0];
-			double fRec101 = (fTemp64 + fTemp63);
-			double fTemp65 = (fConst14 * ((0.20669844109999999 * fTemp26) - ((((1.5005088419999999 * fTemp24) + (0.33408324719999999 * fTemp27)) + (0.1165798232 * fTemp28)) + (0.59521456370000003 * fTemp25))));
-			double fTemp66 = (fConst15 * fRec103[1]);
-			double fTemp67 = (fConst16 * fRec106[1]);
-			fRec108[0] = (fTemp65 + (fTemp66 + (fRec108[1] + fTemp67)));
+			double fRec101 = fTemp41;
+			double fTemp42 = (fConst2 * (((0.20669844109999999 * fTemp10) - ((((1.5005088419999999 * fTemp8) + (0.33408324719999999 * fTemp11)) + (0.1165798232 * fTemp12)) + (0.59521456370000003 * fTemp9))) + (fConst3 * (0.0 - ((fConst5 * fRec106[1]) + (fConst4 * fRec103[1]))))));
+			fRec108[0] = (fRec108[1] + fTemp42);
 			fRec106[0] = fRec108[0];
-			double fRec107 = ((fTemp67 + fTemp66) + fTemp65);
+			double fRec107 = fTemp42;
 			fRec105[0] = (fRec106[0] + fRec105[1]);
 			fRec103[0] = fRec105[0];
 			double fRec104 = fRec107;
 			fVec4[(IOTA & 1023)] = ((1.078655809 * fTemp7) + (fRec92 + (fRec101 + fRec104)));
-			output4[i] = FAUSTFLOAT((0.8267575322812053 * (fRec0[0] * fVec4[((IOTA - iConst17) & 1023)])));
-			double fTemp68 = (fConst4 * fRec109[1]);
-			double fTemp69 = (fConst6 * (((((1.175953399 * fTemp9) + (0.041028005700000002 * fTemp10)) + (0.57022148750000001 * fTemp11)) + (0.091438014200000001 * fTemp14)) - (((0.065083397400000007 * fTemp12) + (0.13848606629999999 * fTemp13)) + (0.83171809649999995 * fTemp15))));
-			double fTemp70 = (fConst8 * fRec112[1]);
-			double fTemp71 = (fConst9 * fRec115[1]);
-			fRec117[0] = (fTemp69 + (fTemp70 + (fRec117[1] + fTemp71)));
+			output4[i] = FAUSTFLOAT((0.8267575322812053 * (fRec0[0] * fVec4[((IOTA - iConst14) & 1023)])));
+			double fTemp43 = (fConst8 * ((fConst3 * (0.0 - ((fConst10 * fRec115[1]) + (fConst9 * fRec112[1])))) + (fConst12 * (((((1.175953399 * fTemp18) + (0.041028005700000002 * fTemp19)) + (0.57022148750000001 * fTemp20)) + (0.091438014200000001 * fTemp23)) - (((0.065083397400000007 * fTemp21) + (0.13848606629999999 * fTemp22)) + (0.83171809649999995 * fTemp24))))));
+			fRec117[0] = (fRec117[1] + fTemp43);
 			fRec115[0] = fRec117[0];
-			double fRec116 = ((fTemp71 + fTemp70) + fTemp69);
+			double fRec116 = fTemp43;
 			fRec114[0] = (fRec115[0] + fRec114[1]);
 			fRec112[0] = fRec114[0];
 			double fRec113 = fRec116;
-			fRec111[0] = (fTemp68 + (fRec113 + fRec111[1]));
+			double fTemp44 = (fConst13 * fRec109[1]);
+			fRec111[0] = ((fRec113 + fRec111[1]) - fTemp44);
 			fRec109[0] = fRec111[0];
-			double fRec110 = (fRec113 + fTemp68);
-			double fTemp72 = (fConst11 * ((0.29326240590000002 * fTemp20) - ((1.5076440609999999 * fTemp19) + (0.5806639723 * fTemp21))));
-			double fTemp73 = (fConst12 * fRec118[1]);
-			fRec120[0] = (fTemp72 + (fRec120[1] + fTemp73));
+			double fRec110 = (fRec113 - fTemp44);
+			double fTemp45 = (fConst6 * (((0.29326240590000002 * fTemp15) - ((1.5076440609999999 * fTemp14) + (0.5806639723 * fTemp16))) - (fConst7 * fRec118[1])));
+			fRec120[0] = (fRec120[1] + fTemp45);
 			fRec118[0] = fRec120[0];
-			double fRec119 = (fTemp73 + fTemp72);
-			double fTemp74 = (fConst14 * ((0.26575177239999997 * fTemp26) - ((((0.64108582209999998 * fTemp24) + (0.33526587349999998 * fTemp27)) + (0.035166705600000001 * fTemp28)) + (1.4898210430000001 * fTemp25))));
-			double fTemp75 = (fConst15 * fRec121[1]);
-			double fTemp76 = (fConst16 * fRec124[1]);
-			fRec126[0] = (fTemp74 + (fTemp75 + (fRec126[1] + fTemp76)));
+			double fRec119 = fTemp45;
+			double fTemp46 = (fConst2 * (((0.26575177239999997 * fTemp10) - ((((0.64108582209999998 * fTemp8) + (0.33526587349999998 * fTemp11)) + (0.035166705600000001 * fTemp12)) + (1.4898210430000001 * fTemp9))) + (fConst3 * (0.0 - ((fConst5 * fRec124[1]) + (fConst4 * fRec121[1]))))));
+			fRec126[0] = (fRec126[1] + fTemp46);
 			fRec124[0] = fRec126[0];
-			double fRec125 = ((fTemp76 + fTemp75) + fTemp74);
+			double fRec125 = fTemp46;
 			fRec123[0] = (fRec124[0] + fRec123[1]);
 			fRec121[0] = fRec123[0];
 			double fRec122 = fRec125;
 			fVec5[(IOTA & 1023)] = ((1.082638583 * fTemp7) + (fRec110 + (fRec119 + fRec122)));
-			output5[i] = FAUSTFLOAT((0.8267575322812053 * (fRec0[0] * fVec5[((IOTA - iConst17) & 1023)])));
-			double fTemp77 = (fConst4 * fRec127[1]);
-			double fTemp78 = (fConst6 * (((0.82354269520000001 * fTemp15) + ((0.097839207499999997 * fTemp14) + (((1.1963849369999999 * fTemp9) + (0.57279258669999999 * fTemp11)) + (0.1385217698 * fTemp13)))) - ((0.040117782400000003 * fTemp10) + (0.063425979600000001 * fTemp12))));
-			double fTemp79 = (fConst8 * fRec130[1]);
-			double fTemp80 = (fConst9 * fRec133[1]);
-			fRec135[0] = (fTemp78 + (fTemp79 + (fRec135[1] + fTemp80)));
+			output5[i] = FAUSTFLOAT((0.8267575322812053 * (fRec0[0] * fVec5[((IOTA - iConst14) & 1023)])));
+			double fTemp47 = (fConst8 * ((fConst3 * (0.0 - ((fConst10 * fRec133[1]) + (fConst9 * fRec130[1])))) + (fConst12 * ((((((1.1963849369999999 * fTemp18) + (0.57279258669999999 * fTemp20)) + (0.1385217698 * fTemp22)) + (0.097839207499999997 * fTemp23)) + (0.82354269520000001 * fTemp24)) - ((0.040117782400000003 * fTemp19) + (0.063425979600000001 * fTemp21))))));
+			fRec135[0] = (fRec135[1] + fTemp47);
 			fRec133[0] = fRec135[0];
-			double fRec134 = ((fTemp80 + fTemp79) + fTemp78);
+			double fRec134 = fTemp47;
 			fRec132[0] = (fRec133[0] + fRec132[1]);
 			fRec130[0] = fRec132[0];
 			double fRec131 = fRec134;
-			fRec129[0] = (fTemp77 + (fRec131 + fRec129[1]));
+			double fTemp48 = (fConst13 * fRec127[1]);
+			fRec129[0] = ((fRec131 + fRec129[1]) - fTemp48);
 			fRec127[0] = fRec129[0];
-			double fRec128 = (fRec131 + fTemp77);
-			double fTemp81 = (fConst11 * (0.0 - (((1.516745121 * fTemp19) + (0.58000363479999995 * fTemp21)) + (0.29052768810000001 * fTemp20))));
-			double fTemp82 = (fConst12 * fRec136[1]);
-			fRec138[0] = (fTemp81 + (fRec138[1] + fTemp82));
+			double fRec128 = (fRec131 - fTemp48);
+			double fTemp49 = (fConst6 * ((0.0 - ((1.516745121 * fTemp14) + ((0.58000363479999995 * fTemp16) + (0.29052768810000001 * fTemp15)))) - (fConst7 * fRec136[1])));
+			fRec138[0] = (fRec138[1] + fTemp49);
 			fRec136[0] = fRec138[0];
-			double fRec137 = (fTemp82 + fTemp81);
-			double fTemp83 = (fConst14 * ((((0.6383341213 * fTemp24) + (0.27478537240000001 * fTemp26)) + (0.036463873199999997 * fTemp28)) - ((0.33613723080000002 * fTemp27) + (1.5023743549999999 * fTemp25))));
-			double fTemp84 = (fConst15 * fRec139[1]);
-			double fTemp85 = (fConst16 * fRec142[1]);
-			fRec144[0] = (fTemp83 + (fTemp84 + (fRec144[1] + fTemp85)));
+			double fRec137 = fTemp49;
+			double fTemp50 = (fConst2 * (((((0.6383341213 * fTemp8) + (0.27478537240000001 * fTemp10)) + (0.036463873199999997 * fTemp12)) - ((0.33613723080000002 * fTemp11) + (1.5023743549999999 * fTemp9))) + (fConst3 * (0.0 - ((fConst5 * fRec142[1]) + (fConst4 * fRec139[1]))))));
+			fRec144[0] = (fRec144[1] + fTemp50);
 			fRec142[0] = fRec144[0];
-			double fRec143 = ((fTemp85 + fTemp84) + fTemp83);
+			double fRec143 = fTemp50;
 			fRec141[0] = (fRec142[0] + fRec141[1]);
 			fRec139[0] = fRec141[0];
 			double fRec140 = fRec143;
 			fVec6[(IOTA & 1023)] = ((1.0806877070000001 * fTemp7) + (fRec128 + (fRec137 + fRec140)));
-			output6[i] = FAUSTFLOAT((0.8267575322812053 * (fRec0[0] * fVec6[((IOTA - iConst17) & 1023)])));
-			double fTemp86 = (fConst4 * fRec145[1]);
-			double fTemp87 = (fConst6 * (((1.4084123129999999 * fTemp15) + ((0.040437495499999997 * fTemp14) + ((0.50316818860000001 * fTemp11) + (0.373427026 * fTemp13)))) - (((0.3440634601 * fTemp9) + (0.099404380900000006 * fTemp10)) + (0.059889899699999999 * fTemp12))));
-			double fTemp88 = (fConst8 * fRec148[1]);
-			double fTemp89 = (fConst9 * fRec151[1]);
-			fRec153[0] = (fTemp87 + (fTemp88 + (fRec153[1] + fTemp89)));
+			output6[i] = FAUSTFLOAT((0.8267575322812053 * (fRec0[0] * fVec6[((IOTA - iConst14) & 1023)])));
+			double fTemp51 = (fConst8 * ((fConst3 * (0.0 - ((fConst10 * fRec151[1]) + (fConst9 * fRec148[1])))) + (fConst12 * (((((0.50316818860000001 * fTemp20) + (0.373427026 * fTemp22)) + (0.040437495499999997 * fTemp23)) + (1.4084123129999999 * fTemp24)) - (((0.3440634601 * fTemp18) + (0.099404380900000006 * fTemp19)) + (0.059889899699999999 * fTemp21))))));
+			fRec153[0] = (fRec153[1] + fTemp51);
 			fRec151[0] = fRec153[0];
-			double fRec152 = ((fTemp89 + fTemp88) + fTemp87);
+			double fRec152 = fTemp51;
 			fRec150[0] = (fRec151[0] + fRec150[1]);
 			fRec148[0] = fRec150[0];
 			double fRec149 = fRec152;
-			fRec147[0] = (fTemp86 + (fRec149 + fRec147[1]));
+			double fTemp52 = (fConst13 * fRec145[1]);
+			fRec147[0] = ((fRec149 + fRec147[1]) - fTemp52);
 			fRec145[0] = fRec147[0];
-			double fRec146 = (fRec149 + fTemp86);
-			double fTemp90 = (fConst11 * (0.0 - (((1.250921264 * fTemp19) + (0.57800575499999995 * fTemp21)) + (0.83732342439999996 * fTemp20))));
-			double fTemp91 = (fConst12 * fRec154[1]);
-			fRec156[0] = (fTemp90 + (fRec156[1] + fTemp91));
+			double fRec146 = (fRec149 - fTemp52);
+			double fTemp53 = (fConst6 * ((0.0 - ((1.250921264 * fTemp14) + ((0.57800575499999995 * fTemp16) + (0.83732342439999996 * fTemp15)))) - (fConst7 * fRec154[1])));
+			fRec156[0] = (fRec156[1] + fTemp53);
 			fRec154[0] = fRec156[0];
-			double fRec155 = (fTemp91 + fTemp90);
-			double fTemp92 = (fConst14 * ((((1.5129918339999999 * fTemp24) + (0.22058864519999999 * fTemp26)) + (0.1228072142 * fTemp28)) - ((0.33602649439999999 * fTemp27) + (0.57940308569999999 * fTemp25))));
-			double fTemp93 = (fConst15 * fRec157[1]);
-			double fTemp94 = (fConst16 * fRec160[1]);
-			fRec162[0] = (fTemp92 + (fTemp93 + (fRec162[1] + fTemp94)));
+			double fRec155 = fTemp53;
+			double fTemp54 = (fConst2 * (((((1.5129918339999999 * fTemp8) + (0.22058864519999999 * fTemp10)) + (0.1228072142 * fTemp12)) - ((0.33602649439999999 * fTemp11) + (0.57940308569999999 * fTemp9))) + (fConst3 * (0.0 - ((fConst5 * fRec160[1]) + (fConst4 * fRec157[1]))))));
+			fRec162[0] = (fRec162[1] + fTemp54);
 			fRec160[0] = fRec162[0];
-			double fRec161 = ((fTemp94 + fTemp93) + fTemp92);
+			double fRec161 = fTemp54;
 			fRec159[0] = (fRec160[0] + fRec159[1]);
 			fRec157[0] = fRec159[0];
 			double fRec158 = fRec161;
 			fVec7[(IOTA & 1023)] = ((1.0741038979999999 * fTemp7) + (fRec146 + (fRec155 + fRec158)));
-			output7[i] = FAUSTFLOAT((0.8267575322812053 * (fRec0[0] * fVec7[((IOTA - iConst17) & 1023)])));
-			double fTemp95 = (fConst4 * fRec163[1]);
-			double fTemp96 = (fConst6 * ((((0.34498097620000001 * fTemp11) + (0.51323361680000001 * fTemp13)) + (0.17541526299999999 * fTemp15)) - ((((1.4127083060000001 * fTemp9) + (0.093863215 * fTemp10)) + (0.056130973899999999 * fTemp12)) + (0.045139062899999999 * fTemp14))));
-			double fTemp97 = (fConst8 * fRec166[1]);
-			double fTemp98 = (fConst9 * fRec169[1]);
-			fRec171[0] = (fTemp96 + (fTemp97 + (fRec171[1] + fTemp98)));
+			output7[i] = FAUSTFLOAT((0.8267575322812053 * (fRec0[0] * fVec7[((IOTA - iConst14) & 1023)])));
+			double fTemp55 = (fConst8 * ((fConst3 * (0.0 - ((fConst10 * fRec169[1]) + (fConst9 * fRec166[1])))) + (fConst12 * ((((0.34498097620000001 * fTemp20) + (0.51323361680000001 * fTemp22)) + (0.17541526299999999 * fTemp24)) - ((((1.4127083060000001 * fTemp18) + (0.093863215 * fTemp19)) + (0.056130973899999999 * fTemp21)) + (0.045139062899999999 * fTemp23))))));
+			fRec171[0] = (fRec171[1] + fTemp55);
 			fRec169[0] = fRec171[0];
-			double fRec170 = ((fTemp98 + fTemp97) + fTemp96);
+			double fRec170 = fTemp55;
 			fRec168[0] = (fRec169[0] + fRec168[1]);
 			fRec166[0] = fRec168[0];
 			double fRec167 = fRec170;
-			fRec165[0] = (fTemp95 + (fRec167 + fRec165[1]));
+			double fTemp56 = (fConst13 * fRec163[1]);
+			fRec165[0] = ((fRec167 + fRec165[1]) - fTemp56);
 			fRec163[0] = fRec165[0];
-			double fRec164 = (fRec167 + fTemp95);
-			double fTemp99 = (fConst11 * (0.0 - (((0.78484094599999998 * fTemp19) + (0.57508230220000001 * fTemp21)) + (1.265395761 * fTemp20))));
-			double fTemp100 = (fConst12 * fRec172[1]);
-			fRec174[0] = (fTemp99 + (fRec174[1] + fTemp100));
+			double fRec164 = (fRec167 - fTemp56);
+			double fTemp57 = (fConst6 * ((0.0 - ((0.78484094599999998 * fTemp14) + ((0.57508230220000001 * fTemp16) + (1.265395761 * fTemp15)))) - (fConst7 * fRec172[1])));
+			fRec174[0] = (fRec174[1] + fTemp57);
 			fRec172[0] = fRec174[0];
-			double fRec173 = (fTemp100 + fTemp99);
-			double fTemp101 = (fConst14 * (((((1.436451036 * fTemp24) + (0.1277235706 * fTemp26)) + (0.22104411230000001 * fTemp28)) + (0.6835669446 * fTemp25)) - (0.33606839700000002 * fTemp27)));
-			double fTemp102 = (fConst15 * fRec175[1]);
-			double fTemp103 = (fConst16 * fRec178[1]);
-			fRec180[0] = (fTemp101 + (fTemp102 + (fRec180[1] + fTemp103)));
+			double fRec173 = fTemp57;
+			double fTemp58 = (fConst2 * ((((((1.436451036 * fTemp8) + (0.1277235706 * fTemp10)) + (0.22104411230000001 * fTemp12)) + (0.6835669446 * fTemp9)) - (0.33606839700000002 * fTemp11)) + (fConst3 * (0.0 - ((fConst5 * fRec178[1]) + (fConst4 * fRec175[1]))))));
+			fRec180[0] = (fRec180[1] + fTemp58);
 			fRec178[0] = fRec180[0];
-			double fRec179 = ((fTemp103 + fTemp102) + fTemp101);
+			double fRec179 = fTemp58;
 			fRec177[0] = (fRec178[0] + fRec177[1]);
 			fRec175[0] = fRec177[0];
 			double fRec176 = fRec179;
 			fVec8[(IOTA & 1023)] = ((1.0665211569999999 * fTemp7) + (fRec164 + (fRec173 + fRec176)));
-			output8[i] = FAUSTFLOAT((0.8267575322812053 * (fRec0[0] * fVec8[((IOTA - iConst17) & 1023)])));
-			double fTemp104 = (fConst4 * fRec181[1]);
-			double fTemp105 = (fConst6 * (((0.1257349525 * fTemp11) + (0.56616687139999999 * fTemp13)) - ((1.2003562459999999 * fTemp15) + ((((0.76254657049999996 * fTemp9) + (0.0347992393 * fTemp10)) + (0.054449090700000001 * fTemp12)) + (0.102209759 * fTemp14)))));
-			double fTemp106 = (fConst8 * fRec184[1]);
-			double fTemp107 = (fConst9 * fRec187[1]);
-			fRec189[0] = (fTemp105 + (fTemp106 + (fRec189[1] + fTemp107)));
+			output8[i] = FAUSTFLOAT((0.8267575322812053 * (fRec0[0] * fVec8[((IOTA - iConst14) & 1023)])));
+			double fTemp59 = (fConst8 * ((fConst3 * (0.0 - ((fConst10 * fRec187[1]) + (fConst9 * fRec184[1])))) + (fConst12 * (((0.1257349525 * fTemp20) + (0.56616687139999999 * fTemp22)) - (((((0.76254657049999996 * fTemp18) + (0.0347992393 * fTemp19)) + (0.054449090700000001 * fTemp21)) + (0.102209759 * fTemp23)) + (1.2003562459999999 * fTemp24))))));
+			fRec189[0] = (fRec189[1] + fTemp59);
 			fRec187[0] = fRec189[0];
-			double fRec188 = ((fTemp107 + fTemp106) + fTemp105);
+			double fRec188 = fTemp59;
 			fRec186[0] = (fRec187[0] + fRec186[1]);
 			fRec184[0] = fRec186[0];
 			double fRec185 = fRec188;
-			fRec183[0] = (fTemp104 + (fRec185 + fRec183[1]));
+			double fTemp60 = (fConst13 * fRec181[1]);
+			fRec183[0] = ((fRec185 + fRec183[1]) - fTemp60);
 			fRec181[0] = fRec183[0];
-			double fRec182 = (fRec185 + fTemp104);
-			double fTemp108 = (fConst11 * (0.0 - (((0.2656231584 * fTemp19) + (0.56978878629999996 * fTemp21)) + (1.485915112 * fTemp20))));
-			double fTemp109 = (fConst12 * fRec190[1]);
-			fRec192[0] = (fTemp108 + (fRec192[1] + fTemp109));
+			double fRec182 = (fRec185 - fTemp60);
+			double fTemp61 = (fConst6 * ((0.0 - ((0.2656231584 * fTemp14) + ((0.56978878629999996 * fTemp16) + (1.485915112 * fTemp15)))) - (fConst7 * fRec190[1])));
+			fRec192[0] = (fRec192[1] + fTemp61);
 			fRec190[0] = fRec192[0];
-			double fRec191 = (fTemp109 + fTemp108);
-			double fTemp110 = (fConst14 * (((((0.57677129620000001 * fTemp24) + (0.037118539399999997 * fTemp26)) + (0.28330739989999998 * fTemp28)) + (1.484023103 * fTemp25)) - (0.33706342109999998 * fTemp27)));
-			double fTemp111 = (fConst15 * fRec193[1]);
-			double fTemp112 = (fConst16 * fRec196[1]);
-			fRec198[0] = (fTemp110 + (fTemp111 + (fRec198[1] + fTemp112)));
+			double fRec191 = fTemp61;
+			double fTemp62 = (fConst2 * ((((((0.57677129620000001 * fTemp8) + (0.037118539399999997 * fTemp10)) + (0.28330739989999998 * fTemp12)) + (1.484023103 * fTemp9)) - (0.33706342109999998 * fTemp11)) + (fConst3 * (0.0 - ((fConst5 * fRec196[1]) + (fConst4 * fRec193[1]))))));
+			fRec198[0] = (fRec198[1] + fTemp62);
 			fRec196[0] = fRec198[0];
-			double fRec197 = ((fTemp112 + fTemp111) + fTemp110);
+			double fRec197 = fTemp62;
 			fRec195[0] = (fRec196[0] + fRec195[1]);
 			fRec193[0] = fRec195[0];
 			double fRec194 = fRec197;
 			fVec9[(IOTA & 1023)] = ((1.0601267619999999 * fTemp7) + (fRec182 + (fRec191 + fRec194)));
-			output9[i] = FAUSTFLOAT((0.8267575322812053 * (fRec0[0] * fVec9[((IOTA - iConst17) & 1023)])));
-			double fTemp113 = (fConst4 * fRec199[1]);
-			double fTemp114 = (fConst6 * ((((0.85555417980000004 * fTemp9) + (0.044708397699999999 * fTemp10)) + (0.56393694169999997 * fTemp13)) - ((1.1561200869999999 * fTemp15) + (((0.14027411519999999 * fTemp11) + (0.055972398 * fTemp12)) + (0.10317330080000001 * fTemp14)))));
-			double fTemp115 = (fConst8 * fRec202[1]);
-			double fTemp116 = (fConst9 * fRec205[1]);
-			fRec207[0] = (fTemp114 + (fTemp115 + (fRec207[1] + fTemp116)));
+			output9[i] = FAUSTFLOAT((0.8267575322812053 * (fRec0[0] * fVec9[((IOTA - iConst14) & 1023)])));
+			double fTemp63 = (fConst8 * ((fConst12 * ((((0.85555417980000004 * fTemp18) + (0.044708397699999999 * fTemp19)) + (0.56393694169999997 * fTemp22)) - ((((0.14027411519999999 * fTemp20) + (0.055972398 * fTemp21)) + (0.10317330080000001 * fTemp23)) + (1.1561200869999999 * fTemp24)))) + (fConst3 * (0.0 - ((fConst10 * fRec205[1]) + (fConst9 * fRec202[1]))))));
+			fRec207[0] = (fRec207[1] + fTemp63);
 			fRec205[0] = fRec207[0];
-			double fRec206 = ((fTemp116 + fTemp115) + fTemp114);
+			double fRec206 = fTemp63;
 			fRec204[0] = (fRec205[0] + fRec204[1]);
 			fRec202[0] = fRec204[0];
 			double fRec203 = fRec206;
-			fRec201[0] = (fTemp113 + (fRec203 + fRec201[1]));
+			double fTemp64 = (fConst13 * fRec199[1]);
+			fRec201[0] = ((fRec203 + fRec201[1]) - fTemp64);
 			fRec199[0] = fRec201[0];
-			double fRec200 = (fRec203 + fTemp113);
-			double fTemp117 = (fConst11 * ((0.30807197930000002 * fTemp19) - ((0.5604518396 * fTemp21) + (1.4756983159999999 * fTemp20))));
-			double fTemp118 = (fConst12 * fRec208[1]);
-			fRec210[0] = (fTemp117 + (fRec210[1] + fTemp118));
+			double fRec200 = (fRec203 - fTemp64);
+			double fTemp65 = (fConst6 * (((0.30807197930000002 * fTemp14) - ((0.5604518396 * fTemp16) + (1.4756983159999999 * fTemp15))) - (fConst7 * fRec208[1])));
+			fRec210[0] = (fRec210[1] + fTemp65);
 			fRec208[0] = fRec210[0];
-			double fRec209 = (fTemp118 + fTemp117);
-			double fTemp119 = (fConst14 * (((0.2770185624 * fTemp28) + (1.4627540809999999 * fTemp25)) - (((0.66183803539999997 * fTemp24) + (0.0499078466 * fTemp26)) + (0.33825894870000001 * fTemp27))));
-			double fTemp120 = (fConst15 * fRec211[1]);
-			double fTemp121 = (fConst16 * fRec214[1]);
-			fRec216[0] = (fTemp119 + (fTemp120 + (fRec216[1] + fTemp121)));
+			double fRec209 = fTemp65;
+			double fTemp66 = (fConst2 * ((((0.2770185624 * fTemp12) + (1.4627540809999999 * fTemp9)) - (((0.66183803539999997 * fTemp8) + (0.0499078466 * fTemp10)) + (0.33825894870000001 * fTemp11))) + (fConst3 * (0.0 - ((fConst5 * fRec214[1]) + (fConst4 * fRec211[1]))))));
+			fRec216[0] = (fRec216[1] + fTemp66);
 			fRec214[0] = fRec216[0];
-			double fRec215 = ((fTemp121 + fTemp120) + fTemp119);
+			double fRec215 = fTemp66;
 			fRec213[0] = (fRec214[0] + fRec213[1]);
 			fRec211[0] = fRec213[0];
 			double fRec212 = fRec215;
 			fVec10[(IOTA & 1023)] = ((1.0538821119999999 * fTemp7) + (fRec200 + (fRec209 + fRec212)));
-			output10[i] = FAUSTFLOAT((0.8267575322812053 * (fRec0[0] * fVec10[((IOTA - iConst17) & 1023)])));
-			double fTemp122 = (fConst4 * fRec217[1]);
-			double fTemp123 = (fConst6 * (((((1.395023803 * fTemp9) + (0.088163013700000001 * fTemp10)) + (0.50102391739999996 * fTemp13)) + (0.31021102560000002 * fTemp15)) - (((0.3582489506 * fTemp11) + (0.0601840415 * fTemp12)) + (0.045401744100000002 * fTemp14))));
-			double fTemp124 = (fConst8 * fRec220[1]);
-			double fTemp125 = (fConst9 * fRec223[1]);
-			fRec225[0] = (fTemp123 + (fTemp124 + (fRec225[1] + fTemp125)));
+			output10[i] = FAUSTFLOAT((0.8267575322812053 * (fRec0[0] * fVec10[((IOTA - iConst14) & 1023)])));
+			double fTemp67 = (fConst8 * ((fConst3 * (0.0 - ((fConst10 * fRec223[1]) + (fConst9 * fRec220[1])))) + (fConst12 * (((((1.395023803 * fTemp18) + (0.088163013700000001 * fTemp19)) + (0.50102391739999996 * fTemp22)) + (0.31021102560000002 * fTemp24)) - (((0.3582489506 * fTemp20) + (0.0601840415 * fTemp21)) + (0.045401744100000002 * fTemp23))))));
+			fRec225[0] = (fRec225[1] + fTemp67);
 			fRec223[0] = fRec225[0];
-			double fRec224 = ((fTemp125 + fTemp124) + fTemp123);
+			double fRec224 = fTemp67;
 			fRec222[0] = (fRec223[0] + fRec222[1]);
 			fRec220[0] = fRec222[0];
 			double fRec221 = fRec224;
-			fRec219[0] = (fTemp122 + (fRec221 + fRec219[1]));
+			double fTemp68 = (fConst13 * fRec217[1]);
+			fRec219[0] = ((fRec221 + fRec219[1]) - fTemp68);
 			fRec217[0] = fRec219[0];
-			double fRec218 = (fRec221 + fTemp122);
-			double fTemp126 = (fConst11 * ((0.81572311050000001 * fTemp19) - ((0.55107468989999997 * fTemp21) + (1.2224603540000001 * fTemp20))));
-			double fTemp127 = (fConst12 * fRec226[1]);
-			fRec228[0] = (fTemp126 + (fRec228[1] + fTemp127));
+			double fRec218 = (fRec221 - fTemp68);
+			double fTemp69 = (fConst6 * (((0.81572311050000001 * fTemp14) - ((0.55107468989999997 * fTemp16) + (1.2224603540000001 * fTemp15))) - (fConst7 * fRec226[1])));
+			fRec228[0] = (fRec228[1] + fTemp69);
 			fRec226[0] = fRec228[0];
-			double fRec227 = (fTemp127 + fTemp126);
-			double fTemp128 = (fConst14 * (((0.2026634511 * fTemp28) + (0.59026496799999995 * fTemp25)) - (((1.468073126 * fTemp24) + (0.12584303399999999 * fTemp26)) + (0.33768668159999998 * fTemp27))));
-			double fTemp129 = (fConst15 * fRec229[1]);
-			double fTemp130 = (fConst16 * fRec232[1]);
-			fRec234[0] = (fTemp128 + (fTemp129 + (fRec234[1] + fTemp130)));
+			double fRec227 = fTemp69;
+			double fTemp70 = (fConst2 * ((((0.2026634511 * fTemp12) + (0.59026496799999995 * fTemp9)) - (((1.468073126 * fTemp8) + (0.12584303399999999 * fTemp10)) + (0.33768668159999998 * fTemp11))) + (fConst3 * (0.0 - ((fConst5 * fRec232[1]) + (fConst4 * fRec229[1]))))));
+			fRec234[0] = (fRec234[1] + fTemp70);
 			fRec232[0] = fRec234[0];
-			double fRec233 = ((fTemp130 + fTemp129) + fTemp128);
+			double fRec233 = fTemp70;
 			fRec231[0] = (fRec232[0] + fRec231[1]);
 			fRec229[0] = fRec231[0];
 			double fRec230 = fRec233;
 			fVec11[(IOTA & 1023)] = ((1.049208012 * fTemp7) + (fRec218 + (fRec227 + fRec230)));
-			output11[i] = FAUSTFLOAT((0.8267575322812053 * (fRec0[0] * fVec11[((IOTA - iConst17) & 1023)])));
-			double fTemp131 = (fConst4 * fRec235[1]);
-			double fTemp132 = (fConst6 * (((1.386105288 * fTemp15) + ((0.032472837599999999 * fTemp14) + (((0.2791911118 * fTemp9) + (0.077024748200000007 * fTemp10)) + (0.35905986909999998 * fTemp13)))) - ((0.49644340840000001 * fTemp11) + (0.064773186400000002 * fTemp12))));
-			double fTemp133 = (fConst8 * fRec238[1]);
-			double fTemp134 = (fConst9 * fRec241[1]);
-			fRec243[0] = (fTemp132 + (fTemp133 + (fRec243[1] + fTemp134)));
+			output11[i] = FAUSTFLOAT((0.8267575322812053 * (fRec0[0] * fVec11[((IOTA - iConst14) & 1023)])));
+			double fTemp71 = (fConst8 * ((fConst3 * (0.0 - ((fConst10 * fRec241[1]) + (fConst9 * fRec238[1])))) + (fConst12 * ((((((0.2791911118 * fTemp18) + (0.077024748200000007 * fTemp19)) + (0.35905986909999998 * fTemp22)) + (0.032472837599999999 * fTemp23)) + (1.386105288 * fTemp24)) - ((0.49644340840000001 * fTemp20) + (0.064773186400000002 * fTemp21))))));
+			fRec243[0] = (fRec243[1] + fTemp71);
 			fRec241[0] = fRec243[0];
-			double fRec242 = ((fTemp134 + fTemp133) + fTemp132);
+			double fRec242 = fTemp71;
 			fRec240[0] = (fRec241[0] + fRec240[1]);
 			fRec238[0] = fRec240[0];
 			double fRec239 = fRec242;
-			fRec237[0] = (fTemp131 + (fRec239 + fRec237[1]));
+			double fTemp72 = (fConst13 * fRec235[1]);
+			fRec237[0] = ((fRec239 + fRec237[1]) - fTemp72);
 			fRec235[0] = fRec237[0];
-			double fRec236 = (fRec239 + fTemp131);
-			double fTemp135 = (fConst11 * ((1.2190484749999999 * fTemp19) - ((0.5467580917 * fTemp21) + (0.80013884000000002 * fTemp20))));
-			double fTemp136 = (fConst12 * fRec244[1]);
-			fRec246[0] = (fTemp135 + (fRec246[1] + fTemp136));
+			double fRec236 = (fRec239 - fTemp72);
+			double fTemp73 = (fConst6 * (((1.2190484749999999 * fTemp14) - ((0.5467580917 * fTemp16) + (0.80013884000000002 * fTemp15))) - (fConst7 * fRec244[1])));
+			fRec246[0] = (fRec246[1] + fTemp73);
 			fRec244[0] = fRec246[0];
-			double fRec245 = (fTemp136 + fTemp135);
-			double fTemp137 = (fConst14 * ((0.1086540508 * fTemp28) - ((((1.4417258550000001 * fTemp24) + (0.19514213959999999 * fTemp26)) + (0.3350003574 * fTemp27)) + (0.60005451970000001 * fTemp25))));
-			double fTemp138 = (fConst15 * fRec247[1]);
-			double fTemp139 = (fConst16 * fRec250[1]);
-			fRec252[0] = (fTemp137 + (fTemp138 + (fRec252[1] + fTemp139)));
+			double fRec245 = fTemp73;
+			double fTemp74 = (fConst2 * (((0.1086540508 * fTemp12) - ((((1.4417258550000001 * fTemp8) + (0.19514213959999999 * fTemp10)) + (0.3350003574 * fTemp11)) + (0.60005451970000001 * fTemp9))) + (fConst3 * (0.0 - ((fConst5 * fRec250[1]) + (fConst4 * fRec247[1]))))));
+			fRec252[0] = (fRec252[1] + fTemp74);
 			fRec250[0] = fRec252[0];
-			double fRec251 = ((fTemp139 + fTemp138) + fTemp137);
+			double fRec251 = fTemp74;
 			fRec249[0] = (fRec250[0] + fRec249[1]);
 			fRec247[0] = fRec249[0];
 			double fRec248 = fRec251;
 			fVec12[(IOTA & 1023)] = ((1.0480109820000001 * fTemp7) + (fRec236 + (fRec245 + fRec248)));
-			output12[i] = FAUSTFLOAT((0.8267575322812053 * (fRec0[0] * fVec12[((IOTA - iConst17) & 1023)])));
-			double fTemp140 = (fConst4 * fRec253[1]);
-			double fTemp141 = (fConst6 * (((0.86265944350000001 * fTemp15) + ((0.085025338399999997 * fTemp14) + ((0.026884529000000001 * fTemp10) + (0.14506620610000001 * fTemp13)))) - (((1.1336232209999999 * fTemp9) + (0.55902967739999998 * fTemp11)) + (0.067434134399999998 * fTemp12))));
-			double fTemp142 = (fConst8 * fRec256[1]);
-			double fTemp143 = (fConst9 * fRec259[1]);
-			fRec261[0] = (fTemp141 + (fTemp142 + (fRec261[1] + fTemp143)));
+			output12[i] = FAUSTFLOAT((0.8267575322812053 * (fRec0[0] * fVec12[((IOTA - iConst14) & 1023)])));
+			double fTemp75 = (fConst8 * ((fConst3 * (0.0 - ((fConst10 * fRec259[1]) + (fConst9 * fRec256[1])))) + (fConst12 * (((((0.026884529000000001 * fTemp19) + (0.14506620610000001 * fTemp22)) + (0.085025338399999997 * fTemp23)) + (0.86265944350000001 * fTemp24)) - (((1.1336232209999999 * fTemp18) + (0.55902967739999998 * fTemp20)) + (0.067434134399999998 * fTemp21))))));
+			fRec261[0] = (fRec261[1] + fTemp75);
 			fRec259[0] = fRec261[0];
-			double fRec260 = ((fTemp143 + fTemp142) + fTemp141);
+			double fRec260 = fTemp75;
 			fRec258[0] = (fRec259[0] + fRec258[1]);
 			fRec256[0] = fRec258[0];
 			double fRec257 = fRec260;
-			fRec255[0] = (fTemp140 + (fRec257 + fRec255[1]));
+			double fTemp76 = (fConst13 * fRec253[1]);
+			fRec255[0] = ((fRec257 + fRec255[1]) - fTemp76);
 			fRec253[0] = fRec255[0];
-			double fRec254 = (fRec257 + fTemp140);
-			double fTemp144 = (fConst11 * ((1.4578924150000001 * fTemp19) - ((0.54967337299999997 * fTemp21) + (0.3041261267 * fTemp20))));
-			double fTemp145 = (fConst12 * fRec262[1]);
-			fRec264[0] = (fTemp144 + (fRec264[1] + fTemp145));
+			double fRec254 = (fRec257 - fTemp76);
+			double fTemp77 = (fConst6 * (((1.4578924150000001 * fTemp14) - ((0.54967337299999997 * fTemp16) + (0.3041261267 * fTemp15))) - (fConst7 * fRec262[1])));
+			fRec264[0] = (fRec264[1] + fTemp77);
 			fRec262[0] = fRec264[0];
-			double fRec263 = (fTemp145 + fTemp144);
-			double fTemp146 = (fConst14 * ((0.034112183999999997 * fTemp28) - ((((0.65526247999999998 * fTemp24) + (0.2443716708 * fTemp26)) + (0.33208566309999998 * fTemp27)) + (1.4398108789999999 * fTemp25))));
-			double fTemp147 = (fConst15 * fRec265[1]);
-			double fTemp148 = (fConst16 * fRec268[1]);
-			fRec270[0] = (fTemp146 + (fTemp147 + (fRec270[1] + fTemp148)));
+			double fRec263 = fTemp77;
+			double fTemp78 = (fConst2 * (((0.034112183999999997 * fTemp12) - ((((0.65526247999999998 * fTemp8) + (0.2443716708 * fTemp10)) + (0.33208566309999998 * fTemp11)) + (1.4398108789999999 * fTemp9))) + (fConst3 * (0.0 - ((fConst5 * fRec268[1]) + (fConst4 * fRec265[1]))))));
+			fRec270[0] = (fRec270[1] + fTemp78);
 			fRec268[0] = fRec270[0];
-			double fRec269 = ((fTemp148 + fTemp147) + fTemp146);
+			double fRec269 = fTemp78;
 			fRec267[0] = (fRec268[0] + fRec267[1]);
 			fRec265[0] = fRec267[0];
 			double fRec266 = fRec269;
 			fVec13[(IOTA & 1023)] = ((1.051446173 * fTemp7) + (fRec254 + (fRec263 + fRec266)));
-			output13[i] = FAUSTFLOAT((0.8267575322812053 * (fRec0[0] * fVec13[((IOTA - iConst17) & 1023)])));
-			double fTemp149 = (fConst4 * fRec271[1]);
-			double fTemp150 = (fConst6 * ((0.086873754299999995 * fTemp14) - ((((((1.237817078 * fTemp9) + (0.0369051585 * fTemp10)) + (0.56477660600000001 * fTemp11)) + (0.067330699699999996 * fTemp12)) + (0.12252714250000001 * fTemp13)) + (0.73610476920000001 * fTemp15))));
-			double fTemp151 = (fConst8 * fRec274[1]);
-			double fTemp152 = (fConst9 * fRec277[1]);
-			fRec279[0] = (fTemp150 + (fTemp151 + (fRec279[1] + fTemp152)));
+			output13[i] = FAUSTFLOAT((0.8267575322812053 * (fRec0[0] * fVec13[((IOTA - iConst14) & 1023)])));
+			double fTemp79 = (fConst8 * ((fConst3 * (0.0 - ((fConst10 * fRec277[1]) + (fConst9 * fRec274[1])))) + (fConst12 * ((0.086873754299999995 * fTemp23) - ((((((1.237817078 * fTemp18) + (0.0369051585 * fTemp19)) + (0.56477660600000001 * fTemp20)) + (0.067330699699999996 * fTemp21)) + (0.12252714250000001 * fTemp22)) + (0.73610476920000001 * fTemp24))))));
+			fRec279[0] = (fRec279[1] + fTemp79);
 			fRec277[0] = fRec279[0];
-			double fRec278 = ((fTemp152 + fTemp151) + fTemp150);
+			double fRec278 = fTemp79;
 			fRec276[0] = (fRec277[0] + fRec276[1]);
 			fRec274[0] = fRec276[0];
 			double fRec275 = fRec278;
-			fRec273[0] = (fTemp149 + (fRec275 + fRec273[1]));
+			double fTemp80 = (fConst13 * fRec271[1]);
+			fRec273[0] = ((fRec275 + fRec273[1]) - fTemp80);
 			fRec271[0] = fRec273[0];
-			double fRec272 = (fRec275 + fTemp149);
-			double fTemp153 = (fConst11 * (((1.4874857909999999 * fTemp19) + (0.25703877600000002 * fTemp20)) - (0.55772063540000005 * fTemp21)));
-			double fTemp154 = (fConst12 * fRec280[1]);
-			fRec282[0] = (fTemp153 + (fRec282[1] + fTemp154));
+			double fRec272 = (fRec275 - fTemp80);
+			double fTemp81 = (fConst6 * ((((1.4874857909999999 * fTemp14) + (0.25703877600000002 * fTemp15)) - (0.55772063540000005 * fTemp16)) - (fConst7 * fRec280[1])));
+			fRec282[0] = (fRec282[1] + fTemp81);
 			fRec280[0] = fRec282[0];
-			double fRec281 = (fTemp154 + fTemp153);
-			double fTemp155 = (fConst14 * ((0.55625613669999996 * fTemp24) - ((((0.25487834840000001 * fTemp26) + (0.33116445579999998 * fTemp27)) + (0.0301461487 * fTemp28)) + (1.500751454 * fTemp25))));
-			double fTemp156 = (fConst15 * fRec283[1]);
-			double fTemp157 = (fConst16 * fRec286[1]);
-			fRec288[0] = (fTemp155 + (fTemp156 + (fRec288[1] + fTemp157)));
+			double fRec281 = fTemp81;
+			double fTemp82 = (fConst2 * (((0.55625613669999996 * fTemp8) - ((((0.25487834840000001 * fTemp10) + (0.33116445579999998 * fTemp11)) + (0.0301461487 * fTemp12)) + (1.500751454 * fTemp9))) + (fConst3 * (0.0 - ((fConst5 * fRec286[1]) + (fConst4 * fRec283[1]))))));
+			fRec288[0] = (fRec288[1] + fTemp82);
 			fRec286[0] = fRec288[0];
-			double fRec287 = ((fTemp157 + fTemp156) + fTemp155);
+			double fRec287 = fTemp82;
 			fRec285[0] = (fRec286[0] + fRec285[1]);
 			fRec283[0] = fRec285[0];
 			double fRec284 = fRec287;
 			fVec14[(IOTA & 1023)] = ((1.058525521 * fTemp7) + (fRec272 + (fRec281 + fRec284)));
-			output14[i] = FAUSTFLOAT((0.8267575322812053 * (fRec0[0] * fVec14[((IOTA - iConst17) & 1023)])));
-			double fTemp158 = (fConst4 * fRec289[1]);
-			double fTemp159 = (fConst6 * (((0.1573595082 * fTemp9) + (0.037448596100000002 * fTemp14)) - (((((0.076547329499999997 * fTemp10) + (0.50856507829999997 * fTemp11)) + (0.065156323299999999 * fTemp12)) + (0.34661838090000002 * fTemp13)) + (1.428152482 * fTemp15))));
-			double fTemp160 = (fConst8 * fRec292[1]);
-			double fTemp161 = (fConst9 * fRec295[1]);
-			fRec297[0] = (fTemp159 + (fTemp160 + (fRec297[1] + fTemp161)));
+			output14[i] = FAUSTFLOAT((0.8267575322812053 * (fRec0[0] * fVec14[((IOTA - iConst14) & 1023)])));
+			double fTemp83 = (fConst8 * ((fConst3 * (0.0 - ((fConst10 * fRec295[1]) + (fConst9 * fRec292[1])))) + (fConst12 * (((0.1573595082 * fTemp18) + (0.037448596100000002 * fTemp23)) - (((((0.076547329499999997 * fTemp19) + (0.50856507829999997 * fTemp20)) + (0.065156323299999999 * fTemp21)) + (0.34661838090000002 * fTemp22)) + (1.428152482 * fTemp24))))));
+			fRec297[0] = (fRec297[1] + fTemp83);
 			fRec295[0] = fRec297[0];
-			double fRec296 = ((fTemp161 + fTemp160) + fTemp159);
+			double fRec296 = fTemp83;
 			fRec294[0] = (fRec295[0] + fRec294[1]);
 			fRec292[0] = fRec294[0];
 			double fRec293 = fRec296;
-			fRec291[0] = (fTemp158 + (fRec293 + fRec291[1]));
+			double fTemp84 = (fConst13 * fRec289[1]);
+			fRec291[0] = ((fRec293 + fRec291[1]) - fTemp84);
 			fRec289[0] = fRec291[0];
-			double fRec290 = (fRec293 + fTemp158);
-			double fTemp162 = (fConst11 * (((1.2753111319999999 * fTemp19) + (0.77412727950000004 * fTemp20)) - (0.56449482959999997 * fTemp21)));
-			double fTemp163 = (fConst12 * fRec298[1]);
-			fRec300[0] = (fTemp162 + (fRec300[1] + fTemp163));
+			double fRec290 = (fRec293 - fTemp84);
+			double fTemp85 = (fConst6 * ((((1.2753111319999999 * fTemp14) + (0.77412727950000004 * fTemp15)) - (0.56449482959999997 * fTemp16)) - (fConst7 * fRec298[1])));
+			fRec300[0] = (fRec300[1] + fTemp85);
 			fRec298[0] = fRec300[0];
-			double fRec299 = (fTemp163 + fTemp162);
-			double fTemp164 = (fConst14 * ((1.426620021 * fTemp24) - ((((0.2139289244 * fTemp26) + (0.333078967 * fTemp27)) + (0.1038464523 * fTemp28)) + (0.70082592249999998 * fTemp25))));
-			double fTemp165 = (fConst15 * fRec301[1]);
-			double fTemp166 = (fConst16 * fRec304[1]);
-			fRec306[0] = (fTemp164 + (fTemp165 + (fRec306[1] + fTemp166)));
+			double fRec299 = fTemp85;
+			double fTemp86 = (fConst2 * (((1.426620021 * fTemp8) - ((((0.2139289244 * fTemp10) + (0.333078967 * fTemp11)) + (0.1038464523 * fTemp12)) + (0.70082592249999998 * fTemp9))) + (fConst3 * (0.0 - ((fConst5 * fRec304[1]) + (fConst4 * fRec301[1]))))));
+			fRec306[0] = (fRec306[1] + fTemp86);
 			fRec304[0] = fRec306[0];
-			double fRec305 = ((fTemp166 + fTemp165) + fTemp164);
+			double fRec305 = fTemp86;
 			fRec303[0] = (fRec304[0] + fRec303[1]);
 			fRec301[0] = fRec303[0];
 			double fRec302 = fRec305;
 			fVec15[(IOTA & 1023)] = ((1.0644773279999999 * fTemp7) + (fRec290 + (fRec299 + fRec302)));
-			output15[i] = FAUSTFLOAT((0.8267575322812053 * (fRec0[0] * fVec15[((IOTA - iConst17) & 1023)])));
-			double fTemp167 = (fConst19 * fRec307[1]);
-			double fTemp168 = (fConst21 * (((0.34689966280000001 * fTemp15) + (((0.79011201850000001 * fTemp9) + (1.545502191 * fTemp10)) + (1.6851143479999999 * fTemp14))) - (((0.053693903699999997 * fTemp11) + (0.57701465949999997 * fTemp12)) + (0.077799744800000001 * fTemp13))));
-			double fTemp169 = (fConst22 * fRec310[1]);
-			double fTemp170 = (fConst23 * fRec313[1]);
-			fRec315[0] = (fTemp168 + (fTemp169 + (fRec315[1] + fTemp170)));
+			output15[i] = FAUSTFLOAT((0.8267575322812053 * (fRec0[0] * fVec15[((IOTA - iConst14) & 1023)])));
+			double fTemp87 = (fConst15 * ((fConst3 * (0.0 - ((fConst17 * fRec313[1]) + (fConst16 * fRec310[1])))) + (fConst19 * (((((0.79011201850000001 * fTemp18) + (1.545502191 * fTemp19)) + (1.6851143479999999 * fTemp23)) + (0.34689966280000001 * fTemp24)) - (((0.053693903699999997 * fTemp20) + (0.57701465949999997 * fTemp21)) + (0.077799744800000001 * fTemp22))))));
+			fRec315[0] = (fRec315[1] + fTemp87);
 			fRec313[0] = fRec315[0];
-			double fRec314 = ((fTemp170 + fTemp169) + fTemp168);
+			double fRec314 = fTemp87;
 			fRec312[0] = (fRec313[0] + fRec312[1]);
 			fRec310[0] = fRec312[0];
 			double fRec311 = fRec314;
-			fRec309[0] = (fTemp167 + (fRec311 + fRec309[1]));
+			double fTemp88 = (fConst20 * fRec307[1]);
+			fRec309[0] = ((fRec311 + fRec309[1]) - fTemp88);
 			fRec307[0] = fRec309[0];
-			double fRec308 = (fRec311 + fTemp167);
-			double fTemp171 = (fConst25 * ((3.2271900900000001 * fTemp21) - ((0.1326066722 * fTemp19) + (0.27112274790000002 * fTemp20))));
-			double fTemp172 = (fConst26 * fRec316[1]);
-			fRec318[0] = (fTemp171 + (fRec318[1] + fTemp172));
+			double fRec308 = (fRec311 - fTemp88);
+			double fTemp89 = (fConst21 * (((3.2271900900000001 * fTemp16) - ((0.1326066722 * fTemp14) + (0.27112274790000002 * fTemp15))) - (fConst22 * fRec316[1])));
+			fRec318[0] = (fRec318[1] + fTemp89);
 			fRec316[0] = fRec318[0];
-			double fRec317 = (fTemp172 + fTemp171);
-			double fTemp173 = (fConst28 * (((1.128038694 * fTemp26) + (2.6725339830000001 * fTemp28)) - (((0.029219941900000001 * fTemp24) + (1.3919245929999999 * fTemp27)) + (0.0959038745 * fTemp25))));
-			double fTemp174 = (fConst29 * fRec319[1]);
-			double fTemp175 = (fConst30 * fRec322[1]);
-			fRec324[0] = (fTemp173 + (fTemp174 + (fRec324[1] + fTemp175)));
+			double fRec317 = fTemp89;
+			double fTemp90 = (fConst23 * ((((1.128038694 * fTemp10) + (2.6725339830000001 * fTemp12)) - (((0.029219941900000001 * fTemp8) + (1.3919245929999999 * fTemp11)) + (0.0959038745 * fTemp9))) + (fConst3 * (0.0 - ((fConst25 * fRec322[1]) + (fConst24 * fRec319[1]))))));
+			fRec324[0] = (fRec324[1] + fTemp90);
 			fRec322[0] = fRec324[0];
-			double fRec323 = ((fTemp175 + fTemp174) + fTemp173);
+			double fRec323 = fTemp90;
 			fRec321[0] = (fRec322[0] + fRec321[1]);
 			fRec319[0] = fRec321[0];
 			double fRec320 = fRec323;
 			fVec16[(IOTA & 511)] = ((fRec308 + (fRec317 + fRec320)) - (0.71663587709999998 * fTemp7));
-			output16[i] = FAUSTFLOAT((0.87553802008608317 * (fRec0[0] * fVec16[((IOTA - iConst31) & 511)])));
-			double fTemp176 = (fConst19 * fRec325[1]);
-			double fTemp177 = (fConst21 * (((0.31973423610000001 * fTemp15) + ((0.057430700600000002 * fTemp11) + (1.6552172940000001 * fTemp14))) - ((((0.80252953819999995 * fTemp9) + (1.57986194 * fTemp10)) + (0.57755366060000002 * fTemp12)) + (0.080963402200000006 * fTemp13))));
-			double fTemp178 = (fConst22 * fRec328[1]);
-			double fTemp179 = (fConst23 * fRec331[1]);
-			fRec333[0] = (fTemp177 + (fTemp178 + (fRec333[1] + fTemp179)));
+			output16[i] = FAUSTFLOAT((0.87553802008608317 * (fRec0[0] * fVec16[((IOTA - iConst26) & 511)])));
+			double fTemp91 = (fConst15 * ((fConst3 * (0.0 - ((fConst17 * fRec331[1]) + (fConst16 * fRec328[1])))) + (fConst19 * ((((0.057430700600000002 * fTemp20) + (1.6552172940000001 * fTemp23)) + (0.31973423610000001 * fTemp24)) - ((((0.80252953819999995 * fTemp18) + (1.57986194 * fTemp19)) + (0.57755366060000002 * fTemp21)) + (0.080963402200000006 * fTemp22))))));
+			fRec333[0] = (fRec333[1] + fTemp91);
 			fRec331[0] = fRec333[0];
-			double fRec332 = ((fTemp179 + fTemp178) + fTemp177);
+			double fRec332 = fTemp91;
 			fRec330[0] = (fRec331[0] + fRec330[1]);
 			fRec328[0] = fRec330[0];
 			double fRec329 = fRec332;
-			fRec327[0] = (fTemp176 + (fRec329 + fRec327[1]));
+			double fTemp92 = (fConst20 * fRec325[1]);
+			fRec327[0] = ((fRec329 + fRec327[1]) - fTemp92);
 			fRec325[0] = fRec327[0];
-			double fRec326 = (fRec329 + fTemp176);
-			double fTemp180 = (fConst25 * (((0.13345226900000001 * fTemp19) + (3.2497891160000001 * fTemp21)) - (0.26385705710000001 * fTemp20)));
-			double fTemp181 = (fConst26 * fRec334[1]);
-			fRec336[0] = (fTemp180 + (fRec336[1] + fTemp181));
+			double fRec326 = (fRec329 - fTemp92);
+			double fTemp93 = (fConst21 * ((((0.13345226900000001 * fTemp14) + (3.2497891160000001 * fTemp16)) - (0.26385705710000001 * fTemp15)) - (fConst22 * fRec334[1])));
+			fRec336[0] = (fRec336[1] + fTemp93);
 			fRec334[0] = fRec336[0];
-			double fRec335 = (fTemp181 + fTemp180);
-			double fTemp182 = (fConst28 * (((0.031873261899999998 * fTemp24) + (2.6621647689999999 * fTemp28)) - (((1.1560522179999999 * fTemp26) + (1.4037039229999999 * fTemp27)) + (0.090159545600000002 * fTemp25))));
-			double fTemp183 = (fConst29 * fRec337[1]);
-			double fTemp184 = (fConst30 * fRec340[1]);
-			fRec342[0] = (fTemp182 + (fTemp183 + (fRec342[1] + fTemp184)));
+			double fRec335 = fTemp93;
+			double fTemp94 = (fConst23 * ((((0.031873261899999998 * fTemp8) + (2.6621647689999999 * fTemp12)) - (((1.1560522179999999 * fTemp10) + (1.4037039229999999 * fTemp11)) + (0.090159545600000002 * fTemp9))) + (fConst3 * (0.0 - ((fConst25 * fRec340[1]) + (fConst24 * fRec337[1]))))));
+			fRec342[0] = (fRec342[1] + fTemp94);
 			fRec340[0] = fRec342[0];
-			double fRec341 = ((fTemp184 + fTemp183) + fTemp182);
+			double fRec341 = fTemp94;
 			fRec339[0] = (fRec340[0] + fRec339[1]);
 			fRec337[0] = fRec339[0];
 			double fRec338 = fRec341;
 			fVec17[(IOTA & 511)] = ((fRec326 + (fRec335 + fRec338)) - (0.72692761480000001 * fTemp7));
-			output17[i] = FAUSTFLOAT((0.87553802008608317 * (fRec0[0] * fVec17[((IOTA - iConst31) & 511)])));
-			double fTemp185 = (fConst19 * fRec343[1]);
-			double fTemp186 = (fConst21 * (((0.40435744439999999 * fTemp9) + (0.090179745800000002 * fTemp11)) - ((0.77125577759999997 * fTemp15) + ((((1.4782186930000001 * fTemp10) + (0.5782451206 * fTemp12)) + (0.045478529199999999 * fTemp13)) + (1.78723678 * fTemp14)))));
-			double fTemp187 = (fConst22 * fRec346[1]);
-			double fTemp188 = (fConst23 * fRec349[1]);
-			fRec351[0] = (fTemp186 + (fTemp187 + (fRec351[1] + fTemp188)));
+			output17[i] = FAUSTFLOAT((0.87553802008608317 * (fRec0[0] * fVec17[((IOTA - iConst26) & 511)])));
+			double fTemp95 = (fConst21 * ((((0.28018120559999998 * fTemp14) + (3.3338112099999999 * fTemp16)) - (0.1128087232 * fTemp15)) - (fConst22 * fRec343[1])));
+			fRec345[0] = (fRec345[1] + fTemp95);
+			fRec343[0] = fRec345[0];
+			double fRec344 = fTemp95;
+			double fTemp96 = (fConst23 * (((((0.028264500800000002 * fTemp8) + (1.043478913 * fTemp12)) + (0.1019662019 * fTemp9)) - ((2.7303464879999999 * fTemp10) + (1.4547183340000001 * fTemp11))) + (fConst3 * (0.0 - ((fConst25 * fRec349[1]) + (fConst24 * fRec346[1]))))));
+			fRec351[0] = (fRec351[1] + fTemp96);
 			fRec349[0] = fRec351[0];
-			double fRec350 = ((fTemp188 + fTemp187) + fTemp186);
+			double fRec350 = fTemp96;
 			fRec348[0] = (fRec349[0] + fRec348[1]);
 			fRec346[0] = fRec348[0];
 			double fRec347 = fRec350;
-			fRec345[0] = (fTemp185 + (fRec347 + fRec345[1]));
-			fRec343[0] = fRec345[0];
-			double fRec344 = (fRec347 + fTemp185);
-			double fTemp189 = (fConst25 * (((0.28018120559999998 * fTemp19) + (3.3338112099999999 * fTemp21)) - (0.1128087232 * fTemp20)));
-			double fTemp190 = (fConst26 * fRec352[1]);
-			fRec354[0] = (fTemp189 + (fRec354[1] + fTemp190));
-			fRec352[0] = fRec354[0];
-			double fRec353 = (fTemp190 + fTemp189);
-			double fTemp191 = (fConst28 * ((((0.028264500800000002 * fTemp24) + (1.043478913 * fTemp28)) + (0.1019662019 * fTemp25)) - ((2.7303464879999999 * fTemp26) + (1.4547183340000001 * fTemp27))));
-			double fTemp192 = (fConst29 * fRec355[1]);
-			double fTemp193 = (fConst30 * fRec358[1]);
-			fRec360[0] = (fTemp191 + (fTemp192 + (fRec360[1] + fTemp193)));
+			double fTemp97 = (fConst15 * ((fConst3 * (0.0 - ((fConst17 * fRec358[1]) + (fConst16 * fRec355[1])))) + (fConst19 * (((0.40435744439999999 * fTemp18) + (0.090179745800000002 * fTemp20)) - (((((1.4782186930000001 * fTemp19) + (0.5782451206 * fTemp21)) + (0.045478529199999999 * fTemp22)) + (1.78723678 * fTemp23)) + (0.77125577759999997 * fTemp24))))));
+			fRec360[0] = (fRec360[1] + fTemp97);
 			fRec358[0] = fRec360[0];
-			double fRec359 = ((fTemp193 + fTemp192) + fTemp191);
+			double fRec359 = fTemp97;
 			fRec357[0] = (fRec358[0] + fRec357[1]);
 			fRec355[0] = fRec357[0];
 			double fRec356 = fRec359;
-			fVec18[(IOTA & 511)] = ((fRec344 + (fRec353 + fRec356)) - (0.76033348970000003 * fTemp7));
-			output18[i] = FAUSTFLOAT((0.87553802008608317 * (fRec0[0] * fVec18[((IOTA - iConst31) & 511)])));
-			double fTemp194 = (fConst19 * fRec361[1]);
-			double fTemp195 = (fConst21 * ((((((0.22544083970000001 * fTemp9) + (1.678397742 * fTemp10)) + (0.078296953599999997 * fTemp11)) + (0.046461566199999998 * fTemp13)) + (0.83943683680000003 * fTemp15)) - ((0.57742520080000004 * fTemp12) + (1.526258589 * fTemp14))));
-			double fTemp196 = (fConst22 * fRec364[1]);
-			double fTemp197 = (fConst23 * fRec367[1]);
-			fRec369[0] = (fTemp195 + (fTemp196 + (fRec369[1] + fTemp197)));
+			double fTemp98 = (fConst20 * fRec352[1]);
+			fRec354[0] = ((fRec356 + fRec354[1]) - fTemp98);
+			fRec352[0] = fRec354[0];
+			double fRec353 = (fRec356 - fTemp98);
+			fVec18[(IOTA & 511)] = ((fRec344 + (fRec347 + fRec353)) - (0.76033348970000003 * fTemp7));
+			output18[i] = FAUSTFLOAT((0.87553802008608317 * (fRec0[0] * fVec18[((IOTA - iConst26) & 511)])));
+			double fTemp99 = (fConst21 * (((0.24543743779999999 * fTemp14) + ((3.2281902850000002 * fTemp16) + (0.1209532769 * fTemp15))) - (fConst22 * fRec361[1])));
+			fRec363[0] = (fRec363[1] + fTemp99);
+			fRec361[0] = fRec363[0];
+			double fRec362 = fTemp99;
+			double fTemp100 = (fConst23 * (((0.089097929699999995 * fTemp9) - ((((0.0162130578 * fTemp8) + (2.5860240640000001 * fTemp10)) + (1.3943220110000001 * fTemp11)) + (1.217650589 * fTemp12))) + (fConst3 * (0.0 - ((fConst25 * fRec367[1]) + (fConst24 * fRec364[1]))))));
+			fRec369[0] = (fRec369[1] + fTemp100);
 			fRec367[0] = fRec369[0];
-			double fRec368 = ((fTemp197 + fTemp196) + fTemp195);
+			double fRec368 = fTemp100;
 			fRec366[0] = (fRec367[0] + fRec366[1]);
 			fRec364[0] = fRec366[0];
 			double fRec365 = fRec368;
-			fRec363[0] = (fTemp194 + (fRec365 + fRec363[1]));
-			fRec361[0] = fRec363[0];
-			double fRec362 = (fRec365 + fTemp194);
-			double fTemp198 = (fConst25 * (((0.24543743779999999 * fTemp19) + (3.2281902850000002 * fTemp21)) + (0.1209532769 * fTemp20)));
-			double fTemp199 = (fConst26 * fRec370[1]);
-			fRec372[0] = (fTemp198 + (fRec372[1] + fTemp199));
-			fRec370[0] = fRec372[0];
-			double fRec371 = (fTemp199 + fTemp198);
-			double fTemp200 = (fConst28 * ((0.089097929699999995 * fTemp25) - ((((0.0162130578 * fTemp24) + (2.5860240640000001 * fTemp26)) + (1.3943220110000001 * fTemp27)) + (1.217650589 * fTemp28))));
-			double fTemp201 = (fConst29 * fRec373[1]);
-			double fTemp202 = (fConst30 * fRec376[1]);
-			fRec378[0] = (fTemp200 + (fTemp201 + (fRec378[1] + fTemp202)));
+			double fTemp101 = (fConst15 * ((fConst3 * (0.0 - ((fConst17 * fRec376[1]) + (fConst16 * fRec373[1])))) + (fConst19 * ((((((0.22544083970000001 * fTemp18) + (1.678397742 * fTemp19)) + (0.078296953599999997 * fTemp20)) + (0.046461566199999998 * fTemp22)) + (0.83943683680000003 * fTemp24)) - ((0.57742520080000004 * fTemp21) + (1.526258589 * fTemp23))))));
+			fRec378[0] = (fRec378[1] + fTemp101);
 			fRec376[0] = fRec378[0];
-			double fRec377 = ((fTemp202 + fTemp201) + fTemp200);
+			double fRec377 = fTemp101;
 			fRec375[0] = (fRec376[0] + fRec375[1]);
 			fRec373[0] = fRec375[0];
 			double fRec374 = fRec377;
-			fVec19[(IOTA & 511)] = ((fRec362 + (fRec371 + fRec374)) - (0.71636274430000002 * fTemp7));
-			output19[i] = FAUSTFLOAT((0.87553802008608317 * (fRec0[0] * fVec19[((IOTA - iConst31) & 511)])));
-			double fTemp203 = (fConst19 * fRec379[1]);
-			double fTemp204 = (fConst21 * (((1.710403951 * fTemp14) + (((1.4528246250000001 * fTemp10) + (0.0386263492 * fTemp11)) + (0.046349647000000001 * fTemp13))) - (((0.75388521289999999 * fTemp9) + (0.57551239710000002 * fTemp12)) + (0.38340662469999998 * fTemp15))));
-			double fTemp205 = (fConst22 * fRec382[1]);
-			double fTemp206 = (fConst23 * fRec385[1]);
-			fRec387[0] = (fTemp204 + (fTemp205 + (fRec387[1] + fTemp206)));
+			double fTemp102 = (fConst20 * fRec370[1]);
+			fRec372[0] = ((fRec374 + fRec372[1]) - fTemp102);
+			fRec370[0] = fRec372[0];
+			double fRec371 = (fRec374 - fTemp102);
+			fVec19[(IOTA & 511)] = ((fRec362 + (fRec365 + fRec371)) - (0.71636274430000002 * fTemp7));
+			output19[i] = FAUSTFLOAT((0.87553802008608317 * (fRec0[0] * fVec19[((IOTA - iConst26) & 511)])));
+			double fTemp103 = (fConst15 * ((fConst3 * (0.0 - ((fConst17 * fRec385[1]) + (fConst16 * fRec382[1])))) + (fConst19 * (((((1.4528246250000001 * fTemp19) + (0.0386263492 * fTemp20)) + (0.046349647000000001 * fTemp22)) + (1.710403951 * fTemp23)) - (((0.75388521289999999 * fTemp18) + (0.57551239710000002 * fTemp21)) + (0.38340662469999998 * fTemp24))))));
+			fRec387[0] = (fRec387[1] + fTemp103);
 			fRec385[0] = fRec387[0];
-			double fRec386 = ((fTemp206 + fTemp205) + fTemp204);
+			double fRec386 = fTemp103;
 			fRec384[0] = (fRec385[0] + fRec384[1]);
 			fRec382[0] = fRec384[0];
 			double fRec383 = fRec386;
-			fRec381[0] = (fTemp203 + (fRec383 + fRec381[1]));
+			double fTemp104 = (fConst20 * fRec379[1]);
+			fRec381[0] = ((fRec383 + fRec381[1]) - fTemp104);
 			fRec379[0] = fRec381[0];
-			double fRec380 = (fRec383 + fTemp203);
-			double fTemp207 = (fConst25 * (((0.1077954122 * fTemp19) + (3.0514447100000002 * fTemp21)) + (0.22248373490000001 * fTemp20)));
-			double fTemp208 = (fConst26 * fRec388[1]);
-			fRec390[0] = (fTemp207 + (fRec390[1] + fTemp208));
+			double fRec380 = (fRec383 - fTemp104);
+			double fTemp105 = (fConst21 * (((0.1077954122 * fTemp14) + ((3.0514447100000002 * fTemp16) + (0.22248373490000001 * fTemp15))) - (fConst22 * fRec388[1])));
+			fRec390[0] = (fRec390[1] + fTemp105);
 			fRec388[0] = fRec390[0];
-			double fRec389 = (fTemp208 + fTemp207);
-			double fTemp209 = (fConst28 * (0.0 - (((((0.029538815900000001 * fTemp24) + (1.02410819 * fTemp26)) + (1.291766762 * fTemp27)) + (2.568730161 * fTemp28)) + (0.089060087499999996 * fTemp25))));
-			double fTemp210 = (fConst29 * fRec391[1]);
-			double fTemp211 = (fConst30 * fRec394[1]);
-			fRec396[0] = (fTemp209 + (fTemp210 + (fRec396[1] + fTemp211)));
+			double fRec389 = fTemp105;
+			double fTemp106 = (fConst23 * ((0.0 - (((((0.029538815900000001 * fTemp8) + (1.02410819 * fTemp10)) + (1.291766762 * fTemp11)) + (2.568730161 * fTemp12)) + (0.089060087499999996 * fTemp9))) + (fConst3 * (0.0 - ((fConst25 * fRec394[1]) + (fConst24 * fRec391[1]))))));
+			fRec396[0] = (fRec396[1] + fTemp106);
 			fRec394[0] = fRec396[0];
-			double fRec395 = ((fTemp211 + fTemp210) + fTemp209);
+			double fRec395 = fTemp106;
 			fRec393[0] = (fRec394[0] + fRec393[1]);
 			fRec391[0] = fRec393[0];
 			double fRec392 = fRec395;
 			fVec20[(IOTA & 511)] = ((fRec380 + (fRec389 + fRec392)) - (0.64376761010000005 * fTemp7));
-			output20[i] = FAUSTFLOAT((0.87553802008608317 * (fRec0[0] * fVec20[((IOTA - iConst31) & 511)])));
-			double fTemp212 = (fConst19 * fRec397[1]);
-			double fTemp213 = (fConst21 * (((1.7130395140000001 * fTemp14) + ((0.76059992369999996 * fTemp9) + (0.048204176299999998 * fTemp13))) - ((((1.466030154 * fTemp10) + (0.042775342500000001 * fTemp11)) + (0.57635593919999994 * fTemp12)) + (0.39179786080000001 * fTemp15))));
-			double fTemp214 = (fConst22 * fRec400[1]);
-			double fTemp215 = (fConst23 * fRec403[1]);
-			fRec405[0] = (fTemp213 + (fTemp214 + (fRec405[1] + fTemp215)));
+			output20[i] = FAUSTFLOAT((0.87553802008608317 * (fRec0[0] * fVec20[((IOTA - iConst26) & 511)])));
+			double fTemp107 = (fConst15 * ((fConst3 * (0.0 - ((fConst17 * fRec403[1]) + (fConst16 * fRec400[1])))) + (fConst19 * ((((0.76059992369999996 * fTemp18) + (0.048204176299999998 * fTemp22)) + (1.7130395140000001 * fTemp23)) - ((((1.466030154 * fTemp19) + (0.042775342500000001 * fTemp20)) + (0.57635593919999994 * fTemp21)) + (0.39179786080000001 * fTemp24))))));
+			fRec405[0] = (fRec405[1] + fTemp107);
 			fRec403[0] = fRec405[0];
-			double fRec404 = ((fTemp215 + fTemp214) + fTemp213);
+			double fRec404 = fTemp107;
 			fRec402[0] = (fRec403[0] + fRec402[1]);
 			fRec400[0] = fRec402[0];
 			double fRec401 = fRec404;
-			fRec399[0] = (fTemp212 + (fRec401 + fRec399[1]));
+			double fTemp108 = (fConst20 * fRec397[1]);
+			fRec399[0] = ((fRec401 + fRec399[1]) - fTemp108);
 			fRec397[0] = fRec399[0];
-			double fRec398 = (fRec401 + fTemp212);
-			double fTemp216 = (fConst25 * (((3.0789110389999998 * fTemp21) + (0.2273960253 * fTemp20)) - (0.11369486970000001 * fTemp19)));
-			double fTemp217 = (fConst26 * fRec406[1]);
-			fRec408[0] = (fTemp216 + (fRec408[1] + fTemp217));
+			double fRec398 = (fRec401 - fTemp108);
+			double fTemp109 = (fConst21 * ((((3.0789110389999998 * fTemp16) + (0.2273960253 * fTemp15)) - (0.11369486970000001 * fTemp14)) - (fConst22 * fRec406[1])));
+			fRec408[0] = (fRec408[1] + fTemp109);
 			fRec406[0] = fRec408[0];
-			double fRec407 = (fTemp217 + fTemp216);
-			double fTemp218 = (fConst28 * (((0.028624669200000001 * fTemp24) + (1.0396157109999999 * fTemp26)) - (((1.304854307 * fTemp27) + (2.5801941309999998 * fTemp28)) + (0.085711717899999998 * fTemp25))));
-			double fTemp219 = (fConst29 * fRec409[1]);
-			double fTemp220 = (fConst30 * fRec412[1]);
-			fRec414[0] = (fTemp218 + (fTemp219 + (fRec414[1] + fTemp220)));
+			double fRec407 = fTemp109;
+			double fTemp110 = (fConst23 * ((((0.028624669200000001 * fTemp8) + (1.0396157109999999 * fTemp10)) - (((1.304854307 * fTemp11) + (2.5801941309999998 * fTemp12)) + (0.085711717899999998 * fTemp9))) + (fConst3 * (0.0 - ((fConst25 * fRec412[1]) + (fConst24 * fRec409[1]))))));
+			fRec414[0] = (fRec414[1] + fTemp110);
 			fRec412[0] = fRec414[0];
-			double fRec413 = ((fTemp220 + fTemp219) + fTemp218);
+			double fRec413 = fTemp110;
 			fRec411[0] = (fRec412[0] + fRec411[1]);
 			fRec409[0] = fRec411[0];
 			double fRec410 = fRec413;
 			fVec21[(IOTA & 511)] = ((fRec398 + (fRec407 + fRec410)) - (0.65714263480000001 * fTemp7));
-			output21[i] = FAUSTFLOAT((0.87553802008608317 * (fRec0[0] * fVec21[((IOTA - iConst31) & 511)])));
-			double fTemp221 = (fConst19 * fRec415[1]);
-			double fTemp222 = (fConst21 * (((0.046493625800000001 * fTemp13) + (0.81616439699999999 * fTemp15)) - (((((0.2570356184 * fTemp9) + (1.6517828699999999 * fTemp10)) + (0.069699353899999997 * fTemp11)) + (0.57901039229999995 * fTemp12)) + (1.580628156 * fTemp14))));
-			double fTemp223 = (fConst22 * fRec418[1]);
-			double fTemp224 = (fConst23 * fRec421[1]);
-			fRec423[0] = (fTemp222 + (fTemp223 + (fRec423[1] + fTemp224)));
+			output21[i] = FAUSTFLOAT((0.87553802008608317 * (fRec0[0] * fVec21[((IOTA - iConst26) & 511)])));
+			double fTemp111 = (fConst15 * ((fConst3 * (0.0 - ((fConst17 * fRec421[1]) + (fConst16 * fRec418[1])))) + (fConst19 * (((0.046493625800000001 * fTemp22) + (0.81616439699999999 * fTemp24)) - (((((0.2570356184 * fTemp18) + (1.6517828699999999 * fTemp19)) + (0.069699353899999997 * fTemp20)) + (0.57901039229999995 * fTemp21)) + (1.580628156 * fTemp23))))));
+			fRec423[0] = (fRec423[1] + fTemp111);
 			fRec421[0] = fRec423[0];
-			double fRec422 = ((fTemp224 + fTemp223) + fTemp222);
+			double fRec422 = fTemp111;
 			fRec420[0] = (fRec421[0] + fRec420[1]);
 			fRec418[0] = fRec420[0];
 			double fRec419 = fRec422;
-			fRec417[0] = (fTemp221 + (fRec419 + fRec417[1]));
+			double fTemp112 = (fConst20 * fRec415[1]);
+			fRec417[0] = ((fRec419 + fRec417[1]) - fTemp112);
 			fRec415[0] = fRec417[0];
-			double fRec416 = (fRec419 + fTemp221);
-			double fTemp225 = (fConst25 * (((3.2676833260000002 * fTemp21) + (0.13105865050000001 * fTemp20)) - (0.27144967530000003 * fTemp19)));
-			double fTemp226 = (fConst26 * fRec424[1]);
-			fRec426[0] = (fTemp225 + (fRec426[1] + fTemp226));
+			double fRec416 = (fRec419 - fTemp112);
+			double fTemp113 = (fConst21 * ((((3.2676833260000002 * fTemp16) + (0.13105865050000001 * fTemp15)) - (0.27144967530000003 * fTemp14)) - (fConst22 * fRec424[1])));
+			fRec426[0] = (fRec426[1] + fTemp113);
 			fRec424[0] = fRec426[0];
-			double fRec425 = (fTemp226 + fTemp225);
-			double fTemp227 = (fConst28 * ((((0.043113664199999999 * fTemp24) + (2.618275133 * fTemp26)) + (0.1033520748 * fTemp25)) - ((1.4087544219999999 * fTemp27) + (1.1971886460000001 * fTemp28))));
-			double fTemp228 = (fConst29 * fRec427[1]);
-			double fTemp229 = (fConst30 * fRec430[1]);
-			fRec432[0] = (fTemp227 + (fTemp228 + (fRec432[1] + fTemp229)));
+			double fRec425 = fTemp113;
+			double fTemp114 = (fConst23 * (((((0.043113664199999999 * fTemp8) + (2.618275133 * fTemp10)) + (0.1033520748 * fTemp9)) - ((1.4087544219999999 * fTemp11) + (1.1971886460000001 * fTemp12))) + (fConst3 * (0.0 - ((fConst25 * fRec430[1]) + (fConst24 * fRec427[1]))))));
+			fRec432[0] = (fRec432[1] + fTemp114);
 			fRec430[0] = fRec432[0];
-			double fRec431 = ((fTemp229 + fTemp228) + fTemp227);
+			double fRec431 = fTemp114;
 			fRec429[0] = (fRec430[0] + fRec429[1]);
 			fRec427[0] = fRec429[0];
 			double fRec428 = fRec431;
 			fVec22[(IOTA & 511)] = ((fRec416 + (fRec425 + fRec428)) - (0.73937673599999998 * fTemp7));
-			output22[i] = FAUSTFLOAT((0.87553802008608317 * (fRec0[0] * fVec22[((IOTA - iConst31) & 511)])));
-			double fTemp230 = (fConst19 * fRec433[1]);
-			double fTemp231 = (fConst21 * ((1.5263927340000001 * fTemp10) - ((0.78490266760000005 * fTemp15) + (((((0.36733705420000001 * fTemp9) + (0.0828596271 * fTemp11)) + (0.57836404470000002 * fTemp12)) + (0.044991680300000003 * fTemp13)) + (1.738361888 * fTemp14)))));
-			double fTemp232 = (fConst22 * fRec436[1]);
-			double fTemp233 = (fConst23 * fRec439[1]);
-			fRec441[0] = (fTemp231 + (fTemp232 + (fRec441[1] + fTemp233)));
+			output22[i] = FAUSTFLOAT((0.87553802008608317 * (fRec0[0] * fVec22[((IOTA - iConst26) & 511)])));
+			double fTemp115 = (fConst15 * ((fConst3 * (0.0 - ((fConst17 * fRec439[1]) + (fConst16 * fRec436[1])))) + (fConst19 * ((1.5263927340000001 * fTemp19) - ((((((0.36733705420000001 * fTemp18) + (0.0828596271 * fTemp20)) + (0.57836404470000002 * fTemp21)) + (0.044991680300000003 * fTemp22)) + (1.738361888 * fTemp23)) + (0.78490266760000005 * fTemp24))))));
+			fRec441[0] = (fRec441[1] + fTemp115);
 			fRec439[0] = fRec441[0];
-			double fRec440 = ((fTemp233 + fTemp232) + fTemp231);
+			double fRec440 = fTemp115;
 			fRec438[0] = (fRec439[0] + fRec438[1]);
 			fRec436[0] = fRec438[0];
 			double fRec437 = fRec440;
-			fRec435[0] = (fTemp230 + (fRec437 + fRec435[1]));
+			double fTemp116 = (fConst20 * fRec433[1]);
+			fRec435[0] = ((fRec437 + fRec435[1]) - fTemp116);
 			fRec433[0] = fRec435[0];
-			double fRec434 = (fRec437 + fTemp230);
-			double fTemp234 = (fConst25 * ((3.3172901010000002 * fTemp21) - ((0.27812155039999997 * fTemp19) + (0.1144411456 * fTemp20))));
-			double fTemp235 = (fConst26 * fRec442[1]);
-			fRec444[0] = (fTemp234 + (fRec444[1] + fTemp235));
+			double fRec434 = (fRec437 - fTemp116);
+			double fTemp117 = (fConst21 * (((3.3172901010000002 * fTemp16) - ((0.27812155039999997 * fTemp14) + (0.1144411456 * fTemp15))) - (fConst22 * fRec442[1])));
+			fRec444[0] = (fRec444[1] + fTemp117);
 			fRec442[0] = fRec444[0];
-			double fRec443 = (fTemp235 + fTemp234);
-			double fTemp236 = (fConst28 * ((((2.7022769910000002 * fTemp26) + (1.076745858 * fTemp28)) + (0.1031060349 * fTemp25)) - ((0.038407635099999997 * fTemp24) + (1.4407382630000001 * fTemp27))));
-			double fTemp237 = (fConst29 * fRec445[1]);
-			double fTemp238 = (fConst30 * fRec448[1]);
-			fRec450[0] = (fTemp236 + (fTemp237 + (fRec450[1] + fTemp238)));
+			double fRec443 = fTemp117;
+			double fTemp118 = (fConst23 * (((((2.7022769910000002 * fTemp10) + (1.076745858 * fTemp12)) + (0.1031060349 * fTemp9)) - ((0.038407635099999997 * fTemp8) + (1.4407382630000001 * fTemp11))) + (fConst3 * (0.0 - ((fConst25 * fRec448[1]) + (fConst24 * fRec445[1]))))));
+			fRec450[0] = (fRec450[1] + fTemp118);
 			fRec448[0] = fRec450[0];
-			double fRec449 = ((fTemp238 + fTemp237) + fTemp236);
+			double fRec449 = fTemp118;
 			fRec447[0] = (fRec448[0] + fRec447[1]);
 			fRec445[0] = fRec447[0];
 			double fRec446 = fRec449;
 			fVec23[(IOTA & 511)] = ((fRec434 + (fRec443 + fRec446)) - (0.75734553459999998 * fTemp7));
-			output23[i] = FAUSTFLOAT((0.87553802008608317 * (fRec0[0] * fVec23[((IOTA - iConst31) & 511)])));
-			double fTemp239 = (fConst33 * fRec451[1]);
-			double fTemp240 = (fConst35 * (((0.0036818449 * fTemp14) + ((((0.034778755500000001 * fTemp9) + (0.86110870679999996 * fTemp10)) + (2.4540454459999999 * fTemp11)) + (2.455185154 * fTemp13))) - ((2.1817598820000002 * fTemp12) + (0.035668522500000001 * fTemp15))));
-			double fTemp241 = (fConst36 * fRec454[1]);
-			double fTemp242 = (fConst37 * fRec457[1]);
-			fRec459[0] = (fTemp240 + (fTemp241 + (fRec459[1] + fTemp242)));
+			output23[i] = FAUSTFLOAT((0.87553802008608317 * (fRec0[0] * fVec23[((IOTA - iConst26) & 511)])));
+			double fTemp119 = (fConst27 * ((fConst3 * (0.0 - ((fConst29 * fRec457[1]) + (fConst28 * fRec454[1])))) + (fConst31 * ((((((0.034778755500000001 * fTemp18) + (0.86110870679999996 * fTemp19)) + (2.4540454459999999 * fTemp20)) + (2.455185154 * fTemp22)) + (0.0036818449 * fTemp23)) - ((2.1817598820000002 * fTemp21) + (0.035668522500000001 * fTemp24))))));
+			fRec459[0] = (fRec459[1] + fTemp119);
 			fRec457[0] = fRec459[0];
-			double fRec458 = ((fTemp242 + fTemp241) + fTemp240);
+			double fRec458 = fTemp119;
 			fRec456[0] = (fRec457[0] + fRec456[1]);
 			fRec454[0] = fRec456[0];
 			double fRec455 = fRec458;
-			fRec453[0] = (fTemp239 + (fRec455 + fRec453[1]));
+			double fTemp120 = (fConst32 * fRec451[1]);
+			fRec453[0] = ((fRec455 + fRec453[1]) - fTemp120);
 			fRec451[0] = fRec453[0];
-			double fRec452 = (fRec455 + fTemp239);
-			double fTemp243 = (fConst39 * (((1.5670109139999999 * fTemp19) + (1.5722602910000001 * fTemp20)) - (11.21353452 * fTemp21)));
-			double fTemp244 = (fConst40 * fRec460[1]);
-			fRec462[0] = (fTemp243 + (fRec462[1] + fTemp244));
+			double fRec452 = (fRec455 - fTemp120);
+			double fTemp121 = (fConst33 * ((((1.5670109139999999 * fTemp14) + (1.5722602910000001 * fTemp15)) - (11.21353452 * fTemp16)) - (fConst34 * fRec460[1])));
+			fRec462[0] = (fRec462[1] + fTemp121);
 			fRec460[0] = fRec462[0];
-			double fRec461 = (fTemp244 + fTemp243);
-			double fTemp245 = (fConst42 * ((10.390682549999999 * fTemp27) - ((((0.2417585038 * fTemp24) + (1.2283925410000001 * fTemp26)) + (1.2470435369999999 * fTemp28)) + (0.0035501776000000001 * fTemp25))));
-			double fTemp246 = (fConst43 * fRec463[1]);
-			double fTemp247 = (fConst44 * fRec466[1]);
-			fRec468[0] = (fTemp245 + (fTemp246 + (fRec468[1] + fTemp247)));
+			double fRec461 = fTemp121;
+			double fTemp122 = (fConst35 * (((10.390682549999999 * fTemp11) - ((((0.2417585038 * fTemp8) + (1.2283925410000001 * fTemp10)) + (1.2470435369999999 * fTemp12)) + (0.0035501776000000001 * fTemp9))) + (fConst3 * (0.0 - ((fConst37 * fRec466[1]) + (fConst36 * fRec463[1]))))));
+			fRec468[0] = (fRec468[1] + fTemp122);
 			fRec466[0] = fRec468[0];
-			double fRec467 = ((fTemp247 + fTemp246) + fTemp245);
+			double fRec467 = fTemp122;
 			fRec465[0] = (fRec466[0] + fRec465[1]);
 			fRec463[0] = fRec465[0];
 			double fRec464 = fRec467;
 			fVec24[(IOTA & 255)] = ((6.4790361709999997 * fTemp7) + (fRec452 + (fRec461 + fRec464)));
-			output24[i] = FAUSTFLOAT((0.95355093256814927 * (fRec0[0] * fVec24[((IOTA - iConst45) & 255)])));
-			double fTemp248 = (fConst33 * fRec469[1]);
-			double fTemp249 = (fConst35 * (((2.4556422539999998 * fTemp13) + (0.0025355454999999999 * fTemp14)) - (((((0.034639365399999997 * fTemp9) + (0.86137513610000005 * fTemp10)) + (2.454353352 * fTemp11)) + (2.1823768559999999 * fTemp12)) + (0.039547751800000003 * fTemp15))));
-			double fTemp250 = (fConst36 * fRec472[1]);
-			double fTemp251 = (fConst37 * fRec475[1]);
-			fRec477[0] = (fTemp249 + (fTemp250 + (fRec477[1] + fTemp251)));
+			output24[i] = FAUSTFLOAT((0.95355093256814927 * (fRec0[0] * fVec24[((IOTA - iConst38) & 255)])));
+			double fTemp123 = (fConst27 * ((fConst3 * (0.0 - ((fConst29 * fRec475[1]) + (fConst28 * fRec472[1])))) + (fConst31 * (((2.4556422539999998 * fTemp22) + (0.0025355454999999999 * fTemp23)) - (((((0.034639365399999997 * fTemp18) + (0.86137513610000005 * fTemp19)) + (2.454353352 * fTemp20)) + (2.1823768559999999 * fTemp21)) + (0.039547751800000003 * fTemp24))))));
+			fRec477[0] = (fRec477[1] + fTemp123);
 			fRec475[0] = fRec477[0];
-			double fRec476 = ((fTemp251 + fTemp250) + fTemp249);
+			double fRec476 = fTemp123;
 			fRec474[0] = (fRec475[0] + fRec474[1]);
 			fRec472[0] = fRec474[0];
 			double fRec473 = fRec476;
-			fRec471[0] = (fTemp248 + (fRec473 + fRec471[1]));
+			double fTemp124 = (fConst32 * fRec469[1]);
+			fRec471[0] = ((fRec473 + fRec471[1]) - fTemp124);
 			fRec469[0] = fRec471[0];
-			double fRec470 = (fRec473 + fTemp248);
-			double fTemp252 = (fConst39 * ((1.5742612170000001 * fTemp20) - ((1.5672730500000001 * fTemp19) + (11.20046943 * fTemp21))));
-			double fTemp253 = (fConst40 * fRec478[1]);
-			fRec480[0] = (fTemp252 + (fRec480[1] + fTemp253));
+			double fRec470 = (fRec473 - fTemp124);
+			double fTemp125 = (fConst33 * (((1.5742612170000001 * fTemp15) - ((1.5672730500000001 * fTemp14) + (11.20046943 * fTemp16))) - (fConst34 * fRec478[1])));
+			fRec480[0] = (fRec480[1] + fTemp125);
 			fRec478[0] = fRec480[0];
-			double fRec479 = (fTemp253 + fTemp252);
-			double fTemp254 = (fConst42 * ((((0.24270983300000001 * fTemp24) + (1.225575401 * fTemp26)) + (10.38551494 * fTemp27)) - ((1.2468496710000001 * fTemp28) + (0.0002415133 * fTemp25))));
-			double fTemp255 = (fConst43 * fRec481[1]);
-			double fTemp256 = (fConst44 * fRec484[1]);
-			fRec486[0] = (fTemp254 + (fTemp255 + (fRec486[1] + fTemp256)));
+			double fRec479 = fTemp125;
+			double fTemp126 = (fConst35 * (((((0.24270983300000001 * fTemp8) + (1.225575401 * fTemp10)) + (10.38551494 * fTemp11)) - ((1.2468496710000001 * fTemp12) + (0.0002415133 * fTemp9))) + (fConst3 * (0.0 - ((fConst37 * fRec484[1]) + (fConst36 * fRec481[1]))))));
+			fRec486[0] = (fRec486[1] + fTemp126);
 			fRec484[0] = fRec486[0];
-			double fRec485 = ((fTemp256 + fTemp255) + fTemp254);
+			double fRec485 = fTemp126;
 			fRec483[0] = (fRec484[0] + fRec483[1]);
 			fRec481[0] = fRec483[0];
 			double fRec482 = fRec485;
 			fVec25[(IOTA & 255)] = ((6.471816274 * fTemp7) + (fRec470 + (fRec479 + fRec482)));
-			output25[i] = FAUSTFLOAT((0.95355093256814927 * (fRec0[0] * fVec25[((IOTA - iConst45) & 255)])));
-			double fTemp257 = (fConst33 * fRec487[1]);
-			double fTemp258 = (fConst35 * (((0.8439190338 * fTemp10) + (0.036490916900000003 * fTemp15)) - (((((0.029597783900000001 * fTemp9) + (2.4605575609999999 * fTemp11)) + (2.164259296 * fTemp12)) + (2.453125 * fTemp13)) + (0.016534051899999999 * fTemp14))));
-			double fTemp259 = (fConst36 * fRec490[1]);
-			double fTemp260 = (fConst37 * fRec493[1]);
-			fRec495[0] = (fTemp258 + (fTemp259 + (fRec495[1] + fTemp260)));
+			output25[i] = FAUSTFLOAT((0.95355093256814927 * (fRec0[0] * fVec25[((IOTA - iConst38) & 255)])));
+			double fTemp127 = (fConst27 * ((fConst3 * (0.0 - ((fConst29 * fRec493[1]) + (fConst28 * fRec490[1])))) + (fConst31 * (((0.8439190338 * fTemp19) + (0.036490916900000003 * fTemp24)) - (((((0.029597783900000001 * fTemp18) + (2.4605575609999999 * fTemp20)) + (2.164259296 * fTemp21)) + (2.453125 * fTemp22)) + (0.016534051899999999 * fTemp23))))));
+			fRec495[0] = (fRec495[1] + fTemp127);
 			fRec493[0] = fRec495[0];
-			double fRec494 = ((fTemp260 + fTemp259) + fTemp258);
+			double fRec494 = fTemp127;
 			fRec492[0] = (fRec493[0] + fRec492[1]);
 			fRec490[0] = fRec492[0];
 			double fRec491 = fRec494;
-			fRec489[0] = (fTemp257 + (fRec491 + fRec489[1]));
+			double fTemp128 = (fConst32 * fRec487[1]);
+			fRec489[0] = ((fRec491 + fRec489[1]) - fTemp128);
 			fRec487[0] = fRec489[0];
-			double fRec488 = (fRec491 + fTemp257);
-			double fTemp261 = (fConst39 * (0.0 - (((1.576718678 * fTemp19) + (11.22446465 * fTemp21)) + (1.5725259979999999 * fTemp20))));
-			double fTemp262 = (fConst40 * fRec496[1]);
-			fRec498[0] = (fTemp261 + (fRec498[1] + fTemp262));
+			double fRec488 = (fRec491 - fTemp128);
+			double fTemp129 = (fConst33 * ((0.0 - ((1.576718678 * fTemp14) + ((11.22446465 * fTemp16) + (1.5725259979999999 * fTemp15)))) - (fConst34 * fRec496[1])));
+			fRec498[0] = (fRec498[1] + fTemp129);
 			fRec496[0] = fRec498[0];
-			double fRec497 = (fTemp262 + fTemp261);
-			double fTemp263 = (fConst42 * (((((1.2501691880000001 * fTemp26) + (10.383987830000001 * fTemp27)) + (1.259315417 * fTemp28)) + (0.0040207549000000004 * fTemp25)) - (0.23899104230000001 * fTemp24)));
-			double fTemp264 = (fConst43 * fRec499[1]);
-			double fTemp265 = (fConst44 * fRec502[1]);
-			fRec504[0] = (fTemp263 + (fTemp264 + (fRec504[1] + fTemp265)));
+			double fRec497 = fTemp129;
+			double fTemp130 = (fConst35 * ((((((1.2501691880000001 * fTemp10) + (10.383987830000001 * fTemp11)) + (1.259315417 * fTemp12)) + (0.0040207549000000004 * fTemp9)) - (0.23899104230000001 * fTemp8)) + (fConst3 * (0.0 - ((fConst37 * fRec502[1]) + (fConst36 * fRec499[1]))))));
+			fRec504[0] = (fRec504[1] + fTemp130);
 			fRec502[0] = fRec504[0];
-			double fRec503 = ((fTemp265 + fTemp264) + fTemp263);
+			double fRec503 = fTemp130;
 			fRec501[0] = (fRec502[0] + fRec501[1]);
 			fRec499[0] = fRec501[0];
 			double fRec500 = fRec503;
 			fVec26[(IOTA & 255)] = ((6.4779645669999999 * fTemp7) + (fRec488 + (fRec497 + fRec500)));
-			output26[i] = FAUSTFLOAT((0.95355093256814927 * (fRec0[0] * fVec26[((IOTA - iConst45) & 255)])));
-			double fTemp266 = (fConst33 * fRec505[1]);
-			double fTemp267 = (fConst35 * ((((0.0303696507 * fTemp9) + (2.4612235920000001 * fTemp11)) + (0.039296814300000003 * fTemp15)) - ((((0.84755913620000001 * fTemp10) + (2.1637273970000002 * fTemp12)) + (2.4530349039999999 * fTemp13)) + (0.0126066093 * fTemp14))));
-			double fTemp268 = (fConst36 * fRec508[1]);
-			double fTemp269 = (fConst37 * fRec511[1]);
-			fRec513[0] = (fTemp267 + (fTemp268 + (fRec513[1] + fTemp269)));
+			output26[i] = FAUSTFLOAT((0.95355093256814927 * (fRec0[0] * fVec26[((IOTA - iConst38) & 255)])));
+			double fTemp131 = (fConst27 * ((fConst3 * (0.0 - ((fConst29 * fRec511[1]) + (fConst28 * fRec508[1])))) + (fConst31 * ((((0.0303696507 * fTemp18) + (2.4612235920000001 * fTemp20)) + (0.039296814300000003 * fTemp24)) - ((((0.84755913620000001 * fTemp19) + (2.1637273970000002 * fTemp21)) + (2.4530349039999999 * fTemp22)) + (0.0126066093 * fTemp23))))));
+			fRec513[0] = (fRec513[1] + fTemp131);
 			fRec511[0] = fRec513[0];
-			double fRec512 = ((fTemp269 + fTemp268) + fTemp267);
+			double fRec512 = fTemp131;
 			fRec510[0] = (fRec511[0] + fRec510[1]);
 			fRec508[0] = fRec510[0];
 			double fRec509 = fRec512;
-			fRec507[0] = (fTemp266 + (fRec509 + fRec507[1]));
+			double fTemp132 = (fConst32 * fRec505[1]);
+			fRec507[0] = ((fRec509 + fRec507[1]) - fTemp132);
 			fRec505[0] = fRec507[0];
-			double fRec506 = (fRec509 + fTemp266);
-			double fTemp270 = (fConst39 * ((1.5768457309999999 * fTemp19) - ((11.2127477 * fTemp21) + (1.5715395780000001 * fTemp20))));
-			double fTemp271 = (fConst40 * fRec514[1]);
-			fRec516[0] = (fTemp270 + (fRec516[1] + fTemp271));
+			double fRec506 = (fRec509 - fTemp132);
+			double fTemp133 = (fConst33 * (((1.5768457309999999 * fTemp14) - ((11.2127477 * fTemp16) + (1.5715395780000001 * fTemp15))) - (fConst34 * fRec514[1])));
+			fRec516[0] = (fRec516[1] + fTemp133);
 			fRec514[0] = fRec516[0];
-			double fRec515 = (fTemp271 + fTemp270);
-			double fTemp272 = (fConst42 * (((((0.2379160263 * fTemp24) + (10.375545089999999 * fTemp27)) + (1.2540728379999999 * fTemp28)) + (0.00049269720000000002 * fTemp25)) - (1.2475638010000001 * fTemp26)));
-			double fTemp273 = (fConst43 * fRec517[1]);
-			double fTemp274 = (fConst44 * fRec520[1]);
-			fRec522[0] = (fTemp272 + (fTemp273 + (fRec522[1] + fTemp274)));
+			double fRec515 = fTemp133;
+			double fTemp134 = (fConst35 * ((((((0.2379160263 * fTemp8) + (10.375545089999999 * fTemp11)) + (1.2540728379999999 * fTemp12)) + (0.00049269720000000002 * fTemp9)) - (1.2475638010000001 * fTemp10)) + (fConst3 * (0.0 - ((fConst37 * fRec520[1]) + (fConst36 * fRec517[1]))))));
+			fRec522[0] = (fRec522[1] + fTemp134);
 			fRec520[0] = fRec522[0];
-			double fRec521 = ((fTemp274 + fTemp273) + fTemp272);
+			double fRec521 = fTemp134;
 			fRec519[0] = (fRec520[0] + fRec519[1]);
 			fRec517[0] = fRec519[0];
 			double fRec518 = fRec521;
 			fVec27[(IOTA & 255)] = ((6.4740131380000001 * fTemp7) + (fRec506 + (fRec515 + fRec518)));
-			output27[i] = FAUSTFLOAT((0.95355093256814927 * (fRec0[0] * fVec27[((IOTA - iConst45) & 255)])));
-			double fTemp275 = (fConst47 * fRec523[1]);
-			double fTemp276 = (fConst49 * (((8.3626000000000002e-05 * fTemp15) + ((0.0025245917999999999 * fTemp14) + (((0.00036107309999999998 * fTemp10) + (11.719751390000001 * fTemp12)) + (0.0024846057999999998 * fTemp13)))) - ((7.6893300000000005e-05 * fTemp9) + (0.000294152 * fTemp11))));
-			double fTemp277 = (fConst50 * fRec526[1]);
-			double fTemp278 = (fConst51 * fRec529[1]);
-			fRec531[0] = (fTemp276 + (fTemp277 + (fRec531[1] + fTemp278)));
+			output27[i] = FAUSTFLOAT((0.95355093256814927 * (fRec0[0] * fVec27[((IOTA - iConst38) & 255)])));
+			double fTemp135 = (fConst39 * ((fConst3 * (0.0 - ((fConst41 * fRec529[1]) + (fConst40 * fRec526[1])))) + (fConst43 * ((((((0.00036107309999999998 * fTemp19) + (11.719751390000001 * fTemp21)) + (0.0024846057999999998 * fTemp22)) + (0.0025245917999999999 * fTemp23)) + (8.3626000000000002e-05 * fTemp24)) - ((7.6893300000000005e-05 * fTemp18) + (0.000294152 * fTemp20))))));
+			fRec531[0] = (fRec531[1] + fTemp135);
 			fRec529[0] = fRec531[0];
-			double fRec530 = ((fTemp278 + fTemp277) + fTemp276);
+			double fRec530 = fTemp135;
 			fRec528[0] = (fRec529[0] + fRec528[1]);
 			fRec526[0] = fRec528[0];
 			double fRec527 = fRec530;
-			fRec525[0] = (fTemp275 + (fRec527 + fRec525[1]));
+			double fTemp136 = (fConst44 * fRec523[1]);
+			fRec525[0] = ((fRec527 + fRec525[1]) - fTemp136);
 			fRec523[0] = fRec525[0];
-			double fRec524 = (fRec527 + fTemp275);
-			double fTemp279 = (fConst53 * (((0.00025615190000000002 * fTemp19) + (36.762283230000001 * fTemp21)) + (0.0033995496000000002 * fTemp20)));
-			double fTemp280 = (fConst54 * fRec532[1]);
-			fRec534[0] = (fTemp279 + (fRec534[1] + fTemp280));
+			double fRec524 = (fRec527 - fTemp136);
+			double fTemp137 = (fConst45 * (((0.00025615190000000002 * fTemp14) + ((36.762283230000001 * fTemp16) + (0.0033995496000000002 * fTemp15))) - (fConst46 * fRec532[1])));
+			fRec534[0] = (fRec534[1] + fTemp137);
 			fRec532[0] = fRec534[0];
-			double fRec533 = (fTemp280 + fTemp279);
-			double fTemp281 = (fConst56 * ((9.4774700000000006e-05 * fTemp26) - ((((0.00056100569999999997 * fTemp24) + (27.412504510000002 * fTemp27)) + (0.0036639847000000001 * fTemp28)) + (0.0025633334999999998 * fTemp25))));
-			double fTemp282 = (fConst57 * fRec535[1]);
-			double fTemp283 = (fConst58 * fRec538[1]);
-			fRec540[0] = (fTemp281 + (fTemp282 + (fRec540[1] + fTemp283)));
+			double fRec533 = fTemp137;
+			double fTemp138 = (fConst47 * (((9.4774700000000006e-05 * fTemp10) - ((((0.00056100569999999997 * fTemp8) + (27.412504510000002 * fTemp11)) + (0.0036639847000000001 * fTemp12)) + (0.0025633334999999998 * fTemp9))) + (fConst3 * (0.0 - ((fConst49 * fRec538[1]) + (fConst48 * fRec535[1]))))));
+			fRec540[0] = (fRec540[1] + fTemp138);
 			fRec538[0] = fRec540[0];
-			double fRec539 = ((fTemp283 + fTemp282) + fTemp281);
+			double fRec539 = fTemp138;
 			fRec537[0] = (fRec538[0] + fRec537[1]);
 			fRec535[0] = fRec537[0];
 			double fRec536 = fRec539;
@@ -5002,34 +9722,32 @@ class mydsp : public dsp {
 			fRec2[2] = fRec2[1];
 			fRec2[1] = fRec2[0];
 			fRec3[1] = fRec3[0];
+			fRec10[2] = fRec10[1];
+			fRec10[1] = fRec10[0];
+			fRec11[2] = fRec11[1];
+			fRec11[1] = fRec11[0];
+			fRec12[2] = fRec12[1];
+			fRec12[1] = fRec12[0];
 			fRec13[2] = fRec13[1];
 			fRec13[1] = fRec13[0];
 			fRec14[2] = fRec14[1];
 			fRec14[1] = fRec14[0];
-			fRec15[2] = fRec15[1];
-			fRec15[1] = fRec15[0];
-			fRec16[2] = fRec16[1];
-			fRec16[1] = fRec16[0];
-			fRec17[2] = fRec17[1];
-			fRec17[1] = fRec17[0];
-			fRec18[2] = fRec18[1];
-			fRec18[1] = fRec18[0];
-			fRec19[2] = fRec19[1];
-			fRec19[1] = fRec19[0];
-			fRec12[1] = fRec12[0];
-			fRec10[1] = fRec10[0];
 			fRec9[1] = fRec9[0];
 			fRec7[1] = fRec7[0];
 			fRec6[1] = fRec6[0];
 			fRec4[1] = fRec4[0];
-			fRec23[2] = fRec23[1];
-			fRec23[1] = fRec23[0];
-			fRec24[2] = fRec24[1];
-			fRec24[1] = fRec24[0];
-			fRec25[2] = fRec25[1];
-			fRec25[1] = fRec25[0];
-			fRec22[1] = fRec22[0];
+			fRec18[2] = fRec18[1];
+			fRec18[1] = fRec18[0];
+			fRec19[2] = fRec19[1];
+			fRec19[1] = fRec19[0];
+			fRec20[2] = fRec20[1];
 			fRec20[1] = fRec20[0];
+			fRec17[1] = fRec17[0];
+			fRec15[1] = fRec15[0];
+			fRec30[2] = fRec30[1];
+			fRec30[1] = fRec30[0];
+			fRec31[2] = fRec31[1];
+			fRec31[1] = fRec31[0];
 			fRec32[2] = fRec32[1];
 			fRec32[1] = fRec32[0];
 			fRec33[2] = fRec33[1];
@@ -5040,10 +9758,12 @@ class mydsp : public dsp {
 			fRec35[1] = fRec35[0];
 			fRec36[2] = fRec36[1];
 			fRec36[1] = fRec36[0];
-			fRec31[1] = fRec31[0];
 			fRec29[1] = fRec29[0];
-			fRec28[1] = fRec28[0];
+			fRec27[1] = fRec27[0];
 			fRec26[1] = fRec26[0];
+			fRec24[1] = fRec24[0];
+			fRec23[1] = fRec23[0];
+			fRec21[1] = fRec21[0];
 			IOTA = (IOTA + 1);
 			fRec45[1] = fRec45[0];
 			fRec43[1] = fRec43[0];
@@ -5249,30 +9969,30 @@ class mydsp : public dsp {
 			fRec340[1] = fRec340[0];
 			fRec339[1] = fRec339[0];
 			fRec337[1] = fRec337[0];
+			fRec345[1] = fRec345[0];
+			fRec343[1] = fRec343[0];
 			fRec351[1] = fRec351[0];
 			fRec349[1] = fRec349[0];
 			fRec348[1] = fRec348[0];
 			fRec346[1] = fRec346[0];
-			fRec345[1] = fRec345[0];
-			fRec343[1] = fRec343[0];
-			fRec354[1] = fRec354[0];
-			fRec352[1] = fRec352[0];
 			fRec360[1] = fRec360[0];
 			fRec358[1] = fRec358[0];
 			fRec357[1] = fRec357[0];
 			fRec355[1] = fRec355[0];
+			fRec354[1] = fRec354[0];
+			fRec352[1] = fRec352[0];
+			fRec363[1] = fRec363[0];
+			fRec361[1] = fRec361[0];
 			fRec369[1] = fRec369[0];
 			fRec367[1] = fRec367[0];
 			fRec366[1] = fRec366[0];
 			fRec364[1] = fRec364[0];
-			fRec363[1] = fRec363[0];
-			fRec361[1] = fRec361[0];
-			fRec372[1] = fRec372[0];
-			fRec370[1] = fRec370[0];
 			fRec378[1] = fRec378[0];
 			fRec376[1] = fRec376[0];
 			fRec375[1] = fRec375[0];
 			fRec373[1] = fRec373[0];
+			fRec372[1] = fRec372[0];
+			fRec370[1] = fRec370[0];
 			fRec387[1] = fRec387[0];
 			fRec385[1] = fRec385[0];
 			fRec384[1] = fRec384[0];
@@ -5386,7 +10106,6 @@ class mydsp : public dsp {
 		
 	}
 
-	
 };
 
 /***************************END USER SECTION ***************************/
@@ -5404,774 +10123,10 @@ class mydsp : public dsp {
 #define ASSIST_INLET 	1  	/* should be defined somewhere ?? */
 #define ASSIST_OUTLET 	2	/* should be defined somewhere ?? */
 
-#define EXTERNAL_VERSION    "0.64"
+#define EXTERNAL_VERSION    "0.68"
 #define STR_SIZE            512
 
-/************************************************************************
- FAUST Architecture File
- Copyright (C) 2003-2017 GRAME, Centre National de Creation Musicale
- ---------------------------------------------------------------------
- This Architecture section is free software; you can redistribute it
- and/or modify it under the terms of the GNU General Public License
- as published by the Free Software Foundation; either version 3 of
- the License, or (at your option) any later version.
- 
- This program is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
- 
- You should have received a copy of the GNU General Public License
- along with this program; If not, see <http://www.gnu.org/licenses/>.
- 
- EXCEPTION : As a special exception, you may create a larger work
- that contains this FAUST architecture section and distribute
- that work under terms of your choice, so long as this FAUST
- architecture section is not modified.
- ************************************************************************/
- 
-#ifndef __GUI_H__
-#define __GUI_H__
-
-#include <list>
-#include <map>
-#include <vector>
-#include <iostream>
-
-#ifdef _WIN32
-# pragma warning (disable: 4100)
-#else
-# pragma GCC diagnostic ignored "-Wunused-parameter"
-#endif
-
-/*
-  Copyright (C) 2000 Paul Davis
-  Copyright (C) 2003 Rohan Drape
-  Copyright (C) 2016 GRAME (renaming for internal use)
-
-  This program is free software; you can redistribute it and/or modify
-  it under the terms of the GNU Lesser General Public License as published by
-  the Free Software Foundation; either version 2.1 of the License, or
-  (at your option) any later version.
-
-  This program is distributed in the hope that it will be useful,
-  but WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  GNU Lesser General Public License for more details.
-
-  You should have received a copy of the GNU Lesser General Public License
-  along with this program; if not, write to the Free Software
-  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
-
-  ISO/POSIX C version of Paul Davis's lock free ringbuffer C++ code.
-  This is safe for the case of one read thread and one write thread.
-*/
-
-#ifndef __ring_buffer__
-#define __ring_buffer__
-
-#include <stdlib.h>
-#include <string.h>
-
-#ifdef WIN32
-#pragma warning (disable: 4334)
-#endif
-
-typedef struct {
-    char *buf;
-    size_t len;
-}
-ringbuffer_data_t;
-
-typedef struct {
-    char *buf;
-    volatile size_t write_ptr;
-    volatile size_t read_ptr;
-    size_t	size;
-    size_t	size_mask;
-    int	mlocked;
-}
-ringbuffer_t;
-
-ringbuffer_t *ringbuffer_create(size_t sz);
-void ringbuffer_free(ringbuffer_t *rb);
-void ringbuffer_get_read_vector(const ringbuffer_t *rb,
-                                         ringbuffer_data_t *vec);
-void ringbuffer_get_write_vector(const ringbuffer_t *rb,
-                                          ringbuffer_data_t *vec);
-size_t ringbuffer_read(ringbuffer_t *rb, char *dest, size_t cnt);
-size_t ringbuffer_peek(ringbuffer_t *rb, char *dest, size_t cnt);
-void ringbuffer_read_advance(ringbuffer_t *rb, size_t cnt);
-size_t ringbuffer_read_space(const ringbuffer_t *rb);
-int ringbuffer_mlock(ringbuffer_t *rb);
-void ringbuffer_reset(ringbuffer_t *rb);
-void ringbuffer_reset_size (ringbuffer_t * rb, size_t sz);
-size_t ringbuffer_write(ringbuffer_t *rb, const char *src,
-                                 size_t cnt);
-void ringbuffer_write_advance(ringbuffer_t *rb, size_t cnt);
-size_t ringbuffer_write_space(const ringbuffer_t *rb);
-
-/* Create a new ringbuffer to hold at least `sz' bytes of data. The
-   actual buffer size is rounded up to the next power of two. */
-
-inline ringbuffer_t *
-ringbuffer_create (size_t sz)
-{
-	size_t power_of_two;
-	ringbuffer_t *rb;
-
-	if ((rb = (ringbuffer_t *) malloc (sizeof (ringbuffer_t))) == NULL) {
-		return NULL;
-	}
-
-	for (power_of_two = 1u; 1u << power_of_two < sz; power_of_two++);
-
-	rb->size = 1u << power_of_two;
-	rb->size_mask = rb->size;
-	rb->size_mask -= 1;
-	rb->write_ptr = 0;
-	rb->read_ptr = 0;
-	if ((rb->buf = (char *) malloc (rb->size)) == NULL) {
-		free (rb);
-		return NULL;
-	}
-	rb->mlocked = 0;
-
-	return rb;
-}
-
-/* Free all data associated with the ringbuffer `rb'. */
-
-inline void
-ringbuffer_free (ringbuffer_t * rb)
-{
-#ifdef USE_MLOCK
-	if (rb->mlocked) {
-		munlock (rb->buf, rb->size);
-	}
-#endif /* USE_MLOCK */
-	free (rb->buf);
-	free (rb);
-}
-
-/* Lock the data block of `rb' using the system call 'mlock'.  */
-
-inline int
-ringbuffer_mlock (ringbuffer_t * rb)
-{
-#ifdef USE_MLOCK
-	if (mlock (rb->buf, rb->size)) {
-		return -1;
-	}
-#endif /* USE_MLOCK */
-	rb->mlocked = 1;
-	return 0;
-}
-
-/* Reset the read and write pointers to zero. This is not thread
-   safe. */
-
-inline void
-ringbuffer_reset (ringbuffer_t * rb)
-{
-	rb->read_ptr = 0;
-	rb->write_ptr = 0;
-    memset(rb->buf, 0, rb->size);
-}
-
-/* Reset the read and write pointers to zero. This is not thread
-   safe. */
-
-inline void
-ringbuffer_reset_size (ringbuffer_t * rb, size_t sz)
-{
-    rb->size = sz;
-    rb->size_mask = rb->size;
-    rb->size_mask -= 1;
-    rb->read_ptr = 0;
-    rb->write_ptr = 0;
-}
-
-/* Return the number of bytes available for reading. This is the
-   number of bytes in front of the read pointer and behind the write
-   pointer.  */
-
-inline size_t
-ringbuffer_read_space (const ringbuffer_t * rb)
-{
-	size_t w, r;
-
-	w = rb->write_ptr;
-	r = rb->read_ptr;
-
-	if (w > r) {
-		return w - r;
-	} else {
-		return (w - r + rb->size) & rb->size_mask;
-	}
-}
-
-/* Return the number of bytes available for writing. This is the
-   number of bytes in front of the write pointer and behind the read
-   pointer.  */
-
-inline size_t
-ringbuffer_write_space (const ringbuffer_t * rb)
-{
-	size_t w, r;
-
-	w = rb->write_ptr;
-	r = rb->read_ptr;
-
-	if (w > r) {
-		return ((r - w + rb->size) & rb->size_mask) - 1;
-	} else if (w < r) {
-		return (r - w) - 1;
-	} else {
-		return rb->size - 1;
-	}
-}
-
-/* The copying data reader. Copy at most `cnt' bytes from `rb' to
-   `dest'.  Returns the actual number of bytes copied. */
-
-inline size_t
-ringbuffer_read (ringbuffer_t * rb, char *dest, size_t cnt)
-{
-	size_t free_cnt;
-	size_t cnt2;
-	size_t to_read;
-	size_t n1, n2;
-
-	if ((free_cnt = ringbuffer_read_space (rb)) == 0) {
-		return 0;
-	}
-
-	to_read = cnt > free_cnt ? free_cnt : cnt;
-
-	cnt2 = rb->read_ptr + to_read;
-
-	if (cnt2 > rb->size) {
-		n1 = rb->size - rb->read_ptr;
-		n2 = cnt2 & rb->size_mask;
-	} else {
-		n1 = to_read;
-		n2 = 0;
-	}
-
-	memcpy (dest, &(rb->buf[rb->read_ptr]), n1);
-	rb->read_ptr = (rb->read_ptr + n1) & rb->size_mask;
-
-	if (n2) {
-		memcpy (dest + n1, &(rb->buf[rb->read_ptr]), n2);
-		rb->read_ptr = (rb->read_ptr + n2) & rb->size_mask;
-	}
-
-	return to_read;
-}
-
-/* The copying data reader w/o read pointer advance. Copy at most
-   `cnt' bytes from `rb' to `dest'.  Returns the actual number of bytes
-   copied. */
-
-inline size_t
-ringbuffer_peek (ringbuffer_t * rb, char *dest, size_t cnt)
-{
-	size_t free_cnt;
-	size_t cnt2;
-	size_t to_read;
-	size_t n1, n2;
-	size_t tmp_read_ptr;
-
-	tmp_read_ptr = rb->read_ptr;
-
-	if ((free_cnt = ringbuffer_read_space (rb)) == 0) {
-		return 0;
-	}
-
-	to_read = cnt > free_cnt ? free_cnt : cnt;
-
-	cnt2 = tmp_read_ptr + to_read;
-
-	if (cnt2 > rb->size) {
-		n1 = rb->size - tmp_read_ptr;
-		n2 = cnt2 & rb->size_mask;
-	} else {
-		n1 = to_read;
-		n2 = 0;
-	}
-
-	memcpy (dest, &(rb->buf[tmp_read_ptr]), n1);
-	tmp_read_ptr = (tmp_read_ptr + n1) & rb->size_mask;
-
-	if (n2) {
-		memcpy (dest + n1, &(rb->buf[tmp_read_ptr]), n2);
-	}
-
-	return to_read;
-}
-
-/* The copying data writer. Copy at most `cnt' bytes to `rb' from
-   `src'.  Returns the actual number of bytes copied. */
-
-inline size_t
-ringbuffer_write (ringbuffer_t * rb, const char *src, size_t cnt)
-{
-	size_t free_cnt;
-	size_t cnt2;
-	size_t to_write;
-	size_t n1, n2;
-
-	if ((free_cnt = ringbuffer_write_space (rb)) == 0) {
-		return 0;
-	}
-
-	to_write = cnt > free_cnt ? free_cnt : cnt;
-
-	cnt2 = rb->write_ptr + to_write;
-
-	if (cnt2 > rb->size) {
-		n1 = rb->size - rb->write_ptr;
-		n2 = cnt2 & rb->size_mask;
-	} else {
-		n1 = to_write;
-		n2 = 0;
-	}
-
-	memcpy (&(rb->buf[rb->write_ptr]), src, n1);
-	rb->write_ptr = (rb->write_ptr + n1) & rb->size_mask;
-
-	if (n2) {
-		memcpy (&(rb->buf[rb->write_ptr]), src + n1, n2);
-		rb->write_ptr = (rb->write_ptr + n2) & rb->size_mask;
-	}
-
-	return to_write;
-}
-
-/* Advance the read pointer `cnt' places. */
-
-inline void
-ringbuffer_read_advance (ringbuffer_t * rb, size_t cnt)
-{
-	size_t tmp = (rb->read_ptr + cnt) & rb->size_mask;
-	rb->read_ptr = tmp;
-}
-
-/* Advance the write pointer `cnt' places. */
-
-inline void
-ringbuffer_write_advance (ringbuffer_t * rb, size_t cnt)
-{
-	size_t tmp = (rb->write_ptr + cnt) & rb->size_mask;
-	rb->write_ptr = tmp;
-}
-
-/* The non-copying data reader. `vec' is an array of two places. Set
-   the values at `vec' to hold the current readable data at `rb'. If
-   the readable data is in one segment the second segment has zero
-   length. */
-
-inline void
-ringbuffer_get_read_vector (const ringbuffer_t * rb,
-				 ringbuffer_data_t * vec)
-{
-	size_t free_cnt;
-	size_t cnt2;
-	size_t w, r;
-
-	w = rb->write_ptr;
-	r = rb->read_ptr;
-
-	if (w > r) {
-		free_cnt = w - r;
-	} else {
-		free_cnt = (w - r + rb->size) & rb->size_mask;
-	}
-
-	cnt2 = r + free_cnt;
-
-	if (cnt2 > rb->size) {
-
-		/* Two part vector: the rest of the buffer after the current write
-		   ptr, plus some from the start of the buffer. */
-
-		vec[0].buf = &(rb->buf[r]);
-		vec[0].len = rb->size - r;
-		vec[1].buf = rb->buf;
-		vec[1].len = cnt2 & rb->size_mask;
-
-	} else {
-
-		/* Single part vector: just the rest of the buffer */
-
-		vec[0].buf = &(rb->buf[r]);
-		vec[0].len = free_cnt;
-		vec[1].len = 0;
-	}
-}
-
-/* The non-copying data writer. `vec' is an array of two places. Set
-   the values at `vec' to hold the current writeable data at `rb'. If
-   the writeable data is in one segment the second segment has zero
-   length. */
-
-inline void
-ringbuffer_get_write_vector (const ringbuffer_t * rb,
-				  ringbuffer_data_t * vec)
-{
-	size_t free_cnt;
-	size_t cnt2;
-	size_t w, r;
-
-	w = rb->write_ptr;
-	r = rb->read_ptr;
-
-	if (w > r) {
-		free_cnt = ((r - w + rb->size) & rb->size_mask) - 1;
-	} else if (w < r) {
-		free_cnt = (r - w) - 1;
-	} else {
-		free_cnt = rb->size - 1;
-	}
-
-	cnt2 = w + free_cnt;
-
-	if (cnt2 > rb->size) {
-
-		/* Two part vector: the rest of the buffer after the current write
-		   ptr, plus some from the start of the buffer. */
-
-		vec[0].buf = &(rb->buf[w]);
-		vec[0].len = rb->size - w;
-		vec[1].buf = rb->buf;
-		vec[1].len = cnt2 & rb->size_mask;
-	} else {
-		vec[0].buf = &(rb->buf[w]);
-		vec[0].len = free_cnt;
-		vec[1].len = 0;
-	}
-}
-
-#endif // __ring_buffer__
-
-/*******************************************************************************
- * GUI : Abstract Graphic User Interface
- * Provides additional mechanisms to synchronize widgets and zones. Widgets
- * should both reflect the value of a zone and allow to change this value.
- ******************************************************************************/
-
-class uiItem;
-typedef void (*uiCallback)(FAUSTFLOAT val, void* data);
-
-class clist : public std::list<uiItem*>
-{
-    
-    public:
-    
-        virtual ~clist();
-        
-};
-
-typedef std::map<FAUSTFLOAT*, clist*> zmap;
-
-typedef std::map<FAUSTFLOAT*, ringbuffer_t*> ztimedmap;
-
-class GUI : public UI
-{
-		
-    private:
-     
-        static std::list<GUI*> fGuiList;
-        zmap fZoneMap;
-        bool fStopped;
-        
-     public:
-            
-        GUI():fStopped(false)
-        {	
-            fGuiList.push_back(this);
-        }
-        
-        virtual ~GUI() 
-        {   
-            // delete all items
-            zmap::iterator it;
-            for (it = fZoneMap.begin(); it != fZoneMap.end(); it++) {
-                delete (*it).second;
-            }
-            // suppress 'this' in static fGuiList
-            fGuiList.remove(this);
-        }
-
-        // -- registerZone(z,c) : zone management
-        
-        void registerZone(FAUSTFLOAT* z, uiItem* c)
-        {
-            if (fZoneMap.find(z) == fZoneMap.end()) fZoneMap[z] = new clist();
-            fZoneMap[z]->push_back(c);
-        }
-
-        void updateAllZones();
-        
-        void updateZone(FAUSTFLOAT* z);
-        
-        static void updateAllGuis()
-        {
-            std::list<GUI*>::iterator g;
-            for (g = fGuiList.begin(); g != fGuiList.end(); g++) {
-                (*g)->updateAllZones();
-            }
-        }
-        void addCallback(FAUSTFLOAT* zone, uiCallback foo, void* data);
-        virtual void show() {};	
-        virtual bool run() { return false; };
-    
-        virtual void stop() { fStopped = true; }
-        bool stopped() { return fStopped; }
-    
-        // -- widget's layouts
-        
-        virtual void openTabBox(const char* label) {};
-        virtual void openHorizontalBox(const char* label) {}
-        virtual void openVerticalBox(const char* label) {}
-        virtual void closeBox() {}
-        
-        // -- active widgets
-        
-        virtual void addButton(const char* label, FAUSTFLOAT* zone) {}
-        virtual void addCheckButton(const char* label, FAUSTFLOAT* zone) {}
-        virtual void addVerticalSlider(const char* label, FAUSTFLOAT* zone, FAUSTFLOAT init, FAUSTFLOAT min, FAUSTFLOAT max, FAUSTFLOAT step) {}
-        virtual void addHorizontalSlider(const char* label, FAUSTFLOAT* zone, FAUSTFLOAT init, FAUSTFLOAT min, FAUSTFLOAT max, FAUSTFLOAT step) {}
-        virtual void addNumEntry(const char* label, FAUSTFLOAT* zone, FAUSTFLOAT init, FAUSTFLOAT min, FAUSTFLOAT max, FAUSTFLOAT step) {}
-    
-        // -- passive widgets
-        
-        virtual void addHorizontalBargraph(const char* label, FAUSTFLOAT* zone, FAUSTFLOAT min, FAUSTFLOAT max) {}
-        virtual void addVerticalBargraph(const char* label, FAUSTFLOAT* zone, FAUSTFLOAT min, FAUSTFLOAT max) {}
-    
-        // -- soundfiles
-    
-        virtual void addSoundfile(const char* label, const char* filename, Soundfile** sf_zone) {}
-    
-        // -- metadata declarations
-
-        virtual void declare(FAUSTFLOAT*, const char*, const char*) {}
-    
-        // Static global for timed zones, shared between all UI that will set timed values
-        static ztimedmap gTimedZoneMap;
-
-};
-
-/**
- * User Interface Item: abstract definition
- */
-
-class uiItem
-{
-    protected:
-          
-        GUI* fGUI;
-        FAUSTFLOAT* fZone;
-        FAUSTFLOAT fCache;
-
-        uiItem(GUI* ui, FAUSTFLOAT* zone):fGUI(ui), fZone(zone), fCache(FAUSTFLOAT(-123456.654321))
-        { 
-            ui->registerZone(zone, this); 
-        }
-
-    public:
-
-        virtual ~uiItem() 
-        {}
-
-        void modifyZone(FAUSTFLOAT v) 	
-        { 
-            fCache = v;
-            if (*fZone != v) {
-                *fZone = v;
-                fGUI->updateZone(fZone);
-            }
-        }
-                
-        FAUSTFLOAT cache() { return fCache; }
-        virtual void reflectZone() = 0;
-};
-
-/**
- * User Interface item owned (and so deleted) by external code
- */
-
-class uiOwnedItem : public uiItem {
-    
-    protected:
-    
-        uiOwnedItem(GUI* ui, FAUSTFLOAT* zone):uiItem(ui, zone)
-        {}
-    
-     public:
-    
-        virtual ~uiOwnedItem()
-        {}
-    
-        virtual void reflectZone() {}
-};
-
-/**
- * Callback Item
- */
-
-struct uiCallbackItem : public uiItem {
-    
-	uiCallback fCallback;
-	void* fData;
-	
-	uiCallbackItem(GUI* ui, FAUSTFLOAT* zone, uiCallback foo, void* data) 
-			: uiItem(ui, zone), fCallback(foo), fData(data) {}
-	
-	virtual void reflectZone() 
-    {		
-		FAUSTFLOAT v = *fZone;
-		fCache = v; 
-		fCallback(v, fData);	
-	}
-};
-
-/**
- * Base class for timed items
- */
-
-// For precise timestamped control
-struct DatedControl {
-    
-    double fDate;
-    FAUSTFLOAT fValue;
-    
-    DatedControl(double d = 0., FAUSTFLOAT v = FAUSTFLOAT(0)):fDate(d), fValue(v) {}
-    
-};
-
-class uiTimedItem : public uiItem
-{
-    
-    protected:
-        
-        bool fDelete;
-        
-    public:
-        
-        uiTimedItem(GUI* ui, FAUSTFLOAT* zone):uiItem(ui, zone)
-        {
-            if (GUI::gTimedZoneMap.find(fZone) == GUI::gTimedZoneMap.end()) {
-                GUI::gTimedZoneMap[fZone] = ringbuffer_create(8192);
-                fDelete = true;
-            } else {
-                fDelete = false;
-            }
-        }
-        
-        virtual ~uiTimedItem()
-        {
-            ztimedmap::iterator it;
-            if (fDelete && ((it = GUI::gTimedZoneMap.find(fZone)) != GUI::gTimedZoneMap.end())) {
-                ringbuffer_free((*it).second);
-                GUI::gTimedZoneMap.erase(it);
-            }
-        }
-        
-        virtual void modifyZone(double date, FAUSTFLOAT v)
-        {
-            size_t res;
-            DatedControl dated_val(date, v);
-            if ((res = ringbuffer_write(GUI::gTimedZoneMap[fZone], (const char*)&dated_val, sizeof(DatedControl))) != sizeof(DatedControl)) {
-                std::cerr << "ringbuffer_write error DatedControl" << std::endl;
-            }
-        }
-    
-};
-
-/**
- * Allows to group a set of zones
- */
-
-class uiGroupItem : public uiItem
-{
-    protected:
-    
-        std::vector<FAUSTFLOAT*> fZoneMap;
-
-    public:
-    
-        uiGroupItem(GUI* ui, FAUSTFLOAT* zone):uiItem(ui, zone)
-        {}
-        virtual ~uiGroupItem() 
-        {}
-        
-        virtual void reflectZone() 
-        {
-            FAUSTFLOAT v = *fZone;
-            fCache = v;
-            
-            // Update all zones of the same group
-            std::vector<FAUSTFLOAT*>::iterator it;
-            for (it = fZoneMap.begin(); it != fZoneMap.end(); it++) {
-                (*(*it)) = v;
-            }
-        }
-        
-        void addZone(FAUSTFLOAT* zone) { fZoneMap.push_back(zone); }
-
-};
-
-/**
- * Update all user items reflecting zone z
- */
-
-inline void GUI::updateZone(FAUSTFLOAT* z)
-{
-	FAUSTFLOAT v = *z;
-	clist* l = fZoneMap[z];
-	for (clist::iterator c = l->begin(); c != l->end(); c++) {
-		if ((*c)->cache() != v) (*c)->reflectZone();
-	}
-}
-
-/**
- * Update all user items not up to date
- */
-
-inline void GUI::updateAllZones()
-{
-	for (zmap::iterator m = fZoneMap.begin(); m != fZoneMap.end(); m++) {
-		FAUSTFLOAT* z = m->first;
-		clist*	l = m->second;
-        if (z) {
-            FAUSTFLOAT v = *z;
-            for (clist::iterator c = l->begin(); c != l->end(); c++) {
-                if ((*c)->cache() != v) (*c)->reflectZone();
-            }
-        }
-	}
-}
-
-inline void GUI::addCallback(FAUSTFLOAT* zone, uiCallback foo, void* data) 
-{ 
-	new uiCallbackItem(this, zone, foo, data); 
-};
-
-inline clist::~clist() 
-{
-    std::list<uiItem*>::iterator it;
-    for (it = begin(); it != end(); it++) {
-        uiOwnedItem* owned = dynamic_cast<uiOwnedItem*>(*it);
-        // owned items are deleted by external code
-        if (!owned) {
-            delete (*it);
-        }
-    }
-}
-
-#endif
+/************************** BEGIN MidiUI.h **************************/
 /************************************************************************
  FAUST Architecture File
  Copyright (C) 2003-2017 GRAME, Centre National de Creation Musicale
@@ -6205,6 +10160,531 @@ inline clist::~clist()
 #include <cstdlib>
 #include <cmath>
 
+/************************** BEGIN MapUI.h **************************/
+/************************************************************************
+ FAUST Architecture File
+ Copyright (C) 2003-2017 GRAME, Centre National de Creation Musicale
+ ---------------------------------------------------------------------
+ This Architecture section is free software; you can redistribute it
+ and/or modify it under the terms of the GNU General Public License
+ as published by the Free Software Foundation; either version 3 of
+ the License, or (at your option) any later version.
+ 
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+ 
+ You should have received a copy of the GNU General Public License
+ along with this program; If not, see <http://www.gnu.org/licenses/>.
+ 
+ EXCEPTION : As a special exception, you may create a larger work
+ that contains this FAUST architecture section and distribute
+ that work under terms of your choice, so long as this FAUST
+ architecture section is not modified.
+ ************************************************************************/
+
+#ifndef FAUST_MAPUI_H
+#define FAUST_MAPUI_H
+
+#include <vector>
+#include <map>
+#include <string>
+
+
+/*******************************************************************************
+ * MapUI : Faust User Interface
+ * This class creates a map of complete hierarchical path and zones for each UI items.
+ ******************************************************************************/
+
+class MapUI : public UI, public PathBuilder
+{
+    
+    protected:
+    
+        // Complete path map
+        std::map<std::string, FAUSTFLOAT*> fPathZoneMap;
+    
+        // Label zone map
+        std::map<std::string, FAUSTFLOAT*> fLabelZoneMap;
+    
+    public:
+        
+        MapUI() {};
+        virtual ~MapUI() {};
+        
+        // -- widget's layouts
+        void openTabBox(const char* label)
+        {
+            pushLabel(label);
+        }
+        void openHorizontalBox(const char* label)
+        {
+            pushLabel(label);
+        }
+        void openVerticalBox(const char* label)
+        {
+            pushLabel(label);
+        }
+        void closeBox()
+        {
+            popLabel();
+        }
+        
+        // -- active widgets
+        void addButton(const char* label, FAUSTFLOAT* zone)
+        {
+            fPathZoneMap[buildPath(label)] = zone;
+            fLabelZoneMap[label] = zone;
+        }
+        void addCheckButton(const char* label, FAUSTFLOAT* zone)
+        {
+            fPathZoneMap[buildPath(label)] = zone;
+            fLabelZoneMap[label] = zone;
+        }
+        void addVerticalSlider(const char* label, FAUSTFLOAT* zone, FAUSTFLOAT init, FAUSTFLOAT fmin, FAUSTFLOAT fmax, FAUSTFLOAT step)
+        {
+            fPathZoneMap[buildPath(label)] = zone;
+            fLabelZoneMap[label] = zone;
+        }
+        void addHorizontalSlider(const char* label, FAUSTFLOAT* zone, FAUSTFLOAT init, FAUSTFLOAT fmin, FAUSTFLOAT fmax, FAUSTFLOAT step)
+        {
+            fPathZoneMap[buildPath(label)] = zone;
+            fLabelZoneMap[label] = zone;
+        }
+        void addNumEntry(const char* label, FAUSTFLOAT* zone, FAUSTFLOAT init, FAUSTFLOAT fmin, FAUSTFLOAT fmax, FAUSTFLOAT step)
+        {
+            fPathZoneMap[buildPath(label)] = zone;
+            fLabelZoneMap[label] = zone;
+        }
+        
+        // -- passive widgets
+        void addHorizontalBargraph(const char* label, FAUSTFLOAT* zone, FAUSTFLOAT fmin, FAUSTFLOAT fmax)
+        {
+            fPathZoneMap[buildPath(label)] = zone;
+            fLabelZoneMap[label] = zone;
+        }
+        void addVerticalBargraph(const char* label, FAUSTFLOAT* zone, FAUSTFLOAT fmin, FAUSTFLOAT fmax)
+        {
+            fPathZoneMap[buildPath(label)] = zone;
+            fLabelZoneMap[label] = zone;
+        }
+    
+        // -- soundfiles
+        virtual void addSoundfile(const char* label, const char* filename, Soundfile** sf_zone) {}
+        
+        // -- metadata declarations
+        void declare(FAUSTFLOAT* zone, const char* key, const char* val)
+        {}
+        
+        // set/get
+        void setParamValue(const std::string& path, FAUSTFLOAT value)
+        {
+            if (fPathZoneMap.find(path) != fPathZoneMap.end()) {
+                *fPathZoneMap[path] = value;
+            } else if (fLabelZoneMap.find(path) != fLabelZoneMap.end()) {
+                *fLabelZoneMap[path] = value;
+            }
+        }
+        
+        FAUSTFLOAT getParamValue(const std::string& path)
+        {
+            if (fPathZoneMap.find(path) != fPathZoneMap.end()) {
+                return *fPathZoneMap[path];
+            } else if (fLabelZoneMap.find(path) != fLabelZoneMap.end()) {
+                return *fLabelZoneMap[path];
+            } else {
+                return FAUSTFLOAT(0);
+            }
+        }
+    
+        // map access 
+        std::map<std::string, FAUSTFLOAT*>& getMap() { return fPathZoneMap; }
+        
+        int getParamsCount() { return int(fPathZoneMap.size()); }
+        
+        std::string getParamAddress(int index)
+        { 
+            std::map<std::string, FAUSTFLOAT*>::iterator it = fPathZoneMap.begin();
+            while (index-- > 0 && it++ != fPathZoneMap.end()) {}
+            return (*it).first;
+        }
+    
+        std::string getParamAddress(FAUSTFLOAT* zone)
+        {
+            std::map<std::string, FAUSTFLOAT*>::iterator it = fPathZoneMap.begin();
+            do {
+                if ((*it).second == zone) return (*it).first;
+            }
+            while (it++ != fPathZoneMap.end());
+            return "";
+        }
+    
+        static bool endsWith(std::string const& str, std::string const& end)
+        {
+            size_t l1 = str.length();
+            size_t l2 = end.length();
+            return (l1 >= l2) && (0 == str.compare(l1 - l2, l2, end));
+        }
+};
+
+
+#endif // FAUST_MAPUI_H
+/**************************  END  MapUI.h **************************/
+/************************** BEGIN MetaDataUI.h **************************/
+/************************************************************************
+ FAUST Architecture File
+ Copyright (C) 2003-2017 GRAME, Centre National de Creation Musicale
+ ---------------------------------------------------------------------
+ This Architecture section is free software; you can redistribute it
+ and/or modify it under the terms of the GNU General Public License
+ as published by the Free Software Foundation; either version 3 of
+ the License, or (at your option) any later version.
+ 
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+ 
+ You should have received a copy of the GNU General Public License
+ along with this program; If not, see <http://www.gnu.org/licenses/>.
+ 
+ EXCEPTION : As a special exception, you may create a larger work
+ that contains this FAUST architecture section and distribute
+ that work under terms of your choice, so long as this FAUST
+ architecture section is not modified.
+ ************************************************************************/
+
+#ifndef MetaData_UI_H
+#define MetaData_UI_H
+
+#ifndef FAUSTFLOAT
+#define FAUSTFLOAT float
+#endif
+
+#include <map>
+#include <set>
+#include <string>
+#include <assert.h>
+
+
+static bool startWith(const std::string& str, const std::string& prefix)
+{
+    return (str.substr(0, prefix.size()) == prefix);
+}
+
+/**
+ * Convert a dB value into a scale between 0 and 1 (following IEC standard ?)
+ */
+static FAUSTFLOAT dB2Scale(FAUSTFLOAT dB)
+{
+    FAUSTFLOAT scale = FAUSTFLOAT(1.0);
+    
+    /*if (dB < -70.0f)
+     scale = 0.0f;
+     else*/
+    if (dB < FAUSTFLOAT(-60.0))
+        scale = (dB + FAUSTFLOAT(70.0)) * FAUSTFLOAT(0.0025);
+    else if (dB < FAUSTFLOAT(-50.0))
+        scale = (dB + FAUSTFLOAT(60.0)) * FAUSTFLOAT(0.005) + FAUSTFLOAT(0.025);
+    else if (dB < FAUSTFLOAT(-40.0))
+        scale = (dB + FAUSTFLOAT(50.0)) * FAUSTFLOAT(0.0075) + FAUSTFLOAT(0.075);
+    else if (dB < FAUSTFLOAT(-30.0))
+        scale = (dB + FAUSTFLOAT(40.0)) * FAUSTFLOAT(0.015) + FAUSTFLOAT(0.15);
+    else if (dB < FAUSTFLOAT(-20.0))
+        scale = (dB + FAUSTFLOAT(30.0)) * FAUSTFLOAT(0.02) + FAUSTFLOAT(0.3);
+    else if (dB < FAUSTFLOAT(-0.001) || dB > FAUSTFLOAT(0.001))  /* if (dB < 0.0) */
+        scale = (dB + FAUSTFLOAT(20.0)) * FAUSTFLOAT(0.025) + FAUSTFLOAT(0.5);
+    
+    return scale;
+}
+
+/*******************************************************************************
+ * MetaDataUI : Common class for MetaData handling
+ ******************************************************************************/
+
+//============================= BEGIN GROUP LABEL METADATA===========================
+// Unlike widget's label, metadata inside group's label are not extracted directly by
+// the Faust compiler. Therefore they must be extracted within the architecture file
+//-----------------------------------------------------------------------------------
+
+class MetaDataUI {
+    
+    protected:
+        
+        std::string                         fGroupTooltip;
+        std::map<FAUSTFLOAT*, FAUSTFLOAT>   fGuiSize;            // map widget zone with widget size coef
+        std::map<FAUSTFLOAT*, std::string>  fTooltip;            // map widget zone with tooltip strings
+        std::map<FAUSTFLOAT*, std::string>  fUnit;               // map widget zone to unit string (i.e. "dB")
+        std::map<FAUSTFLOAT*, std::string>  fRadioDescription;   // map zone to {'low':440; ...; 'hi':1000.0}
+        std::map<FAUSTFLOAT*, std::string>  fMenuDescription;    // map zone to {'low':440; ...; 'hi':1000.0}
+        std::set<FAUSTFLOAT*>               fKnobSet;            // set of widget zone to be knobs
+        std::set<FAUSTFLOAT*>               fLedSet;             // set of widget zone to be LEDs
+        std::set<FAUSTFLOAT*>               fNumSet;             // set of widget zone to be numerical bargraphs
+        std::set<FAUSTFLOAT*>               fLogSet;             // set of widget zone having a log UI scale
+        std::set<FAUSTFLOAT*>               fExpSet;             // set of widget zone having an exp UI scale
+        std::set<FAUSTFLOAT*>               fHiddenSet;          // set of hidden widget zone
+        
+        void clearMetadata()
+        {
+            fGuiSize.clear();
+            fTooltip.clear();
+            fUnit.clear();
+            fRadioDescription.clear();
+            fMenuDescription.clear();
+            fKnobSet.clear();
+            fLedSet.clear();
+            fNumSet.clear();
+            fLogSet.clear();
+            fExpSet.clear();
+            fHiddenSet.clear();
+        }
+        
+        /**
+         * rmWhiteSpaces(): Remove the leading and trailing white spaces of a string
+         * (but not those in the middle of the string)
+         */
+        static std::string rmWhiteSpaces(const std::string& s)
+        {
+            size_t i = s.find_first_not_of(" \t");
+            size_t j = s.find_last_not_of(" \t");
+            if ((i != std::string::npos) && (j != std::string::npos)) {
+                return s.substr(i, 1+j-i);
+            } else {
+                return "";
+            }
+        }
+        
+        /**
+         * Format tooltip string by replacing some white spaces by
+         * return characters so that line width doesn't exceed n.
+         * Limitation : long words exceeding n are not cut
+         */
+        std::string formatTooltip(int n, const std::string& tt)
+        {
+            std::string ss = tt;  // ss string we are going to format
+            int lws = 0;          // last white space encountered
+            int lri = 0;          // last return inserted
+            for (int i = 0; i < (int)tt.size(); i++) {
+                if (tt[i] == ' ') lws = i;
+                if (((i-lri) >= n) && (lws > lri)) {
+                    // insert return here
+                    ss[lws] = '\n';
+                    lri = lws;
+                }
+            }
+            return ss;
+        }
+        
+    public:
+        
+        virtual ~MetaDataUI()
+        {}
+        
+        enum Scale {
+            kLin,
+            kLog,
+            kExp
+        };
+        
+        Scale getScale(FAUSTFLOAT* zone)
+        {
+            if (fLogSet.count(zone) > 0) return kLog;
+            if (fExpSet.count(zone) > 0) return kExp;
+            return kLin;
+        }
+        
+        bool isKnob(FAUSTFLOAT* zone)
+        {
+            return fKnobSet.count(zone) > 0;
+        }
+        
+        bool isRadio(FAUSTFLOAT* zone)
+        {
+            return fRadioDescription.count(zone) > 0;
+        }
+        
+        bool isMenu(FAUSTFLOAT* zone)
+        {
+            return fMenuDescription.count(zone) > 0;
+        }
+        
+        bool isLed(FAUSTFLOAT* zone)
+        {
+            return fLedSet.count(zone) > 0;
+        }
+        
+        bool isNumerical(FAUSTFLOAT* zone)
+        {
+            return fNumSet.count(zone) > 0;
+        }
+        
+        bool isHidden(FAUSTFLOAT* zone)
+        {
+            return fHiddenSet.count(zone) > 0;
+        }
+        
+        /**
+         * Extracts metadata from a label : 'vol [unit: dB]' -> 'vol' + metadata(unit=dB)
+         */
+        static void extractMetadata(const std::string& fulllabel, std::string& label, std::map<std::string, std::string>& metadata)
+        {
+            enum {kLabel, kEscape1, kEscape2, kEscape3, kKey, kValue};
+            int state = kLabel; int deep = 0;
+            std::string key, value;
+            
+            for (unsigned int i = 0; i < fulllabel.size(); i++) {
+                char c = fulllabel[i];
+                switch (state) {
+                    case kLabel :
+                        assert(deep == 0);
+                        switch (c) {
+                            case '\\' : state = kEscape1; break;
+                            case '[' : state = kKey; deep++; break;
+                            default : label += c;
+                        }
+                        break;
+                        
+                    case kEscape1:
+                        label += c;
+                        state = kLabel;
+                        break;
+                        
+                    case kEscape2:
+                        key += c;
+                        state = kKey;
+                        break;
+                        
+                    case kEscape3:
+                        value += c;
+                        state = kValue;
+                        break;
+                        
+                    case kKey:
+                        assert(deep > 0);
+                        switch (c) {
+                            case '\\':
+                                state = kEscape2;
+                                break;
+                                
+                            case '[':
+                                deep++;
+                                key += c;
+                                break;
+                                
+                            case ':':
+                                if (deep == 1) {
+                                    state = kValue;
+                                } else {
+                                    key += c;
+                                }
+                                break;
+                            case ']':
+                                deep--;
+                                if (deep < 1) {
+                                    metadata[rmWhiteSpaces(key)] = "";
+                                    state = kLabel;
+                                    key="";
+                                    value="";
+                                } else {
+                                    key += c;
+                                }
+                                break;
+                            default : key += c;
+                        }
+                        break;
+                        
+                    case kValue:
+                        assert(deep > 0);
+                        switch (c) {
+                            case '\\':
+                                state = kEscape3;
+                                break;
+                                
+                            case '[':
+                                deep++;
+                                value += c;
+                                break;
+                                
+                            case ']':
+                                deep--;
+                                if (deep < 1) {
+                                    metadata[rmWhiteSpaces(key)] = rmWhiteSpaces(value);
+                                    state = kLabel;
+                                    key = "";
+                                    value = "";
+                                } else {
+                                    value += c;
+                                }
+                                break;
+                            default : value += c;
+                        }
+                        break;
+                        
+                    default:
+                        std::cerr << "ERROR unrecognized state " << state << std::endl;
+                }
+            }
+            label = rmWhiteSpaces(label);
+        }
+        
+        /**
+         * Analyses the widget zone metadata declarations and takes appropriate actions
+         */
+        void declare(FAUSTFLOAT* zone, const char* key, const char* value)
+        {
+            if (zone == 0) {
+                // special zone 0 means group metadata
+                if (strcmp(key, "tooltip") == 0) {
+                    // only group tooltip are currently implemented
+                    fGroupTooltip = formatTooltip(30, value);
+                } else if (strcmp(key, "hidden") == 0) {
+                    fHiddenSet.insert(zone);
+                }
+            } else {
+                if (strcmp(key, "size") == 0) {
+                    fGuiSize[zone] = atof(value);
+                }
+                else if (strcmp(key, "tooltip") == 0) {
+                    fTooltip[zone] = formatTooltip(30, value);
+                }
+                else if (strcmp(key, "unit") == 0) {
+                    fUnit[zone] = value;
+                }
+                else if (strcmp(key, "hidden") == 0) {
+                    fHiddenSet.insert(zone);
+                }
+                else if (strcmp(key, "scale") == 0) {
+                    if (strcmp(value, "log") == 0) {
+                        fLogSet.insert(zone);
+                    } else if (strcmp(value, "exp") == 0) {
+                        fExpSet.insert(zone);
+                    }
+                }
+                else if (strcmp(key, "style") == 0) {
+                    if (strcmp(value, "knob") == 0) {
+                        fKnobSet.insert(zone);
+                    } else if (strcmp(value, "led") == 0) {
+                        fLedSet.insert(zone);
+                    } else if (strcmp(value, "numerical") == 0) {
+                        fNumSet.insert(zone);
+                    } else {
+                        const char* p = value;
+                        if (parseWord(p, "radio")) {
+                            fRadioDescription[zone] = std::string(p);
+                        } else if (parseWord(p, "menu")) {
+                            fMenuDescription[zone] = std::string(p);
+                        }
+                    }
+                }
+            }
+        }
+    
+};
+
+#endif
+/**************************  END  MetaDataUI.h **************************/
+/************************** BEGIN midi.h **************************/
 /************************************************************************
  FAUST Architecture File
  Copyright (C) 2003-2017 GRAME, Centre National de Creation Musicale
@@ -6234,12 +10714,29 @@ inline clist::~clist()
 #include <vector>
 #include <string>
 #include <algorithm>
+#include <assert.h>
 
 class MapUI;
 
-//----------------------------------------------------------------
-//  MIDI processor definition
-//----------------------------------------------------------------
+/*************************************
+ A time-stamped short MIDI message
+**************************************/
+
+#pragma pack (push, 1)
+struct MIDIMessage
+{
+    uint32_t frameIndex;
+    uint8_t byte0, byte1, byte2;
+};
+#pragma pack (pop)
+
+/*******************************************************************************
+ * MIDI processor definition.
+ *
+ * MIDI input or output handling classes will implement this interface,
+ * so the same method names (keyOn, ctrlChange...) will be used either
+ * when decoding MIDI input or encoding MIDI output events.
+ *******************************************************************************/
 
 class midi {
 
@@ -6258,22 +10755,7 @@ class midi {
         {
             keyOff(channel, pitch, velocity);
         }
-        
-        virtual void pitchWheel(double, int channel, int wheel)
-        {
-            pitchWheel(channel, wheel);
-        }
-           
-        virtual void ctrlChange(double, int channel, int ctrl, int value)
-        {
-            ctrlChange(channel, ctrl, value);
-        }
-       
-        virtual void progChange(double, int channel, int pgm)
-        {
-            progChange(channel, pgm);
-        }
-        
+    
         virtual void keyPress(double, int channel, int pitch, int press)
         {
             keyPress(channel, pitch, press);
@@ -6283,15 +10765,35 @@ class midi {
         {
             chanPress(channel, press);
         }
-       
+    
+        virtual void pitchWheel(double, int channel, int wheel)
+        {
+            pitchWheel(channel, wheel);
+        }
+           
+        virtual void ctrlChange(double, int channel, int ctrl, int value)
+        {
+            ctrlChange(channel, ctrl, value);
+        }
+    
         virtual void ctrlChange14bits(double, int channel, int ctrl, int value)
         {
             ctrlChange14bits(channel, ctrl, value);
         }
 
+        virtual void progChange(double, int channel, int pgm)
+        {
+            progChange(channel, pgm);
+        }
+    
+        virtual void sysEx(double, std::vector<unsigned char>& message)
+        {
+            sysEx(message);
+        }
+
         // MIDI sync
-        virtual void start_sync(double date)  {}
-        virtual void stop_sync(double date)   {}
+        virtual void startSync(double date)  {}
+        virtual void stopSync(double date)   {}
         virtual void clock(double date)  {}
 
         // Standard MIDI API
@@ -6303,6 +10805,7 @@ class midi {
         virtual void ctrlChange14bits(int channel, int ctrl, int value) {}
         virtual void pitchWheel(int channel, int wheel)                 {}
         virtual void progChange(int channel, int pgm)                   {}
+        virtual void sysEx(std::vector<unsigned char>& message)         {}
 
         enum MidiStatus {
 
@@ -6316,7 +10819,10 @@ class midi {
             MIDI_POLY_AFTERTOUCH = 0xA0,    // aka key pressure
             MIDI_CLOCK = 0xF8,
             MIDI_START = 0xFA,
-            MIDI_STOP = 0xFC
+            MIDI_CONT = 0xFB,
+            MIDI_STOP = 0xFC,
+            MIDI_SYSEX_START = 0xF0,
+            MIDI_SYSEX_STOP = 0xF7
 
         };
 
@@ -6328,9 +10834,15 @@ class midi {
         };
 };
 
-//----------------------------------------------------------------
-//  Base class for MIDI API handling
-//----------------------------------------------------------------
+/****************************************************
+ * Base class for MIDI input handling.
+ *
+ * Shared common code used for input handling:
+ * - decoding Real-Time messages: handleSync
+ * - decoding one data byte messages: handleData1
+ * - decoding two data byte messages: handleData2
+ * - getting ready messages in polling mode
+ ****************************************************/
 
 class midi_handler : public midi {
 
@@ -6338,7 +10850,9 @@ class midi_handler : public midi {
 
         std::vector<midi*> fMidiInputs;
         std::string fName;
-
+    
+        int range(int min, int max, int val) { return (val < min) ? min : ((val >= max) ? max : val); }
+  
     public:
 
         midi_handler(const std::string& name = "MIDIHandler"):fName(name) {}
@@ -6353,12 +10867,15 @@ class midi_handler : public midi {
             }
         }
 
-        virtual bool start_midi() { return true; }
-        virtual void stop_midi() {}
+        virtual bool startMidi() { return true; }
+        virtual void stopMidi() {}
     
         void setName(const std::string& name) { fName = name; }
         std::string getName() { return fName; }
-        
+    
+        // To be used in polling mode
+        virtual int getMessages(std::vector<MIDIMessage>* message) { return 0; }
+    
         void handleSync(double time, int type)
         {
             if (type == MIDI_CLOCK) {
@@ -6367,11 +10884,11 @@ class midi_handler : public midi {
                 }
             } else if (type == MIDI_START) {
                 for (unsigned int i = 0; i < fMidiInputs.size(); i++) {
-                    fMidiInputs[i]->start_sync(time);
+                    fMidiInputs[i]->startSync(time);
                 }
             } else if (type == MIDI_STOP) {
                 for (unsigned int i = 0; i < fMidiInputs.size(); i++) {
-                    fMidiInputs[i]->stop_sync(time);
+                    fMidiInputs[i]->stopSync(time);
                 }
             }
         }
@@ -6405,7 +10922,7 @@ class midi_handler : public midi {
                 }
             } else if (type == MIDI_PITCH_BEND) {
                 for (unsigned int i = 0; i < fMidiInputs.size(); i++) {
-                    fMidiInputs[i]->pitchWheel(time, channel, (data2 * 128.0) + data1);
+                    fMidiInputs[i]->pitchWheel(time, channel, (data2 << 7) + data1);
                 }
             } else if (type == MIDI_POLY_AFTERTOUCH) {
                 for (unsigned int i = 0; i < fMidiInputs.size(); i++) {
@@ -6413,10 +10930,43 @@ class midi_handler : public midi {
                 }
             }
         }
+    
+        void handleMessage(double time, int type, std::vector<unsigned char>& message)
+        {
+            if (type == MIDI_SYSEX_START) {
+                for (unsigned int i = 0; i < fMidiInputs.size(); i++) {
+                    fMidiInputs[i]->sysEx(time, message);
+                }
+            }
+        }
 
 };
 
+//-------------------------------
+// For timestamped MIDI messages
+//-------------------------------
+
+struct DatedMessage {
+    
+    double fDate;
+    unsigned char fBuffer[3];
+    size_t fSize;
+    
+    DatedMessage(double date, unsigned char* buffer, size_t size)
+    :fDate(date), fSize(size)
+    {
+        assert(size <= 3);
+        memcpy(fBuffer, buffer, size);
+    }
+    
+    DatedMessage():fDate(0.0), fSize(0)
+    {}
+    
+};
+
 #endif // __midi__
+/**************************  END  midi.h **************************/
+/************************** BEGIN ValueConverter.h **************************/
 /************************************************************************
  FAUST Architecture File
  Copyright (C) 2003-2017 GRAME, Centre National de Creation Musicale
@@ -6944,6 +11494,7 @@ class ZoneReader
 };
 
 #endif
+/**************************  END  ValueConverter.h **************************/
 
 #ifdef _MSC_VER
 #define gsscanf sscanf_s
@@ -6971,26 +11522,59 @@ struct MidiMeta : public Meta, public std::map<std::string, std::string>
         }
     }
     
-    static void analyse(dsp* tmp_dsp, bool& midi_sync, int& nvoices)
+    static void analyse(dsp* mono_dsp, bool& midi_sync, int& nvoices)
     {
         JSONUI jsonui;
-        tmp_dsp->buildUserInterface(&jsonui);
+        mono_dsp->buildUserInterface(&jsonui);
         std::string json = jsonui.JSON();
         midi_sync = ((json.find("midi") != std::string::npos) &&
                      ((json.find("start") != std::string::npos) ||
                       (json.find("stop") != std::string::npos) ||
-                      (json.find("clock") != std::string::npos)));
+                      (json.find("clock") != std::string::npos) ||
+                      (json.find("timestamp") != std::string::npos)));
     
     #if defined(NVOICES) && NVOICES!=NUM_VOICES
         nvoices = NVOICES;
     #else
         MidiMeta meta;
-        tmp_dsp->metadata(&meta);
-        std::string numVoices = meta.get("nvoices", "0");
-        nvoices = std::atoi(numVoices.c_str());
-        if (nvoices < 0) nvoices = 0;
+        mono_dsp->metadata(&meta);
+        bool found_voices = false;
+        // If "options" metadata is used
+        std::string options = meta.get("options", "");
+        if (options != "") {
+            std::map<std::string, std::string> metadata;
+            std::string res;
+            MetaDataUI::extractMetadata(options, res, metadata);
+            if (metadata.find("nvoices") != metadata.end()) {
+                nvoices = std::atoi(metadata["nvoices"].c_str());
+                found_voices = true;
+            }
+        }
+        // Otherwise test for "nvoices" metadata
+        if (!found_voices) {
+            std::string numVoices = meta.get("nvoices", "0");
+            nvoices = std::atoi(numVoices.c_str());
+        }
+        nvoices = std::max<int>(0, nvoices);
     #endif
     }
+    
+    static bool checkPolyphony(dsp* mono_dsp)
+    {
+        MapUI map_ui;
+        mono_dsp->buildUserInterface(&map_ui);
+        bool has_freq = false;
+        bool has_gate = false;
+        bool has_gain = false;
+        for (int i = 0; i < map_ui.getParamsCount(); i++) {
+            std::string path = map_ui.getParamAddress(i);
+            has_freq |= MapUI::endsWith(path, "/freq");
+            has_gate |= MapUI::endsWith(path, "/gate");
+            has_gain |= MapUI::endsWith(path, "/gain");
+        }
+        return (has_freq && has_gate && has_gain);
+    }
+    
 };
 
 /*******************************************************************************
@@ -7016,6 +11600,10 @@ class uiMidi {
     
 };
 
+/*****************************************************************************
+ * Base class for MIDI aware UI items
+ ******************************************************************************/
+
 class uiMidiItem : public uiMidi, public uiItem {
     
     public:
@@ -7029,6 +11617,10 @@ class uiMidiItem : public uiMidi, public uiItem {
         virtual void reflectZone() {}
     
 };
+
+/*****************************************************************************
+ * Base class for MIDI aware UI items with timestamp support
+ ******************************************************************************/
 
 class uiMidiTimedItem : public uiMidi, public uiTimedItem {
     
@@ -7044,7 +11636,9 @@ class uiMidiTimedItem : public uiMidi, public uiTimedItem {
     
 };
 
+//-------------
 // MIDI sync
+//-------------
 
 class uiMidiStart : public uiMidiTimedItem
 {
@@ -7062,7 +11656,13 @@ class uiMidiStart : public uiMidiTimedItem
             FAUSTFLOAT v = *fZone;
             fCache = v;
             if (v != FAUSTFLOAT(0)) {
-                fMidiOut->start_sync(0);
+                fMidiOut->startSync(0);
+            }
+        }
+        void modifyZone(double date, FAUSTFLOAT v)
+        {
+            if (fInputCtrl) {
+                uiItem::modifyZone(FAUSTFLOAT(v));
             }
         }
         
@@ -7084,7 +11684,14 @@ class uiMidiStop : public uiMidiTimedItem
             FAUSTFLOAT v = *fZone;
             fCache = v;
             if (v != FAUSTFLOAT(1)) {
-                fMidiOut->stop_sync(0);
+                fMidiOut->stopSync(0);
+            }
+        }
+    
+        void modifyZone(double date, FAUSTFLOAT v)
+        {
+            if (fInputCtrl) {
+                uiItem::modifyZone(FAUSTFLOAT(v));
             }
         }
 };
@@ -7121,7 +11728,11 @@ class uiMidiClock : public uiMidiTimedItem
 
 };
 
-class uiMidiProgChange : public uiMidiItem
+//----------------------
+// Standard MIDI events
+//----------------------
+
+class uiMidiProgChange : public uiMidiTimedItem
 {
     
     private:
@@ -7131,7 +11742,7 @@ class uiMidiProgChange : public uiMidiItem
     public:
     
         uiMidiProgChange(midi* midi_out, int pgm, GUI* ui, FAUSTFLOAT* zone, bool input = true)
-            :uiMidiItem(midi_out, ui, zone, input), fPgm(pgm)
+            :uiMidiTimedItem(midi_out, ui, zone, input), fPgm(pgm)
         {}
         virtual ~uiMidiProgChange()
         {}
@@ -7147,7 +11758,7 @@ class uiMidiProgChange : public uiMidiItem
         
 };
 
-class uiMidiChanPress : public uiMidiItem
+class uiMidiChanPress : public uiMidiTimedItem
 {
     private:
         
@@ -7156,7 +11767,7 @@ class uiMidiChanPress : public uiMidiItem
     public:
     
         uiMidiChanPress(midi* midi_out, int press, GUI* ui, FAUSTFLOAT* zone, bool input = true)
-            :uiMidiItem(midi_out, ui, zone, input), fPress(press)
+            :uiMidiTimedItem(midi_out, ui, zone, input), fPress(press)
         {}
         virtual ~uiMidiChanPress()
         {}
@@ -7172,7 +11783,7 @@ class uiMidiChanPress : public uiMidiItem
         
 };
 
-class uiMidiCtrlChange : public uiMidiItem
+class uiMidiCtrlChange : public uiMidiTimedItem
 {
     private:
     
@@ -7182,7 +11793,7 @@ class uiMidiCtrlChange : public uiMidiItem
     public:
     
         uiMidiCtrlChange(midi* midi_out, int ctrl, GUI* ui, FAUSTFLOAT* zone, FAUSTFLOAT min, FAUSTFLOAT max, bool input = true)
-            :uiMidiItem(midi_out, ui, zone, input), fCtrl(ctrl), fConverter(0., 127., double(min), double(max))
+            :uiMidiTimedItem(midi_out, ui, zone, input), fCtrl(ctrl), fConverter(0., 127., double(min), double(max))
         {}
         virtual ~uiMidiCtrlChange()
         {}
@@ -7194,16 +11805,23 @@ class uiMidiCtrlChange : public uiMidiItem
             fMidiOut->ctrlChange(0, fCtrl, fConverter.faust2ui(v));
         }
         
-        void modifyZone(int v) 	
+        void modifyZone(FAUSTFLOAT v)
         { 
             if (fInputCtrl) {
                 uiItem::modifyZone(FAUSTFLOAT(fConverter.ui2faust(v)));
             }
         }
+    
+        void modifyZone(double date, FAUSTFLOAT v)
+        {
+            if (fInputCtrl) {
+                uiMidiTimedItem::modifyZone(date, FAUSTFLOAT(fConverter.ui2faust(v)));
+            }
+        }
  
 };
 
-class uiMidiPitchWheel : public uiMidiItem
+class uiMidiPitchWheel : public uiMidiTimedItem
 {
 
     private:
@@ -7222,7 +11840,7 @@ class uiMidiPitchWheel : public uiMidiItem
     public:
     
         uiMidiPitchWheel(midi* midi_out, GUI* ui, FAUSTFLOAT* zone, bool input = true)
-            :uiMidiItem(midi_out, ui, zone, input)
+            :uiMidiTimedItem(midi_out, ui, zone, input)
         {}
         virtual ~uiMidiPitchWheel()
         {}
@@ -7234,16 +11852,23 @@ class uiMidiPitchWheel : public uiMidiItem
             fMidiOut->pitchWheel(0, bend2wheel(v));
         }
         
-        void modifyZone(int v) 	
+        void modifyZone(FAUSTFLOAT v)
         { 
             if (fInputCtrl) {
                 uiItem::modifyZone(wheel2bend(v));
             }
         }
+    
+        void modifyZone(double date, FAUSTFLOAT v)
+        {
+            if (fInputCtrl) {
+                uiMidiTimedItem::modifyZone(date, wheel2bend(v));
+            }
+        }
  
 };
 
-class uiMidiKeyOn : public uiMidiItem
+class uiMidiKeyOn : public uiMidiTimedItem
 {
 
     private:
@@ -7254,7 +11879,7 @@ class uiMidiKeyOn : public uiMidiItem
     public:
     
         uiMidiKeyOn(midi* midi_out, int key, GUI* ui, FAUSTFLOAT* zone, FAUSTFLOAT min, FAUSTFLOAT max, bool input = true)
-            :uiMidiItem(midi_out, ui, zone, input), fKeyOn(key), fConverter(0., 127., double(min), double(max))
+            :uiMidiTimedItem(midi_out, ui, zone, input), fKeyOn(key), fConverter(0., 127., double(min), double(max))
         {}
         virtual ~uiMidiKeyOn()
         {}
@@ -7266,16 +11891,23 @@ class uiMidiKeyOn : public uiMidiItem
             fMidiOut->keyOn(0, fKeyOn, fConverter.faust2ui(v));
         }
         
-        void modifyZone(int v) 	
+        void modifyZone(FAUSTFLOAT v)
         { 
             if (fInputCtrl) {
                 uiItem::modifyZone(FAUSTFLOAT(fConverter.ui2faust(v)));
             }
         }
-        
+    
+        void modifyZone(double date, FAUSTFLOAT v)
+        {
+            if (fInputCtrl) {
+                uiMidiTimedItem::modifyZone(date, FAUSTFLOAT(fConverter.ui2faust(v)));
+            }
+        }
+    
 };
 
-class uiMidiKeyOff : public uiMidiItem
+class uiMidiKeyOff : public uiMidiTimedItem
 {
 
     private:
@@ -7286,7 +11918,7 @@ class uiMidiKeyOff : public uiMidiItem
     public:
     
         uiMidiKeyOff(midi* midi_out, int key, GUI* ui, FAUSTFLOAT* zone, FAUSTFLOAT min, FAUSTFLOAT max, bool input = true)
-            :uiMidiItem(midi_out, ui, zone, input), fKeyOff(key), fConverter(0., 127., double(min), double(max))
+            :uiMidiTimedItem(midi_out, ui, zone, input), fKeyOff(key), fConverter(0., 127., double(min), double(max))
         {}
         virtual ~uiMidiKeyOff()
         {}
@@ -7298,17 +11930,23 @@ class uiMidiKeyOff : public uiMidiItem
             fMidiOut->keyOff(0, fKeyOff, fConverter.faust2ui(v));
         }
         
-        void modifyZone(int v) 	
+        void modifyZone(FAUSTFLOAT v)
         { 
             if (fInputCtrl) {
                 uiItem::modifyZone(FAUSTFLOAT(fConverter.ui2faust(v)));
             }
         }
-        
+    
+        void modifyZone(double date, FAUSTFLOAT v)
+        {
+            if (fInputCtrl) {
+                uiMidiTimedItem::modifyZone(date, FAUSTFLOAT(fConverter.ui2faust(v)));
+            }
+        }
+    
 };
 
-
-class uiMidiKeyPress : public uiMidiItem
+class uiMidiKeyPress : public uiMidiTimedItem
 {
 
     private:
@@ -7319,7 +11957,7 @@ class uiMidiKeyPress : public uiMidiItem
     public:
     
         uiMidiKeyPress(midi* midi_out, int key, GUI* ui, FAUSTFLOAT* zone, FAUSTFLOAT min, FAUSTFLOAT max, bool input = true)
-            :uiMidiItem(midi_out, ui, zone, input), fKey(key), fConverter(0., 127., double(min), double(max))
+            :uiMidiTimedItem(midi_out, ui, zone, input), fKey(key), fConverter(0., 127., double(min), double(max))
         {}
         virtual ~uiMidiKeyPress()
         {}
@@ -7331,16 +11969,36 @@ class uiMidiKeyPress : public uiMidiItem
             fMidiOut->keyPress(0, fKey, fConverter.faust2ui(v));
         }
         
-        void modifyZone(int v) 	
+        void modifyZone(FAUSTFLOAT v)
         { 
             if (fInputCtrl) {
                 uiItem::modifyZone(FAUSTFLOAT(fConverter.ui2faust(v)));
             }
         }
-        
+    
+        void modifyZone(double date, FAUSTFLOAT v)
+        {
+            if (fInputCtrl) {
+                uiMidiTimedItem::modifyZone(date, FAUSTFLOAT(fConverter.ui2faust(v)));
+            }
+        }
+    
 };
 
 class MapUI;
+
+/******************************************************************************************
+ * MidiUI : Faust User Interface
+ * This class decodes MIDI metadata and maps incoming MIDI messages to them.
+ * Currently ctrl, keyon/keyoff, keypress, pgm, chanpress, pitchwheel/pitchbend
+ * start/stop/clock meta data are handled.
+ *
+ * Maps associating MIDI event ID (like each ctrl number) with all MIDI aware UI items
+ * are defined and progressively filled when decoding MIDI related metadata.
+ * MIDI aware UI items are used in both directions:
+ *  - modifying their internal state when receving MIDI input events
+ *  - sending their internal state as MIDI output events
+ *******************************************************************************************/
 
 class MidiUI : public GUI, public midi
 {
@@ -7364,6 +12022,7 @@ class MidiUI : public GUI, public midi
         
         midi_handler* fMidiHandler;
         bool fDelete;
+        bool fTimeStamp;
     
         void addGenericZone(FAUSTFLOAT* zone, FAUSTFLOAT min, FAUSTFLOAT max, bool input = true)
         {
@@ -7385,16 +12044,18 @@ class MidiUI : public GUI, public midi
                             fProgChangeTable[num].push_back(new uiMidiProgChange(fMidiHandler, num, this, zone, input));
                         } else if (gsscanf(fMetaAux[i].second.c_str(), "chanpress %u", &num) == 1) {
                             fChanPressTable[num].push_back(new uiMidiChanPress(fMidiHandler, num, this, zone, input));
-                        } else if (strcmp(fMetaAux[i].second.c_str(), "pitchwheel") == 0 
-                            || strcmp(fMetaAux[i].second.c_str(), "pitchbend") == 0) {
+                        } else if (fMetaAux[i].second == "pitchwheel" || fMetaAux[i].second == "pitchbend") {
                             fPitchWheelTable.push_back(new uiMidiPitchWheel(fMidiHandler, this, zone, input));
                         // MIDI sync
-                        } else if (strcmp(fMetaAux[i].second.c_str(), "start") == 0) {
+                        } else if (fMetaAux[i].second == "start") {
                             fStartTable.push_back(new uiMidiStart(fMidiHandler, this, zone, input));
-                        } else if (strcmp(fMetaAux[i].second.c_str(), "stop") == 0) {
+                        } else if (fMetaAux[i].second == "stop") {
                             fStopTable.push_back(new uiMidiStop(fMidiHandler, this, zone, input));
-                        } else if (strcmp(fMetaAux[i].second.c_str(), "clock") == 0) {
+                        } else if (fMetaAux[i].second == "clock") {
                             fClockTable.push_back(new uiMidiClock(fMidiHandler, this, zone, input));
+                        // Explicit metadata to activate 'timestamp' mode
+                        } else if (fMetaAux[i].second == "timestamp") {
+                            fTimeStamp = true;
                         }
                     }
                 }
@@ -7404,7 +12065,7 @@ class MidiUI : public GUI, public midi
 
     public:
     
-        MidiUI():fMidiHandler(NULL), fDelete(false)
+        MidiUI():fMidiHandler(NULL), fDelete(false), fTimeStamp(false)
         {}
 
         MidiUI(midi_handler* midi_handler, bool delete_handler = false)
@@ -7412,6 +12073,7 @@ class MidiUI : public GUI, public midi
             fMidiHandler = midi_handler;
             fMidiHandler->addMidiIn(this);
             fDelete = delete_handler;
+            fTimeStamp = false;
         }
  
         virtual ~MidiUI() 
@@ -7420,8 +12082,8 @@ class MidiUI : public GUI, public midi
             if (fDelete) delete fMidiHandler;
         }
         
-        bool run() { return fMidiHandler->start_midi(); }
-        void stop() { fMidiHandler->stop_midi(); }
+        bool run() { return fMidiHandler->startMidi(); }
+        void stop() { fMidiHandler->stopMidi(); }
         
         void addMidiIn(midi* midi_dsp) { fMidiHandler->addMidiIn(midi_dsp); }
         void removeMidiIn(midi* midi_dsp) { fMidiHandler->removeMidiIn(midi_dsp); }
@@ -7473,14 +12135,26 @@ class MidiUI : public GUI, public midi
         MapUI* keyOn(double date, int channel, int note, int velocity)
         {
             if (fKeyOnTable.find(note) != fKeyOnTable.end()) {
-                for (unsigned int i = 0; i < fKeyOnTable[note].size(); i++) {
-                    fKeyOnTable[note][i]->modifyZone(FAUSTFLOAT(velocity));
+                if (fTimeStamp) {
+                    for (unsigned int i = 0; i < fKeyOnTable[note].size(); i++) {
+                        fKeyOnTable[note][i]->modifyZone(date, FAUSTFLOAT(velocity));
+                    }
+                } else {
+                    for (unsigned int i = 0; i < fKeyOnTable[note].size(); i++) {
+                        fKeyOnTable[note][i]->modifyZone(FAUSTFLOAT(velocity));
+                    }
                 }
             }
             // If note is in fKeyTable, handle it as a keyOn
             if (fKeyTable.find(note) != fKeyTable.end()) {
-                for (unsigned int i = 0; i < fKeyTable[note].size(); i++) {
-                    fKeyTable[note][i]->modifyZone(FAUSTFLOAT(velocity));
+                if (fTimeStamp) {
+                    for (unsigned int i = 0; i < fKeyTable[note].size(); i++) {
+                        fKeyTable[note][i]->modifyZone(date, FAUSTFLOAT(velocity));
+                    }
+                } else {
+                    for (unsigned int i = 0; i < fKeyTable[note].size(); i++) {
+                        fKeyTable[note][i]->modifyZone(FAUSTFLOAT(velocity));
+                    }
                 }
             }
             return 0;
@@ -7489,14 +12163,26 @@ class MidiUI : public GUI, public midi
         void keyOff(double date, int channel, int note, int velocity)
         {
             if (fKeyOffTable.find(note) != fKeyOffTable.end()) {
-                for (unsigned int i = 0; i < fKeyOffTable[note].size(); i++) {
-                    fKeyOffTable[note][i]->modifyZone(FAUSTFLOAT(velocity));
+                if (fTimeStamp) {
+                    for (unsigned int i = 0; i < fKeyOffTable[note].size(); i++) {
+                        fKeyOffTable[note][i]->modifyZone(date, FAUSTFLOAT(velocity));
+                    }
+                } else {
+                    for (unsigned int i = 0; i < fKeyOffTable[note].size(); i++) {
+                        fKeyOffTable[note][i]->modifyZone(FAUSTFLOAT(velocity));
+                    }
                 }
             }
             // If note is in fKeyTable, handle it as a keyOff with a 0 velocity
             if (fKeyTable.find(note) != fKeyTable.end()) {
-                for (unsigned int i = 0; i < fKeyTable[note].size(); i++) {
-                    fKeyTable[note][i]->modifyZone(0);
+                if (fTimeStamp) {
+                    for (unsigned int i = 0; i < fKeyTable[note].size(); i++) {
+                        fKeyTable[note][i]->modifyZone(date, 0);
+                    }
+                } else {
+                    for (unsigned int i = 0; i < fKeyTable[note].size(); i++) {
+                        fKeyTable[note][i]->modifyZone(0);
+                    }
                 }
             }
         }
@@ -7504,42 +12190,72 @@ class MidiUI : public GUI, public midi
         void ctrlChange(double date, int channel, int ctrl, int value)
         {
             if (fCtrlChangeTable.find(ctrl) != fCtrlChangeTable.end()) {
-                for (unsigned int i = 0; i < fCtrlChangeTable[ctrl].size(); i++) {
-                    fCtrlChangeTable[ctrl][i]->modifyZone(FAUSTFLOAT(value));
+                if (fTimeStamp) {
+                    for (unsigned int i = 0; i < fCtrlChangeTable[ctrl].size(); i++) {
+                        fCtrlChangeTable[ctrl][i]->modifyZone(date, FAUSTFLOAT(value));
+                    }
+                } else {
+                    for (unsigned int i = 0; i < fCtrlChangeTable[ctrl].size(); i++) {
+                        fCtrlChangeTable[ctrl][i]->modifyZone(FAUSTFLOAT(value));
+                    }
                 }
-            } 
+            }
         }
         
         void progChange(double date, int channel, int pgm)
         {
             if (fProgChangeTable.find(pgm) != fProgChangeTable.end()) {
-                for (unsigned int i = 0; i < fProgChangeTable[pgm].size(); i++) {
-                    fProgChangeTable[pgm][i]->modifyZone(FAUSTFLOAT(1));
+                if (fTimeStamp) {
+                    for (unsigned int i = 0; i < fProgChangeTable[pgm].size(); i++) {
+                        fProgChangeTable[pgm][i]->modifyZone(date, FAUSTFLOAT(1));
+                    }
+                } else {
+                    for (unsigned int i = 0; i < fProgChangeTable[pgm].size(); i++) {
+                        fProgChangeTable[pgm][i]->modifyZone(FAUSTFLOAT(1));
+                    }
                 }
-            } 
+            }
         }
         
         void pitchWheel(double date, int channel, int wheel) 
         {
-            for (unsigned int i = 0; i < fPitchWheelTable.size(); i++) {
-                fPitchWheelTable[i]->modifyZone(FAUSTFLOAT(wheel));
+            if (fTimeStamp) {
+                for (unsigned int i = 0; i < fPitchWheelTable.size(); i++) {
+                    fPitchWheelTable[i]->modifyZone(date, FAUSTFLOAT(wheel));
+                }
+            } else {
+                for (unsigned int i = 0; i < fPitchWheelTable.size(); i++) {
+                    fPitchWheelTable[i]->modifyZone(FAUSTFLOAT(wheel));
+                }
             }
         }
         
         void keyPress(double date, int channel, int pitch, int press) 
         {
             if (fKeyPressTable.find(pitch) != fKeyPressTable.end()) {
-                for (unsigned int i = 0; i < fKeyPressTable[pitch].size(); i++) {
-                    fKeyPressTable[pitch][i]->modifyZone(FAUSTFLOAT(press));
+                if (fTimeStamp) {
+                    for (unsigned int i = 0; i < fKeyPressTable[pitch].size(); i++) {
+                        fKeyPressTable[pitch][i]->modifyZone(date, FAUSTFLOAT(press));
+                    }
+                } else {
+                    for (unsigned int i = 0; i < fKeyPressTable[pitch].size(); i++) {
+                        fKeyPressTable[pitch][i]->modifyZone(FAUSTFLOAT(press));
+                    }
                 }
-            } 
+            }
         }
         
         void chanPress(double date, int channel, int press)
         {
             if (fChanPressTable.find(press) != fChanPressTable.end()) {
-                for (unsigned int i = 0; i < fChanPressTable[press].size(); i++) {
-                    fChanPressTable[press][i]->modifyZone(FAUSTFLOAT(1));
+                if (fTimeStamp) {
+                    for (unsigned int i = 0; i < fChanPressTable[press].size(); i++) {
+                        fChanPressTable[press][i]->modifyZone(date, FAUSTFLOAT(1));
+                    }
+                } else {
+                    for (unsigned int i = 0; i < fChanPressTable[press].size(); i++) {
+                        fChanPressTable[press][i]->modifyZone(FAUSTFLOAT(1));
+                    }
                 }
             } 
         }
@@ -7548,14 +12264,14 @@ class MidiUI : public GUI, public midi
         
         // MIDI sync
         
-        void start_sync(double date)
+        void startSync(double date)
         {
             for (unsigned int i = 0; i < fStartTable.size(); i++) {
                 fStartTable[i]->modifyZone(date, FAUSTFLOAT(1));
             }
         }
         
-        void stop_sync(double date)
+        void stopSync(double date)
         {
             for (unsigned int i = 0; i < fStopTable.size(); i++) {
                 fStopTable[i]->modifyZone(date, FAUSTFLOAT(0));
@@ -7571,6 +12287,410 @@ class MidiUI : public GUI, public midi
 };
 
 #endif // FAUST_MIDIUI_H
+/**************************  END  MidiUI.h **************************/
+/************************** BEGIN mspUI.h **************************/
+/************************************************************************
+ FAUST Architecture File
+ Copyright (C) 2018 GRAME, Centre National de Creation Musicale
+ ---------------------------------------------------------------------
+ This Architecture section is free software; you can redistribute it
+ and/or modify it under the terms of the GNU General Public License
+ as published by the Free Software Foundation; either version 3 of
+ the License, or (at your option) any later version.
+ 
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+ 
+ You should have received a copy of the GNU General Public License
+ along with this program; If not, see <http://www.gnu.org/licenses/>.
+ 
+ EXCEPTION : As a special exception, you may create a larger work
+ that contains this FAUST architecture section and distribute
+ that work under terms of your choice, so long as this FAUST
+ architecture section is not modified.
+ ************************************************************************/
+//
+//  mspUI.h for static Max/MSP externals and faustgen~
+//
+//  Created by Martin Di Rollo on 18/04/12.
+//  Copyright (c) 2012-2019 Grame. All rights reserved.
+//
+
+#ifndef _mspUI_h
+#define _mspUI_h
+
+#include <math.h>
+#include <string>
+#include <map>
+
+
+#define STR_SIZE    512
+#define MULTI_SIZE  256
+
+#ifdef WIN32
+#include <stdio.h>
+#define snprintf _snprintf
+#ifndef NAN
+    static const unsigned long __nan[2] = {0xffffffff, 0x7fffffff};
+    #define NAN (*(const float *) __nan)
+#endif
+#endif
+
+using namespace std;
+
+struct Max_Meta1 : Meta
+{
+    int fCount;
+    
+    Max_Meta1():fCount(0)
+    {}
+    
+    void declare(const char* key, const char* value)
+    {
+        if ((strcmp("name", key) == 0) || (strcmp("author", key) == 0)) {
+            fCount++;
+        }
+    }
+};
+
+struct Max_Meta2 : Meta
+{
+    void declare(const char* key, const char* value)
+    {
+        if ((strcmp("name", key) == 0) || (strcmp("author", key) == 0)) {
+            post("%s : %s", key, value);
+        }
+    }
+};
+
+struct Max_Meta3 : Meta
+{
+    string fName;
+    void declare(const char* key, const char* value)
+    {
+        if ((strcmp("filename", key) == 0)) {
+            fName = "com.grame." + string(value) + "~";
+        }
+    }
+};
+
+class mspUIObject {
+    
+    protected:
+        
+        string fLabel;
+        FAUSTFLOAT* fZone;
+        
+        FAUSTFLOAT range(FAUSTFLOAT min, FAUSTFLOAT max, FAUSTFLOAT val) {return (val < min) ? min : (val > max) ? max : val;}
+        
+    public:
+        
+        mspUIObject(const string& label, FAUSTFLOAT* zone):fLabel(label),fZone(zone) {}
+        virtual ~mspUIObject() {}
+        
+        virtual void setValue(FAUSTFLOAT f) { *fZone = range(0.0,1.0,f); }
+        virtual FAUSTFLOAT getValue() { return *fZone; }
+        virtual void toString(char* buffer) {}
+        virtual string getName() { return fLabel; }
+};
+
+class mspCheckButton : public mspUIObject {
+    
+    public:
+        
+        mspCheckButton(const string& label, FAUSTFLOAT* zone):mspUIObject(label,zone) {}
+        virtual ~mspCheckButton() {}
+        
+        void toString(char* buffer)
+        {
+            snprintf(buffer, STR_SIZE, "CheckButton(float): %s", fLabel.c_str());
+        }
+};
+
+class mspButton : public mspUIObject {
+    
+    public:
+        
+        mspButton(const string& label, FAUSTFLOAT* zone):mspUIObject(label,zone) {}
+        virtual ~mspButton() {}
+        
+        void toString(char* buffer)
+        {
+            snprintf(buffer, STR_SIZE, "Button(float): %s", fLabel.c_str());
+        }
+};
+
+class mspSlider : public mspUIObject {
+    
+    private:
+        
+        FAUSTFLOAT fInit;
+        FAUSTFLOAT fMin;
+        FAUSTFLOAT fMax;
+        FAUSTFLOAT fStep;
+        
+    public:
+        
+        mspSlider(const string& label, FAUSTFLOAT* zone, FAUSTFLOAT init, FAUSTFLOAT min, FAUSTFLOAT max, FAUSTFLOAT step)
+        :mspUIObject(label,zone),fInit(init),fMin(min),fMax(max),fStep(step) {}
+        virtual ~mspSlider() {}
+        
+        void toString(char* buffer)
+        {
+            stringstream str;
+            str << "Slider(float): " << fLabel << " [init=" << fInit << ":min=" << fMin << ":max=" << fMax << ":step=" << fStep << ":cur=" << *fZone << "]";
+            string res = str.str();
+            snprintf(buffer, STR_SIZE, "%s", res.c_str());
+        }
+        
+        void setValue(FAUSTFLOAT f) { *fZone = range(fMin,fMax,f); }
+};
+
+class mspBargraph : public mspUIObject {
+    
+    private:
+        
+        FAUSTFLOAT fMin;
+        FAUSTFLOAT fMax;
+        FAUSTFLOAT fCurrent;
+        
+    public:
+        
+        mspBargraph(const string& label, FAUSTFLOAT* zone, FAUSTFLOAT min, FAUSTFLOAT max)
+        :mspUIObject(label,zone),fMin(min),fMax(max),fCurrent(*zone) {}
+        virtual ~mspBargraph() {}
+        
+        void toString(char* buffer)
+        {
+            stringstream str;
+            str << "Bargraph(float): " << fLabel << " [min=" << fMin << ":max=" << fMax << ":cur=" << *fZone << "]";
+            string res = str.str();
+            snprintf(buffer, STR_SIZE, "%s", res.c_str());
+        }
+        
+        virtual FAUSTFLOAT getValue()
+        {
+            if (*fZone != fCurrent) {
+                fCurrent = *fZone;
+                return fCurrent;
+            } else {
+                return NAN;
+            }
+        }
+};
+
+class mspUI : public UI, public PathBuilder
+{
+    private:
+        
+        map<string, mspUIObject*> fUITable1;       // Table using labels
+        map<string, mspUIObject*> fUITable2;       // Table using complete path
+        map<string, mspUIObject*> fUITable3;       // Table containing bargraph
+        
+        map<const char*, const char*> fDeclareTable;
+        
+        FAUSTFLOAT* fMultiTable[MULTI_SIZE];
+        int fMultiIndex;
+        int fMultiControl;
+        
+        string createLabel(const char* label)
+        {
+            map<const char*, const char*>::reverse_iterator it;
+            if (fDeclareTable.size() > 0) {
+                unsigned int i = 0;
+                string res = string(label);
+                char sep = '[';
+                for (it = fDeclareTable.rbegin(); it != fDeclareTable.rend(); it++, i++) {
+                    res = res + sep + (*it).first + ":" + (*it).second;
+                    sep = ',';
+                }
+                res += ']';
+                fDeclareTable.clear();
+                return res;
+            } else {
+                return string(label);
+            }
+        }
+        
+    public:
+        
+        typedef map<string, mspUIObject*>::iterator iterator;
+        
+        mspUI()
+        {
+            for (int i = 0; i < MULTI_SIZE; i++) {
+                fMultiTable[i] = 0;
+            }
+            fMultiIndex = fMultiControl = 0;
+        }
+        virtual ~mspUI()
+        {
+            clear();
+        }
+        
+        void addButton(const char* label, FAUSTFLOAT* zone)
+        {
+            mspUIObject* obj = new mspButton(createLabel(label), zone);
+            fUITable1[string(label)] = obj;
+            fUITable2[buildPath(label)] = obj;
+        }
+        
+        void addCheckButton(const char* label, FAUSTFLOAT* zone)
+        {
+            mspUIObject* obj = new mspCheckButton(createLabel(label), zone);
+            fUITable1[string(label)] = obj;
+            fUITable2[buildPath(label)] = obj;
+        }
+        
+        void addSlider(const char* label, FAUSTFLOAT* zone, FAUSTFLOAT init, FAUSTFLOAT min, FAUSTFLOAT max, FAUSTFLOAT step)
+        {
+            mspUIObject* obj = new mspSlider(createLabel(label), zone, init, min, max, step);
+            fUITable1[string(label)] = obj;
+            fUITable2[buildPath(label)] = obj;
+        }
+        
+        void addVerticalSlider(const char* label, FAUSTFLOAT* zone, FAUSTFLOAT init, FAUSTFLOAT min, FAUSTFLOAT max, FAUSTFLOAT step)
+        {
+            addSlider(label, zone, init, min, max, step);
+        }
+        
+        void addHorizontalSlider(const char* label, FAUSTFLOAT* zone, FAUSTFLOAT init, FAUSTFLOAT min, FAUSTFLOAT max, FAUSTFLOAT step)
+        {
+            addSlider(label, zone, init, min, max, step);
+        }
+        
+        void addNumEntry(const char* label, FAUSTFLOAT* zone, FAUSTFLOAT init, FAUSTFLOAT min, FAUSTFLOAT max, FAUSTFLOAT step)
+        {
+            mspUIObject* obj = new mspSlider(createLabel(label), zone, init, min, max, step);
+            fUITable1[string(label)] = obj;
+            fUITable2[buildPath(label)] = obj;
+        }
+        
+        void addHorizontalBargraph(const char* label, FAUSTFLOAT* zone, FAUSTFLOAT min, FAUSTFLOAT max)
+        {
+            fUITable3[buildPath(label)] = new mspBargraph(createLabel(label), zone, min, max);
+            fDeclareTable.clear();
+        }
+        void addVerticalBargraph(const char* label, FAUSTFLOAT* zone, FAUSTFLOAT min, FAUSTFLOAT max)
+        {
+            fUITable3[buildPath(label)] = new mspBargraph(createLabel(label), zone, min, max);
+            fDeclareTable.clear();
+        }
+        
+        void addSoundfile(const char* label, const char* filename, Soundfile** sf_zone) {}
+        
+        void openTabBox(const char* label) { pushLabel(label); fDeclareTable.clear(); }
+        void openHorizontalBox(const char* label) { pushLabel(label); fDeclareTable.clear(); }
+        void openVerticalBox(const char* label) { pushLabel(label); fDeclareTable.clear(); }
+        void closeBox() {popLabel(); fDeclareTable.clear();}
+        
+        virtual void declare(FAUSTFLOAT* zone, const char* key, const char* val)
+        {
+            if (strcmp(key,"multi") == 0) {
+                int index = atoi(val);
+                if (index >= 0 && index < MULTI_SIZE) {
+                    fMultiTable[index] = zone;
+                    fMultiControl++;
+                } else {
+                    post("Invalid multi index = %d", index);
+                }
+            }
+            
+            fDeclareTable[key] = val;
+        }
+        
+        void setMultiValues(FAUSTFLOAT* multi, int buffer_size)
+        {
+            for (int read = 0; read < buffer_size; read++) {
+                int write = (fMultiIndex + read) & (MULTI_SIZE - 1);
+                if (fMultiTable[write]) {
+                    *fMultiTable[write] = multi[read];
+                }
+            }
+            fMultiIndex += buffer_size;
+        }
+        
+        bool isMulti() { return fMultiControl > 0; }
+        
+        bool isValue(string name)
+        {
+            return (fUITable1.count(name) || fUITable2.count(name));
+        }
+        bool isOutputValue(string name)
+        {
+            return fUITable3.count(name);
+        }
+        bool isInputValue(string name)
+        {
+            return fUITable2.count(name);
+        }
+        bool setValue(string name, FAUSTFLOAT f)
+        {
+            if (fUITable1.count(name)) {
+                fUITable1[name]->setValue(f);
+                return true;
+            } else if (fUITable2.count(name)) {
+                fUITable2[name]->setValue(f);
+                return true;
+            } else {
+                return false;
+            }
+        }
+        FAUSTFLOAT getOutputValue(string name) { return fUITable3[name]->getValue(); }
+        
+        iterator begin1()	{ return fUITable1.begin(); }
+        iterator end1()		{ return fUITable1.end(); }
+        
+        iterator begin2()	{ return fUITable2.begin(); }
+        iterator end2()		{ return fUITable2.end(); }
+        
+        int itemsCount() { return fUITable1.size(); }
+        void clear()
+        {
+            for (auto& it : fUITable1) {
+                delete it.second;
+            }
+            
+            fUITable1.clear();
+            fUITable2.clear();
+        }
+        
+        void displayControls()
+        {
+            post((char*)"------- Range and path ----------");
+            for (auto& it : fUITable2) {
+                char param[STR_SIZE];
+                it.second->toString(param);
+                post(param);
+                string path = "Complete path: " + it.first;
+                post(path.c_str());
+            }
+            post((char*)"---------------------------------");
+        }
+};
+
+static bool check_digit(const string& name)
+{
+    for (int i = name.size() - 1; i >= 0; i--) {
+        if (isdigit(name[i])) { return true; }
+    }
+    return false;
+}
+
+static int count_digit(const string& name)
+{
+    int count = 0;
+    for (int i = name.size() - 1; i >= 0; i--) {
+        if (isdigit(name[i])) { count++; }
+    }
+    return count;
+}
+
+#endif
+/**************************  END  mspUI.h **************************/
+/************************** BEGIN poly-dsp.h **************************/
 /************************************************************************
  FAUST Architecture File
  Copyright (C) 2003-2017 GRAME, Centre National de Creation Musicale
@@ -7606,168 +12726,9 @@ class MidiUI : public GUI, public midi
 #include <vector>
 #include <limits.h>
 #include <float.h>
+#include <assert.h>
 
-/************************************************************************
- FAUST Architecture File
- Copyright (C) 2003-2017 GRAME, Centre National de Creation Musicale
- ---------------------------------------------------------------------
- This Architecture section is free software; you can redistribute it
- and/or modify it under the terms of the GNU General Public License
- as published by the Free Software Foundation; either version 3 of
- the License, or (at your option) any later version.
- 
- This program is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
- 
- You should have received a copy of the GNU General Public License
- along with this program; If not, see <http://www.gnu.org/licenses/>.
- 
- EXCEPTION : As a special exception, you may create a larger work
- that contains this FAUST architecture section and distribute
- that work under terms of your choice, so long as this FAUST
- architecture section is not modified.
- ************************************************************************/
-
-#ifndef FAUST_MAPUI_H
-#define FAUST_MAPUI_H
-
-#include <vector>
-#include <map>
-#include <string>
-
-
-/*******************************************************************************
- * MapUI : Faust User Interface
- * This class creates a map of complete hierarchical path and zones for each UI items.
- ******************************************************************************/
-
-class MapUI : public UI, public PathBuilder
-{
-    
-    protected:
-    
-        // Complete path map
-        std::map<std::string, FAUSTFLOAT*> fPathZoneMap;
-    
-        // Label zone map
-        std::map<std::string, FAUSTFLOAT*> fLabelZoneMap;
-    
-    public:
-        
-        MapUI() {};
-        virtual ~MapUI() {};
-        
-        // -- widget's layouts
-        void openTabBox(const char* label)
-        {
-            fControlsLevel.push_back(label);
-        }
-        void openHorizontalBox(const char* label)
-        {
-            fControlsLevel.push_back(label);
-        }
-        void openVerticalBox(const char* label)
-        {
-            fControlsLevel.push_back(label);
-        }
-        void closeBox()
-        {
-            fControlsLevel.pop_back();
-        }
-        
-        // -- active widgets
-        void addButton(const char* label, FAUSTFLOAT* zone)
-        {
-            fPathZoneMap[buildPath(label)] = zone;
-            fLabelZoneMap[label] = zone;
-        }
-        void addCheckButton(const char* label, FAUSTFLOAT* zone)
-        {
-            fPathZoneMap[buildPath(label)] = zone;
-            fLabelZoneMap[label] = zone;
-        }
-        void addVerticalSlider(const char* label, FAUSTFLOAT* zone, FAUSTFLOAT init, FAUSTFLOAT fmin, FAUSTFLOAT fmax, FAUSTFLOAT step)
-        {
-            fPathZoneMap[buildPath(label)] = zone;
-            fLabelZoneMap[label] = zone;
-        }
-        void addHorizontalSlider(const char* label, FAUSTFLOAT* zone, FAUSTFLOAT init, FAUSTFLOAT fmin, FAUSTFLOAT fmax, FAUSTFLOAT step)
-        {
-            fPathZoneMap[buildPath(label)] = zone;
-            fLabelZoneMap[label] = zone;
-        }
-        void addNumEntry(const char* label, FAUSTFLOAT* zone, FAUSTFLOAT init, FAUSTFLOAT fmin, FAUSTFLOAT fmax, FAUSTFLOAT step)
-        {
-            fPathZoneMap[buildPath(label)] = zone;
-            fLabelZoneMap[label] = zone;
-        }
-        
-        // -- passive widgets
-        void addHorizontalBargraph(const char* label, FAUSTFLOAT* zone, FAUSTFLOAT fmin, FAUSTFLOAT fmax)
-        {
-            fPathZoneMap[buildPath(label)] = zone;
-            fLabelZoneMap[label] = zone;
-        }
-        void addVerticalBargraph(const char* label, FAUSTFLOAT* zone, FAUSTFLOAT fmin, FAUSTFLOAT fmax)
-        {
-            fPathZoneMap[buildPath(label)] = zone;
-            fLabelZoneMap[label] = zone;
-        }
-    
-        // -- soundfiles
-        virtual void addSoundfile(const char* label, const char* filename, Soundfile** sf_zone) {}
-        
-        // -- metadata declarations
-        void declare(FAUSTFLOAT* zone, const char* key, const char* val)
-        {}
-        
-        // set/get
-        void setParamValue(const std::string& path, FAUSTFLOAT value)
-        {
-            if (fPathZoneMap.find(path) != fPathZoneMap.end()) {
-                *fPathZoneMap[path] = value;
-            } else if (fLabelZoneMap.find(path) != fLabelZoneMap.end()) {
-                *fLabelZoneMap[path] = value;
-            }
-        }
-        
-        FAUSTFLOAT getParamValue(const std::string& path)
-        {
-            if (fPathZoneMap.find(path) != fPathZoneMap.end()) {
-                return *fPathZoneMap[path];
-            } else if (fLabelZoneMap.find(path) != fLabelZoneMap.end()) {
-                return *fLabelZoneMap[path];
-            } else {
-                return FAUSTFLOAT(0);
-            }
-        }
-    
-        // map access 
-        std::map<std::string, FAUSTFLOAT*>& getMap() { return fPathZoneMap; }
-        
-        int getParamsCount() { return int(fPathZoneMap.size()); }
-        
-        std::string getParamAddress(int index)
-        { 
-            std::map<std::string, FAUSTFLOAT*>::iterator it = fPathZoneMap.begin();
-            while (index-- > 0 && it++ != fPathZoneMap.end()) {}
-            return (*it).first;
-        }
-    
-        std::string getParamAddress(FAUSTFLOAT* zone)
-        {
-            std::map<std::string, FAUSTFLOAT*>::iterator it = fPathZoneMap.begin();
-            do {
-                if ((*it).second == zone) return (*it).first;
-            }
-            while (it++ != fPathZoneMap.end());
-            return "";
-        }
-};
-
-#endif // FAUST_MAPUI_H
+/************************** BEGIN proxy-dsp.h **************************/
 /************************************************************************
  FAUST Architecture File
  Copyright (C) 2003-2017 GRAME, Centre National de Creation Musicale
@@ -7797,767 +12758,6 @@ class MapUI : public UI, public PathBuilder
 #include <vector>
 #include <map>
 
-/************************************************************************
- FAUST Architecture File
- Copyright (C) 2003-2017 GRAME, Centre National de Creation Musicale
- ---------------------------------------------------------------------
- This Architecture section is free software; you can redistribute it
- and/or modify it under the terms of the GNU General Public License
- as published by the Free Software Foundation; either version 3 of
- the License, or (at your option) any later version.
- 
- This program is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
- 
- You should have received a copy of the GNU General Public License
- along with this program; If not, see <http://www.gnu.org/licenses/>.
- 
- EXCEPTION : As a special exception, you may create a larger work
- that contains this FAUST architecture section and distribute
- that work under terms of your choice, so long as this FAUST
- architecture section is not modified.
- ************************************************************************/
-
-#ifndef __JSONUIDecoder__
-#define __JSONUIDecoder__
-
-#include <vector>
-#include <map>
-#include <utility>
-#include <assert.h>
-#include <cstdlib>
-
-/************************************************************************
- FAUST Architecture File
- Copyright (C) 2003-2017 GRAME, Centre National de Creation Musicale
- ---------------------------------------------------------------------
- This Architecture section is free software; you can redistribute it
- and/or modify it under the terms of the GNU General Public License
- as published by the Free Software Foundation; either version 3 of
- the License, or (at your option) any later version.
- 
- This program is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
- 
- You should have received a copy of the GNU General Public License
- along with this program; If not, see <http://www.gnu.org/licenses/>.
- 
- EXCEPTION : As a special exception, you may create a larger work
- that contains this FAUST architecture section and distribute
- that work under terms of your choice, so long as this FAUST
- architecture section is not modified.
- ************************************************************************/
-
-#ifndef SIMPLEPARSER_H
-#define SIMPLEPARSER_H
-
-// ---------------------------------------------------------------------
-//                          Simple Parser
-// A parser returns true if it was able to parse what it is
-// supposed to parse and advance the pointer. Otherwise it returns false
-// and the pointer is not advanced so that another parser can be tried.
-// ---------------------------------------------------------------------
-
-#include <vector>
-#include <map>
-#include <string>
-#include <fstream>
-#include <iostream>
-#include <ctype.h>
-
-#ifndef _WIN32
-# pragma GCC diagnostic ignored "-Wunused-function"
-#endif
-
-using namespace std;
-
-struct itemInfo {
-    std::string type;
-    std::string label;
-    std::string address;
-    std::string index;
-    std::string init;
-    std::string min;
-    std::string max;
-    std::string step;
-    std::vector<std::pair<std::string, std::string> > meta;
-};
-
-bool parseMenuList(const char*& p, vector<string>& names, vector<double>& values);
-bool parseMenuItem(const char*& p, string& name, double& value);
-
-void skipBlank(const char*& p);
-bool parseChar(const char*& p, char x);
-bool parseWord(const char*& p, const char* w);
-bool parseString(const char*& p, char quote, string& s);
-bool parseSQString(const char*& p, string& s);
-bool parseDQString(const char*& p, string& s);
-bool parseDouble(const char*& p, double& x);
-
-// ---------------------------------------------------------------------
-//
-//                          IMPLEMENTATION
-// 
-// ---------------------------------------------------------------------
-
-/**
- * @brief parseMenuList, parse a menu list {'low' : 440.0; 'mid' : 880.0; 'hi' : 1760.0}...
- * @param p the string to parse, then the remaining string
- * @param names the vector of names found
- * @param values the vector of values found
- * @return true if a menu list was found
- */
-inline bool parseMenuList(const char*& p, vector<string>& names, vector<double>& values)
-{
-    vector<string> tmpnames;
-    vector<double> tmpvalues;
-
-    const char* saved = p;
-
-    if (parseChar(p, '{')) {
-        do {
-            string n;
-            double v;
-            if (parseMenuItem(p, n, v)) {
-                tmpnames.push_back(n);
-                tmpvalues.push_back(v);
-            } else {
-                p = saved;
-                return false;
-            }
-        } while (parseChar(p, ';'));
-        if (parseChar(p, '}')) {
-            // we suceeded
-            names = tmpnames;
-            values = tmpvalues;
-            return true;
-        }
-    }
-    p = saved;
-    return false;
-}
-
-/**
- * @brief parseMenuItem, parse a menu item ...'low':440.0...
- * @param p the string to parse, then the remaining string
- * @param name the name found
- * @param value the value found
- * @return true if a nemu item was found
- */
-inline bool parseMenuItem(const char*& p, string& name, double& value)
-{
-    const char* saved = p;
-    if (parseSQString(p, name) && parseChar(p, ':') && parseDouble(p, value)) {
-        return true;
-    } else {
-        p = saved;
-        return false;
-    }
-}
-
-// ---------------------------------------------------------------------
-//                          Elementary parsers
-// ---------------------------------------------------------------------
-
-// Report a parsing error
-static bool parseError(const char*& p, const char* errmsg)
-{
-    std::cerr << "Parse error : " << errmsg << " here : " << p << std::endl;
-    return true;
-}
-
-// Parse character x, but don't report error if fails
-static bool tryChar(const char*& p, char x)
-{
-    skipBlank(p);
-    if (x == *p) {
-        p++;
-        return true;
-    } else {
-        return false;
-    }
-}
-
-/**
- * @brief skipBlank : advance pointer p to the first non blank character
- * @param p the string to parse, then the remaining string
- */
-inline void skipBlank(const char*& p)
-{
-    while (isspace(*p)) { p++; }
-}
-
-/**
- * @brief parseChar : parse a specific character x
- * @param p the string to parse, then the remaining string
- * @param x the character to recognize
- * @return true if x was found at the begin of p
- */
-inline bool parseChar(const char*& p, char x)
-{
-    skipBlank(p);
-    if (x == *p) {
-        p++;
-        return true;
-    } else {
-        return false;
-    }
-}
-
-/**
- * @brief parseWord : parse a specific string w
- * @param p the string to parse, then the remaining string
- * @param w the string to recognize
- * @return true if string w was found at the begin of p
- */
-inline bool parseWord(const char*& p, const char* w)
-{
-    skipBlank(p);
-    const char* saved = p;
-    while ((*w == *p) && (*w)) {++w; ++p;}
-    if (*w) {
-        p = saved;
-        return false;
-    } else {
-        return true;
-    }
-}
-
-/**
- * @brief parseDouble : parse number [s]dddd[.dddd] and store the result in x
- * @param p the string to parse, then the remaining string
- * @param x the float number found if any
- * @return true if a float number was found at the begin of p
- */
-inline bool parseDouble(const char*& p, double& x)
-{
-    double sign = +1.0;    // sign of the number
-    double ipart = 0;      // integral part of the number
-    double dpart = 0;      // decimal part of the number before division
-    double dcoef = 1.0;    // division factor for the decimal part
-
-    bool valid = false;   // true if the number contains at least one digit
-    skipBlank(p);
-    const char* saved = p;  // to restore position if we fail
-
-    if (parseChar(p, '+')) {
-        sign = 1.0;
-    } else if (parseChar(p, '-')) {
-        sign = -1.0;
-    }
-    while (isdigit(*p)) {
-        valid = true;
-        ipart = ipart*10 + (*p - '0');
-        p++;
-    }
-    if (parseChar(p, '.')) {
-        while (isdigit(*p)) {
-            valid = true;
-            dpart = dpart*10 + (*p - '0');
-            dcoef *= 10.0;
-            p++;
-        }
-    }
-    if (valid)  {
-        x = sign*(ipart + dpart/dcoef);
-    } else {
-        p = saved;
-    }
-    return valid;
-}
-
-/**
- * @brief parseString, parse an arbitrary quoted string q...q and store the result in s
- * @param p the string to parse, then the remaining string
- * @param quote the character used to quote the string
- * @param s the (unquoted) string found if any
- * @return true if a string was found at the begin of p
- */
-inline bool parseString(const char*& p, char quote, string& s)
-{
-    string str;
-    skipBlank(p);
- 
-    const char* saved = p;
-    if (*p++ == quote) {
-        while ((*p != 0) && (*p != quote)) {
-            str += *p++;
-        }
-        if (*p++ == quote) {
-            s = str;
-            return true;
-        }
-    }
-    p = saved;
-    return false;
-}
-
-/**
- * @brief parseSQString, parse a single quoted string '...' and store the result in s
- * @param p the string to parse, then the remaining string
- * @param s the (unquoted) string found if any
- * @return true if a string was found at the begin of p
- */
-inline bool parseSQString(const char*& p, string& s)
-{
-    return parseString(p, '\'', s);
-}
-
-/**
- * @brief parseDQString, parse a double quoted string "..." and store the result in s
- * @param p the string to parse, then the remaining string
- * @param s the (unquoted) string found if any
- * @return true if a string was found at the begin of p
- */
-inline bool parseDQString(const char*& p, string& s)
-{
-    return parseString(p, '"', s);
-}
-
-static bool parseMetaData(const char*& p, std::map<std::string, std::string>& metadatas)
-{
-    std::string metaKey, metaValue;
-    if (parseChar(p, ':') && parseChar(p, '[')) {
-        do { 
-            if (parseChar(p, '{') && parseDQString(p, metaKey) && parseChar(p, ':') && parseDQString(p, metaValue) && parseChar(p, '}')) {
-                metadatas[metaKey] = metaValue;
-            }
-        } while (tryChar(p, ','));
-        return parseChar(p, ']');
-    } else {
-        return false;
-    }
-}
-
-static bool parseItemMetaData(const char*& p, std::vector<std::pair<std::string, std::string> >& metadatas)
-{
-    std::string metaKey, metaValue;
-    if (parseChar(p, ':') && parseChar(p, '[')) {
-        do { 
-            if (parseChar(p, '{') && parseDQString(p, metaKey) && parseChar(p, ':') && parseDQString(p, metaValue) && parseChar(p, '}')) {
-                metadatas.push_back(std::make_pair(metaKey, metaValue));
-            }
-        } while (tryChar(p, ','));
-        return parseChar(p, ']');
-    } else {
-        return false;
-    }
-}
-
-// ---------------------------------------------------------------------
-// Parse metadatas of the interface:
-// "name" : "...", "inputs" : "...", "outputs" : "...", ...
-// and store the result as key/value
-//
-static bool parseGlobalMetaData(const char*& p, std::string& key, std::string& value, std::map<std::string, std::string>& metadatas)
-{
-    if (parseDQString(p, key)) {
-        if (key == "meta") {
-            return parseMetaData(p, metadatas);
-        } else {
-            return parseChar(p, ':') && parseDQString(p, value);
-        }
-    } else {
-        return false;
-    }
-}
-
-// ---------------------------------------------------------------------
-// Parse gui:
-// "type" : "...", "label" : "...", "address" : "...", ...
-// and store the result in uiItems Vector
-//
-static bool parseUI(const char*& p, std::vector<itemInfo*>& uiItems, int& numItems)
-{
-    if (parseChar(p, '{')) {
-        
-        std::string label;
-        std::string value;
-        
-        do {
-            if (parseDQString(p, label)) {
-                if (label == "type") {
-                    if (uiItems.size() != 0) {
-                        numItems++;
-                    }
-                    if (parseChar(p, ':') && parseDQString(p, value)) {   
-                        itemInfo* item = new itemInfo;
-                        item->type = value;
-                        uiItems.push_back(item);
-                    }
-                }
-                
-                else if (label == "label") {
-                    if (parseChar(p, ':') && parseDQString(p, value)) {
-                        itemInfo* item = uiItems[numItems];
-                        item->label = value;
-                    }
-                }
-                
-                else if (label == "address") {
-                    if (parseChar(p, ':') && parseDQString(p, value)) {
-                        itemInfo* item = uiItems[numItems];
-                        item->address = value;
-                    }
-                }
-                
-                else if (label == "index") {
-                    if (parseChar(p, ':') && parseDQString(p, value)) {
-                        itemInfo* item = uiItems[numItems];
-                        item->index = value;
-                    }
-                }
-                
-                else if (label == "meta") {
-                    itemInfo* item = uiItems[numItems];
-                    if (!parseItemMetaData(p, item->meta)) {
-                        return false;
-                    }
-                }
-                
-                else if (label == "init") {
-                    if (parseChar(p, ':') && parseDQString(p, value)) {
-                        itemInfo* item = uiItems[numItems];
-                        item->init = value;
-                    }
-                }
-                
-                else if (label == "min") {
-                    if (parseChar(p, ':') && parseDQString(p, value)) {
-                        itemInfo* item = uiItems[numItems];
-                        item->min = value;
-                    }
-                }
-                
-                else if (label == "max") {
-                    if (parseChar(p, ':') && parseDQString(p, value)) {
-                        itemInfo* item = uiItems[numItems];
-                        item->max = value;
-                    }
-                }
-                
-                else if (label == "step"){
-                    if (parseChar(p, ':') && parseDQString(p, value)) {
-                        itemInfo* item = uiItems[numItems];
-                        item->step = value;
-                    }
-                }
-                
-                else if (label == "items") {
-                    if (parseChar(p, ':') && parseChar(p, '[')) {
-                        do { 
-                            if (!parseUI(p, uiItems, numItems)) {
-                                return false;
-                            }
-                        } while (tryChar(p, ','));
-                        if (parseChar(p, ']')) {
-                            itemInfo* item = new itemInfo;
-                            item->type = "close";
-                            uiItems.push_back(item);
-                            numItems++;
-                        }
-                    }
-                }
-            } else {
-                return false;
-            }
-            
-        } while (tryChar(p, ','));
-        
-        return parseChar(p, '}');
-    } else {
-        return false;
-    }
-}
-
-// ---------------------------------------------------------------------
-// Parse full JSON record describing a JSON/Faust interface :
-// {"metadatas": "...", "ui": [{ "type": "...", "label": "...", "items": [...], "address": "...","init": "...", "min": "...", "max": "...","step": "..."}]}
-//
-// and store the result in map Metadatas and vector containing the items of the interface. Returns true if parsing was successfull.
-//
-
-inline bool parseJson(const char*& p, std::map<std::string, std::string>& metadatas, std::vector<itemInfo*>& uiItems)
-{
-    parseChar(p, '{');
-    
-    do {
-        std::string key;
-        std::string value;
-        if (parseGlobalMetaData(p, key, value, metadatas)) {
-            if (key != "meta") {
-                // keep "name", "inputs", "outputs" key/value pairs
-                metadatas[key] = value;
-            }
-        } else if (key == "ui") {
-            int numItems = 0;
-            parseChar(p, '[') && parseUI(p, uiItems, numItems);
-        }
-    } while (tryChar(p, ','));
-    
-    return parseChar(p, '}');
-}
-
-#endif // SIMPLEPARSER_H
-
-#ifdef _WIN32
-#include <windows.h>
-#define snprintf _snprintf
-#endif
-
-inline FAUSTFLOAT STR2REAL(const std::string& s) { return (std::strtod(s.c_str(), NULL)); }
-
-//-------------------------------------------------------------------
-//  Decode a dsp JSON description and implement 'buildUserInterface'
-//-------------------------------------------------------------------
-
-typedef std::map<std::string, pair <int, FAUSTFLOAT*> > controlMap;
-
-struct JSONUIDecoder {
-
-    std::string fName;
-    std::string fFileName;
-    
-    std::map<std::string, std::string> fMetadatas; 
-    std::vector<itemInfo*> fUiItems;     
-    
-    FAUSTFLOAT* fInControl;
-    FAUSTFLOAT* fOutControl;
-    
-    std::string fJSON;
-    
-    int fNumInputs, fNumOutputs; 
-    int fInputItems, fOutputItems;
-    
-    std::string fVersion;
-    std::string fOptions;
-    
-    int fDSPSize;
-    
-    controlMap fPathInputTable;     // [path, <index, zone>]
-    controlMap fPathOutputTable;    // [path, <index, zone>]
-    
-    bool isInput(const string& type) { return (type == "vslider" || type == "hslider" || type == "nentry" || type == "button" || type == "checkbox"); }
-    bool isOutput(const string& type) { return (type == "hbargraph" || type == "vbargraph"); }
-
-    JSONUIDecoder(const std::string& json) 
-    {
-        fJSON = json;
-        const char* p = fJSON.c_str();
-        parseJson(p, fMetadatas, fUiItems);
-        
-        // fMetadatas will contain the "meta" section as well as <name : val>, <inputs : val>, <ouputs : val> pairs
-        if (fMetadatas.find("name") != fMetadatas.end()) {
-            fName = fMetadatas["name"];
-            fMetadatas.erase("name");
-        } else {
-            fName = "";
-        }
-        
-        if (fMetadatas.find("filename") != fMetadatas.end()) {
-            fFileName = fMetadatas["filename"];
-            fMetadatas.erase("filename");
-        } else {
-            fName = "";
-        }
-     
-        if (fMetadatas.find("version") != fMetadatas.end()) {
-            fVersion = fMetadatas["version"];
-            fMetadatas.erase("version");
-        } else {
-            fVersion = "";
-        }
-        
-        if (fMetadatas.find("options") != fMetadatas.end()) {
-            fOptions = fMetadatas["options"];
-            fMetadatas.erase("options");
-        } else {
-            fOptions = "";
-        }
-        
-        if (fMetadatas.find("size") != fMetadatas.end()) {
-            fDSPSize = std::atoi(fMetadatas["size"].c_str());
-            fMetadatas.erase("size");
-        } else {
-            fDSPSize = -1;
-        }
-         
-        if (fMetadatas.find("inputs") != fMetadatas.end()) {
-            fNumInputs = std::atoi(fMetadatas["inputs"].c_str());
-            fMetadatas.erase("inputs");
-        } else {
-            fNumInputs = -1;
-        }
-        
-        if (fMetadatas.find("outputs") != fMetadatas.end()) {
-            fNumOutputs = std::atoi(fMetadatas["outputs"].c_str());
-            fMetadatas.erase("outputs");
-        } else {
-            fNumOutputs = -1;
-        }
-       
-        fInputItems = 0;
-        fOutputItems = 0;
-        
-        vector<itemInfo*>::iterator it;
-        for (it = fUiItems.begin(); it != fUiItems.end(); it++) {
-            string type = (*it)->type;
-            if (isInput(type)) {
-                fInputItems++;
-            } else if (isOutput(type)) {
-                fOutputItems++;          
-            }
-        }
-        
-        fInControl = new FAUSTFLOAT[fInputItems];
-        fOutControl = new FAUSTFLOAT[fOutputItems];
-        
-        int counterIn = 0;
-        int counterOut = 0;
-        
-        // Prepare the fPathTable and init zone
-        for (it = fUiItems.begin(); it != fUiItems.end(); it++) {
-            string type = (*it)->type;
-            // Meta data declaration for input items
-            if (isInput(type)) {
-                if ((*it)->address != "") {
-                    fPathInputTable[(*it)->address] = make_pair(std::atoi((*it)->index.c_str()), &fInControl[counterIn]);
-                }
-                fInControl[counterIn] = STR2REAL((*it)->init);
-                counterIn++;
-            }
-            // Meta data declaration for output items
-            else if (isOutput(type)) {
-                if ((*it)->address != "") {
-                    fPathOutputTable[(*it)->address] = make_pair(std::atoi((*it)->index.c_str()), &fOutControl[counterOut]);
-                }
-                fOutControl[counterOut] = FAUSTFLOAT(0);
-                counterOut++;
-            }
-        }
-    }
-    
-    virtual ~JSONUIDecoder() 
-    {
-        vector<itemInfo*>::iterator it;
-        for (it = fUiItems.begin(); it != fUiItems.end(); it++) {
-            delete(*it);
-        }
-        delete [] fInControl;
-        delete [] fOutControl;
-    }
-    
-    void metadata(Meta* m)
-    {
-        std::map<std::string, std::string>::iterator it;
-        for (it = fMetadatas.begin(); it != fMetadatas.end(); it++) {
-            m->declare((*it).first.c_str(), (*it).second.c_str());
-        }
-    }
-    
-    void resetUserInterface()
-    {
-        vector<itemInfo*>::iterator it;
-        int item = 0;
-        for (it = fUiItems.begin(); it != fUiItems.end(); it++) {
-            if (isInput((*it)->type)) {
-                fInControl[item++] = STR2REAL((*it)->init);
-            }
-        }
-    }
-   
-    void buildUserInterface(UI* ui)
-    {
-        // To be sure the floats are correctly encoded
-        char* tmp_local = setlocale(LC_ALL, NULL);
-        setlocale(LC_ALL, "C");
-
-        int counterIn = 0;
-        int counterOut = 0;
-        vector<itemInfo*>::iterator it;
-        
-        for (it = fUiItems.begin(); it != fUiItems.end(); it++) {
-            
-            bool isInItem = false;
-            bool isOutItem = false;
-            string type = (*it)->type;
-            
-            FAUSTFLOAT init = STR2REAL((*it)->init);
-            FAUSTFLOAT min = STR2REAL((*it)->min);
-            FAUSTFLOAT max = STR2REAL((*it)->max);
-            FAUSTFLOAT step = STR2REAL((*it)->step);
-            
-            if (isInput(type)) {
-                isInItem = true;
-            } else if (isOutput(type)) {
-                isOutItem = true;
-            }
-            
-            // Meta data declaration for input items
-            if (isInput(type)) {
-                fInControl[counterIn] = init;
-                for (size_t i = 0; i < (*it)->meta.size(); i++) {
-                    ui->declare(&fInControl[counterIn], (*it)->meta[i].first.c_str(), (*it)->meta[i].second.c_str());
-                }
-            }
-            // Meta data declaration for output items
-            else if (isOutput(type)) {
-                fOutControl[counterOut] = init;
-                for (size_t i = 0; i < (*it)->meta.size(); i++) {
-                    ui->declare(&fOutControl[counterOut], (*it)->meta[i].first.c_str(), (*it)->meta[i].second.c_str());
-                }
-            }
-            // Meta data declaration for group opening or closing
-            else {
-                for (size_t i = 0; i < (*it)->meta.size(); i++) {
-                    ui->declare(0, (*it)->meta[i].first.c_str(), (*it)->meta[i].second.c_str());
-                }
-            }
-            
-            if (type == "hgroup") {
-                ui->openHorizontalBox((*it)->label.c_str());
-            } else if (type == "vgroup") { 
-                ui->openVerticalBox((*it)->label.c_str());
-            } else if (type == "tgroup") {
-                ui->openTabBox((*it)->label.c_str());
-            } else if (type == "vslider") {
-                ui->addVerticalSlider((*it)->label.c_str(), &fInControl[counterIn], init, min, max, step);
-            } else if (type == "hslider") {
-                ui->addHorizontalSlider((*it)->label.c_str(), &fInControl[counterIn], init, min, max, step);            
-            } else if (type == "checkbox") {
-                ui->addCheckButton((*it)->label.c_str(), &fInControl[counterIn]);
-            } else if (type == "hbargraph") {
-                ui->addHorizontalBargraph((*it)->label.c_str(), &fOutControl[counterOut], min, max);
-            } else if (type == "vbargraph") {
-                ui->addVerticalBargraph((*it)->label.c_str(), &fOutControl[counterOut], min, max);
-            } else if (type == "nentry") {
-                ui->addNumEntry((*it)->label.c_str(), &fInControl[counterIn], init, min, max, step);
-            } else if (type == "button") {
-                ui->addButton((*it)->label.c_str(), &fInControl[counterIn]);
-            } else if (type == "close") {
-                ui->closeBox();
-            }
-                
-            if (isInItem) {
-                counterIn++;
-            }
-                
-            if (isOutItem) {
-                counterOut++;
-            }
-        }
-        
-        setlocale(LC_ALL, tmp_local);
-    }
-    
-};
-
-
-#endif
 
 //----------------------------------------------------------------
 //  Proxy dsp definition created from the DSP JSON description
@@ -8569,15 +12769,23 @@ class proxy_dsp : public dsp {
 
     private:
     
-        int fSamplingFreq;
         JSONUIDecoder* fDecoder;
+        int fSampleRate;
         
     public:
     
-        proxy_dsp(const string& json)
+        proxy_dsp():fDecoder(nullptr), fSampleRate(-1)
+        {}
+    
+        proxy_dsp(const std::string& json)
+        {
+            init(json);
+        }
+    
+        void init(const std::string& json)
         {
             fDecoder = new JSONUIDecoder(json);
-            fSamplingFreq = -1;
+            fSampleRate = -1;
         }
           
         proxy_dsp(dsp* dsp)
@@ -8585,7 +12793,7 @@ class proxy_dsp : public dsp {
             JSONUI builder(dsp->getNumInputs(), dsp->getNumOutputs());
             dsp->metadata(&builder);
             dsp->buildUserInterface(&builder);
-            fSamplingFreq = dsp->getSampleRate();
+            fSampleRate = dsp->getSampleRate();
             fDecoder = new JSONUIDecoder(builder.JSON());
         }
       
@@ -8594,27 +12802,27 @@ class proxy_dsp : public dsp {
             delete fDecoder;
         }
        
-        virtual int getNumInputs() 	{ return fDecoder->fNumInputs; }
+        virtual int getNumInputs() { return fDecoder->fNumInputs; }
         virtual int getNumOutputs() { return fDecoder->fNumOutputs; }
         
         virtual void buildUserInterface(UI* ui) { fDecoder->buildUserInterface(ui); }
         
         // To possibly implement in a concrete proxy dsp 
-        virtual void init(int samplingFreq)
+        virtual void init(int sample_rate)
         {
-            instanceInit(samplingFreq);
+            instanceInit(sample_rate);
         }
-        virtual void instanceInit(int samplingFreq)
+        virtual void instanceInit(int sample_rate)
         {
-            instanceConstants(samplingFreq);
+            instanceConstants(sample_rate);
             instanceResetUserInterface();
             instanceClear();
         }
-        virtual void instanceConstants(int samplingRate) { fSamplingFreq = samplingRate; }
+        virtual void instanceConstants(int sample_rate) { fSampleRate = sample_rate; }
         virtual void instanceResetUserInterface() { fDecoder->resetUserInterface(); }
         virtual void instanceClear() {}
     
-        virtual int getSampleRate() { return fSamplingFreq; }
+        virtual int getSampleRate() { return fSampleRate; }
     
         virtual proxy_dsp* clone() { return new proxy_dsp(fDecoder->fJSON); }
         virtual void metadata(Meta* m) { fDecoder->metadata(m); }
@@ -8625,27 +12833,64 @@ class proxy_dsp : public dsp {
 };
 
 #endif
+/**************************  END  proxy-dsp.h **************************/
+/************************** BEGIN JSONControl.h **************************/
+/************************************************************************
+ FAUST Architecture File
+ Copyright (C) 2019 GRAME, Centre National de Creation Musicale
+ ---------------------------------------------------------------------
+ This Architecture section is free software; you can redistribute it
+ and/or modify it under the terms of the GNU General Public License
+ as published by the Free Software Foundation; either version 3 of
+ the License, or (at your option) any later version.
+ 
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+ 
+ You should have received a copy of the GNU General Public License
+ along with this program; If not, see <http://www.gnu.org/licenses/>.
+ 
+ EXCEPTION : As a special exception, you may create a larger work
+ that contains this FAUST architecture section and distribute
+ that work under terms of your choice, so long as this FAUST
+ architecture section is not modified.
+ ************************************************************************/
+
+#ifndef __JSON_CONTROL__
+#define __JSON_CONTROL__
+
+#include <string>
+
+#ifndef FAUSTFLOAT
+#define FAUSTFLOAT float
+#endif
+
+struct JSONControl {
+    
+    virtual std::string getJSON() { return ""; }
+
+    virtual void setParamValue(const std::string& path, FAUSTFLOAT value) {}
+
+    virtual FAUSTFLOAT getParamValue(const std::string& path) { return 0; }
+    
+};
+
+#endif
+/**************************  END  JSONControl.h **************************/
 
 #define kActiveVoice      0
 #define kFreeVoice        -1
 #define kReleaseVoice     -2
 #define kNoVoice          -3
 
-#define VOICE_STOP_LEVEL  0.001
-#define MIX_BUFFER_SIZE   16384
-
-#define FLOAT_MAX(a, b) (((a) < (b)) ? (b) : (a))
+#define VOICE_STOP_LEVEL  0.0005    // -70 db
+#define MIX_BUFFER_SIZE   4096
 
 // endsWith(<str>,<end>) : returns true if <str> ends with <end>
 
-static inline bool endsWith(std::string const& str, std::string const& end)
-{
-    size_t l1 = str.length();
-    size_t l2 = end.length();
-    return (l1 >= l2) && (0 == str.compare(l1 - l2, l2, end));
-}
-
-static inline double midiToFreq(double note)
+static double midiToFreq(double note)
 {
     return 440.0 * std::pow(2.0, (note-69.0)/12.0);
 }
@@ -8663,9 +12908,9 @@ class GroupUI : public GUI, public PathBuilder
 
         void insertMap(std::string label, FAUSTFLOAT* zone)
         {
-            if (!endsWith(label, "/gate")
-                && !endsWith(label, "/freq")
-                && !endsWith(label, "/gain")) {
+            if (!MapUI::endsWith(label, "/gate")
+                && !MapUI::endsWith(label, "/freq")
+                && !MapUI::endsWith(label, "/gain")) {
 
                 // Groups all controller except 'freq', 'gate', and 'gain'
                 if (fLabelZoneMap.find(label) != fLabelZoneMap.end()) {
@@ -8693,19 +12938,19 @@ class GroupUI : public GUI, public PathBuilder
         // -- widget's layouts
         void openTabBox(const char* label)
         {
-            fControlsLevel.push_back(label);
+            pushLabel(label);
         }
         void openHorizontalBox(const char* label)
         {
-            fControlsLevel.push_back(label);
+            pushLabel(label);
         }
         void openVerticalBox(const char* label)
         {
-            fControlsLevel.push_back(label);
+            pushLabel(label);
         }
         void closeBox()
         {
-            fControlsLevel.pop_back();
+            popLabel();
         }
 
         // -- active widgets
@@ -8748,15 +12993,14 @@ class GroupUI : public GUI, public PathBuilder
 
 struct dsp_voice : public MapUI, public decorator_dsp {
 
-    int fNote;              // Playing note actual pitch
-    int fDate;              // KeyOn date
-    bool fTrigger;          // True if stolen note and need for envelop trigger
-    FAUSTFLOAT fLevel;      // Last audio block level
-    std::string fGatePath;  // Path of 'gate' control
-    std::string fGainPath;  // Path of 'gain' control
-    std::string fFreqPath;  // Path of 'freq' control
-    FAUSTFLOAT** fInputsSlice;
-    FAUSTFLOAT** fOutputsSlice;
+    int fNote;                          // Playing note actual pitch
+    int fDate;                          // KeyOn date
+    int fRelease;                       // Current number of samples used in release mode to detect end of note
+    int fMinRelease;                    // Max of samples used in release mode to detect end of note
+    FAUSTFLOAT fLevel;                  // Last audio block level
+    std::vector<std::string> fGatePath; // Paths of 'gate' control
+    std::vector<std::string> fGainPath; // Paths of 'gain' control
+    std::vector<std::string> fFreqPath; // Paths of 'freq' control
  
     dsp_voice(dsp* dsp):decorator_dsp(dsp)
     {
@@ -8764,94 +13008,64 @@ struct dsp_voice : public MapUI, public decorator_dsp {
         fNote = kFreeVoice;
         fLevel = FAUSTFLOAT(0);
         fDate = 0;
-        fTrigger = false;
+        fMinRelease = dsp->getSampleRate()/2; // One 1/2 sec used in release mode to detect end of note
         extractPaths(fGatePath, fFreqPath, fGainPath);
-        fInputsSlice = new FAUSTFLOAT*[dsp->getNumInputs()];
-        fOutputsSlice = new FAUSTFLOAT*[dsp->getNumOutputs()];
     }
     virtual ~dsp_voice()
-    {
-        delete [] fInputsSlice;
-        delete [] fOutputsSlice;
-    }
+    {}
 
-    void extractPaths(std::string& gate, std::string& freq, std::string& gain)
+    void extractPaths(std::vector<std::string>& gate, std::vector<std::string>& freq, std::vector<std::string>& gain)
     {
         // Keep gain, freq and gate labels
         std::map<std::string, FAUSTFLOAT*>::iterator it;
         for (it = getMap().begin(); it != getMap().end(); it++) {
             std::string path = (*it).first;
             if (endsWith(path, "/gate")) {
-                gate = path;
+                gate.push_back(path);
             } else if (endsWith(path, "/freq")) {
-                freq = path;
+                freq.push_back(path);
             } else if (endsWith(path, "/gain")) {
-                gain = path;
+                gain.push_back(path);
             }
         }
     }
 
     // MIDI velocity [0..127]
-    void keyOn(int pitch, int velocity)
+    void keyOn(int pitch, int velocity, bool trigger)
     {
-        setParamValue(fFreqPath, midiToFreq(pitch));
-        setParamValue(fGainPath, float(velocity)/127.f);
-        fNote = pitch;
+        keyOn(pitch, float(velocity)/127.f, trigger);
     }
 
     // Normalized MIDI velocity [0..1]
-    void keyOn(int pitch, float velocity)
+    void keyOn(int pitch, float velocity, bool trigger)
     {
-        setParamValue(fFreqPath, midiToFreq(pitch));
-        setParamValue(fGainPath, velocity);
+        for (size_t i = 0; i < fFreqPath.size(); i++) {
+            setParamValue(fFreqPath[i], midiToFreq(pitch));
+        }
+        for (size_t i = 0; i < fGatePath.size(); i++) {
+            setParamValue(fGatePath[i], FAUSTFLOAT(1));
+        }
+        for (size_t i = 0; i < fGainPath.size(); i++) {
+            setParamValue(fGainPath[i], velocity);
+        }
+        
         fNote = pitch;
     }
 
     void keyOff(bool hard = false)
     {
         // No use of velocity for now...
-        setParamValue(fGatePath, FAUSTFLOAT(0));
+        for (size_t i = 0; i < fGatePath.size(); i++) {
+            setParamValue(fGatePath[i], FAUSTFLOAT(0));
+        }
         
         if (hard) {
-            // Stop immediately
+            // Immediately stop voice
             fNote = kFreeVoice;
-            fTrigger = false;
         } else {
             // Release voice
+            fRelease = fMinRelease;
             fNote = kReleaseVoice;
-        }
-    }
-
-    void play(int count, FAUSTFLOAT** inputs, FAUSTFLOAT** outputs)
-    {
-        if (fTrigger) {
-            // New note, so trigger it
-            trigger(count, inputs, outputs);
-        } else {
-            // Compute the voice
-            compute(count, inputs, outputs);
-        }
-    }
-
-    void trigger(int count, FAUSTFLOAT** inputs, FAUSTFLOAT** outputs)
-    {
-        setParamValue(fGatePath, FAUSTFLOAT(0));
-        computeSlice(0, 1, inputs, outputs);
-        setParamValue(fGatePath, FAUSTFLOAT(1));
-        computeSlice(1, count - 1, inputs, outputs);
-        fTrigger = false;
-    }
-
-    void computeSlice(int offset, int slice, FAUSTFLOAT** inputs, FAUSTFLOAT** outputs)
-    {
-        if (slice > 0) {
-            for (int chan = 0; chan < getNumInputs(); chan++) {
-                fInputsSlice[chan] = &(inputs[chan][offset]);
-            }
-            for (int chan = 0; chan < getNumOutputs(); chan++) {
-                fOutputsSlice[chan] = &(outputs[chan][offset]);
-            }
-            compute(slice, fInputsSlice, fOutputsSlice);
         }
     }
 
@@ -8922,7 +13136,7 @@ struct dsp_voice_group {
             if (!fGroupControl) {
                 for (size_t i = 0; i < fVoiceTable.size(); i++) {
                     char buffer[32];
-                    snprintf(buffer, 32, ((fVoiceTable.size() < 8) ? "Voice%ld" : "V%ld"), i+1);
+                    snprintf(buffer, 32, ((fVoiceTable.size() < 8) ? "Voice%ld" : "V%ld"), long(i+1));
                     ui_interface->openHorizontalBox(buffer);
                     fVoiceTable[i]->buildUserInterface(ui_interface);
                     ui_interface->closeBox();
@@ -8938,20 +13152,115 @@ struct dsp_voice_group {
 };
 
 /**
- * Base class for Polyphonic DSP.
+ * Base class for MIDI controllable DSP.
  */
-class dsp_poly : public decorator_dsp, public midi {
 
+#ifdef EMCC
+#endif
+
+class dsp_poly : public decorator_dsp, public midi, public JSONControl {
+
+    protected:
+    
+    #ifdef EMCC
+        MapUI fMapUI;
+        std::string fJSON;
+    #endif
+    
     public:
     
-        dsp_poly(dsp* dsp):decorator_dsp(dsp)
+        dsp_poly()
         {}
+        dsp_poly(dsp* dsp):decorator_dsp(dsp)
+        {
+        #ifdef EMCC
+            JSONUI jsonui(getNumInputs(), getNumOutputs());
+            buildUserInterface(&jsonui);
+            fJSON = jsonui.JSON(true);
+            buildUserInterface(&fMapUI);
+        #endif
+        }
     
         virtual ~dsp_poly() {}
+    
+        // Reimplemented for EMCC
+    #ifdef EMCC
+        virtual int getNumInputs() { return decorator_dsp::getNumInputs(); }
+        virtual int getNumOutputs() { return decorator_dsp::getNumOutputs(); }
+        virtual void buildUserInterface(UI* ui_interface) { decorator_dsp::buildUserInterface(ui_interface); }
+        virtual int getSampleRate() { return decorator_dsp::getSampleRate(); }
+        virtual void init(int sample_rate) { decorator_dsp::init(sample_rate); }
+        virtual void instanceInit(int sample_rate) { decorator_dsp::instanceInit(sample_rate); }
+        virtual void instanceConstants(int sample_rate) { decorator_dsp::instanceConstants(sample_rate); }
+        virtual void instanceResetUserInterface() { decorator_dsp::instanceResetUserInterface(); }
+        virtual void instanceClear() { decorator_dsp::instanceClear(); }
+        virtual dsp_poly* clone() { return new dsp_poly(fDSP->clone()); }
+        virtual void metadata(Meta* m) { decorator_dsp::metadata(m); }
+    
+        // Additional API
+        std::string getJSON()
+        {
+            return fJSON;
+        }
+    
+        virtual void setParamValue(const std::string& path, FAUSTFLOAT value)
+        {
+            fMapUI.setParamValue(path, value);
+            GUI::updateAllGuis();
+        }
+        
+        virtual FAUSTFLOAT getParamValue(const std::string& path) { return fMapUI.getParamValue(path); }
+
+        virtual void computeJS(int count, uintptr_t inputs, uintptr_t outputs)
+        {
+            decorator_dsp::compute(count, reinterpret_cast<FAUSTFLOAT**>(inputs),reinterpret_cast<FAUSTFLOAT**>(outputs));
+        }
+    #endif
+    
+        virtual  MapUI* keyOn(int channel, int pitch, int velocity)
+        {
+            return midi::keyOn(channel, pitch, velocity);
+        }
+        virtual  void keyOff(int channel, int pitch, int velocity)
+        {
+            midi::keyOff(channel, pitch, velocity);
+        }
+        virtual  void keyPress(int channel, int pitch, int press)
+        {
+            midi::keyPress(channel, pitch, press);
+        }
+        virtual void chanPress(int channel, int press)
+        {
+            midi::chanPress(channel, press);
+        }
+        virtual void ctrlChange(int channel, int ctrl, int value)
+        {
+            midi::ctrlChange(channel, ctrl, value);
+        }
+        virtual void ctrlChange14bits(int channel, int ctrl, int value)
+        {
+            midi::ctrlChange14bits(channel, ctrl, value);
+        }
+        virtual void pitchWheel(int channel, int wheel)
+        {
+            midi::pitchWheel(channel, wheel);
+        }
+        virtual void progChange(int channel, int pgm)
+        {
+            midi::progChange(channel, pgm);
+        }
+    
+        // Group API
+        virtual void setGroup(bool group) {}
+        virtual bool getGroup() { return false; }
+
 };
 
 /**
- * Polyphonic DSP : group a set of DSP to be played together or triggered by MIDI.
+ * Polyphonic DSP: groups a set of DSP to be played together or triggered by MIDI.
+ *
+ * All voices are preallocated by cloning the single DSP voice given at creation time.
+ * Dynamic voice allocation is done in 'getFreeVoice'
  */
 
 class mydsp_poly : public dsp_voice_group, public dsp_poly {
@@ -8961,28 +13270,40 @@ class mydsp_poly : public dsp_voice_group, public dsp_poly {
         FAUSTFLOAT** fMixBuffer;
         int fDate;
 
-        inline FAUSTFLOAT mixVoice(int count, FAUSTFLOAT** outputBuffer, FAUSTFLOAT** mixBuffer)
+        FAUSTFLOAT mixCheckVoice(int count, FAUSTFLOAT** outputBuffer, FAUSTFLOAT** mixBuffer)
         {
             FAUSTFLOAT level = 0;
             for (int i = 0; i < getNumOutputs(); i++) {
                 FAUSTFLOAT* mixChannel = mixBuffer[i];
                 FAUSTFLOAT* outChannel = outputBuffer[i];
                 for (int j = 0; j < count; j++) {
-                    level = FLOAT_MAX(level, (FAUSTFLOAT)fabs(outChannel[j]));
+                    level = std::max<FAUSTFLOAT>(level, (FAUSTFLOAT)fabs(outChannel[j]));
                     mixChannel[j] += outChannel[j];
                 }
             }
             return level;
         }
+    
+        void mixVoice(int count, FAUSTFLOAT** outputBuffer, FAUSTFLOAT** mixBuffer)
+        {
+            FAUSTFLOAT level = 0;
+            for (int i = 0; i < getNumOutputs(); i++) {
+                FAUSTFLOAT* mixChannel = mixBuffer[i];
+                FAUSTFLOAT* outChannel = outputBuffer[i];
+                for (int j = 0; j < count; j++) {
+                    mixChannel[j] += outChannel[j];
+                }
+            }
+        }
 
-        inline void clearOutput(int count, FAUSTFLOAT** mixBuffer)
+        void clearOutput(int count, FAUSTFLOAT** mixBuffer)
         {
             for (int i = 0; i < getNumOutputs(); i++) {
                 memset(mixBuffer[i], 0, count * sizeof(FAUSTFLOAT));
             }
         }
     
-        inline int getPlayingVoice(int pitch)
+        int getPlayingVoice(int pitch)
         {
             int voice_playing = kNoVoice;
             int oldest_date_playing = INT_MAX;
@@ -8992,7 +13313,7 @@ class mydsp_poly : public dsp_voice_group, public dsp_poly {
                     // Keeps oldest playing voice
                     if (fVoiceTable[i]->fDate < oldest_date_playing) {
                         oldest_date_playing = fVoiceTable[i]->fDate;
-                        voice_playing = i;
+                        voice_playing = int(i);
                     }
                 }
             }
@@ -9001,14 +13322,14 @@ class mydsp_poly : public dsp_voice_group, public dsp_poly {
         }
     
         // Always returns a voice
-        inline int getFreeVoice()
+        int getFreeVoice()
         {
             int voice = kNoVoice;
             
             // Looks for the first available voice
             for (size_t i = 0; i < fVoiceTable.size(); i++) {
                 if (fVoiceTable[i]->fNote == kFreeVoice) {
-                    voice = i;
+                    voice = int(i);
                     goto result;
                 }
             }
@@ -9027,13 +13348,13 @@ class mydsp_poly : public dsp_voice_group, public dsp_poly {
                         // Keeps oldest release voice
                         if (fVoiceTable[i]->fDate < oldest_date_release) {
                             oldest_date_release = fVoiceTable[i]->fDate;
-                            voice_release = i;
+                            voice_release = int(i);
                         }
                     } else {
                         // Otherwise keeps oldest playing voice
                         if (fVoiceTable[i]->fDate < oldest_date_playing) {
                             oldest_date_playing = fVoiceTable[i]->fDate;
-                            voice_playing = i;
+                            voice_playing = int(i);
                         }
                     }
                 }
@@ -9054,8 +13375,9 @@ class mydsp_poly : public dsp_voice_group, public dsp_poly {
             }
             
         result:
+            // So that envelop is always re-initialized
+            fVoiceTable[voice]->instanceClear();
             fVoiceTable[voice]->fDate = fDate++;
-            fVoiceTable[voice]->fTrigger = true;    // So that envelop is always re-initialized
             fVoiceTable[voice]->fNote = kActiveVoice;
             return voice;
         }
@@ -9067,7 +13389,7 @@ class mydsp_poly : public dsp_voice_group, public dsp_poly {
             }
         }
 
-        inline bool checkPolyphony()
+        bool checkPolyphony()
         {
             if (fVoiceTable.size() > 0) {
                 return true;
@@ -9083,23 +13405,25 @@ class mydsp_poly : public dsp_voice_group, public dsp_poly {
          * Constructor.
          *
          * @param dsp - the dsp to be used for one voice. Beware: mydsp_poly will use and finally delete the pointer.
-         * @param nvoices - number of polyphony voices
+         * @param nvoices - number of polyphony voices, should be at least 1
          * @param control - whether voices will be dynamically allocated and controlled (typically by a MIDI controler).
          *                If false all voices are always running.
          * @param group - if true, voices are not individually accessible, a global "Voices" tab will automatically dispatch
          *                a given control on all voices, assuming GUI::updateAllGuis() is called.
          *                If false, all voices can be individually controlled.
+         *                setGroup/getGroup methods can be used to set/get the group state.
          *
          */
         mydsp_poly(dsp* dsp,
                    int nvoices,
                    bool control = false,
                    bool group = true)
-        : dsp_voice_group(panic, this, control, group), dsp_poly(dsp)
+        : dsp_voice_group(panic, this, control, group), dsp_poly(dsp) // dsp parameter is deallocated by ~dsp_poly
         {
             fDate = 0;
 
             // Create voices
+            assert(nvoices > 0);
             for (int i = 0; i < nvoices; i++) {
                 addVoice(new dsp_voice(dsp->clone()));
             }
@@ -9128,15 +13452,15 @@ class mydsp_poly : public dsp_voice_group, public dsp_poly {
             dsp_voice_group::buildUserInterface(ui_interface);
         }
 
-        void init(int samplingRate)
+        void init(int sample_rate)
         {
-            decorator_dsp::init(samplingRate);
-            fVoiceGroup->init(samplingRate);
+            decorator_dsp::init(sample_rate);
+            fVoiceGroup->init(sample_rate);
             fPanic = FAUSTFLOAT(0);
             
             // Init voices
             for (size_t i = 0; i < fVoiceTable.size(); i++) {
-                fVoiceTable[i]->init(samplingRate);
+                fVoiceTable[i]->init(sample_rate);
             }
         }
     
@@ -9147,14 +13471,14 @@ class mydsp_poly : public dsp_voice_group, public dsp_poly {
             instanceClear();
         }
 
-        void instanceConstants(int samplingRate)
+        void instanceConstants(int sample_rate)
         {
-            decorator_dsp::instanceConstants(samplingRate);
-            fVoiceGroup->instanceConstants(samplingRate);
+            decorator_dsp::instanceConstants(sample_rate);
+            fVoiceGroup->instanceConstants(sample_rate);
             
             // Init voices
             for (size_t i = 0; i < fVoiceTable.size(); i++) {
-                fVoiceTable[i]->instanceConstants(samplingRate);
+                fVoiceTable[i]->instanceConstants(sample_rate);
             }
         }
 
@@ -9186,7 +13510,7 @@ class mydsp_poly : public dsp_voice_group, public dsp_poly {
 
         void compute(int count, FAUSTFLOAT** inputs, FAUSTFLOAT** outputs)
         {
-            assert(count < MIX_BUFFER_SIZE);
+            assert(count <= MIX_BUFFER_SIZE);
 
             // First clear the outputs
             clearOutput(count, outputs);
@@ -9196,11 +13520,14 @@ class mydsp_poly : public dsp_voice_group, public dsp_poly {
                 for (size_t i = 0; i < fVoiceTable.size(); i++) {
                     dsp_voice* voice = fVoiceTable[i];
                     if (voice->fNote != kFreeVoice) {
-                        voice->play(count, inputs, fMixBuffer);
+                        voice->compute(count, inputs, fMixBuffer);
                         // Mix it in result
-                        voice->fLevel = mixVoice(count, fMixBuffer, outputs);
+                        voice->fLevel = mixCheckVoice(count, fMixBuffer, outputs);
                         // Check the level to possibly set the voice in kFreeVoice again
-                        if ((voice->fLevel < VOICE_STOP_LEVEL) && (voice->fNote == kReleaseVoice)) {
+                        voice->fRelease -= count;
+                        if ((voice->fNote == kReleaseVoice)
+                            && (voice->fRelease < 0)
+                            && (voice->fLevel < VOICE_STOP_LEVEL)) {
                             voice->fNote = kFreeVoice;
                         }
                     }
@@ -9218,6 +13545,14 @@ class mydsp_poly : public dsp_voice_group, public dsp_poly {
         {
             compute(count, inputs, outputs);
         }
+    
+        // Terminate all active voices, gently or immediately (depending of 'hard' value)
+        void allNotesOff(bool hard = false)
+        {
+            for (size_t i = 0; i < fVoiceTable.size(); i++) {
+                fVoiceTable[i]->keyOff(hard);
+            }
+        }
 
         // Additional polyphonic API
         MapUI* newVoice()
@@ -9234,13 +13569,16 @@ class mydsp_poly : public dsp_voice_group, public dsp_poly {
                 std::cout << "Voice not found\n";
             }
         }
+    
+        void setGroup(bool group) { fGroupControl = group; }
+        bool getGroup() { return fGroupControl; }
 
         // MIDI API
         MapUI* keyOn(int channel, int pitch, int velocity)
         {
             if (checkPolyphony()) {
                 int voice = getFreeVoice();
-                fVoiceTable[voice]->keyOn(pitch, velocity);
+                fVoiceTable[voice]->keyOn(pitch, velocity, true);
                 return fVoiceTable[voice];
             } else {
                 return 0;
@@ -9281,17 +13619,146 @@ class mydsp_poly : public dsp_voice_group, public dsp_poly {
         void ctrlChange14bits(int channel, int ctrl, int value)
         {}
 
-        // Terminate all active voices, gently or immediately (depending of 'hard' value)
-        void allNotesOff(bool hard = false)
-        {
-            for (size_t i = 0; i < fVoiceTable.size(); i++) {
-                fVoiceTable[i]->keyOff(hard);
-            }
-        }
+};
 
+/**
+ * Polyphonic DSP with an integrated effect. fPolyDSP will respond to MIDI messages.
+ */
+class dsp_poly_effect : public dsp_poly {
+    
+    private:
+        
+        dsp_poly* fPolyDSP;
+        
+    public:
+        
+        dsp_poly_effect(dsp_poly* dsp1, dsp* dsp2)
+        :dsp_poly(dsp2), fPolyDSP(dsp1)
+        {}
+        
+        virtual ~dsp_poly_effect()
+        {
+            // dsp_poly_effect is also a decorator_dsp, which will free fPolyDSP
+        }
+        
+        // MIDI API
+        MapUI* keyOn(int channel, int pitch, int velocity)
+        {
+            return fPolyDSP->keyOn(channel, pitch, velocity);
+        }
+        void keyOff(int channel, int pitch, int velocity)
+        {
+            fPolyDSP->keyOff(channel, pitch, velocity);
+        }
+        void keyPress(int channel, int pitch, int press)
+        {
+            fPolyDSP->keyPress(channel, pitch, press);
+        }
+        void chanPress(int channel, int press)
+        {
+            fPolyDSP->chanPress(channel, press);
+        }
+        void ctrlChange(int channel, int ctrl, int value)
+        {
+            fPolyDSP->ctrlChange(channel, ctrl, value);
+        }
+        void ctrlChange14bits(int channel, int ctrl, int value)
+        {
+            fPolyDSP->ctrlChange14bits(channel, ctrl, value);
+        }
+        void pitchWheel(int channel, int wheel)
+        {
+            fPolyDSP->pitchWheel(channel, wheel);
+        }
+        void progChange(int channel, int pgm)
+        {
+            fPolyDSP->progChange(channel, pgm);
+        }
+        
+        // Group API
+        void setGroup(bool group)
+        {
+            fPolyDSP->setGroup(group);
+        }
+        bool getGroup()
+        {
+            return fPolyDSP->getGroup();
+        }
+};
+
+/**
+ * Polyphonic DSP factory class. Helper code to support polyphonic DSP source with an integrated effect.
+ */
+
+struct dsp_poly_factory : public dsp_factory {
+    
+    dsp_factory* fProcessFactory;
+    dsp_factory* fEffectFactory;
+    
+    std::string getEffectCode(const std::string& dsp_content)
+    {
+        std::stringstream effect_code;
+        effect_code << "adapt(1,1) = _; adapt(2,2) = _,_; adapt(1,2) = _ <: _,_; adapt(2,1) = _,_ :> _;";
+        effect_code << "adaptor(F,G) = adapt(outputs(F),inputs(G)); dsp_code = environment{ " << dsp_content << " };";
+        effect_code << "process = adaptor(dsp_code.process, dsp_code.effect) : dsp_code.effect;";
+        return effect_code.str();
+    }
+
+    dsp_poly_factory(dsp_factory* process_factory = NULL,
+                     dsp_factory* effect_factory = NULL):
+    fProcessFactory(process_factory)
+    ,fEffectFactory(effect_factory)
+    {}
+    
+    virtual ~dsp_poly_factory()
+    {}
+    
+    virtual std::string getName() { return fProcessFactory->getName(); }
+    virtual std::string getSHAKey() { return fProcessFactory->getSHAKey(); }
+    virtual std::string getDSPCode() { return fProcessFactory->getDSPCode(); }
+    virtual std::string getCompileOptions() { return fProcessFactory->getCompileOptions(); }
+    virtual std::vector<std::string> getLibraryList() { return fProcessFactory->getLibraryList(); }
+    virtual std::vector<std::string> getIncludePathnames() { return fProcessFactory->getIncludePathnames(); }
+    
+    virtual void setMemoryManager(dsp_memory_manager* manager)
+    {
+        fProcessFactory->setMemoryManager(manager);
+        if (fEffectFactory) {
+            fEffectFactory->setMemoryManager(manager);
+        }
+    }
+    virtual dsp_memory_manager* getMemoryManager() { return fProcessFactory->getMemoryManager(); }
+    
+    /* Create a new polyphonic DSP instance with global effect, to be deleted with C++ 'delete'
+     *
+     * @param nvoices - number of polyphony voices, should be at least 1
+     * @param control - whether voices will be dynamically allocated and controlled (typically by a MIDI controler).
+     *                If false all voices are always running.
+     * @param group - if true, voices are not individually accessible, a global "Voices" tab will automatically dispatch
+     *                a given control on all voices, assuming GUI::updateAllGuis() is called.
+     *                If false, all voices can be individually controlled.
+     */
+    dsp_poly* createPolyDSPInstance(int nvoices, bool control, bool group)
+    {
+        dsp_poly* dsp_poly = new mydsp_poly(fProcessFactory->createDSPInstance(), nvoices, control, group);
+        if (fEffectFactory) {
+            // the 'dsp_poly' object has to be controlled with MIDI, so kept separated from new dsp_sequencer(...) object
+            return new dsp_poly_effect(dsp_poly, new dsp_sequencer(dsp_poly, fEffectFactory->createDSPInstance()));
+        } else {
+            return new dsp_poly_effect(dsp_poly, dsp_poly);
+        }
+    }
+    
+    /* Create a new DSP instance, to be deleted with C++ 'delete' */
+    dsp* createDSPInstance()
+    {
+        return fProcessFactory->createDSPInstance();
+    }
+    
 };
 
 #endif // __poly_dsp__
+/**************************  END  poly-dsp.h **************************/
 
 std::list<GUI*> GUI::fGuiList;
 ztimedmap GUI::gTimedZoneMap;
@@ -9301,44 +13768,6 @@ static const char* getCodeSize()
     int tmp;
     return (sizeof(&tmp) == 8) ? "64 bits" : "32 bits";
 }
-
-class mspUI;
-
-struct Max_Meta1 : Meta
-{
-    int fCount;
-    
-    Max_Meta1():fCount(0)
-    {}
-     
-    void declare(const char* key, const char* value)
-    {
-        if ((strcmp("name", key) == 0) || (strcmp("author", key) == 0)) {
-            fCount++;
-        }
-    }
-};
-
-struct Max_Meta2 : Meta
-{
-    void declare(const char* key, const char* value)
-    {
-        if ((strcmp("name", key) == 0) || (strcmp("author", key) == 0)) {
-            post("%s : %s", key, value);
-        }
-    }
-};
-
-struct Max_Meta3 : Meta
-{
-    string fName;
-    void declare(const char* key, const char* value)
-    {
-        if ((strcmp("filename", key) == 0)) {
-            fName = "com.grame." + string(value) + "~";
-        }
-    }
-};
 
 /*--------------------------------------------------------------------------*/
 typedef struct faust
@@ -9362,351 +13791,15 @@ typedef struct faust
 #ifdef SOUNDFILE
     SoundUI* m_soundInterface;
 #endif
+#ifdef OSCCTRL
+    OSCUI* m_oscInterface;
+#endif
 } t_faust;
 
 void* faust_class;
 
 void faust_create_jsui(t_faust* x);
 void faust_make_json(t_faust* x);
-
-/*--------------------------------------------------------------------------*/
-class mspUIObject {
-
-	protected:
-
-		string fLabel;
-		FAUSTFLOAT* fZone;
-
-		FAUSTFLOAT range(FAUSTFLOAT min, FAUSTFLOAT max, FAUSTFLOAT val) {return (val < min) ? min : (val > max) ? max : val;}
-
-	public:
-
-		mspUIObject(const string& label, FAUSTFLOAT* zone):fLabel(label),fZone(zone) {}
-		virtual ~mspUIObject() {}
-
-		virtual void setValue(FAUSTFLOAT f) {*fZone = range(0.0,1.0,f);}
-        virtual FAUSTFLOAT getValue() { return *fZone; }
-		virtual void toString(char* buffer) {}
-		virtual string getName() {return fLabel;}
-};
-
-/*--------------------------------------------------------------------------*/
-class mspCheckButton : public mspUIObject {
-
-	public:
-
-		mspCheckButton(const string& label, FAUSTFLOAT* zone):mspUIObject(label,zone) {}
-		virtual ~mspCheckButton() {}
-
-		void toString(char* buffer)
-		{
-            snprintf(buffer, STR_SIZE, "CheckButton(double): %s", fLabel.c_str());
-		}
-};
-
-/*--------------------------------------------------------------------------*/
-class mspButton : public mspUIObject {
-
-	public:
-
-		mspButton(const string& label, FAUSTFLOAT* zone):mspUIObject(label,zone) {}
-		virtual ~mspButton() {}
-
-		void toString(char* buffer)
-		{
-            snprintf(buffer, STR_SIZE, "Button(double): %s", fLabel.c_str());
-		}
-};
-
-/*--------------------------------------------------------------------------*/
-class mspSlider : public mspUIObject {
-
-	private:
-
-		FAUSTFLOAT fInit;
-		FAUSTFLOAT fMin;
-		FAUSTFLOAT fMax;
-		FAUSTFLOAT fStep;
-
-	public:
-
-		mspSlider(const string& label, FAUSTFLOAT* zone, FAUSTFLOAT init, FAUSTFLOAT min, FAUSTFLOAT max, FAUSTFLOAT step)
-			:mspUIObject(label,zone),fInit(init),fMin(min),fMax(max),fStep(step) {}
-		virtual ~mspSlider() {}
-
-        void toString(char* buffer)
-        {
-            stringstream str;
-            str << "Slider(float): " << fLabel << " [init=" << fInit << ":min=" << fMin << ":max=" << fMax << ":step=" << fStep << ":cur=" << *fZone << "]";
-            string res = str.str();
-            snprintf(buffer, STR_SIZE, "%s", res.c_str());
-        }
-
-		void setValue(FAUSTFLOAT f) {*fZone = range(fMin,fMax,f);}
-};
-
-/*--------------------------------------------------------------------------*/
-class mspBargraph : public mspUIObject {
-    
-    private:
-        
-        FAUSTFLOAT fMin;
-        FAUSTFLOAT fMax;
-        FAUSTFLOAT fCurrent;
-        
-    public:
-        
-        mspBargraph(const string& label, FAUSTFLOAT* zone, FAUSTFLOAT min, FAUSTFLOAT max)
-        :mspUIObject(label,zone),fMin(min),fMax(max),fCurrent(*zone) {}
-        virtual ~mspBargraph() {}
-        
-        void toString(char* buffer)
-        {
-            stringstream str;
-            str << "Bargraph(float): " << fLabel << " [min=" << fMin << ":max=" << fMax << ":cur=" << *fZone << "]";
-            string res = str.str();
-            snprintf(buffer, STR_SIZE, "%s", res.c_str());
-        }
-    
-        virtual FAUSTFLOAT getValue() 
-        { 
-            if (*fZone != fCurrent) {
-                fCurrent = *fZone;
-                return fCurrent;
-            } else {
-                return NAN; 
-            }
-        }
-};
-
-/*--------------------------------------------------------------------------*/
-
-#define MULTI_SIZE  256
-
-class mspUI : public UI
-{
-	private:
-
-        map<string, mspUIObject*> fUITable1;       // Table using labels
-        map<string, mspUIObject*> fUITable2;       // Table using complete path
-        map<string, mspUIObject*> fUITable3;       // Table containing bargraph
-       
-        map<const char*, const char*> fDeclareTable;
-        std::vector<std::string> fControlsLevel;
-        
-        FAUSTFLOAT* fMultiTable[MULTI_SIZE];
-        int fMultiIndex;
-        int fMultiControl;
-        
-        std::string buildPath(const std::string& label) 
-        {
-            std::string res = "/";
-            for (size_t i = 0; i < fControlsLevel.size(); i++) {
-                res += fControlsLevel[i];
-                res += "/";
-            }
-            res += label;
-            replace(res.begin(), res.end(), ' ', '_');
-            return res;
-        }
-    
-        string createLabel(const char* label)
-        {
-            map<const char*, const char*>::reverse_iterator it;
-            if (fDeclareTable.size() > 0) {
-                unsigned int i = 0;
-                string res = string(label);
-                char sep = '[';
-                for (it = fDeclareTable.rbegin(); it != fDeclareTable.rend(); it++, i++) {
-                    res = res + sep + (*it).first + ":" + (*it).second;
-                    sep = ',';
-                }
-                res += ']';
-                fDeclareTable.clear();
-                return res;
-            } else {
-                return string(label);
-            }
-        }
-
-	public:
-    
-		typedef map<string, mspUIObject*>::iterator iterator;
-
-		mspUI() 
-        {
-     		for (int i = 0; i < MULTI_SIZE; i++) {
-                fMultiTable[i] = 0;
-            }
-            fMultiIndex = fMultiControl = 0;
-        }
-		virtual ~mspUI()
-		{
-            clear();
-   		}
-      
-		void addButton(const char* label, FAUSTFLOAT* zone) 
-        {
-            mspUIObject* obj = new mspButton(createLabel(label), zone);
-            fUITable1[string(label)] = obj;
-            fUITable2[buildPath(label)] = obj;
-        }
-        
-        void addCheckButton(const char* label, FAUSTFLOAT* zone) 
-        {
-            mspUIObject* obj = new mspCheckButton(createLabel(label), zone);
-            fUITable1[string(label)] = obj;
-            fUITable2[buildPath(label)] = obj; 
-        }
-        
-        void addSlider(const char* label, FAUSTFLOAT* zone, FAUSTFLOAT init, FAUSTFLOAT min, FAUSTFLOAT max, FAUSTFLOAT step)
-        {
-            mspUIObject* obj = new mspSlider(createLabel(label), zone, init, min, max, step);
-            fUITable1[string(label)] = obj;
-            fUITable2[buildPath(label)] = obj; 
-        }
-        
-        void addVerticalSlider(const char* label, FAUSTFLOAT* zone, FAUSTFLOAT init, FAUSTFLOAT min, FAUSTFLOAT max, FAUSTFLOAT step)
-        {
-            addSlider(label, zone, init, min, max, step);
-        }
-        
-        void addHorizontalSlider(const char* label, FAUSTFLOAT* zone, FAUSTFLOAT init, FAUSTFLOAT min, FAUSTFLOAT max, FAUSTFLOAT step)
-        {
-            addSlider(label, zone, init, min, max, step);
-        }
-        
-        void addNumEntry(const char* label, FAUSTFLOAT* zone, FAUSTFLOAT init, FAUSTFLOAT min, FAUSTFLOAT max, FAUSTFLOAT step)
-        {
-            mspUIObject* obj = new mspSlider(createLabel(label), zone, init, min, max, step);
-            fUITable1[string(label)] = obj;
-            fUITable2[buildPath(label)] = obj;
-        }
-        
-        void addHorizontalBargraph(const char* label, FAUSTFLOAT* zone, FAUSTFLOAT min, FAUSTFLOAT max) 
-        {   
-            fUITable3[buildPath(label)] = new mspBargraph(createLabel(label), zone, min, max);
-            fDeclareTable.clear();
-        }
-        void addVerticalBargraph(const char* label, FAUSTFLOAT* zone, FAUSTFLOAT min, FAUSTFLOAT max) 
-        {
-            fUITable3[buildPath(label)] = new mspBargraph(createLabel(label), zone, min, max);
-            fDeclareTable.clear();
-        }
-    
-        void addSoundfile(const char* label, const char* filename, Soundfile** sf_zone) {}
-    
-        void openTabBox(const char* label) {fControlsLevel.push_back(label); fDeclareTable.clear();}
-        void openHorizontalBox(const char* label) {fControlsLevel.push_back(label); fDeclareTable.clear();}
-        void openVerticalBox(const char* label) {fControlsLevel.push_back(label); fDeclareTable.clear();}
-        void closeBox() {fControlsLevel.pop_back(); fDeclareTable.clear();}
-
-        virtual void declare(FAUSTFLOAT* zone, const char* key, const char* val)
-        {
-            if (strcmp(key,"multi") == 0) {
-                int index = atoi(val);
-                if (index >= 0 && index < MULTI_SIZE) {
-                    fMultiTable[index] = zone;
-                    fMultiControl++;
-                } else {
-                    post("Invalid multi index = %d", index);
-                }
-            }
-            
-            fDeclareTable[key] = val;
-        }
-        
-        void setMultiValues(FAUSTFLOAT* multi, int buffer_size)
-		{
-            for (int read = 0; read < buffer_size; read++) {
-                int write = (fMultiIndex + read) & (MULTI_SIZE - 1);
-                if (fMultiTable[write]) {
-                    *fMultiTable[write] = multi[read];
-                }
-            }
-            fMultiIndex += buffer_size;
-		}
-        
-        bool isMulti() { return fMultiControl > 0; }
-    
-        bool isValue(string name) 
-        {
-            return (fUITable1.count(name) || fUITable2.count(name));
-        }
-        bool isOutputValue(string name) 
-        {
-            return fUITable3.count(name);
-        }
-        bool isInputValue(string name) 
-        {
-            return fUITable2.count(name);
-        }
-        bool setValue(string name, FAUSTFLOAT f)
-        {
-            if (fUITable1.count(name)) {
-                fUITable1[name]->setValue(f);
-                return true;
-            } else if (fUITable2.count(name)) {
-                fUITable2[name]->setValue(f);
-                return true;
-            } else {
-                return false;
-            }
-        }
-		FAUSTFLOAT getOutputValue(string name) { return fUITable3[name]->getValue(); }
-          
-        iterator begin1()	{ return fUITable1.begin(); }
-        iterator end1()		{ return fUITable1.end(); }
-        
-        iterator begin2()	{ return fUITable2.begin(); }
-        iterator end2()		{ return fUITable2.end(); }
-
-        int itemsCount() { return fUITable1.size(); }
-        void clear() 
-        { 
-            iterator it;
-            for (it = begin1(); it != end1(); it++) {
-                delete (*it).second;
-            }
-            fUITable1.clear(); 
-            fUITable2.clear(); 
-        }
-    
-        void displayControls()
-        {
-            iterator it;
-            post((char*)"------- labels and ranges ----------");
-            for (it = fUITable1.begin(); it != fUITable1.end(); it++) {
-                char param[STR_SIZE];
-                it->second->toString(param);
-                post(param);
-            }
-            post((char*)"------- complete paths ----------");
-            for (it = fUITable2.begin(); it != fUITable2.end(); it++) {
-                post(it->first.c_str());
-            }
-            post((char*)"---------------------------------");
-        }
-    
-};
-
-//--------------------------------------------------------------------------
-static bool check_digit(const string& name)
-{
-    for (int i = name.size() - 1; i >= 0; i--) {
-        if (isdigit(name[i])) { return true; }
-    }
-    return false;
-}
-
-static int count_digit(const string& name)
-{
-    int count = 0;
-    for (int i = name.size() - 1; i >= 0; i--) {
-        if (isdigit(name[i])) { count++; }
-    }
-    return count;
-}
 
 /*--------------------------------------------------------------------------*/
 void faust_anything(t_faust* obj, t_symbol* s, short ac, t_atom* av)
@@ -9716,7 +13809,7 @@ void faust_anything(t_faust* obj, t_symbol* s, short ac, t_atom* av)
     bool res = false;
     string name = string((s)->s_name);
     
-    // Check if no argument is there, consider it is a toggle message for a button
+    // If no argument is there, consider it as a toggle message for a button
     if (ac == 0 && obj->m_dspUI->isValue(name)) {
         
         float off = 0.0f;
@@ -9770,89 +13863,78 @@ void faust_anything(t_faust* obj, t_symbol* s, short ac, t_atom* av)
                     return;         
             }
             
-            stringstream num_val;
-            num_val << num + i;
-            string str = num_val.str();
-            char param_name[256];
-            
-            switch (ndigit - count_digit(str)) {
-                case 0:
-                    sprintf(param_name, "%s%s", prefix.c_str(), str.c_str());
-                    break;
-                case 1:
-                    sprintf(param_name, "%s %s", prefix.c_str(), str.c_str());
-                    break;
-                case 2:
-                    sprintf(param_name, "%s  %s", prefix.c_str(), str.c_str());
-                    break;
+            stringstream num_val; num_val << num + i;
+            stringstream param_name; param_name << prefix;
+            for (int i = 0; i < ndigit - count_digit(num_val.str()); i++) {
+                param_name << ' ';
             }
-            
+            param_name << num_val.str();
+              
             // Try special naming scheme for list of parameters
-            res = obj->m_dspUI->setValue(param_name, value); 
+            res = obj->m_dspUI->setValue(param_name.str(), value);
             
             // Otherwise try standard name
             if (!res) {
                 res = obj->m_dspUI->setValue(name, value);
             }
-            
             if (!res) {
                 post("Unknown parameter : %s", (s)->s_name);
             }
         }
+        
     } else {
         // Standard parameter name
         float value = (av[0].a_type == A_LONG) ? (float)av[0].a_w.w_long : av[0].a_w.w_float;
         res = obj->m_dspUI->setValue(name, value);
-    }
-    
-    if (!res) {
-        post("Unknown parameter : %s", (s)->s_name);
+        if (!res) {
+            post("Unknown parameter : %s", (s)->s_name);
+        }
     }
 }
 
 /*--------------------------------------------------------------------------*/
-void faust_polyphony(t_faust* obj, t_symbol* s, short ac, t_atom* av)
+void faust_polyphony(t_faust* x, t_symbol* s, short ac, t_atom* av)
 {
-    if (systhread_mutex_lock(obj->m_mutex) == MAX_ERR_NONE) {
+    if (systhread_mutex_lock(x->m_mutex) == MAX_ERR_NONE) {
     #ifdef MIDICTRL
-        mydsp_poly* poly = dynamic_cast<mydsp_poly*>(obj->m_dsp);
+        mydsp_poly* poly = dynamic_cast<mydsp_poly*>(x->m_dsp);
         if (poly) {
-            obj->m_midiHandler->removeMidiIn(poly);
+            x->m_midiHandler->removeMidiIn(poly);
         }
     #endif
         // Delete old
-        delete obj->m_dsp;
-        obj->m_dspUI->clear();
+        delete x->m_dsp;
+        x->m_dspUI->clear();
         mydsp_poly* dsp_poly = NULL;
         // Allocate new one
         if (av[0].a_w.w_long > 0) {
             post("polyphonic DSP voices = %d", av[0].a_w.w_long);
             dsp_poly = new mydsp_poly(new mydsp(), av[0].a_w.w_long, true, true);
         #ifdef POLY2
-            obj->m_dsp = new dsp_sequencer(dsp_poly, new effect());
+            x->m_dsp = new dsp_sequencer(dsp_poly, new effect());
         #else
-            obj->m_dsp = dsp_poly;
+            x->m_dsp = dsp_poly;
         #endif
         } else {
-            obj->m_dsp = new mydsp();
+            x->m_dsp = new mydsp();
             post("monophonic DSP");
         }
         // Initialize User Interface (here connnection with controls)
-        obj->m_dsp->buildUserInterface(obj->m_dspUI);
+        x->m_dsp->buildUserInterface(x->m_dspUI);
     #ifdef MIDICTRL
-        obj->m_midiHandler->addMidiIn(dsp_poly);
-        obj->m_dsp->buildUserInterface(obj->m_midiUI);
+        x->m_midiHandler->addMidiIn(dsp_poly);
+        x->m_dsp->buildUserInterface(x->m_midiUI);
     #endif
         // Initialize at the system's sampling rate
-        obj->m_dsp->init(long(sys_getsr()));
+        x->m_dsp->init(long(sys_getsr()));
         
         // Prepare JSON
-        faust_make_json(obj);
+        faust_make_json(x);
         
         // Send JSON to JS script
-        faust_create_jsui(obj);
+        faust_create_jsui(x);
         
-        systhread_mutex_unlock(obj->m_mutex);
+        systhread_mutex_unlock(x->m_mutex);
     } else {
         post("Mutex lock cannot be taken...");
     }
@@ -9860,18 +13942,18 @@ void faust_polyphony(t_faust* obj, t_symbol* s, short ac, t_atom* av)
 
 /*--------------------------------------------------------------------------*/
 #ifdef MIDICTRL
-void faust_midievent(t_faust* obj, t_symbol* s, short ac, t_atom* av) 
+void faust_midievent(t_faust* x, t_symbol* s, short ac, t_atom* av) 
 {
     if (ac > 0) {
         int type = (int)av[0].a_w.w_long & 0xf0;
         int channel = (int)av[0].a_w.w_long & 0x0f;
                 
         if (ac == 1) {
-            obj->m_midiHandler->handleSync(0.0, av[0].a_w.w_long);
+            x->m_midiHandler->handleSync(0.0, av[0].a_w.w_long);
         } else if (ac == 2) {
-            obj->m_midiHandler->handleData1(0.0, type, channel, av[1].a_w.w_long);
+            x->m_midiHandler->handleData1(0.0, type, channel, av[1].a_w.w_long);
         } else if (ac == 3) {
-            obj->m_midiHandler->handleData2(0.0, type, channel, av[1].a_w.w_long, av[2].a_w.w_long);
+            x->m_midiHandler->handleData2(0.0, type, channel, av[1].a_w.w_long, av[2].a_w.w_long);
         }
     }
 }
@@ -10014,13 +14096,75 @@ void* faust_new(t_symbol* s, short ac, t_atom* av)
         post("Bundle_path cannot be found!");
     }
     x->m_soundInterface = new SoundUI(bundle_path_str);
+    // SoundUI has to be dispatched on all internal voices
+    if (dsp_poly) dsp_poly->setGroup(false);
     x->m_dsp->buildUserInterface(x->m_soundInterface);
+    if (dsp_poly) dsp_poly->setGroup(true);
+#endif
+    
+#ifdef OSCCTRL
+    x->m_oscInterface = NULL;
 #endif
     
     // Send JSON to JS script
     faust_create_jsui(x);
+    
+    // Display controls
+    x->m_dspUI->displayControls();
     return x;
 }
+
+#ifdef OSCCTRL
+// osc 'IP inport outport xmit bundle'
+void faust_osc(t_faust* x, t_symbol* s, short ac, t_atom* av)
+{
+    if (ac == 5) {
+        if (systhread_mutex_lock(x->m_mutex) == MAX_ERR_NONE) {
+            
+            delete x->m_oscInterface;
+            
+            const char* argv1[32];
+            int argc1 = 0;
+            
+            argv1[argc1++] = "Faust";
+            
+            argv1[argc1++]  = "-desthost";
+            argv1[argc1++]  = atom_getsym(&av[0])->s_name;
+            
+            char inport[32];
+            snprintf(inport, 32, "%ld", long(av[1].a_w.w_long));
+            argv1[argc1++] = "-port";
+            argv1[argc1++] = inport;
+            
+            char outport[32];
+            snprintf(outport, 32, "%ld", long(av[2].a_w.w_long));
+            argv1[argc1++] = "-outport";
+            argv1[argc1++] = outport;
+            
+            char xmit[32];
+            snprintf(xmit, 32, "%ld", long(av[3].a_w.w_long));
+            argv1[argc1++] = "-xmit";
+            argv1[argc1++] = xmit;
+            
+            char bundle[32];
+            snprintf(bundle, 32, "%ld", long(av[4].a_w.w_long));
+            argv1[argc1++] = "-bundle";
+            argv1[argc1++] = bundle;
+            
+            x->m_oscInterface = new OSCUI("Faust", argc1, (char**)argv1);
+            x->m_dsp->buildUserInterface(x->m_oscInterface);
+            x->m_oscInterface->run();
+            
+            post(x->m_oscInterface->getInfos().c_str());
+            systhread_mutex_unlock(x->m_mutex);
+        } else {
+            post("Mutex lock cannot be taken...");
+        }
+    } else {
+        post("Should be : osc 'IP inport outport xmit(0|1|2) bundle(0|1)'");
+    }
+}
+#endif
 
 /*--------------------------------------------------------------------------*/
 void faust_dblclick(t_faust* x, long inlet)
@@ -10072,6 +14216,9 @@ void faust_free(t_faust* x)
 #ifdef SOUNDFILE
     delete x->m_soundInterface;
 #endif
+#ifdef OSCCTRL
+    delete x->m_oscInterface;
+#endif
 }
 
 /*--------------------------------------------------------------------------*/
@@ -10086,9 +14233,12 @@ void faust_perform64(t_faust* x, t_object* dsp64, double** ins, long numins, dou
             } else {
                 x->m_dsp->compute(sampleframes, ins, outs);
             }
+        #ifdef OSCCTRL
+            if (x->m_oscInterface) x->m_oscInterface->endBundle();
+        #endif
             faust_update_outputs(x);
         }
-    #ifdef MIDICTRL
+    #if defined(MIDICTRL) || defined(OSCCTRL)
         GUI::updateAllGuis();
     #endif
         systhread_mutex_unlock(x->m_mutex);
@@ -10119,6 +14269,9 @@ extern "C" int main(void)
     // 03/11/14 : use 'anything' to handle all parameter changes
     addmess((method)faust_anything, (char*)"anything", A_GIMME, 0);
     addmess((method)faust_polyphony, (char*)"polyphony", A_GIMME, 0);
+#ifdef OSCCTRL
+    addmess((method)faust_osc, (char*)"osc", A_GIMME, 0);
+#endif
 #ifdef MIDICTRL
     addmess((method)faust_midievent, (char*)"midievent", A_GIMME, 0);
 #endif
@@ -10129,7 +14282,7 @@ extern "C" int main(void)
     dsp_initclass();
 
     post((char*)"Faust DSP object v%s (sample = 64 bits code = %s)", EXTERNAL_VERSION, getCodeSize());
-    post((char*)"Copyright (c) 2012-2018 Grame");
+    post((char*)"Copyright (c) 2012-2019 Grame");
     Max_Meta1 meta1;
     tmp_dsp->metadata(&meta1);
     if (meta1.fCount > 0) {
@@ -10144,9 +14297,6 @@ extern "C" int main(void)
 }
 
 /********************END ARCHITECTURE SECTION (part 2/2)****************/
-
-
-
 
 
 #endif

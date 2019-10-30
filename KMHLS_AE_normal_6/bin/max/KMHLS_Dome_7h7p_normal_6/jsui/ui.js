@@ -80,8 +80,7 @@ faust.ui = function (json, patcher) {
 
         } else if (item.type === "hbargraph" || item.type === "vbargraph") {
         
-            faust.numwidgets++;
-        
+            faust.numwidgets++;     
             faust.theComments[faust.numwidgets] = patcher.newdefault(hBase, 20 + widgHeight * faust.numwidgets, "comment");
             faust.theComments[faust.numwidgets].message("set", "bargraph" + faust.numwidgets);
         
@@ -109,8 +108,7 @@ faust.ui = function (json, patcher) {
         
         } else if (item.type === "vslider" || item.type === "hslider" ) {
         
-            faust.numwidgets++;
-        
+            faust.numwidgets++; 
             faust.theComments[faust.numwidgets] = patcher.newdefault(hBase, 20 + widgHeight * faust.numwidgets, "comment");
             faust.theComments[faust.numwidgets].message("set", item.label);
 
@@ -162,8 +160,31 @@ faust.ui = function (json, patcher) {
             //patcher.hiddenconnect(faust.thenumberBoxes[faust.numwidgets], 0, target, 0)
             
         } else if (item.type === "nentry") {
-        
-            
+			
+            faust.numwidgets++;
+            faust.theComments[faust.numwidgets] = patcher.newdefault(hBase, 20 + widgHeight * faust.numwidgets, "comment");
+            faust.theComments[faust.numwidgets].message("set", item.label);
+
+            if (parseFloat(item.step) == 1.0)  {
+                //post("integer : nentry \n");
+                faust.thenumberBoxes[faust.numwidgets] = patcher.newobject("number", hBase + 258, 20 + widgHeight * faust.numwidgets, 80, 13);
+            } else {
+                //post("float : nentry \n");
+                faust.thenumberBoxes[faust.numwidgets] = patcher.newobject("flonum", hBase + 258, 20 + widgHeight * faust.numwidgets, 80, 13);
+            }
+
+            faust.thenumberBoxes[faust.numwidgets].message('min', parseFloat(item.min));
+            faust.thenumberBoxes[faust.numwidgets].message('max', parseFloat(item.max));
+            faust.thenumberBoxes[faust.numwidgets].message(parseFloat(item.init));
+                
+            faust.theMessages[faust.numwidgets] = patcher.newobject("message", hBase + 345, 23 + widgHeight * faust.numwidgets, 350, 9);
+            faust.theMessages[faust.numwidgets].message("set", item.address,"\$1");
+
+            patcher.hiddenconnect(faust.thenumberBoxes[faust.numwidgets], 0, faust.theMessages[faust.numwidgets], 0);
+            patcher.hiddenconnect(faust.theMessages[faust.numwidgets], 0, target, 0); 
+
+            // direct connection to faustgen~ does not work...
+            //patcher.hiddenconnect(faust.thenumberBoxes[faust.numwidgets], 0, target, 0);       
         }
     }
     
@@ -185,7 +206,7 @@ faust.ui = function (json, patcher) {
         parse_ui(parsed_json.ui, dsp_object1, patcher);
     } else {
         // Tries to find the compiled object from the "filename" field in the JSON
-        var dsp_object2 = patcher.getnamed(parsed_json.filename + "~");
+        var dsp_object2 = patcher.getnamed(parsed_json.filename.slice(0,-4) + "~");
         if (dsp_object2 !== patcher.getnamed("null_object")) {
             parse_ui(parsed_json.ui, dsp_object2, patcher);
         } else {
