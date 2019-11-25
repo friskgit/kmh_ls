@@ -214,7 +214,12 @@ $(scdir)/%.sc : $(srcdir)/%.dsp
 	@mv $(basename $<)_supernova.scx $(scdir)
 	@mv $(basename $<).cpp $(cppdir)
 
-.PHONY : maxpackage maxdirs tester maxbin maxjsui maxreadme maxhelp
+.PHONY : maxpackage maxdirs tester maxbin maxjsui maxreadme maxhelp maxzip
+
+maxzip : 
+	@echo $(maxdir)
+	$(eval maxobj=$(wildcard $(maxdir)/*))	
+	$(foreach var, $(maxobj), @zip -r $(var).zip $(var))
 
 maxpackage : max maxbin maxjsui maxreadme maxhelp
 	rm $(maxdir)/*.maxpat && rm -rf $(maxdir)/*.mxo && rm $(maxdir)/*.js

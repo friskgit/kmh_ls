@@ -214,7 +214,12 @@ $(scdir)/%.sc : $(srcdir)/%.dsp
 	@mv $(basename $<)_supernova.scx $(scdir)
 	@mv $(basename $<).cpp $(cppdir)
 
-.PHONY : maxpackage maxdirs tester maxbin maxjsui maxreadme maxhelp
+.PHONY : maxpackage maxdirs tester maxbin maxjsui maxreadme maxhelp maxzip
+
+maxzip : 
+	@echo $(maxdir)
+	$(eval maxobj=$(wildcard $(maxdir)/*))	
+	$(foreach var, $(maxobj), @zip -r $(var).zip $(var))
 
 maxpackage : max maxbin maxjsui maxreadme maxhelp
 	rm $(maxdir)/*.maxpat && rm -rf $(maxdir)/*.mxo && rm $(maxdir)/*.js
@@ -261,7 +266,7 @@ maxdirs : # maxpackage
 	 $(foreach var, $(mxo), $(if [[ ! -d $(MAX_OBJECTS)/$(notdir $(var:~.mxo=))/$(mvar)]], $(foreach mvar, $(MAX_PACKAGE_DIRS), @mkdir $(MAX_OBJECTS)/$(notdir $(var:~.mxo=))/$(mvar)), "Directory exists"));
 
 scinstall : ##$(SC) $(SCX) $(SSCX)
-	@echo "Installing SuperCollider extensions  in $(SC_INSTALL)"
+	@echo "Installing SuperCollider extensions xin $(SC_INSTALL)"
 	@echo "$(sc)"
 	$(foreach var, $(sc), $(shell cp $(var) $(SC_INSTALL)))
 	$(foreach var, $(scx), $(shell cp $(var) $(SC_INSTALL)))
