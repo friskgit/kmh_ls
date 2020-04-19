@@ -720,7 +720,7 @@ At this point any sound you send to the track will be convolved with each of the
 
 There is an example file in the binaural directory that demonstrates the effect. It is a simple snare drum circling the lower 16 speakers. It should be listened to in headphones.
 
-![img](images/decoders/vst_mcfx.jpg "Choose the 32 channel decoder of all the versions of the mcfx\_convolver for lilla salen (29 speakers).")
+![img](images/vst_mcfx.jpg "Choose the 32 channel decoder of all the versions of the mcfx\_convolver for lilla salen (29 speakers).")
 
-![img](images/decoders/mcfx_convolver.jpg "Click 'open' and load the correct file. Observe how the plugin now has 29 inputs and 2 outputs.")
+![img](images/mcfx_convolver.jpg "Click 'open' and load the correct file. Observe how the plugin now has 29 inputs and 2 outputs.")
 
