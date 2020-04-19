@@ -2,7 +2,7 @@
 
 # General information
 
-Scroll down to [Klangkupolen, Lilla Salen](#orgeb57750) for specifics
+Scroll down to [Klangkupolen, Lilla Salen](#orgfae91ad) for specifics
 
 
 ## Ambisonics in KMH studios and Lilla salen
@@ -17,7 +17,7 @@ In principle, any kind of encoder may be combined with any kind of decoder provi
 
 ### About the compiled decoders
 
-All decoders use ACN channel order (see [Component order](#org3956fc6)) and SN3D normalization (see [Normalisation](#org80565b1)) and are dual-band, max-rE/rV.
+All decoders use ACN channel order (see [Component order](#org9550490)) and SN3D normalization (see [Normalisation](#org41200be)) and are dual-band, max-rE/rV.
 
 -   A guide to the file names
 
@@ -197,7 +197,7 @@ All decoders use ACN channel order (see [Component order](#org3956fc6)) and SN3D
         `$ make -k target=install all`
 
 
-<a id="orgeb57750"></a>
+<a id="orgfae91ad"></a>
 
 # Klangkupolen, Lilla Salen
 
@@ -212,13 +212,13 @@ In Klangkupolen the channel order from the mixer is channel 1-29 for the regular
 The layout is ordered clockwise starting at speaker one.
 
 
-<a id="orgc2b5adb"></a>
+<a id="orgaf279cc"></a>
 
 ### Speaker positions
 
 All distances and heigths are measured from 1.25m height from floor.
 
-<table id="org2d61e4e" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table id="orgcd5201e" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -654,7 +654,7 @@ All distances and heigths are measured from 1.25m height from floor.
 
 -   29 speakers
 
-    A setup file for the current speaker arrangments in Lilla Salen (29 speakers) according to [Speaker positions](#orgc2b5adb) for use with the Ircam spat package. 
+    A setup file for the current speaker arrangments in Lilla Salen (29 speakers) according to [Speaker positions](#orgaf279cc) for use with the Ircam spat package. 
     
     The following file may be used for a `spat.viewer @numspeakers 29 @showlistener 1 @viewpoint top @width 1200 @height 600`:
     
@@ -663,7 +663,7 @@ All distances and heigths are measured from 1.25m height from floor.
 
 -   45 speakers
 
-    A setup file for the current speaker arrangments in Lilla Salen (45 speakers) according to [Speaker positions](#orgc2b5adb) for use with the Ircam spat package. 
+    A setup file for the current speaker arrangments in Lilla Salen (45 speakers) according to [Speaker positions](#orgaf279cc) for use with the Ircam spat package. 
     
     The following file may be used for a `spat.viewer @numspeakers 29 @showlistener 1 @viewpoint top @width 1200 @height 600`:
     
@@ -675,7 +675,7 @@ All distances and heigths are measured from 1.25m height from floor.
 
 -   29 speakers
 
-    A setup file for the current speaker arrangments in Lilla Salen (29 speakers) according to [Speaker positions](#orgc2b5adb) for use with the Ircam panoramix package. 
+    A setup file for the current speaker arrangments in Lilla Salen (29 speakers) according to [Speaker positions](#orgaf279cc) for use with the Ircam panoramix package. 
     
     ![img](./images/panoramix-hoabus.png "A HOA bus in Panoramix")
     
@@ -703,4 +703,24 @@ All distances and heigths are measured from 1.25m height from floor.
 ### Zirkonium
 
 Two setup files for Zirkonium are available in the corresponding directory. There is one for normal setup (29 speakers) and one for full setup (45 speakers).
+
+
+### Convolution
+
+It is possible to do work in Lilla Salen at a distance with only a stereosystem and a pair of headpohnes using a BRIR (Binaural Room, Impulse Response) of lilla salen. The recording of the BRIR was made in 2018 and before we moved the speakers a few degrees. I will make a new one shortly that reflects the current speaker setup. The process is to record a sine sweep from each speaker with a dummy head in the sweet spot that generates 29 binaural signals. At the stage of convolution each input is convoluted with each of the 29 signals and summed up producing one binaural stereo signal.
+
+To get this working there are a couple of options of which I now describe sing a VST host (such as Reaper):
+
+1.  Get [Matthias Kronlacher's mcfx suite](http://www.matthiaskronlachner.com/?p=1910) of plugins and install
+2.  Install the preset files in ~/Library/Application Support/mcfx (if the directory doesn't exist, create it). The preset files is to be found in the binaural directory above.
+3.  Now you should be able to load the plugin in Reaper (see [fig:convol](#fig:convol) below). You need to make sure that the track you load the plugin in has at least 29 channels: It will take 29 channels input and 2 channels out.
+4.  Once the plugin is loaded and you have set up the track you can load the preset (see the screenshot)
+
+At this point any sound you send to the track will be convolved with each of the convolution signals and, if you send a sound to channel 1, it will appear to come from the speaker number one in lilla salen and so forth. The plugin here should be inserted at the very end of your mix where you have 29 discrete channels ready to be sent to Klangkupolen. 
+
+There is an example file in the binaural directory that demonstrates the effect. It is a simple snare drum circling the lower 16 speakers. It should be listened to in headphones.
+
+![img](images/decoders/vst_mcfx.jpg "Choose the 32 channel decoder of all the versions of the mcfx\_convolver for lilla salen (29 speakers).")
+
+![img](images/decoders/mcfx_convolver.jpg "Click 'open' and load the correct file. Observe how the plugin now has 29 inputs and 2 outputs.")
 
