@@ -34,6 +34,19 @@
 # 
 # 30 Juni 2018	Henrik Frisk	mail@henrikfrisk.com
 
+## Platform specific
+
+UNAME := $(shell uname)
+
+ifeq ($(UNAME), Linux)
+	SYSTEM =+ Linux
+	SUPERNOVA_EXT = so
+endif
+ifeq ($(UNAME), Darwin)
+	SYSTEM =+ OSX
+	SUPERNOVA_EXT = scx
+endif
+
 ## Specify the sources to build here
 srcdir	:= src
 src	:= $(wildcard $(addsuffix /*.dsp, $(srcdir)))
@@ -65,9 +78,9 @@ jack	:= $(addprefix $(bindir)/, $(notdir $(basename $(src))))
 app	:= $(addprefix $(bindir)/, $(notdir $(src:.dsp=.app)))
 vst	:= $(addprefix $(vstdir)/, $(notdir $(src:.dsp=.vst)))
 mxo	:= $(addprefix $(maxdir)/, $(notdir $(src:.dsp=~.mxo)))
+scx	:= $(addprefix $(scdir)/, $(notdir $(src:.dsp=.$(SUPERNOVA_EXT))))
+superscx:= $(addprefix $(scdir)/, $(notdir $(src:.dsp=_supernova.$(SUPERNOVA_EXT))))
 sc	:= $(addprefix $(scdir)/, $(notdir $(src:.dsp=.sc)))
-scx	:= $(addprefix $(scdir)/, $(notdir $(src:.dsp=.scx)))
-superscx:= $(addprefix $(scdir)/, $(notdir $(src:.dsp=_supernova.scx)))
 ambix	:= $(addprefix $(ambixdir)/, $(notdir $(src:.dsp=.config)))
 pd	:= $(addprefix $(pddir)/, $(notdir $(src:.dsp=~.pd_darwin)))
 html	:= $(addprefix $(docdir)/, $(notdir $(src:.dsp=.html)))
@@ -104,7 +117,7 @@ FAUST2MDOC	:= f2mdoc
 REQUIRED_DIRS	= $(bindir) $(docdir) $(cppdir) $(scdir) $(maxdir) $(vstdir) $(pddir) $(pdinstdir) $(vstinstdir) $(ambixinstdir)/$(amb108) $(ambixinstdir)/$(amb114) $(ambixinstdir)/$(ambls)
 MKDIR	       	:= $(shell for d in $(REQUIRED_DIRS); \
 			do				\
-			[[ -d $$d ]] || mkdir -p $$d; 	\
+			[ -d $$d ] || mkdir -p $$d; 	\
 			done)
 
 LOC108		:= KMH108
@@ -207,11 +220,13 @@ $(docdir)/%-svg : $(srcdir)/%.dsp
 	@rm -rf $(<:.dsp=-svg)
 
 $(scdir)/%.sc : $(srcdir)/%.dsp
-	export SUPERCOLLIDER_HEADERS=~/bin/supercollider/include/; \
+ifeq ($(SYSTEM), OSX)
+	export SUPERCOLLIDER_HEADERS=~/bin/supercollider/include/;
+endif
 	$(FAUST2SC) $<
 	@mv $(basename $<).sc $@
-	@mv $(basename $<).scx $(scdir)
-	@mv $(basename $<)_supernova.scx $(scdir)
+	@mv $(basename $<).$(SUPERNOVA_EXT) $(scdir)
+	@mv $(basename $<)_supernova.$(SUPERNOVA_EXT) $(scdir)
 	@mv $(basename $<).cpp $(cppdir)
 
 .PHONY : maxpackage maxdirs tester maxbin maxjsui maxreadme maxhelp maxzip
