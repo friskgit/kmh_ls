@@ -1,11 +1,11 @@
 /* ------------------------------------------------------------
-author: "AmbisonicDecoderToolkit"
+author: "AmbisonicDecoderToolkit, Henrik Frisk"
 copyright: "(c) Aaron J. Heller 2013"
 license: "BSD 3-Clause License"
 name: "KMHLS_FullSetup_1h1p_full_4"
 version: "1.2"
-Code generated with Faust 2.18.3 (https://faust.grame.fr)
-Compilation options: -lang cpp -scal -ftz 0
+Code generated with Faust 2.30.5 (https://faust.grame.fr)
+Compilation options: -lang cpp -es 1 -scal -ftz 0
 ------------------------------------------------------------ */
 
 #ifndef  __mydsp_H__
@@ -90,7 +90,7 @@ Compilation options: -lang cpp -scal -ftz 0
 #define FAUSTFLOAT float
 #endif
 
-class UI;
+struct UI;
 struct Meta;
 
 /**
@@ -125,7 +125,7 @@ class dsp {
     
         /**
          * Trigger the ui_interface parameter with instance specific calls
-         * to 'addBtton', 'addVerticalSlider'... in order to build the UI.
+         * to 'openTabBox', 'addButton', 'addVerticalSlider'... in order to build the UI.
          *
          * @param ui_interface - the user interface builder
          */
@@ -160,7 +160,7 @@ class dsp {
         /* Init default control parameters values */
         virtual void instanceResetUserInterface() = 0;
     
-        /* Init instance state (delay lines...) */
+        /* Init instance state (like delay lines...) but keep the control parameter values */
         virtual void instanceClear() = 0;
  
         /**
@@ -212,7 +212,7 @@ class decorator_dsp : public dsp {
 
     public:
 
-        decorator_dsp(dsp* dsp = 0):fDSP(dsp) {}
+        decorator_dsp(dsp* dsp = nullptr):fDSP(dsp) {}
         virtual ~decorator_dsp() { delete fDSP; }
 
         virtual int getNumInputs() { return fDSP->getNumInputs(); }
@@ -280,7 +280,7 @@ class dsp_factory {
 /************************** BEGIN UI.h **************************/
 /************************************************************************
  FAUST Architecture File
- Copyright (C) 2003-2017 GRAME, Centre National de Creation Musicale
+ Copyright (C) 2003-2020 GRAME, Centre National de Creation Musicale
  ---------------------------------------------------------------------
  This Architecture section is free software; you can redistribute it
  and/or modify it under the terms of the GNU General Public License
@@ -318,50 +318,44 @@ class dsp_factory {
 struct Soundfile;
 
 template <typename REAL>
-class UIReal
+struct UIReal
 {
+    UIReal() {}
+    virtual ~UIReal() {}
     
-    public:
-        
-        UIReal() {}
-        virtual ~UIReal() {}
-        
-        // -- widget's layouts
-        
-        virtual void openTabBox(const char* label) = 0;
-        virtual void openHorizontalBox(const char* label) = 0;
-        virtual void openVerticalBox(const char* label) = 0;
-        virtual void closeBox() = 0;
-        
-        // -- active widgets
-        
-        virtual void addButton(const char* label, REAL* zone) = 0;
-        virtual void addCheckButton(const char* label, REAL* zone) = 0;
-        virtual void addVerticalSlider(const char* label, REAL* zone, REAL init, REAL min, REAL max, REAL step) = 0;
-        virtual void addHorizontalSlider(const char* label, REAL* zone, REAL init, REAL min, REAL max, REAL step) = 0;
-        virtual void addNumEntry(const char* label, REAL* zone, REAL init, REAL min, REAL max, REAL step) = 0;
-        
-        // -- passive widgets
-        
-        virtual void addHorizontalBargraph(const char* label, REAL* zone, REAL min, REAL max) = 0;
-        virtual void addVerticalBargraph(const char* label, REAL* zone, REAL min, REAL max) = 0;
-        
-        // -- soundfiles
-        
-        virtual void addSoundfile(const char* label, const char* filename, Soundfile** sf_zone) = 0;
-        
-        // -- metadata declarations
-        
-        virtual void declare(REAL* zone, const char* key, const char* val) {}
+    // -- widget's layouts
+    
+    virtual void openTabBox(const char* label) = 0;
+    virtual void openHorizontalBox(const char* label) = 0;
+    virtual void openVerticalBox(const char* label) = 0;
+    virtual void closeBox() = 0;
+    
+    // -- active widgets
+    
+    virtual void addButton(const char* label, REAL* zone) = 0;
+    virtual void addCheckButton(const char* label, REAL* zone) = 0;
+    virtual void addVerticalSlider(const char* label, REAL* zone, REAL init, REAL min, REAL max, REAL step) = 0;
+    virtual void addHorizontalSlider(const char* label, REAL* zone, REAL init, REAL min, REAL max, REAL step) = 0;
+    virtual void addNumEntry(const char* label, REAL* zone, REAL init, REAL min, REAL max, REAL step) = 0;
+    
+    // -- passive widgets
+    
+    virtual void addHorizontalBargraph(const char* label, REAL* zone, REAL min, REAL max) = 0;
+    virtual void addVerticalBargraph(const char* label, REAL* zone, REAL min, REAL max) = 0;
+    
+    // -- soundfiles
+    
+    virtual void addSoundfile(const char* label, const char* filename, Soundfile** sf_zone) = 0;
+    
+    // -- metadata declarations
+    
+    virtual void declare(REAL* zone, const char* key, const char* val) {}
 };
 
-class UI : public UIReal<FAUSTFLOAT>
+struct UI : public UIReal<FAUSTFLOAT>
 {
-
-    public:
-
-        UI() {}
-        virtual ~UI() {}
+    UI() {}
+    virtual ~UI() {}
 };
 
 #endif
@@ -389,7 +383,7 @@ class UI : public UIReal<FAUSTFLOAT>
  that work under terms of your choice, so long as this FAUST
  architecture section is not modified.
  ************************************************************************/
- 
+
 #ifndef __misc__
 #define __misc__
 
@@ -456,23 +450,40 @@ static int int2pow2(int x) { int r = 0; while ((1<<r) < x) r++; return r; }
 
 static long lopt(char* argv[], const char* name, long def)
 {
-	int	i;
-    for (i = 0; argv[i]; i++) if (!strcmp(argv[i], name)) return std::atoi(argv[i+1]);
-	return def;
+    for (int i = 0; argv[i]; i++) if (!strcmp(argv[i], name)) return std::atoi(argv[i+1]);
+    return def;
 }
 
-static bool isopt(char* argv[], const char* name)
+static long lopt1(int argc, char* argv[], const char* longname, const char* shortname, long def)
 {
-	int	i;
-	for (i = 0; argv[i]; i++) if (!strcmp(argv[i], name)) return true;
-	return false;
+    for (int i = 2; i < argc; i++) {
+        if (strcmp(argv[i-1], shortname) == 0 || strcmp(argv[i-1], longname) == 0) {
+            return atoi(argv[i]);
+        }
+    }
+    return def;
 }
 
 static const char* lopts(char* argv[], const char* name, const char* def)
 {
-	int	i;
-	for (i = 0; argv[i]; i++) if (!strcmp(argv[i], name)) return argv[i+1];
-	return def;
+    for (int i = 0; argv[i]; i++) if (!strcmp(argv[i], name)) return argv[i+1];
+    return def;
+}
+
+static const char* lopts1(int argc, char* argv[], const char* longname, const char* shortname, const char* def)
+{
+    for (int i = 2; i < argc; i++) {
+        if (strcmp(argv[i-1], shortname) == 0 || strcmp(argv[i-1], longname) == 0) {
+            return argv[i];
+        }
+    }
+    return def;
+}
+
+static bool isopt(char* argv[], const char* name)
+{
+    for (int i = 0; argv[i]; i++) if (!strcmp(argv[i], name)) return true;
+    return false;
 }
 
 static std::string pathToContent(const std::string& path)
@@ -684,12 +695,12 @@ private:
 
 static float mydsp_faustpower2_f(float value) {
 	return (value * value);
-	
 }
 
 #ifndef FAUSTCLASS 
 #define FAUSTCLASS mydsp
 #endif
+
 #ifdef __APPLE__ 
 #define exp10f __exp10f
 #define exp10 __exp10
@@ -863,7 +874,8 @@ class mydsp : public dsp {
  public:
 	
 	void metadata(Meta* m) { 
-		m->declare("author", "AmbisonicDecoderToolkit");
+		m->declare("author", "AmbisonicDecoderToolkit, Henrik Frisk");
+		m->declare("compile_options", "-lang cpp -es 1 -scal -ftz 0");
 		m->declare("copyright", "(c) Aaron J. Heller 2013");
 		m->declare("filename", "KMHLS_FullSetup_1h1p_full_4.dsp");
 		m->declare("license", "BSD 3-Clause License");
@@ -873,15 +885,13 @@ class mydsp : public dsp {
 
 	virtual int getNumInputs() {
 		return 4;
-		
 	}
 	virtual int getNumOutputs() {
 		return 45;
-		
 	}
 	virtual int getInputRate(int channel) {
 		int rate;
-		switch (channel) {
+		switch ((channel)) {
 			case 0: {
 				rate = 1;
 				break;
@@ -902,14 +912,12 @@ class mydsp : public dsp {
 				rate = -1;
 				break;
 			}
-			
 		}
 		return rate;
-		
 	}
 	virtual int getOutputRate(int channel) {
 		int rate;
-		switch (channel) {
+		switch ((channel)) {
 			case 0: {
 				rate = 1;
 				break;
@@ -1094,14 +1102,11 @@ class mydsp : public dsp {
 				rate = -1;
 				break;
 			}
-			
 		}
 		return rate;
-		
 	}
 	
 	static void classInit(int sample_rate) {
-		
 	}
 	
 	virtual void instanceConstants(int sample_rate) {
@@ -1119,7 +1124,6 @@ class mydsp : public dsp {
 		iConst10 = int(((0.000754629844f * fConst0) + 0.5f));
 		fConst11 = (1.0f / ((30.7760601f / fConst0) + 1.0f));
 		fConst12 = (61.5521202f / fConst0);
-		
 	}
 	
 	virtual void instanceResetUserInterface() {
@@ -1127,576 +1131,433 @@ class mydsp : public dsp {
 		fHslider0 = FAUSTFLOAT(-10.0f);
 		fHslider1 = FAUSTFLOAT(400.0f);
 		fHslider2 = FAUSTFLOAT(0.0f);
-		
 	}
 	
 	virtual void instanceClear() {
 		for (int l0 = 0; (l0 < 2); l0 = (l0 + 1)) {
 			fRec0[l0] = 0.0f;
-			
 		}
 		for (int l1 = 0; (l1 < 2); l1 = (l1 + 1)) {
 			fRec4[l1] = 0.0f;
-			
 		}
 		for (int l2 = 0; (l2 < 3); l2 = (l2 + 1)) {
 			fRec5[l2] = 0.0f;
-			
 		}
 		for (int l3 = 0; (l3 < 2); l3 = (l3 + 1)) {
 			fRec6[l3] = 0.0f;
-			
 		}
 		for (int l4 = 0; (l4 < 3); l4 = (l4 + 1)) {
 			fRec7[l4] = 0.0f;
-			
 		}
 		for (int l5 = 0; (l5 < 3); l5 = (l5 + 1)) {
 			fRec8[l5] = 0.0f;
-			
 		}
 		for (int l6 = 0; (l6 < 2); l6 = (l6 + 1)) {
 			fRec3[l6] = 0.0f;
-			
 		}
 		for (int l7 = 0; (l7 < 2); l7 = (l7 + 1)) {
 			fRec1[l7] = 0.0f;
-			
 		}
 		for (int l8 = 0; (l8 < 3); l8 = (l8 + 1)) {
 			fRec9[l8] = 0.0f;
-			
 		}
 		IOTA = 0;
 		for (int l9 = 0; (l9 < 1024); l9 = (l9 + 1)) {
 			fVec0[l9] = 0.0f;
-			
 		}
 		for (int l10 = 0; (l10 < 2); l10 = (l10 + 1)) {
 			fRec12[l10] = 0.0f;
-			
 		}
 		for (int l11 = 0; (l11 < 2); l11 = (l11 + 1)) {
 			fRec10[l11] = 0.0f;
-			
 		}
 		for (int l12 = 0; (l12 < 1024); l12 = (l12 + 1)) {
 			fVec1[l12] = 0.0f;
-			
 		}
 		for (int l13 = 0; (l13 < 2); l13 = (l13 + 1)) {
 			fRec15[l13] = 0.0f;
-			
 		}
 		for (int l14 = 0; (l14 < 2); l14 = (l14 + 1)) {
 			fRec13[l14] = 0.0f;
-			
 		}
 		for (int l15 = 0; (l15 < 1024); l15 = (l15 + 1)) {
 			fVec2[l15] = 0.0f;
-			
 		}
 		for (int l16 = 0; (l16 < 2); l16 = (l16 + 1)) {
 			fRec18[l16] = 0.0f;
-			
 		}
 		for (int l17 = 0; (l17 < 2); l17 = (l17 + 1)) {
 			fRec16[l17] = 0.0f;
-			
 		}
 		for (int l18 = 0; (l18 < 1024); l18 = (l18 + 1)) {
 			fVec3[l18] = 0.0f;
-			
 		}
 		for (int l19 = 0; (l19 < 2); l19 = (l19 + 1)) {
 			fRec21[l19] = 0.0f;
-			
 		}
 		for (int l20 = 0; (l20 < 2); l20 = (l20 + 1)) {
 			fRec19[l20] = 0.0f;
-			
 		}
 		for (int l21 = 0; (l21 < 1024); l21 = (l21 + 1)) {
 			fVec4[l21] = 0.0f;
-			
 		}
 		for (int l22 = 0; (l22 < 2); l22 = (l22 + 1)) {
 			fRec24[l22] = 0.0f;
-			
 		}
 		for (int l23 = 0; (l23 < 2); l23 = (l23 + 1)) {
 			fRec22[l23] = 0.0f;
-			
 		}
 		for (int l24 = 0; (l24 < 1024); l24 = (l24 + 1)) {
 			fVec5[l24] = 0.0f;
-			
 		}
 		for (int l25 = 0; (l25 < 2); l25 = (l25 + 1)) {
 			fRec27[l25] = 0.0f;
-			
 		}
 		for (int l26 = 0; (l26 < 2); l26 = (l26 + 1)) {
 			fRec25[l26] = 0.0f;
-			
 		}
 		for (int l27 = 0; (l27 < 1024); l27 = (l27 + 1)) {
 			fVec6[l27] = 0.0f;
-			
 		}
 		for (int l28 = 0; (l28 < 2); l28 = (l28 + 1)) {
 			fRec30[l28] = 0.0f;
-			
 		}
 		for (int l29 = 0; (l29 < 2); l29 = (l29 + 1)) {
 			fRec28[l29] = 0.0f;
-			
 		}
 		for (int l30 = 0; (l30 < 1024); l30 = (l30 + 1)) {
 			fVec7[l30] = 0.0f;
-			
 		}
 		for (int l31 = 0; (l31 < 2); l31 = (l31 + 1)) {
 			fRec33[l31] = 0.0f;
-			
 		}
 		for (int l32 = 0; (l32 < 2); l32 = (l32 + 1)) {
 			fRec31[l32] = 0.0f;
-			
 		}
 		for (int l33 = 0; (l33 < 1024); l33 = (l33 + 1)) {
 			fVec8[l33] = 0.0f;
-			
 		}
 		for (int l34 = 0; (l34 < 2); l34 = (l34 + 1)) {
 			fRec36[l34] = 0.0f;
-			
 		}
 		for (int l35 = 0; (l35 < 2); l35 = (l35 + 1)) {
 			fRec34[l35] = 0.0f;
-			
 		}
 		for (int l36 = 0; (l36 < 1024); l36 = (l36 + 1)) {
 			fVec9[l36] = 0.0f;
-			
 		}
 		for (int l37 = 0; (l37 < 2); l37 = (l37 + 1)) {
 			fRec39[l37] = 0.0f;
-			
 		}
 		for (int l38 = 0; (l38 < 2); l38 = (l38 + 1)) {
 			fRec37[l38] = 0.0f;
-			
 		}
 		for (int l39 = 0; (l39 < 1024); l39 = (l39 + 1)) {
 			fVec10[l39] = 0.0f;
-			
 		}
 		for (int l40 = 0; (l40 < 2); l40 = (l40 + 1)) {
 			fRec42[l40] = 0.0f;
-			
 		}
 		for (int l41 = 0; (l41 < 2); l41 = (l41 + 1)) {
 			fRec40[l41] = 0.0f;
-			
 		}
 		for (int l42 = 0; (l42 < 1024); l42 = (l42 + 1)) {
 			fVec11[l42] = 0.0f;
-			
 		}
 		for (int l43 = 0; (l43 < 2); l43 = (l43 + 1)) {
 			fRec45[l43] = 0.0f;
-			
 		}
 		for (int l44 = 0; (l44 < 2); l44 = (l44 + 1)) {
 			fRec43[l44] = 0.0f;
-			
 		}
 		for (int l45 = 0; (l45 < 1024); l45 = (l45 + 1)) {
 			fVec12[l45] = 0.0f;
-			
 		}
 		for (int l46 = 0; (l46 < 2); l46 = (l46 + 1)) {
 			fRec48[l46] = 0.0f;
-			
 		}
 		for (int l47 = 0; (l47 < 2); l47 = (l47 + 1)) {
 			fRec46[l47] = 0.0f;
-			
 		}
 		for (int l48 = 0; (l48 < 1024); l48 = (l48 + 1)) {
 			fVec13[l48] = 0.0f;
-			
 		}
 		for (int l49 = 0; (l49 < 2); l49 = (l49 + 1)) {
 			fRec51[l49] = 0.0f;
-			
 		}
 		for (int l50 = 0; (l50 < 2); l50 = (l50 + 1)) {
 			fRec49[l50] = 0.0f;
-			
 		}
 		for (int l51 = 0; (l51 < 1024); l51 = (l51 + 1)) {
 			fVec14[l51] = 0.0f;
-			
 		}
 		for (int l52 = 0; (l52 < 2); l52 = (l52 + 1)) {
 			fRec54[l52] = 0.0f;
-			
 		}
 		for (int l53 = 0; (l53 < 2); l53 = (l53 + 1)) {
 			fRec52[l53] = 0.0f;
-			
 		}
 		for (int l54 = 0; (l54 < 1024); l54 = (l54 + 1)) {
 			fVec15[l54] = 0.0f;
-			
 		}
 		for (int l55 = 0; (l55 < 2); l55 = (l55 + 1)) {
 			fRec57[l55] = 0.0f;
-			
 		}
 		for (int l56 = 0; (l56 < 2); l56 = (l56 + 1)) {
 			fRec55[l56] = 0.0f;
-			
 		}
 		for (int l57 = 0; (l57 < 512); l57 = (l57 + 1)) {
 			fVec16[l57] = 0.0f;
-			
 		}
 		for (int l58 = 0; (l58 < 2); l58 = (l58 + 1)) {
 			fRec60[l58] = 0.0f;
-			
 		}
 		for (int l59 = 0; (l59 < 2); l59 = (l59 + 1)) {
 			fRec58[l59] = 0.0f;
-			
 		}
 		for (int l60 = 0; (l60 < 512); l60 = (l60 + 1)) {
 			fVec17[l60] = 0.0f;
-			
 		}
 		for (int l61 = 0; (l61 < 2); l61 = (l61 + 1)) {
 			fRec63[l61] = 0.0f;
-			
 		}
 		for (int l62 = 0; (l62 < 2); l62 = (l62 + 1)) {
 			fRec61[l62] = 0.0f;
-			
 		}
 		for (int l63 = 0; (l63 < 512); l63 = (l63 + 1)) {
 			fVec18[l63] = 0.0f;
-			
 		}
 		for (int l64 = 0; (l64 < 2); l64 = (l64 + 1)) {
 			fRec66[l64] = 0.0f;
-			
 		}
 		for (int l65 = 0; (l65 < 2); l65 = (l65 + 1)) {
 			fRec64[l65] = 0.0f;
-			
 		}
 		for (int l66 = 0; (l66 < 512); l66 = (l66 + 1)) {
 			fVec19[l66] = 0.0f;
-			
 		}
 		for (int l67 = 0; (l67 < 2); l67 = (l67 + 1)) {
 			fRec69[l67] = 0.0f;
-			
 		}
 		for (int l68 = 0; (l68 < 2); l68 = (l68 + 1)) {
 			fRec67[l68] = 0.0f;
-			
 		}
 		for (int l69 = 0; (l69 < 512); l69 = (l69 + 1)) {
 			fVec20[l69] = 0.0f;
-			
 		}
 		for (int l70 = 0; (l70 < 2); l70 = (l70 + 1)) {
 			fRec72[l70] = 0.0f;
-			
 		}
 		for (int l71 = 0; (l71 < 2); l71 = (l71 + 1)) {
 			fRec70[l71] = 0.0f;
-			
 		}
 		for (int l72 = 0; (l72 < 512); l72 = (l72 + 1)) {
 			fVec21[l72] = 0.0f;
-			
 		}
 		for (int l73 = 0; (l73 < 2); l73 = (l73 + 1)) {
 			fRec75[l73] = 0.0f;
-			
 		}
 		for (int l74 = 0; (l74 < 2); l74 = (l74 + 1)) {
 			fRec73[l74] = 0.0f;
-			
 		}
 		for (int l75 = 0; (l75 < 512); l75 = (l75 + 1)) {
 			fVec22[l75] = 0.0f;
-			
 		}
 		for (int l76 = 0; (l76 < 2); l76 = (l76 + 1)) {
 			fRec78[l76] = 0.0f;
-			
 		}
 		for (int l77 = 0; (l77 < 2); l77 = (l77 + 1)) {
 			fRec76[l77] = 0.0f;
-			
 		}
 		for (int l78 = 0; (l78 < 512); l78 = (l78 + 1)) {
 			fVec23[l78] = 0.0f;
-			
 		}
 		for (int l79 = 0; (l79 < 2); l79 = (l79 + 1)) {
 			fRec81[l79] = 0.0f;
-			
 		}
 		for (int l80 = 0; (l80 < 2); l80 = (l80 + 1)) {
 			fRec79[l80] = 0.0f;
-			
 		}
 		for (int l81 = 0; (l81 < 256); l81 = (l81 + 1)) {
 			fVec24[l81] = 0.0f;
-			
 		}
 		for (int l82 = 0; (l82 < 2); l82 = (l82 + 1)) {
 			fRec84[l82] = 0.0f;
-			
 		}
 		for (int l83 = 0; (l83 < 2); l83 = (l83 + 1)) {
 			fRec82[l83] = 0.0f;
-			
 		}
 		for (int l84 = 0; (l84 < 256); l84 = (l84 + 1)) {
 			fVec25[l84] = 0.0f;
-			
 		}
 		for (int l85 = 0; (l85 < 2); l85 = (l85 + 1)) {
 			fRec87[l85] = 0.0f;
-			
 		}
 		for (int l86 = 0; (l86 < 2); l86 = (l86 + 1)) {
 			fRec85[l86] = 0.0f;
-			
 		}
 		for (int l87 = 0; (l87 < 256); l87 = (l87 + 1)) {
 			fVec26[l87] = 0.0f;
-			
 		}
 		for (int l88 = 0; (l88 < 2); l88 = (l88 + 1)) {
 			fRec90[l88] = 0.0f;
-			
 		}
 		for (int l89 = 0; (l89 < 2); l89 = (l89 + 1)) {
 			fRec88[l89] = 0.0f;
-			
 		}
 		for (int l90 = 0; (l90 < 256); l90 = (l90 + 1)) {
 			fVec27[l90] = 0.0f;
-			
 		}
 		for (int l91 = 0; (l91 < 2); l91 = (l91 + 1)) {
 			fRec93[l91] = 0.0f;
-			
 		}
 		for (int l92 = 0; (l92 < 2); l92 = (l92 + 1)) {
 			fRec91[l92] = 0.0f;
-			
 		}
 		for (int l93 = 0; (l93 < 2); l93 = (l93 + 1)) {
 			fRec96[l93] = 0.0f;
-			
 		}
 		for (int l94 = 0; (l94 < 2); l94 = (l94 + 1)) {
 			fRec94[l94] = 0.0f;
-			
 		}
 		for (int l95 = 0; (l95 < 1024); l95 = (l95 + 1)) {
 			fVec28[l95] = 0.0f;
-			
 		}
 		for (int l96 = 0; (l96 < 2); l96 = (l96 + 1)) {
 			fRec99[l96] = 0.0f;
-			
 		}
 		for (int l97 = 0; (l97 < 2); l97 = (l97 + 1)) {
 			fRec97[l97] = 0.0f;
-			
 		}
 		for (int l98 = 0; (l98 < 1024); l98 = (l98 + 1)) {
 			fVec29[l98] = 0.0f;
-			
 		}
 		for (int l99 = 0; (l99 < 2); l99 = (l99 + 1)) {
 			fRec102[l99] = 0.0f;
-			
 		}
 		for (int l100 = 0; (l100 < 2); l100 = (l100 + 1)) {
 			fRec100[l100] = 0.0f;
-			
 		}
 		for (int l101 = 0; (l101 < 1024); l101 = (l101 + 1)) {
 			fVec30[l101] = 0.0f;
-			
 		}
 		for (int l102 = 0; (l102 < 2); l102 = (l102 + 1)) {
 			fRec105[l102] = 0.0f;
-			
 		}
 		for (int l103 = 0; (l103 < 2); l103 = (l103 + 1)) {
 			fRec103[l103] = 0.0f;
-			
 		}
 		for (int l104 = 0; (l104 < 1024); l104 = (l104 + 1)) {
 			fVec31[l104] = 0.0f;
-			
 		}
 		for (int l105 = 0; (l105 < 2); l105 = (l105 + 1)) {
 			fRec108[l105] = 0.0f;
-			
 		}
 		for (int l106 = 0; (l106 < 2); l106 = (l106 + 1)) {
 			fRec106[l106] = 0.0f;
-			
 		}
 		for (int l107 = 0; (l107 < 1024); l107 = (l107 + 1)) {
 			fVec32[l107] = 0.0f;
-			
 		}
 		for (int l108 = 0; (l108 < 2); l108 = (l108 + 1)) {
 			fRec111[l108] = 0.0f;
-			
 		}
 		for (int l109 = 0; (l109 < 2); l109 = (l109 + 1)) {
 			fRec109[l109] = 0.0f;
-			
 		}
 		for (int l110 = 0; (l110 < 1024); l110 = (l110 + 1)) {
 			fVec33[l110] = 0.0f;
-			
 		}
 		for (int l111 = 0; (l111 < 2); l111 = (l111 + 1)) {
 			fRec114[l111] = 0.0f;
-			
 		}
 		for (int l112 = 0; (l112 < 2); l112 = (l112 + 1)) {
 			fRec112[l112] = 0.0f;
-			
 		}
 		for (int l113 = 0; (l113 < 1024); l113 = (l113 + 1)) {
 			fVec34[l113] = 0.0f;
-			
 		}
 		for (int l114 = 0; (l114 < 2); l114 = (l114 + 1)) {
 			fRec117[l114] = 0.0f;
-			
 		}
 		for (int l115 = 0; (l115 < 2); l115 = (l115 + 1)) {
 			fRec115[l115] = 0.0f;
-			
 		}
 		for (int l116 = 0; (l116 < 1024); l116 = (l116 + 1)) {
 			fVec35[l116] = 0.0f;
-			
 		}
 		for (int l117 = 0; (l117 < 2); l117 = (l117 + 1)) {
 			fRec120[l117] = 0.0f;
-			
 		}
 		for (int l118 = 0; (l118 < 2); l118 = (l118 + 1)) {
 			fRec118[l118] = 0.0f;
-			
 		}
 		for (int l119 = 0; (l119 < 1024); l119 = (l119 + 1)) {
 			fVec36[l119] = 0.0f;
-			
 		}
 		for (int l120 = 0; (l120 < 2); l120 = (l120 + 1)) {
 			fRec123[l120] = 0.0f;
-			
 		}
 		for (int l121 = 0; (l121 < 2); l121 = (l121 + 1)) {
 			fRec121[l121] = 0.0f;
-			
 		}
 		for (int l122 = 0; (l122 < 1024); l122 = (l122 + 1)) {
 			fVec37[l122] = 0.0f;
-			
 		}
 		for (int l123 = 0; (l123 < 2); l123 = (l123 + 1)) {
 			fRec126[l123] = 0.0f;
-			
 		}
 		for (int l124 = 0; (l124 < 2); l124 = (l124 + 1)) {
 			fRec124[l124] = 0.0f;
-			
 		}
 		for (int l125 = 0; (l125 < 1024); l125 = (l125 + 1)) {
 			fVec38[l125] = 0.0f;
-			
 		}
 		for (int l126 = 0; (l126 < 2); l126 = (l126 + 1)) {
 			fRec129[l126] = 0.0f;
-			
 		}
 		for (int l127 = 0; (l127 < 2); l127 = (l127 + 1)) {
 			fRec127[l127] = 0.0f;
-			
 		}
 		for (int l128 = 0; (l128 < 1024); l128 = (l128 + 1)) {
 			fVec39[l128] = 0.0f;
-			
 		}
 		for (int l129 = 0; (l129 < 2); l129 = (l129 + 1)) {
 			fRec132[l129] = 0.0f;
-			
 		}
 		for (int l130 = 0; (l130 < 2); l130 = (l130 + 1)) {
 			fRec130[l130] = 0.0f;
-			
 		}
 		for (int l131 = 0; (l131 < 1024); l131 = (l131 + 1)) {
 			fVec40[l131] = 0.0f;
-			
 		}
 		for (int l132 = 0; (l132 < 2); l132 = (l132 + 1)) {
 			fRec135[l132] = 0.0f;
-			
 		}
 		for (int l133 = 0; (l133 < 2); l133 = (l133 + 1)) {
 			fRec133[l133] = 0.0f;
-			
 		}
 		for (int l134 = 0; (l134 < 1024); l134 = (l134 + 1)) {
 			fVec41[l134] = 0.0f;
-			
 		}
 		for (int l135 = 0; (l135 < 2); l135 = (l135 + 1)) {
 			fRec138[l135] = 0.0f;
-			
 		}
 		for (int l136 = 0; (l136 < 2); l136 = (l136 + 1)) {
 			fRec136[l136] = 0.0f;
-			
 		}
 		for (int l137 = 0; (l137 < 1024); l137 = (l137 + 1)) {
 			fVec42[l137] = 0.0f;
-			
 		}
 		for (int l138 = 0; (l138 < 2); l138 = (l138 + 1)) {
 			fRec141[l138] = 0.0f;
-			
 		}
 		for (int l139 = 0; (l139 < 2); l139 = (l139 + 1)) {
 			fRec139[l139] = 0.0f;
-			
 		}
 		for (int l140 = 0; (l140 < 1024); l140 = (l140 + 1)) {
 			fVec43[l140] = 0.0f;
-			
 		}
-		
 	}
 	
 	virtual void init(int sample_rate) {
@@ -1715,7 +1576,6 @@ class mydsp : public dsp {
 	
 	virtual int getSampleRate() {
 		return fSampleRate;
-		
 	}
 	
 	virtual void buildUserInterface(UI* ui_interface) {
@@ -1728,7 +1588,6 @@ class mydsp : public dsp {
 		ui_interface->declare(&fHslider1, "unit", "Hz");
 		ui_interface->addHorizontalSlider("xover", &fHslider1, 400.0f, 200.0f, 800.0f, 20.0f);
 		ui_interface->closeBox();
-		
 	}
 	
 	virtual void compute(int count, FAUSTFLOAT** inputs, FAUSTFLOAT** outputs) {
@@ -2174,9 +2033,7 @@ class mydsp : public dsp {
 			fRec136[1] = fRec136[0];
 			fRec141[1] = fRec141[0];
 			fRec139[1] = fRec139[0];
-			
 		}
-		
 	}
 
 };

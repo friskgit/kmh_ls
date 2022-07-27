@@ -41,10 +41,12 @@ UNAME := $(shell uname)
 ifeq ($(UNAME), Linux)
 	SYSTEM =+ Linux
 	SUPERNOVA_EXT = so
+	SC_INSTALL := ~/.local/share/SuperCollider/Extensions/MyExtensions
 endif
 ifeq ($(UNAME), Darwin)
 	SYSTEM =+ OSX
 	SUPERNOVA_EXT = scx
+	SC_INSTALL := ~/Library/Application\ Support/SuperCollider/Extensions/ADT
 endif
 
 ## Specify the sources to build here
@@ -124,7 +126,7 @@ LOC108		:= KMH108
 LOC114		:= KMH114
 LOCLS		:= KMHLS
 
-SC_INSTALL	:= ~/Library/Application\ Support/SuperCollider/Extensions/ADT
+# SC_INSTALL see above
 VST_INSTALL	:= $(vstinstdir)
 MAX_OBJECTS	:= $(maxpackage)
 MAX_INSTALL	:= $(maxinstall)

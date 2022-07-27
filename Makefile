@@ -28,7 +28,7 @@
 # sed -i -E 's/(.+n_inputs,n_outputs,outs.+)/\/\/\1/; s/(.+par.i,n_outputs,.0,gate_bus.i,outs.+)/\/\/\1/; s/.+m.bus.n_outputs.+//'
 
 subdirs := $(wildcard ./KMH*)
-target_makefile	:=  ~/Music/faust/faust_stuff.git/Makefile.adt
+target_makefile	:= /home/henrikfr/Music/spatialization/klangkupolen/decoders/kmh_decoders/Makefile.adt
 target 	:= all
 sources := $(wildcard */src/*.dsp)
 
